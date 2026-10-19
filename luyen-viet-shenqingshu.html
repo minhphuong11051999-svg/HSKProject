@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>申请书 · Ôn tập &amp; Luyện viết Đơn xin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C2B33; --ink-soft:#3C4C54;
+    --paper:#F6F1E5; --paper-line:#E4D9BE;
+    --seal:#A63A32; --seal-soft:#C97B6F;
+    --jade:#3E6E52; --jade-soft:#DCE9DF;
+    --sand:#EDE6D3;
+    --sidebar:#16211D; --sidebar-line:#2B3B33;
+  }
+  body{ font-family:'Be Vietnam Pro',sans-serif; background:var(--sand); color:var(--ink); }
+  .han{ font-family:'Noto Serif SC',serif; }
+  ::selection{ background:var(--seal-soft); color:#fff; }
+
+  .navbtn{ display:flex; align-items:flex-start; gap:.6rem; width:100%; text-align:left; padding:.55rem .8rem; border-radius:.4rem; color:#C9D2CC; font-size:.83rem; line-height:1.35; transition:background .15s, color .15s; }
+  .navbtn:hover{ background:var(--sidebar-line); color:#fff; }
+  .navbtn.active{ background:var(--seal); color:#fff; }
+  .navbtn i{ width:1.1rem; text-align:center; margin-top:.15rem; color:#8DA093; }
+  .navbtn.active i{ color:#F3D9D4; }
+  .subnav{ display:flex; width:100%; text-align:left; padding:.35rem .8rem .35rem 2.5rem; border-radius:.35rem; color:#93A69B; font-size:.76rem; transition:background .15s, color .15s; }
+  .subnav:hover{ background:var(--sidebar-line); color:#fff; }
+  .subnav.active{ background:#24352E; color:#F0D9D3; }
+
+  .paper{
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size:100% 1.85rem;
+    border-left:3px solid var(--seal-soft);
+    box-shadow:0 1px 0 rgba(0,0,0,.03), 0 12px 30px -18px rgba(28,43,51,.35);
+    position:relative;
+  }
+  .paper::before{
+    content:""; position:absolute; inset:0;
+    background-image:radial-gradient(circle at 92% 8%, rgba(166,58,50,.06), transparent 55%);
+    pointer-events:none;
+  }
+  .paper-title{ text-align:center; font-weight:700; letter-spacing:.15em; font-size:1.15rem; }
+  .paper-line{ line-height:1.85rem; white-space:pre-wrap; word-break:break-word; }
+  .indent2{ text-indent:2em; }
+  .indent4{ text-indent:4em; }
+  .sig-block{ margin-left:auto; width:fit-content; max-width:100%; }
+  .sig-name{ text-align:center; }
+  .sig-date{ text-align:right; }
+  .paper-empty{ color:#B7AD90; font-style:italic; font-size:.85rem; text-align:center; padding-top:2.4rem; }
+  .err-mark{ background:none; }
+  #err-paper.reveal-errors .err-mark{ background:#F6DEDB; text-decoration:underline wavy var(--seal); text-decoration-thickness:1.5px; padding:0 .1em; }
+  .fix-mark{ background:var(--jade-soft); padding:0 .1em; }
+
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+  .sub-panel{ display:none; }
+  .sub-panel.active{ display:block; }
+  .sub-chip{ border:1px solid #D9CFB4; background:#fff; color:var(--ink-soft); transition:all .15s; }
+  .sub-chip:hover{ border-color:var(--seal); }
+  .sub-chip.active{ background:var(--seal); border-color:var(--seal); color:#fff; }
+
+  .opt-btn{ border:1px solid #D9CFB4; background:#fff; transition:all .15s; }
+  .opt-btn:hover{ border-color:var(--seal); }
+  .opt-btn.correct{ background:var(--jade-soft); border-color:var(--jade); color:#1D3B2A; }
+  .opt-btn.wrong{ background:#F6DEDB; border-color:var(--seal); color:#6B231D; }
+
+  input[type=text].blank, textarea.free, select.blank{
+    border-bottom:2px solid #C9BE9F; background:transparent; outline:none;
+    font-family:'Noto Serif SC',serif;
+  }
+  input[type=text].blank:focus, textarea.free:focus, select.blank:focus{ border-color:var(--seal); }
+
+  .tag-jade{ background:var(--jade-soft); color:#1D3B2A; }
+  .tag-seal{ background:#F6DEDB; color:#6B231D; }
+
+  .phrase-chip{ border:1px dashed #C9BE9F; background:#F8F4E9; color:var(--ink-soft); transition:all .15s; cursor:pointer; }
+  .phrase-chip:hover{ border-color:var(--seal); border-style:solid; color:var(--seal); }
+
+  ::-webkit-scrollbar{ width:9px; height:9px; }
+  ::-webkit-scrollbar-thumb{ background:#C9BE9F; border-radius:5px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+
+  .lock-field{ background:#F2EEE2; border:1px dashed #C9BE9F; }
+  .step-dot{ transition:all .15s; }
+
+  .progress-track{ background:#EFE7CF; border-radius:999px; overflow:hidden; height:8px; }
+  .progress-fill{ height:100%; transition:width .2s ease, background .2s ease; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div class="lg:grid lg:grid-cols-[300px_1fr] min-h-screen">
+
+  <!-- ================= SIDEBAR — CHỈ MỤC LỤC ĐIỀU HƯỚNG ================= -->
+  <aside class="bg-[var(--sidebar)] text-white lg:sticky lg:top-0 lg:h-screen flex flex-col">
+    <div class="px-6 pt-7 pb-4 border-b border-[var(--sidebar-line)]">
+      <p class="han text-2xl font-semibold tracking-wide">申请书</p>
+      <p class="text-[12.5px] text-[#9FB0A5] mt-1">Ôn tập &amp; Luyện viết Văn bản ứng dụng</p>
+    </div>
+    <nav id="sidebar-nav" class="px-3 py-4 space-y-1 overflow-y-auto flex-1"></nav>
+    <div class="px-5 py-3 border-t border-[var(--sidebar-line)] text-[11px] text-[#7E9186] leading-relaxed">
+      100% chạy tĩnh (offline) · Không dùng API AI · Đáp án &amp; giải thích có sẵn trong mã nguồn.
+    </div>
+  </aside>
+
+  <!-- ================= MAIN STAGE ================= -->
+  <main class="px-5 sm:px-8 lg:px-12 py-8 max-w-5xl">
+
+    <div class="flex items-center gap-1 mb-8 overflow-x-auto pb-1" id="stepper"></div>
+
+    <!-- ============ TAB 1 · HƯỚNG DẪN VIẾT & BÀI MẪU CHUẨN ============ -->
+    <section id="tab-1" class="tab-panel active">
+      <h2 class="han text-2xl font-bold"><i class="fa-solid fa-book-open text-[var(--seal)] mr-1"></i> Hướng dẫn viết "申请书" (Đơn xin / Thư xin)</h2>
+
+      <div class="space-y-5 mt-6">
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-2">1. Mục đích sử dụng &amp; Yêu cầu chung</h3>
+          <div class="text-sm leading-relaxed space-y-2">
+            <p><b>Mục đích:</b> 申请书 (Đơn xin / Thư xin) là văn bản ứng dụng do cá nhân viết gửi tới cơ quan, tổ chức hoặc cấp trên để trình bày một nguyện vọng, đề nghị chính đáng về một vấn đề cụ thể nhằm mong muốn được xem xét và phê duyệt.</p>
+            <p><b>Đối tượng áp dụng:</b> Dùng trong môi trường học thuật (học sinh, sinh viên gửi Ban giám hiệu, khoa/viện, thầy cô giáo) hoặc môi trường công sở/đoàn thể (nhân viên gửi lãnh đạo, cá nhân gửi tổ chức).</p>
+            <p><b>Yêu cầu cốt lõi:</b></p>
+            <ul class="list-disc list-inside space-y-1">
+              <li><b>Văn phong hạ - thượng (下对上):</b> Vì là đơn do cá nhân/cấp dưới gửi tổ chức/cấp trên, ngôn ngữ bắt buộc phải mực thước, lễ phép, thể hiện thái độ tôn trọng và chân thành.</li>
+              <li><b>Một đơn một việc (一事一议):</b> Nội dung bài viết phải tập trung, đơn giản và rõ ràng. Mỗi lá đơn chỉ tập trung giải quyết một nguyện vọng duy nhất, không lồng ghép nhiều yêu cầu phức tạp.</li>
+              <li><b>Trực diện &amp; Thuyết phục:</b> Trình bày lý do phải trung thực, khách quan, phân tích tính chính đáng của yêu cầu để thuyết phục người phê duyệt.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-1">2. Cấu trúc chuẩn 5 phần &amp; Quy tắc trình bày</h3>
+          <p class="text-[13px] text-[#8a8270] mb-3">Một văn bản 申请书 chuẩn mực bắt buộc tuân thủ bố cục 5 phần sau, theo thứ tự từ trên xuống dưới.</p>
+          <div class="divide-y divide-[#EFE7CF]">
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">1</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Tiêu đề <span class="han">(标题)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">居中 — căn giữa</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Viết ở dòng đầu tiên. Các cách đặt tiêu đề phổ biến:</p>
+                <ul class="list-disc list-inside mt-1 space-y-0.5 text-[var(--ink-soft)]">
+                  <li>Tên thể loại đơn giản: <span class="han">申请书</span> hoặc <span class="han">申请信</span></li>
+                  <li>Tính chất + Thể loại: <span class="han">复学申请书</span>, <span class="han">奖学金申请</span></li>
+                  <li>Nội dung cụ thể + Thể loại: <span class="han">关于调整上课时间与学期时间的申请</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">2</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Đối tượng nhận đơn <span class="han">(称呼)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">顶格 — sát lề trái</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Viết ở dòng thứ hai, kết thúc bằng dấu hai chấm (：). Ví dụ: <span class="han">尊敬的校领导：</span>, <span class="han">尊敬的校长：</span>, <span class="han">尊敬的李教授：</span>.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">3</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Lời chào <span class="han">(问候语)</span> &amp; Chính văn <span class="han">(正文)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">空两格 — lùi 2 ô</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Lời chào <span class="han">您好！</span> xuống dòng lùi vào 2 ô trống. Đầu mỗi đoạn chính văn cũng bắt buộc lùi vào 2 ô. Tiến trình nội dung chính văn gồm 4 bước:</p>
+                <ol class="list-decimal list-inside mt-1 space-y-0.5">
+                  <li><b>Tự giới thiệu <span class="han">(自我介绍)</span>:</b> Họ tên, đơn vị, khoa/ngành học, lớp.</li>
+                  <li><b>Nội dung xin cụ thể <span class="han">(申请内容)</span>:</b> Nêu trực diện nguyện vọng.</li>
+                  <li><b>Lý do &amp; Bối cảnh <span class="han">(申请原因)</span>:</b> Trọng tâm chính văn; phân tích hoàn cảnh, tính cần thiết và chính đáng của yêu cầu.</li>
+                  <li><b>Quyết tâm &amp; Nguyện vọng <span class="han">(决心与要求)</span>:</b> Bày tỏ thái độ nghiêm túc, quyết tâm học tập/làm việc tốt.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">4</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Lời kết <span class="han">(结语 / 祝颂语)</span></p>
+                <p class="text-[var(--ink-soft)] mt-1"><b>Cách 1 (Chúc tụng hành chính):</b></p>
+                <ul class="mt-1 space-y-1">
+                  <li class="flex items-center gap-2 flex-wrap"><span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold">空四格 — lùi 4 ô</span><span class="han">此致</span> xuống dòng.</li>
+                  <li class="flex items-center gap-2 flex-wrap"><span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold">顶格 — sát lề trái</span><span class="han">敬礼！</span> xuống dòng tiếp theo, viết sát lề trái hoàn toàn.</li>
+                </ul>
+                <p class="text-[var(--ink-soft)] mt-2"><b>Cách 2 (Bày tỏ hy vọng):</b> Đưa vế câu nguyện vọng vào cuối chính văn, ví dụ: <span class="han">请领导考虑我的申请。</span>, <span class="han">盼望早日得到您的答复。</span>, <span class="han">特此申请，望予以批准为盼。</span></p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">5</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Ký tên &amp; Ngày tháng <span class="han">(落款与日期)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">góc dưới bên phải</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1"><b>Dòng trên (Ký tên):</b> Ghi rõ <span class="han">申请人：</span> hoặc <span class="han">学生：</span> phía trước họ tên (VD: <span class="han">申请人：马小华</span>, <span class="han">学生：张三</span>).</p>
+                <p class="text-[var(--ink-soft)] mt-1"><b>Dòng dưới (Ngày tháng):</b> Ghi rõ ngày tháng năm làm đơn theo chữ Hán (VD: <span class="han">2026年3月1日</span>).</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-1">3. Bộ mẫu câu cố định chuyên dụng (套话)</h3>
+          <p class="text-[13px] text-[#8a8270] mb-3">Bốn nhóm mẫu câu dùng trong 4 giai đoạn của lá đơn — dấu ngoặc vuông [ ] là phần cần thay bằng thông tin cụ thể của bạn.</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="border border-[#E4D9BE] rounded-sm p-4">
+              <p class="font-semibold text-sm mb-2"><i class="fa-solid fa-handshake text-[var(--seal)] mr-1"></i>a) Mở đầu &amp; Tự giới thiệu</p>
+              <ul class="text-[13.5px] leading-relaxed space-y-2">
+                <li><span class="han block">我是[Tên khoa/ngành] [Tên lớp] 的学生[Họ tên]。</span><span class="text-[var(--ink-soft)]">Em là sinh viên lớp... ngành... họ tên là...</span></li>
+                <li><span class="han block">我是[Tên đơn vị]的留学生，非常冒昧地给您写这封申请信。</span><span class="text-[var(--ink-soft)]">Em là du học sinh..., rất mạo muội viết lá đơn này gửi thầy/cô.</span></li>
+                <li><span class="han block">为了不耽误[Nội dung]，特提出申请，请求[Nội dung xin]。</span><span class="text-[var(--ink-soft)]">Để không làm ảnh hưởng đến..., em đặc biệt làm đơn này xin được...</span></li>
+              </ul>
+            </div>
+            <div class="border border-[#E4D9BE] rounded-sm p-4">
+              <p class="font-semibold text-sm mb-2"><i class="fa-solid fa-scale-balanced text-[var(--seal)] mr-1"></i>b) Trình bày lý do &amp; Phân tích tính chính đáng</p>
+              <ul class="text-[13.5px] leading-relaxed space-y-2">
+                <li><span class="han block">经过[Thời gian]的[Điều trị/Nỗ lực]，现已基本痊愈/恢复……</span><span class="text-[var(--ink-soft)]">Sau thời gian... điều trị/nỗ lực, nay đã cơ bản bình phục/khôi phục...</span></li>
+                <li><span class="han block">根据实际情况，……严重影响了学习效果/工作效率。</span><span class="text-[var(--ink-soft)]">Theo tình hình thực tế,..., đã ảnh hưởng nghiêm trọng đến hiệu quả học tập/làm việc.</span></li>
+                <li><span class="han block">如果[Phương án đề xuất]的话，既可以[Lợi ích 1]，也能[Lợi ích 2]。</span><span class="text-[var(--ink-soft)]">Nếu..., thì vừa có thể..., lại vừa có thể...</span></li>
+              </ul>
+            </div>
+            <div class="border border-[#E4D9BE] rounded-sm p-4">
+              <p class="font-semibold text-sm mb-2"><i class="fa-solid fa-fire text-[var(--seal)] mr-1"></i>c) Bày tỏ quyết tâm &amp; Thái độ cầu thị</p>
+              <ul class="text-[13.5px] leading-relaxed space-y-2">
+                <li><span class="han block">在这期间，我从未放弃过学习，还制定了详细的学习计划。</span><span class="text-[var(--ink-soft)]">Trong thời gian này, em chưa từng từ bỏ việc học, còn lập kế hoạch chi tiết.</span></li>
+                <li><span class="han block">我希望学校/领导请有关老师对我进行考核后再做决定。</span><span class="text-[var(--ink-soft)]">Em hy vọng nhà trường/lãnh đạo cho giáo viên kiểm tra em trước khi ra quyết định.</span></li>
+                <li><span class="han block">我坚信如果能获得这个机会，我一定会取得更大的进步。</span><span class="text-[var(--ink-soft)]">Em tin chắc nếu có được cơ hội này, em nhất định sẽ tiến bộ nhiều hơn.</span></li>
+              </ul>
+            </div>
+            <div class="border border-[#E4D9BE] rounded-sm p-4">
+              <p class="font-semibold text-sm mb-2"><i class="fa-solid fa-flag-checkered text-[var(--seal)] mr-1"></i>d) Lời kết &amp; Mong đợi phê duyệt</p>
+              <ul class="text-[13.5px] leading-relaxed space-y-2">
+                <li><span class="han block">请领导/组织考虑我的申请。</span><span class="text-[var(--ink-soft)]">Kính mong lãnh đạo/tổ chức xem xét đơn của em.</span></li>
+                <li><span class="han block">盼望早日得到您的答复。</span><span class="text-[var(--ink-soft)]">Rất mong sớm nhận được hồi đáp của thầy/cô.</span></li>
+                <li><span class="han block">特此申请，望予以批准为盼。</span><span class="text-[var(--ink-soft)]">Đặc biệt làm đơn này, kính mong được phê duyệt.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-1">Khung dàn bài tổng quát</h3>
+          <p class="text-[13px] text-[#8a8270] mb-3">Khái quát lại: một bức 申请书 thường viết những gì, theo đúng trình tự 5 phần đã học. Hai bài mẫu bên dưới là ví dụ cụ thể được viết theo đúng khung này.</p>
+          <div class="paper p-5 rounded-sm">
+            <p class="paper-title han">申 请</p>
+            <p class="paper-line han mt-1">尊敬的校领导：</p>
+            <p class="paper-line han indent2">您好！</p>
+            <p class="paper-line indent2">(Tự giới thiệu: họ tên, đơn vị, khoa/ngành, lớp — rồi nêu trực diện nguyện vọng xin cụ thể.)</p>
+            <p class="paper-line indent2">(Trình bày lý do, bối cảnh, phân tích tính chính đáng của yêu cầu.)</p>
+            <p class="paper-line indent2">(Bày tỏ quyết tâm, thái độ cầu thị — rồi nêu lời kết mong đợi được phê duyệt.)</p>
+            <p class="paper-line han indent4 mt-1">此致</p>
+            <p class="paper-line han">敬礼！</p>
+            <div class="sig-block mt-1">
+              <p class="paper-line sig-name">(Người nộp đơn — ghi rõ danh xưng phía trước họ tên)</p>
+              <p class="paper-line sig-date">(Ngày tháng làm đơn)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-3">Bài mẫu 1 · <span class="han">复学申请书</span> (Đơn xin học tiếp)</h3>
+          <div class="paper p-5 rounded-sm">
+            <p class="paper-title han">复学申请书</p>
+            <p class="paper-line han mt-1">尊敬的校领导：</p>
+            <p class="paper-line han indent2">您好！</p>
+            <p class="paper-line han indent2">我是××系××××专业×级×班的学生×××。我在去年的一次体育课上，由于不慎摔了一跤，造成左腿骨折。经过一年的治疗和调养，现已基本痊愈，为了不耽误下学期的课程学习，特提出申请，请求复学。</p>
+            <p class="paper-line han indent2">去年住院以后，由于不能上课，就向学院提出了休学申请。在家休养这一年中，我从未放弃过自己的学习。出院不久，我就给自己制定了学习计划。这一年来，我虽未在校学习，但并未停止学习，还读了不少提高个人修养方面的书，如中外名著等。因此，我希望领导考虑能否让我重新跟原班学习，我不知道这种提法是否妥当，但我希望学校请有关老师对我进行考试后再做决定。请领导考虑我的申请。</p>
+            <p class="paper-line han indent4 mt-1">此致</p>
+            <p class="paper-line han">敬礼！</p>
+            <div class="sig-block mt-1">
+              <p class="paper-line han sig-name">学生：×××</p>
+              <p class="paper-line han sig-date">××××年×月×日</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-3">Bài mẫu 2 · <span class="han">关于调整上课时间与学期时间的申请</span> (Đơn xin điều chỉnh lịch học)</h3>
+          <div class="paper p-5 rounded-sm">
+            <p class="paper-title han">关于调整上课时间与学期时间的申请</p>
+            <p class="paper-line han mt-1">尊敬的校长：</p>
+            <p class="paper-line han indent2">您好！</p>
+            <p class="paper-line han indent2">我是汉语学院的留学生，非常冒昧地给您写这封申请信。</p>
+            <p class="paper-line han indent2">关于上课时间的事情想请您听听我们留学生的想法。按照学校的规定，各个院系都是早上八点上课。对于留学生来说，这个上课时间太早了！根据我的调查，大多数留学生在自己的国家都是九点才开始上课，他们都不习惯早起。每天早晨挣扎着爬起来，睡眼腥忪地跑到教室，迷迷糊糊地听课，严重影响学习效果。甚至有的学生因不能起床而缺勤，丧失了很多学习机会。另外，很多留学生住在校外，为了能够按时到校，要早六点半甚至更早一些起床。即使是这样，也可能遇上堵车而迟到。如果学生上课时间改为九点的话，既可以避开上班高峰时间，也能保证学生有充足的睡眠时间，从而提高学习效率。</p>
+            <p class="paper-line han indent2">此外，我们的学期太长了！第一个学期从9月初到1月初，第二个学期从2月中旬到6月中旬，每个学期都长达4个月。所有的同学还没到学期末就已经筋疲力尽了，最后几周简直是在煎熬，很难集中精力上课。留学生来中国的目的，一方面是在学校学习语言，提高语言水平；另一方面是为了亲身体验中国生活，了解中国文化。"读万卷书，行万里路"。我们留学生需要利用假期到中国各地参观考察，如果把两个学期变成三个学期，将更有利于我们安排外出。</p>
+            <p class="paper-line han indent2">尊敬的校长，您能否根据我们的情况改变一下留学生上课的时间以及学期时间？请您对此予以考虑。盼望早日得到您的答复。</p>
+            <p class="paper-line han indent4 mt-1">此致</p>
+            <p class="paper-line han">敬礼！</p>
+            <div class="sig-block mt-1">
+              <p class="paper-line han sig-name">申请人：马小华</p>
+              <p class="paper-line han sig-date">2016年3月1日</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TAB 2 · TRẮC NGHIỆM QUY CÁCH & LOGIC ============ -->
+    <section id="tab-2" class="tab-panel">
+      <h2 class="han text-2xl font-bold"><i class="fa-solid fa-list-check text-[var(--seal)] mr-1"></i> Trắc nghiệm quy cách &amp; logic (6 câu)</h2>
+      <div id="quiz-wrap" class="space-y-6 mt-6"></div>
+    </section>
+
+    <!-- ============ TAB 3 · CHUYỂN ĐỔI VĂN PHONG & VIẾT CÂU ============ -->
+    <section id="tab-3" class="tab-panel">
+      <h2 class="han text-2xl font-bold"><i class="fa-solid fa-arrows-rotate text-[var(--seal)] mr-1"></i> Chuyển đổi văn phong &amp; viết câu</h2>
+
+      <div class="flex flex-wrap gap-2 mb-6 mt-6" id="sub3-chips">
+        <button class="sub-chip active px-3 py-1.5 rounded-sm text-sm font-medium" data-sub="3.1">3.1 · Ghép nối từ vựng</button>
+        <button class="sub-chip px-3 py-1.5 rounded-sm text-sm font-medium" data-sub="3.2">3.2 · Dịch câu Việt - Trung</button>
+        <button class="sub-chip px-3 py-1.5 rounded-sm text-sm font-medium" data-sub="3.3">3.3 · Chuyển đổi khẩu ngữ</button>
+      </div>
+
+      <!-- 3.1 -->
+      <div class="sub-panel active" id="sub-3.1">
+        <h3 class="han text-lg font-bold text-[var(--seal)]">Ghép nối từ vựng hành chính (口语 ➔ 书面语)</h3>
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5 mt-4">
+          <p class="text-sm text-[var(--ink-soft)] mb-3">👉 Hãy ghép các cụm từ khẩu ngữ ở Cột A với từ văn viết hành chính tương ứng ở Cột B:</p>
+          <div id="match31-wrap" class="space-y-2.5"></div>
+          <button onclick="checkMatch()" class="mt-4 bg-[var(--seal)] text-white px-5 py-2 rounded-sm text-sm font-medium hover:opacity-90">Kiểm tra ghép nối</button>
+          <div id="match31-result" class="mt-4 space-y-2 text-sm"></div>
+        </div>
+      </div>
+
+      <!-- 3.2 -->
+      <div class="sub-panel" id="sub-3.2">
+        <h3 class="han text-lg font-bold text-[var(--seal)]">Dịch câu Việt - Trung (Luyện viết câu hoàn chỉnh)</h3>
+        <div id="translate-wrap" class="space-y-5 mt-4"></div>
+      </div>
+
+      <!-- 3.3 -->
+      <div class="sub-panel" id="sub-3.3">
+        <h3 class="han text-lg font-bold text-[var(--seal)]">Chuyển đổi khẩu ngữ sang văn phong chuyên dụng (口语 ➔ 书面套话)</h3>
+        <div id="upgrade-wrap" class="space-y-5 mt-4"></div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 4 · SỬA LỖI THỂ THỨC ============ -->
+    <section id="tab-4" class="tab-panel">
+      <h2 class="han text-2xl font-bold"><i class="fa-solid fa-triangle-exclamation text-[var(--seal)] mr-1"></i> Sửa lỗi thể thức (Critical Correction)</h2>
+      <p class="text-sm text-[var(--ink-soft)] mt-3 mb-4">Đề bài: Hãy tìm ra 3 lỗi sai thể thức và văn phong trong đơn xin phục học dưới đây.</p>
+
+      <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mb-1">Bản bị lỗi thể thức (cần sửa lỗi)</p>
+      <div class="paper p-5 rounded-sm" id="err-paper">
+        <p class="paper-title han"><span class="err-mark">申 请 ：</span></p>
+        <p class="paper-line han mt-1">尊敬的老师：</p>
+        <p class="paper-line han"><span class="err-mark">你好！</span></p>
+        <p class="paper-line han">我想申请到贵校留学一年，学习汉语。</p>
+        <p class="paper-line han">我是一名日本学生，已经获得了早稻田大学的学士学位，专业为国际贸易。我学习努力，成绩优秀。我对汉语非常感兴趣。如果我学好了汉语，将为中日之间的贸易往来贡献力量。</p>
+        <p class="paper-line han">希望您能接受我的申请。</p>
+        <p class="paper-line han"><span class="err-mark">此致敬礼！</span></p>
+        <p class="paper-line han text-right mt-1">张伟</p>
+        <p class="paper-line han text-right"><span class="err-mark">2026.9.10</span></p>
+      </div>
+
+      <div class="bg-white border border-[#E4D9BE] rounded-sm p-5 mt-5">
+        <p class="text-sm font-medium mb-3">Hãy mô tả 3 lỗi bạn tìm thấy (vị trí lỗi &amp; cách sửa) vào 3 ô bên dưới:</p>
+        <div class="space-y-3">
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">Lỗi 1</label>
+            <input id="err-guess-1" type="text" class="free w-full mt-1 py-1.5 px-2 text-sm" placeholder="VD: lỗi ở phần tiêu đề...">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">Lỗi 2</label>
+            <input id="err-guess-2" type="text" class="free w-full mt-1 py-1.5 px-2 text-sm" placeholder="VD: lỗi ở phần thụt lề...">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">Lỗi 3</label>
+            <input id="err-guess-3" type="text" class="free w-full mt-1 py-1.5 px-2 text-sm" placeholder="VD: lỗi ở phần lời kết / ngày tháng...">
+          </div>
+        </div>
+        <button onclick="checkErrCompare()" id="err-toggle-btn" class="mt-4 bg-[var(--seal)] text-white px-5 py-2.5 rounded-sm text-sm font-medium hover:opacity-90">
+          Kiểm tra đáp án
+        </button>
+      </div>
+
+      <div id="err-compare" class="hidden mt-6">
+        <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mb-1">Bản đã sửa chuẩn mực</p>
+        <div class="paper p-5 rounded-sm">
+          <p class="paper-title han"><span class="fix-mark">申 请</span></p>
+          <p class="paper-line han mt-1">尊敬的老师：</p>
+          <p class="paper-line han indent2"><span class="fix-mark">您好！</span></p>
+          <p class="paper-line han indent2">我想申请到贵校留学一年，学习汉语。</p>
+          <p class="paper-line han indent2">我是一名日本学生，已经获得了早稻田大学的学士学位，专业为国际贸易。我学习努力，成绩优秀。我对汉语非常感兴趣。如果我学好了汉语，将为中日之间的贸易往来贡献力量。</p>
+          <p class="paper-line han indent2">希望您能接受我的申请。</p>
+          <p class="paper-line han indent4 mt-1"><span class="fix-mark">此致</span></p>
+          <p class="paper-line han"><span class="fix-mark">敬礼！</span></p>
+          <div class="sig-block mt-1">
+            <p class="paper-line han sig-name">张 伟</p>
+            <p class="paper-line han sig-date"><span class="fix-mark">2026年9月10日</span></p>
+          </div>
+        </div>
+
+        <div class="bg-[var(--jade-soft)] border border-[var(--jade)] rounded-sm p-4 text-sm leading-relaxed mt-4 space-y-2">
+          <p class="font-semibold text-[#1D3B2A]">👉 Phân tích lỗi sai &amp; sửa lại chuẩn mực:</p>
+          <p><b>1. Lỗi thể thức Tiêu đề:</b> Tiêu đề thừa dấu hai chấm (：). Sửa lại: bỏ dấu hai chấm, viết căn giữa: <span class="han">申 请</span>.</p>
+          <p><b>2. Lỗi thụt lề đoạn văn:</b> Lời chào <span class="han">你好！</span> và các đoạn chính văn viết sát lề, không lùi 2 ô. Sửa lại: <span class="han">您好！</span> và dòng đầu mỗi đoạn chính văn bắt buộc lùi vào đúng 2 ô trống (<span class="han">空两格</span>).</p>
+          <p><b>3. Lỗi Lời kết &amp; Ngày tháng:</b> <span class="han">此致敬礼！</span> dính liền nhau và ngày tháng ghi dạng 2026.9.10. Sửa lại: <span class="han">此致</span> xuống dòng lùi 4 ô; <span class="han">敬礼！</span> xuống dòng tiếp theo viết sát lề trái. Ngày tháng phải ghi dạng chữ Hán: <span class="han">2026年9月10日</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 5 · ĐỤC LỖ TÁI LẬP ============ -->
+    <section id="tab-5" class="tab-panel">
+      <h2 class="han text-2xl font-bold"><i class="fa-solid fa-puzzle-piece text-[var(--seal)] mr-1"></i> Đục lỗ tái lập (Cloze Test)</h2>
+      <p class="text-sm text-[var(--ink-soft)] mt-3 mb-2">Hãy chọn các cụm từ thích hợp trong khung cho sẵn để điền vào chỗ trống nhằm hoàn thiện bức đơn xin.</p>
+      <div class="flex flex-wrap gap-2 mb-6 text-sm">
+        <span class="text-[var(--ink-soft)]">Kho từ:</span>
+        <span class="han bg-[#F2EEE2] px-2 py-0.5 rounded-sm">A. 非常冒昧地给您写这封申请信</span>
+        <span class="han bg-[#F2EEE2] px-2 py-0.5 rounded-sm">B. 严重影响学习效果</span>
+        <span class="han bg-[#F2EEE2] px-2 py-0.5 rounded-sm">C. 盼望早日得到您的答复</span>
+      </div>
+
+      <div class="paper p-6 rounded-sm">
+        <p class="paper-title han">关于调整上课时间与学期时间的申请</p>
+        <p class="paper-line han mt-1">尊敬的校长：</p>
+        <p class="paper-line han indent2">您好！</p>
+        <p class="paper-line han indent2">我是汉语学院的留学生，<select data-blank="0" class="blank han"></select>。</p>
+        <p class="paper-line han indent2">按照学校的规定，各个院系都是早上八点上课。对于留学生来说，这个时间太早了！每天早晨挣扎着爬起来，睡眼腥忪地跑到教室，迷迷糊糊地听课，<select data-blank="1" class="blank han"></select>。如果上课时间改为九点的话，既可以避开上班高峰时间，也能保证充足的睡眠。</p>
+        <p class="paper-line han indent2">尊敬的校长，您能否根据我们的情况改变一下留学生上课的时间？请您对此予以考虑。<select data-blank="2" class="blank han"></select>。</p>
+        <p class="paper-line han indent4 mt-1">此致</p>
+        <p class="paper-line han">敬礼！</p>
+        <div class="sig-block mt-1">
+          <p class="paper-line han sig-name">申请人：马小华</p>
+          <p class="paper-line han sig-date">2016年3月1日</p>
+        </div>
+      </div>
+
+      <button onclick="checkCloze()" class="mt-5 bg-[var(--seal)] text-white px-5 py-2.5 rounded-sm text-sm font-medium hover:opacity-90">Kiểm tra đáp án</button>
+      <div id="cloze-result" class="mt-5 space-y-2 text-sm"></div>
+    </section>
+
+    <!-- ============ TAB 6 · LUYỆN VIẾT HOÀN CHỈNH ============ -->
+    <section id="tab-6" class="tab-panel">
+      <h2 class="han text-2xl font-bold"><i class="fa-solid fa-graduation-cap text-[var(--seal)] mr-1"></i> Luyện viết hoàn chỉnh theo tình huống</h2>
+      <div class="bg-white border border-[#E4D9BE] rounded-sm p-4 mt-4 mb-6 text-sm text-[var(--ink-soft)] leading-relaxed">
+        <b>Tình huống:</b> Em là du học sinh tên Kim Thái Dân (<span class="han">金泰民</span>), sinh viên lớp 2 khóa 2024 ngành Hán ngữ. Học kỳ trước em bị tai nạn xe đạp phải nghỉ học 1 năm. Nay sau thời gian điều trị tại bệnh viện, sức khỏe của em đã khôi phục hoàn toàn. Em hãy viết một bức <span class="han">复学申请书</span> gửi Ban giám hiệu nhà trường (<span class="han">尊敬的校领导：</span>) để xin quay lại học vào học kỳ tới (tháng 2 năm 2027) và mong muốn được theo học tiếp cùng các bạn lớp cũ.
+        <br><br><b>Yêu cầu:</b> Viết từ 150 - 180 chữ Hán, chuẩn mực thể thức 5 phần.
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">标题 · Tiêu đề</label>
+            <input id="s6-title" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="复学申请书" oninput="renderPaper6()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">称呼 · Đối tượng nhận</label>
+            <input id="s6-recipient" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="尊敬的校领导：" oninput="renderPaper6()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">问候语 · Lời chào</label>
+            <input id="s6-greeting" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="您好！" oninput="renderPaper6()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">正文 · Chính văn (tự giới thiệu → lý do → quyết tâm)</label>
+            <textarea id="s6-body" class="free han w-full mt-1 py-2 px-2 text-base" rows="7" placeholder="我是汉语系汉语言专业24级2班的学生金泰民……" oninput="renderPaper6()"></textarea>
+            <div class="flex flex-wrap gap-1.5 mt-2" id="phrase-chips"></div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">此致 · Lời kết 1</label>
+              <input id="s6-cizhi" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="此致" oninput="renderPaper6()">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">敬礼！ · Lời kết 2</label>
+              <input id="s6-jingli" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="敬礼！" oninput="renderPaper6()">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">落款 · Người nộp</label>
+              <input id="s6-name" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="学生：金泰民" oninput="renderPaper6()">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">日期 · Ngày tháng</label>
+              <input id="s6-date" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="2026年12月20日" oninput="renderPaper6()">
+            </div>
+          </div>
+
+          <button onclick="toggleRef('s6')" class="mt-2 bg-[var(--seal)] text-white px-4 py-2.5 rounded-sm text-sm font-medium hover:opacity-90">Hiện Bài Tham Khảo Chuẩn Căn Lề</button>
+          <div id="s6-ref" class="hidden mt-3 bg-[var(--jade-soft)] border border-[var(--jade)] rounded-sm p-4 text-sm leading-relaxed">
+            <p class="text-xs font-semibold uppercase tracking-wide text-[#1D3B2A] mb-2">BÀI THAM KHẢO CHUẨN CĂN LỀ</p>
+            <p class="han text-center font-bold">复学申请书</p>
+            <p class="han mt-1">尊敬的校领导：</p>
+            <p class="han indent2">您好！</p>
+            <p class="han indent2">我是汉语系汉语言专业24级2班的学生金泰民。去年我因骑自行车不慎发生车祸导致腿部受伤，向学校提出了休学一年的申请。经过一年的治疗与精心休养，目前我的身体已完全康复，腿部行动自如。</p>
+            <p class="han indent2">为了不耽误学业，特提出申请，请求于2027年2月休学期满后正式复学。在家休养期间，我一直坚持自学，按时复习专业课程。因此，我希望领导能批准我回到原班级继续学习。请领导考虑我的申请。</p>
+            <p class="han indent4 mt-1">此致</p>
+            <p class="han">敬礼！</p>
+            <div class="sig-block mt-1">
+              <p class="han sig-name">学生：金泰民</p>
+              <p class="han sig-date">2026年12月20日</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide mb-1">Xem trước tờ đơn mô phỏng</p>
+          <div class="paper p-6 rounded-sm relative min-h-[380px]" id="s6-paper"></div>
+
+          <div class="mt-4 bg-white border border-[#E4D9BE] rounded-sm p-4">
+            <div class="flex items-center justify-between text-sm mb-1.5">
+              <span class="font-semibold text-[var(--ink-soft)]">Số chữ Hán (chính văn)</span>
+              <span id="wc-count" class="han font-bold text-[var(--seal)]">0 / 150–180</span>
+            </div>
+            <div class="progress-track">
+              <div id="wc-fill" class="progress-fill" style="width:0%; background:#C9BE9F;"></div>
+            </div>
+            <p id="wc-status" class="text-[12px] text-[#8a8270] mt-1.5">Bắt đầu gõ chính văn để theo dõi độ dài bài viết.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   ĐIỀU HƯỚNG: SIDEBAR (mục lục) + STEPPER (6 tab)
+   ============================================================ */
+const NAV = [
+  { id:1, icon:"fa-book-open", label:'Hướng dẫn viết &amp; Bài mẫu chuẩn' },
+  { id:2, icon:"fa-list-check", label:"Trắc nghiệm quy cách &amp; logic" },
+  { id:3, icon:"fa-arrows-rotate", label:"Chuyển đổi văn phong &amp; viết câu",
+    sub:[ {k:"3.1", t:"Ghép nối từ vựng"},
+          {k:"3.2", t:"Dịch câu Việt - Trung"},
+          {k:"3.3", t:"Chuyển đổi khẩu ngữ"} ] },
+  { id:4, icon:"fa-triangle-exclamation", label:"Sửa lỗi thể thức" },
+  { id:5, icon:"fa-puzzle-piece", label:"Đục lỗ tái lập" },
+  { id:6, icon:"fa-graduation-cap", label:"Luyện viết hoàn chỉnh theo tình huống" }
+];
+
+const sidebarNav = document.getElementById('sidebar-nav');
+NAV.forEach(item=>{
+  const btn = document.createElement('button');
+  btn.className = "navbtn" + (item.id===1 ? " active" : "");
+  btn.dataset.tab = item.id;
+  btn.innerHTML = `<i class="fa-solid ${item.icon}"></i><span>${item.label}</span>`;
+  btn.onclick = ()=> goTab(item.id);
+  sidebarNav.appendChild(btn);
+  if(item.sub){
+    item.sub.forEach(s=>{
+      const sb = document.createElement('button');
+      sb.className = "subnav";
+      sb.dataset.tab = item.id;
+      sb.dataset.sub = s.k;
+      sb.textContent = `${s.k} · ${s.t}`;
+      sb.onclick = ()=>{ goTab(item.id); goSub(s.k); };
+      sidebarNav.appendChild(sb);
+    });
+  }
+});
+
+const stepper = document.getElementById('stepper');
+const stepLabels = ["一","二","三","四","五","六"];
+stepLabels.forEach((label,i)=>{
+  const n=i+1;
+  const b = document.createElement('button');
+  b.className = "step-dot han text-xs w-8 h-8 flex items-center justify-center rounded-full border shrink-0";
+  b.textContent = label;
+  b.dataset.step = n;
+  b.onclick = ()=>goTab(n);
+  stepper.appendChild(b);
+});
+
+function paintStepper(active){
+  document.querySelectorAll('.step-dot').forEach(d=>{
+    const i = Number(d.dataset.step);
+    if(i===active){ d.style.background='var(--seal)'; d.style.borderColor='var(--seal)'; d.style.color='#fff'; }
+    else if(i<active){ d.style.background='var(--jade-soft)'; d.style.borderColor='var(--jade)'; d.style.color='#1D3B2A'; }
+    else { d.style.background='#fff'; d.style.borderColor='#D9CFB4'; d.style.color='#8a8270'; }
+  });
+}
+
+function goTab(n){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(b=> b.classList.toggle('active', Number(b.dataset.tab)===n) );
+  document.querySelectorAll('.subnav').forEach(b=> b.classList.remove('active') );
+  paintStepper(n);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function goSub(key){
+  document.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('sub-'+key).classList.add('active');
+  document.querySelectorAll('.sub-chip').forEach(c=> c.classList.toggle('active', c.dataset.sub===key) );
+  document.querySelectorAll('.subnav').forEach(b=> b.classList.toggle('active', b.dataset.sub===key) );
+}
+document.querySelectorAll('.sub-chip').forEach(c=> c.onclick = ()=> goSub(c.dataset.sub) );
+
+goTab(1);
+
+/* ============================================================
+   TIỆN ÍCH DÙNG CHUNG
+   ============================================================ */
+function esc(str){
+  const div = document.createElement('div');
+  div.innerText = str;
+  return div.innerHTML;
+}
+// Tiêu đề đúng 2 chữ Hán ➔ chèn khoảng trắng ở giữa cho cân đối (VD: 申请 ➔ 申 请). Từ 3 chữ trở lên giữ nguyên.
+function spaceTwoCharTitle(raw){
+  if(!raw) return raw;
+  const core = raw.replace(/\s+/g,'').trim();
+  const chars = Array.from(core);
+  if(chars.length === 2) return chars.join(' ');
+  return core;
+}
+// Ký tên đúng 2 chữ Hán (bỏ qua nhãn như "学生：") ➔ chèn khoảng trắng cho cân đối; 3 chữ trở lên giữ nguyên.
+function spaceTwoCharName(raw){
+  if(!raw) return raw;
+  const trimmed = raw.trim();
+  const m = trimmed.match(/^(.*?[:：])(.*)$/);
+  let prefix = '', core = trimmed;
+  if(m){ prefix = m[1]; core = m[2].trim(); }
+  const chars = Array.from(core.replace(/\s+/g,''));
+  if(chars.length === 2) core = chars.join(' ');
+  return prefix + core;
+}
+function sigBlockHtml(name, date){
+  if(!name && !date) return '';
+  return `<div class="sig-block mt-1">
+    ${name ? `<p class="paper-line han sig-name">${esc(spaceTwoCharName(name))}</p>` : ''}
+    ${date ? `<p class="paper-line han sig-date">${esc(date)}</p>` : ''}
+  </div>`;
+}
+
+/* ============================================================
+   TAB 2: QUIZ (6 câu, nguyên văn từ tài liệu nguồn)
+   ============================================================ */
+const quizData = [
+  { q:"Câu 1 · Ngôn ngữ sử dụng trong một bức 申请书 bắt buộc phải tuân thủ nguyên tắc văn phong nào?",
+    opts:[
+      "Ngôn ngữ ngang hàng (平级行文), có thể sử dụng khẩu ngữ tự nhiên.",
+      "Ngôn ngữ hạ - thượng (下对上行文), mực thước, kính trọng, khiêm tốn.",
+      "Ngôn ngữ cấp trên chỉ thị cấp dưới (上对下行文), dùng nhiều câu mệnh lệnh.",
+      "Ngôn ngữ quảng cáo thương mại, tự do sử dụng câu cảm thán."
+    ],
+    correct:1,
+    explain:"申请书 là đơn do cá nhân gửi tổ chức hoặc cấp dưới gửi cấp trên, nên ngôn ngữ bắt buộc phải tuân thủ chuẩn mực hạ - thượng (下对上)." },
+  { q:"Câu 2 · Tiêu đề của một bức 申请书 được trình bày thế nào là chuẩn quy cách?",
+    opts:[
+      "Viết sát lề bên trái hoàn toàn (顶格), kết thúc bằng dấu hai chấm.",
+      "Viết ở dòng đầu tiên, bắt buộc căn giữa (居中).",
+      "Viết lùi vào 4 ô trống ở dòng đầu tiên.",
+      "Viết ở góc dưới bên phải cùng với phần ký tên."
+    ],
+    correct:1,
+    explain:"Tiêu đề của văn bản 申请书 bắt buộc phải đặt ở dòng đầu tiên và căn giữa (居中)." },
+  { q:"Câu 3 · Khi trình bày cặp từ chúc tụng 此致 và 敬礼！ ở cuối đơn, quy chuẩn căn lề đúng là gì?",
+    opts:[
+      "此致 và 敬礼！ cùng viết sát lề trái ở một dòng.",
+      "此致 xuống dòng lùi vào 4 ô trống; 敬礼！ xuống dòng tiếp theo viết sát lề trái (顶格).",
+      "此致 viết căn giữa; 敬礼！ viết sát lề phải.",
+      "Cả hai từ đều viết lùi vào 2 ô trống trên cùng một dòng."
+    ],
+    correct:1,
+    explain:"此致 xuống dòng lùi 4 ô, còn 敬礼！ xuống dòng tiếp theo viết sát lề trái hoàn toàn (顶格) để thể hiện sự tôn trọng." },
+  { q:"Câu 4 · Trong phần Chính văn của 申请书, nội dung nào chiếm vị trí trọng tâm nhất?",
+    opts:[
+      "Phần tự giới thiệu về sở thích cá nhân và hoàn cảnh gia đình.",
+      "Phần trình bày lý do, bối cảnh và phân tích tính chính đáng của yêu cầu (申请原因).",
+      "Danh sách chi tiết các môn học đã hoàn thành ở kỳ trước.",
+      "Lời cảm ơn kéo dài gửi đến các phòng ban."
+    ],
+    correct:1,
+    explain:"Trọng tâm của 申请书 là phần trình bày lý do (申请原因), phân tích tính chính đáng để thuyết phục cấp trên xem xét phê duyệt." },
+  { q:"Câu 5 · Nguyên tắc nội dung 'Một đơn một việc' (一事一议) trong 申请书 có nghĩa là gì?",
+    opts:[
+      "Mỗi lá đơn chỉ được viết đúng một đoạn văn.",
+      "Mỗi lá đơn chỉ tập trung giải quyết một đề nghị/nguyện vọng duy nhất, không lồng ghép nhiều việc không liên quan.",
+      "Chỉ được gửi đơn cho một người duy nhất trong cơ quan.",
+      "Chỉ được nộp đơn một lần trong cả khóa học."
+    ],
+    correct:1,
+    explain:"Một đơn một việc (一事一议) đòi hỏi nội dung đơn phải đơn thuần, rõ ràng, mỗi lá đơn chỉ giải quyết một nguyện vọng duy nhất." },
+  { q:"Câu 6 · Khi ký tên ở góc dưới bên phải đơn xin, cách ghi nào sau đây là chuẩn mực nhất?",
+    opts:[
+      "Chỉ ký một tên riêng duy nhất.",
+      "Ghi kèm danh tính/xưng vị rõ ràng phía trước họ tên, như 申请人：马小华 hoặc 学生：张三.",
+      "Ghi địa chỉ nhà riêng trước tên.",
+      "Viết tên lùi vào 2 ô trống ở sát lề bên trái."
+    ],
+    correct:1,
+    explain:"Trong đơn hành chính, phần ký tên nên ghi rõ xưng vị 申请人： hoặc 学生： phía trước họ tên để xác định rõ tư cách người nộp đơn." },
+];
+const quizWrap = document.getElementById('quiz-wrap');
+quizData.forEach((item, qi)=>{
+  const card = document.createElement('div');
+  card.className = "bg-white border border-[#E4D9BE] rounded-sm p-5";
+  card.innerHTML = `
+    <p class="han text-[15px] font-medium">${item.q}</p>
+    <div class="grid gap-2 mt-3" id="q${qi}-opts"></div>
+    <div id="q${qi}-explain" class="hidden mt-3 text-sm rounded-sm p-3"></div>`;
+  quizWrap.appendChild(card);
+  const optsWrap = card.querySelector(`#q${qi}-opts`);
+  const letters = ["A","B","C","D"];
+  item.opts.forEach((opt, oi)=>{
+    const btn = document.createElement('button');
+    btn.className = "opt-btn han text-left text-sm px-3 py-2 rounded-sm";
+    btn.innerHTML = `<b>${letters[oi]}.</b> ${opt}`;
+    btn.onclick = ()=>{
+      optsWrap.querySelectorAll('button').forEach((b,bi)=>{
+        b.classList.remove('correct','wrong');
+        if(bi===item.correct) b.classList.add('correct');
+        else if(bi===oi) b.classList.add('wrong');
+      });
+      const ex = card.querySelector(`#q${qi}-explain`);
+      ex.classList.remove('hidden');
+      const isRight = oi===item.correct;
+      ex.className = "mt-3 text-sm rounded-sm p-3 leading-relaxed " + (isRight ? "tag-jade" : "tag-seal");
+      ex.innerHTML = `<b>${isRight ? "Chính xác! " : "Chưa đúng. "}</b>${item.explain}`;
+    };
+    optsWrap.appendChild(btn);
+  });
+});
+
+/* ============================================================
+   TAB 3.1: MATCHING (6 cặp, nguyên văn)
+   ============================================================ */
+const match31 = {
+  cols:[
+    ["病好了 (khỏi bệnh, lành bệnh)","丢了机会 (bỏ lỡ, mất cơ hội)","躲开 (tránh né, né ra)","等著答复 (muốn, mong chờ)","所以写信求 (cho nên viết đơn xin)","不小心摔倒了，把腿给摔断了 (lỡ chân ngã một cái làm gãy chân)"],
+    ["避开","痊愈","丧失","特提出申请","盼望 / 望","不慎摔了一跤，造成左腿骨折"]
+  ],
+  answers:["B","C","A","E","D","F"],
+  explain:[
+    "1 - B (病好了 ➔ 痊愈: 经过一年的治疗，现已基本痊愈).",
+    "2 - C (丢了机会 ➔ 丧失: 丧失了很多学习机会).",
+    "3 - A (躲开高峰 ➔ 避开: 避开上班高峰时间).",
+    "4 - E (等著答复 ➔ 盼望 / 望: 盼望早日得到您的答复).",
+    "5 - D (所以写信求 ➔ 特提出申请: 特提出申请，请求复学).",
+    "6 - F (不小心摔倒了，把腿给摔断了 ➔ 不慎摔了一跤，造成左腿骨折)."
+  ]
+};
+function buildMatch(){
+  const wrap = document.getElementById('match31-wrap');
+  const letters = "ABCDEFGHIJ".split('');
+  const bLabels = match31.cols[1].map((_,i)=>letters[i]);
+  const bOptions = match31.cols[1].map((txt,i)=>({label:bLabels[i], txt}));
+  match31.cols[0].forEach((aTxt,i)=>{
+    const row = document.createElement('div');
+    row.className = "flex items-center gap-3 flex-wrap";
+    row.innerHTML = `
+      <span class="han text-sm w-72 shrink-0 bg-[#F2EEE2] px-2 py-1.5 rounded-sm">${i+1}. ${aTxt}</span>
+      <span class="text-[var(--ink-soft)]">➔</span>
+      <select data-idx="${i}" class="han border border-[#D9CFB4] rounded-sm px-2 py-1.5 text-sm flex-1 min-w-[160px]">
+        <option value="">— chọn —</option>
+        ${bOptions.map(o=>`<option value="${o.label}">${o.label}. ${o.txt}</option>`).join("")}
+      </select>`;
+    wrap.appendChild(row);
+  });
+}
+buildMatch();
+function checkMatch(){
+  const result = document.getElementById('match31-result');
+  result.innerHTML = "";
+  let correct = 0;
+  match31.answers.forEach((ans,i)=>{
+    const sel = document.querySelector(`#match31-wrap [data-idx="${i}"]`);
+    const ok = sel.value === ans;
+    sel.style.borderColor = sel.value ? (ok ? 'var(--jade)' : 'var(--seal)') : '#D9CFB4';
+    if(ok) correct++;
+  });
+  const summary = document.createElement('p');
+  summary.className = (correct===match31.answers.length ? 'text-[var(--jade)]' : 'text-[var(--seal)]') + " font-medium";
+  summary.textContent = `Đúng ${correct}/${match31.answers.length} cặp.`;
+  result.appendChild(summary);
+  const box = document.createElement('div');
+  box.className = "tag-jade rounded-sm p-3 text-[13px] leading-relaxed space-y-1";
+  box.innerHTML = "<b>💡 Đáp án và giải thích:</b><br>" + match31.explain.join("<br>");
+  result.appendChild(box);
+}
+
+/* ============================================================
+   TAB 3.2: DỊCH CÂU VIỆT - TRUNG (5 câu, nguyên văn)
+   ============================================================ */
+const translateData = [
+  { vi:"Nếu thời gian vào học đổi thành 9 giờ, vừa có thể tránh được giờ cao điểm đi làm, lại vừa có thể đảm bảo học sinh có đủ thời gian ngủ.",
+    hint:["如果……改为……的话，既可以避开……，也能保证……"],
+    answer:"如果上课时间改为九点的话，既可以避开上班高峰时间，也能保证学生有充足的睡眠时间。" },
+  { vi:"Việc nghỉ học vì không thể ngủ dậy đúng giờ khiến học sinh mất đi rất nhiều cơ hội học tập, ảnh hưởng nghiêm trọng đến hiệu quả học tập.",
+    hint:["因……而缺勤 (nghỉ học vì...)","丧失……机会 (mất cơ hội...)","严重影响……效果 (ảnh hưởng nghiêm trọng...)"],
+    answer:"有的学生因不能按时起床而缺勤，丧失了许多学习机会，严重影响了学习效果。" },
+  { vi:"(Chân của em) nay đã cơ bản bình phục, để không làm ảnh hưởng đến việc học của học kỳ tới, em đặc biệt làm đơn này kính xin được phục học.",
+    hint:["现已基本痊愈 (nay đã cơ bản bình phục/khỏe hẳn)","为了不耽误…… (để không làm ảnh hưởng/trễ nải...)","特提出申请，请求…… (đặc biệt đưa ra đơn này, kính xin được...)"],
+    answer:"现已基本痊愈，为了不耽误下学期的课程学习，特提出申请，请求复学。" },
+  { vi:"Em hy vọng nhà trường mời các thầy cô có liên quan tiến hành kiểm tra em rồi mới đưa ra quyết định. Kính mong lãnh đạo xem xét đơn xin của em.",
+    hint:["请有关老师对……进行考试 (mời/nhờ giáo viên có liên quan tiến hành kiểm tra...)","……后再做决定 (sau khi... mới đưa ra quyết định)","请领导考虑…… (kính mong lãnh đạo xem xét...)"],
+    answer:"我希望学校请有关老师对我进行考试后再做决定。请领导考虑我的申请。" },
+  { vi:"Kính mong ngài (Hiệu trưởng) xem xét về việc này. Rất mong sớm nhận được hồi đáp của ngài.",
+    hint:["请您对此予以…… (kính mong ngài đối với việc này...)","予以考虑 (dành sự xem xét/cân nhắc)","盼望早日得到…… (rất mong sớm nhận được...)"],
+    answer:"请您对此予以考虑。盼望早日得到您的答复。" },
+];
+const translateWrap = document.getElementById('translate-wrap');
+translateData.forEach((item, i)=>{
+  const card = document.createElement('div');
+  card.className = "bg-white border border-[#E4D9BE] rounded-sm p-5";
+  card.innerHTML = `
+    <p class="text-sm font-medium">Câu ${i+1}: ${item.vi}</p>
+    <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mt-3 mb-1">Gợi ý từ/cấu trúc (提示词汇与句型)</p>
+    <ul class="han text-sm text-[var(--ink-soft)] list-disc list-inside space-y-0.5">${item.hint.map(h=>`<li>${h}</li>`).join('')}</ul>
+    <textarea id="tr-${i}-input" class="free han w-full mt-3 py-2 px-2 text-base" rows="2" placeholder="Viết câu trả lời của bạn ở đây..."></textarea>
+    <button onclick="toggleRef('tr-${i}')" class="mt-2 border border-[var(--seal)] text-[var(--seal)] px-4 py-1.5 rounded-sm text-sm font-medium hover:bg-[#F6DEDB]">💡 Đáp án đối chiếu</button>
+    <div id="tr-${i}-ref" class="hidden mt-2 bg-[var(--jade-soft)] rounded-sm p-3 text-sm">
+      <p class="han">${item.answer}</p>
+    </div>`;
+  translateWrap.appendChild(card);
+});
+
+/* ============================================================
+   TAB 3.3: CHUYỂN ĐỔI KHẨU NGỮ SANG VĂN PHONG (3 câu, nguyên văn)
+   ============================================================ */
+const upgradeData = [
+  { title:"Giải thích lợi ích của việc thay đổi giờ học sang 9 giờ",
+    spoken:"要是改到九点上课，大家就不用赶在上班太堵的时候出门，也能多睡一会儿。",
+    formal:"如果上课时间改为九点的话，既可以避开上班高峰时间，也能保证学生有充足的睡眠时间。" },
+  { title:"Đề nghị nhà trường cho làm bài kiểm tra trước khi quyết định",
+    spoken:"领导你先别拒绝，找几个老师考考我，看我合格不合格再决定。",
+    formal:"我希望学校请有关老师对我进行考试后再做决定。请领导考虑我的申请。" },
+  { title:"Bày tỏ mong muốn nhận được hồi đáp của Hiệu trưởng",
+    spoken:"校长，你觉得怎么样？希望能快一点收到你的回信。",
+    formal:"请您对此予以考虑。盼望早日得到您的答复。" },
+];
+const upgradeWrap = document.getElementById('upgrade-wrap');
+upgradeData.forEach((item, i)=>{
+  const card = document.createElement('div');
+  card.className = "bg-white border border-[#E4D9BE] rounded-sm p-5";
+  card.innerHTML = `
+    <p class="text-sm font-medium">Câu ${i+1}: ${item.title}</p>
+    <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mt-3 mb-1">Khẩu ngữ (口语)</p>
+    <p class="han text-sm bg-[#F2EEE2] rounded-sm px-3 py-2">${item.spoken}</p>
+    <label class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mt-3 mb-1 block">Nâng cấp thành câu hành chính chuẩn mực</label>
+    <textarea id="up-${i}-input" class="free han w-full mt-1 py-2 px-2 text-base" rows="2" placeholder="Viết lại câu văn viết hành chính ở đây..."></textarea>
+    <button onclick="toggleRef('up-${i}')" class="mt-2 border border-[var(--seal)] text-[var(--seal)] px-4 py-1.5 rounded-sm text-sm font-medium hover:bg-[#F6DEDB]">💡 Xem đáp án nâng cấp (书面套话)</button>
+    <div id="up-${i}-ref" class="hidden mt-2 bg-[var(--jade-soft)] rounded-sm p-3 text-sm">
+      <p class="han">${item.formal}</p>
+    </div>`;
+  upgradeWrap.appendChild(card);
+});
+
+/* ============================================================
+   TAB 4: SỬA LỖI THỂ THỨC — TOGGLE SO SÁNH
+   ============================================================ */
+function checkErrCompare(){
+  const box = document.getElementById('err-compare');
+  const paper = document.getElementById('err-paper');
+  const btn = document.getElementById('err-toggle-btn');
+  const nowHidden = box.classList.toggle('hidden');
+  paper.classList.toggle('reveal-errors', !nowHidden);
+  btn.textContent = nowHidden ? 'Kiểm tra đáp án' : 'Ẩn đáp án';
+  if(!nowHidden){ box.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+}
+
+/* ============================================================
+   TAB 5: ĐỤC LỖ TÁI LẬP (Cloze)
+   ============================================================ */
+const clozeBank = [
+  {label:"A", text:"非常冒昧地给您写这封申请信"},
+  {label:"B", text:"严重影响学习效果"},
+  {label:"C", text:"盼望早日得到您的答复"},
+];
+const clozeAnswers = ["A","B","C"];
+document.querySelectorAll('select[data-blank]').forEach(sel=>{
+  sel.innerHTML = `<option value="">— chọn —</option>` + clozeBank.map(o=>`<option value="${o.label}">${o.label}. ${o.text}</option>`).join("");
+});
+const clozeExplain = [
+  "Chỗ trống (1) - Điền A: 非常冒昧地给您写这封申请信 (Đặt sau phần tự giới thiệu để biểu thị sự khiêm tốn, lễ phép khi gửi đơn lên Hiệu trưởng).",
+  "Chỗ trống (2) - Điền B: 严重影响学习效果 (Đặt ở vế câu phân tích tác hại của việc đi học quá sớm để làm rõ tính chính đáng của lý do xin).",
+  "Chỗ trống (3) - Điền C: 盼望早日得到您的答复 (Đặt ở cuối chính văn trước phần 此致敬礼 để thể hiện sự mong đợi phê duyệt từ lãnh đạo)."
+];
+function checkCloze(){
+  const result = document.getElementById('cloze-result');
+  result.innerHTML = "";
+  let allRight = true;
+  clozeAnswers.forEach((ans,i)=>{
+    const sel = document.querySelector(`[data-blank="${i}"]`);
+    const val = sel.value;
+    const right = val === ans;
+    if(!right) allRight = false;
+    sel.style.borderColor = val ? (right ? 'var(--jade)' : 'var(--seal)') : '#C9BE9F';
+  });
+  const summary = document.createElement('p');
+  summary.className = "font-medium " + (allRight ? "text-[var(--jade)]" : "text-[var(--seal)]");
+  summary.textContent = allRight ? "Bạn đã điền đúng toàn bộ 3 chỗ trống!" : "Xem lại các ô viền đỏ, sau đó đọc giải thích bên dưới.";
+  result.appendChild(summary);
+  const box = document.createElement('div');
+  box.className = "tag-jade rounded-sm p-3 text-[13px] leading-relaxed space-y-1";
+  box.innerHTML = "<b>💡 Đáp án &amp; giải thích:</b><br>" + clozeExplain.join("<br>");
+  result.appendChild(box);
+}
+
+/* ============================================================
+   TAB 6: DUAL-PANEL WRITING
+   ============================================================ */
+const phraseChipsData = [
+  "我是[Tên khoa/ngành][Tên lớp]的学生[Họ tên]。",
+  "经过[Thời gian]的[Điều trị/Nỗ lực]，现已基本痊愈。",
+  "为了不耽误[Nội dung]，特提出申请，请求[Nội dung xin]。",
+  "在这期间，我从未放弃过学习，还制定了详细的学习计划。",
+  "我坚信如果能获得这个机会，我一定会取得更大的进步。",
+  "请领导考虑我的申请。",
+];
+const chipsWrap = document.getElementById('phrase-chips');
+phraseChipsData.forEach(phrase=>{
+  const chip = document.createElement('button');
+  chip.type = "button";
+  chip.className = "phrase-chip han text-[12.5px] px-2.5 py-1 rounded-full";
+  chip.textContent = "+ " + phrase;
+  chip.onclick = ()=>{
+    const ta = document.getElementById('s6-body');
+    const sep = ta.value.trim() ? (ta.value.endsWith('。') || ta.value.endsWith('！') ? '' : '') : '';
+    ta.value = ta.value.trim() ? (ta.value + phrase) : phrase;
+    renderPaper6();
+    ta.focus();
+  };
+  chipsWrap.appendChild(chip);
+});
+
+function countHan(str){
+  const m = str.match(/[\u4e00-\u9fff]/g);
+  return m ? m.length : 0;
+}
+
+function renderPaper6(){
+  const title = document.getElementById('s6-title').value.trim();
+  const recipient = document.getElementById('s6-recipient').value.trim();
+  const greeting = document.getElementById('s6-greeting').value.trim();
+  const body = document.getElementById('s6-body').value.trim();
+  const cizhi = document.getElementById('s6-cizhi').value.trim();
+  const jingli = document.getElementById('s6-jingli').value.trim();
+  const name = document.getElementById('s6-name').value.trim();
+  const date = document.getElementById('s6-date').value.trim();
+  const paper = document.getElementById('s6-paper');
+
+  const anyTyped = title || recipient || greeting || body || cizhi || jingli || name || date;
+  if(!anyTyped){
+    paper.innerHTML = `<p class="paper-empty">— Tờ giấy trắng: bắt đầu gõ bài làm bên trái để xem kết quả —</p>`;
+  } else {
+    const bodyLines = body ? body.split('\n').filter(l=>l.trim()).map(l=>`<p class="paper-line han indent2">${esc(l.trim())}</p>`).join('') : '';
+    paper.innerHTML = `
+      ${title ? `<p class="paper-title han">${esc(spaceTwoCharTitle(title))}</p>` : ''}
+      ${recipient ? `<p class="paper-line han mt-1">${esc(recipient)}</p>` : ''}
+      ${greeting ? `<p class="paper-line han indent2">${esc(greeting)}</p>` : ''}
+      ${bodyLines}
+      ${cizhi ? `<p class="paper-line han indent4 mt-1">${esc(cizhi)}</p>` : ''}
+      ${jingli ? `<p class="paper-line han">${esc(jingli)}</p>` : ''}
+      ${sigBlockHtml(name, date)}`;
+  }
+
+  // Bộ đếm chữ Hán (dựa trên nội dung chính văn: lời chào + chính văn)
+  const hanCount = countHan(greeting) + countHan(body);
+  const wcCount = document.getElementById('wc-count');
+  const wcFill = document.getElementById('wc-fill');
+  const wcStatus = document.getElementById('wc-status');
+  wcCount.textContent = `${hanCount} / 150–180`;
+  const pct = Math.min(100, Math.round((hanCount/180)*100));
+  wcFill.style.width = pct + '%';
+  if(hanCount === 0){
+    wcFill.style.background = '#C9BE9F';
+    wcStatus.textContent = 'Bắt đầu gõ chính văn để theo dõi độ dài bài viết.';
+    wcStatus.style.color = '#8a8270';
+  } else if(hanCount < 150){
+    wcFill.style.background = 'var(--seal)';
+    wcStatus.textContent = `Còn thiếu ${150-hanCount} chữ để đạt mức tối thiểu (150 chữ).`;
+    wcStatus.style.color = '#8a8270';
+  } else if(hanCount <= 180){
+    wcFill.style.background = 'var(--jade)';
+    wcStatus.textContent = 'Độ dài bài viết đã đạt yêu cầu (150–180 chữ Hán).';
+    wcStatus.style.color = '#1D3B2A';
+  } else {
+    wcFill.style.background = 'var(--seal)';
+    wcStatus.textContent = `Bài viết đã dài hơn ${hanCount-180} chữ so với mức tối đa khuyến nghị.`;
+    wcStatus.style.color = '#8a8270';
+  }
+}
+renderPaper6();
+
+/* ============================================================
+   TIỆN ÍCH DÙNG CHUNG: TOGGLE ĐÁP ÁN THAM KHẢO
+   ============================================================ */
+function toggleRef(id){
+  document.getElementById(`${id}-ref`).classList.toggle('hidden');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>邀请信 · Luyện viết Thư mời HSK6</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2541;
+    --paper:#fbf9f2;
+    --paper-line:#e7e0cd;
+    --seal:#a3272c;
+    --sky:#0369a1;
+    --slate-side:#16233b;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif; background:#eef1f6; color:var(--ink);}
+  .cjk{font-family:'Noto Serif SC','Songti SC','SimSun',serif;}
+  .paper{
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      var(--paper);
+    background-size: 100% 2.1em;
+    background-position: 0 4.6em;
+    border:1px solid #ded5b8;
+    box-shadow: 0 1px 2px rgba(28,37,65,.06), 0 8px 24px -12px rgba(28,37,65,.18);
+    position:relative;
+    overflow:hidden;
+  }
+  .paper::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:6px;
+    background:var(--seal);
+    opacity:.85;
+  }
+  .seal-mark{
+    position:absolute;
+    width:74px; height:74px;
+    border:2.5px solid var(--seal);
+    border-radius:50%;
+    color:var(--seal);
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; letter-spacing:2px;
+    opacity:.22;
+    transform:rotate(-12deg);
+    pointer-events:none;
+    right:28px; bottom:26px;
+  }
+  .tab-btn{
+    display:flex; align-items:flex-start; gap:.6rem;
+    width:100%; text-align:left;
+    padding:.85rem .9rem;
+    border-radius:.6rem;
+    color:#c7d2e3;
+    font-size:.86rem;
+    line-height:1.35;
+    transition:background .15s ease, color .15s ease;
+    border:1px solid transparent;
+  }
+  .tab-btn:hover{ background:rgba(255,255,255,.06); color:#fff; }
+  .tab-btn.active{
+    background:linear-gradient(135deg,#0c4a6e,#0369a1);
+    color:#fff;
+    border-color:rgba(255,255,255,.15);
+    box-shadow: 0 4px 14px -4px rgba(3,105,161,.6);
+  }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+  .choice-opt{
+    display:flex; gap:.6rem; align-items:flex-start;
+    padding:.7rem .85rem; border:1px solid #dbe2ea; border-radius:.55rem;
+    cursor:pointer; background:#fff; transition:.12s;
+  }
+  .choice-opt:hover{ border-color:#0369a1; background:#f0f7fc; }
+  .choice-opt.correct{ background:#dcfce7; border-color:#22c55e; }
+  .choice-opt.wrong{ background:#fee2e2; border-color:#ef4444; }
+  .blank-select{
+    border:2px solid var(--sky); border-radius:.35rem;
+    background:#eaf4fb; color:var(--sky); font-weight:600;
+    font-family:'Noto Serif SC','Songti SC','SimSun',serif;
+    padding:.15rem .4rem; outline:none; cursor:pointer;
+  }
+  .blank-select.right{ background:#dcfce7; border-color:#10b981; color:#065f46; }
+  .blank-select.wrong{ background:#fee2e2; border-color:#ef4444; color:#991b1b; }
+  .match-card{
+    padding:.55rem .8rem; border:1.5px solid #dbe2ea; border-radius:.5rem;
+    cursor:pointer; background:#fff; font-size:.9rem; transition:.12s;
+  }
+  .match-card:hover{ border-color:#0369a1; }
+  .match-card.sel{ border-color:#0369a1; background:#e0f2fe; }
+  .match-card.paired{ background:#f8fafc; color:#94a3b8; }
+  .match-card.correct{ border-color:#10b981; background:#ecfdf3; color:#065f46; }
+  .match-card.wrong{ border-color:#ef4444; background:#fef2f2; color:#991b1b; }
+  .signblock{ display:inline-flex; flex-direction:column; align-items:center; }
+  .card{ background:#fff; border:1px solid #e2e8f0; border-radius:.9rem; }
+  .btn-primary{
+    background:var(--sky); color:#fff; font-weight:600; font-size:.88rem;
+    padding:.55rem 1.1rem; border-radius:.5rem; transition:.15s;
+  }
+  .btn-primary:hover{ background:#075985; }
+  .btn-ghost{
+    background:#fff; color:var(--ink); font-weight:600; font-size:.85rem;
+    padding:.5rem 1rem; border-radius:.5rem; border:1px solid #cbd5e1;
+  }
+  .btn-ghost:hover{ background:#f8fafc; }
+  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar-thumb{ background:#334155; border-radius:4px; }
+  .fade-in{ animation:fadein .25s ease; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(15,23,42,.55);
+    display:flex; align-items:center; justify-content:center;
+    z-index:50; padding:1.25rem;
+  }
+  .modal-box{
+    background:#fff; border-radius:1rem; max-width:38rem; width:100%;
+    max-height:88vh; overflow-y:auto; padding:1.5rem;
+    box-shadow:0 24px 48px -12px rgba(0,0,0,.35);
+  }
+  .counter-pill{
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.8rem; font-weight:700; padding:.3rem .8rem; border-radius:999px;
+    border:1.5px solid; transition:.15s;
+  }
+  .opt-card{
+    display:flex; gap:.5rem; padding:.6rem .8rem; border:1px solid #dbe2ea;
+    border-radius:.5rem; background:#f8fafc; font-size:.85rem;
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div class="flex min-h-screen">
+
+  <!-- SIDEBAR -->
+  <aside class="w-72 shrink-0 hidden lg:flex flex-col" style="background:var(--slate-side);">
+    <div class="px-5 pt-6 pb-5 border-b border-white/10">
+      <p class="text-sky-400 text-xs font-semibold tracking-wide">应用文写作 · 邀请信 · HSK6</p>
+      <h1 class="text-white text-lg font-bold mt-1 leading-snug">Luyện viết Thư mời<br>(邀请信 / 邀请函)</h1>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto" id="sidebar-nav">
+      <button class="tab-btn active" data-tab="1"><span>📖</span><span>Hướng dẫn viết &amp; Bài mẫu chuẩn</span></button>
+      <button class="tab-btn" data-tab="2"><span>📌</span><span>Bước 1: Trắc nghiệm định dạng &amp; logic (11 câu)</span></button>
+      <button class="tab-btn" data-tab="3"><span>📌</span><span>Bước 2: Nối từ Khẩu ngữ ➔ Văn viết</span></button>
+      <button class="tab-btn" data-tab="4"><span>📌</span><span>Bước 3: Chuyển câu Khẩu ngữ ➔ Văn phong</span></button>
+      <button class="tab-btn" data-tab="5"><span>📌</span><span>Bước 4: Phân tích khuyết thiếu &amp; sửa lỗi</span></button>
+      <button class="tab-btn" data-tab="6"><span>📌</span><span>Bước 5: Đục lỗ tái lập (2 ngữ cảnh)</span></button>
+      <button class="tab-btn" data-tab="7"><span>📌</span><span>Bước 6: Luyện viết hoàn chỉnh (Dual-Panel)</span></button>
+    </nav>
+    <div class="px-5 py-4 border-t border-white/10 text-[11px] text-slate-400">100% offline · không dùng API</div>
+  </aside>
+
+  <!-- MOBILE TAB BAR -->
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-[var(--slate-side)] border-t border-white/10 flex overflow-x-auto">
+    <button class="tab-btn-m flex-1 min-w-[70px] active" data-tab="1">📖<span class="block text-[9px] mt-0.5">Hướng dẫn</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="2">📌<span class="block text-[9px] mt-0.5">B1 TN</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="3">📌<span class="block text-[9px] mt-0.5">B2 Nối từ</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="4">📌<span class="block text-[9px] mt-0.5">B3 Chuyển câu</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="5">📌<span class="block text-[9px] mt-0.5">B4 Sửa lỗi</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="6">📌<span class="block text-[9px] mt-0.5">B5 Đục lỗ</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="7">📌<span class="block text-[9px] mt-0.5">B6 Tự viết</span></button>
+  </div>
+
+  <!-- MAIN STAGE -->
+  <main class="flex-1 px-4 sm:px-8 py-8 pb-24 lg:pb-8 max-w-6xl mx-auto w-full">
+
+    <!-- ============ TAB 1 : HƯỚNG DẪN & BÀI MẪU ============ -->
+    <section class="tab-panel active" id="panel-1">
+      <h2 class="text-2xl font-bold mb-1">Hướng dẫn viết "邀请信" (Thư mời) &amp; Bài mẫu chuẩn</h2>
+      <p class="text-slate-500 text-sm mb-6">Văn bản dùng để gửi lời mời trang trọng đến người thân, bạn bè hoặc chuyên gia, khách quý tham dự một sự kiện cụ thể.</p>
+
+      <div class="card p-5 mb-5">
+        <h3 class="font-bold text-sky-800 mb-2">I. Mục đích sử dụng &amp; yêu cầu chung</h3>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1.5 mb-3">
+          <li><b>Mục đích:</b> gửi lời mời trang trọng bằng văn bản đến người thân, bạn bè hoặc chuyên gia, khách quý đến tham dự tiệc, buổi họp hoặc một hoạt động cụ thể.</li>
+          <li><b>Loại 1 (Thư mời cá nhân / Thân mật):</b> mời bạn bè, người quen tham gia hoạt động cá nhân (tiệc sinh nhật, liên hoan, dã ngoại…). Giọng văn thân thiện, ấm áp.</li>
+          <li><b>Loại 2 (Thư mời hành chính / Trang trọng — <span class="cjk">邀请函 / 请柬</span>):</b> mời chuyên gia, lãnh đạo, đại biểu tham dự sự kiện chính thức (hội thảo, lễ cưới, lễ khánh thành…). Giọng văn trang trọng, khách quan, tôn kính.</li>
+          <li><b>Yêu cầu cốt lõi:</b> đầy đủ thông tin sự kiện, phát hành kịp thời, ngôn ngữ lịch sự, có cách phản hồi rõ ràng.</li>
+          <li><b>Chủ đề phổ biến:</b> <span class="cjk">宴会邀请</span> (mời tiệc), <span class="cjk">婚礼邀请</span> (mời cưới), <span class="cjk">会议邀请</span> (mời hội nghị), <span class="cjk">聚会邀请</span> (mời liên hoan).</li>
+        </ul>
+
+        <h3 class="font-bold text-sky-800 mb-2">II. Cấu trúc chuẩn 5 phần &amp; quy tắc trình bày</h3>
+        <ol class="text-sm text-slate-700 list-decimal pl-5 space-y-1.5">
+          <li><b>Tiêu đề (<span class="cjk">标题</span>):</b> dòng đầu tiên, căn giữa. Cách viết chuẩn: <span class="cjk">邀请信</span>, <span class="cjk">邀请函</span>, <span class="cjk">请柬</span> hoặc <span class="cjk">请帖</span>.</li>
+          <li><b>Đối tượng nhận lời mời (<span class="cjk">称呼</span>):</b> dòng thứ hai, sát lề trái (<span class="cjk">顶格</span>), kết thúc bằng dấu hai chấm. VD thân mật: <span class="cjk">亲爱的朋友：</span>; VD trang trọng: <span class="cjk">尊敬的李教授：</span>, <span class="cjk">尊敬的各位来宾：</span>.</li>
+          <li><b>Chính văn (<span class="cjk">正文</span>):</b> lùi 2 ô đầu mỗi đoạn văn mới; xuống dòng trong cùng đoạn thì viết sát lề. Nội dung bắt buộc: lý do mời (<span class="cjk">缘起</span>), thông tin chi tiết thời gian/địa điểm/hoạt động, yêu cầu chuẩn bị, hình thức trả lời, lưu ý ăn uống nếu có.</li>
+          <li><b>Lời chúc cuối thư (<span class="cjk">祝颂语</span>):</b>
+            <ul class="list-disc pl-5 mt-1 space-y-1">
+              <li>Thư thân mật: câu chúc ấm áp ngắn gọn (VD: <span class="cjk">期待你的到来！</span>).</li>
+              <li>Thư trang trọng: cặp từ <span class="cjk">此致 / 敬礼！</span> — <b>此致</b> xuống dòng riêng, lùi vào <b>4 ô</b>; <b>敬礼！</b> xuống dòng tiếp theo, viết <b>sát lề trái hoàn toàn</b>.</li>
+            </ul>
+          </li>
+          <li><b>Ký tên &amp; Ngày tháng (<span class="cjk">署名与日期</span>):</b> nằm ở góc dưới bên phải, cách chính văn (hoặc lời chúc cuối thư) khoảng <b>2 đến 3 dòng</b>.</li>
+        </ol>
+      </div>
+
+      <div class="card p-5 mb-8">
+        <h3 class="font-bold text-sky-800 mb-3">III. Bộ mẫu câu cố định chuyên dụng (<span class="cjk">套话</span>) — 6 nhóm</h3>
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div>
+            <p class="font-semibold mb-1.5">1. Mở đầu &amp; lý do mời</p>
+            <ul class="space-y-1 text-slate-700 cjk">
+              <li>我们很荣幸地邀请您于[时间]到[地点]参加/做[活动]。</li>
+              <li>我诚挚/荣幸地邀请……。</li>
+              <li>我们打算在[时间]举行一次[活动]，真诚希望您能够参加。</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-1.5">2. Thông tin chi tiết &amp; lịch trình</p>
+            <ul class="space-y-1 text-slate-700 cjk">
+              <li>聚会/婚礼定于[时间]在[地点]举行。</li>
+              <li>[活动]定在[时间]开始，活动地点为[地点]。</li>
+              <li>当天我们会一起吃晚饭、切生日蛋糕、玩一些有趣的小游戏。</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-1.5">3. Yêu cầu chuẩn bị trước</p>
+            <ul class="space-y-1 text-slate-700 cjk">
+              <li>报告题目和具体时间由您自行决定。</li>
+              <li>请与会人员做好发言准备。</li>
+              <li>如需投影或其他设备请于[时间]前告知。</li>
+              <li>你不用准备礼物，只要带着愉快的心情来就可以了。</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-1.5">4. Lưu ý đặc biệt về ăn uống</p>
+            <ul class="space-y-1 text-slate-700 cjk">
+              <li>如有素食等特殊饮食要求，请提前告知。</li>
+              <li>为了方便我们安排菜品，如果您有任何饮食禁忌，请在回复时说明。</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-1.5">5. Hình thức trả lời</p>
+            <ul class="space-y-1 text-slate-700 cjk">
+              <li>请予答复。</li>
+              <li>敬请/恭请光临。</li>
+              <li>如果你能参加，请在[时间]之前通过微信或电话回复我。</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-1.5">6. Lời kết bày tỏ mong đợi</p>
+            <ul class="space-y-1 text-slate-700 cjk">
+              <li>非常感谢您对我院学术工作的支持，并诚挚期待着聆听您的精彩报告。</li>
+              <li>我们真诚希望您能够参加，期待您的光临。</li>
+              <li>期待你的到来！希望我们一起度过一个快乐、温馨又难忘的聚会！</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="text-lg font-bold mb-4">IV. Các bài mẫu chuẩn</h3>
+
+      <div class="rounded-xl overflow-hidden border-2 border-sky-700/20 shadow-md mb-8">
+        <div class="bg-gradient-to-r from-sky-800 to-sky-600 px-5 py-3 flex items-center gap-2">
+          <span class="text-lg">📐</span>
+          <p class="text-white font-bold text-sm tracking-wide">KHUNG XƯƠNG DÀN BÀI CHUNG · <span class="cjk">邀请信</span> (Thư mời)</p>
+        </div>
+        <div class="bg-white p-5 sm:p-6">
+          <div class="max-w-lg mx-auto space-y-2.5">
+            <div class="flex items-center gap-3 bg-sky-50 border-2 border-sky-200 rounded-lg px-4 py-2.5">
+              <p class="text-center w-full font-extrabold text-sky-900 cjk text-base">[TIÊU ĐỀ]</p>
+            </div>
+            <div class="flex items-center gap-3 bg-sky-50 border-2 border-sky-200 rounded-lg px-4 py-2.5">
+              <p class="font-extrabold text-sky-900 cjk">[XƯNG HÔ]：</p>
+            </div>
+            <div class="flex items-start gap-3 bg-amber-50 border-2 border-amber-200 rounded-lg px-4 py-3">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-extrabold flex items-center justify-center">1</span>
+              <p class="font-bold text-amber-900">Đoạn 1: Lý do mời &amp; lời mời chính thức</p>
+            </div>
+            <div class="flex items-start gap-3 bg-amber-50 border-2 border-amber-200 rounded-lg px-4 py-3">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-extrabold flex items-center justify-center">2</span>
+              <p class="font-bold text-amber-900">Đoạn 2: Thời gian, địa điểm &amp; lịch trình chi tiết</p>
+            </div>
+            <div class="flex items-start gap-3 bg-amber-50 border-2 border-amber-200 rounded-lg px-4 py-3">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-extrabold flex items-center justify-center">3</span>
+              <p class="font-bold text-amber-900">Đoạn 3: Yêu cầu chuẩn bị, hồi đáp &amp; ăn uống (nếu có)</p>
+            </div>
+            <div class="flex items-start gap-3 bg-emerald-50 border-2 border-emerald-200 rounded-lg px-4 py-3">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-extrabold flex items-center justify-center">✓</span>
+              <p class="font-bold text-emerald-900">Đoạn kết: Lời chúc trang trọng / Lời mong đợi</p>
+            </div>
+            <div class="flex justify-end pt-2">
+              <div class="signblock bg-red-50 border-2 border-red-200 rounded-lg px-5 py-2.5">
+                <p class="font-extrabold text-red-800">[Ký tên / Đơn vị]</p>
+                <p class="mt-1 font-extrabold text-red-800">[Ngày tháng năm]</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <p class="text-sm font-semibold text-emerald-700 mb-1">Bài mẫu 1 — Thư mời cá nhân / thân mật (tiệc sinh nhật)</p>
+        <div class="paper rounded-lg p-6 sm:p-10 max-w-xl mx-auto text-sm cjk leading-8">
+          <p class="text-center font-bold mb-4">邀请信</p>
+          <p class="text-left mb-2">亲爱的朋友：</p>
+          <p style="text-indent:2em;">你好！我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加，希望我们能够一起度过一个愉快而难忘的晚上。</p>
+          <p style="text-indent:2em;">聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。当天我们会一起吃晚饭、切生日蛋糕、玩一些有趣的小游戏，还会一起拍照留念。如果时间允许，我们还准备去KTV唱歌，相信大家一定会玩得很开心。</p>
+          <p style="text-indent:2em;">你不用准备礼物，只要带着愉快的心情来就可以了。如果你能参加，请在8月12日之前通过微信或电话回复我，方便我提前预订座位和安排活动。</p>
+          <p style="text-indent:2em;">期待你的到来！希望我们一起度过一个快乐、温馨又难忘的生日聚会！</p>
+          <div class="flex justify-end mt-8">
+            <div class="signblock">
+              <p>你的朋友：张明</p>
+              <p class="mt-1">2026年8月5日</p>
+            </div>
+          </div>
+          <div class="seal-mark cjk">存<br>档</div>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <p class="text-sm font-semibold text-sky-700 mb-1">Bài mẫu 2 — Thư mời hành chính / trang trọng (mời chuyên gia thuyết trình)</p>
+        <div class="paper rounded-lg p-6 sm:p-10 max-w-xl mx-auto text-sm cjk leading-8">
+          <p class="text-center font-bold mb-4">邀请信</p>
+          <p class="text-left mb-2">尊敬的李友教授：</p>
+          <p style="text-indent:2em;">我们很荣幸地邀请您于本月15日到我院做一次关于当前中国经济情况的报告。报告题目和具体时间由您自行决定。如需投影或其他设备请于11日17点前告知。</p>
+          <p style="text-indent:2em;">非常感谢您对我院学术工作的支持，并诚挚期待着聆听您的精彩报告。</p>
+          <div class="flex justify-end mt-8">
+            <div class="signblock">
+              <p>经济学院：钱德</p>
+              <p class="mt-1">2016年6月8日</p>
+            </div>
+          </div>
+          <div class="seal-mark cjk">存<br>档</div>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold text-red-700 mb-1">Bài mẫu 3 — 邀请函 (Liên hoan Giáng sinh của du học sinh, có 此致 / 敬礼！)</p>
+        <div class="paper rounded-lg p-6 sm:p-10 max-w-xl mx-auto text-sm cjk leading-8">
+          <p class="text-center font-bold mb-4">邀请函</p>
+          <p class="text-left mb-2">亲爱的王老师：</p>
+          <p style="text-indent:2em;">我们打算在圣诞节前夕举行一次中外学生联谊会。联谊会定在24日晚上7点开始，活动地点为学生会活动中心。</p>
+          <p style="text-indent:2em;">我们真诚希望您能够参加，期待您的光临。若您不能参加，请打电话xxxxxxxx告知。</p>
+          <p style="text-indent:4em;">此致</p>
+          <p class="text-left">敬礼！</p>
+          <div class="flex justify-end mt-8">
+            <div class="signblock">
+              <p>您的学生：王小亚等</p>
+              <p class="mt-1">2016年12月20日</p>
+            </div>
+          </div>
+          <div class="seal-mark cjk">存<br>档</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 2 : TRẮC NGHIỆM 11 CÂU ============ -->
+    <section class="tab-panel" id="panel-2">
+      <h2 class="text-2xl font-bold mb-1">Bước 1 · Trắc nghiệm định dạng &amp; logic</h2>
+      <p class="text-slate-500 text-sm mb-6">11 câu (6 câu thể thức/logic + 5 câu điền cụm từ 套话). Chọn đáp án rồi bấm "Kiểm tra". Có thể chọn lại bất cứ lúc nào.</p>
+      <div id="quiz-wrap" class="space-y-6"></div>
+    </section>
+
+    <!-- ============ TAB 3 : NỐI TỪ ============ -->
+    <section class="tab-panel" id="panel-3">
+      <h2 class="text-2xl font-bold mb-1">Bước 2 · Nối từ Khẩu ngữ ➔ Văn viết</h2>
+      <p class="text-slate-500 text-sm mb-6">Chọn 1 thẻ ở cột A (口语) rồi chọn thẻ tương ứng ở cột B (书面语单字) để ghép cặp.</p>
+      <div id="match-wrap"></div>
+    </section>
+
+    <!-- ============ TAB 4 : CHUYỂN CÂU ============ -->
+    <section class="tab-panel" id="panel-4">
+      <h2 class="text-2xl font-bold mb-1">Bước 3 · Chuyển câu Khẩu ngữ ➔ Văn phong chuyên dụng</h2>
+      <p class="text-slate-500 text-sm mb-6">Viết lại câu khẩu ngữ dưới đây thành mẫu câu cố định (套话) trang trọng, rồi đối chiếu đáp án.</p>
+      <div id="convert-wrap" class="space-y-6"></div>
+    </section>
+
+    <!-- ============ TAB 5 : SỬA LỖI ============ -->
+    <section class="tab-panel" id="panel-5">
+      <h2 class="text-2xl font-bold mb-1">Bước 4 · Phân tích khuyết thiếu &amp; sửa lỗi bản thảo</h2>
+      <p class="text-slate-500 text-sm mb-6">Đóng vai người duyệt văn bản: tìm ra 2 lỗi thể thức trình bày trong bức thư mời bạn bè cắm trại của 王伟 dưới đây.</p>
+      <div id="correction-wrap"></div>
+    </section>
+
+    <!-- ============ TAB 6 : ĐỤC LỖ 2 NGỮ CẢNH ============ -->
+    <section class="tab-panel" id="panel-6">
+      <h2 class="text-2xl font-bold mb-1">Bước 5 · Đục lỗ tái lập văn bản (2 ngữ cảnh)</h2>
+      <p class="text-slate-500 text-sm mb-6">Đọc kỹ các lựa chọn A/B/C, chọn đúng thứ tự vào từng chỗ trống rồi bấm "Kiểm tra đáp án".</p>
+      <div id="fib-wrap" class="space-y-10"></div>
+    </section>
+
+    <!-- ============ TAB 7 : DUAL PANEL ============ -->
+    <section class="tab-panel" id="panel-7">
+      <h2 class="text-2xl font-bold mb-1">Bước 6 · Luyện viết hoàn chỉnh (Dual-Panel Real-time)</h2>
+      <p class="text-slate-500 text-sm mb-2"><b>Đề bài:</b> Sắp đến Lễ Giáng sinh, bạn muốn mời thầy Vương (<span class="cjk">王老师</span>) — giáo viên dạy tiếng Trung — đến tham dự "Buổi liên hoan đón Giáng sinh của du học sinh" (<span class="cjk">中外学生圣诞联谊会</span>). Thời gian: 7 giờ tối 24/12. Địa điểm: Trung tâm hoạt động sinh viên (<span class="cjk">学生活动中心</span>). Thầy không cần chuẩn bị quà; nếu bận xin gọi điện báo trước ngày 20/12.</p>
+      <p class="text-slate-500 text-sm mb-6">Viết 120–150 chữ Hán, chia 2 đoạn (mỗi đoạn thụt 2 ô), ký tên căn lề phải cân đối. Tờ giấy bên phải sẽ tự động cập nhật theo thời gian thực.</p>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div>
+            <label class="text-xs font-semibold text-slate-500 block mb-1">1. Tiêu đề (标题)</label>
+            <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w7-title" oninput="renderW7()" placeholder="邀请函">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-slate-500 block mb-1">2. Đối tượng nhận / Xưng hô (称呼)</label>
+            <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w7-greet" oninput="renderW7()" placeholder="亲爱的王老师：">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-slate-500 block mb-1">3. Chính văn (正文) — mỗi dòng Enter = 1 đoạn mới</label>
+            <textarea class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" rows="7" id="w7-body" oninput="renderW7()" placeholder="输入正文…"></textarea>
+          </div>
+          <label class="flex items-center gap-2 text-xs font-medium text-slate-600">
+            <input type="checkbox" id="w7-salute" onchange="renderW7()">
+            Dùng lời chúc trang trọng <span class="cjk font-semibold">此致 / 敬礼！</span> (此致 lùi 4 ô, 敬礼！sát lề)
+          </label>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs font-semibold text-slate-500 block mb-1">4. Đơn vị / Ký tên (署名)</label>
+              <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w7-sign" oninput="renderW7()" placeholder="您的学生：李明">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-slate-500 block mb-1">5. Ngày tháng (日期)</label>
+              <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w7-date" oninput="renderW7()" placeholder="2026年12月18日">
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <span id="w7-counter" class="counter-pill">0 chữ Hán</span>
+            <button class="btn-primary" onclick="openModel()">📄 Xem bài viết mẫu chuẩn</button>
+            <button class="btn-ghost" onclick="clearW7()">Xoá</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-slate-500 mb-1">Tờ giấy mô phỏng (real-time)</p>
+          <div class="paper rounded-lg p-6 sm:p-8 text-sm cjk leading-8 min-h-[440px]">
+            <p class="text-center font-bold mb-3 min-h-[1.5em]" id="w7-p-title"></p>
+            <p class="text-left mb-2 min-h-[1.5em]" id="w7-p-greet"></p>
+            <div id="w7-p-body"></div>
+            <div id="w7-p-salute"></div>
+            <div class="flex justify-end mt-8">
+              <div class="signblock">
+                <p id="w7-p-sign">&nbsp;</p>
+                <p class="mt-1" id="w7-p-date">&nbsp;</p>
+              </div>
+            </div>
+            <div class="seal-mark cjk">存<br>档</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="model-modal">
+  <div class="modal-box">
+    <div class="flex items-center justify-between mb-4">
+      <p class="font-bold text-lg">📄 Bài viết mẫu chuẩn HSK6</p>
+      <button class="btn-ghost" onclick="closeModel()">Đóng ✕</button>
+    </div>
+    <div class="paper rounded-lg p-6 text-sm cjk leading-8" id="model-paper">
+      <p class="text-center font-bold mb-3">邀请函</p>
+      <p class="text-left mb-2">亲爱的王老师：</p>
+      <p style="text-indent:2em;">我们打算在圣诞节前夕举行一次中外学生联谊会，特此诚挚邀请您拨冗参加。联谊会定于12月24日晚上7点开始，活动地点为学生会活动中心，届时大家将一起唱圣诞歌曲、交换小礼物，气氛一定十分热闹。</p>
+      <p style="text-indent:2em;">您不用准备礼物，只要带着愉快的心情出席即可。若您因故不能参加，请于12月20日之前拨打电话xxxxxxxx告知，以便我们及时安排座位。</p>
+      <p style="text-indent:2em;">我们真诚希望您能够拨冗参加，期待您的光临！</p>
+      <p style="text-indent:4em;">此致</p>
+      <p class="text-left">敬礼！</p>
+      <div class="flex justify-end mt-8">
+        <div class="signblock">
+          <p>您的学生：王小亚等</p>
+          <p class="mt-1">2026年12月18日</p>
+        </div>
+      </div>
+      <div class="seal-mark cjk">存<br>档</div>
+    </div>
+    <p id="model-wordcount" class="text-center text-sm font-bold text-emerald-700 mt-3"></p>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   TAB SWITCHING
+=============================================================== */
+function setTab(n){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===String(n)));
+  document.querySelectorAll('.tab-btn-m').forEach(b=>b.classList.toggle('active', b.dataset.tab===String(n)));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('.tab-btn, .tab-btn-m').forEach(b=>{
+  b.addEventListener('click', ()=>setTab(b.dataset.tab));
+});
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ============================================================
+   TAB 2 — QUIZ (11 questions)
+=============================================================== */
+const sharedOptions = [
+  {k:'A', t:'定于 (Được quyết định vào lúc)'},
+  {k:'B', t:'提前告知 (Báo trước / cho biết trước)'},
+  {k:'C', t:'由您自行决定 (Do ngài tự quyết định)'},
+  {k:'D', t:'通过微信或电话 (Qua WeChat hoặc điện thoại)'},
+  {k:'E', t:'期待你的到来 (Mong đợi sự có mặt của bạn)'}
+];
+const quizData = [
+  {
+    id:'q1', title:'Câu 1 · Nội dung bắt buộc của Chính văn',
+    prompt:'Phần Chính văn (正文) của một bức thư mời bắt buộc phải ghi rõ những thông tin nào?',
+    options:[
+      {k:'A', t:'Phương thức liên hệ khẩn cấp và danh sách quà tặng.'},
+      {k:'B', t:'Thời gian, địa điểm và nội dung hoạt động cụ thể (时间、地点、活动内容)。'},
+      {k:'C', t:'Trình độ HSK của người viết và số lượng khách mời.'},
+      {k:'D', t:'Chức danh học thuật của người nhận thư viết ở góc dưới lề phải.'},
+    ],
+    correct:'B',
+    explain:'Thời gian, địa điểm và nội dung hoạt động là ba thông tin cốt lõi bắt buộc phải có để người nhận thư nắm rõ sự kiện và sắp xếp tham dự.'
+  },
+  {
+    id:'q2', title:'Câu 2 · Cách trình bày Xưng hô tôn kính',
+    prompt:'Dòng xưng hô đầu thư (称呼) gửi cho đối tượng cần tôn kính (VD: 莫兰老师 hoặc 尊敬的李友教授) phải được trình bày thế nào?',
+    options:[
+      {k:'A', t:'Lùi đầu dòng vào đúng 2 ô trống, kết thúc bằng dấu phẩy ,.'},
+      {k:'B', t:'Viết sát lề trái hoàn toàn (顶格), kết thúc bằng dấu hai chấm ：。'},
+      {k:'C', t:'Viết sát lề trái hoàn toàn (顶格), kết thúc bằng dấu chấm hỏi ?.'},
+      {k:'D', t:'Viết lùi vào đúng 4 ô trống, kết thúc bằng dấu chấm than !.'},
+    ],
+    correct:'B',
+    explain:'Tên người nhận thư phải viết sát lề trái hoàn toàn (顶格) để thể hiện sự tôn trọng trực tiếp, kết thúc bằng dấu hai chấm để mở đầu nội dung.'
+  },
+  {
+    id:'q3', title:'Câu 3 · Nội dung chu đáo cho thư mời sinh nhật',
+    prompt:'Trong thư mời sinh nhật bạn bè, ngoài thời gian và địa điểm, người viết nên ghi thêm nội dung gì để thư tự nhiên và chu đáo?',
+    options:[
+      {k:'A', t:'Yêu cầu bạn bè chuẩn bị quà đắt tiền.'},
+      {k:'B', t:'Lịch trình cụ thể (吃晚饭、切生日蛋糕、玩游戏…) và lời dặn "không cần chuẩn bị quà"。'},
+      {k:'C', t:'Đơn giá chi tiết từng món ăn để mọi người cùng chia tiền.'},
+      {k:'D', t:'Danh sách những người không được mời.'},
+    ],
+    correct:'B',
+    explain:'Nêu rõ lịch trình giúp bạn bè dễ chuẩn bị tâm lý, và lời dặn không cần quà thể hiện sự hiếu khách, tinh tế của một bữa tiệc thân mật.'
+  },
+  {
+    id:'q4', title:'Câu 4 · Xưng hô phù hợp cho thư thân mật',
+    prompt:'Cách mở đầu xưng hô (称呼) nào sau đây phù hợp nhất cho thư mời thân mật gửi bạn bè hoặc tập thể lớp?',
+    options:[
+      {k:'A', t:'尊敬的李友教授：'},
+      {k:'B', t:'莫兰老师：'},
+      {k:'C', t:'亲爱的朋友： (hoặc 大家好！)'},
+      {k:'D', t:'Vào thẳng chính văn và lược bỏ hoàn toàn xưng hô.'},
+    ],
+    correct:'C',
+    explain:'Đối với bạn bè hoặc tập thể bạn học, cách xưng hô gần gũi như "亲爱的朋友：" hoặc "大家好！" giúp tạo không khí tự nhiên, cởi mở.'
+  },
+  {
+    id:'q5', title:'Câu 5 · Chi tiết thể hiện sự chu đáo',
+    prompt:'Ngoài thời gian và địa điểm, người viết nên thêm chi tiết nào vào thư mời để thể hiện sự chu đáo và giúp người nhận dễ chuẩn bị?',
+    options:[
+      {k:'A', t:'Danh sách các món ăn mặn của buổi tiệc và địa chỉ bãi đỗ xe.'},
+      {k:'B', t:'Yêu cầu chuẩn bị trước (phát biểu, lưu ý ăn chay), yêu cầu hồi đáp và lời bày tỏ lòng biết ơn, sự mong đợi。'},
+      {k:'C', t:'Chi phí chi tiết của từng món ăn và sơ đồ phòng họp tự vẽ.'},
+      {k:'D', t:'Danh sách học vị của tất cả các khách mời khác sẽ tham gia.'},
+    ],
+    correct:'B',
+    explain:'Thêm các nội dung này giúp người nhận thư chủ động chuẩn bị (nội dung phát biểu, báo trước chế độ ăn uống) và phản hồi kịp thời để ban tổ chức sắp xếp chu đáo nhất.'
+  },
+  {
+    id:'q6', title:'Câu 6 · Quy tắc trình bày 此致 / 敬礼！',
+    prompt:'Khi sử dụng cặp từ chúc tụng hành chính 此致 và 敬礼！ ở cuối thư mời, quy chuẩn trình bày dòng nào sau đây là đúng?',
+    options:[
+      {k:'A', t:'Viết liền nhau trên cùng một dòng lề phải: 此致敬礼！'},
+      {k:'B', t:'Cả hai từ đều viết lùi vào đúng 4 ô trống ở dòng cuối cùng của chính văn.'},
+      {k:'C', t:'此致 viết sát lề trái; 敬礼！ xuống dòng lùi vào 2 ô trống.'},
+      {k:'D', t:'此致 xuống dòng lùi vào 4 ô trống; 敬礼！ xuống dòng tiếp theo viết sát lề trái hoàn toàn (顶格)。'},
+    ],
+    correct:'D',
+    explain:'Từ 此致 bắt đầu dòng mới và lùi vào 4 ô trống (như bắt đầu một đoạn mới), còn từ 敬礼！ xuống dòng tiếp theo và viết sát lề hoàn toàn (顶格) để thể hiện sự tôn trọng tối đa.'
+  },
+  {
+    id:'q7', title:'Câu 7 · Điền cụm từ (套话)',
+    prompt:'报告题目和具体时间________。',
+    options: sharedOptions, correct:'C',
+    explain:'Cụm từ "由您自行决定" thể hiện sự tôn kính và chu đáo, nhường quyền chủ động chọn đề tài và thời gian cho chuyên gia/giảng viên được mời.'
+  },
+  {
+    id:'q8', title:'Câu 8 · Điền cụm từ (套话)',
+    prompt:'聚会/婚礼________8月15日晚上6点在学校附近的阳光餐厅举行。',
+    options: sharedOptions, correct:'A',
+    explain:'"定于" là phó từ hành chính trang trọng, dùng để liên kết trực tiếp chủ thể sự kiện với mốc thời gian và địa điểm tổ chức cụ thể.'
+  },
+  {
+    id:'q9', title:'Câu 9 · Điền cụm từ (套话)',
+    prompt:'如有素食等特殊饮食要求，请________。',
+    options: sharedOptions, correct:'B',
+    explain:'"提前告知" đặt ở cuối câu để đề nghị khách mời thông báo sớm các nhu cầu ăn uống đặc biệt (như ăn chay), giúp chủ nhà chuẩn bị chu đáo.'
+  },
+  {
+    id:'q10', title:'Câu 10 · Điền cụm từ (套话)',
+    prompt:'如果你能参加，请在8月12日之前________回复我，方便我安排活动。',
+    options: sharedOptions, correct:'D',
+    explain:'"通过微信或电话" làm trạng ngữ chỉ phương thức liên hệ, giúp người nhận thư biết rõ cách thức để phản hồi thông tin nhanh chóng.'
+  },
+  {
+    id:'q11', title:'Câu 11 · Điền cụm từ (套话)',
+    prompt:'很久没见面了，________！',
+    options: sharedOptions, correct:'E',
+    explain:'"期待你的到来！" là lời kết thân mật, bày tỏ tình cảm ấm áp và mong đợi nhiệt tình của người viết đối với bạn bè.'
+  }
+];
+
+function renderQuiz(){
+  const wrap = document.getElementById('quiz-wrap');
+  wrap.innerHTML = quizData.map(q=>`
+    <div class="card p-5">
+      <p class="font-semibold text-sm mb-1">${q.title}</p>
+      <p class="text-sm text-slate-700 mb-3 cjk">${q.prompt}</p>
+      <div class="space-y-2" id="opts-${q.id}">
+        ${q.options.map(o=>`
+          <div class="choice-opt cjk" data-key="${o.k}" onclick="selectQuiz('${q.id}','${o.k}')">
+            <span class="font-bold text-slate-400">${o.k}</span><span>${o.t}</span>
+          </div>`).join('')}
+      </div>
+      <button class="btn-primary mt-3" onclick="checkQuiz('${q.id}')">Kiểm tra đáp án</button>
+      <div id="exp-${q.id}" class="mt-3 hidden text-sm bg-sky-50 border border-sky-200 rounded-lg p-3 fade-in"></div>
+    </div>
+  `).join('');
+}
+const quizSelected = {};
+function selectQuiz(id,key){
+  quizSelected[id]=key;
+  document.querySelectorAll('#opts-'+id+' .choice-opt').forEach(el=>{
+    el.classList.remove('correct','wrong');
+    el.style.borderColor = el.dataset.key===key ? '#0369a1' : '#dbe2ea';
+  });
+  document.getElementById('exp-'+id).classList.add('hidden');
+}
+function checkQuiz(id){
+  const q = quizData.find(x=>x.id===id);
+  const sel = quizSelected[id];
+  const expBox = document.getElementById('exp-'+id);
+  document.querySelectorAll('#opts-'+id+' .choice-opt').forEach(el=>{
+    el.style.borderColor='';
+    if(el.dataset.key===q.correct) el.classList.add('correct');
+    else if(el.dataset.key===sel) el.classList.add('wrong');
+  });
+  expBox.classList.remove('hidden');
+  if(!sel){
+    expBox.innerHTML = `<p class="font-semibold text-amber-700">⚠️ Bạn chưa chọn đáp án nào.</p><p class="mt-1">💡 ${q.explain}</p>`;
+  } else {
+    expBox.innerHTML = `<p class="font-semibold ${sel===q.correct?'text-emerald-700':'text-red-700'}">${sel===q.correct?'✅ Chính xác!':'❌ Chưa đúng.'} Đáp án đúng: ${q.correct}</p><p class="mt-1">💡 ${q.explain}</p>`;
+  }
+}
+renderQuiz();
+
+/* ============================================================
+   TAB 3 — MATCHING (5 pairs)
+=============================================================== */
+const matchData = {
+  id:'m1',
+  left:[
+    {k:'1', t:'在 (Ở, tại)'},
+    {k:'2', t:'想 (Muốn, dự định)'},
+    {k:'3', t:'要 (Sẽ)'},
+    {k:'4', t:'到时候 (Đến lúc đó, khi đó)'},
+    {k:'5', t:'和 (Và, cùng với)'}
+  ],
+  right:[
+    {k:'A', t:'于'},
+    {k:'B', t:'欲 / 拟'},
+    {k:'C', t:'将'},
+    {k:'D', t:'届时'},
+    {k:'E', t:'及'}
+  ],
+  correct:{'1':'A','2':'B','3':'C','4':'D','5':'E'}
+};
+const matchState = {};
+function renderMatchTab(){
+  matchState[matchData.id] = {sel:null, pairs:{}};
+  document.getElementById('match-wrap').innerHTML = `
+  <div class="card p-5">
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="space-y-2" id="${matchData.id}-left">
+        <p class="text-xs font-semibold text-slate-400 mb-1">口语 (Cột A)</p>
+        ${matchData.left.map(o=>`<div class="match-card cjk" data-side="L" data-key="${o.k}" onclick="matchClick('L','${o.k}')"><b>${o.k}.</b> ${o.t}</div>`).join('')}
+      </div>
+      <div class="space-y-2" id="${matchData.id}-right">
+        <p class="text-xs font-semibold text-slate-400 mb-1">书面语 (Cột B)</p>
+        ${matchData.right.map(o=>`<div class="match-card cjk" data-side="R" data-key="${o.k}" onclick="matchClick('R','${o.k}')"><b>${o.k}.</b> ${o.t}</div>`).join('')}
+      </div>
+    </div>
+    <div class="flex items-center gap-3 mt-4">
+      <button class="btn-primary" onclick="checkMatch()">Kiểm tra</button>
+      <button class="btn-ghost" onclick="resetMatchTab()">↺ Thử lại</button>
+    </div>
+    <div id="${matchData.id}-exp" class="hidden mt-3 fade-in text-sm bg-sky-50 border border-sky-200 rounded-lg p-3"></div>
+  </div>`;
+}
+function matchClick(side, key){
+  const id = matchData.id;
+  const st = matchState[id];
+  const already = Object.entries(st.pairs).find(([l,r])=> (side==='L'&&l===key) || (side==='R'&&r===key));
+  if(already) return;
+  if(side==='L'){
+    st.sel = key;
+    document.querySelectorAll('#'+id+'-left .match-card').forEach(el=>{
+      el.classList.toggle('sel', el.dataset.key===key);
+    });
+  } else {
+    if(!st.sel) return;
+    st.pairs[st.sel] = key;
+    document.querySelector('#'+id+'-left [data-key="'+st.sel+'"]').classList.add('paired');
+    document.querySelector('#'+id+'-left [data-key="'+st.sel+'"]').classList.remove('sel');
+    document.querySelector('#'+id+'-right [data-key="'+key+'"]').classList.add('paired');
+    st.sel = null;
+  }
+}
+function resetMatchTab(){ renderMatchTab(); }
+function checkMatch(){
+  const id = matchData.id;
+  const st = matchState[id];
+  let allRight = true;
+  let rows = [];
+  matchData.left.forEach(o=>{
+    const chosen = st.pairs[o.k];
+    const ok = chosen === matchData.correct[o.k];
+    if(!ok) allRight = false;
+    const leftEl = document.querySelector('#'+id+'-left [data-key="'+o.k+'"]');
+    if(chosen){
+      leftEl.classList.add(ok?'correct':'wrong');
+      document.querySelector('#'+id+'-right [data-key="'+chosen+'"]').classList.add(ok?'correct':'wrong');
+    } else {
+      leftEl.classList.add('wrong');
+    }
+    rows.push(`${o.k} → ${matchData.correct[o.k]}`);
+  });
+  const exp = document.getElementById(id+'-exp');
+  exp.classList.remove('hidden');
+  exp.innerHTML = `<p class="font-semibold ${allRight?'text-emerald-700':'text-red-700'} mb-1">${allRight?'✅ Chính xác toàn bộ!':'❌ Có cặp chưa đúng (đã tô đỏ).'}</p><p class="cjk">💡 Đáp án: ${rows.join('，&nbsp;&nbsp;')}.</p>`;
+}
+renderMatchTab();
+
+/* ============================================================
+   TAB 4 — SENTENCE CONVERSION (5 sentences)
+=============================================================== */
+const convertData = [
+  {
+    id:'c1', label:'Câu 1 · Hỏi giáo sư về đề tài và thời gian thuyết trình',
+    spoken:'你想讲什么题目，还有什么时候来，你自己决定就行。',
+    answer:'报告题目和具体时间由您自行决定。',
+    explain:'"由您自行决定" (Do ngài tự quyết định) là mẫu câu lịch sự dùng tôn vinh quyền chủ động của chuyên gia.'
+  },
+  {
+    id:'c2', label:'Câu 2 · Dặn dò bạn bè về quà cáp khi dự tiệc sinh nhật',
+    spoken:'你来就行了，千万别给我买礼物，人来我就最高兴了。',
+    answer:'你不用准备礼物，只要带着愉快的心情来就可以了。',
+    explain:'Cách nói tế nhị giúp khách mời cảm thấy thoải mái và vui vẻ khi đến dự tiệc.'
+  },
+  {
+    id:'c3', label:'Câu 3 · Hỏi thăm về chế độ ăn uống, ăn chay của khách',
+    spoken:'如果你不能吃肉、只吃素，记得提前和我说。',
+    answer:'如有素食等特殊饮食要求，请提前告知。',
+    explain:'Sử dụng cụm "提前告知" (báo trước) giúp câu văn gọn gàng, trang nhã.'
+  },
+  {
+    id:'c4', label:'Câu 4 · Hỏi về các kiêng kỵ dị ứng món ăn của khách mời trang trọng',
+    spoken:'为了让我们安排好菜，如果你有什么东西不能吃，回信的时候跟我说一下。',
+    answer:'为了方便我们安排菜品，如果您有任何饮食禁忌，请在回复时说明。',
+    explain:'"饮食禁忌" (kiêng kỵ ăn uống) và "回复时说明" (nói rõ khi phản hồi) là văn phong hành chính rất lịch sự.'
+  },
+  {
+    id:'c5', label:'Câu 5 · Hạn chót và phương thức liên hệ xác nhận của bạn bè',
+    spoken:'要是你来，在8月12号前发微信或者打电话跟我说。',
+    answer:'如果你能参加，请在8月12日之前通过微信或电话回复我。',
+    explain:'Chuyển "要是" thành "如果", "发微信或者打电话" thành cụm giới từ "通过微信或电话".'
+  }
+];
+function renderConvert(){
+  document.getElementById('convert-wrap').innerHTML = convertData.map(c=>`
+    <div class="card p-5">
+      <p class="font-semibold text-sm mb-2">${c.label}</p>
+      <p class="text-xs text-slate-500 mb-1">口语 (Khẩu ngữ):</p>
+      <p class="text-sm text-slate-700 cjk mb-3">${c.spoken}</p>
+      <label class="text-xs font-semibold text-slate-500 block mb-1">👉 写一写 (Sửa thành 套话):</label>
+      <textarea class="w-full border border-slate-300 rounded-lg p-2.5 text-sm mb-3 cjk" rows="2" placeholder="输入……"></textarea>
+      <button class="btn-primary" onclick="document.getElementById('${c.id}-ans').classList.remove('hidden')">Đối chiếu đáp án</button>
+      <div id="${c.id}-ans" class="hidden mt-3 fade-in text-sm bg-sky-50 border border-sky-200 rounded-lg p-3">
+        <p class="cjk font-semibold text-emerald-700 mb-1">👉 ${c.answer}</p>
+        <p class="text-slate-700">💡 ${c.explain}</p>
+      </div>
+    </div>
+  `).join('');
+}
+renderConvert();
+
+/* ============================================================
+   TAB 5 — CRITICAL CORRECTION
+=============================================================== */
+function renderCorrection(){
+  document.getElementById('correction-wrap').innerHTML = `
+  <div class="card p-5">
+    <p class="text-xs font-semibold text-slate-500 mb-2">【Bản thảo của 王伟 (chứa 2 lỗi thể thức)】</p>
+    <div class="paper rounded-lg p-5 sm:p-7 max-w-xl text-sm cjk leading-7 mb-5">
+      <p class="mb-1">&emsp;&emsp;&emsp;&emsp;亲爱的朋友：</p>
+      <p class="mb-1">你好！我们已经很久没有见面了。为了走进大自然、放松身心，我打算本周六组织一次郊外野餐活动，诚心邀请你一同参加。</p>
+      <p style="text-indent:2em;" class="mb-1">野餐活动定于9月10日上午9点在学校操场集合出发。届时我们将一起烤肉、趣味互动。如果你能前来，请于9月8日前通过微信或电话告知我，方便我提前做好准备。</p>
+      <div class="flex justify-end mt-8">
+        <div class="signblock">
+          <p>你的朋友：王伟</p>
+          <p class="mt-1">2026年9月5日</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-sm font-medium mb-2">👉 Nhiệm vụ: tìm ra 2 lỗi thể thức trình bày trong bức thư trên (phần ký tên &amp; ngày tháng đã đúng quy cách, không phải lỗi cần tìm).</p>
+    <div class="grid gap-2 mb-4">
+      <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm" placeholder="👉 Lỗi 1…">
+      <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm" placeholder="👉 Lỗi 2…">
+    </div>
+
+    <button class="btn-primary" onclick="document.getElementById('corr-ans').classList.remove('hidden')">Bấm để xem đáp án sửa lỗi chi tiết</button>
+
+    <div id="corr-ans" class="hidden mt-5 fade-in">
+      <ul class="list-disc pl-5 text-sm text-slate-700 space-y-2 mb-5">
+        <li><b>Lỗi 1:</b> Xưng hô <span class="cjk">亲爱的朋友：</span> đang bị lùi lề 4 ô. <br><i>Sửa lại:</i> phải viết sát lề trái hoàn toàn (顶格).</li>
+        <li><b>Lỗi 2:</b> Dòng đầu tiên của đoạn 1 <span class="cjk">你好！我们已经……</span> viết sát lề, chưa thụt đầu dòng. <br><i>Sửa lại:</i> phải lùi vào đúng 2 ô trống như đoạn 2 bên dưới.</li>
+        <li class="text-slate-500"><i>Lưu ý:</i> phần ký tên <span class="cjk">你的朋友：王伟</span> và ngày tháng <span class="cjk">2026年9月5日</span> ở góc dưới bên phải, cách nội dung chính 2 dòng — đây đã là cách trình bày đúng quy cách, không phải lỗi.</li>
+      </ul>
+      <p class="text-sm font-semibold text-emerald-700 mb-2">✅ Bản sửa lỗi hoàn chỉnh:</p>
+      <div class="paper rounded-lg p-5 sm:p-7 max-w-xl text-sm cjk leading-7">
+        <p class="text-left mb-2">亲爱的朋友：</p>
+        <p style="text-indent:2em;">你好！我们已经很久没有见面了。为了走进大自然、放松身心，我打算本周六组织一次郊外野餐活动，诚心邀请你一同参加。</p>
+        <p style="text-indent:2em;">野餐活动定于9月10日上午9点在学校操场集合出发。届时我们将一起烤肉、趣味互动。如果你能前来，请于9月8日前通过微信或电话告知我，方便我提前做好准备。</p>
+        <div class="flex justify-end mt-8">
+          <div class="signblock">
+            <p>你的朋友：王伟</p>
+            <p class="mt-1">2026年9月5日</p>
+          </div>
+        </div>
+        <div class="seal-mark cjk">存<br>档</div>
+      </div>
+    </div>
+  </div>`;
+}
+renderCorrection();
+
+/* ============================================================
+   TAB 6 — FILL IN THE BLANKS (2 contexts, option cards + select)
+=============================================================== */
+const fibContexts = [
+  {
+    id:'fc1',
+    label:'Ngữ cảnh 1 · Thư mời trang trọng gửi chuyên gia',
+    options:[
+      {k:'A', t:'报告题目和具体时间由您自行决定'},
+      {k:'B', t:'如需投影或其他设备请于11日17点前告知'},
+      {k:'C', t:'并诚挚期待着聆听您的精彩报告'}
+    ],
+    before:'邀请信',
+    greet:'尊敬的李友教授：',
+    lines:[
+      '我们很荣幸地邀请您于本月15日到我院做一次关于当前中国经济情况的报告。',
+    ],
+    blanksLine: ['(1)', '。', '(2)', '。'],
+    afterTemplate: ['非常感谢您对我院学术工作的支持，', '(3)', '。'],
+    sign:'经济学院：钱德', date:'2016年6月8日',
+    answers:{'1':'A','2':'B','3':'C'},
+    explain:{
+      '1':'Đứng ngay sau câu giới thiệu sự kiện chính để nhường quyền chủ động chọn đề tài và thời gian cho chuyên gia được mời.',
+      '2':'Câu tiếp theo dùng để hỏi về nhu cầu kỹ thuật/thiết bị phụ trợ phục vụ cho buổi thuyết trình.',
+      '3':'Đặt ở cuối thư mời trang trọng để tạo thành vế liên kết song song biểu thị sự kính trọng và mong chờ.'
+    }
+  },
+  {
+    id:'fc2',
+    label:'Ngữ cảnh 2 · Thư mời thân mật dự tiệc sinh nhật',
+    options:[
+      {k:'A', t:'我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加'},
+      {k:'B', t:'你不用准备礼物，只要带着愉快的心情来就可以了'},
+      {k:'C', t:'如果你能参加，请在8月12日之前通过微信或电话回复我'}
+    ],
+    answers:{'1':'A','2':'B','3':'C'},
+    explain:{
+      '1':'Điền ngay đầu thư (sau lời chào) để nêu rõ bối cảnh và lý do viết thư mời một cách tự nhiên.',
+      '2':'Đặt ở đoạn cuối trước phần liên hệ để dặn dò chu đáo, giúp khách mời cảm thấy thoải mái, không áp lực về quà cáp.',
+      '3':'Đi liền với vế "tiện đặt bàn và sắp xếp hoạt động" để đưa ra hạn chót và cách thức phản hồi rõ ràng cho chủ nhà.'
+    }
+  }
+];
+
+function fibSelect(ctxId, num, ans){
+  const optsHtml = ['<option value="">— chọn —</option>'].concat(
+    ['A','B','C'].map(k=>`<option value="${k}">${k}</option>`)
+  ).join('');
+  return `<select class="blank-select" id="${ctxId}-b${num}" data-ans="${ans}">${optsHtml}</select>`;
+}
+
+function renderFibContexts(){
+  const c1 = fibContexts[0];
+  const c2 = fibContexts[1];
+  document.getElementById('fib-wrap').innerHTML = `
+    <div class="card p-5">
+      <p class="font-semibold text-sm mb-3">${c1.label}</p>
+      <div class="grid gap-2 mb-4">
+        ${c1.options.map(o=>`<div class="opt-card cjk"><b>${o.k}.</b> ${o.t}</div>`).join('')}
+      </div>
+      <div class="paper rounded-lg p-6 sm:p-9 max-w-xl text-sm cjk leading-8 mb-4">
+        <p class="text-center font-bold mb-3">邀请信</p>
+        <p class="text-left mb-2">尊敬的李友教授：</p>
+        <p style="text-indent:2em;">我们很荣幸地邀请您于本月15日到我院做一次关于当前中国经济情况的报告。 ${fibSelect('fc1','1',c1.answers['1'])} 。 ${fibSelect('fc1','2',c1.answers['2'])} 。</p>
+        <p style="text-indent:2em;">非常感谢您对我院学术工作的支持， ${fibSelect('fc1','3',c1.answers['3'])} 。</p>
+        <div class="flex justify-end mt-8">
+          <div class="signblock"><p>经济学院：钱德</p><p class="mt-1">2016年6月8日</p></div>
+        </div>
+        <div class="seal-mark cjk">存<br>档</div>
+      </div>
+      <button class="btn-primary" onclick="checkFibContext('fc1')">Kiểm tra đáp án</button>
+      <div id="fc1-result" class="mt-2 text-sm font-semibold"></div>
+      <div id="fc1-exp" class="hidden mt-3 fade-in text-sm bg-sky-50 border border-sky-200 rounded-lg p-3 space-y-1.5"></div>
+    </div>
+
+    <div class="card p-5">
+      <p class="font-semibold text-sm mb-3">${c2.label}</p>
+      <div class="grid gap-2 mb-4">
+        ${c2.options.map(o=>`<div class="opt-card cjk"><b>${o.k}.</b> ${o.t}</div>`).join('')}
+      </div>
+      <div class="paper rounded-lg p-6 sm:p-9 max-w-xl text-sm cjk leading-8 mb-4">
+        <p class="text-center font-bold mb-3">邀请信</p>
+        <p class="text-left mb-2">亲爱的朋友：</p>
+        <p style="text-indent:2em;">你好！ ${fibSelect('fc2','1',c2.answers['1'])} ，希望我们能够一起度过一个愉快而难忘的晚上。</p>
+        <p style="text-indent:2em;">聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。当天我们会一起吃晚饭、切生日蛋糕、玩一些有趣的小游戏，还会一起拍照留念。</p>
+        <p style="text-indent:2em;"> ${fibSelect('fc2','2',c2.answers['2'])} 。 ${fibSelect('fc2','3',c2.answers['3'])} ，方便我提前预订座位和安排活动。</p>
+        <p style="text-indent:2em;">期待你的到来！</p>
+        <div class="flex justify-end mt-8">
+          <div class="signblock"><p>你的朋友</p><p class="mt-1">2026年8月5日</p></div>
+        </div>
+        <div class="seal-mark cjk">存<br>档</div>
+      </div>
+      <button class="btn-primary" onclick="checkFibContext('fc2')">Kiểm tra đáp án</button>
+      <div id="fc2-result" class="mt-2 text-sm font-semibold"></div>
+      <div id="fc2-exp" class="hidden mt-3 fade-in text-sm bg-sky-50 border border-sky-200 rounded-lg p-3 space-y-1.5"></div>
+    </div>
+  `;
+}
+function checkFibContext(ctxId){
+  const ctx = fibContexts.find(c=>c.id===ctxId);
+  let allRight = true, allChosen = true;
+  ['1','2','3'].forEach(n=>{
+    const el = document.getElementById(ctxId+'-b'+n);
+    el.classList.remove('right','wrong');
+    if(!el.value) allChosen = false;
+    if(el.value === ctx.answers[n]) el.classList.add('right');
+    else { el.classList.add('wrong'); allRight = false; }
+  });
+  const res = document.getElementById(ctxId+'-result');
+  if(!allChosen){ res.textContent='⚠️ Bạn chưa chọn đủ 3 chỗ trống.'; res.className='mt-2 text-sm font-semibold text-amber-700'; }
+  else if(allRight){ res.textContent='✅ Chính xác toàn bộ!'; res.className='mt-2 text-sm font-semibold text-emerald-700'; }
+  else { res.textContent='❌ Có chỗ chưa đúng (viền đỏ) — xem đáp án chi tiết bên dưới.'; res.className='mt-2 text-sm font-semibold text-red-700'; }
+
+  const exp = document.getElementById(ctxId+'-exp');
+  exp.classList.remove('hidden');
+  exp.innerHTML = ['1','2','3'].map(n=>`<p><b>(${n}) → ${ctx.answers[n]}:</b> ${ctx.explain[n]}</p>`).join('');
+}
+renderFibContexts();
+
+/* ============================================================
+   TAB 7 — DUAL PANEL WRITING
+=============================================================== */
+function countHanzi(s){
+  const m = s.match(/[\u4e00-\u9fff]/g);
+  return m ? m.length : 0;
+}
+function renderW7(){
+  const title = document.getElementById('w7-title').value;
+  const greet = document.getElementById('w7-greet').value;
+  const body = document.getElementById('w7-body').value;
+  const sign = document.getElementById('w7-sign').value;
+  const date = document.getElementById('w7-date').value;
+  const useSalute = document.getElementById('w7-salute').checked;
+
+  document.getElementById('w7-p-title').textContent = title;
+  document.getElementById('w7-p-greet').textContent = greet;
+
+  const paras = body.split('\n').filter(l=>l.length>0);
+  document.getElementById('w7-p-body').innerHTML = paras.length
+    ? paras.map(p=>`<p style="text-indent:2em;">${escapeHtml(p)}</p>`).join('')
+    : '';
+
+  const saluteHost = document.getElementById('w7-p-salute');
+  saluteHost.innerHTML = useSalute
+    ? `<p style="text-indent:4em;">此致</p><p class="text-left">敬礼！</p>`
+    : '';
+
+  document.getElementById('w7-p-sign').innerHTML = sign ? escapeHtml(sign) : '&nbsp;';
+  document.getElementById('w7-p-date').innerHTML = date ? escapeHtml(date) : '&nbsp;';
+
+  const total = countHanzi(title+greet+body+sign+date+(useSalute?'此致敬礼':''));
+  const pill = document.getElementById('w7-counter');
+  pill.textContent = 'Số chữ Hán: ' + total + ' / 120 - 150 chữ';
+  if(total < 120){
+    pill.style.background = '#fffbeb'; pill.style.borderColor='#f59e0b'; pill.style.color='#b45309';
+  } else if(total <= 150){
+    pill.style.background = '#ecfdf3'; pill.style.borderColor='#10b981'; pill.style.color='#047857';
+  } else {
+    pill.style.background = '#fef2f2'; pill.style.borderColor='#ef4444'; pill.style.color='#b91c1c';
+  }
+}
+function clearW7(){
+  ['title','greet','body','sign','date'].forEach(f=>document.getElementById('w7-'+f).value='');
+  document.getElementById('w7-salute').checked = false;
+  renderW7();
+}
+function openModel(){
+  document.getElementById('model-modal').classList.remove('hidden');
+  const text = document.getElementById('model-paper').innerText;
+  const total = countHanzi(text);
+  document.getElementById('model-wordcount').textContent = '📊 Tổng số chữ Hán của bài mẫu: ' + total + ' chữ';
+}
+function closeModel(){ document.getElementById('model-modal').classList.add('hidden'); }
+document.getElementById('model-modal').addEventListener('click', e=>{
+  if(e.target.id==='model-modal') closeModel();
+});
+renderW7();
+</script>
+</body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>请假条 · Ôn tập &amp; Luyện viết Đơn xin nghỉ phép</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C2B33; --ink-soft:#3C4C54;
+    --paper:#F6F1E5; --paper-line:#E4D9BE;
+    --seal:#A63A32; --seal-soft:#C97B6F;
+    --jade:#3E6E52; --jade-soft:#DCE9DF;
+    --sand:#EDE6D3;
+    --sidebar:#16211D; --sidebar-line:#2B3B33;
+  }
+  body{ font-family:'Be Vietnam Pro',sans-serif; background:var(--sand); color:var(--ink); }
+  .han{ font-family:'Noto Serif SC',serif; }
+  ::selection{ background:var(--seal-soft); color:#fff; }
+
+  .navbtn{ display:flex; align-items:flex-start; gap:.55rem; width:100%; text-align:left; padding:.55rem .8rem; border-radius:.4rem; color:#C9D2CC; font-size:.83rem; line-height:1.35; transition:background .15s, color .15s; }
+  .navbtn:hover{ background:var(--sidebar-line); color:#fff; }
+  .navbtn.active{ background:var(--seal); color:#fff; }
+  .subnav{ display:flex; width:100%; text-align:left; padding:.35rem .8rem .35rem 2.35rem; border-radius:.35rem; color:#93A69B; font-size:.76rem; transition:background .15s, color .15s; }
+  .subnav:hover{ background:var(--sidebar-line); color:#fff; }
+  .subnav.active{ background:#24352E; color:#F0D9D3; }
+
+  .paper{
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size:100% 1.85rem;
+    border-left:3px solid var(--seal-soft);
+    box-shadow:0 1px 0 rgba(0,0,0,.03), 0 12px 30px -18px rgba(28,43,51,.35);
+    position:relative;
+  }
+  .paper::before{
+    content:""; position:absolute; inset:0;
+    background-image:radial-gradient(circle at 92% 8%, rgba(166,58,50,.06), transparent 55%);
+    pointer-events:none;
+  }
+  .paper-title{ text-align:center; font-weight:700; letter-spacing:.15em; font-size:1.15rem; }
+  .paper-line{ line-height:1.85rem; white-space:pre-wrap; word-break:break-word; }
+  .indent2{ text-indent:2em; }
+  .indent4{ text-indent:4em; }
+  .sig-block{ margin-left:auto; width:fit-content; max-width:100%; }
+  .sig-name{ text-align:center; }
+  .sig-date{ text-align:right; }
+  .paper-empty{ color:#B7AD90; font-style:italic; font-size:.85rem; text-align:center; padding-top:2.4rem; }
+
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+  .sub-panel{ display:none; }
+  .sub-panel.active{ display:block; }
+  .sub-chip{ border:1px solid #D9CFB4; background:#fff; color:var(--ink-soft); transition:all .15s; }
+  .sub-chip:hover{ border-color:var(--seal); }
+  .sub-chip.active{ background:var(--seal); border-color:var(--seal); color:#fff; }
+
+  .opt-btn{ border:1px solid #D9CFB4; background:#fff; transition:all .15s; }
+  .opt-btn:hover{ border-color:var(--seal); }
+  .opt-btn.correct{ background:var(--jade-soft); border-color:var(--jade); color:#1D3B2A; }
+  .opt-btn.wrong{ background:#F6DEDB; border-color:var(--seal); color:#6B231D; }
+
+  input[type=text].blank, textarea.free, select.blank{
+    border-bottom:2px solid #C9BE9F; background:transparent; outline:none;
+    font-family:'Noto Serif SC',serif;
+  }
+  input[type=text].blank:focus, textarea.free:focus, select.blank:focus{ border-color:var(--seal); }
+
+  .tag-jade{ background:var(--jade-soft); color:#1D3B2A; }
+  .tag-seal{ background:#F6DEDB; color:#6B231D; }
+
+  ::-webkit-scrollbar{ width:9px; height:9px; }
+  ::-webkit-scrollbar-thumb{ background:#C9BE9F; border-radius:5px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+
+  .lock-field{ background:#F2EEE2; border:1px dashed #C9BE9F; }
+  .step-dot{ transition:all .15s; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div class="lg:grid lg:grid-cols-[300px_1fr] min-h-screen">
+
+  <!-- ================= SIDEBAR — CHỈ MỤC LỤC ĐIỀU HƯỚNG ================= -->
+  <aside class="bg-[var(--sidebar)] text-white lg:sticky lg:top-0 lg:h-screen flex flex-col">
+    <div class="px-6 pt-7 pb-4 border-b border-[var(--sidebar-line)]">
+      <p class="han text-2xl font-semibold tracking-wide">请假条</p>
+      <p class="text-[12.5px] text-[#9FB0A5] mt-1">Ôn tập &amp; Luyện viết Văn bản ứng dụng</p>
+    </div>
+    <nav id="sidebar-nav" class="px-3 py-4 space-y-1 overflow-y-auto flex-1"></nav>
+    <div class="px-5 py-3 border-t border-[var(--sidebar-line)] text-[11px] text-[#7E9186] leading-relaxed">
+      100% chạy tĩnh (offline) · Không dùng API AI · Đáp án &amp; giải thích có sẵn trong mã nguồn.
+    </div>
+  </aside>
+
+  <!-- ================= MAIN STAGE ================= -->
+  <main class="px-5 sm:px-8 lg:px-12 py-8 max-w-5xl">
+
+    <div class="flex items-center gap-1 mb-8 overflow-x-auto pb-1" id="stepper"></div>
+
+    <!-- ============ TAB 1 · HƯỚNG DẪN VIẾT & BÀI MẪU 1 ============ -->
+    <section id="tab-1" class="tab-panel active">
+      <h2 class="han text-2xl font-bold">📖 Chỉ dẫn viết "请假条" (Đơn xin nghỉ phép)</h2>
+      <p class="text-sm text-[var(--ink-soft)] mt-1 mb-6">Hệ thống hóa quy phạm trình bày và bộ mẫu câu cố định, dùng làm nền tảng cho toàn bộ 5 bước luyện tập bên dưới.</p>
+
+      <div class="space-y-5">
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-2">I. Mục đích sử dụng</h3>
+          <p class="text-sm leading-relaxed">Xin phép nghỉ học, nghỉ làm hoặc không tham gia hoạt động tập thể vì lý do chính đáng: <b class="han">病假条</b> (Xin nghỉ ốm) hoặc <b class="han">事假条</b> (Xin nghỉ việc riêng).</p>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-1">II. Cấu trúc chuẩn 6 phần &amp; Quy tắc căn lề</h3>
+          <p class="text-[13px] text-[#8a8270] mb-3">Một tờ 请假条 luôn được dựng theo đúng 6 phần dưới đây, theo thứ tự từ trên xuống dưới.</p>
+          <div class="divide-y divide-[#EFE7CF]">
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">1</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Tiêu đề <span class="han">(标题)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">居中</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Viết ba chữ "请假条" ở dòng đầu tiên, căn giữa trang.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">2</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Xưng hô / Người nhận <span class="han">(称呼)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">顶格</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Viết ở dòng thứ hai, sát lề bên trái. Công thức: <i>Họ/Họ tên + Chức danh/Xưng vị + dấu hai chấm (：)</i> hoặc <i>Kính ngữ + Họ + Chức danh/Xưng vị + dấu hai chấm (：)</i>.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">3</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Chính văn <span class="han">(正文)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">空两格</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Xuống dòng, lùi đầu dòng 2 ô. Nội dung đi theo trình tự: <b>Lý do xin nghỉ</b> → <b>Thời gian nghỉ cụ thể</b> → <b>Đề nghị xin nghỉ và hy vọng được phê chuẩn</b>. Văn phong: ngắn gọn, chân thực, súc tích.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">4</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Lời chúc kết thúc <span class="han">(祝颂语)</span>
+                  <span class="text-[11px] font-normal text-[#8a8270] ml-1">— có thể có hoặc không</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Nếu viết, bắt buộc tuân thủ đủ 2 dòng:</p>
+                <ul class="mt-1 space-y-1">
+                  <li class="flex items-center gap-2 flex-wrap"><span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold">空四格 — lùi 4 ô</span><span class="han">此致</span> xuống dòng dưới chính văn, không dùng dấu câu ở sau.</li>
+                  <li class="flex items-center gap-2 flex-wrap"><span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold">顶格 — sát lề trái</span><span class="han">敬礼！</span> xuống dòng tiếp theo, bắt buộc dùng dấu chấm than (！).</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">5</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Ký tên <span class="han">(署名)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">góc dưới bên phải</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Cách dòng chúc khoảng 2 dòng trống. Viết tên riêng, canh giữa so với chiều rộng dòng ngày tháng bên dưới.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 py-3">
+              <span class="han shrink-0 w-7 h-7 rounded-full bg-[var(--seal)] text-white flex items-center justify-center text-xs font-bold">6</span>
+              <div class="text-sm leading-relaxed">
+                <p class="font-semibold">Ngày tháng <span class="han">(日期)</span>
+                  <span class="han inline-block tag-jade px-2 py-0.5 rounded-sm text-xs font-semibold ml-1">sát lề phải</span>
+                </p>
+                <p class="text-[var(--ink-soft)] mt-1">Xuống dòng ngay dưới phần Ký tên. Thứ tự viết: <span class="han">年 月 日</span>.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-2">III. Bộ từ ngữ / mẫu câu cố định (套语)</h3>
+          <div class="text-sm leading-relaxed space-y-2">
+            <p><b>Nêu lý do &amp; thời gian:</b> <span class="han">因病/因事请假……</span> (Xin nghỉ phép ... vì lý do bệnh/việc bận); <span class="han">遵医嘱休息……</span> (Nghỉ ngơi ... theo chỉ định của bác sĩ); <span class="han">请假一周 / 请假半天</span> (Xin nghỉ một tuần / Xin nghỉ nửa ngày).</p>
+            <p><b>Lời đề nghị phê duyệt cuối chính văn:</b> <span class="han">特向您请假，并望批准。</span>(Nay xin phép nghỉ, và mong ngài phê chuẩn). <span class="han">恳请批准为盼。</span>(Khẩn khoản kính mong được phê chuẩn). <span class="han">特此请假。</span>(Nay xin nghỉ phép).</p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-3">IV. Sơ đồ bố cục trực quan</h3>
+          <div class="paper p-5 rounded-sm">
+            <p class="paper-title han">请假条</p>
+            <p class="paper-line han mt-1">尊敬的陈老师：</p>
+            <p class="paper-line han indent2">我因[Lý do xin nghỉ]，需要[Yêu cầu nghỉ ngơi]。因此，我拟于[Thời gian cụ thể]请假[Số ngày nghỉ]。特向您请假，并望批准。</p>
+            <p class="paper-line han indent4 mt-1">此致</p>
+            <p class="paper-line han">敬礼！</p>
+            <div class="sig-block mt-1">
+              <p class="paper-line han sig-name">麦 克</p>
+              <p class="paper-line han sig-date">2026年8月31日</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5">
+          <h3 class="han font-bold text-[var(--seal)] mb-3">Bài mẫu 1</h3>
+          <div class="paper p-5 rounded-sm">
+            <p class="paper-title han">请假条</p>
+            <p class="paper-line han mt-1">王院长：</p>
+            <p class="paper-line han indent2">今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我卧床静养。因此，我拟于12月26-29日请假四天。特向您请假，并望批准。</p>
+            <p class="paper-line han indent4 mt-1">此致</p>
+            <p class="paper-line han">敬礼！</p>
+            <div class="sig-block mt-1">
+              <p class="paper-line han sig-name">张大伟</p>
+              <p class="paper-line han sig-date">2026年8月31日</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 2 · BƯỚC 1 — TRẮC NGHIỆM ============ -->
+    <section id="tab-2" class="tab-panel">
+      <h2 class="han text-2xl font-bold">✏️ Bước 1 — Nhận diện thể thức (Trắc nghiệm)</h2>
+      <div id="quiz-wrap" class="space-y-6 mt-6"></div>
+    </section>
+
+    <!-- ============ TAB 3 · BƯỚC 2 — ĐỤC LỖ TÁI LẬP ============ -->
+    <section id="tab-3" class="tab-panel">
+      <h2 class="han text-2xl font-bold">🧩 Bước 2 — Đục lỗ tái lập (Fill in the blanks)</h2>
+      <p class="text-sm text-[var(--ink-soft)] mt-1 mb-2">Hãy điền các cụm từ thích hợp nhất trong Bài mẫu 1 vào chỗ trống để hoàn thiện tờ đơn dưới đây.</p>
+      <p class="text-sm text-[var(--ink-soft)] mb-6">Kho từ lựa chọn: <span class="han bg-[#F2EEE2] px-2 py-0.5 rounded-sm">特向您请假，并望批准</span> · <span class="han bg-[#F2EEE2] px-2 py-0.5 rounded-sm">拟于</span> · <span class="han bg-[#F2EEE2] px-2 py-0.5 rounded-sm">卧床静养</span> · <span class="han bg-[#F2EEE2] px-2 py-0.5 rounded-sm">四</span></p>
+
+      <div class="paper p-6 rounded-sm">
+        <p class="paper-title han">请假条</p>
+        <p class="paper-line han mt-1">王院长：</p>
+        <p class="paper-line han indent2 han">
+          今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我
+          <select data-blank="0" class="blank han"></select>。
+          因此，我 <select data-blank="1" class="blank han"></select> 12月26—29日请假 <select data-blank="2" class="blank han"></select>天。
+          <select data-blank="3" class="blank han w-72"></select>。
+        </p>
+        <p class="paper-line han indent4 mt-1">此致</p>
+        <p class="paper-line han">敬礼！</p>
+        <div class="sig-block mt-1">
+          <p class="paper-line han sig-name">张大伟</p>
+          <p class="paper-line han sig-date">2026年8月31日</p>
+        </div>
+      </div>
+
+      <button onclick="checkBlanks()" class="mt-5 bg-[var(--seal)] text-white px-5 py-2.5 rounded-sm text-sm font-medium hover:opacity-90">Kiểm tra đáp án</button>
+      <div id="blank-result" class="mt-5 space-y-2 text-sm"></div>
+    </section>
+
+    <!-- ============ TAB 4 · BƯỚC 3 — VIẾT BÁN PHẦN ============ -->
+    <section id="tab-4" class="tab-panel">
+      <h2 class="han text-2xl font-bold">📝 Bước 3 — Viết bán phần (Skeleton Writing)</h2>
+      <div class="bg-white border border-[#E4D9BE] rounded-sm p-4 mt-4 mb-6 text-sm text-[var(--ink-soft)] leading-relaxed">
+        <b>Tình huống:</b> Bạn tên là <span class="han">美美</span>. Ngày 15 tháng 10 năm 2026, bạn bắt buộc phải đi Cục Quản lý Xuất nhập cảnh (<span class="han">出入境管理局</span>) để làm thủ tục gia hạn visa, không thể lên lớp học buổi sáng của Thầy Trần (<span class="han">陈老师</span>).
+        <br><br><b>Nhiệm vụ:</b> Hãy lắp ráp đầy đủ các thành phần thể thức của tờ đơn xin nghỉ phép (chưa cần viết phần lý do chi tiết) qua 8 ô nhập liệu bên dưới.
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">1 · Tiêu đề (标题)</label>
+            <input id="s3-title" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="请假条" oninput="renderPaper3()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">2 · Xưng hô người nhận (称呼 — đúng dấu câu)</label>
+            <input id="s3-recipient" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="陈老师：" oninput="renderPaper3()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">3 · Cú pháp thời gian dùng từ "拟于" (Sáng 15/10, nghỉ nửa ngày)</label>
+            <input id="s3-time" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="我拟于10月15日上午请假半天。" oninput="renderPaper3()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">4 · Lời đề nghị phê chuẩn ở cuối chính văn</label>
+            <input id="s3-request" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="特向您请假，并望批准。" oninput="renderPaper3()">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">5 · Lời kết 1 (此致)</label>
+              <input id="s3-cizhi" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="此致" oninput="renderPaper3()">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">6 · Lời kết 2 (敬礼！)</label>
+              <input id="s3-jingli" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="敬礼！" oninput="renderPaper3()">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">7 · Tên người viết / Ký tên (署名)</label>
+              <input id="s3-name" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="美美" oninput="renderPaper3()">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">8 · Ngày tháng (日期)</label>
+              <input id="s3-date" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="2026年10月14日" oninput="renderPaper3()">
+            </div>
+          </div>
+
+          <button onclick="toggleRef('s3')" class="mt-2 border border-[var(--seal)] text-[var(--seal)] px-4 py-2 rounded-sm text-sm font-medium hover:bg-[#F6DEDB]">Xem Đáp án tham khảo &amp; Phân tích điểm sáng</button>
+          <div id="s3-ref" class="hidden mt-3 bg-[var(--jade-soft)] border border-[var(--jade)] rounded-sm p-4 text-sm leading-relaxed">
+            <p class="han">陈老师：<br>……（正文，暂不需要写理由）我拟于10月15日上午请假半天。特向您请假，并望批准。</p>
+            <p class="mt-3 text-[13px] text-[#1D3B2A]"><b>Phân tích điểm sáng:</b> Dựa theo mục III (Bộ từ ngữ/mẫu câu cố định), cụm <span class="han">拟于……请假半天</span> dùng đúng mẫu câu cố định <span class="han">请假半天</span> để nêu thời lượng nghỉ; cụm kết <span class="han">特向您请假，并望批准</span> là mẫu câu cố định nêu lời đề nghị phê duyệt cuối chính văn, đúng theo Sơ đồ bố cục trực quan (mục IV) đã cho.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide mb-1">Xem trước tờ đơn mô phỏng</p>
+          <div class="paper p-6 rounded-sm relative min-h-[340px]" id="s3-paper"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 5 · BƯỚC 4 — CHUYÊN ĐỀ CHUYỂN ĐỔI LÝ DO ============ -->
+    <section id="tab-5" class="tab-panel">
+      <h2 class="han text-2xl font-bold">🔄 Bước 4 — Chuyên đề luyện viết &amp; chuyển đổi lý do (Reason-formulation)</h2>
+
+      <div class="flex flex-wrap gap-2 mb-6 mt-6" id="sub4-chips">
+        <button class="sub-chip active px-3 py-1.5 rounded-sm text-sm font-medium" data-sub="4.1">4.1 · Chuyển đổi lý do sức khỏe</button>
+        <button class="sub-chip px-3 py-1.5 rounded-sm text-sm font-medium" data-sub="4.2">4.2 · Ghép nối thuật ngữ</button>
+        <button class="sub-chip px-3 py-1.5 rounded-sm text-sm font-medium" data-sub="4.3">4.3 · Chuyển đổi lý do sức khỏe</button>
+        <button class="sub-chip px-3 py-1.5 rounded-sm text-sm font-medium" data-sub="4.4">4.4 · Ghép nối thuật ngữ</button>
+      </div>
+
+      <!-- 4.1 -->
+      <div class="sub-panel active" id="sub-4.1">
+        <h3 class="han text-lg font-bold text-[var(--seal)]">Nhiệm vụ 1 — Chuyển đổi lý do sức khỏe (病假类)</h3>
+
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5 mt-4">
+          <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)]">Tình huống thực tế</p>
+          <p class="text-sm mt-1 italic">"Tôi bị đau dạ dày dữ dội từ đêm qua, sáng nay đau không dậy nổi, phải đi bệnh viện khám. Bác sĩ bảo tôi bị viêm dạ dày cấp tính, phải ở nhà nằm yên trên giường nghỉ ngơi truyền dịch 2 ngày."</p>
+
+          <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mt-4">Gợi ý từ vựng trang trọng (书面语)</p>
+          <div class="flex flex-wrap gap-2 mt-2 text-sm han">
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">昨晚不慎</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">胃痛难忍</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">去医院就诊</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">确诊为</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">急性胃炎</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">医嘱建议 / 遵医嘱</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">卧床静养</span>
+          </div>
+
+          <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mt-4">👉 Bài tập</p>
+          <p class="text-sm mt-1">Hãy kết hợp các từ gợi ý trên để viết lại lý do này thành 1 đến 2 câu văn viết ngắn gọn và trang trọng nhất.</p>
+          <textarea id="t41-input" class="free han w-full mt-2 py-2 px-2 text-base" rows="2"></textarea>
+          <button onclick="toggleRef('t41')" class="mt-2 border border-[var(--seal)] text-[var(--seal)] px-4 py-1.5 rounded-sm text-sm font-medium hover:bg-[#F6DEDB]">💡 Đáp án tham khảo &amp; Phân tích điểm sáng</button>
+          <div id="t41-ref" class="hidden mt-2 bg-[var(--jade-soft)] rounded-sm p-3 text-sm leading-relaxed">
+            <p class="han">我因昨晚不慎吃坏肚子，胃痛难忍。今早去医院就诊，确诊为急性胃炎。医嘱建议我卧床静养两天。</p>
+            <p class="mt-2 text-[13px] text-[#1D3B2A]"><b>💡 Điểm sáng:</b></p>
+            <ul class="text-[13px] text-[#1D3B2A] mt-1 space-y-1 list-disc list-inside">
+              <li>Thay vì dùng từ khẩu ngữ như "肚子疼得厉害" (đau bụng dữ dội), câu mẫu sử dụng từ ghép bốn chữ <span class="han">胃痛难忍</span> cực kỳ trang trọng.</li>
+              <li>Thay vì dùng "看医生" (gặp bác sĩ) hoặc "看病" (khám bệnh), câu mẫu sử dụng thuật ngữ hành chính <span class="han">去医院就诊</span> và <span class="han">确诊为</span>.</li>
+              <li>Cấu trúc <span class="han">医嘱建议……</span> (chỉ định của bác sĩ khuyên...) mang tính bắt buộc khách quan cao hơn rất nhiều so với câu "医生要我休息" (bác sĩ muốn tôi nghỉ).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.2 -->
+      <div class="sub-panel" id="sub-4.2">
+        <h3 class="han text-lg font-bold text-[var(--seal)]">Nhiệm vụ 2 — Ghép nối thuật ngữ y tế (口语 ➔ 书面语)</h3>
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5 mt-4">
+          <p class="text-sm text-[var(--ink-soft)] mb-3">👉 Hãy ghép các ý nghĩ khẩu ngữ, tự nhiên ở Cột A với thuật ngữ trang trọng tương ứng dùng trong đơn từ ở Cột B:</p>
+          <div id="match42-wrap" class="space-y-2.5"></div>
+          <button onclick="checkMatch(42)" class="mt-4 bg-[var(--seal)] text-white px-5 py-2 rounded-sm text-sm font-medium hover:opacity-90">Kiểm tra ghép nối</button>
+          <div id="match42-result" class="mt-4 space-y-2 text-sm"></div>
+        </div>
+      </div>
+
+      <!-- 4.3 -->
+      <div class="sub-panel" id="sub-4.3">
+        <h3 class="han text-lg font-bold text-[var(--seal)]">Nhiệm vụ 3 — Chuyển đổi lý do sức khỏe (病假类)</h3>
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5 mt-4">
+          <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)]">Tình huống</p>
+          <p class="text-sm mt-1 italic">"Sáng nay ngủ dậy tôi thấy đầu trán cứ nóng hâm hấp (sốt nhẹ), cổ họng thì đau buốt, cả người mệt mỏi khó chịu lắm. Tôi liền đi bệnh viện khám ngay, bác sĩ nói tôi bị viêm đường hô hấp trên và khuyên tôi nên nằm yên trên giường để nghỉ ngơi dưỡng bệnh."</p>
+
+          <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mt-4">Gợi ý từ vựng trang trọng (书面语)</p>
+          <div class="flex flex-wrap gap-2 mt-2 text-sm han">
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">今天起床后</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">脑门发热</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">嗓子疼</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">全身不适</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">到医院看病</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">上呼吸道感染</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">建议我</span>
+            <span class="bg-[#F2EEE2] px-2 py-1 rounded-sm">卧床静养</span>
+          </div>
+
+          <p class="text-xs font-semibold uppercase tracking-wide text-[var(--ink-soft)] mt-4">👉 Bài tập</p>
+          <p class="text-sm mt-1">Hãy sử dụng toàn bộ các từ vựng gợi ý trên để liên kết và viết lại tình huống khẩu ngữ thành 1 đến 2 câu văn viết chuẩn mực nhất.</p>
+          <textarea id="t43-input" class="free han w-full mt-2 py-2 px-2 text-base" rows="2"></textarea>
+          <button onclick="toggleRef('t43')" class="mt-2 border border-[var(--seal)] text-[var(--seal)] px-4 py-1.5 rounded-sm text-sm font-medium hover:bg-[#F6DEDB]">💡 Đáp án tham khảo &amp; Phân tích điểm sáng</button>
+          <div id="t43-ref" class="hidden mt-2 bg-[var(--jade-soft)] rounded-sm p-3 text-sm leading-relaxed">
+            <p class="han">今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我卧床静养。</p>
+            <p class="mt-2 text-[13px] text-[#1D3B2A]"><b>💡 Điểm sáng:</b></p>
+            <ul class="text-[13px] text-[#1D3B2A] mt-1 space-y-1 list-disc list-inside">
+              <li><b>Tính khách quan:</b> Dùng <span class="han">全身不适</span> thay cho 浑身难受 để loại bỏ sắc thái rên rỉ, cảm tính cá nhân.</li>
+              <li><b>Tính thuyết phục:</b> Dùng thuật ngữ y học <span class="han">上呼吸道感染</span> (Nhiễm trùng đường hô hấp trên) thay cho từ 感冒 thông thường để tăng tính chính đáng pháp lý cho lý do nghỉ phép.</li>
+              <li><b>Tính bất khả kháng:</b> Dùng cụm từ <span class="han">建议我卧床静养</span> (chỉ định nằm giường tĩnh dưỡng) để biến việc nghỉ phép thành yêu cầu bắt buộc khách quan từ bác sĩ, giúp người duyệt đơn dễ dàng chấp thuận ngay lập tức.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.4 -->
+      <div class="sub-panel" id="sub-4.4">
+        <h3 class="han text-lg font-bold text-[var(--seal)]">Nhiệm vụ 4 — Ghép nối từ vựng chuyên sâu (口语 ➔ 书面语)</h3>
+        <p class="text-sm text-[var(--ink-soft)] mt-1">Tất cả đều trích từ bài mẫu của Vương Viện trưởng (Bài mẫu 1).</p>
+        <div class="bg-white border border-[#E4D9BE] rounded-sm p-5 mt-4">
+          <div id="match44-wrap" class="space-y-2.5"></div>
+          <button onclick="checkMatch(44)" class="mt-4 bg-[var(--seal)] text-white px-5 py-2 rounded-sm text-sm font-medium hover:opacity-90">Kiểm tra ghép nối</button>
+          <div id="match44-result" class="mt-4 space-y-2 text-sm"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 6 · BƯỚC 5 — LUYỆN VIẾT HOÀN CHỈNH ============ -->
+    <section id="tab-6" class="tab-panel">
+      <h2 class="han text-2xl font-bold">🎓 Bước 5 — Luyện viết hoàn chỉnh theo tình huống (病假条)</h2>
+      <div class="bg-white border border-[#E4D9BE] rounded-sm p-4 mt-3 mb-6 text-sm text-[var(--ink-soft)] leading-relaxed">
+        <b>Tình huống:</b> Tối qua bạn không cẩn thận bị cảm lạnh. Hôm nay bạn bị sốt, ho không dứt, toàn thân vô lực. Sau khi đi khám, bác sĩ chẩn đoán bạn bị cảm nặng (<span class="han">重感冒</span>) và khuyên nên nằm giường tĩnh dưỡng (<span class="han">卧床静养</span>). Bạn quyết định nghe theo lời bác sĩ và nghỉ ngơi tại nhà 2 ngày (từ mùng 1 đến mùng 2 tháng 9).
+        <br><br><b>Nhiệm vụ:</b> Hãy viết một tờ 请假条 gửi cô giáo Trương (<span class="han">张老师</span>) để xin nghỉ phép các buổi học tiếng Trung của ngày mai và ngày kia. (Giả định ngày viết đơn là ngày 31 tháng 8).
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">标题 · Tiêu đề</label>
+            <input id="s5-title" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="请假条" oninput="renderPaper5()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">称呼 · Người nhận</label>
+            <input id="s5-recipient" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="张老师" oninput="renderPaper5()">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">正文 · Chính văn</label>
+            <textarea id="s5-body" class="free han w-full mt-1 py-2 px-2 text-base" rows="6" placeholder="Viết lý do (cảm lạnh, sốt, ho) → chẩn đoán 重感冒 → thời gian nghỉ (1-2/9) → lời xin phép..." oninput="renderPaper5()"></textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">此致 · Lời kết 1</label>
+              <input id="s5-cizhi" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="此致" oninput="renderPaper5()">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">敬礼！ · Lời kết 2</label>
+              <input id="s5-jingli" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="敬礼！" oninput="renderPaper5()">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">署名 · Ký tên</label>
+              <input id="s5-name" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="你的名字" oninput="renderPaper5()">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide">日期 · Ngày tháng</label>
+              <input id="s5-date" type="text" class="free han w-full mt-1 py-1.5 px-2 text-base" placeholder="2026年8月31日" oninput="renderPaper5()">
+            </div>
+          </div>
+          <button onclick="toggleRef('s5')" class="mt-2 bg-[var(--seal)] text-white px-4 py-2.5 rounded-sm text-sm font-medium hover:opacity-90">Hiện Đáp Án Chuẩn Đối Chiếu</button>
+          <div id="s5-ref" class="hidden mt-3 bg-[var(--jade-soft)] border border-[var(--jade)] rounded-sm p-4 text-sm leading-relaxed">
+            <p class="text-xs font-semibold uppercase tracking-wide text-[#1D3B2A] mb-1">ĐÁP ÁN ĐỐI CHIẾU CHUẨN XÁC</p>
+            <p class="han">张老师：<br>
+            我因昨晚不慎着凉，今天发烧、咳嗽不止，全身无力。我已去医院看病，医生说我是重感冒，建议我卧床静养。为了尽快恢复健康，我遵医嘱在家休息两天（9月1日至2日）。<br>
+            为此，明后两天的汉语课我无法出勤，特向您请假，并望批准。</p>
+            <p class="han indent4 mt-1">此致</p>
+            <p class="han">敬礼！</p>
+            <div class="sig-block mt-1">
+              <p class="han sig-name">学生：李 伟</p>
+              <p class="han sig-date">2026年8月31日</p>
+            </div>
+
+            <p class="mt-4 text-[13px] text-[#1D3B2A]"><b>Khung phân tích các từ ghép 4 chữ (书面语) đáng học tập, trích từ chính bài viết chuẩn trên:</b></p>
+            <ul class="text-[13px] text-[#1D3B2A] mt-1 space-y-1 list-disc list-inside">
+              <li><span class="han">不慎着凉</span> — không cẩn thận bị cảm lạnh.</li>
+              <li><span class="han">咳嗽不止</span> — ho không dứt.</li>
+              <li><span class="han">全身无力</span> — toàn thân vô lực, không còn sức.</li>
+              <li><span class="han">卧床静养</span> — nằm giường tĩnh dưỡng.</li>
+              <li><span class="han">尽快恢复</span> — sớm hồi phục (sức khỏe).</li>
+              <li><span class="han">无法出勤</span> — không thể đi học/đi làm.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-[var(--ink-soft)] uppercase tracking-wide mb-1">Xem trước tờ đơn mô phỏng</p>
+          <div class="paper p-6 rounded-sm relative min-h-[380px]" id="s5-paper"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   ĐIỀU HƯỚNG: SIDEBAR (mục lục) + STEPPER (6 tab)
+   ============================================================ */
+const NAV = [
+  { id:1, icon:"📖", label:'Hướng dẫn viết "请假条" & Bài mẫu 1' },
+  { id:2, icon:"✏️", label:"Bước 1: Nhận diện thể thức (Trắc nghiệm)" },
+  { id:3, icon:"🧩", label:"Bước 2: Đục lỗ tái lập" },
+  { id:4, icon:"📝", label:"Bước 3: Viết bán phần" },
+  { id:5, icon:"🔄", label:"Bước 4: Chuyên đề luyện viết & chuyển đổi lý do",
+    sub:[ {k:"4.1", t:"Chuyển đổi lý do sức khỏe"},
+          {k:"4.2", t:"Ghép nối thuật ngữ"},
+          {k:"4.3", t:"Chuyển đổi lý do sức khỏe"},
+          {k:"4.4", t:"Ghép nối thuật ngữ"} ] },
+  { id:6, icon:"🎓", label:"Bước 5: Luyện viết hoàn chỉnh theo tình huống (病假条)" }
+];
+
+const sidebarNav = document.getElementById('sidebar-nav');
+NAV.forEach(item=>{
+  const btn = document.createElement('button');
+  btn.className = "navbtn" + (item.id===1 ? " active" : "");
+  btn.dataset.tab = item.id;
+  btn.innerHTML = `<span>${item.icon}</span><span>${item.label}</span>`;
+  btn.onclick = ()=> goTab(item.id);
+  sidebarNav.appendChild(btn);
+  if(item.sub){
+    item.sub.forEach(s=>{
+      const sb = document.createElement('button');
+      sb.className = "subnav";
+      sb.dataset.tab = item.id;
+      sb.dataset.sub = s.k;
+      sb.textContent = `${s.k} · ${s.t}`;
+      sb.onclick = ()=>{ goTab(item.id); goSub(s.k); };
+      sidebarNav.appendChild(sb);
+    });
+  }
+});
+
+const stepper = document.getElementById('stepper');
+const stepLabels = ["一","二","三","四","五","六"];
+stepLabels.forEach((label,i)=>{
+  const n=i+1;
+  const b = document.createElement('button');
+  b.className = "step-dot han text-xs w-8 h-8 flex items-center justify-center rounded-full border shrink-0";
+  b.textContent = label;
+  b.dataset.step = n;
+  b.onclick = ()=>goTab(n);
+  stepper.appendChild(b);
+});
+
+function paintStepper(active){
+  document.querySelectorAll('.step-dot').forEach(d=>{
+    const i = Number(d.dataset.step);
+    if(i===active){ d.style.background='var(--seal)'; d.style.borderColor='var(--seal)'; d.style.color='#fff'; }
+    else if(i<active){ d.style.background='var(--jade-soft)'; d.style.borderColor='var(--jade)'; d.style.color='#1D3B2A'; }
+    else { d.style.background='#fff'; d.style.borderColor='#D9CFB4'; d.style.color='#8a8270'; }
+  });
+}
+
+function goTab(n){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(b=> b.classList.toggle('active', Number(b.dataset.tab)===n) );
+  document.querySelectorAll('.subnav').forEach(b=> b.classList.remove('active') );
+  paintStepper(n);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function goSub(key){
+  document.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('sub-'+key).classList.add('active');
+  document.querySelectorAll('.sub-chip').forEach(c=> c.classList.toggle('active', c.dataset.sub===key) );
+  document.querySelectorAll('.subnav').forEach(b=> b.classList.toggle('active', b.dataset.sub===key) );
+}
+document.querySelectorAll('.sub-chip').forEach(c=> c.onclick = ()=> goSub(c.dataset.sub) );
+
+goTab(1);
+
+/* ============================================================
+   BƯỚC 1: QUIZ (nguyên văn từ tài liệu nguồn)
+   ============================================================ */
+const quizData = [
+  { q:"1.1 · Quan sát kỹ Bài mẫu 1 bạn vừa đọc, nhận định nào sau đây là SAI về mặt thể thức hoặc văn phong?",
+    opts:[
+      "Tiêu đề \"请假条\" bắt buộc phải viết ở dòng đầu tiên và căn giữa (居中).",
+      "Cụm từ \"此致\" phải xuống dòng lùi vào 4 ô (空四格), còn \"敬礼！\" phải xuống dòng tiếp theo viết sát lề trái (顶格).",
+      "Trong câu \"我拟于12月26-29日请假四天\", từ \"拟于\" mang sắc thái khẩu ngữ (口语), có thể thoải mái thay bằng \"准备在\" trong các văn bản trang trọng gửi cấp trên.",
+      "Ký tên \"张大伟\" và ngày tháng \"2026年8月31日\" phải được viết ở góc dưới bên phải tờ đơn và ngày tháng nằm ngay dưới tên."
+    ],
+    correct:2,
+    explain:"Đáp án SAI là C. \"拟于\" (dự định vào...) là từ ngữ văn viết (书面语) chuyên dụng trong văn bản ứng dụng Trung Quốc để thể hiện sự trang trọng, nghiêm túc. Việc thay bằng từ khẩu ngữ \"准备在\" sẽ làm giảm tính chuyên nghiệp của đơn xin nghỉ phép." },
+  { q:"1.2 · Theo hướng dẫn viết của giáo trình, phần Chính văn (正文) của một tờ \"请假条\" bắt buộc phải nêu bật được 3 yếu tố nào sau đây?",
+    opts:[
+      "Giới thiệu bản thân, kể chi tiết diễn biến sự việc, lời hứa sẽ tự học bù.",
+      "Lời hỏi thăm sức khỏe người nhận, lý do xin nghỉ, thông tin liên lạc khi cần.",
+      "Lý do xin nghỉ (请假原因), thời hạn nghỉ cụ thể (期限), và lời đề nghị xin nghỉ kèm mong muốn được phê duyệt (提出请假和希望得到批准的要求).",
+      "Thời gian bắt đầu nghỉ, thời điểm quay trở lại, lời cảm ơn sâu sắc gửi tới người nhận đơn."
+    ],
+    correct:2,
+    explain:"Đáp án: C. \"请假条的正文说明请假原因、期限并提出请假和希望得到批准的要求\" (Chính văn của đơn xin nghỉ phép nêu rõ lý do xin nghỉ, thời hạn nghỉ và đưa ra yêu cầu xin nghỉ cùng hy vọng được phê chuẩn). Các phương án còn lại đều thiếu hoặc thừa các chi tiết không quy phạm." },
+  { q:"1.3 · Khi trình bày phần lý do xin nghỉ trong chính văn, người viết cần tuân thủ nguyên tắc văn phong nào dưới đây để đảm bảo tính trang trọng (书面语) và hiệu quả giao tiếp?",
+    opts:[
+      "Phải chân thực, khách quan (真实、客观), ngôn từ chính xác, ngắn gọn và súc tích (准确、简洁), tránh kể lể dông dài những chi tiết đời tư không liên quan.",
+      "Nên viết thật chi tiết và biểu cảm để khơi gợi sự đồng cảm, thương xót từ thầy cô hoặc cấp trên.",
+      "Sử dụng nhiều từ ngữ khẩu ngữ (口语) sinh động, gần gũi để kéo gần khoảng cách với người duyệt đơn.",
+      "Chỉ cần viết chung chung là \"因 sự bận请假\" (Xin nghỉ vì việc bận) mà không cần đưa ra bối cảnh hợp lý nào khác."
+    ],
+    correct:0,
+    explain:"Đáp án: A. Văn bản ứng dụng đề cao tính thực dụng, nội dung phải \"客观、真实\" (khách quan, chân thực) và ngôn ngữ phải \"准确、简洁\" (chính xác, ngắn gọn), tuyệt đối không viết lan man hoặc dùng các từ ngữ biểu cảm, ví dụ: \"比如写请假条，正文部分简要地说明请假理由、期限就可以了，不必详述相关情况\" (Ví dụ viết đơn xin nghỉ phép, phần chính văn chỉ cần thuyết minh ngắn gọn lý do, thời hạn là được, không cần kể chi tiết sự việc)." },
+  { q:"1.4 · Trong các câu nêu lý do xin nghỉ ốm dưới đây, câu nào sử dụng mẫu câu cố định (套语) trang trọng và chuẩn mực nhất theo giáo trình?",
+    opts:[
+      "我身体不太舒服，头痛得厉害，没办法去上课了。",
+      "我因昨晚不慎着凉，今天发烧、咳嗽不止。医嘱建议我卧床静养两天。",
+      "医生说我病得有点严重，一定要我在家好好躺着休息。",
+      "今天起床后我脑门发热，医生说我是感冒，所以我要请假。"
+    ],
+    correct:1,
+    explain:"Đáp án: B. Phương án B sử dụng các cụm từ trang trọng (书面语) cực kỳ chuẩn mực trong giáo trình như: 因……请假 (vì lý do... xin nghỉ), 不慎着凉 (không cẩn thận bị cảm lạnh), và đặc biệt là cụm từ ghép hành chính 医嘱建议…… / 遵医嘱休息…… (nghỉ ngơi theo chỉ định của bác sĩ). Các phương án A, C, D mang đậm sắc thái khẩu ngữ (口语) tự nhiên, không phù hợp với văn bản viết trang trọng gửi cấp trên." },
+];
+const quizWrap = document.getElementById('quiz-wrap');
+quizData.forEach((item, qi)=>{
+  const card = document.createElement('div');
+  card.className = "bg-white border border-[#E4D9BE] rounded-sm p-5";
+  card.innerHTML = `
+    <p class="han text-[15px] font-medium">${item.q}</p>
+    <div class="grid gap-2 mt-3" id="q${qi}-opts"></div>
+    <div id="q${qi}-explain" class="hidden mt-3 text-sm rounded-sm p-3"></div>`;
+  quizWrap.appendChild(card);
+  const optsWrap = card.querySelector(`#q${qi}-opts`);
+  const letters = ["A","B","C","D"];
+  item.opts.forEach((opt, oi)=>{
+    const btn = document.createElement('button');
+    btn.className = "opt-btn han text-left text-sm px-3 py-2 rounded-sm";
+    btn.innerHTML = `<b>${letters[oi]}.</b> ${opt}`;
+    btn.onclick = ()=>{
+      optsWrap.querySelectorAll('button').forEach((b,bi)=>{
+        b.classList.remove('correct','wrong');
+        if(bi===item.correct) b.classList.add('correct');
+        else if(bi===oi) b.classList.add('wrong');
+      });
+      const ex = card.querySelector(`#q${qi}-explain`);
+      ex.classList.remove('hidden');
+      const isRight = oi===item.correct;
+      ex.className = "mt-3 text-sm rounded-sm p-3 leading-relaxed " + (isRight ? "tag-jade" : "tag-seal");
+      ex.innerHTML = `<b>${isRight ? "Chính xác! " : "Chưa đúng. "}</b>${item.explain}`;
+    };
+    optsWrap.appendChild(btn);
+  });
+});
+
+/* ============================================================
+   BƯỚC 2: FILL BLANKS (kho từ cho sẵn, nguyên văn)
+   ============================================================ */
+const wordBank = ["特向您请假，并望批准","拟于","卧床静养","四"];
+const blankAnswers = ["卧床静养","拟于","四","特向您请假，并望批准"];
+document.querySelectorAll('select[data-blank]').forEach(sel=>{
+  sel.innerHTML = `<option value="">— chọn —</option>` + wordBank.map(w=>`<option value="${w}">${w}</option>`).join("");
+});
+function checkBlanks(){
+  const result = document.getElementById('blank-result');
+  result.innerHTML = "";
+  let allRight = true;
+  blankAnswers.forEach((ans, i)=>{
+    const sel = document.querySelector(`[data-blank="${i}"]`);
+    const val = sel.value;
+    const right = val === ans;
+    if(!right) allRight = false;
+    sel.style.borderColor = val ? (right ? 'var(--jade)' : 'var(--seal)') : '#C9BE9F';
+    const row = document.createElement('div');
+    row.className = "flex items-start gap-2 " + (right ? "text-[#1D3B2A]" : "text-[#6B231D]");
+    row.innerHTML = `<span class="han font-medium">(${i+1})</span> <span>${right ? "Đúng!" : "Đáp án đúng:"} <b class="han">${ans}</b></span>`;
+    result.appendChild(row);
+  });
+  const summary = document.createElement('p');
+  summary.className = "pt-2 font-medium " + (allRight ? "text-[var(--jade)]" : "text-[var(--seal)]");
+  summary.textContent = allRight ? "Bạn đã điền đúng toàn bộ 4 chỗ trống!" : "Xem lại các ô viền đỏ rồi thử lại nhé.";
+  result.prepend(summary);
+}
+
+/* ============================================================
+   TIỆN ÍCH: ESCAPE HTML + KHỐI KÝ TÊN/NGÀY THÁNG
+   ============================================================ */
+function esc(str){
+  const div = document.createElement('div');
+  div.innerText = str;
+  return div.innerHTML;
+}
+// Quy tắc ký tên (署名): tên riêng đúng 2 chữ Hán thì thêm khoảng cách giữa 2 chữ cho cân đối
+// thị giác (VD: 美美 ➔ 美 美); tên từ 3 chữ trở lên giữ nguyên bình thường (VD: 张大伟).
+function formatSigName(raw){
+  if(!raw) return raw;
+  const trimmed = raw.trim();
+  const m = trimmed.match(/^(.*?[:：])(.*)$/); // tách nhãn kiểu "学生：" nếu có, chỉ căn khoảng cách phần tên
+  let prefix = '', core = trimmed;
+  if(m){ prefix = m[1]; core = m[2].trim(); }
+  const chars = Array.from(core);
+  if(chars.length === 2) core = chars.join(' ');
+  return prefix + core;
+}
+// Tên (ký tên) căn giữa so với chiều rộng dòng ngày tháng; cả khối căn lề phải trên trang.
+function sigBlockHtml(name, date){
+  if(!name && !date) return '';
+  return `<div class="sig-block mt-1">
+    ${name ? `<p class="paper-line han sig-name">${esc(formatSigName(name))}</p>` : ''}
+    ${date ? `<p class="paper-line han sig-date">${esc(date)}</p>` : ''}
+  </div>`;
+}
+
+/* ============================================================
+   BƯỚC 3 (TAB 4): PAPER SIMULATION — bắt đầu HOÀN TOÀN TRỐNG
+   ============================================================ */
+function renderPaper3(){
+  const title = document.getElementById('s3-title').value.trim();
+  const recipient = document.getElementById('s3-recipient').value.trim();
+  const time = document.getElementById('s3-time').value.trim();
+  const request = document.getElementById('s3-request').value.trim();
+  const cizhi = document.getElementById('s3-cizhi').value.trim();
+  const jingli = document.getElementById('s3-jingli').value.trim();
+  const name = document.getElementById('s3-name').value.trim();
+  const date = document.getElementById('s3-date').value.trim();
+  const paper = document.getElementById('s3-paper');
+
+  const anyTyped = title || recipient || time || request || cizhi || jingli || name || date;
+  if(!anyTyped){
+    paper.innerHTML = `<p class="paper-empty">— Tờ giấy trắng: bắt đầu gõ ở bên trái để xem kết quả —</p>`;
+    return;
+  }
+
+  const body = [time, request].filter(Boolean).join(' ');
+  paper.innerHTML = `
+    ${title ? `<p class="paper-title han">${esc(title)}</p>` : ''}
+    ${recipient ? `<p class="paper-line han mt-1">${esc(recipient)}</p>` : ''}
+    ${body ? `<p class="paper-line han indent2">${esc(body)}</p>` : ''}
+    ${cizhi ? `<p class="paper-line han indent4 mt-1">${esc(cizhi)}</p>` : ''}
+    ${jingli ? `<p class="paper-line han">${esc(jingli)}</p>` : ''}
+    ${sigBlockHtml(name, date)}`;
+}
+renderPaper3();
+
+/* ============================================================
+   BƯỚC 5 (TAB 6): PAPER SIMULATION — bắt đầu HOÀN TOÀN TRỐNG
+   ============================================================ */
+function renderPaper5(){
+  const title = document.getElementById('s5-title').value.trim();
+  const recipient = document.getElementById('s5-recipient').value.trim();
+  const body = document.getElementById('s5-body').value.trim();
+  const cizhi = document.getElementById('s5-cizhi').value.trim();
+  const jingli = document.getElementById('s5-jingli').value.trim();
+  const name = document.getElementById('s5-name').value.trim();
+  const date = document.getElementById('s5-date').value.trim();
+  const paper = document.getElementById('s5-paper');
+
+  const anyTyped = title || recipient || body || cizhi || jingli || name || date;
+  if(!anyTyped){
+    paper.innerHTML = `<p class="paper-empty">— Tờ giấy trắng: bắt đầu gõ bài làm bên trái để xem kết quả —</p>`;
+    return;
+  }
+
+  paper.innerHTML = `
+    ${title ? `<p class="paper-title han">${esc(title)}</p>` : ''}
+    ${recipient ? `<p class="paper-line han mt-1">${esc(recipient)}</p>` : ''}
+    ${body ? `<p class="paper-line han indent2">${esc(body)}</p>` : ''}
+    ${cizhi ? `<p class="paper-line han indent4 mt-1">${esc(cizhi)}</p>` : ''}
+    ${jingli ? `<p class="paper-line han">${esc(jingli)}</p>` : ''}
+    ${sigBlockHtml(name, date)}`;
+}
+renderPaper5();
+
+/* ============================================================
+   BƯỚC 4.2 / 4.4: MATCHING (nguyên văn)
+   ============================================================ */
+const match42 = {
+  cols:[
+    ["头有点热、发烧","喉咙痛、脖子疼","浑身难受","感冒、发炎了","好好躺在床上休息"],
+    ["全身不适","卧床静养","上呼吸道感染","脑门发热","嗓子疼"]
+  ],
+  bLabels:["A","B","C","D","E"],
+  answers:["D","E","A","C","B"],
+  explain:[
+    "1 - D (头有点热、发烧 ➔ 脑门发热: Chỉ trạng thái sốt nhẹ một cách khách quan).",
+    "2 - E (喉咙痛 ➔ 嗓子疼: Thuật ngữ chuẩn trong văn bản để chỉ triệu chứng đau họng).",
+    "3 - A (浑身难受 ➔ 全身不适: Cách diễn đạt trang trọng thể hiện toàn thân không khỏe).",
+    "4 - C (感冒、发炎了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác \"nhiễm trùng đường hô hấp trên\" thay vì gọi chung chung là cảm cúm).",
+    "5 - B (好好躺在床上休息 ➔ 卧床静养: \"Nằm giường tĩnh dưỡng\", thuật ngữ hành chính thể hiện việc nghỉ ngơi nghiêm túc theo chỉ định điều trị)."
+  ]
+};
+const match44 = {
+  cols:[
+    ["头/额头有点热、发烧","喉咙痛、脖子疼","浑身难受、没力气","感冒、发炎了","在床上好好躺着休息"],
+    ["全身不适","卧床静养","上呼吸道感染","脑门发热","嗓子疼"]
+  ],
+  bLabels:["A","B","C","D","E"],
+  answers:["D","E","A","C","B"],
+  explain:[
+    "1 - D (额头有点热 ➔ 脑门发热: Diễn đạt trạng thái sốt nhẹ một cách khách quan).",
+    "2 - E (喉咙痛 ➔ 嗓子疼: Cách diễn đạt chuẩn mực y tế thông thường trong văn bản).",
+    "3 - A (浑身难受 ➔ 全身不适: Cụm từ hành chính thay thế cho cảm giác mệt mỏi chủ quan).",
+    "4 - C (感冒了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác giúp tăng tính thuyết phục cho đơn xin nghỉ).",
+    "5 - B (好好躺着休息 ➔ 卧床静养: Thể hiện việc tuân thủ nghiêm túc chế độ điều trị của bác sĩ)."
+  ]
+};
+
+function buildMatch(id, data){
+  const wrap = document.getElementById(`match${id}-wrap`);
+  const bOptions = data.cols[1].map((txt,i)=>({label:data.bLabels[i], txt}));
+  data.cols[0].forEach((aTxt,i)=>{
+    const row = document.createElement('div');
+    row.className = "flex items-center gap-3 flex-wrap";
+    row.innerHTML = `
+      <span class="han text-sm w-64 shrink-0 bg-[#F2EEE2] px-2 py-1.5 rounded-sm">${i+1}. ${aTxt}</span>
+      <span class="text-[var(--ink-soft)]">➔</span>
+      <select data-m="${id}" data-idx="${i}" class="han border border-[#D9CFB4] rounded-sm px-2 py-1.5 text-sm flex-1 min-w-[160px]">
+        <option value="">— chọn —</option>
+        ${bOptions.map(o=>`<option value="${o.label}">${o.label}. ${o.txt}</option>`).join("")}
+      </select>`;
+    wrap.appendChild(row);
+  });
+}
+buildMatch(42, match42);
+buildMatch(44, match44);
+
+function checkMatch(id){
+  const data = id===42 ? match42 : match44;
+  const result = document.getElementById(`match${id}-result`);
+  result.innerHTML = "";
+  let correct = 0;
+  data.answers.forEach((ans,i)=>{
+    const sel = document.querySelector(`[data-m="${id}"][data-idx="${i}"]`);
+    const ok = sel.value === ans;
+    sel.style.borderColor = sel.value ? (ok ? 'var(--jade)' : 'var(--seal)') : '#D9CFB4';
+    if(ok) correct++;
+  });
+  const summary = document.createElement('p');
+  summary.className = (correct===data.answers.length ? 'text-[var(--jade)]' : 'text-[var(--seal)]') + " font-medium";
+  summary.textContent = `Đúng ${correct}/${data.answers.length} cặp.`;
+  result.appendChild(summary);
+  const box = document.createElement('div');
+  box.className = "tag-jade rounded-sm p-3 text-[13px] leading-relaxed space-y-1";
+  box.innerHTML = "<b>💡 Đáp án và giải thích:</b><br>" + data.explain.join("<br>");
+  result.appendChild(box);
+}
+
+/* ============================================================
+   TIỆN ÍCH DÙNG CHUNG: TOGGLE ĐÁP ÁN THAM KHẢO
+   ============================================================ */
+function toggleRef(id){
+  document.getElementById(`${id}-ref`).classList.toggle('hidden');
+}
+</script>
+</body>
+</html>

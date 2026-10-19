@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>推荐信 · Luyện viết Thư giới thiệu HSK6</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2541;
+    --paper:#fbf9f2;
+    --paper-line:#e7e0cd;
+    --seal:#a3272c;
+    --sky:#0369a1;
+    --slate-side:#16233b;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif; background:#eef1f6; color:var(--ink);}
+  .cjk{font-family:'Noto Serif SC','Songti SC','SimSun',serif;}
+  .paper{
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      var(--paper);
+    background-size: 100% 2.1em;
+    background-position: 0 4.6em;
+    border:1px solid #ded5b8;
+    box-shadow: 0 1px 2px rgba(28,37,65,.06), 0 8px 24px -12px rgba(28,37,65,.18);
+    position:relative;
+    overflow:hidden;
+  }
+  .paper::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:6px;
+    background:var(--seal);
+    opacity:.85;
+  }
+  .seal-mark{
+    position:absolute;
+    width:74px; height:74px;
+    border:2.5px solid var(--seal);
+    border-radius:50%;
+    color:var(--seal);
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; letter-spacing:2px;
+    opacity:.22;
+    transform:rotate(-12deg);
+    pointer-events:none;
+    right:28px; bottom:26px;
+  }
+  .tab-btn{
+    display:flex; align-items:flex-start; gap:.6rem;
+    width:100%; text-align:left;
+    padding:.85rem .9rem;
+    border-radius:.6rem;
+    color:#c7d2e3;
+    font-size:.86rem;
+    line-height:1.35;
+    transition:background .15s ease, color .15s ease;
+    border:1px solid transparent;
+  }
+  .tab-btn:hover{ background:rgba(255,255,255,.06); color:#fff; }
+  .tab-btn.active{
+    background:linear-gradient(135deg,#0c4a6e,#0369a1);
+    color:#fff;
+    border-color:rgba(255,255,255,.15);
+    box-shadow: 0 4px 14px -4px rgba(3,105,161,.6);
+  }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+  .choice-opt{
+    display:flex; gap:.6rem; align-items:flex-start;
+    padding:.7rem .85rem; border:1px solid #dbe2ea; border-radius:.55rem;
+    cursor:pointer; background:#fff; transition:.12s;
+  }
+  .choice-opt:hover{ border-color:#0369a1; background:#f0f7fc; }
+  .choice-opt.correct{ background:#dcfce7; border-color:#22c55e; }
+  .choice-opt.wrong{ background:#fee2e2; border-color:#ef4444; }
+  .choice-opt.disabled{ pointer-events:none; }
+  .blank-select{
+    border:2px solid var(--sky); border-radius:.35rem;
+    background:#eaf4fb; color:var(--sky); font-weight:600;
+    font-family:'Noto Serif SC','Songti SC','SimSun',serif;
+    padding:.15rem .4rem; outline:none; cursor:pointer;
+  }
+  .blank-select.right{ background:#dcfce7; border-color:#10b981; color:#065f46; }
+  .blank-select.wrong{ background:#fee2e2; border-color:#ef4444; color:#991b1b; }
+  .fib-hint{
+    font-size:.7rem; font-weight:700; color:#b91c1c;
+    background:#fef2f2; border:1px solid #fecaca; border-radius:.3rem;
+    padding:.05rem .35rem; white-space:nowrap;
+  }
+  .fib-hint:empty{ display:none; }
+  .match-card{
+    padding:.55rem .8rem; border:1.5px solid #dbe2ea; border-radius:.5rem;
+    cursor:pointer; background:#fff; font-size:.9rem; transition:.12s;
+  }
+  .match-card:hover{ border-color:#0369a1; }
+  .match-card.sel{ border-color:#0369a1; background:#e0f2fe; }
+  .match-card.paired{ background:#f8fafc; color:#94a3b8; }
+  .match-card.correct{ border-color:#10b981; background:#ecfdf3; color:#065f46; }
+  .match-card.wrong{ border-color:#ef4444; background:#fef2f2; color:#991b1b; }
+  .signblock{ display:inline-flex; flex-direction:column; align-items:center; }
+  .card{ background:#fff; border:1px solid #e2e8f0; border-radius:.9rem; }
+  .btn-primary{
+    background:var(--sky); color:#fff; font-weight:600; font-size:.88rem;
+    padding:.55rem 1.1rem; border-radius:.5rem; transition:.15s;
+  }
+  .btn-primary:hover{ background:#075985; }
+  .btn-ghost{
+    background:#fff; color:var(--ink); font-weight:600; font-size:.85rem;
+    padding:.5rem 1rem; border-radius:.5rem; border:1px solid #cbd5e1;
+  }
+  .btn-ghost:hover{ background:#f8fafc; }
+  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar-thumb{ background:#334155; border-radius:4px; }
+  .fade-in{ animation:fadein .25s ease; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(15,23,42,.55);
+    display:flex; align-items:center; justify-content:center;
+    z-index:50; padding:1.25rem;
+  }
+  .modal-box{
+    background:#fff; border-radius:1rem; max-width:38rem; width:100%;
+    max-height:88vh; overflow-y:auto; padding:1.5rem;
+    box-shadow:0 24px 48px -12px rgba(0,0,0,.35);
+  }
+  .counter-pill{
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.8rem; font-weight:700; padding:.3rem .8rem; border-radius:999px;
+    border:1.5px solid; transition:.15s;
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div class="flex min-h-screen">
+
+  <!-- SIDEBAR -->
+  <aside class="w-72 shrink-0 hidden lg:flex flex-col" style="background:var(--slate-side);">
+    <div class="px-5 pt-6 pb-5 border-b border-white/10">
+      <p class="text-sky-400 text-xs font-semibold tracking-wide">应用文写作 · 推荐信 · HSK6</p>
+      <h1 class="text-white text-lg font-bold mt-1 leading-snug">Luyện viết Thư<br>giới thiệu / Tiến cử</h1>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto" id="sidebar-nav">
+      <button class="tab-btn active" data-tab="1"><span>📖</span><span>Hướng dẫn viết &amp; Bài mẫu chuẩn</span></button>
+      <button class="tab-btn" data-tab="2"><span>📌</span><span>Bước 1: Trắc nghiệm Bố cục &amp; Thể thức</span></button>
+      <button class="tab-btn" data-tab="3"><span>📌</span><span>Bước 2: Nối từ Khẩu ngữ ➔ Văn viết</span></button>
+      <button class="tab-btn" data-tab="4"><span>📌</span><span>Bước 3: Điền từ vào câu hạt nhân</span></button>
+      <button class="tab-btn" data-tab="5"><span>📌</span><span>Bước 4: Phân tích khuyết thiếu &amp; sửa lỗi</span></button>
+      <button class="tab-btn" data-tab="6"><span>📌</span><span>Bước 5: Tập viết trơn tru (Dịch câu)</span></button>
+      <button class="tab-btn" data-tab="7"><span>📌</span><span>Bước 6: Chuẩn bị dàn ý thông tin</span></button>
+      <button class="tab-btn" data-tab="8"><span>📌</span><span>Bước 7: Luyện viết hoàn chỉnh (Dual-Panel)</span></button>
+    </nav>
+    <div class="px-5 py-4 border-t border-white/10 text-[11px] text-slate-400">100% offline · không dùng API</div>
+  </aside>
+
+  <!-- MOBILE TAB BAR -->
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-[var(--slate-side)] border-t border-white/10 flex overflow-x-auto">
+    <button class="tab-btn-m flex-1 min-w-[70px] active" data-tab="1">📖<span class="block text-[9px] mt-0.5">Hướng dẫn</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="2">📌<span class="block text-[9px] mt-0.5">B1 TN</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="3">📌<span class="block text-[9px] mt-0.5">B2 Nối từ</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="4">📌<span class="block text-[9px] mt-0.5">B3 Đục lỗ</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="5">📌<span class="block text-[9px] mt-0.5">B4 Sửa lỗi</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="6">📌<span class="block text-[9px] mt-0.5">B5 Dịch câu</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="7">📌<span class="block text-[9px] mt-0.5">B6 Dàn ý</span></button>
+    <button class="tab-btn-m flex-1 min-w-[70px]" data-tab="8">📌<span class="block text-[9px] mt-0.5">B7 Tự viết</span></button>
+  </div>
+
+  <!-- MAIN STAGE -->
+  <main class="flex-1 px-4 sm:px-8 py-8 pb-24 lg:pb-8 max-w-6xl mx-auto w-full">
+
+    <!-- ============ TAB 1 : HƯỚNG DẪN & BÀI MẪU ============ -->
+    <section class="tab-panel active" id="panel-1">
+      <h2 class="text-2xl font-bold mb-1">Hướng dẫn viết "推荐信" &amp; Bài mẫu chuẩn</h2>
+      <p class="text-slate-500 text-sm mb-6">Thư giới thiệu / Tiến cử — dùng khi cần giới thiệu một cá nhân đáng tin cậy, hoặc chia sẻ trải nghiệm hữu ích đến người khác.</p>
+
+      <div class="card p-5 mb-5">
+        <p class="inline-block text-xs font-bold text-white bg-sky-700 rounded-full px-3 py-1 mb-3">LOẠI 1 · 正式推荐信 — Thư giới thiệu chính thống</p>
+        <h3 class="font-bold text-sky-800 mb-2">I. Mục đích sử dụng &amp; yêu cầu chung</h3>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1.5 mb-4">
+          <li><b>Mục đích:</b> tiến cử một cá nhân (học sinh, cấp dưới) mà người giới thiệu am hiểu và tin tưởng đến một trường học, tổ chức hoặc nhà tuyển dụng để xin học, xin học bổng hoặc xin việc làm.</li>
+          <li><b>Đối tượng áp dụng:</b> viết bởi một cá nhân có uy tín, chuyên môn hoặc thẩm quyền (Giáo sư, Giáo viên, Giám đốc/Cấp trên) gửi cho đơn vị tiếp nhận.</li>
+          <li><b>Yêu cầu cốt lõi:</b> trình bày rõ ràng thông tin cơ bản của đối tượng được giới thiệu, đồng thời đưa ra lý do, minh chứng xác đáng và có sức thuyết phục cao.</li>
+        </ul>
+
+        <h3 class="font-bold text-sky-800 mb-2">II. Cấu trúc chuẩn &amp; quy tắc trình bày</h3>
+        <ol class="text-sm text-slate-700 list-decimal pl-5 space-y-1.5">
+          <li><b>Tiêu đề (<span class="cjk">标题</span>):</b> chữ <span class="cjk">推荐信</span> căn giữa (<span class="cjk">居中</span>) dòng đầu tiên.</li>
+          <li><b>Xưng hô (<span class="cjk">称呼</span>):</b> thường là tên đơn vị hoặc cá nhân tiếp nhận thư.<br><b>Yêu cầu:</b> viết sát lề trái ở dòng đầu tiên, kèm theo chức xưng tôn kính và kết thúc bằng dấu hai chấm (VD: <span class="cjk">莫兰老师：</span> hoặc <span class="cjk">尊敬的厦门大学招生办领导：</span>).</li>
+          <li><b>Thân bài (<span class="cjk">正文</span>):</b> xuống dòng, lùi vào 2 ô khi bắt đầu viết; nếu chia nhiều đoạn thì mỗi đoạn mới đều phải thụt 2 ô.
+            <ul class="list-disc pl-5 mt-1 space-y-1">
+              <li>Mở đầu: giới thiệu mối quan hệ giữa người giới thiệu và ứng viên.</li>
+              <li>Nội dung chính: đánh giá năng lực học tập, học lực, sở trường chuyên môn, trình độ ngoại ngữ, kỹ năng.</li>
+              <li>Tiến cử: khẳng định sự tin tưởng, đề nghị đơn vị tiếp nhận tạo cơ hội cho ứng viên.</li>
+            </ul>
+          </li>
+          <li><b>Ký tên &amp; Ngày tháng (<span class="cjk">署名与日期</span>):</b> nằm hoàn toàn ở góc dưới bên phải. Đơn vị + họ tên trên cùng 1 dòng (<span class="cjk">北京大学 刘玲玲</span>), ngày tháng ngay dưới. <b>Dòng nào ngắn hơn được căn giữa theo dòng dài hơn</b> để phần ký tên vuông vắn, cân đối.</li>
+        </ol>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-lg font-bold mb-1">Bài mẫu 1 — Thư giới thiệu chính thống</h3>
+        <p class="text-sm text-slate-500 mb-3">Khung giả lập trang giấy chuẩn thể thức.</p>
+        <div class="paper rounded-lg p-6 sm:p-10 max-w-xl mx-auto text-sm cjk leading-8">
+          <p class="text-center font-bold mb-4">推荐信</p>
+          <p class="text-left mb-2">莫兰老师：</p>
+          <p style="text-indent:2em;">获悉贵院近期正在招聘兼职英语教师，我诚挚地向您推荐我的学生吉米。</p>
+          <p style="text-indent:2em;">吉米是我校中文专业的外籍公费留学生，现主修中国文化。该生在英国已经获得教育学学士学位，且汉语已达到新HSK六级水平，对中国文化也颇为熟悉。吉米性格活跃开朗，相信能给您的学生一个轻松愉快的学习氛围。</p>
+          <div class="flex justify-end mt-8">
+            <div class="signblock">
+              <p>北京大学&nbsp;&nbsp;刘玲玲</p>
+              <p class="mt-1">2016年12月19日</p>
+            </div>
+          </div>
+          <div class="seal-mark cjk">存<br>档</div>
+        </div>
+      </div>
+
+      <div class="card p-5 mb-5">
+        <p class="inline-block text-xs font-bold text-white bg-emerald-700 rounded-full px-3 py-1 mb-3">LOẠI 2 · 分享类推荐 — Bài viết chia sẻ trải nghiệm</p>
+        <h3 class="font-bold text-emerald-800 mb-2">I. Mục đích sử dụng &amp; yêu cầu chung</h3>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1.5 mb-4">
+          <li><b>Mục đích:</b> tiến cử, chia sẻ và đánh giá một sản phẩm, dịch vụ hoặc khóa học hữu ích mà bản thân đã trực tiếp trải nghiệm cho người khác cùng tham gia.</li>
+          <li><b>Đối tượng áp dụng:</b> người viết đã trực tiếp trải nghiệm (học sinh, người dùng), viết gửi bạn bè/bạn học/cộng đồng chung. Giọng văn thân thiện, gần gũi, mang tính chia sẻ cá nhân.</li>
+        </ul>
+        <h3 class="font-bold text-emerald-800 mb-2">II. Cấu trúc chuẩn &amp; quy tắc trình bày</h3>
+        <ol class="text-sm text-slate-700 list-decimal pl-5 space-y-1.5">
+          <li><b>Xưng hô (<span class="cjk">称呼</span>):</b> viết sát lề trái ở dòng đầu tiên, hướng tới số đông hoặc nhóm bạn bè (VD: <span class="cjk">大家好！</span>).</li>
+          <li><b>Thân bài (<span class="cjk">正文</span>):</b> lùi 2 ô mỗi đoạn văn mới.
+            <ul class="list-disc pl-5 mt-1 space-y-1">
+              <li>Mở đầu: nêu lý do giới thiệu (vừa hoàn thành khóa học/trải nghiệm và thấy hiệu quả).</li>
+              <li>Nội dung chính: giới thiệu ngắn gọn kiến thức cốt lõi, tiến bộ/lợi ích cụ thể đạt được.</li>
+              <li>Lời khuyên ứng dụng: định vị đối tượng phù hợp, mẹo thực tế để học hiệu quả.</li>
+              <li>Lời kết: kêu gọi mọi người trải nghiệm, chúc họ đạt kết quả tốt.</li>
+            </ul>
+          </li>
+          <li><b>Ký tên &amp; Ngày tháng:</b> áp dụng tương tự nếu viết dưới dạng thư trang trọng gửi nhóm — đặt góc dưới phải, dòng ngắn căn giữa theo dòng dài.</li>
+        </ol>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold mb-1">Bài mẫu 2 — Giới thiệu khóa học online</h3>
+        <p class="text-sm text-slate-500 mb-3">Thể loại chia sẻ trải nghiệm, xưng hô sát lề, mỗi đoạn thụt 2 ô.</p>
+        <div class="paper rounded-lg p-6 sm:p-10 max-w-xl mx-auto text-sm cjk leading-8">
+          <p class="text-left font-bold mb-3">大家好！</p>
+          <p style="text-indent:2em;">最近我参加了一门线上汉语课程，觉得收获很大，所以想推荐给大家。这门课程主要学习汉语口语、听力和日常交流技巧，老师讲课生动，内容也很实用。</p>
+          <p style="text-indent:2em;">通过学习，我的汉语水平提高了很多，也更有信心和别人交流。我认为这门课程特别适合汉语初学者和想提高口语水平的同学。</p>
+          <p style="text-indent:2em;">如果你想学好汉语，建议每天坚持学习，认真完成作业，多和老师、同学交流，这样进步会更快。</p>
+          <p style="text-indent:2em;">希望大家有机会也来试试这门课程，相信你一定会有所收获！</p>
+          <div class="seal-mark cjk">存<br>档</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 2 : TRẮC NGHIỆM ============ -->
+    <section class="tab-panel" id="panel-2">
+      <h2 class="text-2xl font-bold mb-1">Bước 1 · Trắc nghiệm Bố cục &amp; Thể thức</h2>
+      <p class="text-slate-500 text-sm mb-6">Chọn đáp án rồi bấm "Kiểm tra đáp án". Có thể chọn lại phương án khác bất cứ lúc nào.</p>
+      <div id="quiz-wrap" class="space-y-6"></div>
+    </section>
+
+    <!-- ============ TAB 3 : NỐI TỪ ============ -->
+    <section class="tab-panel" id="panel-3">
+      <h2 class="text-2xl font-bold mb-1">Bước 2 · Nối từ Khẩu ngữ ➔ Văn viết</h2>
+      <p class="text-slate-500 text-sm mb-6">Chọn 1 thẻ ở cột A (口语) rồi chọn thẻ tương ứng ở cột B (书面语) để ghép cặp. Bấm "Kiểm tra" để xem đúng/sai, hoặc "↺ Thử lại" để làm lại.</p>
+      <div id="match-wrap"></div>
+    </section>
+
+    <!-- ============ TAB 4 : ĐỤC LỖ CÂU HẠT NHÂN ============ -->
+    <section class="tab-panel" id="panel-4">
+      <h2 class="text-2xl font-bold mb-1">Bước 3 · Điền từ vào câu hạt nhân</h2>
+      <p class="text-slate-500 text-sm mb-6">Mỗi câu có một hộp từ gợi ý chữ Hán riêng. Chọn đúng thứ tự vào 3 chỗ trống rồi bấm "Kiểm tra".</p>
+      <div id="fib-wrap" class="space-y-8"></div>
+    </section>
+
+    <!-- ============ TAB 5 : SỬA LỖI BẢN THẢO ============ -->
+    <section class="tab-panel" id="panel-5">
+      <h2 class="text-2xl font-bold mb-1">Bước 4 · Phân tích khuyết thiếu &amp; sửa lỗi bản thảo</h2>
+      <p class="text-slate-500 text-sm mb-6">Đọc bản thảo 【不规范的草稿】, tự phân tích lỗi rồi đối chiếu đáp án chi tiết.</p>
+      <div id="correction-wrap"></div>
+    </section>
+
+    <!-- ============ TAB 6 : DỊCH CÂU ============ -->
+    <section class="tab-panel" id="panel-6">
+      <h2 class="text-2xl font-bold mb-1">Bước 5 · Tập viết trơn tru (Dịch &amp; chuyển câu)</h2>
+      <p class="text-slate-500 text-sm mb-6">Dịch câu tiếng Việt sang tiếng Trung dựa vào gợi ý cấu trúc, rồi đối chiếu câu mẫu tham khảo.</p>
+      <div id="translate-wrap" class="space-y-6"></div>
+    </section>
+
+    <!-- ============ TAB 7 : DÀN Ý ============ -->
+    <section class="tab-panel" id="panel-7">
+      <h2 class="text-2xl font-bold mb-1">Bước 6 · Chuẩn bị dàn ý thông tin (Outline)</h2>
+      <p class="text-slate-500 text-sm mb-4">Đề bài: giới thiệu ứng dụng <b class="cjk">"笔顺背汉字"</b> (Học chữ Hán qua nét vẽ) lên nhóm chat của lớp. Hãy tự điền từ khóa của bạn vào từng mục, sau đó đối chiếu dàn ý gợi ý chuẩn.</p>
+      <div id="outline-wrap"></div>
+    </section>
+
+    <!-- ============ TAB 8 : LUYỆN VIẾT DUAL-PANEL ============ -->
+    <section class="tab-panel" id="panel-8">
+      <h2 class="text-2xl font-bold mb-1">Bước 7 · Luyện viết hoàn chỉnh (Dual-Panel Real-time)</h2>
+      <p class="text-slate-500 text-sm mb-2"><b>Đề bài:</b> Gần đây bạn đã trải nghiệm ứng dụng <span class="cjk">"笔顺背汉字"</span> rất hiệu quả. Hãy viết bài chia sẻ trải nghiệm (Loại 2), khoảng 100–120 chữ, giới thiệu &amp; khuyên dùng ứng dụng này tới các bạn cùng lớp trên nhóm chat chung.</p>
+      <p class="text-slate-500 text-sm mb-6">Nhập từng thành phần bên trái — tờ giấy bên phải sẽ tự động cập nhật đúng thể thức theo thời gian thực.</p>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div>
+            <label class="text-xs font-semibold text-slate-500 block mb-1">1. Tiêu đề (标题) — bỏ trống nếu là thư Loại 2 (không bắt buộc có tiêu đề riêng)</label>
+            <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w8-title" oninput="renderW8()" placeholder="推荐信 (nếu có)">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-slate-500 block mb-1">2. Đối tượng nhận / Lời chào (称呼)</label>
+            <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w8-greet" oninput="renderW8()" placeholder="大家好！">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-slate-500 block mb-1">3. Chính văn (正文) — mỗi dòng Enter = 1 đoạn mới</label>
+            <textarea class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" rows="8" id="w8-body" oninput="renderW8()" placeholder="输入正文…"></textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs font-semibold text-slate-500 block mb-1">4. Đơn vị / Ký tên (署名)</label>
+              <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w8-sign" oninput="renderW8()" placeholder="(có thể để trống)">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-slate-500 block mb-1">5. Ngày tháng (日期)</label>
+              <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" id="w8-date" oninput="renderW8()" placeholder="(có thể để trống)">
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <span id="w8-counter" class="counter-pill">0 chữ Hán</span>
+            <button class="btn-primary" onclick="openModel()">📄 Xem bài viết mẫu chuẩn</button>
+            <button class="btn-ghost" onclick="clearW8()">Xoá</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-slate-500 mb-1">Tờ giấy mô phỏng (real-time)</p>
+          <div class="paper rounded-lg p-6 sm:p-8 text-sm cjk leading-8 min-h-[420px]">
+            <p class="text-center font-bold mb-3 min-h-[1.5em]" id="w8-p-title"></p>
+            <p class="text-left mb-2 min-h-[1.5em]" id="w8-p-greet"></p>
+            <div id="w8-p-body"></div>
+            <div class="flex justify-end mt-8">
+              <div class="signblock">
+                <p id="w8-p-sign">&nbsp;</p>
+                <p class="mt-1" id="w8-p-date">&nbsp;</p>
+              </div>
+            </div>
+            <div class="seal-mark cjk">存<br>档</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="model-modal">
+  <div class="modal-box">
+    <div class="flex items-center justify-between mb-4">
+      <p class="font-bold text-lg">📄 Bài viết mẫu chuẩn HSK6 (~115 chữ)</p>
+      <button class="btn-ghost" onclick="closeModel()">Đóng ✕</button>
+    </div>
+    <div class="paper rounded-lg p-6 text-sm cjk leading-8">
+      <p class="text-left font-bold mb-3">大家好！</p>
+      <p style="text-indent:2em;">最近我使用了一款名为"笔顺背汉字"的手机软件，觉得对汉字学习收获很大，所以想推荐给大家。这个软件主要展示汉字的笔顺动画，还配有标准的汉语发音，内容非常生动实用。</p>
+      <p style="text-indent:2em;">通过使用这个软件，我记住了很多难写的汉字，也写得更规范了，不再害怕写汉字。我认为这款软件特别适合汉字初学者和想写好汉字的同学。</p>
+      <p style="text-indent:2em;">如果你想提高汉字水平，建议每天坚持使用这个软件练习十分钟，认真模仿汉字的笔顺，这样进步会更快。</p>
+      <p style="text-indent:2em;">希望大家有机会也来试试，相信对你们一定会有所帮助！祝大家学习进步！</p>
+      <div class="seal-mark cjk">存<br>档</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   TAB SWITCHING
+=============================================================== */
+function setTab(n){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===String(n)));
+  document.querySelectorAll('.tab-btn-m').forEach(b=>b.classList.toggle('active', b.dataset.tab===String(n)));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('.tab-btn, .tab-btn-m').forEach(b=>{
+  b.addEventListener('click', ()=>setTab(b.dataset.tab));
+});
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ============================================================
+   TAB 2 — QUIZ
+=============================================================== */
+const quizData = [
+  {
+    id:'q1', title:'Câu 1 · [Loại 1] Mở đầu thân bài',
+    prompt:'Khi viết "Thư giới thiệu chính thống" (tiến cử học sinh/cấp dưới), phần mở đầu của thân bài bắt buộc phải nêu rõ nội dung nào?',
+    options:[
+      {k:'A', t:'性格特点与兴趣爱好'},
+      {k:'B', t:'推荐人与被推荐人的关系，并明确提出推荐意向'},
+      {k:'C', t:'对接收单位的具体薪资和待遇要求'},
+      {k:'D', t:'阐述被推荐人的所有缺点以示客观'},
+    ],
+    correct:'B',
+    explain:'Theo quy chuẩn Thư giới thiệu chính thống (Loại 1), phần mở đầu thân bài phải lập tức xác lập mối quan hệ giữa người giới thiệu và ứng viên để tạo độ tin cậy, sau đó nêu rõ mục đích tiến cử.'
+  },
+  {
+    id:'q2', title:'Câu 2 · [Loại 1] Cách viết xưng hô chuẩn',
+    prompt:'Trong "Thư giới thiệu chính thống" (Loại 1), cách viết xưng hô (称呼) nào sau đây là đúng quy chuẩn trình bày?',
+    options:[
+      {k:'A', t:'莫兰老师 (Viết thụt lề vào 2 ô, không có dấu hai chấm)'},
+      {k:'B', t:'亲爱的莫兰老师 (Viết ở giữa dòng, sử dụng dấu phẩy)'},
+      {k:'C', t:'莫兰老师： (Viết sát lề trái hoàn toàn, không thụt lề, bắt buộc có dấu hai chấm)'},
+      {k:'D', t:'莫兰老师， (Viết sát lề trái hoàn toàn, sử dụng dấu phẩy)'},
+    ],
+    correct:'C',
+    explain:'Quy tắc trình bày bắt buộc đối với phần xưng hô trong thư giới thiệu chính thống là phải viết sát lề trái hoàn toàn (顶格), tuyệt đối không lùi đầu dòng và bắt buộc kết thúc bằng dấu hai chấm (：).'
+  },
+  {
+    id:'q3', title:'Câu 3 · [Loại 2] Mở đầu thân bài chia sẻ',
+    prompt:'Khi viết một "Bài viết chia sẻ trải nghiệm" (giới thiệu phần mềm, khóa học, dịch vụ), bước đầu tiên của phần thân bài cần phải viết gì để tạo sự tin cậy?',
+    options:[
+      {k:'A', t:'给出具体的学习建议'},
+      {k:'B', t:'说明自己最近的实际体验并引出推荐'},
+      {k:'C', t:'详细列出该产品的开发团队背景'},
+      {k:'D', t:'要求大家必须马上购买或下载'},
+    ],
+    correct:'B',
+    explain:'Với bài viết chia sẻ trải nghiệm cá nhân (Loại 2), việc khẳng định bản thân đã trực tiếp trải nghiệm (vừa hoàn thành khóa học/sử dụng phần mềm) và gặt hái thành quả thực tế là yếu tố cốt lõi giúp người đọc tin tưởng.'
+  },
+  {
+    id:'q4', title:'Câu 4 · Quy tắc trình bày Thân bài &amp; Ký tên',
+    prompt:'Quy tắc trình bày nào dưới đây là hoàn toàn CHÍNH XÁC đối với phần Thân bài và phần Ký tên của thư giới thiệu chuẩn?',
+    options:[
+      {k:'A', t:'正文开头不需缩进，署名与日期写在左下角'},
+      {k:'B', t:'正文每段开头必须缩进两个汉字空格，署名与日期靠右对齐、整齐美观'},
+      {k:'C', t:'正文每段缩进四个汉字，署名与日期写在正中间'},
+      {k:'D', t:'正文每段缩进一个汉字，署名写在右下角，日期写在左下角'},
+    ],
+    correct:'B',
+    explain:'Quy tắc trình bày thư tín chữ Hán chuẩn yêu cầu: đầu mỗi đoạn văn mới trong thân bài bắt buộc phải thụt lề 2 ô chữ (缩进两格); phần ký tên và ngày tháng phải căn lề phải tuyệt đối (靠右) ở góc dưới cùng, dòng ngắn căn giữa theo dòng dài để tạo bố cục vuông vắn, ngay ngắn.'
+  }
+];
+
+function renderQuiz(){
+  const wrap = document.getElementById('quiz-wrap');
+  wrap.innerHTML = quizData.map(q=>`
+    <div class="card p-5">
+      <p class="font-semibold text-sm mb-1">${q.title}</p>
+      <p class="text-sm text-slate-700 mb-3">${q.prompt}</p>
+      <div class="space-y-2" id="opts-${q.id}">
+        ${q.options.map(o=>`
+          <div class="choice-opt cjk" data-key="${o.k}" onclick="selectQuiz('${q.id}','${o.k}')">
+            <span class="font-bold text-slate-400">${o.k}</span><span>${o.t}</span>
+          </div>`).join('')}
+      </div>
+      <button class="btn-primary mt-3" onclick="checkQuiz('${q.id}')">Kiểm tra đáp án</button>
+      <div id="exp-${q.id}" class="mt-3 hidden text-sm bg-sky-50 border border-sky-200 rounded-lg p-3 fade-in"></div>
+    </div>
+  `).join('');
+}
+const quizSelected = {};
+function selectQuiz(id,key){
+  quizSelected[id]=key;
+  document.querySelectorAll('#opts-'+id+' .choice-opt').forEach(el=>{
+    el.classList.remove('correct','wrong','disabled');
+    el.style.borderColor = el.dataset.key===key ? '#0369a1' : '#dbe2ea';
+  });
+  document.getElementById('exp-'+id).classList.add('hidden');
+}
+function checkQuiz(id){
+  const q = quizData.find(x=>x.id===id);
+  const sel = quizSelected[id];
+  const expBox = document.getElementById('exp-'+id);
+  document.querySelectorAll('#opts-'+id+' .choice-opt').forEach(el=>{
+    el.style.borderColor='';
+    if(el.dataset.key===q.correct) el.classList.add('correct');
+    else if(el.dataset.key===sel) el.classList.add('wrong');
+  });
+  expBox.classList.remove('hidden');
+  if(!sel){
+    expBox.innerHTML = `<p class="font-semibold text-amber-700">⚠️ Bạn chưa chọn đáp án nào.</p><p class="mt-1">💡 ${q.explain}</p>`;
+  } else {
+    expBox.innerHTML = `<p class="font-semibold ${sel===q.correct?'text-emerald-700':'text-red-700'}">${sel===q.correct?'✅ Chính xác!':'❌ Chưa đúng.'} Đáp án đúng: ${q.correct}</p><p class="mt-1">📝 ${q.explain}</p>`;
+  }
+}
+renderQuiz();
+
+/* ============================================================
+   TAB 3 — MATCHING (6 pairs)
+=============================================================== */
+const matchData = {
+  id:'m1',
+  left:[
+    {k:'1', t:'知道 (Biết được, nghe nói)'},
+    {k:'2', t:'很、非常 (Rất, khá)'},
+    {k:'3', t:'学习 (Học ngành chính là / theo học)'},
+    {k:'4', t:'推荐 (Giới thiệu, tiến cử)'},
+    {k:'5', t:'做得好这个工作 (Có thể làm tốt việc này)'},
+    {k:'6', t:'很乐意 (Rất sẵn lòng)'}
+  ],
+  right:[
+    {k:'A', t:'颇为 / 极'},
+    {k:'B', t:'获悉 / 欣闻'},
+    {k:'C', t:'完全可以胜任该项工作'},
+    {k:'D', t:'主修 / 攻读'},
+    {k:'E', t:'诚挚地向您推荐 / 郑重推荐'},
+    {k:'F', t:'非常乐意'}
+  ],
+  correct:{'1':'B','2':'A','3':'D','4':'E','5':'C','6':'F'}
+};
+const matchState = {};
+function renderMatchTab(){
+  matchState[matchData.id] = {sel:null, pairs:{}};
+  document.getElementById('match-wrap').innerHTML = `
+  <div class="card p-5">
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="space-y-2" id="${matchData.id}-left">
+        <p class="text-xs font-semibold text-slate-400 mb-1">口语 (Cột A)</p>
+        ${matchData.left.map(o=>`<div class="match-card cjk" data-side="L" data-key="${o.k}" onclick="matchClick('L','${o.k}')"><b>${o.k}.</b> ${o.t}</div>`).join('')}
+      </div>
+      <div class="space-y-2" id="${matchData.id}-right">
+        <p class="text-xs font-semibold text-slate-400 mb-1">书面语 (Cột B)</p>
+        ${matchData.right.map(o=>`<div class="match-card cjk" data-side="R" data-key="${o.k}" onclick="matchClick('R','${o.k}')"><b>${o.k}.</b> ${o.t}</div>`).join('')}
+      </div>
+    </div>
+    <div class="flex items-center gap-3 mt-4">
+      <button class="btn-primary" onclick="checkMatch()">Kiểm tra</button>
+      <button class="btn-ghost" onclick="resetMatchTab()">↺ Thử lại</button>
+    </div>
+    <div id="${matchData.id}-exp" class="hidden mt-3 fade-in text-sm bg-sky-50 border border-sky-200 rounded-lg p-3"></div>
+  </div>`;
+}
+function matchClick(side, key){
+  const id = matchData.id;
+  const st = matchState[id];
+  const already = Object.entries(st.pairs).find(([l,r])=> (side==='L'&&l===key) || (side==='R'&&r===key));
+  if(already) return;
+  if(side==='L'){
+    st.sel = key;
+    document.querySelectorAll('#'+id+'-left .match-card').forEach(el=>{
+      el.classList.toggle('sel', el.dataset.key===key);
+    });
+  } else {
+    if(!st.sel) return;
+    st.pairs[st.sel] = key;
+    document.querySelector('#'+id+'-left [data-key="'+st.sel+'"]').classList.add('paired');
+    document.querySelector('#'+id+'-left [data-key="'+st.sel+'"]').classList.remove('sel');
+    document.querySelector('#'+id+'-right [data-key="'+key+'"]').classList.add('paired');
+    st.sel = null;
+  }
+}
+function resetMatchTab(){
+  renderMatchTab();
+}
+function checkMatch(){
+  const id = matchData.id;
+  const st = matchState[id];
+  let allRight = true;
+  let rows = [];
+  matchData.left.forEach(o=>{
+    const chosen = st.pairs[o.k];
+    const ok = chosen === matchData.correct[o.k];
+    if(!ok) allRight = false;
+    const leftEl = document.querySelector('#'+id+'-left [data-key="'+o.k+'"]');
+    if(chosen){
+      leftEl.classList.add(ok?'correct':'wrong');
+      document.querySelector('#'+id+'-right [data-key="'+chosen+'"]').classList.add(ok?'correct':'wrong');
+    } else {
+      leftEl.classList.add('wrong');
+    }
+    rows.push(`${o.k} → ${matchData.correct[o.k]}`);
+  });
+  const exp = document.getElementById(id+'-exp');
+  exp.classList.remove('hidden');
+  exp.innerHTML = `<p class="font-semibold ${allRight?'text-emerald-700':'text-red-700'} mb-1">${allRight?'✅ Chính xác toàn bộ!':'❌ Có cặp chưa đúng (đã tô đỏ).'}</p><p class="cjk">💡 Đáp án: ${rows.join('，&nbsp;&nbsp;')}.</p>`;
+}
+renderMatchTab();
+
+/* ============================================================
+   TAB 4 — FILL-IN-BLANK (6 sentences, own word bank each)
+=============================================================== */
+const fibData = [
+  {
+    id:'f1', group:'第一部分：正式推荐信常用句型 (Loại 1)',
+    func:'Câu 1 · Giới thiệu thân phận bản thân và nêu rõ ý định tiến cử',
+    template:['','贵院近期正在招聘','，我诚挚地向您推荐','。'],
+    bank:['获悉','兼职汉语教师','我的学生吉米'],
+    answers:['获悉','兼职汉语教师','我的学生吉米']
+  },
+  {
+    id:'f2', group:'第一部分：正式推荐信常用句型 (Loại 1)',
+    func:'Câu 2 · Kể thành tích học tập và năng lực ngoại ngữ của ứng viên',
+    template:['该生在','已经获得','学位，且汉语已达到','水平。'],
+    bank:['英国','教育学学士','新HSK六级'],
+    answers:['英国','教育学学士','新HSK六级']
+  },
+  {
+    id:'f3', group:'第一部分：正式推荐信常用句型 (Loại 1)',
+    func:'Câu 3 · Nhận xét tính cách và khẳng định đóng góp của ứng viên',
+    template:['吉米','，相信能给您的学生一个','的学习氛围。'],
+    bank:['性格活跃开朗','轻松愉快'],
+    answers:['性格活跃开朗','轻松愉快']
+  },
+  {
+    id:'f4', group:'第二部分：分享类推荐信常用句型 (Loại 2)',
+    func:'Câu 4 · Kể lại trải nghiệm thực tế của bản thân và giới thiệu khóa học',
+    template:['','我','一门线上汉语课程，觉得','，所以想推荐给大家。'],
+    bank:['最近','参加了','收获很大'],
+    answers:['最近','参加了','收获很大']
+  },
+  {
+    id:'f5', group:'第二部分：分享类推荐信常用句型 (Loại 2)',
+    func:'Câu 5 · Giới thiệu tính phù hợp của sản phẩm đối với đối tượng cụ thể',
+    template:['我认为这门课程特别适合','和','的同学。'],
+    bank:['汉语初学者','想提高口语水平'],
+    answers:['汉语初学者','想提高口语水平']
+  },
+  {
+    id:'f6', group:'第二部分：分享类推荐信常用句型 (Loại 2)',
+    func:'Câu 6 · Đưa ra lời khuyên học tập thực tế để đạt hiệu quả',
+    template:['如果你想学好汉语，建议每天','，','作业，这样','。'],
+    bank:['坚持学习','认真完成','进步会更快'],
+    answers:['坚持学习','认真完成','进步会更快']
+  }
+];
+
+function buildBlankSentence(f){
+  let html = f.template[0] ? escapeHtml(f.template[0]) : '';
+  f.answers.forEach((ans,i)=>{
+    const optsHtml = ['<option value="">— chọn —</option>'].concat(
+      f.bank.map(w=>`<option value="${w}">${w}</option>`)
+    ).join('');
+    html += `<span class="inline-flex items-center flex-wrap gap-1"><select class="blank-select" id="${f.id}-b${i}" data-ans="${ans}">${optsHtml}</select><span id="${f.id}-hint${i}" class="fib-hint"></span></span>`;
+    html += escapeHtml(f.template[i+1] || '');
+  });
+  return html;
+}
+function renderFib(){
+  const groups = {};
+  fibData.forEach(f=>{
+    if(!groups[f.group]) groups[f.group]=[];
+    groups[f.group].push(f);
+  });
+  let out = '';
+  Object.keys(groups).forEach(g=>{
+    out += `<div><p class="text-xs font-bold text-sky-700 mb-3 cjk uppercase tracking-wide">${g}</p><div class="space-y-4">`;
+    groups[g].forEach(f=>{
+      out += `
+      <div class="card p-4">
+        <p class="text-xs font-semibold text-slate-500 mb-2">${f.func}</p>
+        <div class="flex flex-wrap gap-1.5 mb-3">
+          <span class="text-[11px] font-semibold text-slate-400 mr-1 mt-1">Hộp từ gợi ý:</span>
+          ${f.bank.map(w=>`<span class="cjk text-[11px] bg-sky-50 text-sky-700 border border-sky-200 rounded-full px-2.5 py-0.5">${w}</span>`).join('')}
+        </div>
+        <p class="text-sm cjk leading-8">${buildBlankSentence(f)}</p>
+        <div class="flex items-center gap-3 mt-2">
+          <button class="btn-primary" onclick="checkFibSentence('${f.id}')">Kiểm tra</button>
+          <p id="${f.id}-result" class="text-xs font-semibold"></p>
+        </div>
+      </div>`;
+    });
+    out += `</div></div>`;
+  });
+  document.getElementById('fib-wrap').innerHTML = out;
+}
+function checkFibSentence(id){
+  const f = fibData.find(x=>x.id===id);
+  let allRight = true, allChosen = true;
+  f.answers.forEach((ans,i)=>{
+    const el = document.getElementById(id+'-b'+i);
+    const hint = document.getElementById(id+'-hint'+i);
+    el.classList.remove('right','wrong');
+    if(!el.value) allChosen = false;
+    if(el.value===ans){ el.classList.add('right'); hint.textContent=''; }
+    else { el.classList.add('wrong'); allRight=false; hint.textContent='正确：'+ans; }
+  });
+  const res = document.getElementById(id+'-result');
+  if(!allChosen){ res.textContent='⚠️ Chưa chọn đủ.'; res.className='text-xs font-semibold text-amber-700'; }
+  else if(allRight){ res.textContent='✅ Chính xác!'; res.className='text-xs font-semibold text-emerald-700'; }
+  else { res.textContent='❌ Có chỗ sai — đáp án đúng hiện cạnh ô sai.'; res.className='text-xs font-semibold text-red-700'; }
+}
+renderFib();
+
+/* ============================================================
+   TAB 5 — DRAFT CORRECTION
+=============================================================== */
+function renderCorrection(){
+  document.getElementById('correction-wrap').innerHTML = `
+  <div class="card p-5">
+    <p class="text-xs font-semibold text-slate-500 mb-2">【不规范的草稿 (Bản thảo lỗi)】</p>
+    <div class="paper rounded-lg p-5 sm:p-7 max-w-xl text-sm cjk leading-7 mb-5">
+      <p class="mb-1">推荐信 莫兰老师，</p>
+      <p class="mb-1">获悉贵院正在招汉语老师，我想把我的学生吉米介绍给你们。</p>
+      <p class="mb-1">吉米现在主修中国文化。这个学生在英国拿到了学士学位，而且他的中文非常棒。吉米人很好，肯定能和你们的学生玩得开心。</p>
+      <p>北京大学 刘玲玲 2016年12月19日</p>
+    </div>
+
+    <p class="text-sm font-medium mb-2">👉 Nhiệm vụ: tìm ít nhất 2 lỗi <b>Thể thức trình bày (格式)</b> và ít nhất 2 lỗi <b>Dùng từ khẩu ngữ (口语)</b> cần chuyển sang văn phong viết (书面语).</p>
+    <textarea class="w-full border border-slate-300 rounded-lg p-2.5 text-sm mb-2" rows="2" placeholder="Nhập lỗi thể thức bạn phát hiện…"></textarea>
+    <textarea class="w-full border border-slate-300 rounded-lg p-2.5 text-sm mb-4" rows="2" placeholder="Nhập lỗi dùng từ khẩu ngữ bạn phát hiện…"></textarea>
+
+    <button class="btn-primary" onclick="document.getElementById('c-ans').classList.remove('hidden')">Bấm để xem đáp án sửa lỗi chi tiết</button>
+
+    <div id="c-ans" class="hidden mt-5 fade-in">
+      <p class="text-sm font-semibold text-sky-800 mb-2">1. 格式错误与纠正 (Sửa lỗi thể thức):</p>
+      <ul class="list-disc pl-5 text-sm text-slate-700 space-y-2 mb-5">
+        <li><b>Lỗi 1:</b> Xưng hô <span class="cjk">莫兰老师，</span> viết lùi vào 2 ô và dùng dấu phẩy. <br><i>Sửa lại:</i> viết sát lề trái hoàn toàn (顶格) và dùng dấu hai chấm: <span class="cjk">莫兰老师：</span>.</li>
+        <li><b>Lỗi 2:</b> Phần ký tên và ngày tháng viết lệch, chưa căn phải vuông vắn ở cuối thư. <br><i>Sửa lại:</i> căn lề phải toàn bộ ký tên và ngày tháng; dòng ngắn căn giữa theo dòng dài.</li>
+        <li><b>Lỗi 3:</b> Đầu mỗi đoạn văn ở thân bài chưa lùi 2 ô chữ. <br><i>Sửa lại:</i> thụt lề 2 ô cho tất cả các đoạn văn trong thân bài.</li>
+      </ul>
+      <p class="text-sm font-semibold text-sky-800 mb-2">2. 词汇与句型纠正 (Sửa lỗi dùng từ văn nói sang văn viết):</p>
+      <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1.5 mb-5 cjk">
+        <li>招汉语老师 → <b class="text-emerald-700">招聘兼职汉语教师</b></li>
+        <li>我想把我的学生吉米介绍给你们 → <b class="text-emerald-700">我诚挚地向您推荐我的学生吉米</b></li>
+        <li>这个学生 → <b class="text-emerald-700">该生</b></li>
+        <li>拿到了学士学位 → <b class="text-emerald-700">已经获得教育学学士学位</b></li>
+        <li>中文非常棒 → <b class="text-emerald-700">汉语已达到新HSK六级水平</b></li>
+        <li>肯定能和你们的学生玩得开心 → <b class="text-emerald-700">相信能给您的学生一个轻松愉快的学习氛围</b></li>
+      </ul>
+      <p class="text-sm font-semibold text-emerald-700 mb-2">✅ Bản sửa lỗi hoàn chỉnh:</p>
+      <div class="paper rounded-lg p-5 sm:p-7 max-w-xl text-sm cjk leading-7">
+        <p class="text-center font-bold mb-3">推荐信</p>
+        <p class="text-left mb-2">莫兰老师：</p>
+        <p style="text-indent:2em;">获悉贵院正在招聘兼职汉语教师，我诚挚地向您推荐我的学生吉米。</p>
+        <p style="text-indent:2em;">吉米现在主修中国文化，该生在英国已经获得学士学位，而且汉语已达到新HSK六级水平。吉米性格活跃开朗，相信能给您的学生一个轻松愉快的学习氛围。</p>
+        <div class="flex justify-end mt-8">
+          <div class="signblock">
+            <p>北京大学&nbsp;&nbsp;刘玲玲</p>
+            <p class="mt-1">2016年12月19日</p>
+          </div>
+        </div>
+        <div class="seal-mark cjk">存<br>档</div>
+      </div>
+    </div>
+  </div>`;
+}
+renderCorrection();
+
+/* ============================================================
+   TAB 6 — TRANSLATION TASKS
+=============================================================== */
+const translateData = [
+  {
+    id:'tr1', tag:'开头 · Mở đầu tiến cử',
+    vn:'Được biết quý công ty gần đây đang tuyển dụng nhân viên marketing, tôi xin chân thành giới thiệu học sinh của tôi là Vương Vĩ đến ngài.',
+    hint:'获悉……，我诚挚地向您推荐……',
+    answer:'获悉贵公司近期正在招聘市场营销人员，我诚挚地向您推荐我的学生王伟。'
+  },
+  {
+    id:'tr2', tag:'评价 · Đánh giá năng lực',
+    vn:'Cậu ấy là người trung thực, năng lực tổ chức tốt, là một nhân tài hiếm có.',
+    hint:'为人……，组织能力……，是不可多得的人才',
+    answer:'该生为人诚实，组织能力强，是不可多得的人才。'
+  },
+  {
+    id:'tr3', tag:'推荐 · Khẳng định tiến cử',
+    vn:'Tôi tin tưởng sâu sắc rằng cậu ấy hoàn toàn có thể đảm nhiệm tốt công việc này và đóng góp cho quý trường.',
+    hint:'我深信……完全可以胜任……并为贵校……',
+    answer:'我深信该生完全可以胜任这份工作，并为贵校做出积极贡献。'
+  },
+  {
+    id:'tr4', tag:'结尾祝愿 · Lời chúc kết thúc',
+    vn:'Tôi tin rằng phần mềm này sẽ giúp ích rất nhiều cho mọi người, chúc các bạn học tập tiến bộ!',
+    hint:'相信……会有所帮助 / 祝……学习进步！',
+    answer:'相信这款软件对大家会有所帮助，祝大家学习进步！'
+  }
+];
+function renderTranslate(){
+  document.getElementById('translate-wrap').innerHTML = translateData.map((t,i)=>`
+    <div class="card p-5">
+      <div class="flex items-center gap-2 mb-2">
+        <p class="font-semibold text-sm">Câu ${i+1}</p>
+        <span class="text-[11px] font-semibold text-sky-700 bg-sky-50 border border-sky-200 rounded-full px-2 py-0.5 cjk">${t.tag}</span>
+      </div>
+      <p class="text-sm text-slate-700 italic mb-2">${t.vn}</p>
+      <p class="text-xs text-slate-500 mb-3">Gợi ý cấu trúc: <span class="cjk font-semibold text-sky-700">${t.hint}</span></p>
+      <label class="text-xs font-semibold text-slate-500 block mb-1">👉 写一写 (Viết vào đây):</label>
+      <textarea class="w-full border border-slate-300 rounded-lg p-2.5 text-sm mb-3 cjk" rows="2" placeholder="输入你的句子…"></textarea>
+      <button class="btn-primary" onclick="document.getElementById('${t.id}-ans').classList.remove('hidden')">Đối chiếu câu mẫu</button>
+      <div id="${t.id}-ans" class="hidden mt-3 fade-in text-sm bg-sky-50 border border-sky-200 rounded-lg p-3 cjk leading-7">
+        💡 参考答案：${t.answer}
+      </div>
+    </div>
+  `).join('');
+}
+renderTranslate();
+
+/* ============================================================
+   TAB 7 — OUTLINE
+=============================================================== */
+const outlineData = [
+  {n:1, label:'称呼 (Xưng hô sát lề trái)', hint:'大家好！'},
+  {n:2, label:'推荐原因 (Lý do giới thiệu)', hint:'最近我发现了一个…… / 觉得对……非常有帮助 / 收获很大'},
+  {n:3, label:'核心功能 (Tính năng nổi bật)', hint:'演示笔顺动画 / 配有汉字发音 / 简单实用'},
+  {n:4, label:'实际收获 (Tiến bộ bản thân)', hint:'记住了很多难写的汉字 / 汉字写得更规范了'},
+  {n:5, label:'学习建议 (Lời khuyên bổ ích)', hint:'建议每天坚持使用10分钟 / 认真模仿 / 这样进步会更快'},
+  {n:6, label:'结尾祝愿 (Lời chúc kết thúc)', hint:'相信对大家会有所帮助 / 祝大家学习进步！'}
+];
+function renderOutline(){
+  document.getElementById('outline-wrap').innerHTML = `
+  <div class="card p-5">
+    <div class="space-y-3 mb-4">
+      ${outlineData.map(o=>`
+        <div class="grid sm:grid-cols-[auto,1fr] gap-2 sm:gap-4 items-start border-b border-slate-100 pb-3">
+          <p class="text-xs font-bold text-sky-700 w-full sm:w-52 pt-2">${o.n}. ${o.label}</p>
+          <input type="text" class="w-full border border-slate-300 rounded-lg p-2 text-sm cjk" placeholder="输入你的关键词…">
+        </div>
+      `).join('')}
+    </div>
+    <button class="btn-primary" onclick="document.getElementById('outline-ans').classList.remove('hidden')">Hiển thị dàn ý từ vựng gợi ý</button>
+    <div id="outline-ans" class="hidden mt-4 fade-in overflow-x-auto">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="text-left p-2.5 border-b border-slate-200 w-10">STT</th>
+            <th class="text-left p-2.5 border-b border-slate-200">Gợi ý nội dung</th>
+            <th class="text-left p-2.5 border-b border-slate-200 cjk">核心词汇与句型</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${outlineData.map(o=>`
+            <tr class="border-b border-slate-100 last:border-0">
+              <td class="p-2.5 font-bold text-slate-400">${o.n}</td>
+              <td class="p-2.5">${o.label}</td>
+              <td class="p-2.5 cjk text-sky-700">${o.hint}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+}
+renderOutline();
+
+/* ============================================================
+   TAB 8 — DUAL PANEL WRITING
+=============================================================== */
+function countHanzi(s){
+  const m = s.match(/[\u4e00-\u9fff]/g);
+  return m ? m.length : 0;
+}
+function renderW8(){
+  const title = document.getElementById('w8-title').value;
+  const greet = document.getElementById('w8-greet').value;
+  const body = document.getElementById('w8-body').value;
+  const sign = document.getElementById('w8-sign').value;
+  const date = document.getElementById('w8-date').value;
+
+  document.getElementById('w8-p-title').textContent = title;
+  document.getElementById('w8-p-greet').textContent = greet;
+
+  const paras = body.split('\n').filter(l=>l.length>0);
+  document.getElementById('w8-p-body').innerHTML = paras.length
+    ? paras.map(p=>`<p style="text-indent:2em;">${escapeHtml(p)}</p>`).join('')
+    : '';
+
+  document.getElementById('w8-p-sign').innerHTML = sign ? escapeHtml(sign) : '&nbsp;';
+  document.getElementById('w8-p-date').innerHTML = date ? escapeHtml(date) : '&nbsp;';
+
+  const total = countHanzi(title+greet+body+sign+date);
+  const pill = document.getElementById('w8-counter');
+  pill.textContent = 'Số chữ Hán: ' + total + ' / 100 - 120 chữ';
+  if(total < 100){
+    pill.style.background = '#fffbeb'; pill.style.borderColor='#f59e0b'; pill.style.color='#b45309';
+  } else if(total <= 130){
+    pill.style.background = '#ecfdf3'; pill.style.borderColor='#10b981'; pill.style.color='#047857';
+  } else {
+    pill.style.background = '#fef2f2'; pill.style.borderColor='#ef4444'; pill.style.color='#b91c1c';
+  }
+}
+function clearW8(){
+  ['title','greet','body','sign','date'].forEach(f=>document.getElementById('w8-'+f).value='');
+  renderW8();
+}
+function openModel(){ document.getElementById('model-modal').classList.remove('hidden'); }
+function closeModel(){ document.getElementById('model-modal').classList.add('hidden'); }
+document.getElementById('model-modal').addEventListener('click', e=>{
+  if(e.target.id==='model-modal') closeModel();
+});
+renderW8();
+</script>
+</body>
+</html>

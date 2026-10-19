@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>通知 · Xưởng Luyện Viết Thông Báo Hành Chính</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#12142a;
+    --ink-700:#232a52;
+    --indigo-900:#1a2044;
+    --indigo-800:#232b56;
+    --indigo-600:#3a4a8f;
+    --indigo-400:#6d7fc4;
+    --blue-600:#2c5aa0;
+    --blue-100:#e7edf9;
+    --slate-50:#f4f5f9;
+    --slate-100:#e9ebf3;
+    --slate-300:#c7cbdc;
+    --slate-500:#4d5480;
+    --paper:#fdfcf8;
+    --paper-line:#eae7dc;
+    --seal-red:#a33529;
+    --ok-green:#1f8a4c;
+    --ok-green-bg:#e2f6ea;
+    --bad-red:#c0392b;
+    --bad-red-bg:#fbeae8;
+    --gold:#b08a3e;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Be Vietnam Pro', 'Noto Sans SC', sans-serif;
+    background:var(--slate-50);
+    color:var(--ink-900);
+  }
+  .zh{font-family:'Noto Serif SC','Be Vietnam Pro',serif; font-weight:500; color:var(--ink-900);}
+  .paper{
+    background:var(--paper);
+    background-image: linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size: 100% 2.15em;
+    border:1px solid var(--slate-300);
+    box-shadow: 0 1px 0 rgba(0,0,0,.02), 0 12px 28px -18px rgba(28,35,64,.35);
+    color:var(--ink-900);
+  }
+  .paper p{ color:var(--ink-900); }
+  .indent2{text-indent:2em;}
+  .sidebar-btn{
+    display:flex; align-items:center; gap:.75rem;
+    width:100%; text-align:left;
+    padding:.85rem .9rem;
+    border-radius:.6rem;
+    color:#c7cde8;
+    transition:background .15s ease, color .15s ease;
+    font-size:.925rem;
+    line-height:1.35;
+  }
+  .sidebar-btn:hover{ background:rgba(255,255,255,.06); color:#fff; }
+  .sidebar-btn.active{ background:linear-gradient(90deg, var(--indigo-600), var(--indigo-400)); color:#fff; box-shadow: 0 6px 16px -6px rgba(58,74,143,.7); }
+  .sidebar-num{
+    flex:0 0 auto; width:1.9rem; height:1.9rem; border-radius:.45rem;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.08); font-weight:700; font-size:.8rem;
+    color:#dfe3f5;
+  }
+  .sidebar-btn.active .sidebar-num{ background:rgba(255,255,255,.25); color:#fff; }
+
+  .panel{ display:none; }
+  .panel.active{ display:block; animation:fadeIn .25s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .opt-btn{
+    display:block; width:100%; text-align:left; padding:.75rem .9rem;
+    border:1px solid var(--slate-300); border-radius:.55rem; background:#fff;
+    transition: all .15s ease; cursor:pointer; white-space:pre-line; line-height:1.6;
+  }
+  .opt-btn:hover{ border-color:var(--indigo-400); background:var(--blue-100); }
+  .opt-btn.correct{ background:var(--ok-green-bg); border-color:var(--ok-green); border-width:2px; color:var(--ok-green); font-weight:700; }
+  .opt-btn.incorrect{ background:var(--bad-red-bg); border-color:var(--bad-red); border-width:2px; color:var(--bad-red); font-weight:700; }
+  .opt-btn.selected{ border-color:var(--indigo-600); background:var(--blue-100); }
+  .opt-btn:disabled{ cursor:default; }
+  .badge-check{ display:inline-block; margin-left:.4rem; font-weight:800; }
+
+  .explain-box{
+    background:var(--blue-100); border-left:4px solid var(--indigo-600);
+    border-radius:.4rem; padding:.9rem 1.1rem; font-size:.9rem; line-height:1.65;
+  }
+
+  select.blank-select{
+    border:1.5px solid var(--slate-300); border-radius:.4rem; padding:.15rem .5rem;
+    font-family:'Noto Serif SC',serif; font-size:1rem; background:#fff8ec;
+    color:var(--ink-900); min-width:9.5rem;
+  }
+  select.blank-select.correct{ border-color:var(--ok-green); background:var(--ok-green-bg); }
+  select.blank-select.incorrect{ border-color:var(--bad-red); background:var(--bad-red-bg); }
+
+  .btn-primary{
+    background:var(--indigo-600); color:#fff; padding:.65rem 1.3rem; border-radius:.5rem;
+    font-weight:600; font-size:.9rem; transition:background .15s ease;
+  }
+  .btn-primary:hover{ background:var(--indigo-900); }
+  .btn-secondary{
+    background:#fff; color:var(--indigo-600); border:1.5px solid var(--indigo-600);
+    padding:.6rem 1.2rem; border-radius:.5rem; font-weight:600; font-size:.9rem;
+  }
+  .btn-secondary:hover{ background:var(--blue-100); }
+
+  .doc-sign-block{ display:flex; flex-direction:column; align-items:flex-end; }
+  .doc-sign-inner{ display:inline-flex; flex-direction:column; align-items:center; text-align:center; }
+
+  .tag{
+    display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.02em;
+    padding:.2rem .55rem; border-radius:.3rem; background:var(--indigo-900); color:#fff;
+  }
+  .vocab-row:nth-child(even){ background:var(--slate-50); }
+
+  ::selection{ background:var(--gold); color:#fff; }
+
+  input[type=text], textarea{
+    width:100%; border:1.5px solid var(--slate-300); border-radius:.5rem;
+    padding:.6rem .8rem; font-size:.95rem; font-family:'Be Vietnam Pro',sans-serif;
+    background:#fff;
+  }
+  input[type=text]:focus, textarea:focus{ outline:none; border-color:var(--indigo-600); box-shadow:0 0 0 3px rgba(58,74,143,.15); }
+
+  @media (max-width: 900px){
+    .app-shell{ flex-direction:column; }
+    .sidebar{ width:100% !important; position:relative !important; height:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-shell flex min-h-screen">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" style="width:300px; background:linear-gradient(180deg, var(--indigo-900), var(--ink-900)); position:sticky; top:0; height:100vh; overflow-y:auto;">
+    <div class="px-6 pt-7 pb-5">
+      <p class="text-white font-bold text-lg leading-tight zh">通知写作训练营</p>
+      <p class="text-[13px]" style="color:#a7aede;">Xưởng luyện viết Thông báo hành chính · HSK6</p>
+    </div>
+    <nav class="px-3 pb-8 flex flex-col gap-1.5">
+      <button class="sidebar-btn active" data-tab="tab1">
+        <span class="sidebar-num">📖</span>
+        <span>Hướng dẫn viết 通知 &amp; 3 bài mẫu</span>
+      </button>
+      <button class="sidebar-btn" data-tab="tab2">
+        <span class="sidebar-num">1</span>
+        <span>Nhận diện thể thức &amp; liên kết</span>
+      </button>
+      <button class="sidebar-btn" data-tab="tab3">
+        <span class="sidebar-num">2</span>
+        <span>Đục lỗ tái lập văn bản</span>
+      </button>
+      <button class="sidebar-btn" data-tab="tab4">
+        <span class="sidebar-num">3</span>
+        <span>Phân tích khuyết thiếu &amp; sửa lỗi</span>
+      </button>
+      <button class="sidebar-btn" data-tab="tab5">
+        <span class="sidebar-num">4</span>
+        <span>Ghép từ vựng &amp; viết câu trơn tru</span>
+      </button>
+      <button class="sidebar-btn" data-tab="tab6">
+        <span class="sidebar-num">5</span>
+        <span>Luyện viết hoàn chỉnh HSK6</span>
+      </button>
+    </nav>
+    <div class="px-6 pb-6 text-[11px]" style="color:#7982ad;">100% offline · 0 token API</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 px-6 md:px-12 py-10 max-w-5xl">
+
+    <!-- ===================== TAB 1 ===================== -->
+    <section id="tab1" class="panel active">
+      <h1 class="text-2xl font-bold text-[var(--ink-900)] mb-1">Hướng dẫn viết 通知 &amp; Bài mẫu chuẩn</h1>
+      <p class="text-[var(--slate-500)] mb-8 text-sm">Trích lọc từ Giáo trình Viết Trung – Cao cấp Tập 2, trang 32–36.</p>
+
+      <h2 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="tag">I</span> Mục đích &amp; yêu cầu chung</h2>
+      <div class="bg-white rounded-lg border border-[var(--slate-300)] p-5 mb-8 text-sm leading-7">
+        <p><b>Mục đích:</b> Dùng để truyền đạt, thông báo bằng văn bản một sự việc nào đó cho những người có liên quan biết để thực hiện hoặc tham gia.</p>
+        <p><b>Đối tượng áp dụng:</b> Cấp trên gửi cấp dưới · Đơn vị/Tổ chức gửi thành viên · Giữa các đơn vị ngang hàng.</p>
+        <p><b>Yêu cầu cốt lõi:</b> <span class="zh">言简意赅</span> (ngắn gọn súc tích) · <span class="zh">措辞得当</span> (từ ngữ thích đáng) · <span class="zh">时间及时</span> (phát hành kịp thời).</p>
+      </div>
+
+      <h2 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="tag">II</span> Cấu trúc chuẩn 5 phần</h2>
+      <div class="bg-white rounded-lg border border-[var(--slate-300)] p-5 mb-8 text-sm leading-7 space-y-4">
+        <div>
+          <p class="font-semibold">1. Tiêu đề <span class="zh">标题</span> — căn giữa, không có dấu hai chấm</p>
+          <p class="text-[var(--slate-500)]">Cách 1: chỉ thể loại — <span class="zh">通知</span>. Cách 2: nội dung + thể loại — <span class="zh">关于演讲比赛的通知</span>. Cách 3: chủ thể + nội dung + thể loại — <span class="zh">北京大学关于放暑假的通知</span>.</p>
+        </div>
+        <div>
+          <p class="font-semibold">2. Đối tượng nhận <span class="zh">被通知方的名称</span> — sát lề trái, kết thúc bằng dấu hai chấm ：</p>
+          <p class="text-[var(--slate-500)]">VD: <span class="zh">各位同学：</span>, <span class="zh">各部门：</span>. Có thể lược bỏ nếu tiêu đề/chính văn đã nêu rõ đối tượng.</p>
+        </div>
+        <div>
+          <p class="font-semibold">3. Chính văn <span class="zh">正文</span> — mỗi đoạn thụt đầu dòng 2 ô</p>
+          <p class="text-[var(--slate-500)]">Phải làm rõ Thời gian – Người tham gia – Địa điểm – Nội dung. Nội dung phức tạp thì chia điều khoản <span class="zh">一、二、……</span> (dòng điều khoản vẫn thụt lề 2 ô).</p>
+        </div>
+        <div>
+          <p class="font-semibold">4. Ký tên <span class="zh">署名</span> — góc dưới bên phải, cách chính văn 1–3 dòng trống</p>
+        </div>
+        <div>
+          <p class="font-semibold">5. Ngày tháng <span class="zh">日期</span> — ngay dưới ký tên, căn giữa theo chiều rộng dòng ký tên</p>
+          <p class="text-[var(--slate-500)]">Thứ tự: <span class="zh">年 月 日</span>.</p>
+        </div>
+      </div>
+
+      <h2 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="tag">III</span> Ba bài mẫu chuẩn</h2>
+
+      <p class="text-sm font-semibold mb-2">Bài mẫu 1 · Thông báo hành chính (nghỉ Tết)</p>
+      <div class="paper rounded-sm p-8 mb-6 text-[15px] leading-8 zh">
+        <p class="text-center font-bold text-lg mb-4">关于春节放假的通知</p>
+        <p class="mb-2">各部门：</p>
+        <p class="indent2 mb-1">2016年2月7—13日（即农历除夕至大年初六）放假，共7天。2月14日开始上班。</p>
+        <p class="indent2">节日期间，各部门要做好值班安排工作，注意防火防盗。若遇有重大突发事件发生，要按规定及时报告并妥善处理。</p>
+        <div class="doc-sign-block mt-6">
+          <div class="doc-sign-inner">
+            <p>大山科技有限公司办公室</p>
+            <p>2016年1月15日</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-sm font-semibold mb-2">Bài mẫu 2 · Thông báo sự kiện (hội chợ tuyển dụng)</p>
+      <div class="paper rounded-sm p-8 mb-6 text-[15px] leading-8 zh">
+        <p class="text-center font-bold text-lg mb-4">通　　知</p>
+        <p class="mb-2">各位同学：</p>
+        <p class="indent2 mb-1">我校将于本周日6月12日在静园一层大厅举办合资公司招聘会。届时将有二十个世界知名公司参会。本次招聘会将为企业与人才提供见面交流的机会，尽可能地满足各类人才的求职需求。</p>
+        <p class="indent2">欢迎各位留学生朋友参加。请同学们互相转告。</p>
+        <div class="doc-sign-block mt-6">
+          <div class="doc-sign-inner">
+            <p>留学生办公室</p>
+            <p>2016年6月6日</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-sm font-semibold mb-2">Bài mẫu 3 · Thông báo cuộc họp (chia khoản rõ ràng)</p>
+      <div class="paper rounded-sm p-8 mb-8 text-[15px] leading-8 zh">
+        <p class="text-center font-bold text-lg mb-4">北京大学关于召开留学生工作会议的通知</p>
+        <p class="indent2 mb-1">为了总结经验，研究分析当前留学生工作存在的问题，进一步做好对外汉语教学工作，经研究决定召开留学生工作会议。现将有关事项通知如下：</p>
+        <p class="indent2 mb-1">一、会议内容：</p>
+        <p class="mb-1">1. 留学生招生工作研讨；</p>
+        <p class="mb-1">2. 分析当前对外汉语教学的课程设置问题；</p>
+        <p class="mb-1">3. 如何做好留学生后勤工作。</p>
+        <p class="indent2 mb-1">二、参加人员：</p>
+        <p class="mb-1">1. 留学生办公室领导及工作人员；</p>
+        <p class="mb-1">2. 对外汉语教育学院领导及五名教师代表。</p>
+        <p class="indent2 mb-1">三、会议时间和地点：5月17日（星期二）下午2:00，桃园112会议室。</p>
+        <p class="indent2">四、要求：请与会人员做好发言准备。</p>
+        <div class="doc-sign-block mt-6">
+          <div class="doc-sign-inner">
+            <p>北京大学校长办公室</p>
+            <p>2016年5月10日</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="tag">IV</span> Bộ mẫu câu cố định <span class="zh">套语</span></h2>
+      <div class="bg-white rounded-lg border border-[var(--slate-300)] p-5 mb-8 text-sm leading-7 space-y-1.5">
+        <p><span class="zh font-medium">现将有关事宜通知如下。</span> — Nay thông báo các vấn đề liên quan như sau (câu chuyển tiếp trước khi chia mục).</p>
+        <p><span class="zh font-medium">经[Chủ thể]批准，特做如下通知。</span> — Được sự phê duyệt của..., nay đặc biệt thông báo như sau.</p>
+        <p><span class="zh font-medium">欢迎届时参加。</span> — Hoan nghênh tham gia đúng giờ.</p>
+        <p><span class="zh font-medium">[Sự kiện]将于[Thời gian]举行。</span> — [Sự kiện] sẽ được tổ chức vào lúc...</p>
+        <p><span class="zh font-medium">现把通知转发给各部门，望遵照执行。</span> — Nay chuyển tiếp thông báo này đến các bộ phận, mong tuân thủ thực hiện.</p>
+        <p><span class="zh font-medium">根据[Chủ thể]的指示，[Nội dung sự việc]。</span> — Theo chỉ thị của..., [Nội dung hành động].</p>
+        <p><span class="zh font-medium">请互相转告。</span> — Xin hãy truyền đạt/báo lại cho nhau (mẫu kết cực phổ biến).</p>
+        <p><span class="zh font-medium">至于其他有关问题，另行通知。</span> — Về các vấn đề liên quan khác, sẽ có thông báo sau.</p>
+      </div>
+
+      <h2 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="tag">V</span> Từ đơn âm tiết văn viết <span class="zh">书面语</span></h2>
+      <div class="bg-white rounded-lg border border-[var(--slate-300)] mb-8 overflow-hidden text-sm">
+        <div class="grid grid-cols-12 font-semibold bg-[var(--indigo-900)] text-white px-4 py-2">
+          <div class="col-span-2">书面语</div><div class="col-span-2">Khẩu ngữ</div><div class="col-span-3">Nghĩa</div><div class="col-span-5">Ví dụ</div>
+        </div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">本</div><div class="col-span-2">这个</div><div class="col-span-3">Này / tuần này</div><div class="col-span-5">本周日（Chủ Nhật tuần này）</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">将</div><div class="col-span-2">要</div><div class="col-span-3">Sẽ / chuẩn bị</div><div class="col-span-5">将在静园举行</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">于</div><div class="col-span-2">在</div><div class="col-span-3">Vào lúc / tại</div><div class="col-span-5">将于5月4日举办</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">至</div><div class="col-span-2">到</div><div class="col-span-3">Đến</div><div class="col-span-5">2月7日至13日</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">欲</div><div class="col-span-2">想</div><div class="col-span-3">Muốn / dự định</div><div class="col-span-5">欲参加者请……</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">与</div><div class="col-span-2">和</div><div class="col-span-3">Và / với</div><div class="col-span-5">为企业与人才提供机会</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">共</div><div class="col-span-2">一共</div><div class="col-span-3">Tổng cộng</div><div class="col-span-5">共7天</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">已</div><div class="col-span-2">已经</div><div class="col-span-3">Đã</div><div class="col-span-5">已去医院</div></div>
+        <div class="vocab-row grid grid-cols-12 px-4 py-2 items-center zh"><div class="col-span-2 font-bold">及</div><div class="col-span-2">和</div><div class="col-span-3">Và / cùng với</div><div class="col-span-5">办公室领导及工作人员</div></div>
+      </div>
+
+      <h2 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="tag">VI</span> Chiến thuật mở rộng dung lượng HSK6 3.0 (150–200 chữ)</h2>
+      <div class="bg-white rounded-lg border border-[var(--slate-300)] p-5 mb-4 text-sm leading-7 space-y-3">
+        <p><b>1. Dạng nghỉ lễ / nghỉ phép <span class="zh">放假类通知</span>:</b> bổ sung quy định an toàn &amp; trực ban cuối chính văn — <span class="zh">节日期间，各部门要做好值班安排工作，注意防火防盗。若遇有重大突发事件发生，要按规定及时报告并妥善处理。</span></p>
+        <p><b>2. Dạng sự kiện / hoạt động / tuyển dụng <span class="zh">活动/招聘类通知</span>:</b> nêu mục đích ý nghĩa ở đầu, lời mời + yêu cầu chuyển tiếp ở cuối — <span class="zh">本次活动旨在为同学们提供交流机会…… 欢迎各位同学/留学生朋友参加。请同学们互相转告。</span></p>
+        <p><b>3. Dạng cuộc họp / hội nghị <span class="zh">会议类通知</span>:</b> bối cảnh ở đầu, chia mục nhỏ <span class="zh">一、会议内容；二、参加人员</span>, yêu cầu kỷ luật ở cuối — <span class="zh">要求：请与会人员提前做好发言准备，并提前15分钟入场，将手机调至无音状态。</span></p>
+      </div>
+    </section>
+
+    <!-- ===================== TAB 2 ===================== -->
+    <section id="tab2" class="panel">
+      <h1 class="text-2xl font-bold mb-1">Bước 1 · Nhận diện thể thức &amp; liên kết trơn tru</h1>
+      <p class="text-[var(--slate-500)] mb-8 text-sm">Trả lời 4 câu trắc nghiệm, sau đó bấm "Kiểm tra đáp án" ở mỗi câu.</p>
+      <div id="quiz2-container" class="space-y-8"></div>
+    </section>
+
+    <!-- ===================== TAB 3 ===================== -->
+    <section id="tab3" class="panel">
+      <h1 class="text-2xl font-bold mb-1">Bước 2 · Đục lỗ tái lập văn bản</h1>
+      <p class="text-[var(--slate-500)] mb-6 text-sm">Chọn từ phù hợp cho 4 ô trống trong bài mẫu tiêu điểm dưới đây.</p>
+
+      <div class="paper rounded-sm p-8 mb-6 text-[15px] leading-8 zh">
+        <p class="text-center font-bold text-lg mb-4">关于举办留学生中国文化体验日的通知</p>
+        <p class="mb-2">各位同学：</p>
+        <p class="indent2 mb-1">为了增进中外学生交流，
+          <select class="blank-select" id="blank1" data-answer="丰富同学们的课余生活">
+            <option value="">-- Chọn từ phù hợp --</option>
+            <option>丰富同学们的课余生活</option>
+            <option>将于</option>
+            <option>旨在</option>
+            <option>欢迎各位同学届时参加</option>
+          </select>，留学生办公室
+          <select class="blank-select" id="blank2" data-answer="将于">
+            <option value="">-- Chọn từ phù hợp --</option>
+            <option>丰富同学们的课余生活</option>
+            <option>将于</option>
+            <option>旨在</option>
+            <option>欢迎各位同学届时参加</option>
+          </select>本周五（9月4日）下午2:00在学校体育馆举办"中国文化体验日"活动。
+        </p>
+        <p class="indent2 mb-1">本次活动内容包括京剧脸谱绘制、传统书法体验及中华武术表演。活动
+          <select class="blank-select" id="blank3" data-answer="旨在">
+            <option value="">-- Chọn từ phù hợp --</option>
+            <option>丰富同学们的课余生活</option>
+            <option>将于</option>
+            <option>旨在</option>
+            <option>欢迎各位同学届时参加</option>
+          </select>为留学生朋友提供感知中国文化的平台，尽可能地满足大家的兴趣需求。
+        </p>
+        <p class="indent2">
+          <select class="blank-select" id="blank4" data-answer="欢迎各位同学届时参加">
+            <option value="">-- Chọn từ phù hợp --</option>
+            <option>丰富同学们的课余生活</option>
+            <option>将于</option>
+            <option>旨在</option>
+            <option>欢迎各位同学届时参加</option>
+          </select>。请大家互相转告。
+        </p>
+        <div class="doc-sign-block mt-6">
+          <div class="doc-sign-inner">
+            <p>留学生办公室</p>
+            <p>2026年9月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mb-6">
+        <button class="btn-primary" onclick="checkTab3()">Kiểm tra đáp án</button>
+        <button class="btn-secondary" onclick="resetTab3()">Thử lại</button>
+        <button class="btn-secondary" onclick="revealTab3()">Xem đáp án đối chiếu</button>
+      </div>
+      <div id="tab3-feedback" class="text-sm mb-4"></div>
+      <div id="tab3-answer" class="paper rounded-sm p-8 text-[15px] leading-8 zh" style="display:none;"></div>
+    </section>
+
+    <!-- ===================== TAB 4 ===================== -->
+    <section id="tab4" class="panel">
+      <h1 class="text-2xl font-bold mb-1">Bước 3 · Phân tích khuyết thiếu &amp; sửa lỗi thể thức</h1>
+      <p class="text-[var(--slate-500)] mb-8 text-sm">Đọc bản thảo lỗi, chọn nhận định đúng, rồi xem phân tích chi tiết.</p>
+      <div id="quiz4-container" class="space-y-10"></div>
+    </section>
+
+    <!-- ===================== TAB 5 ===================== -->
+    <section id="tab5" class="panel">
+      <h1 class="text-2xl font-bold mb-1">Bước 4 · Kết hợp thông tin &amp; tập viết trơn tru (Guided Writing)</h1>
+      <p class="text-[var(--slate-500)] mb-8 text-sm">Rèn luyện kỹ năng dùng từ đơn âm tiết văn viết (本, 于, 将, 在, 召开, 并, 以) để kết hợp các thông tin đơn lẻ thành câu thông báo liền mạch, trôi chảy.</p>
+
+      <h2 class="text-lg font-bold mb-3">Bài tập ghép nối từ vựng hành chính <span class="zh text-base font-normal">（口语 ➔ 书面语）</span></h2>
+      <p class="text-sm text-[var(--slate-500)] mb-3">Rèn phản xạ nhận diện nhanh và thay thế các từ khẩu ngữ bằng từ đơn âm tiết trang trọng (trang 36 giáo trình).</p>
+      <div class="bg-white rounded-lg border border-[var(--slate-300)] p-5 mb-4 text-sm">
+        <p class="font-semibold mb-2">Cột B — Từ đơn âm tiết văn viết:</p>
+        <p class="zh mb-4">A. 将　B. 于　C. 与　D. 本　E. 欲</p>
+        <div id="match-container" class="space-y-3"></div>
+      </div>
+      <div class="flex gap-3 mb-4">
+        <button class="btn-primary" onclick="checkMatch()">Kiểm tra &amp; xem giải thích</button>
+      </div>
+      <div id="match-feedback" class="explain-box mb-10" style="display:none;"></div>
+
+      <h2 class="text-lg font-bold mb-3">Lắp ráp câu thông báo trơn tru</h2>
+      <div id="task-container" class="space-y-6"></div>
+    </section>
+
+    <!-- ===================== TAB 6 ===================== -->
+    <section id="tab6" class="panel">
+      <h1 class="text-2xl font-bold mb-1">Bước 5 · Luyện viết hoàn chỉnh theo tình huống HSK6</h1>
+      <div class="bg-white rounded-lg border border-[var(--slate-300)] p-5 mb-6 text-sm leading-7">
+        <p><b>Tình huống:</b> Bạn là nhân viên Văn phòng Du học sinh <span class="zh">（留学生办公室）</span>. Nhằm làm phong phú đời sống ngoài giờ học của các bạn học sinh và quảng bá văn hóa thể thao truyền thống Trung Hoa, văn phòng quyết định tổ chức "Giải thi đấu Thái Cực Quyền / <span class="zh">太极拳比赛</span>" vào lúc 2 giờ chiều thứ Sáu tuần này (ngày 4 tháng 9 năm 2026) tại Sân vận động của trường <span class="zh">（学校操场）</span>. Đối tượng tham gia là toàn thể du học sinh trong trường. Người chiến thắng sẽ nhận được những phần quà lưu niệm ý nghĩa.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- FORM -->
+        <div class="space-y-4">
+          <div>
+            <label class="text-sm font-semibold block mb-1">1. Tiêu đề <span class="zh">标题</span></label>
+            <input type="text" id="in-title" placeholder="例如：关于举办留学生太极拳比赛的通知" oninput="renderPaper()">
+          </div>
+          <div>
+            <label class="text-sm font-semibold block mb-1">2. Đối tượng nhận <span class="zh">被通知方</span></label>
+            <input type="text" id="in-audience" placeholder="例如：各位同学" oninput="renderPaper()">
+          </div>
+          <div>
+            <label class="text-sm font-semibold block mb-1">3. Chính văn <span class="zh">正文</span> <span class="text-[var(--slate-500)] font-normal">(mỗi đoạn xuống dòng riêng)</span></label>
+            <textarea id="in-body" rows="8" placeholder="Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới…" oninput="renderPaper()"></textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-semibold block mb-1">4. Đơn vị phát hành 署名</label>
+              <input type="text" id="in-org" placeholder="例如：留学生办公室" oninput="renderPaper()">
+            </div>
+            <div>
+              <label class="text-sm font-semibold block mb-1">5. Ngày tháng 日期</label>
+              <input type="text" id="in-date" placeholder="例如：2026年9月1日" oninput="renderPaper()">
+            </div>
+          </div>
+        </div>
+
+        <!-- PAPER PREVIEW -->
+        <div>
+          <p class="text-xs font-semibold text-[var(--slate-500)] mb-2 uppercase tracking-wide">Trang giấy xem trước (real-time)</p>
+          <div class="paper rounded-sm p-8 text-[15px] leading-8 zh min-h-[420px]" id="live-paper">
+            <p class="text-center font-bold text-lg mb-4 text-[var(--slate-300)]" id="pv-title">（标题）</p>
+            <p class="mb-2 text-[var(--slate-300)]" id="pv-audience">（被通知方：）</p>
+            <div id="pv-body"></div>
+            <div class="doc-sign-block mt-6">
+              <div class="doc-sign-inner">
+                <p id="pv-org" class="text-[var(--slate-300)]">（署名）</p>
+                <p id="pv-date" class="text-[var(--slate-300)]">（日期）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <button class="btn-secondary" onclick="toggleModelAnswer()">Hiện đáp án chuẩn đối chiếu</button>
+        <div id="model-answer" class="paper rounded-sm p-8 mt-4 text-[15px] leading-8 zh" style="display:none;">
+          <p class="text-center font-bold text-lg mb-4">关于举办留学生太极拳比赛的通知</p>
+          <p class="mb-2">各位同学：</p>
+          <p class="indent2 mb-1">为了丰富同学们的课余生活，推广中国传统体育文化，留学生办公室将于本周五（9月4日）下午2:00在学校操场举办"留学生太极拳比赛"。</p>
+          <p class="indent2">本次比赛旨在为同学们提供一个展示自我、强身健体的平台。比赛前三名将获得精美礼品，欢迎各位留学生朋友届时参加。欲参赛者请于明日下午5:00前到办公室登记。请大家互相转告。</p>
+          <div class="doc-sign-block mt-6">
+            <div class="doc-sign-inner">
+              <p>留学生办公室</p>
+              <p>2026年9月1日</p>
+            </div>
+          </div>
+          <p class="text-xs text-[var(--slate-500)] mt-4 zh">（172 字）</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============ NAVIGATION ============ */
+document.querySelectorAll('.sidebar-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.sidebar-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo(0,0);
+  });
+});
+
+/* ============ TAB 2 : MCQ DATA ============ */
+const quiz2Data = [
+  {
+    id:'q1',
+    title:'1.1 Nhận diện quy tắc lược bỏ "Xưng hô / Đối tượng nhận" (称呼省略规范)',
+    prompt:'Theo quy chuẩn viết văn bản ứng dụng công sở của giáo trình, dòng xưng hô ở đầu thư (ví dụ: 各位同学：) có thể được lược bỏ hoàn toàn mà vẫn đảm bảo tính quy phạm tuyệt đối của tờ 通知 trong trường hợp nào sau đây?',
+    options:[
+      'A. Khi người phát hành thông báo là Ban giám hiệu nhà trường (cấp cao nhất).',
+      'B. Khi đối tượng tiếp nhận thông báo đã được chỉ định rõ ràng ngay trong Tiêu đề hoặc trong phần Chính văn của văn bản.',
+      'C. Khi thông báo được đăng trực tiếp lên bảng tin công cộng thay vì gửi thư riêng.',
+      'D. Dòng xưng hô là bắt buộc trong mọi trường hợp, tuyệt đối không được phép lược bỏ.'
+    ],
+    correct:1,
+    explain:'Trang 32 của giáo trình quy định rõ: "如果正文中已经写明了被通知的对象，被通知方的名称也可以不写" — Nếu trong chính văn hoặc tiêu đề đã nêu rõ đối tượng nhận thông báo thì phần xưng hô ở dòng thứ hai có thể lược bỏ để văn bản súc tích hơn.'
+  },
+  {
+    id:'q2',
+    title:'1.2 Nhận diện cấu trúc mở đầu tờ 通知 (nêu mục đích + thông tin sự kiện)',
+    prompt:'Để viết phần mở đầu chính văn của một tờ 通知 thông báo sự kiện đạt chuẩn HSK6 3.0 (150–200 chữ), học sinh cần kết hợp mượt mà các thành phần: Mục đích (目的) → Chủ thể (主导/组织者) → Thời gian (时间) → Địa điểm (地点) → Sự kiện (事件). Dưới đây có 3 cấu trúc viết ĐÚNG chuẩn văn viết hành chính và 1 cấu trúc SAI thường gặp. Hãy chọn cấu trúc SAI:',
+    options:[
+      'A. 为了 + [Mục đích]，[Chủ thể] + 将于 + [Thời gian] + 在 + [Địa điểm] + 举办 + [Sự kiện]。\nVí dụ: 为了丰富同学们的课余生活，留学生办公室将于本周五下午2:00在学校体育馆举办"中国文化体验日"活动。',
+      'B. 为 + [Mục đích]，[Chủ thể] + 决定于 + [Thời gian] + 在 + [Địa điểm] + 举行 + [Sự kiện]。\nVí dụ: 为推广中国传统体育文化，留学生办公室决定于本周五下午2:00在学校操场举行"留学生太极拳比赛"。',
+      'C. 经 + [Cấp trên] + 批准，[Chủ thể] + 将于 + [Thời gian] + 在 + [Địa điểm] + 举办 + [Sự kiện]。\nVí dụ: 经学校批准，留学生办公室将于本周五下午2:00在学校体育馆举办"中国文化体验日"活动。',
+      'D. 为了 + [Mục đích]，所以 + [Chủ thể] + 准备在 + [Thời gian] + [Địa điểm] + 举办 + [Sự kiện]。\nVí dụ: 为了丰富同学们的课余生活，所以留学生办公室准备在本周五下午2:00学校体育馆举办"中国文化体验日"活动。'
+    ],
+    correct:3,
+    explain:'Đáp án D là cấu trúc SAI. (1) Dùng "所以" sau "为了" là lỗi lặp logic nặng nề và mang sắc thái khẩu ngữ. (2) "准备在" là từ nói hằng ngày, văn viết công vụ bắt buộc dùng "将于" hoặc "决定于". (3) Thiếu giới từ "在" trước địa điểm "学校体育馆".'
+  },
+  {
+    id:'q3',
+    title:'1.3 Nhận diện từ nối giúp văn phong trơn tru (Cohesion & Fluency)',
+    prompt:'Để liên kết đoạn thông báo thời gian sự kiện với đoạn mời gọi tham gia một cách mượt mà và tự nhiên nhất, từ nối trang trọng (书面语) nào dưới đây thường được ưu tiên sử dụng ở câu cuối?',
+    options:[
+      'A. 这时候 (Lúc đó / Vào lúc này)',
+      'B. 到时候 (Đến lúc đó / Khẩu ngữ tự nhiên)',
+      'C. 届时 (Đến lúc đó / Đúng giờ đó — Văn viết chuyên dụng)',
+      'D. 随后 (Ngay sau đó)'
+    ],
+    correct:2,
+    explain:'Từ đơn âm tiết văn viết "届时" là phó từ hành chính chuyên dùng trong thông báo sự kiện, mang lại cảm giác trơn tru, trang trọng hơn rất nhiều so với cụm từ nói "到时候".'
+  },
+  {
+    id:'q4',
+    title:'1.4 Nhận diện chiến thuật mở rộng dung lượng HSK6 3.0',
+    prompt:'Khi viết thông báo sự kiện, nếu viết xong các thông tin cơ bản mà bài viết vẫn chưa đạt mốc 150 chữ, cách xử lý nào sau đây giúp tăng số chữ hợp quy phạm công sở nhất?',
+    options:[
+      'A. Chèn thêm các câu cảm thán biểu đạt sự mong đợi mãnh liệt của bản thân đối với hoạt động.',
+      'B. Thêm phần giới thiệu bối cảnh, mục đích tổ chức ở đầu chính văn và đưa ra các yêu cầu kỷ luật, phối hợp rõ ràng ở cuối chính văn.',
+      'C. Kể chi tiết về quá trình họp bàn chuẩn bị nội bộ của ban tổ chức.',
+      'D. Viết lặp đi lặp lại mốc thời gian và địa điểm bằng nhiều cách diễn đạt khác nhau.'
+    ],
+    correct:1,
+    explain:'Thêm bối cảnh "为了增进交流……" và yêu cầu phối hợp "请大家互相转告。" giúp bài viết tăng từ 40–60 chữ một cách vô cùng chính đáng và trang trọng, đúng tinh thần thể thức 通知.'
+  }
+];
+
+function renderQuiz2(){
+  const c = document.getElementById('quiz2-container');
+  quiz2Data.forEach(q=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'bg-white rounded-lg border border-[var(--slate-300)] p-5';
+    wrap.innerHTML = `
+      <p class="font-semibold mb-2">${q.title}</p>
+      <p class="text-sm mb-4 whitespace-pre-line zh">${q.prompt}</p>
+      <div class="space-y-2" id="opts-${q.id}"></div>
+      <p class="text-xs mt-2" id="status-${q.id}" style="color:var(--slate-500);"></p>
+      <button class="btn-primary mt-3" onclick="checkQuiz2('${q.id}')">Kiểm tra đáp án</button>
+      <div class="explain-box mt-4" id="explain-${q.id}" style="display:none;"></div>
+    `;
+    c.appendChild(wrap);
+    const optsDiv = wrap.querySelector(`#opts-${q.id}`);
+    q.options.forEach((opt,i)=>{
+      const b = document.createElement('button');
+      b.className='opt-btn text-sm';
+      b.textContent = opt;
+      b.onclick = ()=>selectQuiz2(q.id, i);
+      b.dataset.idx = i;
+      optsDiv.appendChild(b);
+    });
+  });
+}
+const quiz2Selected = {};
+function selectQuiz2(id, idx){
+  quiz2Selected[id] = idx;
+  const btns = document.querySelectorAll(`#opts-${id} .opt-btn`);
+  btns.forEach((b,i)=>{
+    b.classList.remove('correct','incorrect','selected');
+    if(i===idx) b.classList.add('selected');
+  });
+  const statusEl = document.getElementById(`status-${id}`);
+  if(statusEl) statusEl.textContent = '';
+}
+function checkQuiz2(id){
+  const q = quiz2Data.find(x=>x.id===id);
+  const sel = quiz2Selected[id];
+  const statusEl = document.getElementById(`status-${id}`);
+  if(sel===undefined){
+    statusEl.textContent = 'Vui lòng chọn một đáp án trước khi kiểm tra.';
+    statusEl.style.color = 'var(--bad-red)';
+    return;
+  }
+  const btns = document.querySelectorAll(`#opts-${id} .opt-btn`);
+  const letter = String.fromCharCode(65+q.correct);
+  btns.forEach((b,i)=>{
+    b.classList.remove('selected');
+    if(i===q.correct) b.classList.add('correct');
+    else if(i===sel) b.classList.add('incorrect');
+    else b.classList.remove('correct','incorrect');
+  });
+  if(sel===q.correct){
+    statusEl.textContent = '';
+  } else {
+    statusEl.textContent = 'Chưa đúng — chọn đáp án khác rồi bấm "Kiểm tra đáp án" lại nhé.';
+    statusEl.style.color = 'var(--bad-red)';
+  }
+  const explainEl = document.getElementById(`explain-${id}`);
+  explainEl.style.display='block';
+  explainEl.innerHTML = `<p class="font-bold mb-1" style="color:var(--ok-green);">✅ Đáp án đúng: ${letter}</p><p>${q.explain}</p>`;
+  if(q.draftHtmlMarked){
+    const draftEl = document.getElementById(`draft-${id}`);
+    if(draftEl) draftEl.innerHTML = q.draftHtmlMarked;
+  }
+}
+renderQuiz2();
+
+/* ============ TAB 3 : FILL IN BLANKS ============ */
+document.querySelectorAll('#blank1,#blank2,#blank3,#blank4').forEach(sel=>{
+  sel.addEventListener('change', ()=>{ sel.classList.remove('correct','incorrect'); document.getElementById('tab3-feedback').innerHTML=''; });
+});
+function checkTab3(){
+  let allCorrect = true;
+  let answered = 0;
+  ['blank1','blank2','blank3','blank4'].forEach(id=>{
+    const sel = document.getElementById(id);
+    sel.classList.remove('correct','incorrect');
+    if(sel.value){
+      answered++;
+      if(sel.value === sel.dataset.answer){ sel.classList.add('correct'); }
+      else { sel.classList.add('incorrect'); allCorrect = false; }
+    } else {
+      allCorrect = false;
+    }
+  });
+  const fb = document.getElementById('tab3-feedback');
+  if(answered < 4){
+    fb.innerHTML = '<p style="color:var(--bad-red);">Vui lòng chọn đủ 4 ô trước khi kiểm tra.</p>';
+  } else if(allCorrect){
+    fb.innerHTML = '<p style="color:var(--ok-green); font-weight:600;">✓ Chính xác cả 4 vị trí! Bạn đã nắm vững từ vựng thể thức.</p>';
+  } else {
+    fb.innerHTML = '<p style="color:var(--bad-red); font-weight:600;">✗ Còn một số ô chưa đúng, ô viền đỏ cần xem lại. Bấm "Xem đáp án đối chiếu" nếu cần.</p>';
+  }
+}
+function resetTab3(){
+  ['blank1','blank2','blank3','blank4'].forEach(id=>{
+    const sel = document.getElementById(id);
+    sel.value = '';
+    sel.classList.remove('correct','incorrect');
+  });
+  document.getElementById('tab3-feedback').innerHTML = '';
+  document.getElementById('tab3-answer').style.display = 'none';
+}
+function revealTab3(){
+  const box = document.getElementById('tab3-answer');
+  box.style.display = 'block';
+  box.innerHTML = `
+    <p class="text-center font-bold text-lg mb-4">关于举办留学生中国文化体验日的通知</p>
+    <p class="mb-2">各位同学：</p>
+    <p class="indent2 mb-1">为了增进中外学生交流，<mark style="background:#fff3b0;">丰富同学们的课余生活</mark>，留学生办公室<mark style="background:#fff3b0;">将于</mark>本周五（9月4日）下午2:00在学校体育馆举办"中国文化体验日"活动。</p>
+    <p class="indent2 mb-1">本次活动内容包括京剧脸谱绘制、传统书法体验及中华武术表演。活动<mark style="background:#fff3b0;">旨在</mark>为留学生朋友提供感知中国文化的平台，尽可能地满足大家的兴趣需求。</p>
+    <p class="indent2"><mark style="background:#fff3b0;">欢迎各位同学届时参加</mark>。请大家互相转告。</p>
+    <div class="doc-sign-block mt-6"><div class="doc-sign-inner"><p>留学生办公室</p><p>2026年9月1日</p></div></div>
+  `;
+}
+
+/* ============ TAB 4 : ERROR ANALYSIS ============ */
+const quiz4Data = [
+  {
+    id:'e1',
+    situation:'3.1 · Thông báo nghỉ lễ 国庆节',
+    draftHtml:`
+      <p class="text-center font-bold text-lg mb-4">国庆节放假通知：</p>
+      <p class="mb-2">亲爱的同学们：</p>
+      <p class="indent2 mb-1">根据学校安排，10月1日至7日放假，共7天。假期期间请老师们照常在线上给同学们上网课，认真辅导作业。</p>
+      <div class="doc-sign-block mt-6"><div class="doc-sign-inner"><p>教务处</p><p>2026年9月28日</p></div></div>
+    `,
+    draftHtmlMarked:`
+      <p class="text-center font-bold text-lg mb-4">国庆节放假通知<span style="color:var(--bad-red);font-weight:900;">：</span></p>
+      <p class="mb-2"><span style="color:var(--bad-red);font-weight:900;">亲爱的</span>同学们：</p>
+      <p class="indent2 mb-1">根据学校安排，10月1日至7日放假，共7天。<span style="color:var(--bad-red);font-weight:900;">假期期间请老师们照常在线上给同学们上网课，认真辅导作业。</span></p>
+      <div class="doc-sign-block mt-6"><div class="doc-sign-inner"><p>教务处</p><p>2026年9月28日</p></div></div>
+    `,
+    prompt:'Bản thảo trên mắc bao nhiêu lỗi thể thức / logic nghiêm trọng, và đó là những lỗi nào?',
+    options:[
+      'A. Chỉ có 1 lỗi duy nhất: thiếu ngày tháng cụ thể',
+      'B. Mắc 3 lỗi: (1) tiêu đề có dấu hai chấm ở cuối — sai quy tắc; (2) dùng "亲爱的" (chỉ dùng cho thư cá nhân) thay vì xưng hô hành chính; (3) yêu cầu giáo viên dạy online trong kỳ nghỉ lễ chính thức là mâu thuẫn logic với chính nội dung "放假"',
+      'C. Bản thảo này hoàn toàn đúng chuẩn, không có lỗi nào',
+      'D. Chỉ sai ở việc thiếu phần ký tên đơn vị phát hành'
+    ],
+    correct:1,
+    explain:'(1) Tiêu đề thông báo tuyệt đối không được dùng dấu hai chấm ： ở cuối. (2) Từ biểu cảm "亲爱的" chỉ dùng cho thư cá nhân, trong thông báo hành chính phải dùng trực tiếp: "全体师生：". (3) Yêu cầu giáo viên lên lớp online trong kỳ nghỉ lễ chính thức là mâu thuẫn trực tiếp với quy định nghỉ ngơi của nhà nước và trái với logic hành chính thông thường.'
+  },
+  {
+    id:'e2',
+    situation:'3.2 · Thông báo họp 教学研讨',
+    draftHtml:`
+      <p class="text-center font-bold text-lg mb-4">对外汉语教育学院关于召开教学研讨会的通知</p>
+      <p class="indent2 mb-1">为了提高教学质量，特召开教学研讨会议，现将有关事项通知如下：</p>
+      <p class="mb-1">一、会议内容：教学方法交流</p>
+      <p class="mb-1">二、会议时间：9月10日上午9:00，多功能厅</p>
+      <p class="indent2">迟到者将被处以罚款100元，请大家务必准时到场，不得无故缺席！</p>
+      <div class="doc-sign-block mt-6"><div class="doc-sign-inner"><p>校长办公室</p><p>2026年9月5日</p></div></div>
+    `,
+    draftHtmlMarked:`
+      <p class="text-center font-bold text-lg mb-4">对外汉语教育学院关于召开教学研讨会的通知</p>
+      <p class="indent2 mb-1">为了提高教学质量，特召开教学研讨会议，现将有关事项通知如下：</p>
+      <p class="mb-1" style="color:var(--bad-red);font-weight:900;">一、会议内容：教学方法交流　<span class="text-xs font-normal">（thiếu thụt lề 2 ô）</span></p>
+      <p class="mb-1" style="color:var(--bad-red);font-weight:900;">二、会议时间：9月10日上午9:00，多功能厅　<span class="text-xs font-normal">（thiếu thụt lề 2 ô）</span></p>
+      <p class="indent2"><span style="color:var(--bad-red);font-weight:900;">迟到者将被处以罚款100元，</span>请大家务必准时到场，不得无故缺席！</p>
+      <div class="doc-sign-block mt-6"><div class="doc-sign-inner"><p style="color:var(--bad-red);font-weight:900;">校长办公室　<span class="text-xs font-normal">（không khớp với 对外汉语教育学院 ở tiêu đề）</span></p><p>2026年9月5日</p></div></div>
+    `,
+    prompt:'Bản thảo trên mắc những lỗi thể thức nào?',
+    options:[
+      'A. Mắc 3 lỗi: (1) các dòng điều khoản 一、二、 không thụt lề 2 ô; (2) đơn vị phát hành ở tiêu đề (对外汉语教育学院) và ở ký tên (校长办公室) không nhất quán; (3) câu kỷ luật dọa phạt tiền quá khẩu ngữ, không phù hợp văn phong công sở',
+      'B. Chỉ sai ở việc thiếu ngày tháng',
+      'C. Chỉ sai ở việc chia điều khoản 一、二、',
+      'D. Bản thảo hoàn toàn đúng chuẩn thể thức'
+    ],
+    correct:0,
+    explain:'(1) Khi viết các mục nhỏ 一、二、... dòng đó vẫn được tính là đầu đoạn mới nên bắt buộc phải thụt lề 2 ô (trong bản thảo hai dòng này bị viết sát lề trái — được gạch chân đỏ để bạn dễ nhận ra). (2) Đơn vị phát hành ở tiêu đề là "对外汉语教育学院" nhưng ký tên lại là "校长办公室" là lỗi bất nhất quán hành chính. (3) Câu kỷ luật dọa phạt tiền quá khẩu ngữ và nặng nề, không phù hợp với văn phong công sở trang trọng.'
+  }
+];
+
+function renderQuiz4(){
+  const c = document.getElementById('quiz4-container');
+  quiz4Data.forEach(q=>{
+    const wrap = document.createElement('div');
+    wrap.className='';
+    wrap.innerHTML = `
+      <p class="font-semibold mb-2">${q.situation}</p>
+      <div class="paper rounded-sm p-6 mb-3 text-[15px] leading-8 zh" id="draft-${q.id}">${q.draftHtml}</div>
+      <p class="text-sm mb-3">${q.prompt}</p>
+      <div class="space-y-2" id="opts-${q.id}"></div>
+      <p class="text-xs mt-2" id="status-${q.id}" style="color:var(--slate-500);"></p>
+      <button class="btn-primary mt-3" onclick="checkQuiz2('${q.id}')">Kiểm tra đáp án</button>
+      <div class="explain-box mt-4" id="explain-${q.id}" style="display:none;"></div>
+    `;
+    c.appendChild(wrap);
+    const optsDiv = wrap.querySelector(`#opts-${q.id}`);
+    q.options.forEach((opt,i)=>{
+      const b = document.createElement('button');
+      b.className='opt-btn text-sm';
+      b.textContent = opt;
+      b.onclick = ()=>selectQuiz2(q.id, i);
+      optsDiv.appendChild(b);
+    });
+    quiz2Data.push(q); // reuse checkQuiz2 logic
+  });
+}
+renderQuiz4();
+
+/* ============ TAB 5 PART A : MATCHING ============ */
+const matchData = [
+  { num:1, vi:'Cái tuần này, tuần này', zh:'这个星期、这周', answer:'D' },
+  { num:2, vi:'Sẽ làm, chuẩn bị làm', zh:'想要、准备在……办', answer:'A' },
+  { num:3, vi:'Làm vào lúc, tổ chức tại', zh:'在星期五、在学校', answer:'B' },
+  { num:4, vi:'Muốn tham gia, ai có ý định', zh:'想要参加的人', answer:'E' },
+  { num:5, vi:'Gặp gỡ và giao lưu với học sinh', zh:'和学生、跟学生', answer:'C' }
+];
+const matchExplain = {
+  1:'这个星期 ➔ 本周 / 本周五: "本" chỉ đối tượng đang được nhắc đến trực tiếp trong thông báo.',
+  2:'准备在……办 ➔ 将在……举办: "将" là phó từ chỉ hành động sẽ xảy ra trong tương lai.',
+  3:'在学校体育馆 ➔ 于学校体育馆 / 于本周五: "于" là giới từ chỉ thời gian, không gian trang trọng.',
+  4:'想要参加的人 ➔ 欲参加者 / 欲参赛者: "欲" chỉ mong muốn, dự định trong văn viết.',
+  5:'和学生、跟学生 ➔ 与学生: "与" là liên từ nối các đối tượng song song trong văn bản hành chính.'
+};
+function renderMatch(){
+  const c = document.getElementById('match-container');
+  matchData.forEach(m=>{
+    const row = document.createElement('div');
+    row.className = 'flex items-center gap-3 flex-wrap';
+    row.innerHTML = `
+      <span class="font-semibold text-sm w-6">${m.num}.</span>
+      <span class="text-sm flex-1 min-w-[220px]">${m.vi} <span class="zh text-[var(--slate-500)]">(${m.zh})</span></span>
+      <select class="blank-select" id="match-${m.num}" data-answer="${m.answer}">
+        <option value="">--</option>
+        <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
+      </select>
+    `;
+    c.appendChild(row);
+  });
+  matchData.forEach(m=>{
+    document.getElementById(`match-${m.num}`).addEventListener('change', function(){
+      this.classList.remove('correct','incorrect');
+      document.getElementById('match-feedback').style.display='none';
+    });
+  });
+}
+renderMatch();
+function checkMatch(){
+  let html = '';
+  let allCorrect = true;
+  matchData.forEach(m=>{
+    const sel = document.getElementById(`match-${m.num}`);
+    sel.classList.remove('correct','incorrect');
+    const ok = sel.value === m.answer;
+    if(!ok) allCorrect = false;
+    if(sel.value) sel.classList.add(ok?'correct':'incorrect');
+    html += `<p class="mb-1"><b>${m.num} - ${m.answer}</b>: ${matchExplain[m.num]}</p>`;
+  });
+  const fb = document.getElementById('match-feedback');
+  fb.style.display = 'block';
+  fb.innerHTML = (allCorrect ? '<p style="color:var(--ok-green); font-weight:600;" class="mb-2">✓ Chính xác toàn bộ!</p>' : '<p style="color:var(--bad-red); font-weight:600;" class="mb-2">Xem lại các ô viền đỏ, và tham khảo giải thích bên dưới:</p>') + html;
+}
+
+/* ============ TAB 5 PART B : SENTENCE TASKS ============ */
+const taskData = [
+  {
+    id:'t1',
+    title:'Nhiệm vụ 1 · Lắp ráp câu thông báo sự kiện (Sự kiện / Hoạt động)',
+    facts:[
+      'Chủ thể tổ chức: 留学生办公室 (Văn phòng Du học sinh)',
+      'Thời gian: 本周六上午9:00 (9h sáng thứ Bảy tuần này)',
+      'Địa điểm: 学校操场 (Sân vận động trường)',
+      'Nội dung sự kiện: 举办留学生趣味运动会 (Tổ chức đại hội thể thao vui nhộn)'
+    ],
+    keywords:'将于, 本, 在',
+    hint:'Công thức: [Chủ thể] + 将于 + [Thời gian] + 在 + [Địa điểm] + 举办 + [Hoạt động].',
+    answer:'留学生办公室将于本周六上午9:00在学校操场举办"留学生趣味运动会"。'
+  },
+  {
+    id:'t2',
+    title:'Nhiệm vụ 2 · Lắp ráp câu thông báo cuộc họp (Cuộc họp)',
+    facts:[
+      'Chủ thể triệu tập: 对外汉语教育学院 (Viện Giáo dục Hán ngữ đối ngoại)',
+      'Thời gian: 下周一（9月7日）下午4:00 (4h chiều thứ Hai tuần sau)',
+      'Địa điểm: 多功能厅 (Phòng đa năng)',
+      'Nội dung cuộc họp: 召开全体教师工作会议 (Triệu tập cuộc họp công tác toàn thể giáo viên)'
+    ],
+    keywords:'将于, 在, 召开',
+    hint:'Luôn sử dụng động từ chuyên dụng 召开 đi kèm danh từ cuộc họp, thay vì dùng từ khẩu ngữ "开会".',
+    answer:'对外汉语教育学院将于下周一（9月7日）下午4:00在多功能厅召开全体教师工作会议。'
+  },
+  {
+    id:'t3',
+    title:'Nhiệm vụ 3 · Viết câu yêu cầu kỷ luật (kéo dài số chữ trơn tru)',
+    facts:[
+      'Yêu cầu thời gian: 提前15分钟入场 (Vào phòng trước 15 phút)',
+      'Yêu cầu thiết bị: 将手机调至静音状态 (Chuyển điện thoại sang chế độ im lặng)',
+      'Yêu cầu trật tự: 保持会场安静 (Giữ trật tự hội trường)'
+    ],
+    keywords:'请, 并, 以',
+    hint:'Sử dụng liên từ 并 để nối hai hành động song song và giới từ 以 để chỉ mục đích một cách trang trọng. (Giúp tăng dung lượng thêm ~29 chữ Hán cực kỳ tự nhiên.)',
+    answer:'请与会人员提前15分钟入场，并将手机调至静音状态，以保持会场安静。'
+  }
+];
+function renderTasks(){
+  const c = document.getElementById('task-container');
+  taskData.forEach(t=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'bg-white rounded-lg border border-[var(--slate-300)] p-5';
+    wrap.innerHTML = `
+      <p class="font-semibold mb-2">${t.title}</p>
+      <ul class="text-xs text-[var(--slate-500)] mb-2 zh list-disc pl-4 space-y-0.5">
+        ${t.facts.map(f=>`<li>${f}</li>`).join('')}
+      </ul>
+      <p class="text-xs mb-3" style="color:var(--indigo-600); font-weight:600;">Từ khóa văn viết bắt buộc phải dùng: <span class="zh">${t.keywords}</span></p>
+      <textarea rows="2" placeholder="Viết câu hoàn chỉnh bằng tiếng Trung ở đây…" class="zh"></textarea>
+      <div class="flex items-center justify-between mt-3 gap-3">
+        <p class="text-xs text-[var(--slate-500)]">💡 ${t.hint}</p>
+        <button class="btn-secondary text-xs whitespace-nowrap" onclick="this.parentElement.nextElementSibling.style.display='block'; this.style.display='none';">Xem đáp án đối chiếu</button>
+      </div>
+      <div class="explain-box mt-3 zh" style="display:none;">${t.answer}</div>
+    `;
+    c.appendChild(wrap);
+  });
+}
+renderTasks();
+
+/* ============ TAB 6 : LIVE PAPER SIMULATION ============ */
+function renderPaper(){
+  const title = document.getElementById('in-title').value.trim();
+  const audience = document.getElementById('in-audience').value.trim();
+  const body = document.getElementById('in-body').value;
+  const org = document.getElementById('in-org').value.trim();
+  const date = document.getElementById('in-date').value.trim();
+
+  const pvTitle = document.getElementById('pv-title');
+  pvTitle.textContent = title || '（标题）';
+  pvTitle.style.color = title ? 'var(--ink-900)' : 'var(--slate-300)';
+
+  const pvAud = document.getElementById('pv-audience');
+  pvAud.textContent = audience ? (audience.endsWith('：')? audience : audience + '：') : '（被通知方：）';
+  pvAud.style.color = audience ? 'var(--ink-900)' : 'var(--slate-300)';
+
+  const pvBody = document.getElementById('pv-body');
+  pvBody.innerHTML = '';
+  const paras = body.split('\n').filter(p=>p.trim().length>0);
+  if(paras.length===0){
+    pvBody.innerHTML = '<p class="indent2 mb-1" style="color:var(--slate-300);">（正文……）</p>';
+  } else {
+    paras.forEach(p=>{
+      const el = document.createElement('p');
+      el.className='indent2 mb-1';
+      el.textContent = p;
+      pvBody.appendChild(el);
+    });
+  }
+
+  const pvOrg = document.getElementById('pv-org');
+  pvOrg.textContent = org || '（署名）';
+  pvOrg.style.color = org ? 'var(--ink-900)' : 'var(--slate-300)';
+
+  const pvDate = document.getElementById('pv-date');
+  pvDate.textContent = date || '（日期）';
+  pvDate.style.color = date ? 'var(--ink-900)' : 'var(--slate-300)';
+}
+function toggleModelAnswer(){
+  const box = document.getElementById('model-answer');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
