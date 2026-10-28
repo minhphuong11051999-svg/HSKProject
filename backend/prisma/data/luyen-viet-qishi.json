@@ -1,0 +1,245 @@
+{
+  "sections": [
+    {
+      "heading": "I. Mục đích sử dụng",
+      "bodyHtml": "<p><b>启事</b> (Bố cáo/Thông báo công khai): loại văn bản ứng dụng dùng khi một cá nhân, tập thể hoặc đơn vị muốn tuyên bố, giải thích công khai một sự việc trước công chúng, hoặc mong muốn mọi người giúp đỡ giải quyết một công việc cụ thể.</p><p>Tính chất: khác với thông báo hành chính (<span class=\"zh\">通知</span>), 启事 không mang tính pháp lệnh, chính sách, không bắt buộc thi hành.</p><p>Phân loại phổ biến: <span class=\"zh\">寻物启事</span> (Tìm đồ lạc), <span class=\"zh\">寻人启事</span> (Tìm người), <span class=\"zh\">求租启事</span> (Tìm thuê nhà), <span class=\"zh\">出租启事</span> (Cho thuê nhà), <span class=\"zh\">出售启事</span> (Bán thanh lý đồ), <span class=\"zh\">招聘启事</span> (Tuyển dụng)…</p>",
+      "kind": "text",
+      "orderIndex": 0
+    },
+    {
+      "heading": "II. Cấu trúc chuẩn 4 phần & quy tắc trình bày",
+      "bodyHtml": "<div><p><b>1. Tiêu đề 标题</b> — dòng đầu, bắt buộc căn giữa. Cách 1 — chỉ thể loại: <span class=\"zh\">启事</span>. Cách 2 — nội dung làm tiêu đề: <span class=\"zh\">求租 / 招聘</span>. Cách 3 — nội dung + thể loại: <span class=\"zh\">求租启事 / 招聘启事</span>. Cách 4 — chủ thể + nội dung: <span class=\"zh\">北京汽车公司招聘</span>. Cách 5 — chủ thể + nội dung + thể loại: <span class=\"zh\">北京汽车公司招聘启事</span>.</p><p><b>2. Chính văn 正文</b> — xuống dòng, lùi 2 ô đầu dòng. Nêu rõ sự việc, thời gian, địa điểm, nguyên do cụ thể. <span class=\"zh\">寻物启事</span>: thời gian/địa điểm rơi; tên gọi, đặc điểm nhận dạng đồ vật; tâm trạng lo lắng; lời hứa hậu tạ (<span class=\"zh\">必有重谢</span> / <span class=\"zh\">拟付酬金</span>). <span class=\"zh\">求租启事</span>: yêu cầu về nhà (vị trí, giao thông, tiện ích…); cam kết bản thân (giữ vệ sinh, không ồn, đóng tiền đúng hạn). <span class=\"zh\">出售启事</span>: thân phận người bán, tình trạng đồ dùng, mức giá mong muốn. Cuối chính văn bắt buộc có thông tin liên hệ (địa chỉ, điện thoại, người liên hệ, email).</p><p><b>3. Ký tên 署名</b> — cách chính văn 2 dòng, đặt góc dưới bên phải, canh giữa so với dòng ngày tháng. Có thể ký tên thật, tên đơn vị hoặc ẩn danh phù hợp tình huống (<span class=\"zh\">失主</span> - người mất đồ, <span class=\"zh\">求租人</span> - người cần thuê). Tên đúng 2 chữ được viết cách ra: <span class=\"zh\">失　主</span>, <span class=\"zh\">安　娜</span>.</p><p><b>4. Ngày tháng 日期</b> — xuống dòng ngay dưới ký tên, căn lề phải. Thứ tự: Năm <span class=\"zh\">年</span> Tháng <span class=\"zh\">月</span> Ngày <span class=\"zh\">日</span>.</p></div>",
+      "kind": "text",
+      "orderIndex": 1
+    },
+    {
+      "heading": "III. Bộ mẫu câu cố định (套语)",
+      "bodyHtml": "<div><p><b>🔍 Tìm đồ (寻物):</b> <span class=\"zh\">不慎丢失……</span> · <span class=\"zh\">包内装有……等重要物品</span> · <span class=\"zh\">本人十分焦急</span> · <span class=\"zh\">请拾到……的好心人尽快与我联系</span> · <span class=\"zh\">必有重谢！</span></p><p><b>🏷️ Bán đồ (出售):</b> <span class=\"zh\">本人因即将回国，现欲便宜转让自用……</span> · <span class=\"zh\">性能良好，价格面议</span> · <span class=\"zh\">有意者请来电咨询</span></p><p><b>🏠 Thuê nhà (求租):</b> <span class=\"zh\">现欲在[地点]附近求租一套……</span> · <span class=\"zh\">交通便利，设施齐全</span> · <span class=\"zh\">本人保证按时交费，保持环境卫生</span></p></div>",
+      "kind": "text",
+      "orderIndex": 2
+    },
+    {
+      "heading": "IV. Sơ đồ bố cục trực quan (dạng 寻物启事)",
+      "bodyHtml": "<div><p>Khung mẫu: <span class=\"zh\">寻物启事</span> (tiêu đề căn giữa) → chính văn thụt lề 2 ô: <span class=\"zh\">本人于[时间]在[地点]不慎丢失[物品名称]，内装有[物品描述]。本人十分焦急，请拾到[物品]的好心人尽快打电话[电话]与我联系。必有重谢！</span> → ký tên <span class=\"zh\">失　主</span> → ngày tháng <span class=\"zh\">[年 月 日]</span>, căn lề phải, canh giữa so với dòng ký tên.</p></div>",
+      "kind": "text",
+      "orderIndex": 3
+    }
+  ],
+  "sampleDocuments": [
+    {
+      "label": "Bài mẫu 1 · Tìm đồ rơi (寻物启事)",
+      "audience": null,
+      "body": "寻物启事\n\n本人于2017年3月1日在中关村电子城不慎丢失一个黑色皮质双肩包，包内装有本人的护照、一部华为手机、钱包以及本人的工作资料等重要物品。本人十分焦急，请拾到双肩包的好心人尽快打电话 1390xxxxxxx 与我联系。必有重谢！",
+      "signerOrg": "失主",
+      "date": "2017年3月2日",
+      "orderIndex": 0
+    },
+    {
+      "label": "Bài mẫu 2 · Tìm đồng hồ thông minh, bản đã sửa lỗi (寻物启事)",
+      "audience": null,
+      "body": "寻物启事\n\n本人于今早乘坐学校班车时，不慎丢失一部银色苹果智能手表。该手表对本人十分重要，心中十分焦急。如有拾到该手表的好心人，请尽快与我联系，联系电话：138xxxxxxxx。必有重谢！",
+      "signerOrg": null,
+      "date": null,
+      "orderIndex": 1
+    },
+    {
+      "label": "Bài mẫu 3 · Bán xe đạp cũ, bản đã sửa lỗi (出售启事)",
+      "audience": null,
+      "body": "出售二手自行车\n\n我是语言大学的留学生，下个月我将回国，现出售一辆二手自行车。自行车为女式24型，黑色，六成新，好骑，有购车发票，价格面议。有意者请与我联系。联系电话：xxxxxxxx；联系人：张安娜。",
+      "signerOrg": null,
+      "date": null,
+      "orderIndex": 2
+    }
+  ],
+  "vocabTerms": [
+    { "literary": "不慎丢失", "colloquial": "不小心丢了/掉了", "meaningVi": "Vô ý làm mất, làm rơi", "example": "不慎丢失一部手表" },
+    { "literary": "内装有……等重要物品", "colloquial": "包里装有重要东西", "meaningVi": "Bên trong có đựng... những vật quan trọng", "example": "包内装有护照等重要物品" },
+    { "literary": "十分焦急", "colloquial": "急得不得了", "meaningVi": "Vô cùng lo lắng, sốt ruột", "example": "本人十分焦急" },
+    { "literary": "必有重谢", "colloquial": "会给钱感谢", "meaningVi": "Chắc chắn sẽ hậu tạ", "example": "必有重谢！" },
+    { "literary": "现出售", "colloquial": "想便宜卖", "meaningVi": "Nay bán ra, rao bán", "example": "现出售一辆二手自行车" },
+    { "literary": "好骑", "colloquial": "骑着挺好", "meaningVi": "Đi êm, chạy tốt (xe đạp)", "example": "自行车好骑" },
+    { "literary": "价格面议", "colloquial": "见面再商量价格", "meaningVi": "Giá cả thương lượng trực tiếp", "example": "价格面议" },
+    { "literary": "现欲求租", "colloquial": "现在想要租房", "meaningVi": "Nay muốn tìm thuê", "example": "现欲在中关村附近求租一套住房" },
+    { "literary": "交通便利，设施齐全", "colloquial": "交通挺方便，东西挺全", "meaningVi": "Giao thông thuận tiện, tiện nghi đầy đủ", "example": "要求交通便利，设施齐全" }
+  ],
+  "fixedPhrases": [
+    { "chinese": "不慎丢失……", "viExplanation": "Vô ý/sơ ý làm mất... (mở đầu mô tả sự việc trong 寻物启事)." },
+    { "chinese": "包内装有……等重要物品", "viExplanation": "Bên trong có đựng... những đồ vật quan trọng." },
+    { "chinese": "本人十分焦急", "viExplanation": "Bản thân vô cùng lo lắng, sốt ruột." },
+    { "chinese": "请拾到……的好心人尽快与我联系", "viExplanation": "Xin người tốt bụng nhặt được... nhanh chóng liên hệ với tôi." },
+    { "chinese": "必有重谢！", "viExplanation": "Nhất định sẽ hậu tạ! (câu kết cố định của 寻物启事)." },
+    { "chinese": "本人因即将回国，现欲便宜转让自用……", "viExplanation": "Vì sắp về nước, nay muốn nhượng lại rẻ đồ dùng của bản thân..." },
+    { "chinese": "性能良好，价格面议", "viExplanation": "Chất lượng/hiệu năng tốt, giá cả thương lượng." },
+    { "chinese": "现欲在[地点]附近求租一套……", "viExplanation": "Nay muốn tìm thuê một căn... gần khu vực..." },
+    { "chinese": "本人保证按时交费，保持环境卫生", "viExplanation": "Bản thân cam kết đóng tiền đúng hạn, giữ gìn vệ sinh môi trường." }
+  ],
+  "quizQuestions": [
+    {
+      "kind": "THEORY",
+      "title": "1.1 · Nhận diện lỗi đặt tiêu đề",
+      "prompt": "Dựa vào 5 cách viết tiêu đề chuẩn đã học, tiêu đề nào sau đây viết SAI quy phạm của một tờ 启事?",
+      "options": ["A. 启事", "B. 寻物启事", "C. 寻物", "D. 寻物启事条"],
+      "correctIndex": 3,
+      "explanation": "Đáp án đúng là D. Giáo trình chỉ quy định 5 cách đặt tiêu đề chuẩn, không có dạng kết hợp thêm từ \"条\" vào sau \"启事\".",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 0
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.2 · Nhận diện nội dung cốt lõi của phần Chính văn (正文)",
+      "prompt": "Khi viết một tờ 寻物启事 (Tìm đồ rơi), phần chính văn bắt buộc phải nêu rõ những thông tin cụ thể nào dưới đây để đảm bảo tính khách quan và súc tích?",
+      "options": [
+        "A. Giá trị mua ban đầu của đồ vật, hoàn cảnh gia đình hiện tại của người mất.",
+        "B. Thời gian và địa điểm rơi; tên gọi và mô tả đặc điểm nổi bật của đồ vật; thông tin liên lạc và lời hứa hậu tạ.",
+        "C. Địa chỉ nhà riêng của người đăng tin, cơ quan công an gần nhất nơi xảy ra sự việc.",
+        "D. Lời khuyên người khác bảo quản đồ dùng, danh sách những người đi cùng mình hôm đó."
+      ],
+      "correctIndex": 1,
+      "explanation": "Đáp án đúng là B. Mô tả chi tiết đặc điểm đồ vật, mốc thời gian/địa điểm rơi và thông tin liên hệ là ba yếu tố xương sống quyết định hiệu quả của đơn tìm đồ.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 1
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.3 · Nhận diện văn phong hành chính trang trọng (书面语)",
+      "prompt": "Câu nào sau đây sử dụng mẫu câu cố định (套语) trang trọng và quy phạm nhất để viết lời kết cho một tờ 寻物启事?",
+      "options": [
+        "A. 谁捡到了就还给我，我带他去大吃一顿！",
+        "B. 希望拾到包包的好人快点给我打电话，我很着急。",
+        "C. 请拾到双肩包的好心人尽快与我联系。必有重谢！",
+        "D. 捡到的人请一定要还给我，不然我没办法工作。"
+      ],
+      "correctIndex": 2,
+      "explanation": "Đáp án đúng là C. Cú pháp 请拾到……的好心人尽快与我联系。必有重谢！ là bộ mẫu câu cố định trang trọng, đạt chuẩn văn viết hành chính.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 2
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.4 · Nhận diện nội dung cam kết bắt buộc của \"求租启事\"",
+      "prompt": "Khi viết một tờ 求租启事 (Tin tìm thuê nhà), để tạo sự tin tưởng tối đa cho chủ nhà, người viết ngoài việc nêu các yêu cầu về tiện nghi nhà cửa thì bắt buộc (必要时) phải đưa ra cam kết nào sau đây theo đúng quy chuẩn của giáo trình?",
+      "options": [
+        "A. Cam kết sẽ giới thiệu thêm nhiều bạn bè là du học sinh đến ở cùng khu phố.",
+        "B. Cam kết không làm ồn (不吵闹), giữ gìn vệ sinh môi trường (保持环境卫生) và đóng tiền đúng hạn (按时交费).",
+        "C. Cam kết sẽ tự mình chịu trách nhiệm sơn sửa và tân trang lại toàn bộ ngôi nhà mỗi năm một lần.",
+        "D. Cam kết sẽ thuê nhà tối thiểu từ 3 năm trở lên và không thay đổi cấu trúc thiết bị trong phòng."
+      ],
+      "correctIndex": 1,
+      "explanation": "Đáp án đúng là B. Giáo trình quy định rõ: \"必要时，也可以向房东做出一些保证，如不吵闹、保持环境卫生、按时交费等\" nhằm tăng tính uy tín và thuyết phục cho người thuê.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 3
+    },
+    {
+      "kind": "ERROR_ANALYSIS",
+      "title": "4.1 · Tin tìm đồng hồ của 大卫 (寻物启事)",
+      "prompt": "Bản thảo trên của học sinh mắc bao nhiêu lỗi thể thức / văn phong nghiêm trọng, và đó là những lỗi nào?",
+      "options": [
+        "A. Chỉ có 1 lỗi duy nhất: thiếu ngày tháng cụ thể",
+        "B. Mắc 3 lỗi: (1) tiêu đề \"寻物\" quá cụt ngủn, không đúng quy chuẩn 5 cách đặt tiêu đề của 启事; (2) chính văn thiếu thời gian/địa điểm rơi, số điện thoại liên hệ và lời hứa hậu tạ \"必有重谢\"; (3) văn phong quá khẩu ngữ (\"我不小心掉了\", \"我很着急\", \"请捡到的人还给我\") thay vì dùng套语 trang trọng",
+        "C. Bản thảo này hoàn toàn đúng chuẩn, không có lỗi nào",
+        "D. Chỉ sai ở việc thiếu phần ký tên"
+      ],
+      "correctIndex": 1,
+      "explanation": "Tiêu đề: \"寻物\" quá cụt ngủn, nên sửa thành \"寻物启事\" để đúng quy chuẩn văn bản ứng dụng. Thông tin khuyết thiếu: không nêu rõ thời gian và địa điểm rơi; không có số điện thoại để người nhặt được liên lạc; thiếu lời cam kết hậu tạ (必有重谢). Văn phong: dùng từ khẩu ngữ tự nhiên (\"我不小心掉了\", \"我很着急\", \"请还给我\") thay vì thuật ngữ hành chính quy phạm. Bản sửa chuẩn: 本人于今早乘坐学校班车时，不慎丢失一部银色苹果智能手表。该手表对本人十分重要，心中十分焦急。如有拾到该手表的好心人，请尽快与我联系，联系电话：138xxxxxxxx。必有重谢！",
+      "draftHtml": "<p class=\"text-center font-bold text-lg mb-4\">寻物</p><p class=\"indent2 mb-1\">我不小心掉了我的智能手表，是银色的苹果手表。这个手表对我非常重要，我很着急。请捡到的人还给我。</p>",
+      "draftHtmlMarked": "<p class=\"text-center font-bold text-lg mb-4\"><span style=\"color:#c0392b;font-weight:900;\">寻物</span></p><p class=\"indent2 mb-1\"><span style=\"color:#c0392b;font-weight:900;\">我不小心掉了</span>我的智能手表，是银色的苹果手表。这个手表对我非常重要，<span style=\"color:#c0392b;font-weight:900;\">我很着急</span>。<span style=\"color:#c0392b;font-weight:900;\">请捡到的人还给我</span>。</p>",
+      "orderIndex": 4
+    },
+    {
+      "kind": "ERROR_ANALYSIS",
+      "title": "4.2 · Tin bán xe đạp của 安娜 (出售启事)",
+      "prompt": "Bản thảo trên mắc những lỗi thể thức / văn phong nào?",
+      "options": [
+        "A. Mắc 3 lỗi: (1) tiêu đề chỉ viết một chữ \"卖\" quá cẩu thả, không đúng quy chuẩn đặt tiêu đề; (2) thiếu câu giới thiệu bối cảnh/thân phận người bán và lý do bán đồ; (3) văn phong khẩu ngữ \"想要买的请打电话给我\" chưa chuyển sang thuật ngữ hành chính \"有意者请与我联系\"",
+        "B. Chỉ sai ở việc thiếu ngày tháng",
+        "C. Chỉ sai ở việc chia điều khoản 一、二、",
+        "D. Bản thảo hoàn toàn đúng chuẩn thể thức"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tiêu đề: chỉ viết một chữ \"卖\" là quá cẩu thả, nên sửa thành \"出售二手自行车\" hoặc \"出售启事\". Thiếu bối cảnh chính đáng: nên thêm câu giới thiệu thân phận và lý do bán đồ (我是语言大学的留学生，下个月我将回国). Văn phong khẩu ngữ: cụm \"想要买的请打电话给我\" cần chuyển sang thuật ngữ hành chính quy phạm: \"有意者请与我联系\". Bản sửa chuẩn: 我是语言大学的留学生，下个月我将回国，现出售一辆二手自行车。自行车为女式24型，黑色，六成新，好骑，有购车发票，价格面议。有意者请与我联系。联系电话：xxxxxxxx；联系人：张安娜。",
+      "draftHtml": "<p class=\"text-center font-bold text-lg mb-4\">卖</p><p class=\"indent2 mb-1\">我的二手自行车：女式24型，黑色，八成新，骑着挺好。价格：200元。想要买的请打电话给我。电话：xxxxxxxx。</p>",
+      "draftHtmlMarked": "<p class=\"text-center font-bold text-lg mb-4\"><span style=\"color:#c0392b;font-weight:900;\">卖</span></p><p class=\"indent2 mb-1\">我的二手自行车：女式24型，黑色，八成新，<span style=\"color:#c0392b;font-weight:900;\">骑着挺好</span>。价格：200元。<span style=\"color:#c0392b;font-weight:900;\">想要买的请打电话给我</span>。电话：xxxxxxxx。</p>",
+      "orderIndex": 5
+    }
+  ],
+  "clozeExercises": [
+    {
+      "templateHtml": "<p class=\"text-center font-bold mb-4\">寻物启事</p><p class=\"indent2\">本人于2017年3月1日在中关村电子城_____(1)_____一个黑色皮质双肩包，包内装有本人的护照、一部华为手机、钱包以及本人的工作资料_____(2)_____。本人_____(3)_____，请拾到双肩包的好心人尽快打电话 1390xxxxxxx 与我联系。_____(4)_____！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>失　主</p><p>2017年3月2日</p></div></div>",
+      "blanks": [
+        { "id": "blank1", "answer": "不慎丢失", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] },
+        { "id": "blank2", "answer": "等重要物品", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] },
+        { "id": "blank3", "answer": "十分焦急", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] },
+        { "id": "blank4", "answer": "必有重谢", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] }
+      ],
+      "orderIndex": 0
+    }
+  ],
+  "matchItems": [
+    { "leftLabelVi": "Vô ý làm rơi, mất ví tiền (不小心掉了、丢了钱包)", "rightLabelZh": "不慎丢失钱包", "correctKey": "不慎丢失钱包", "explanation": "不小心掉了、丢了钱包 ➔ 不慎丢失钱包: \"不慎\" là phó từ văn viết thay cho \"不小心\" trong khẩu ngữ.", "orderIndex": 0 },
+    { "leftLabelVi": "Trong túi có đựng đồ quan trọng (包里装有重要东西)", "rightLabelZh": "内装有……等重要物品", "correctKey": "内装有……等重要物品", "explanation": "包里装有重要东西 ➔ 内装有……等重要物品: cấu trúc liệt kê trang trọng dùng trong 寻物启事.", "orderIndex": 1 },
+    { "leftLabelVi": "Lo lắng không chịu nổi (急得不得了)", "rightLabelZh": "十分焦急", "correctKey": "十分焦急", "explanation": "急得不得了 ➔ 十分焦急: cụm từ văn viết diễn tả tâm trạng lo lắng một cách trang trọng.", "orderIndex": 2 },
+    { "leftLabelVi": "Sẽ đưa tiền cảm ơn (会给钱感谢)", "rightLabelZh": "必有重谢", "correctKey": "必有重谢", "explanation": "会给钱感谢 ➔ 必有重谢: câu kết cố định (套语) bắt buộc của mọi tờ 寻物启事.", "orderIndex": 3 },
+    { "leftLabelVi": "Sắp về nước rồi (快要回国了)", "rightLabelZh": "我将回国", "correctKey": "我将回国", "explanation": "快要回国了 ➔ 我将回国: \"将\" là phó từ văn viết chỉ hành động sắp xảy ra.", "orderIndex": 4 },
+    { "leftLabelVi": "Muốn bán rẻ xe đạp cũ tự dùng (想便宜卖自用旧自行车)", "rightLabelZh": "现出售一辆二手自行车", "correctKey": "现出售一辆二手自行车", "explanation": "想便宜卖自用旧自行车 ➔ 现出售一辆二手自行车: \"现出售\" là mẫu câu mở đầu trang trọng của 出售启事.", "orderIndex": 5 },
+    { "leftLabelVi": "Xe đạp đi rất tốt (自行车骑着挺好)", "rightLabelZh": "好骑 / 骑行良好", "correctKey": "好骑 / 骑行良好", "explanation": "骑着挺好 ➔ 好骑 / 骑行良好: tính từ ghép súc tích thay cho cụm khẩu ngữ dài dòng.", "orderIndex": 6 },
+    { "leftLabelVi": "Gặp mặt rồi thương lượng giá (见面再商量价格)", "rightLabelZh": "价格面议", "correctKey": "价格面议", "explanation": "见面再商量价格 ➔ 价格面议: cụm từ 4 chữ cố định chuyên dùng trong tin rao bán.", "orderIndex": 7 },
+    { "leftLabelVi": "Bây giờ muốn thuê nhà (现在想要租房)", "rightLabelZh": "现欲求租 / 求租", "correctKey": "现欲求租 / 求租", "explanation": "现在想要租房 ➔ 现欲求租 / 求租: \"现欲\" là mẫu mở đầu trang trọng của 求租启事.", "orderIndex": 8 },
+    { "leftLabelVi": "Trong phòng có điều hòa, tủ lạnh, máy giặt, tivi đầy đủ (屋里空调、冰箱、洗衣机、电视都有)", "rightLabelZh": "要求冰箱、洗衣机、空调、电视等家电齐全", "correctKey": "要求冰箱、洗衣机、空调、电视等家电齐全", "explanation": "屋里……都有 ➔ 要求……等家电齐全: cấu trúc liệt kê yêu cầu tiện nghi trang trọng.", "orderIndex": 9 },
+    { "leftLabelVi": "Giao thông khá tiện lợi, đồ dùng khá đầy đủ (交通挺方便，东西挺全)", "rightLabelZh": "交通便利，设施齐全", "correctKey": "交通便利，设施齐全", "explanation": "交通挺方便，东西挺全 ➔ 交通便利，设施齐全: cặp thành ngữ 4 chữ song song, trang trọng hơn hẳn khẩu ngữ \"挺\".", "orderIndex": 10 },
+    { "leftLabelVi": "Cam kết không ồn ào, sạch sẽ, trả tiền đúng hạn (保证不吵闹、干净、按时给钱)", "rightLabelZh": "保证不吵闹，保持环境卫生，按时交纳有关费用", "correctKey": "保证不吵闹，保持环境卫生，按时交纳有关费用", "explanation": "保证不吵闹、干净、按时给钱 ➔ 保证不吵闹，保持环境卫生，按时交纳有关费用: diễn đạt đầy đủ 3 cam kết bắt buộc trong 求租启事.", "orderIndex": 11 }
+  ],
+  "writingTasks": [
+    {
+      "title": "Nhiệm vụ 1 · Chuyển đổi phần mô tả đồ rơi (寻物类)",
+      "facts": [
+        "Tình huống: \"Sáng nay tôi đi xe bus trường học thì đánh rơi mất cái đồng hồ Apple Watch thông minh màu bạc. Cái đồng hồ này vô cùng quan trọng với tôi, tôi đang rất cuống, ai nhặt được làm ơn trả tôi với.\""
+      ],
+      "requiredKeywords": ["不慎丢失", "银色苹果智能手表", "对本人十分重要", "心中十分焦急"],
+      "hint": "Chuyển ngôn ngữ nói sang văn viết trang trọng, dùng đủ 4 cụm từ gợi ý trên theo đúng thứ tự diễn đạt sự việc.",
+      "referenceAnswer": "本人于今早乘坐学校班车时，不慎丢失一部银色苹果智能手表（Apple Watch）。该手表对本人十分重要，心中十分焦急。",
+      "orderIndex": 0
+    },
+    {
+      "title": "Nhiệm vụ 2 · Chuyên đề luyện viết (出售类)",
+      "facts": [
+        "Tình huống: \"Tôi là du học sinh trường Đại học Ngôn ngữ, tháng sau sắp về nước rồi nên muốn bán rẻ cái xe đạp cũ tự dùng. Xe là kiểu xe đạp nữ cỡ 24, màu đen, mới 60%, đi rất tốt, có cả hóa đơn mua xe nữa, giá cả thương lượng trực tiếp nhé.\""
+      ],
+      "requiredKeywords": ["我是语言大学的留学生", "下个月我将回国", "现出售一辆二手自行车", "自行车为女式24型", "黑色，六成新", "好骑", "有购车发票", "价格面议"],
+      "hint": "Ghép nối tuần tự các cụm từ gợi ý thành đoạn văn liền mạch giới thiệu thân phận, lý do bán và tình trạng xe.",
+      "referenceAnswer": "我是语言大学的留学生，下个月我将回国，现出售一辆二手自行车。自行车为女式24型，黑色，六成新，好骑，有购车发票，价格面议。",
+      "orderIndex": 1
+    },
+    {
+      "title": "Nhiệm vụ 3 · Chuyển đổi mô tả yêu cầu thuê nhà & cam kết (求租类)",
+      "facts": [
+        "Tình huống: \"Tôi là học sinh Đại học Bắc Kinh. Bây giờ tôi đang rất muốn tìm thuê một phòng rộng khoảng 30 mét vuông ở quanh khu Trung Quan Thôn. Trong phòng cần trang bị sẵn giường tủ, tủ lạnh, máy giặt, tivi, điều hòa đầy đủ để tôi dọn vào ở luôn. Tôi hứa là sẽ tuân thủ quy định của khu phố, giữ gìn phòng sạch sẽ, không gây ồn ào và đóng tiền nhà đúng hạn mỗi tháng.\""
+      ],
+      "requiredKeywords": ["我是北京大学的留学生", "现欲", "求租一间30平米左右的住房", "要求冰箱、洗衣机、空调、电视等家电齐全，有床、衣柜等家具", "房屋地点最好在中关村附近", "保证遵守小区有关规定，不吵闹，保持环境卫生，按时交纳有关费用"],
+      "hint": "Trình bày theo thứ tự: thân phận → nhu cầu thuê + vị trí → yêu cầu tiện nghi → lời cam kết với chủ nhà.",
+      "referenceAnswer": "我是北京大学的留学生，现欲在中关村附近求租一间30平米左右的住房。要求冰箱、洗衣机、空调、电视等家电齐全，有床、衣柜等家具。本人保证遵守小区有关规定，不吵闹，保持环境卫生，按时交纳有关费用。",
+      "orderIndex": 2
+    }
+  ],
+  "guidedWritingFields": [
+    { "name": "title", "label": "1. Tiêu đề 标题", "placeholder": "例如：寻物启事", "inputType": "text", "orderIndex": 0 },
+    { "name": "body", "label": "2. Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 1 },
+    { "name": "sign", "label": "3. Ký tên 署名", "placeholder": "例如：李大卫", "inputType": "text", "orderIndex": 2 },
+    { "name": "date", "label": "4. Ngày tháng 日期", "placeholder": "例如：2026年9月1日", "inputType": "text", "orderIndex": 3 }
+  ],
+  "guidedWritingScenarios": [
+    {
+      "situationPrompt": "Tình huống: Sáng ngày 1 tháng 9 năm 2026, trên xe bus trường học (学校班车), bạn không cẩn thận làm rơi chiếc đồng hồ thông minh Apple Watch màu bạc. Bạn tên là David (李大卫).",
+      "modelAnswer": "寻物启事\n\n本人于今早乘坐学校班车时，不慎丢失一部银色苹果智能手表（Apple Watch）。\n\n该手表对本人十分重要，心中十分焦急。如有拾到该手表的好心人，请尽快与我联系，联系电话：138xxxxxxxx。必有重谢！\n\n李　大卫\n2026年9月1日",
+      "targetWordCount": 78
+    },
+    {
+      "situationPrompt": "Tình huống: Bạn tên là Anna (张安娜), du học sinh Đại học Ngôn ngữ. Tháng sau về nước, cần bán xe đạp nữ cỡ 24 màu đen, mới 60%, đi tốt, có hóa đơn, giá thỏa thuận. Đăng ngày 5/2/2017.",
+      "modelAnswer": "出售二手自行车\n\n我是语言大学的留学生，下个月我将回国，现出售一辆二手自行车。\n\n自行车为女式24型，黑色，六成新，好骑，有购车发票，价格面议。有意者请与我联系。\n\n联系电话：xxxxxxxx；联系人：张安娜。\n\n张　安娜\n2017年2月5日",
+      "targetWordCount": 90
+    }
+  ]
+}

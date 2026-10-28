@@ -1,0 +1,171 @@
+{
+  "sections": [
+    {
+      "heading": "I. Mục đích sử dụng",
+      "bodyHtml": "<p><b class=\"zh\">事假条</b> (Đơn xin nghỉ việc riêng): Dùng khi học viên/nhân viên cần giải quyết việc bận cá nhân hoặc gia đình (ví dụ: đón người thân tại sân bay, tham gia ngày lễ của gia đình).</p><p><b class=\"zh\">事务类请假条</b> (Đơn xin nghỉ giải quyết thủ tục): Dùng khi cần lên Đại sứ quán hoặc Cục Quản lý Xuất nhập cảnh để làm các thủ tục hành chính bắt buộc (ví dụ: gia hạn visa).</p>",
+      "kind": "text",
+      "orderIndex": 0
+    },
+    {
+      "heading": "II. Cấu trúc chuẩn 6 phần & Quy tắc căn lề",
+      "bodyHtml": "<div><p><b>1. Tiêu đề (标题):</b> Viết ba chữ \"请假条\" ở ngay dòng đầu tiên. Bắt buộc căn giữa (居中).</p><p><b>2. Xưng hô/Người nhận (称呼):</b> Viết ở dòng thứ hai, sát lề bên trái (顶格). Công thức: Họ + Chức danh/Xưng vị + dấu hai chấm (：) hoặc Kính ngữ (尊敬的) + Họ + Chức danh/Xưng vị + dấu hai chấm (：).</p><p><b>3. Chính văn (正文):</b></p><ul><li><b>Cách trình bày:</b> Xuống dòng, bắt đầu viết bằng cách lùi đầu dòng 2 ô (<span class=\"zh\">空两格</span>).</li><li><b>Nội dung:</b> Lý do xin nghỉ (<span class=\"zh\">原因</span>) → Thời gian nghỉ cụ thể (<span class=\"zh\">期限</span>) → Đề nghị xin nghỉ và hy vọng được phê chuẩn (<span class=\"zh\">要求与希望得到批准</span>).</li><li><b>Văn phong:</b> Ngắn gọn, chân thực, súc tích (<span class=\"zh\">准确、简洁</span>), tránh kể lể dông dài.</li></ul><p><b>4. Lời chào kết thúc (祝颂语):</b> (Có thể có hoặc không).</p><ul><li><b class=\"zh\">此致</b>: xuống dòng dưới chính văn, lùi đầu dòng 4 ô (<span class=\"zh\">空四格</span>), không dùng dấu câu ở sau.</li><li><b class=\"zh\">敬礼！</b>: xuống dòng tiếp theo, viết sát lề trái (<span class=\"zh\">顶格</span>), bắt buộc dùng dấu chấm than (！).</li></ul><p><b>5. Ký tên (署名):</b> Xuống cách dòng chúc khoảng 2 dòng trống. Viết (tên riêng) ở góc dưới bên phải, canh giữa ngày tháng.</p><p><b>6. Ngày tháng (日期):</b> Xuống dòng ngay dưới phần Ký tên, căn lề bên phải. Thứ tự: Năm 年 Tháng 月 Ngày 日.</p></div>",
+      "kind": "text",
+      "orderIndex": 1
+    },
+    {
+      "heading": "III. Sơ đồ bố cục trực quan",
+      "bodyHtml": "<div class=\"zh\"><p>请假条</p><p>尊敬的[Họ tên giáo viên/Cấp trên]：</p><p>　　我因[Lý do hành chính/việc riêng cụ thể]，无法正常[lên lớp/đi làm]。……因此，我拟于[Thời gian cụ thể]请假[Số ngày/giờ]。特向您请假，并望批准。</p><p>　　　　此致</p><p>敬礼！</p><p style=\"text-align:right\">[Họ tên]<br>[Ngày tháng năm]</p></div>",
+      "kind": "text",
+      "orderIndex": 2
+    }
+  ],
+  "sampleDocuments": [
+    {
+      "label": "Bài mẫu 1 · Thủ tục hành chính (事务类请假条 — Làm thủ tục gia hạn visa tại Cục Quản lý Xuất nhập cảnh)",
+      "audience": "陈老师：",
+      "body": "我因签证即将到期，急需于10月15日上午前往出入境管理局办理签证延期手续，无法正常上课。因此，我拟于10月15日上午请假半天。特向您请假，并望批准。\n\n此致\n敬礼！",
+      "signerOrg": "美 美",
+      "date": "2026年10月14日",
+      "orderIndex": 0
+    }
+  ],
+  "vocabTerms": [
+    { "literary": "因事请假", "colloquial": "有事情、有私事", "meaningVi": "Vì có việc riêng, xin nghỉ vì bận việc", "example": "我因事，父母拟于本周五来华探望我……" },
+    { "literary": "来华探望我", "colloquial": "父母坐飞机来中国看我", "meaningVi": "Đến Trung Quốc thăm tôi", "example": "父母拟于9月18日上午来华探望我。" },
+    { "literary": "前往机场接机", "colloquial": "去机场接人", "meaningVi": "Đi đến sân bay đón máy bay", "example": "需前往机场接机并协助安排其入住。" },
+    { "literary": "协助安排其入住", "colloquial": "帮父母在宾馆办住下", "meaningVi": "Hỗ trợ sắp xếp nhận phòng (khách sạn)", "example": "由于其不通汉语，我需前往机场接机并协助安排其入住。" },
+    { "literary": "办理签证延期手续", "colloquial": "去办签证、办延期", "meaningVi": "Làm thủ tục gia hạn visa", "example": "急需于下周一上午前往出入境管理局办理签证延期手续。" },
+    { "literary": "前往出入境管理局", "colloquial": "去出入境管理局那儿", "meaningVi": "Đi đến Cục Quản lý Xuất nhập cảnh", "example": "急需于10月15日上午前往出入境管理局办理签证延期手续。" },
+    { "literary": "签证即将到期", "colloquial": "签证快要到期了", "meaningVi": "Visa sắp hết hạn", "example": "我因签证即将到期，急需于……前往出入境管理局……" },
+    { "literary": "无法正常上课 / 无法出勤", "colloquial": "没办法去上课", "meaningVi": "Không thể lên lớp/đi làm bình thường", "example": "……急需于下周一上午前往出入境管理局办理签证延期手续，无法正常上课。" }
+  ],
+  "fixedPhrases": [
+    { "chinese": "特向您请假，并望批准。", "viExplanation": "Nay xin phép nghỉ, và mong ngài phê chuẩn (câu kết cố định ở cuối chính văn)." },
+    { "chinese": "我因[lý do]，无法正常[lên lớp/đi làm]。", "viExplanation": "Tôi vì [lý do] nên không thể [lên lớp/đi làm] bình thường (mẫu câu nêu lý do dẫn đến hệ quả)." },
+    { "chinese": "因此，我拟于[thời gian]请假[số ngày/giờ]。", "viExplanation": "Do đó, tôi dự định xin nghỉ vào [thời gian] với [số ngày/giờ] (câu nêu rõ thời hạn xin nghỉ)." },
+    { "chinese": "此致", "viExplanation": "Lời chào kết thúc trang trọng, xuống dòng lùi 4 ô (空四格), không dùng dấu câu ở sau." },
+    { "chinese": "敬礼！", "viExplanation": "Lời chào kết thúc, xuống dòng viết sát lề trái (顶格), bắt buộc dùng dấu chấm than (！)." },
+    { "chinese": "急需于……前往……", "viExplanation": "Cấp thiết cần phải đến... vào... (nhấn mạnh tính khẩn cấp của việc xin nghỉ)." },
+    { "chinese": "由于其不通汉语", "viExplanation": "Do họ (người thân) không biết tiếng Trung (câu nêu lý do phụ, bổ sung tính chính đáng)." },
+    { "chinese": "我已阅读请假注意事项，回校后将按时销假！", "viExplanation": "Tôi đã đọc các lưu ý khi xin nghỉ phép, sau khi về trường sẽ hủy phép (báo cáo trở lại) đúng hạn (câu cam kết mở rộng dung lượng cuối chính văn)." }
+  ],
+  "quizQuestions": [
+    {
+      "kind": "THEORY",
+      "title": "1.1 · Nhận diện lỗi thể thức tổng quát",
+      "prompt": "Quan sát kỹ Bài mẫu 1, nhận định nào sau đây là SAI về mặt thể thức trình bày đơn từ?",
+      "options": [
+        "A. Tiêu đề \"请假条\" bắt buộc phải viết ở dòng đầu tiên và căn giữa (居中).",
+        "B. Cụm từ \"此致\" phải xuống dòng lùi vào 4 ô (空四格), còn \"敬礼！\" phải xuống dòng tiếp theo viết sát lề trái (顶格).",
+        "C. Phần ký tên \"美 美\" và ngày tháng \"2026年10月14日\" bắt buộc phải viết sát lề bên trái của tờ đơn để thể hiện sự trang trọng.",
+        "D. Xưng hô người nhận đơn \"陈老师：\" phải viết sát lề bên trái và kết thúc bằng dấu hai chấm (：)."
+      ],
+      "correctIndex": 2,
+      "explanation": "Đáp án SAI là C. Vì phần ký tên và ngày tháng bắt buộc phải viết ở phía dưới bên phải của tờ đơn để đảm bảo tính quy phạm bố cục.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 0
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.2 · Nhận diện bố cục chính văn (正文)",
+      "prompt": "Theo quy định của giáo trình, phần Chính văn (正文) của một tờ đơn xin nghỉ phép bắt buộc phải đảm bảo đủ 3 yếu tố nào dưới đây?",
+      "options": [
+        "A. Lý do xin nghỉ (原因), thời hạn nghỉ cụ thể (期限) và lời đề nghị mong được phê chuẩn (要求与希望得到批准).",
+        "B. Lời chào hỏi chúc sức khỏe, lý do cá nhân chi tiết và lời hứa hẹn sẽ hoàn thành bài tập đầy đủ.",
+        "C. Giới thiệu sơ lược bản thân, quá trình chuẩn bị hồ sơ visa và ngày hẹn nộp kết quả.",
+        "D. Lý do cá nhân khách quan, đề xuất người học thay và lời cảm ơn gửi tới lớp học."
+      ],
+      "correctIndex": 0,
+      "explanation": "Đáp án đúng là A. Quy chuẩn viết tại trang 21 của giáo trình quy định rõ chính văn phải nêu đủ lý do nghỉ, thời hạn nghỉ và đề xuất yêu cầu phê chuẩn.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 1
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.3 · Nhận diện văn phong trang trọng (书面语)",
+      "prompt": "Trong các cách diễn đạt lý do hành chính dưới đây, câu nào tuân thủ đúng nguyên tắc văn phong trang trọng, súc tích (准确、简洁) của đơn từ hành chính?",
+      "options": [
+        "A. 我的签证马上就要过期了，我必须要去出入境管理局办一下延期，星期一上午我不能上课。",
+        "B. 我因签证即将到期，急需于下周一上午前往出入境管理局办理签证延期手续。",
+        "C. 星期一上午我要请假，因为我要去出入境管理局给我的签证延期，不去的话会被罚款。",
+        "D. 老师，我下周一早上有事要去办签证的事情，没办法来上课了。"
+      ],
+      "correctIndex": 1,
+      "explanation": "Đáp án đúng là B. Câu B sử dụng các cụm từ trang trọng chuẩn văn viết như 我因 (tôi vì), 即将到期 (sắp sửa hết hạn), 前往...办理...手续 (đi đến... để làm thủ tục...), loại bỏ hoàn toàn các từ ngữ khẩu ngữ tự nhiên.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 2
+    }
+  ],
+  "clozeExercises": [
+    {
+      "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">请假条</p><p class=\"mb-2\">陈老师：</p><p class=\"indent2 mb-1\">我因签证即将到期，急需于10月15日上午前往出入境管理局_____(1)_____，无法正常上课。因此，我_____(2)_____10月15日上午请假半天。_____(3)_____。</p><p class=\"indent4 mb-1\">此致</p><p class=\"mb-1\">敬礼！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>美 美</p><p>2026年10月14日</p></div></div>",
+      "blanks": [
+        { "id": "blank1", "answer": "办理签证延期手续", "options": ["特向您请假，并望批准", "办理签证延期手续", "拟于"] },
+        { "id": "blank2", "answer": "拟于", "options": ["特向您请假，并望批准", "办理签证延期手续", "拟于"] },
+        { "id": "blank3", "answer": "特向您请假，并望批准", "options": ["特向您请假，并望批准", "办理签证延期手续", "拟于"] }
+      ],
+      "orderIndex": 0
+    }
+  ],
+  "matchItems": [
+    { "leftLabelVi": "Có việc riêng, có việc bận (有事情、有私事)", "rightLabelZh": "因事请假", "correctKey": "因事请假", "explanation": "有私事 ➔ 因事请假: Diễn đạt nguyên nhân một cách khách quan, lịch sự và súc tích.", "orderIndex": 0 },
+    { "leftLabelVi": "Bố mẹ đi máy bay sang Trung Quốc thăm tôi (父母坐飞机来中国看我)", "rightLabelZh": "来华探望我", "correctKey": "来华探望我", "explanation": "坐飞机来中国看我 ➔ 来华探望我: Sử dụng từ ghép trang trọng chuyên dụng trong văn bản hành chính.", "orderIndex": 1 },
+    { "leftLabelVi": "Đi sân bay đón người (去机场接人)", "rightLabelZh": "前往机场接机", "correctKey": "前往机场接机", "explanation": "去机场接人 ➔ 前往机场接机: Tăng tính quy phạm, chuyên nghiệp và trang trọng trong đơn từ.", "orderIndex": 2 },
+    { "leftLabelVi": "Giúp bố mẹ làm thủ tục nhận phòng khách sạn (帮父母在宾馆办住下)", "rightLabelZh": "协助安排其入住", "correctKey": "协助安排其入住", "explanation": "帮父母在宾馆办住下 ➔ 协助安排其入住: Ngôn từ chuẩn mực hành chính thay cho khẩu ngữ nói hằng ngày.", "orderIndex": 3 },
+    { "leftLabelVi": "Đi làm visa, làm thủ tục gia hạn (去办签证、办延期)", "rightLabelZh": "办理签证延期手续", "correctKey": "办理签证延期手续", "explanation": "去办签证、办延期 ➔ 办理签证延期手续: Diễn đạt đầy đủ tên thủ tục hành chính quy phạm để tăng tính chuyên nghiệp.", "orderIndex": 4 },
+    { "leftLabelVi": "Đi đến Cục Quản lý Xuất nhập cảnh (去出入境管理局那儿)", "rightLabelZh": "前往出入境管理局", "correctKey": "前往出入境管理局", "explanation": "去出入境管理局那儿 ➔ 前往出入境管理局: Dùng động từ trang trọng \"前往\" thay cho từ \"去\".", "orderIndex": 5 },
+    { "leftLabelVi": "Visa sắp hết hạn rồi (签证快要到期了)", "rightLabelZh": "签证即将到期", "correctKey": "签证即将到期", "explanation": "签证快要到期了 ➔ 签证即将到期: Thay phó từ khẩu ngữ \"快要\" bằng từ hành chính trang trọng \"即将\".", "orderIndex": 6 },
+    { "leftLabelVi": "Không thể đi học được (没办法去上课)", "rightLabelZh": "无法正常上课 / 无法出勤", "correctKey": "无法正常上课 / 无法出勤", "explanation": "没办法去上课 ➔ 无法正常上课 / 无法出勤: Cách diễn đạt chuẩn văn viết lịch sự.", "orderIndex": 7 }
+  ],
+  "writingTasks": [
+    {
+      "title": "Nhiệm vụ 1 · Chuyển đổi lý do việc tư (事假类)",
+      "facts": [
+        "Tình huống khẩu ngữ: Vì có việc riêng, bố mẹ tôi dự định sang thăm tôi vào thứ Sáu tuần này. Do họ không biết tiếng Trung, tôi cần ra sân bay đón và giúp họ làm thủ tục nhận phòng khách sạn."
+      ],
+      "requiredKeywords": ["因事", "父母拟于……来华探望我", "由于其不通汉语", "需前往机场接机", "并协助安排其入住"],
+      "hint": "Hãy kết hợp các từ gợi ý trên để viết lại lý do này thành 1 đến 2 câu văn viết ngắn gọn và trang trọng nhất.",
+      "referenceAnswer": "我因事，父母拟于本周五来华探望我，由于其不通汉语，需前往机场接机并协助安排其入住。",
+      "orderIndex": 0
+    },
+    {
+      "title": "Nhiệm vụ 2 · Chuyển đổi lý do thủ tục hành chính (事务类)",
+      "facts": [
+        "Tình huống khẩu ngữ: Visa của tôi sắp hết hạn rồi. Tôi cần gấp đến Cục Quản lý Xuất nhập cảnh vào sáng thứ Hai tới để làm thủ tục gia hạn visa, nên không thể lên lớp bình thường."
+      ],
+      "requiredKeywords": ["因签证即将到期", "急需于……前往", "出入境管理局", "办理签证延期手续", "无法正常上课"],
+      "hint": "Hãy kết hợp các từ gợi ý trên để viết lại lý do này thành 1 đến 2 câu văn viết ngắn gọn và trang trọng nhất.",
+      "referenceAnswer": "我因签证即将到期，急需于下周一上午前往出入境管理局办理签证延期手续，无法正常上课。",
+      "orderIndex": 1
+    },
+    {
+      "title": "Nhiệm vụ 3 · Viết bán phần (Skeleton Writing)",
+      "facts": [
+        "Bạn tên là 李明 (Lý Minh). Sáng thứ Sáu này (ngày 18 tháng 9 năm 2026), bạn bắt buộc phải ra sân bay đón bố mẹ từ nước ngoài sang chơi, không thể lên lớp học tiếng Trung buổi sáng của Cô Vương (王老师)."
+      ],
+      "requiredKeywords": ["拟于", "请假半天", "特向您请假，并望批准"],
+      "hint": "Lắp ráp khung thể thức và các câu chuyển tiếp trang trọng, kể cả các phần cố định (标题, 此致, 敬礼！); chưa cần viết chi tiết lý do đón người thân ở bước này.",
+      "referenceAnswer": "请假条\n王老师：\n……（正文，暂不需要写理由）我拟于9月18日上午请假半天。特向您请假，并望批准。\n此致\n敬礼！\n李 明\n2026年9月17日",
+      "orderIndex": 2
+    }
+  ],
+  "guidedWritingFields": [
+    { "name": "title", "label": "标题 · Tiêu đề", "placeholder": "请假条", "inputType": "text", "orderIndex": 0 },
+    { "name": "recipient", "label": "称呼 · Người nhận", "placeholder": "尊敬的王老师：", "inputType": "text", "orderIndex": 1 },
+    { "name": "body", "label": "正文 · Chính văn (mỗi dòng = 1 đoạn, tự thụt 2 ô)", "placeholder": "Viết lý do (bố mẹ sang thăm, không biết tiếng Trung, cần ra sân bay đón) → thời gian nghỉ (18/9 buổi sáng) → lời xin phép...", "inputType": "textarea", "orderIndex": 2 },
+    { "name": "close1", "label": "此致", "placeholder": "此致", "inputType": "text", "orderIndex": 3 },
+    { "name": "close2", "label": "敬礼！", "placeholder": "敬礼！", "inputType": "text", "orderIndex": 4 },
+    { "name": "name", "label": "署名 · Ký tên", "placeholder": "李明", "inputType": "text", "orderIndex": 5 },
+    { "name": "date", "label": "日期 · Ngày tháng", "placeholder": "2026年9月17日", "inputType": "text", "orderIndex": 6 }
+  ],
+  "guidedWritingScenarios": [
+    {
+      "situationPrompt": "Tình huống: Bố mẹ của bạn sắp sang Trung Quốc thăm bạn. Vì họ hoàn toàn không biết một chút tiếng Trung nào (一点汉语也不会说), nên bạn bắt buộc phải ra sân bay để đón họ vào sáng thứ Sáu ngày 18 tháng 9 năm 2026. Nhiệm vụ: Bạn tên là 李明 (Lý Minh). Hãy vận dụng cấu trúc chuẩn 6 phần và văn phong trang trọng (书面语) đã học để viết một tờ 请假条 gửi cho Cô Vương (王老师) để xin nghỉ phép nửa ngày (buổi sáng ngày 18 tháng 9). (Giả định ngày viết đơn là ngày 17 tháng 9). Chính văn có thể tách nhiều đoạn — mỗi đoạn xuống dòng sẽ tự động thụt đầu 2 ô.",
+      "modelAnswer": "请假条\n\n尊敬的王老师：\n\n我父母拟于9月18日上午来华探望我。由于其不通汉语，我需前往机场接机并协助安排其入住，无法正常上课。因此，我拟于9月18日上午请假半天。特向您请假，并望批准。\n\n本人清楚学校学院有关研究生管理的规章制度，离校期间我将严格遵守国家法律、学校、学院有关安全管理规定，对自己的行为和人身安全负责；我已阅读请假注意事项，回校后将按时销假！\n\n此致\n敬礼！\n\n李 明\n2026年9月17日\n\n（187字）",
+      "targetWordCount": 187
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "sections": [
+    {
+      "heading": "I. Mục đích sử dụng",
+      "bodyHtml": "<p>Xin phép nghỉ học, nghỉ làm hoặc không tham gia hoạt động tập thể vì lý do chính đáng: <b class=\"zh\">病假条</b> (Xin nghỉ ốm) hoặc <b class=\"zh\">事假条</b> (Xin nghỉ việc riêng).</p>",
+      "kind": "text",
+      "orderIndex": 0
+    },
+    {
+      "heading": "II. Cấu trúc chuẩn 6 phần & Quy tắc căn lề",
+      "bodyHtml": "<div><p><b>1. Tiêu đề 标题</b> — 居中 (căn giữa). Viết ba chữ \"请假条\" ở dòng đầu tiên, căn giữa trang.</p><p><b>2. Xưng hô / Người nhận 称呼</b> — 顶格 (sát lề trái). Viết ở dòng thứ hai. Công thức: Họ/Họ tên + Chức danh/Xưng vị + dấu hai chấm (：) hoặc Kính ngữ + Họ + Chức danh/Xưng vị + dấu hai chấm (：).</p><p><b>3. Chính văn 正文</b> — 空两格 (lùi đầu dòng 2 ô). Nội dung đi theo trình tự: Lý do xin nghỉ → Thời gian nghỉ cụ thể → Đề nghị xin nghỉ và hy vọng được phê chuẩn. Văn phong: ngắn gọn, chân thực, súc tích.</p><p><b>4. Lời chúc kết thúc 祝颂语</b> — có thể có hoặc không. Nếu viết, bắt buộc tuân thủ đủ 2 dòng: <span class=\"zh\">此致</span> (空四格 — lùi 4 ô) xuống dòng dưới chính văn, không dùng dấu câu ở sau; <span class=\"zh\">敬礼！</span> (顶格 — sát lề trái) xuống dòng tiếp theo, bắt buộc dùng dấu chấm than (！).</p><p><b>5. Ký tên 署名</b> — góc dưới bên phải. Cách dòng chúc khoảng 2 dòng trống. Viết tên riêng, canh giữa so với chiều rộng dòng ngày tháng bên dưới.</p><p><b>6. Ngày tháng 日期</b> — sát lề phải. Xuống dòng ngay dưới phần Ký tên. Thứ tự viết: <span class=\"zh\">年 月 日</span>.</p></div>",
+      "kind": "text",
+      "orderIndex": 1
+    },
+    {
+      "heading": "III. Bộ từ ngữ / mẫu câu cố định (套语)",
+      "bodyHtml": "<p><b>Nêu lý do & thời gian:</b> <span class=\"zh\">因病/因事请假……</span> (Xin nghỉ phép ... vì lý do bệnh/việc bận); <span class=\"zh\">遵医嘱休息……</span> (Nghỉ ngơi ... theo chỉ định của bác sĩ); <span class=\"zh\">请假一周 / 请假半天</span> (Xin nghỉ một tuần / Xin nghỉ nửa ngày).</p><p><b>Lời đề nghị phê duyệt cuối chính văn:</b> <span class=\"zh\">特向您请假，并望批准。</span>(Nay xin phép nghỉ, và mong ngài phê chuẩn). <span class=\"zh\">恳请批准为盼。</span>(Khẩn khoản kính mong được phê chuẩn). <span class=\"zh\">特此请假。</span>(Nay xin nghỉ phép).</p>",
+      "kind": "text",
+      "orderIndex": 2
+    },
+    {
+      "heading": "IV. Sơ đồ bố cục trực quan",
+      "bodyHtml": "<div><p class=\"text-center font-bold zh\">请假条</p><p class=\"zh\">尊敬的陈老师：</p><p class=\"indent2 zh\">我因[Lý do xin nghỉ]，需要[Yêu cầu nghỉ ngơi]。因此，我拟于[Thời gian cụ thể]请假[Số ngày nghỉ]。特向您请假，并望批准。</p><p class=\"indent4 zh\">此致</p><p class=\"zh\">敬礼！</p><p class=\"zh\" style=\"text-align:center\">麦 克</p><p class=\"zh\" style=\"text-align:right\">2026年8月31日</p></div>",
+      "kind": "text",
+      "orderIndex": 3
+    }
+  ],
+  "sampleDocuments": [
+    {
+      "label": "Bài mẫu 1 · Đơn xin nghỉ phép (病假条)",
+      "audience": "王院长：",
+      "body": "今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我卧床静养。因此，我拟于12月26-29日请假四天。特向您请假，并望批准。\n\n此致\n敬礼！",
+      "signerOrg": "张大伟",
+      "date": "2026年8月31日",
+      "orderIndex": 0
+    },
+    {
+      "label": "Sơ đồ bố cục trực quan · Mẫu khung điền chỗ trống",
+      "audience": "尊敬的陈老师：",
+      "body": "我因[Lý do xin nghỉ]，需要[Yêu cầu nghỉ ngơi]。因此，我拟于[Thời gian cụ thể]请假[Số ngày nghỉ]。特向您请假，并望批准。\n\n此致\n敬礼！",
+      "signerOrg": "麦克",
+      "date": "2026年8月31日",
+      "orderIndex": 1
+    }
+  ],
+  "vocabTerms": [
+    { "literary": "脑门发热", "colloquial": "头有点热、发烧", "meaningVi": "Sốt nhẹ, đầu nóng", "example": "今天起床后我感到脑门发热，嗓子疼，全身不适。" },
+    { "literary": "嗓子疼", "colloquial": "喉咙痛、脖子疼", "meaningVi": "Đau họng", "example": "我感到……嗓子疼，全身不适。" },
+    { "literary": "全身不适", "colloquial": "浑身难受", "meaningVi": "Toàn thân khó chịu, không khỏe", "example": "我感到脑门发热，嗓子疼，全身不适。" },
+    { "literary": "上呼吸道感染", "colloquial": "感冒、发炎了", "meaningVi": "Nhiễm trùng đường hô hấp trên", "example": "医生说我是上呼吸道感染并建议我卧床静养。" },
+    { "literary": "卧床静养", "colloquial": "好好躺在床上休息", "meaningVi": "Nằm giường tĩnh dưỡng", "example": "医嘱建议我卧床静养两天。" },
+    { "literary": "拟于", "colloquial": "准备在", "meaningVi": "Dự định vào (mốc thời gian)", "example": "我拟于12月26-29日请假四天。" },
+    { "literary": "不慎着凉", "colloquial": "不小心感冒了", "meaningVi": "Không cẩn thận bị cảm lạnh", "example": "我因昨晚不慎着凉，今天发烧、咳嗽不止。" },
+    { "literary": "遵医嘱", "colloquial": "听医生的话", "meaningVi": "Tuân theo chỉ định của bác sĩ", "example": "我遵医嘱在家休息两天（9月1日至2日）。" }
+  ],
+  "fixedPhrases": [
+    { "chinese": "因病/因事请假……", "viExplanation": "Xin nghỉ phép vì lý do bệnh/việc bận (mẫu mở đầu nêu lý do)." },
+    { "chinese": "遵医嘱休息……", "viExplanation": "Nghỉ ngơi theo chỉ định của bác sĩ." },
+    { "chinese": "请假一周 / 请假半天", "viExplanation": "Xin nghỉ một tuần / Xin nghỉ nửa ngày (mẫu câu nêu thời lượng nghỉ)." },
+    { "chinese": "特向您请假，并望批准。", "viExplanation": "Nay xin phép nghỉ, và mong ngài phê chuẩn (lời đề nghị phê duyệt cuối chính văn)." },
+    { "chinese": "恳请批准为盼。", "viExplanation": "Khẩn khoản kính mong được phê chuẩn." },
+    { "chinese": "特此请假。", "viExplanation": "Nay xin nghỉ phép." },
+    { "chinese": "此致", "viExplanation": "Lời kết thúc trang trọng, lùi vào 4 ô (空四格), không dùng dấu câu phía sau." },
+    { "chinese": "敬礼！", "viExplanation": "Lời chào kính lễ, viết sát lề trái (顶格) ngay dòng dưới 此致, bắt buộc dùng dấu chấm than." }
+  ],
+  "quizQuestions": [
+    {
+      "kind": "THEORY",
+      "title": "1.1 · Quan sát kỹ Bài mẫu 1 bạn vừa đọc, nhận định nào sau đây là SAI về mặt thể thức hoặc văn phong?",
+      "prompt": "Quan sát kỹ Bài mẫu 1 bạn vừa đọc, nhận định nào sau đây là SAI về mặt thể thức hoặc văn phong?",
+      "options": [
+        "Tiêu đề \"请假条\" bắt buộc phải viết ở dòng đầu tiên và căn giữa (居中).",
+        "Cụm từ \"此致\" phải xuống dòng lùi vào 4 ô (空四格), còn \"敬礼！\" phải xuống dòng tiếp theo viết sát lề trái (顶格)。",
+        "Trong câu \"我拟于12月26-29日请假四天\"，từ \"拟于\" mang sắc thái khẩu ngữ (口语)，có thể thoải mái thay bằng \"准备在\" trong các văn bản trang trọng gửi cấp trên.",
+        "Ký tên \"张大伟\" và ngày tháng \"2026年8月31日\" phải được viết ở góc dưới bên phải tờ đơn và ngày tháng nằm ngay dưới tên."
+      ],
+      "correctIndex": 2,
+      "explanation": "Đáp án SAI là C. \"拟于\" (dự định vào...) là từ ngữ văn viết (书面语) chuyên dụng trong văn bản ứng dụng Trung Quốc để thể hiện sự trang trọng, nghiêm túc. Việc thay bằng từ khẩu ngữ \"准备在\" sẽ làm giảm tính chuyên nghiệp của đơn xin nghỉ phép.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 0
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.2 · Ba yếu tố bắt buộc trong Chính văn (正文)",
+      "prompt": "Theo hướng dẫn viết của giáo trình, phần Chính văn (正文) của một tờ \"请假条\" bắt buộc phải nêu bật được 3 yếu tố nào sau đây?",
+      "options": [
+        "Giới thiệu bản thân, kể chi tiết diễn biến sự việc, lời hứa sẽ tự học bù.",
+        "Lời hỏi thăm sức khỏe người nhận, lý do xin nghỉ, thông tin liên lạc khi cần.",
+        "Lý do xin nghỉ (请假原因), thời hạn nghỉ cụ thể (期限), và lời đề nghị xin nghỉ kèm mong muốn được phê duyệt (提出请假和希望得到批准的要求)。",
+        "Thời gian bắt đầu nghỉ, thời điểm quay trở lại, lời cảm ơn sâu sắc gửi tới người nhận đơn."
+      ],
+      "correctIndex": 2,
+      "explanation": "Đáp án: C. \"请假条的正文说明请假原因、期限并提出请假和希望得到批准的要求\" (Chính văn của đơn xin nghỉ phép nêu rõ lý do xin nghỉ, thời hạn nghỉ và đưa ra yêu cầu xin nghỉ cùng hy vọng được phê chuẩn). Các phương án còn lại đều thiếu hoặc thừa các chi tiết không quy phạm.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 1
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.3 · Nguyên tắc văn phong khi trình bày lý do xin nghỉ",
+      "prompt": "Khi trình bày phần lý do xin nghỉ trong chính văn, người viết cần tuân thủ nguyên tắc văn phong nào dưới đây để đảm bảo tính trang trọng (书面语) và hiệu quả giao tiếp?",
+      "options": [
+        "Phải chân thực, khách quan (真实、客观), ngôn từ chính xác, ngắn gọn và súc tích (准确、简洁), tránh kể lể dông dài những chi tiết đời tư không liên quan.",
+        "Nên viết thật chi tiết và biểu cảm để khơi gợi sự đồng cảm, thương xót từ thầy cô hoặc cấp trên.",
+        "Sử dụng nhiều từ ngữ khẩu ngữ (口语) sinh động, gần gũi để kéo gần khoảng cách với người duyệt đơn.",
+        "Chỉ cần viết chung chung là \"因 sự bận请假\" (Xin nghỉ vì việc bận) mà không cần đưa ra bối cảnh hợp lý nào khác."
+      ],
+      "correctIndex": 0,
+      "explanation": "Đáp án: A. Văn bản ứng dụng đề cao tính thực dụng, nội dung phải \"客观、真实\" (khách quan, chân thực) và ngôn ngữ phải \"准确、简洁\" (chính xác, ngắn gọn), tuyệt đối không viết lan man hoặc dùng các từ ngữ biểu cảm, ví dụ: \"比如写请假条，正文部分简要地说明请假理由、期限就可以了，不必详述相关情况\" (Ví dụ viết đơn xin nghỉ phép, phần chính văn chỉ cần thuyết minh ngắn gọn lý do, thời hạn là được, không cần kể chi tiết sự việc).",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 2
+    },
+    {
+      "kind": "THEORY",
+      "title": "1.4 · Nhận diện mẫu câu cố định (套语) chuẩn mực nhất khi nêu lý do xin nghỉ ốm",
+      "prompt": "Trong các câu nêu lý do xin nghỉ ốm dưới đây, câu nào sử dụng mẫu câu cố định (套语) trang trọng và chuẩn mực nhất theo giáo trình?",
+      "options": [
+        "我身体不太舒服，头痛得厉害，没办法去上课了。",
+        "我因昨晚不慎着凉，今天发烧、咳嗽不止。医嘱建议我卧床静养两天。",
+        "医生说我病得有点严重，一定要我在家好好躺着休息。",
+        "今天起床后我脑门发热，医生说我是感冒，所以我要请假。"
+      ],
+      "correctIndex": 1,
+      "explanation": "Đáp án: B. Phương án B sử dụng các cụm từ trang trọng (书面语) cực kỳ chuẩn mực trong giáo trình như: 因……请假 (vì lý do... xin nghỉ), 不慎着凉 (không cẩn thận bị cảm lạnh), và đặc biệt là cụm từ ghép hành chính 医嘱建议…… / 遵医嘱休息…… (nghỉ ngơi theo chỉ định của bác sĩ). Các phương án A, C, D mang đậm sắc thái khẩu ngữ (口语) tự nhiên, không phù hợp với văn bản viết trang trọng gửi cấp trên.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 3
+    }
+  ],
+  "clozeExercises": [
+    {
+      "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">请假条</p><p class=\"mb-2\">王院长：</p><p class=\"indent2 mb-1\">今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我_____(1)_____。因此，我_____(2)_____12月26—29日请假_____(3)_____天。_____(4)_____。</p><p class=\"indent4 mt-1\">此致</p><p>敬礼！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>张大伟</p><p>2026年8月31日</p></div></div>",
+      "blanks": [
+        { "id": "blank1", "answer": "卧床静养", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] },
+        { "id": "blank2", "answer": "拟于", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] },
+        { "id": "blank3", "answer": "四", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] },
+        { "id": "blank4", "answer": "特向您请假，并望批准", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] }
+      ],
+      "orderIndex": 0
+    }
+  ],
+  "matchItems": [
+    { "leftLabelVi": "头有点热、发烧 (đầu hơi nóng, sốt nhẹ)", "rightLabelZh": "脑门发热", "correctKey": "脑门发热", "explanation": "头有点热、发烧 ➔ 脑门发热: Chỉ trạng thái sốt nhẹ một cách khách quan.", "orderIndex": 0 },
+    { "leftLabelVi": "喉咙痛、脖子疼 (đau họng, đau cổ)", "rightLabelZh": "嗓子疼", "correctKey": "嗓子疼", "explanation": "喉咙痛 ➔ 嗓子疼: Thuật ngữ chuẩn trong văn bản để chỉ triệu chứng đau họng.", "orderIndex": 1 },
+    { "leftLabelVi": "浑身难受 (toàn thân khó chịu)", "rightLabelZh": "全身不适", "correctKey": "全身不适", "explanation": "浑身难受 ➔ 全身不适: Cách diễn đạt trang trọng thể hiện toàn thân không khỏe.", "orderIndex": 2 },
+    { "leftLabelVi": "感冒、发炎了 (cảm cúm, bị viêm)", "rightLabelZh": "上呼吸道感染", "correctKey": "上呼吸道感染", "explanation": "感冒、发炎了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác \"nhiễm trùng đường hô hấp trên\" thay vì gọi chung chung là cảm cúm.", "orderIndex": 3 },
+    { "leftLabelVi": "好好躺在床上休息 (nằm yên trên giường nghỉ ngơi)", "rightLabelZh": "卧床静养", "correctKey": "卧床静养", "explanation": "好好躺在床上休息 ➔ 卧床静养: \"Nằm giường tĩnh dưỡng\", thuật ngữ hành chính thể hiện việc nghỉ ngơi nghiêm túc theo chỉ định điều trị.", "orderIndex": 4 },
+    { "leftLabelVi": "头/额头有点热、发烧 (đầu/trán hơi nóng, sốt nhẹ)", "rightLabelZh": "脑门发热", "correctKey": "脑门发热", "explanation": "额头有点热 ➔ 脑门发热: Diễn đạt trạng thái sốt nhẹ một cách khách quan.", "orderIndex": 5 },
+    { "leftLabelVi": "喉咙痛、脖子疼 (đau họng, đau cổ)", "rightLabelZh": "嗓子疼", "correctKey": "嗓子疼", "explanation": "喉咙痛 ➔ 嗓子疼: Cách diễn đạt chuẩn mực y tế thông thường trong văn bản.", "orderIndex": 6 },
+    { "leftLabelVi": "浑身难受、没力气 (toàn thân khó chịu, không còn sức)", "rightLabelZh": "全身不适", "correctKey": "全身不适", "explanation": "浑身难受 ➔ 全身不适: Cụm từ hành chính thay thế cho cảm giác mệt mỏi chủ quan.", "orderIndex": 7 },
+    { "leftLabelVi": "感冒、发炎了 (cảm cúm, bị viêm)", "rightLabelZh": "上呼吸道感染", "correctKey": "上呼吸道感染", "explanation": "感冒了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác giúp tăng tính thuyết phục cho đơn xin nghỉ.", "orderIndex": 8 },
+    { "leftLabelVi": "在床上好好躺着休息 (nằm yên trên giường nghỉ ngơi)", "rightLabelZh": "卧床静养", "correctKey": "卧床静养", "explanation": "好好躺着休息 ➔ 卧床静养: Thể hiện việc tuân thủ nghiêm túc chế độ điều trị của bác sĩ.", "orderIndex": 9 }
+  ],
+  "writingTasks": [
+    {
+      "title": "Nhiệm vụ 1 · Viết bán phần (Skeleton Writing) — Xin nghỉ nửa ngày làm thủ tục visa",
+      "facts": [
+        "Người viết: 美美",
+        "Ngày viết đơn: 2026年10月14日",
+        "Lý do: phải đi 出入境管理局 (Cục Quản lý Xuất nhập cảnh) làm thủ tục gia hạn visa",
+        "Người nhận: 陈老师",
+        "Thời gian xin nghỉ: sáng ngày 15/10/2026, nghỉ nửa ngày (请假半天)"
+      ],
+      "requiredKeywords": ["拟于", "请假半天", "特向您请假，并望批准", "此致", "敬礼"],
+      "hint": "Công thức: [称呼：] + 我拟于[Thời gian cụ thể]请假半天。特向您请假，并望批准。 + 此致（空四格）+ 敬礼！（顶格）+ 署名 + 日期。",
+      "referenceAnswer": "陈老师：\n……（正文，暂不需要写理由）我拟于10月15日上午请假半天。特向您请假，并望批准。\n此致\n敬礼！\n美 美\n2026年10月14日",
+      "orderIndex": 0
+    },
+    {
+      "title": "Nhiệm vụ 2 · Chuyển đổi lý do sức khỏe (病假类) — Đau dạ dày",
+      "facts": [
+        "Tình huống: Tôi bị đau dạ dày dữ dội từ đêm qua, sáng nay đau không dậy nổi, phải đi bệnh viện khám. Bác sĩ bảo tôi bị viêm dạ dày cấp tính, phải ở nhà nằm yên trên giường nghỉ ngơi truyền dịch 2 ngày."
+      ],
+      "requiredKeywords": ["昨晚不慎", "胃痛难忍", "去医院就诊", "确诊为", "急性胃炎", "医嘱建议 / 遵医嘱", "卧床静养"],
+      "hint": "Hãy kết hợp các từ gợi ý trên để viết lại lý do này thành 1 đến 2 câu văn viết ngắn gọn và trang trọng nhất.",
+      "referenceAnswer": "我因昨晚不慎吃坏肚子，胃痛难忍。今早去医院就诊，确诊为急性胃炎。医嘱建议我卧床静养两天。",
+      "orderIndex": 1
+    },
+    {
+      "title": "Nhiệm vụ 3 · Chuyển đổi lý do sức khỏe (病假类) — Sốt, đau họng, nhiễm trùng hô hấp trên",
+      "facts": [
+        "Tình huống: Sáng nay ngủ dậy tôi thấy đầu trán cứ nóng hâm hấp (sốt nhẹ), cổ họng thì đau buốt, cả người mệt mỏi khó chịu lắm. Tôi liền đi bệnh viện khám ngay, bác sĩ nói tôi bị viêm đường hô hấp trên và khuyên tôi nên nằm yên trên giường để nghỉ ngơi dưỡng bệnh."
+      ],
+      "requiredKeywords": ["今天起床后", "脑门发热", "嗓子疼", "全身不适", "到医院看病", "上呼吸道感染", "建议我", "卧床静养"],
+      "hint": "Hãy sử dụng toàn bộ các từ vựng gợi ý trên để liên kết và viết lại tình huống khẩu ngữ thành 1 đến 2 câu văn viết chuẩn mực nhất.",
+      "referenceAnswer": "今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我卧床静养。",
+      "orderIndex": 2
+    }
+  ],
+  "guidedWritingFields": [
+    { "name": "title", "label": "标题 · Tiêu đề", "placeholder": "请假条", "inputType": "text", "orderIndex": 0 },
+    { "name": "audience", "label": "称呼 · Người nhận", "placeholder": "张老师", "inputType": "text", "orderIndex": 1 },
+    { "name": "body", "label": "正文 · Chính văn", "placeholder": "Viết lý do (cảm lạnh, sốt, ho) → chẩn đoán 重感冒 → thời gian nghỉ (1-2/9) → lời xin phép...", "inputType": "textarea", "orderIndex": 2 },
+    { "name": "cizhi", "label": "此致 · Lời kết 1", "placeholder": "此致", "inputType": "text", "orderIndex": 3 },
+    { "name": "jingli", "label": "敬礼！ · Lời kết 2", "placeholder": "敬礼！", "inputType": "text", "orderIndex": 4 },
+    { "name": "name", "label": "署名 · Ký tên", "placeholder": "你的名字", "inputType": "text", "orderIndex": 5 },
+    { "name": "date", "label": "日期 · Ngày tháng", "placeholder": "2026年8月31日", "inputType": "text", "orderIndex": 6 }
+  ],
+  "guidedWritingScenarios": [
+    {
+      "situationPrompt": "Tình huống: Tối qua bạn không cẩn thận bị cảm lạnh. Hôm nay bạn bị sốt, ho không dứt, toàn thân vô lực. Sau khi đi khám, bác sĩ chẩn đoán bạn bị cảm nặng (重感冒) và khuyên nên nằm giường tĩnh dưỡng (卧床静养). Bạn quyết định nghe theo lời bác sĩ và nghỉ ngơi tại nhà 2 ngày (từ mùng 1 đến mùng 2 tháng 9). Nhiệm vụ: Hãy viết một tờ 请假条 gửi cô giáo Trương (张老师) để xin nghỉ phép các buổi học tiếng Trung của ngày mai và ngày kia. (Giả định ngày viết đơn là ngày 31 tháng 8).",
+      "modelAnswer": "张老师：\n我因昨晚不慎着凉，今天发烧、咳嗽不止，全身无力。我已去医院看病，医生说我是重感冒，建议我卧床静养。为了尽快恢复健康，我遵医嘱在家休息两天（9月1日至2日）。\n为此，明后两天的汉语课我无法出勤，特向您请假，并望批准。\n此致\n敬礼！\n学生：李 伟\n2026年8月31日",
+      "targetWordCount": 150
+    }
+  ]
+}

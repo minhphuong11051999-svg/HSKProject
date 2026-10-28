@@ -1,0 +1,348 @@
+{
+  "sections": [
+    {
+      "heading": "I. Mục đích sử dụng & yêu cầu chung",
+      "bodyHtml": "<p><b>Mục đích:</b> gửi lời mời trang trọng bằng văn bản đến người thân, bạn bè hoặc chuyên gia, khách quý đến tham dự tiệc, buổi họp hoặc một hoạt động cụ thể.</p><p><b>Loại 1 (Thư mời cá nhân / Thân mật):</b> mời bạn bè, người quen tham gia hoạt động cá nhân (tiệc sinh nhật, liên hoan, dã ngoại…). Giọng văn thân thiện, ấm áp.</p><p><b>Loại 2 (Thư mời hành chính / Trang trọng — <span class=\"zh\">邀请函 / 请柬</span>):</b> mời chuyên gia, lãnh đạo, đại biểu tham dự sự kiện chính thức (hội thảo, lễ cưới, lễ khánh thành…). Giọng văn trang trọng, khách quan, tôn kính.</p><p><b>Yêu cầu cốt lõi:</b> đầy đủ thông tin sự kiện, phát hành kịp thời, ngôn ngữ lịch sự, có cách phản hồi rõ ràng.</p><p><b>Chủ đề phổ biến:</b> <span class=\"zh\">宴会邀请</span> (mời tiệc), <span class=\"zh\">婚礼邀请</span> (mời cưới), <span class=\"zh\">会议邀请</span> (mời hội nghị), <span class=\"zh\">聚会邀请</span> (mời liên hoan).</p>",
+      "kind": "text",
+      "orderIndex": 0
+    },
+    {
+      "heading": "II. Cấu trúc chuẩn 5 phần & quy tắc trình bày",
+      "bodyHtml": "<div><p><b>1. Tiêu đề 标题</b> — dòng đầu tiên, căn giữa. Cách viết chuẩn: 邀请信, 邀请函, 请柬 hoặc 请帖.</p><p><b>2. Đối tượng nhận lời mời 称呼</b> — dòng thứ hai, sát lề trái (顶格), kết thúc bằng dấu hai chấm. VD thân mật: 亲爱的朋友：; VD trang trọng: 尊敬的李教授：, 尊敬的各位来宾：.</p><p><b>3. Chính văn 正文</b> — lùi 2 ô đầu mỗi đoạn văn mới; xuống dòng trong cùng đoạn thì viết sát lề. Nội dung bắt buộc: lý do mời (缘起), thông tin chi tiết thời gian/địa điểm/hoạt động, yêu cầu chuẩn bị, hình thức trả lời, lưu ý ăn uống nếu có.</p><p><b>4. Lời chúc cuối thư 祝颂语</b> — Thư thân mật: câu chúc ấm áp ngắn gọn (VD: 期待你的到来！). Thư trang trọng: cặp từ 此致 / 敬礼！ — 此致 xuống dòng riêng, lùi vào 4 ô; 敬礼！xuống dòng tiếp theo, viết sát lề trái hoàn toàn.</p><p><b>5. Ký tên & Ngày tháng 署名与日期</b> — nằm ở góc dưới bên phải, cách chính văn (hoặc lời chúc cuối thư) khoảng 2 đến 3 dòng.</p></div>",
+      "kind": "text",
+      "orderIndex": 1
+    },
+    {
+      "heading": "III. Bộ mẫu câu cố định chuyên dụng 套话 (6 nhóm)",
+      "bodyHtml": "<div><p><b>1. Mở đầu & lý do mời:</b> 我们很荣幸地邀请您于[时间]到[地点]参加/做[活动]。 · 我诚挚/荣幸地邀请……。 · 我们打算在[时间]举行一次[活动]，真诚希望您能够参加。</p><p><b>2. Thông tin chi tiết & lịch trình:</b> 聚会/婚礼定于[时间]在[地点]举行。 · [活动]定在[时间]开始，活动地点为[地点]。 · 当天我们会一起吃晚饭、切生日蛋糕、玩一些有趣的小游戏。</p><p><b>3. Yêu cầu chuẩn bị trước:</b> 报告题目和具体时间由您自行决定。 · 请与会人员做好发言准备。 · 如需投影或其他设备请于[时间]前告知。 · 你不用准备礼物，只要带着愉快的心情来就可以了。</p><p><b>4. Lưu ý đặc biệt về ăn uống:</b> 如有素食等特殊饮食要求，请提前告知。 · 为了方便我们安排菜品，如果您有任何饮食禁忌，请在回复时说明。</p><p><b>5. Hình thức trả lời:</b> 请予答复。 · 敬请/恭请光临。 · 如果你能参加，请在[时间]之前通过微信或电话回复我。</p><p><b>6. Lời kết bày tỏ mong đợi:</b> 非常感谢您对我院学术工作的支持，并诚挚期待着聆听您的精彩报告。 · 我们真诚希望您能够参加，期待您的光临。 · 期待你的到来！希望我们一起度过一个快乐、温馨又难忘的聚会！</p></div>",
+      "kind": "text",
+      "orderIndex": 2
+    }
+  ],
+  "sampleDocuments": [
+    {
+      "label": "Bài mẫu 1 · Thư mời cá nhân / thân mật (tiệc sinh nhật)",
+      "audience": "亲爱的朋友：",
+      "body": "邀请信\n\n你好！我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加，希望我们能够一起度过一个愉快而难忘的晚上。\n\n聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。当天我们会一起吃晚饭、切生日蛋糕、玩一些有趣的小游戏，还会一起拍照留念。如果时间允许，我们还准备去KTV唱歌，相信大家一定会玩得很开心。\n\n你不用准备礼物，只要带着愉快的心情来就可以了。如果你能参加，请在8月12日之前通过微信或电话回复我，方便我提前预订座位和安排活动。\n\n期待你的到来！希望我们一起度过一个快乐、温馨又难忘的生日聚会！",
+      "signerOrg": "你的朋友：张明",
+      "date": "2026年8月5日",
+      "orderIndex": 0
+    },
+    {
+      "label": "Bài mẫu 2 · Thư mời hành chính / trang trọng (mời chuyên gia thuyết trình)",
+      "audience": "尊敬的李友教授：",
+      "body": "邀请信\n\n我们很荣幸地邀请您于本月15日到我院做一次关于当前中国经济情况的报告。报告题目和具体时间由您自行决定。如需投影或其他设备请于11日17点前告知。\n\n非常感谢您对我院学术工作的支持，并诚挚期待着聆听您的精彩报告。",
+      "signerOrg": "经济学院：钱德",
+      "date": "2016年6月8日",
+      "orderIndex": 1
+    },
+    {
+      "label": "Bài mẫu 3 · 邀请函 (Liên hoan Giáng sinh của du học sinh, có 此致 / 敬礼！)",
+      "audience": "亲爱的王老师：",
+      "body": "邀请函\n\n我们打算在圣诞节前夕举行一次中外学生联谊会。联谊会定在24日晚上7点开始，活动地点为学生会活动中心。\n\n我们真诚希望您能够参加，期待您的光临。若您不能参加，请打电话xxxxxxxx告知。\n\n此致\n敬礼！",
+      "signerOrg": "您的学生：王小亚等",
+      "date": "2016年12月20日",
+      "orderIndex": 2
+    }
+  ],
+  "vocabTerms": [
+    { "literary": "于", "colloquial": "在", "meaningVi": "Ở, tại / vào lúc (trang trọng)", "example": "我们很荣幸地邀请您于本月15日到我院做一次报告。" },
+    { "literary": "欲 / 拟", "colloquial": "想", "meaningVi": "Muốn / dự định", "example": "欲参加者请提前通过微信或电话回复。" },
+    { "literary": "将", "colloquial": "要", "meaningVi": "Sẽ / sắp", "example": "聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。" },
+    { "literary": "届时", "colloquial": "到时候", "meaningVi": "Đến lúc đó / đúng giờ đó", "example": "届时大家将一起唱圣诞歌曲、交换小礼物，气氛一定十分热闹。" },
+    { "literary": "及", "colloquial": "和", "meaningVi": "Và / cùng với", "example": "敬请各位来宾及家属届时光临。" }
+  ],
+  "fixedPhrases": [
+    { "chinese": "我们很荣幸地邀请您于[时间]到[地点]参加/做[活动]。", "viExplanation": "Chúng tôi rất vinh dự kính mời quý vị đến [địa điểm] tham gia/thực hiện [hoạt động] vào lúc [thời gian] (mở đầu thư mời trang trọng)." },
+    { "chinese": "我们打算在[时间]举行一次[活动]，真诚希望您能够参加。", "viExplanation": "Chúng tôi dự định tổ chức một [hoạt động] vào [thời gian], chân thành mong quý vị có thể tham gia." },
+    { "chinese": "聚会/婚礼定于[时间]在[地点]举行。", "viExplanation": "Buổi tiệc/lễ cưới được ấn định tổ chức vào [thời gian] tại [địa điểm]." },
+    { "chinese": "报告题目和具体时间由您自行决定。", "viExplanation": "Đề tài báo cáo và thời gian cụ thể do ngài tự quyết định (nhường quyền chủ động, thể hiện sự tôn trọng)." },
+    { "chinese": "如有素食等特殊饮食要求，请提前告知。", "viExplanation": "Nếu có yêu cầu ăn chay hoặc chế độ ăn đặc biệt khác, xin vui lòng báo trước." },
+    { "chinese": "你不用准备礼物，只要带着愉快的心情来就可以了。", "viExplanation": "Bạn không cần chuẩn bị quà, chỉ cần mang theo tâm trạng vui vẻ đến là được (câu dặn dò tế nhị trong thư mời thân mật)." },
+    { "chinese": "如果你能参加，请在[时间]之前通过微信或电话回复我。", "viExplanation": "Nếu bạn có thể tham gia, xin hãy phản hồi cho tôi qua WeChat hoặc điện thoại trước [thời gian]." },
+    { "chinese": "非常感谢您对我院学术工作的支持，并诚挚期待着聆听您的精彩报告。", "viExplanation": "Rất cảm ơn sự ủng hộ của ngài đối với công tác học thuật của viện chúng tôi, và chân thành mong đợi được lắng nghe bài báo cáo xuất sắc của ngài (lời kết thư mời trang trọng)." }
+  ],
+  "quizQuestions": [
+    {
+      "kind": "THEORY",
+      "title": "Câu 1 · Nội dung bắt buộc của Chính văn",
+      "prompt": "Phần Chính văn (正文) của một bức thư mời bắt buộc phải ghi rõ những thông tin nào?",
+      "options": [
+        "A. Phương thức liên hệ khẩn cấp và danh sách quà tặng.",
+        "B. Thời gian, địa điểm và nội dung hoạt động cụ thể (时间、地点、活动内容)。",
+        "C. Trình độ HSK của người viết và số lượng khách mời.",
+        "D. Chức danh học thuật của người nhận thư viết ở góc dưới lề phải."
+      ],
+      "correctIndex": 1,
+      "explanation": "Thời gian, địa điểm và nội dung hoạt động là ba thông tin cốt lõi bắt buộc phải có để người nhận thư nắm rõ sự kiện và sắp xếp tham dự.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 0
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 2 · Cách trình bày Xưng hô tôn kính",
+      "prompt": "Dòng xưng hô đầu thư (称呼) gửi cho đối tượng cần tôn kính (VD: 莫兰老师 hoặc 尊敬的李友教授) phải được trình bày thế nào?",
+      "options": [
+        "A. Lùi đầu dòng vào đúng 2 ô trống, kết thúc bằng dấu phẩy ,.",
+        "B. Viết sát lề trái hoàn toàn (顶格), kết thúc bằng dấu hai chấm ：。",
+        "C. Viết sát lề trái hoàn toàn (顶格), kết thúc bằng dấu chấm hỏi ?.",
+        "D. Viết lùi vào đúng 4 ô trống, kết thúc bằng dấu chấm than !."
+      ],
+      "correctIndex": 1,
+      "explanation": "Tên người nhận thư phải viết sát lề trái hoàn toàn (顶格) để thể hiện sự tôn trọng trực tiếp, kết thúc bằng dấu hai chấm để mở đầu nội dung.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 1
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 3 · Nội dung chu đáo cho thư mời sinh nhật",
+      "prompt": "Trong thư mời sinh nhật bạn bè, ngoài thời gian và địa điểm, người viết nên ghi thêm nội dung gì để thư tự nhiên và chu đáo?",
+      "options": [
+        "A. Yêu cầu bạn bè chuẩn bị quà đắt tiền.",
+        "B. Lịch trình cụ thể (吃晚饭、切生日蛋糕、玩游戏…) và lời dặn \"không cần chuẩn bị quà\"。",
+        "C. Đơn giá chi tiết từng món ăn để mọi người cùng chia tiền.",
+        "D. Danh sách những người không được mời."
+      ],
+      "correctIndex": 1,
+      "explanation": "Nêu rõ lịch trình giúp bạn bè dễ chuẩn bị tâm lý, và lời dặn không cần quà thể hiện sự hiếu khách, tinh tế của một bữa tiệc thân mật.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 2
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 4 · Xưng hô phù hợp cho thư thân mật",
+      "prompt": "Cách mở đầu xưng hô (称呼) nào sau đây phù hợp nhất cho thư mời thân mật gửi bạn bè hoặc tập thể lớp?",
+      "options": [
+        "A. 尊敬的李友教授：",
+        "B. 莫兰老师：",
+        "C. 亲爱的朋友： (hoặc 大家好！)",
+        "D. Vào thẳng chính văn và lược bỏ hoàn toàn xưng hô."
+      ],
+      "correctIndex": 2,
+      "explanation": "Đối với bạn bè hoặc tập thể bạn học, cách xưng hô gần gũi như \"亲爱的朋友：\" hoặc \"大家好！\" giúp tạo không khí tự nhiên, cởi mở.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 3
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 5 · Chi tiết thể hiện sự chu đáo",
+      "prompt": "Ngoài thời gian và địa điểm, người viết nên thêm chi tiết nào vào thư mời để thể hiện sự chu đáo và giúp người nhận dễ chuẩn bị?",
+      "options": [
+        "A. Danh sách các món ăn mặn của buổi tiệc và địa chỉ bãi đỗ xe.",
+        "B. Yêu cầu chuẩn bị trước (phát biểu, lưu ý ăn chay), yêu cầu hồi đáp và lời bày tỏ lòng biết ơn, sự mong đợi。",
+        "C. Chi phí chi tiết của từng món ăn và sơ đồ phòng họp tự vẽ.",
+        "D. Danh sách học vị của tất cả các khách mời khác sẽ tham gia."
+      ],
+      "correctIndex": 1,
+      "explanation": "Thêm các nội dung này giúp người nhận thư chủ động chuẩn bị (nội dung phát biểu, báo trước chế độ ăn uống) và phản hồi kịp thời để ban tổ chức sắp xếp chu đáo nhất.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 4
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 6 · Quy tắc trình bày 此致 / 敬礼！",
+      "prompt": "Khi sử dụng cặp từ chúc tụng hành chính 此致 và 敬礼！ ở cuối thư mời, quy chuẩn trình bày dòng nào sau đây là đúng?",
+      "options": [
+        "A. Viết liền nhau trên cùng một dòng lề phải: 此致敬礼！",
+        "B. Cả hai từ đều viết lùi vào đúng 4 ô trống ở dòng cuối cùng của chính văn.",
+        "C. 此致 viết sát lề trái; 敬礼！ xuống dòng lùi vào 2 ô trống.",
+        "D. 此致 xuống dòng lùi vào 4 ô trống; 敬礼！ xuống dòng tiếp theo viết sát lề trái hoàn toàn (顶格)。"
+      ],
+      "correctIndex": 3,
+      "explanation": "Từ 此致 bắt đầu dòng mới và lùi vào 4 ô trống (như bắt đầu một đoạn mới), còn từ 敬礼！ xuống dòng tiếp theo và viết sát lề hoàn toàn (顶格) để thể hiện sự tôn trọng tối đa.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 5
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 7 · Điền cụm từ 套话",
+      "prompt": "报告题目和具体时间________。",
+      "options": [
+        "A. 定于 (Được quyết định vào lúc)",
+        "B. 提前告知 (Báo trước / cho biết trước)",
+        "C. 由您自行决定 (Do ngài tự quyết định)",
+        "D. 通过微信或电话 (Qua WeChat hoặc điện thoại)",
+        "E. 期待你的到来 (Mong đợi sự có mặt của bạn)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cụm từ \"由您自行决定\" thể hiện sự tôn kính và chu đáo, nhường quyền chủ động chọn đề tài và thời gian cho chuyên gia/giảng viên được mời.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 6
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 8 · Điền cụm từ 套话",
+      "prompt": "聚会/婚礼________8月15日晚上6点在学校附近的阳光餐厅举行。",
+      "options": [
+        "A. 定于 (Được quyết định vào lúc)",
+        "B. 提前告知 (Báo trước / cho biết trước)",
+        "C. 由您自行决定 (Do ngài tự quyết định)",
+        "D. 通过微信或电话 (Qua WeChat hoặc điện thoại)",
+        "E. 期待你的到来 (Mong đợi sự có mặt của bạn)"
+      ],
+      "correctIndex": 0,
+      "explanation": "\"定于\" là phó từ hành chính trang trọng, dùng để liên kết trực tiếp chủ thể sự kiện với mốc thời gian và địa điểm tổ chức cụ thể.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 7
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 9 · Điền cụm từ 套话",
+      "prompt": "如有素食等特殊饮食要求，请________。",
+      "options": [
+        "A. 定于 (Được quyết định vào lúc)",
+        "B. 提前告知 (Báo trước / cho biết trước)",
+        "C. 由您自行决定 (Do ngài tự quyết định)",
+        "D. 通过微信或电话 (Qua WeChat hoặc điện thoại)",
+        "E. 期待你的到来 (Mong đợi sự có mặt của bạn)"
+      ],
+      "correctIndex": 1,
+      "explanation": "\"提前告知\" đặt ở cuối câu để đề nghị khách mời thông báo sớm các nhu cầu ăn uống đặc biệt (như ăn chay), giúp chủ nhà chuẩn bị chu đáo.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 8
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 10 · Điền cụm từ 套话",
+      "prompt": "如果你能参加，请在8月12日之前________回复我，方便我安排活动。",
+      "options": [
+        "A. 定于 (Được quyết định vào lúc)",
+        "B. 提前告知 (Báo trước / cho biết trước)",
+        "C. 由您自行决定 (Do ngài tự quyết định)",
+        "D. 通过微信或电话 (Qua WeChat hoặc điện thoại)",
+        "E. 期待你的到来 (Mong đợi sự có mặt của bạn)"
+      ],
+      "correctIndex": 3,
+      "explanation": "\"通过微信或电话\" làm trạng ngữ chỉ phương thức liên hệ, giúp người nhận thư biết rõ cách thức để phản hồi thông tin nhanh chóng.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 9
+    },
+    {
+      "kind": "THEORY",
+      "title": "Câu 11 · Điền cụm từ 套话",
+      "prompt": "很久没见面了，________！",
+      "options": [
+        "A. 定于 (Được quyết định vào lúc)",
+        "B. 提前告知 (Báo trước / cho biết trước)",
+        "C. 由您自行决定 (Do ngài tự quyết định)",
+        "D. 通过微信或电话 (Qua WeChat hoặc điện thoại)",
+        "E. 期待你的到来 (Mong đợi sự có mặt của bạn)"
+      ],
+      "correctIndex": 4,
+      "explanation": "\"期待你的到来！\" là lời kết thân mật, bày tỏ tình cảm ấm áp và mong đợi nhiệt tình của người viết đối với bạn bè.",
+      "draftHtml": null,
+      "draftHtmlMarked": null,
+      "orderIndex": 10
+    },
+    {
+      "kind": "ERROR_ANALYSIS",
+      "title": "Bước 4 · Thư mời bạn bè dã ngoại (bản thảo của 王伟)",
+      "prompt": "Bản thảo trên của 王伟 mắc bao nhiêu lỗi thể thức trình bày, và đó là những lỗi nào? (Phần ký tên và ngày tháng ở góc dưới bên phải đã đúng quy cách, không phải lỗi cần tìm.)",
+      "options": [
+        "A. Chỉ có 1 lỗi duy nhất: phần ký tên viết sai vị trí, phải đặt ở giữa trang.",
+        "B. Mắc 2 lỗi: (1) dòng xưng hô 亲爱的朋友： bị lùi vào 4 ô thay vì viết sát lề trái hoàn toàn (顶格); (2) dòng đầu của đoạn 1 (你好！我们已经……) viết sát lề, chưa thụt đầu dòng 2 ô như đoạn 2 bên dưới.",
+        "C. Bản thảo này hoàn toàn đúng chuẩn, không có lỗi nào.",
+        "D. Chỉ sai duy nhất ở việc thiếu tiêu đề 邀请信 ở đầu thư."
+      ],
+      "correctIndex": 1,
+      "explanation": "(1) Xưng hô \"亲爱的朋友：\" phải viết sát lề trái hoàn toàn (顶格) để mở đầu thư, nhưng bản thảo lại lùi vào 4 ô — sai quy tắc trình bày. (2) Đoạn văn đầu tiên của chính văn \"你好！我们已经很久没有见面了……\" bị viết sát lề, trong khi đúng ra phải lùi vào 2 ô đầu dòng giống như đoạn thứ hai bên dưới nó. Phần ký tên \"你的朋友：王伟\" và ngày tháng \"2026年9月5日\" ở góc dưới bên phải, cách nội dung chính 2 dòng — đây đã là cách trình bày đúng quy cách, không phải lỗi.",
+      "draftHtml": "<p class=\"mb-1\">&emsp;&emsp;&emsp;&emsp;亲爱的朋友：</p><p class=\"mb-1\">你好！我们已经很久没有见面了。为了走进大自然、放松身心，我打算本周六组织一次郊外野餐活动，诚心邀请你一同参加。</p><p class=\"indent2 mb-1\">野餐活动定于9月10日上午9点在学校操场集合出发。届时我们将一起烤肉、趣味互动。如果你能前来，请于9月8日前通过微信或电话告知我，方便我提前做好准备。</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>你的朋友：王伟</p><p>2026年9月5日</p></div></div>",
+      "draftHtmlMarked": "<p class=\"mb-1\" style=\"color:#c0392b;font-weight:900;\">&emsp;&emsp;&emsp;&emsp;亲爱的朋友：　（sai: phải viết sát lề trái 顶格，không lùi 4 ô）</p><p class=\"mb-1\" style=\"color:#c0392b;font-weight:900;\">你好！我们已经很久没有见面了。为了走进大自然、放松身心，我打算本周六组织一次郊外野餐活动，诚心邀请你一同参加。　（sai: chưa thụt đầu dòng 2 ô）</p><p class=\"indent2 mb-1\">野餐活动定于9月10日上午9点在学校操场集合出发。届时我们将一起烤肉、趣味互动。如果你能前来，请于9月8日前通过微信或电话告知我，方便我提前做好准备。</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>你的朋友：王伟</p><p>2026年9月5日</p></div></div>",
+      "orderIndex": 11
+    }
+  ],
+  "clozeExercises": [
+    {
+      "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">邀请信</p><p class=\"mb-2\">尊敬的李友教授：</p><p class=\"indent2 mb-1\">我们很荣幸地邀请您于本月15日到我院做一次关于当前中国经济情况的报告。_____(1)_____。_____(2)_____。</p><p class=\"indent2 mb-1\">非常感谢您对我院学术工作的支持，_____(3)_____。</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>经济学院：钱德</p><p>2016年6月8日</p></div></div>",
+      "blanks": [
+        { "id": "blank1", "answer": "报告题目和具体时间由您自行决定", "options": ["报告题目和具体时间由您自行决定", "如需投影或其他设备请于11日17点前告知", "并诚挚期待着聆听您的精彩报告"] },
+        { "id": "blank2", "answer": "如需投影或其他设备请于11日17点前告知", "options": ["报告题目和具体时间由您自行决定", "如需投影或其他设备请于11日17点前告知", "并诚挚期待着聆听您的精彩报告"] },
+        { "id": "blank3", "answer": "并诚挚期待着聆听您的精彩报告", "options": ["报告题目和具体时间由您自行决定", "如需投影或其他设备请于11日17点前告知", "并诚挚期待着聆听您的精彩报告"] }
+      ],
+      "orderIndex": 0
+    },
+    {
+      "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">邀请信</p><p class=\"mb-2\">亲爱的朋友：</p><p class=\"indent2 mb-1\">你好！_____(1)_____，希望我们能够一起度过一个愉快而难忘的晚上。</p><p class=\"indent2 mb-1\">聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。当天我们会一起吃晚饭、切生日蛋糕、玩一些有趣的小游戏，还会一起拍照留念。</p><p class=\"indent2 mb-1\">_____(2)_____。_____(3)_____，方便我提前预订座位和安排活动。</p><p class=\"indent2\">期待你的到来！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>你的朋友</p><p>2026年8月5日</p></div></div>",
+      "blanks": [
+        { "id": "blank1", "answer": "我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "options": ["我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "你不用准备礼物，只要带着愉快的心情来就可以了", "如果你能参加，请在8月12日之前通过微信或电话回复我"] },
+        { "id": "blank2", "answer": "你不用准备礼物，只要带着愉快的心情来就可以了", "options": ["我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "你不用准备礼物，只要带着愉快的心情来就可以了", "如果你能参加，请在8月12日之前通过微信或电话回复我"] },
+        { "id": "blank3", "answer": "如果你能参加，请在8月12日之前通过微信或电话回复我", "options": ["我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "你不用准备礼物，只要带着愉快的心情来就可以了", "如果你能参加，请在8月12日之前通过微信或电话回复我"] }
+      ],
+      "orderIndex": 1
+    }
+  ],
+  "matchItems": [
+    { "leftLabelVi": "Ở, tại (在星期五、在学校)", "rightLabelZh": "于", "correctKey": "于", "explanation": "在学校体育馆 ➔ 于学校体育馆: \"于\" là giới từ trang trọng chỉ thời gian, địa điểm thay cho \"在\" trong văn viết hành chính.", "orderIndex": 0 },
+    { "leftLabelVi": "Muốn, dự định (想参加、想邀请)", "rightLabelZh": "欲 / 拟", "correctKey": "欲 / 拟", "explanation": "想参加的人 ➔ 欲参加者: \"欲\"／\"拟\" là phó từ văn viết chỉ ý định, mong muốn, trang trọng hơn \"想\".", "orderIndex": 1 },
+    { "leftLabelVi": "Sẽ, sắp (要在……举行、要邀请)", "rightLabelZh": "将", "correctKey": "将", "explanation": "聚会要在8月15日举行 ➔ 聚会将于8月15日举行: \"将\" là phó từ chỉ hành động sẽ xảy ra trong tương lai gần.", "orderIndex": 2 },
+    { "leftLabelVi": "Đến lúc đó, khi đó (到时候大家一起……)", "rightLabelZh": "届时", "correctKey": "届时", "explanation": "到时候大家一起唱歌 ➔ 届时大家将一起唱圣诞歌曲: \"届时\" là phó từ văn viết chuyên dùng trong thư mời/thông báo sự kiện.", "orderIndex": 3 },
+    { "leftLabelVi": "Và, cùng với (来宾和家属)", "rightLabelZh": "及", "correctKey": "及", "explanation": "来宾和家属 ➔ 来宾及家属: \"及\" là liên từ trang trọng nối các đối tượng song song trong văn bản hành chính.", "orderIndex": 4 }
+  ],
+  "writingTasks": [
+    {
+      "title": "Nhiệm vụ 1 · Chuyển câu khẩu ngữ ➔ văn viết (hỏi đề tài & thời gian thuyết trình)",
+      "facts": ["Câu khẩu ngữ gốc: 你想讲什么题目，还有什么时候来，你自己决定就行。"],
+      "requiredKeywords": ["由您自行决定"],
+      "hint": "Dùng cụm \"由您自行决定\" (Do ngài tự quyết định) để nhường quyền chủ động cho chuyên gia/giảng viên một cách lịch sự.",
+      "referenceAnswer": "报告题目和具体时间由您自行决定。",
+      "orderIndex": 0
+    },
+    {
+      "title": "Nhiệm vụ 2 · Chuyển câu khẩu ngữ ➔ văn viết (dặn dò về quà cáp)",
+      "facts": ["Câu khẩu ngữ gốc: 你来就行了，千万别给我买礼物，人来我就最高兴了。"],
+      "requiredKeywords": ["不用准备礼物", "只要……就可以了"],
+      "hint": "Dùng cấu trúc \"不用准备……，只要……就可以了\" để dặn dò tế nhị, giúp khách mời cảm thấy thoải mái.",
+      "referenceAnswer": "你不用准备礼物，只要带着愉快的心情来就可以了。",
+      "orderIndex": 1
+    },
+    {
+      "title": "Nhiệm vụ 3 · Chuyển câu khẩu ngữ ➔ văn viết (hỏi về ăn chay)",
+      "facts": ["Câu khẩu ngữ gốc: 如果你不能吃肉、只吃素，记得提前和我说。"],
+      "requiredKeywords": ["如有……要求", "请提前告知"],
+      "hint": "Sử dụng cụm \"如有素食等特殊饮食要求，请提前告知\" để câu văn gọn gàng, trang nhã hơn khẩu ngữ.",
+      "referenceAnswer": "如有素食等特殊饮食要求，请提前告知。",
+      "orderIndex": 2
+    },
+    {
+      "title": "Nhiệm vụ 4 · Chuyển câu khẩu ngữ ➔ văn viết (hỏi về kiêng kỵ món ăn, khách trang trọng)",
+      "facts": ["Câu khẩu ngữ gốc: 为了让我们安排好菜，如果你有什么东西不能吃，回信的时候跟我说一下。"],
+      "requiredKeywords": ["饮食禁忌", "回复时说明"],
+      "hint": "Dùng từ \"饮食禁忌\" (kiêng kỵ ăn uống) và cụm \"请在回复时说明\" cho văn phong hành chính lịch sự.",
+      "referenceAnswer": "为了方便我们安排菜品，如果您有任何饮食禁忌，请在回复时说明。",
+      "orderIndex": 3
+    },
+    {
+      "title": "Nhiệm vụ 5 · Chuyển câu khẩu ngữ ➔ văn viết (hạn chót & phương thức phản hồi)",
+      "facts": ["Câu khẩu ngữ gốc: 要是你来，在8月12号前发微信或者打电话跟我说。"],
+      "requiredKeywords": ["如果……请在……之前", "通过微信或电话"],
+      "hint": "Chuyển \"要是\" thành \"如果\", \"发微信或者打电话\" thành cụm giới từ \"通过微信或电话\".",
+      "referenceAnswer": "如果你能参加，请在8月12日之前通过微信或电话回复我。",
+      "orderIndex": 4
+    }
+  ],
+  "guidedWritingFields": [
+    { "name": "title", "label": "1. Tiêu đề 标题", "placeholder": "邀请函", "inputType": "text", "orderIndex": 0 },
+    { "name": "greet", "label": "2. Đối tượng nhận / Xưng hô 称呼", "placeholder": "亲爱的王老师：", "inputType": "text", "orderIndex": 1 },
+    { "name": "body", "label": "3. Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 2 },
+    { "name": "salute", "label": "4. Dùng lời chúc trang trọng 此致 / 敬礼！", "placeholder": "此致 lùi 4 ô, 敬礼！sát lề", "inputType": "checkbox", "orderIndex": 3 },
+    { "name": "sign", "label": "5. Đơn vị / Ký tên 署名", "placeholder": "您的学生：李明", "inputType": "text", "orderIndex": 4 },
+    { "name": "date", "label": "6. Ngày tháng 日期", "placeholder": "2026年12月18日", "inputType": "text", "orderIndex": 5 }
+  ],
+  "guidedWritingScenarios": [
+    {
+      "situationPrompt": "Sắp đến Lễ Giáng sinh, bạn muốn mời thầy Vương (王老师) — giáo viên dạy tiếng Trung — đến tham dự \"Buổi liên hoan đón Giáng sinh của du học sinh\" (中外学生圣诞联谊会). Thời gian: 7 giờ tối 24/12. Địa điểm: Trung tâm hoạt động sinh viên (学生活动中心). Thầy không cần chuẩn bị quà; nếu bận xin gọi điện báo trước ngày 20/12. Viết 120–150 chữ Hán, chia 2 đoạn (mỗi đoạn thụt 2 ô), ký tên căn lề phải cân đối.",
+      "modelAnswer": "邀请函\n\n亲爱的王老师：\n\n我们打算在圣诞节前夕举行一次中外学生联谊会，特此诚挚邀请您拨冗参加。联谊会定于12月24日晚上7点开始，活动地点为学生会活动中心，届时大家将一起唱圣诞歌曲、交换小礼物，气氛一定十分热闹。\n\n您不用准备礼物，只要带着愉快的心情出席即可。若您因故不能参加，请于12月20日之前拨打电话xxxxxxxx告知，以便我们及时安排座位。\n\n我们真诚希望您能够拨冗参加，期待您的光临！\n\n此致\n敬礼！\n\n您的学生：王小亚等\n2026年12月18日",
+      "targetWordCount": 174
+    }
+  ]
+}
