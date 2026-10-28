@@ -10,6 +10,8 @@ export const submitExercise = (payload) => axiosClient.post('/submissions', payl
 export const listMySubmissions = (lessonSlug) =>
   axiosClient.get(lessonSlug ? `/submissions/me/${lessonSlug}` : '/submissions/me').then((r) => r.data);
 
+export const getLessonForAdmin = (id) => axiosClient.get(`/admin/lessons/${id}`).then((r) => r.data);
+
 export const createLesson = (payload) => axiosClient.post('/admin/lessons', payload).then((r) => r.data);
 
 export const updateLesson = (id, payload) => axiosClient.put(`/admin/lessons/${id}`, payload).then((r) => r.data);

@@ -18,6 +18,15 @@ async function getBySlug(req, res, next) {
   }
 }
 
+async function getForAdmin(req, res, next) {
+  try {
+    const lesson = await lessonService.getLessonForAdmin(req.params.id);
+    res.json(lesson);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function create(req, res, next) {
   try {
     const lesson = await lessonService.upsertLesson(req.body);
@@ -45,4 +54,4 @@ async function remove(req, res, next) {
   }
 }
 
-module.exports = { list, getBySlug, create, update, remove };
+module.exports = { list, getBySlug, getForAdmin, create, update, remove };

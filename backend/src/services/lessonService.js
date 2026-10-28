@@ -78,6 +78,16 @@ async function getLessonForGrading(lessonId) {
   return prisma.lesson.findUnique({ where: { id: lessonId }, include: FULL_INCLUDE });
 }
 
+async function getLessonForAdmin(lessonId) {
+  const lesson = await prisma.lesson.findUnique({ where: { id: lessonId }, include: FULL_INCLUDE });
+  if (!lesson) {
+    const error = new Error('Lesson not found');
+    error.status = 404;
+    throw error;
+  }
+  return lesson;
+}
+
 async function upsertLesson(data, lessonId) {
   const { slug, titleZh, titleVi, description, themeKey, type, examMonth, examYear, orderIndex, isPremium } = data;
 
@@ -144,4 +154,12 @@ async function deleteLesson(lessonId) {
   await prisma.lesson.delete({ where: { id: lessonId } });
 }
 
-module.exports = { listLessons, getLessonBySlug, getLessonForGrading, upsertLesson, deleteLesson, canAccess };
+module.exports = {
+  listLessons,
+  getLessonBySlug,
+  getLessonForGrading,
+  getLessonForAdmin,
+  upsertLesson,
+  deleteLesson,
+  canAccess,
+};
