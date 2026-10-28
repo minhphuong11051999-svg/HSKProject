@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #f4f5f9;
+  color: #12142a;
+}
+
+.zh {
+  font-family: 'Noto Serif SC', 'Be Vietnam Pro', serif;
+  font-weight: 500;
+}
+
+::selection {
+  background: #b08a3e;
+  color: #fff;
+}

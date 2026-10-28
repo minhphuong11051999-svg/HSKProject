@@ -1,0 +1,188 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Plan {
+  FREE
+  PREMIUM
+}
+
+enum LessonType {
+  PRACTICE
+  EXAM
+}
+
+enum QuizKind {
+  THEORY
+  ERROR_ANALYSIS
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  passwordHash String
+  name         String
+  role         Role         @default(USER)
+  plan         Plan         @default(FREE)
+  createdAt    DateTime     @default(now())
+  submissions  Submission[]
+}
+
+model Lesson {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  titleZh     String
+  titleVi     String
+  description String?
+  themeKey    String     @default("indigo")
+  type        LessonType @default(PRACTICE)
+  examMonth   Int?
+  examYear    Int?
+  orderIndex  Int        @default(0)
+  isPremium   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  sections             LessonSection[]
+  sampleDocuments       SampleDocument[]
+  vocabTerms            VocabTerm[]
+  fixedPhrases          FixedPhrase[]
+  quizQuestions         QuizQuestion[]
+  clozeExercises        ClozeExercise[]
+  matchItems            MatchItem[]
+  writingTasks          WritingTask[]
+  guidedWritingFields   GuidedWritingField[]
+  guidedWritingScenarios GuidedWritingScenario[]
+  submissions           Submission[]
+}
+
+model LessonSection {
+  id         String @id @default(cuid())
+  lessonId   String
+  lesson     Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  heading    String
+  bodyHtml   String
+  kind       String @default("text")
+  orderIndex Int    @default(0)
+}
+
+model SampleDocument {
+  id         String @id @default(cuid())
+  lessonId   String
+  lesson     Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  label      String
+  audience   String?
+  body       String
+  signerOrg  String?
+  date       String?
+  orderIndex Int    @default(0)
+}
+
+model VocabTerm {
+  id         String @id @default(cuid())
+  lessonId   String
+  lesson     Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  literary   String
+  colloquial String
+  meaningVi  String
+  example    String?
+}
+
+model FixedPhrase {
+  id             String @id @default(cuid())
+  lessonId       String
+  lesson         Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  chinese        String
+  viExplanation  String
+}
+
+model QuizQuestion {
+  id              String   @id @default(cuid())
+  lessonId        String
+  lesson          Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  kind            QuizKind @default(THEORY)
+  title           String
+  prompt          String
+  options         Json
+  correctIndex    Int
+  explanation     String?
+  draftHtml       String?
+  draftHtmlMarked String?
+  orderIndex      Int      @default(0)
+}
+
+model ClozeExercise {
+  id           String @id @default(cuid())
+  lessonId     String
+  lesson       Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  templateHtml String
+  blanks       Json
+  orderIndex   Int    @default(0)
+}
+
+model MatchItem {
+  id            String @id @default(cuid())
+  lessonId      String
+  lesson        Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  leftLabelVi   String
+  rightLabelZh  String
+  correctKey    String
+  explanation   String?
+  orderIndex    Int    @default(0)
+}
+
+model WritingTask {
+  id               String @id @default(cuid())
+  lessonId         String
+  lesson           Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  title            String
+  facts            Json
+  requiredKeywords Json
+  hint             String?
+  referenceAnswer  String
+  orderIndex       Int    @default(0)
+}
+
+model GuidedWritingField {
+  id          String @id @default(cuid())
+  lessonId    String
+  lesson      Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  name        String
+  label       String
+  placeholder String?
+  inputType   String @default("text")
+  orderIndex  Int    @default(0)
+}
+
+model GuidedWritingScenario {
+  id               String @id @default(cuid())
+  lessonId         String
+  lesson           Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  situationPrompt  String
+  modelAnswer      String
+  targetWordCount  Int?
+}
+
+model Submission {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId      String
+  lesson        Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  exerciseType  String
+  exerciseId    String
+  answerPayload Json
+  score         Int?
+  maxScore      Int?
+  submittedAt   DateTime @default(now())
+}
