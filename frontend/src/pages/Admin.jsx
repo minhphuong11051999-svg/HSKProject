@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { listLessons, getLessonForAdmin, createLesson, updateLesson, deleteLesson } from '../api/lessons';
 import { TextField, TextAreaField, NumberField, SelectField, CheckboxField } from '../components/admin/fields';
 import SimpleListEditor from '../components/admin/SimpleListEditor';
@@ -122,7 +123,10 @@ export default function Admin() {
     <main className="max-w-6xl mx-auto px-6 py-10">
       <div className="grid lg:grid-cols-[320px_1fr] gap-8">
         <section>
-          <h1 className="text-xl font-bold mb-4">Danh sách bài học</h1>
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl font-bold">Danh sách bài học</h1>
+            <Link to="/admin/users" className="text-sm text-indigo-600 underline">Quản lý người dùng</Link>
+          </div>
           <ul className="space-y-2">
             {lessons.map((lesson) => (
               <li key={lesson.id} className="bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center">

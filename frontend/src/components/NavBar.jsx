@@ -19,9 +19,10 @@ export default function NavBar() {
         <nav className="flex items-center gap-4 text-sm">
           {user && <Link to="/history">Lịch sử</Link>}
           {user?.role === 'ADMIN' && <Link to="/admin">Quản trị</Link>}
+          {user?.role === 'ADMIN' && <Link to="/admin/users">Người dùng</Link>}
           {user ? (
             <>
-              <span className="opacity-80">{user.name}</span>
+              <span className="opacity-80">Xin chào, {user.name}</span>
               <button onClick={handleLogout} className="underline">
                 Đăng xuất
               </button>

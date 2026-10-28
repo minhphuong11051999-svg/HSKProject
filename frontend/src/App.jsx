@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import History from './pages/History';
 import Admin from './pages/Admin';
+import AdminUsers from './pages/AdminUsers';
 import LessonPlayer from './pages/LessonPlayer';
 import ProtectedRoute from './routes/ProtectedRoute';
 
@@ -37,6 +38,14 @@ export default function App() {
           element={
             <ProtectedRoute role="ADMIN">
               <Admin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute role="ADMIN">
+              <AdminUsers />
             </ProtectedRoute>
           }
         />
