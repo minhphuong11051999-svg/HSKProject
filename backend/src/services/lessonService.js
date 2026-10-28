@@ -123,8 +123,21 @@ function buildNestedCreate(data) {
   return result;
 }
 
+const MODEL_NAME = {
+  sections: 'lessonSection',
+  sampleDocuments: 'sampleDocument',
+  vocabTerms: 'vocabTerm',
+  fixedPhrases: 'fixedPhrase',
+  quizQuestions: 'quizQuestion',
+  clozeExercises: 'clozeExercise',
+  matchItems: 'matchItem',
+  writingTasks: 'writingTask',
+  guidedWritingFields: 'guidedWritingField',
+  guidedWritingScenarios: 'guidedWritingScenario',
+};
+
 function modelNameFor(key) {
-  return key;
+  return MODEL_NAME[key];
 }
 
 async function deleteLesson(lessonId) {

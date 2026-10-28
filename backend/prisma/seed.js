@@ -19,6 +19,19 @@ const NESTED_KEYS = [
   'guidedWritingScenarios',
 ];
 
+const MODEL_NAME = {
+  sections: 'lessonSection',
+  sampleDocuments: 'sampleDocument',
+  vocabTerms: 'vocabTerm',
+  fixedPhrases: 'fixedPhrase',
+  quizQuestions: 'quizQuestion',
+  clozeExercises: 'clozeExercise',
+  matchItems: 'matchItem',
+  writingTasks: 'writingTask',
+  guidedWritingFields: 'guidedWritingField',
+  guidedWritingScenarios: 'guidedWritingScenario',
+};
+
 function loadContentFor(slug) {
   const file = path.join(__dirname, 'data', `${slug}.json`);
   if (!fs.existsSync(file)) return null;
@@ -65,7 +78,7 @@ async function main() {
     if (existing) {
       if (content) {
         await prisma.$transaction(
-          NESTED_KEYS.map((key) => prisma[key].deleteMany({ where: { lessonId: existing.id } }))
+          NESTED_KEYS.map((key) => prisma[MODEL_NAME[key]].deleteMany({ where: { lessonId: existing.id } }))
         );
         await prisma.lesson.update({
           where: { id: existing.id },
