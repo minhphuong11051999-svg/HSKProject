@@ -3,6 +3,9 @@ import { useAuth } from '../context/AuthContext';
 
 const NAV_ITEMS = [
   { to: '/', icon: '🏠', label: 'Trang chủ' },
+  { to: '/lessons', icon: '📖', label: 'Bài học' },
+  { to: '/lessons/practice', icon: '📝', label: 'Đề mẫu' },
+  { to: '/lessons/exam', icon: '🎯', label: 'Đề thi thật' },
   { to: '/history', icon: '🕘', label: 'Lịch sử' },
 ];
 

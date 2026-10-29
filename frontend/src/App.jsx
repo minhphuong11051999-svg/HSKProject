@@ -10,6 +10,7 @@ const History = lazy(() => import('./pages/History'));
 const Admin = lazy(() => import('./pages/Admin'));
 const AdminUsers = lazy(() => import('./pages/AdminUsers'));
 const LessonPlayer = lazy(() => import('./pages/LessonPlayer'));
+const Lessons = lazy(() => import('./pages/Lessons'));
 
 function PageFallback() {
   return <div className="p-10 text-center text-slate-500">Đang tải...</div>;
@@ -23,6 +24,30 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/lessons"
+            element={
+              <ProtectedRoute>
+                <Lessons />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/lessons/practice"
+            element={
+              <ProtectedRoute>
+                <Lessons type="practice" />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/lessons/exam"
+            element={
+              <ProtectedRoute>
+                <Lessons type="exam" />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/lessons/:slug"
             element={

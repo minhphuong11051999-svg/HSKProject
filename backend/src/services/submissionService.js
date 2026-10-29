@@ -71,4 +71,75 @@ async function listMySubmissions(userId, lessonSlug) {
   });
 }
 
-module.exports = { createSubmission, listMySubmissions };
+const DAY_MS = 24 * 60 * 60 * 1000;
+const ACTIVITY_WINDOW_DAYS = 90;
+
+function toDateKey(date) {
+  return date.toISOString().slice(0, 10);
+}
+
+async function getUserStats(userId) {
+  const submissions = await prisma.submission.findMany({
+    where: { userId },
+    select: { submittedAt: true },
+  });
+
+  const activeDays = new Set(submissions.map((s) => toDateKey(s.submittedAt)));
+  const sortedDays = Array.from(activeDays).sort();
+
+  const todayKey = toDateKey(new Date());
+  const yesterdayKey = toDateKey(new Date(Date.now() - DAY_MS));
+
+  let currentStreak = 0;
+  if (activeDays.has(todayKey) || activeDays.has(yesterdayKey)) {
+    let cursor = activeDays.has(todayKey) ? new Date() : new Date(Date.now() - DAY_MS);
+    while (activeDays.has(toDateKey(cursor))) {
+      currentStreak += 1;
+      cursor = new Date(cursor.getTime() - DAY_MS);
+    }
+  }
+
+  let longestStreak = 0;
+  let run = 0;
+  let prevDate = null;
+  for (const key of sortedDays) {
+    const date = new Date(`${key}T00:00:00Z`);
+    if (prevDate && date.getTime() - prevDate.getTime() === DAY_MS) {
+      run += 1;
+    } else {
+      run = 1;
+    }
+    longestStreak = Math.max(longestStreak, run);
+    prevDate = date;
+  }
+
+  const totalSubmissions = submissions.length;
+  const xpPerSubmission = 10;
+  const xpPerLevel = 100;
+  const totalXp = totalSubmissions * xpPerSubmission;
+  const level = Math.floor(totalXp / xpPerLevel) + 1;
+  const xpIntoLevel = totalXp % xpPerLevel;
+
+  const activity = [];
+  const now = new Date();
+  for (let i = ACTIVITY_WINDOW_DAYS - 1; i >= 0; i -= 1) {
+    const date = new Date(now.getTime() - i * DAY_MS);
+    const key = toDateKey(date);
+    activity.push({ date: key, active: activeDays.has(key) });
+  }
+  const daysActiveInWindow = activity.filter((a) => a.active).length;
+
+  return {
+    currentStreak,
+    longestStreak,
+    totalSubmissions,
+    level,
+    xpIntoLevel,
+    xpPerLevel,
+    activity,
+    daysActiveInWindow,
+    windowDays: ACTIVITY_WINDOW_DAYS,
+  };
+}
+
+module.exports = { createSubmission, listMySubmissions, getUserStats };

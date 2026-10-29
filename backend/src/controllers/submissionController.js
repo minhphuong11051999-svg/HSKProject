@@ -24,4 +24,13 @@ async function listMine(req, res, next) {
   }
 }
 
-module.exports = { create, listMine };
+async function myStats(req, res, next) {
+  try {
+    const stats = await submissionService.getUserStats(req.user.id);
+    res.json(stats);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { create, listMine, myStats };
