@@ -125,18 +125,18 @@ export default function Admin() {
         <section>
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-xl font-bold">Danh sách bài học</h1>
-            <Link to="/admin/users" className="text-sm text-indigo-600 underline">Quản lý người dùng</Link>
+            <Link to="/admin/users" className="text-sm text-coral-400 underline">Quản lý người dùng</Link>
           </div>
           <ul className="space-y-2">
             {lessons.map((lesson) => (
-              <li key={lesson.id} className="bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center">
+              <li key={lesson.id} className="bg-night-800 border border-night-700 rounded-lg p-3 flex justify-between items-center">
                 <div>
                   <p className="zh">{lesson.titleZh}</p>
-                  <p className="text-xs text-slate-500">{lesson.slug} · {lesson.type}</p>
+                  <p className="text-xs text-slate-400">{lesson.slug} · {lesson.type}</p>
                 </div>
                 <div className="flex gap-2 text-sm">
-                  <button onClick={() => edit(lesson)} className="text-indigo-600 underline">Sửa</button>
-                  <button onClick={() => handleDelete(lesson.id)} className="text-seal underline">Xoá</button>
+                  <button onClick={() => edit(lesson)} className="text-coral-400 underline">Sửa</button>
+                  <button onClick={() => handleDelete(lesson.id)} className="text-red-400 underline">Xoá</button>
                 </div>
               </li>
             ))}
@@ -147,16 +147,16 @@ export default function Admin() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold">{form.id ? 'Sửa bài học' : 'Thêm bài học mới'}</h2>
             {form.id && (
-              <button type="button" onClick={() => setForm(EMPTY_FORM)} className="text-sm px-3 py-1.5 border border-slate-300 rounded-lg">
+              <button type="button" onClick={() => setForm(EMPTY_FORM)} className="text-sm px-3 py-1.5 border border-night-600 rounded-lg">
                 + Tạo bài học mới
               </button>
             )}
           </div>
 
-          {loadingEdit && <p className="text-slate-500 text-sm mb-3">Đang tải nội dung...</p>}
+          {loadingEdit && <p className="text-slate-400 text-sm mb-3">Đang tải nội dung...</p>}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="border border-slate-300 rounded-lg p-4 space-y-2">
+            <div className="border border-night-600 rounded-lg p-4 space-y-2">
               <h3 className="font-semibold text-sm mb-1">Thông tin cơ bản</h3>
               <div className="grid sm:grid-cols-2 gap-2">
                 <TextField label="Slug (vd: luyen-viet-thongbao)" value={form.slug} onChange={(v) => set('slug', v)} />
@@ -280,10 +280,10 @@ export default function Admin() {
               ]}
             />
 
-            {error && <p className="text-seal text-sm">{error}</p>}
-            {savedMessage && <p className="text-green-700 text-sm">{savedMessage}</p>}
-            <div className="flex gap-2 sticky bottom-0 bg-slate-50 py-3">
-              <button type="submit" disabled={saving} className="bg-indigo-900 text-white rounded-lg px-4 py-2 font-semibold">
+            {error && <p className="text-red-400 text-sm">{error}</p>}
+            {savedMessage && <p className="text-green-400 text-sm">{savedMessage}</p>}
+            <div className="flex gap-2 sticky bottom-0 bg-night-950 py-3">
+              <button type="submit" disabled={saving} className="bg-coral-500 hover:bg-coral-600 text-white rounded-lg px-4 py-2 font-semibold transition-colors">
                 {saving ? 'Đang lưu...' : form.id ? 'Lưu thay đổi' : 'Tạo bài học'}
               </button>
             </div>

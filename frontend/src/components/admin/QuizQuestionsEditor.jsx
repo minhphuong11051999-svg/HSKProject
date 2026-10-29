@@ -56,7 +56,7 @@ export default function QuizQuestionsEditor({ items, onChange }) {
           )}
 
           <div>
-            <p className="text-xs text-slate-600 mb-1">Các đáp án (chọn ô tròn cho đáp án ĐÚNG)</p>
+            <p className="text-xs text-slate-400 mb-1">Các đáp án (chọn ô tròn cho đáp án ĐÚNG)</p>
             <div className="space-y-1">
               {item.options.map((opt, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export default function QuizQuestionsEditor({ items, onChange }) {
                       update({ ...item, options });
                     }}
                     placeholder={`Đáp án ${String.fromCharCode(65 + i)}`}
-                    className="flex-1 border border-slate-300 rounded px-2 py-1 text-sm"
+                    className="flex-1 bg-night-900 border border-night-600 rounded px-2 py-1 text-sm text-slate-100"
                   />
                   <button
                     type="button"
@@ -82,7 +82,7 @@ export default function QuizQuestionsEditor({ items, onChange }) {
                       const correctIndex = item.correctIndex >= options.length ? 0 : item.correctIndex;
                       update({ ...item, options, correctIndex });
                     }}
-                    className="text-xs text-seal"
+                    className="text-xs text-red-400"
                   >
                     Xoá
                   </button>
@@ -92,7 +92,7 @@ export default function QuizQuestionsEditor({ items, onChange }) {
             <button
               type="button"
               onClick={() => update({ ...item, options: [...item.options, ''] })}
-              className="mt-1 text-xs text-indigo-600 underline"
+              className="mt-1 text-xs text-coral-400 underline"
             >
               + thêm đáp án
             </button>

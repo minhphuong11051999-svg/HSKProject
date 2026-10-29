@@ -11,6 +11,23 @@ export default {
         paperline: '#eae7dc',
         seal: '#a33529',
         gold: '#b08a3e',
+        // Baolingo-inspired dark theme
+        night: {
+          950: '#0a0a0d',
+          900: '#121216',
+          800: '#1a1a20',
+          700: '#242430',
+          600: '#32323f',
+        },
+        coral: {
+          50: '#fdeceb',
+          100: '#fbd9d6',
+          300: '#f29c96',
+          400: '#ee847d',
+          500: '#e8716a',
+          600: '#d85951',
+          700: '#b8453e',
+        },
       },
       fontFamily: {
         zh: ['"Noto Serif SC"', '"Be Vietnam Pro"', 'serif'],

@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-  background: #f4f5f9;
-  color: #12142a;
+  background: #0a0a0d;
+  color: #e9e9ee;
 }
 
 .zh {
@@ -13,6 +13,21 @@ body {
 }
 
 ::selection {
-  background: #b08a3e;
+  background: #e8716a;
   color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #121216;
+}
+::-webkit-scrollbar-thumb {
+  background: #32323f;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e8716a;
 }

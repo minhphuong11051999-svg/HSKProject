@@ -19,15 +19,15 @@ export default function History() {
       ) : (
         <ul className="space-y-3">
           {submissions.map((s) => (
-            <li key={s.id} className="bg-white border border-slate-300 rounded-lg p-4 flex justify-between items-center">
+            <li key={s.id} className="bg-night-800 border border-night-700 rounded-lg p-4 flex justify-between items-center">
               <div>
-                <p className="zh">{s.lesson.titleZh}</p>
+                <p className="zh text-slate-100">{s.lesson.titleZh}</p>
                 <p className="text-sm text-slate-500">
                   {s.exerciseType} · {new Date(s.submittedAt).toLocaleString('vi-VN')}
                 </p>
               </div>
               {s.maxScore != null && (
-                <span className="font-semibold">
+                <span className="font-semibold text-coral-400">
                   {s.score}/{s.maxScore}
                 </span>
               )}

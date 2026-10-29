@@ -32,10 +32,10 @@ export default function ClozeExercisesEditor({ items, onChange }) {
           />
 
           <div>
-            <p className="text-xs text-slate-600 mb-1">Các chỗ trống (theo đúng thứ tự 1, 2, 3...)</p>
+            <p className="text-xs text-slate-400 mb-1">Các chỗ trống (theo đúng thứ tự 1, 2, 3...)</p>
             <div className="space-y-2">
               {item.blanks.map((b, i) => (
-                <div key={i} className="bg-white border border-slate-200 rounded p-2">
+                <div key={i} className="bg-night-900 border border-night-700 rounded p-2">
                   <p className="text-xs text-slate-400 mb-1">Chỗ trống số {i + 1}</p>
                   <div className="grid sm:grid-cols-2 gap-2">
                     <input
@@ -46,7 +46,7 @@ export default function ClozeExercisesEditor({ items, onChange }) {
                         update({ ...item, blanks });
                       }}
                       placeholder="Đáp án đúng"
-                      className="border border-slate-300 rounded px-2 py-1 text-sm"
+                      className="bg-night-800 border border-night-600 rounded px-2 py-1 text-sm text-slate-100"
                     />
                     <LinesField
                       label="Các lựa chọn hiển thị (mỗi dòng 1 lựa chọn, nên gồm cả đáp án đúng ở trên)"
@@ -66,7 +66,7 @@ export default function ClozeExercisesEditor({ items, onChange }) {
                         .map((blank, idx) => ({ ...blank, id: blankId(idx) }));
                       update({ ...item, blanks });
                     }}
-                    className="text-xs text-seal mt-1"
+                    className="text-xs text-red-400 mt-1"
                   >
                     Xoá chỗ trống này
                   </button>
@@ -81,7 +81,7 @@ export default function ClozeExercisesEditor({ items, onChange }) {
                   blanks: [...item.blanks, { id: blankId(item.blanks.length), answer: '', options: [''] }],
                 })
               }
-              className="mt-1 text-xs text-indigo-600 underline"
+              className="mt-1 text-xs text-coral-400 underline"
             >
               + thêm chỗ trống
             </button>

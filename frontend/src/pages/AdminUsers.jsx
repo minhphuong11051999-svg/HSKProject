@@ -49,16 +49,16 @@ export default function AdminUsers() {
     <main className="max-w-5xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-bold">Quản lý người dùng</h1>
-        <Link to="/admin" className="text-sm text-indigo-600 underline">Quản trị bài học</Link>
+        <Link to="/admin" className="text-sm text-coral-400 underline">Quản trị bài học</Link>
       </div>
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-8">
         <section>
           {loading ? (
-            <p className="text-slate-500">Đang tải...</p>
+            <p className="text-slate-400">Đang tải...</p>
           ) : (
-            <table className="w-full text-sm bg-white border border-slate-300 rounded-lg overflow-hidden">
-              <thead className="bg-slate-50">
+            <table className="w-full text-sm bg-night-800 border border-night-700 rounded-lg overflow-hidden">
+              <thead className="bg-night-900">
                 <tr>
                   <th className="p-3 text-left">Tên</th>
                   <th className="p-3 text-left">Email</th>
@@ -70,15 +70,15 @@ export default function AdminUsers() {
               </thead>
               <tbody>
                 {users.map((u) => (
-                  <tr key={u.id} className="border-t border-slate-200">
+                  <tr key={u.id} className="border-t border-night-700">
                     <td className="p-3">{u.name}</td>
                     <td className="p-3">{u.email}</td>
                     <td className="p-3">{u.role}</td>
-                    <td className="p-3 text-slate-500">{new Date(u.createdAt).toLocaleDateString('vi-VN')}</td>
+                    <td className="p-3 text-slate-400">{new Date(u.createdAt).toLocaleDateString('vi-VN')}</td>
                     <td className="p-3 text-center">{u.submissionCount}</td>
                     <td className="p-3 text-right">
                       {u.id !== me?.id && (
-                        <button onClick={() => handleDelete(u)} className="text-seal underline">Xoá</button>
+                        <button onClick={() => handleDelete(u)} className="text-red-400 underline">Xoá</button>
                       )}
                     </td>
                   </tr>
@@ -90,13 +90,13 @@ export default function AdminUsers() {
 
         <section>
           <h2 className="font-semibold mb-3">Tạo tài khoản mới</h2>
-          <form onSubmit={handleSubmit} className="space-y-3 bg-white border border-slate-300 rounded-lg p-4">
+          <form onSubmit={handleSubmit} className="space-y-3 bg-night-800 border border-night-700 rounded-lg p-4">
             <input
               required
               placeholder="Họ tên"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+              className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500"
             />
             <input
               type="email"
@@ -104,7 +104,7 @@ export default function AdminUsers() {
               placeholder="Email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+              className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500"
             />
             <input
               type="password"
@@ -113,18 +113,18 @@ export default function AdminUsers() {
               placeholder="Mật khẩu (tối thiểu 8 ký tự)"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+              className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500"
             />
             <select
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+              className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500"
             >
               <option value="USER">Người dùng</option>
               <option value="ADMIN">Quản trị viên</option>
             </select>
-            {error && <p className="text-seal text-sm">{error}</p>}
-            <button type="submit" disabled={saving} className="w-full bg-indigo-900 text-white rounded-lg py-2 font-semibold">
+            {error && <p className="text-red-400 text-sm">{error}</p>}
+            <button type="submit" disabled={saving} className="w-full bg-coral-500 hover:bg-coral-600 text-white rounded-lg py-2 font-semibold transition-colors">
               {saving ? 'Đang tạo...' : 'Tạo tài khoản'}
             </button>
           </form>
