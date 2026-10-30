@@ -76,10 +76,27 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
     });
   }
 
-  function handleFile(e) {
+  async function handleFile(e) {
     const file = e.target.files?.[0];
     e.target.value = '';
     if (!file) return;
+
+    const isWord =
+      file.name.toLowerCase().endsWith('.docx') ||
+      file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+
+    if (isWord) {
+      try {
+        const mammoth = await import('mammoth/mammoth.browser');
+        const arrayBuffer = await file.arrayBuffer();
+        const { value: html } = await mammoth.convertToHtml({ arrayBuffer });
+        insertAtCursor(html);
+      } catch (err) {
+        alert('Không đọc được file Word này: ' + err.message);
+      }
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = () => insertAtCursor(`<img src="${reader.result}" alt="" />`);
     reader.readAsDataURL(file);
@@ -103,9 +120,15 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
           U
         </button>
         <button type="button" className={RICH_TOOLBAR_BTN} onClick={() => fileInputRef.current?.click()}>
-          📎 Thêm file
+          📎 Thêm ảnh/Word
         </button>
-        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*,.docx"
+          className="hidden"
+          onChange={handleFile}
+        />
         <button
           type="button"
           className={`${RICH_TOOLBAR_BTN} ${preview ? 'bg-coral-600 border-coral-500 text-white' : ''}`}
