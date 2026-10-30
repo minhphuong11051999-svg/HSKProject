@@ -130,19 +130,25 @@ function GuideTab({ lesson }) {
 
 function QuizTab({ lessonId, questions, canSave, showDraft }) {
   const [selected, setSelected] = useState({});
-  const [checked, setChecked] = useState({});
+  const [results, setResults] = useState({});
+  const [checking, setChecking] = useState({});
 
   async function check(question) {
     const selectedIndex = selected[question.id];
-    if (selectedIndex === undefined) return;
-    setChecked((prev) => ({ ...prev, [question.id]: true }));
-    if (canSave) {
-      await submitExercise({
+    if (selectedIndex === undefined || !canSave) return;
+    setChecking((prev) => ({ ...prev, [question.id]: true }));
+    try {
+      const res = await submitExercise({
         lessonId,
         exerciseType: 'quiz',
         exerciseId: question.id,
         answerPayload: { selectedIndex },
-      }).catch(() => {});
+      });
+      setResults((prev) => ({ ...prev, [question.id]: res.feedback }));
+    } catch {
+      // ignore network errors, let the user retry
+    } finally {
+      setChecking((prev) => ({ ...prev, [question.id]: false }));
     }
   }
 
@@ -150,57 +156,81 @@ function QuizTab({ lessonId, questions, canSave, showDraft }) {
 
   return (
     <div className="space-y-6">
-      {questions.map((q) => (
-        <div key={q.id} className="border border-night-700 rounded-lg p-4">
-          <p className="font-semibold">{q.title}</p>
-          {showDraft && q.draftHtml && (
-            <div
-              className="my-3 text-sm bg-night-900 p-3 rounded"
-              dangerouslySetInnerHTML={{ __html: checked[q.id] ? q.draftHtmlMarked || q.draftHtml : q.draftHtml }}
-            />
-          )}
-          <p className="mt-2 text-sm">{q.prompt}</p>
-          <div className="mt-3 space-y-2">
-            {q.options.map((opt, idx) => (
-              <label key={idx} className="flex items-center gap-2 text-sm">
-                <input
-                  type="radio"
-                  name={q.id}
-                  checked={selected[q.id] === idx}
-                  onChange={() => setSelected((prev) => ({ ...prev, [q.id]: idx }))}
-                />
-                {typeof opt === 'string' ? opt : opt.text}
-              </label>
-            ))}
+      {questions.map((q) => {
+        const result = results[q.id];
+        return (
+          <div key={q.id} className="border border-night-700 rounded-lg p-4">
+            <p className="font-semibold">{q.title}</p>
+            {showDraft && q.draftHtml && (
+              <div
+                className="my-3 text-sm bg-night-900 p-3 rounded"
+                dangerouslySetInnerHTML={{ __html: result ? q.draftHtmlMarked || q.draftHtml : q.draftHtml }}
+              />
+            )}
+            <p className="mt-2 text-sm">{q.prompt}</p>
+            <div className="mt-3 space-y-2">
+              {q.options.map((opt, idx) => {
+                const text = typeof opt === 'string' ? opt : opt.text;
+                let optionClass = '';
+                if (result) {
+                  if (idx === result.correctIndex) optionClass = 'text-green-400 font-semibold';
+                  else if (idx === selected[q.id]) optionClass = 'text-red-400';
+                }
+                return (
+                  <label key={idx} className={`flex items-center gap-2 text-sm ${optionClass}`}>
+                    <input
+                      type="radio"
+                      name={q.id}
+                      checked={selected[q.id] === idx}
+                      disabled={!!result}
+                      onChange={() => setSelected((prev) => ({ ...prev, [q.id]: idx }))}
+                    />
+                    {text}
+                  </label>
+                );
+              })}
+            </div>
+            {!result && (
+              <button
+                onClick={() => check(q)}
+                disabled={checking[q.id]}
+                className="mt-3 text-sm bg-coral-500 hover:bg-coral-600 text-white px-3 py-1.5 rounded-lg transition-colors"
+              >
+                {checking[q.id] ? 'Đang kiểm tra...' : 'Kiểm tra'}
+              </button>
+            )}
+            {result && (
+              <div className="mt-3 text-sm">
+                <p className={result.isCorrect ? 'text-green-400 font-semibold' : 'text-red-400 font-semibold'}>
+                  {result.isCorrect ? '✅ Chính xác!' : '❌ Chưa đúng.'}
+                </p>
+                {result.explanation && <p className="mt-1 text-slate-400">{result.explanation}</p>}
+              </div>
+            )}
           </div>
-          <button onClick={() => check(q)} className="mt-3 text-sm bg-coral-500 hover:bg-coral-600 text-white px-3 py-1.5 rounded-lg transition-colors">
-            Kiểm tra
-          </button>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
 
 function ClozeTab({ lessonId, exercises, canSave }) {
   const [answers, setAnswers] = useState({});
-  const [result, setResult] = useState({});
+  const [results, setResults] = useState({});
 
   async function check(exercise) {
     const chosen = answers[exercise.id] || {};
-    const blanks = exercise.blanks;
-    let correct = 0;
-    blanks.forEach((b) => {
-      if (chosen[b.id] === b.answer) correct += 1;
-    });
-    setResult((prev) => ({ ...prev, [exercise.id]: `${correct}/${blanks.length}` }));
-    if (canSave) {
-      await submitExercise({
+    if (!canSave) return;
+    try {
+      const res = await submitExercise({
         lessonId,
         exerciseType: 'cloze',
         exerciseId: exercise.id,
         answerPayload: { answers: chosen },
-      }).catch(() => {});
+      });
+      setResults((prev) => ({ ...prev, [exercise.id]: res.feedback }));
+    } catch {
+      // ignore, user can retry
     }
   }
 
@@ -208,51 +238,76 @@ function ClozeTab({ lessonId, exercises, canSave }) {
 
   return (
     <div className="space-y-6">
-      {exercises.map((ex) => (
-        <div key={ex.id} className="border border-night-700 rounded-lg p-4">
-          <div dangerouslySetInnerHTML={{ __html: ex.templateHtml }} />
-          <div className="mt-3 flex flex-wrap gap-3">
-            {ex.blanks.map((b) => (
-              <select
-                key={b.id}
-                value={answers[ex.id]?.[b.id] || ''}
-                onChange={(e) =>
-                  setAnswers((prev) => ({ ...prev, [ex.id]: { ...prev[ex.id], [b.id]: e.target.value } }))
-                }
-                className="bg-night-900 border border-night-600 rounded px-2 py-1 text-sm text-slate-100"
+      {exercises.map((ex) => {
+        const result = results[ex.id];
+        return (
+          <div key={ex.id} className="border border-night-700 rounded-lg p-4">
+            <div dangerouslySetInnerHTML={{ __html: ex.templateHtml }} />
+            <div className="mt-3 flex flex-wrap gap-3">
+              {ex.blanks.map((b) => {
+                const chosen = answers[ex.id]?.[b.id] || '';
+                const correctAnswer = result?.correctAnswers?.[b.id];
+                const isRight = result && chosen === correctAnswer;
+                return (
+                  <div key={b.id} className="flex flex-col items-start gap-1">
+                    <select
+                      value={chosen}
+                      disabled={!!result}
+                      onChange={(e) =>
+                        setAnswers((prev) => ({ ...prev, [ex.id]: { ...prev[ex.id], [b.id]: e.target.value } }))
+                      }
+                      className={`bg-night-900 border rounded px-2 py-1 text-sm text-slate-100 ${
+                        result ? (isRight ? 'border-green-500' : 'border-red-500') : 'border-night-600'
+                      }`}
+                    >
+                      <option value="">Chọn...</option>
+                      {b.options.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                    {result && !isRight && <span className="text-xs text-green-400">Đáp án: {correctAnswer}</span>}
+                  </div>
+                );
+              })}
+            </div>
+            {!result && (
+              <button
+                onClick={() => check(ex)}
+                className="mt-3 text-sm bg-coral-500 hover:bg-coral-600 text-white px-3 py-1.5 rounded-lg transition-colors"
               >
-                <option value="">Chọn...</option>
-                {b.options.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            ))}
+                Kiểm tra
+              </button>
+            )}
+            {result && (
+              <p className="mt-2 text-sm font-semibold text-coral-400">
+                Kết quả: {result.score}/{result.maxScore}
+              </p>
+            )}
           </div>
-          <button onClick={() => check(ex)} className="mt-3 text-sm bg-coral-500 hover:bg-coral-600 text-white px-3 py-1.5 rounded-lg transition-colors">
-            Kiểm tra
-          </button>
-          {result[ex.id] && <p className="mt-2 text-sm font-semibold">Kết quả: {result[ex.id]}</p>}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
 
 function VocabTab({ lesson, canSave }) {
   const [selected, setSelected] = useState({});
-  const [checked, setChecked] = useState({});
+  const [results, setResults] = useState({});
 
   async function check(item) {
-    setChecked((prev) => ({ ...prev, [item.id]: true }));
-    if (canSave) {
-      await submitExercise({
+    if (!canSave) return;
+    try {
+      const res = await submitExercise({
         lessonId: lesson.id,
         exerciseType: 'match',
         exerciseId: item.id,
         answerPayload: { selectedKey: selected[item.id] },
-      }).catch(() => {});
+      });
+      setResults((prev) => ({ ...prev, [item.id]: res.feedback }));
+    } catch {
+      // ignore, user can retry
     }
   }
 
@@ -289,18 +344,25 @@ function VocabTab({ lesson, canSave }) {
               <span className="text-sm w-40">{item.leftLabelVi}</span>
               <select
                 value={selected[item.id] || ''}
+                disabled={!!results[item.id]}
                 onChange={(e) => setSelected((prev) => ({ ...prev, [item.id]: e.target.value }))}
                 className="bg-night-900 border border-night-600 rounded px-2 py-1 text-sm text-slate-100"
               >
                 <option value="">Chọn...</option>
                 <option value={item.rightLabelZh}>{item.rightLabelZh}</option>
               </select>
-              <button onClick={() => check(item)} className="text-sm text-coral-400 underline">
-                Kiểm tra
-              </button>
-              {checked[item.id] && (
+              {!results[item.id] && (
+                <button onClick={() => check(item)} className="text-sm text-coral-400 underline">
+                  Kiểm tra
+                </button>
+              )}
+              {results[item.id] && (
                 <span className="text-sm">
-                  {selected[item.id] === item.correctKey ? '✅' : `❌ (${item.explanation || ''})`}
+                  {results[item.id].isCorrect
+                    ? '✅'
+                    : `❌ Đáp án đúng: ${results[item.id].correctKey}${
+                        results[item.id].explanation ? ` (${results[item.id].explanation})` : ''
+                      }`}
                 </span>
               )}
             </div>

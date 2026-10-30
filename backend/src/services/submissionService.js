@@ -5,7 +5,13 @@ function gradeQuiz(lesson, exerciseId, answerPayload) {
   const question = lesson.quizQuestions.find((q) => q.id === exerciseId);
   if (!question) return null;
   const correct = answerPayload.selectedIndex === question.correctIndex;
-  return { score: correct ? 1 : 0, maxScore: 1 };
+  return {
+    score: correct ? 1 : 0,
+    maxScore: 1,
+    isCorrect: correct,
+    correctIndex: question.correctIndex,
+    explanation: question.explanation || null,
+  };
 }
 
 function gradeCloze(lesson, exerciseId, answerPayload) {
@@ -13,17 +19,25 @@ function gradeCloze(lesson, exerciseId, answerPayload) {
   if (!exercise) return null;
   const blanks = exercise.blanks || [];
   let correctCount = 0;
+  const correctAnswers = {};
   for (const blank of blanks) {
+    correctAnswers[blank.id] = blank.answer;
     if (answerPayload.answers?.[blank.id] === blank.answer) correctCount += 1;
   }
-  return { score: correctCount, maxScore: blanks.length };
+  return { score: correctCount, maxScore: blanks.length, correctAnswers };
 }
 
 function gradeMatch(lesson, exerciseId, answerPayload) {
   const item = lesson.matchItems.find((m) => m.id === exerciseId);
   if (!item) return null;
   const correct = answerPayload.selectedKey === item.correctKey;
-  return { score: correct ? 1 : 0, maxScore: 1 };
+  return {
+    score: correct ? 1 : 0,
+    maxScore: 1,
+    isCorrect: correct,
+    correctKey: item.correctKey,
+    explanation: item.explanation || null,
+  };
 }
 
 const GRADERS = {
@@ -43,7 +57,7 @@ async function createSubmission({ userId, lessonId, exerciseType, exerciseId, an
   const grader = GRADERS[exerciseType];
   const result = grader ? grader(lesson, exerciseId, answerPayload) : null;
 
-  return prisma.submission.create({
+  const submission = await prisma.submission.create({
     data: {
       userId,
       lessonId,
@@ -54,6 +68,8 @@ async function createSubmission({ userId, lessonId, exerciseType, exerciseId, an
       maxScore: result?.maxScore ?? null,
     },
   });
+
+  return { ...submission, feedback: result };
 }
 
 async function listMySubmissions(userId, lessonSlug) {
