@@ -1,5 +1,5 @@
 import Repeater from './Repeater';
-import { TextField, TextAreaField, SelectField } from './fields';
+import { TextField, TextAreaField, RichTextAreaField, SelectField } from './fields';
 
 export default function QuizQuestionsEditor({ items, onChange }) {
   function emptyItem() {
@@ -42,12 +42,12 @@ export default function QuizQuestionsEditor({ items, onChange }) {
 
           {item.kind === 'ERROR_ANALYSIS' && (
             <div className="grid sm:grid-cols-2 gap-2">
-              <TextAreaField
+              <RichTextAreaField
                 label="Bản nháp có lỗi (hiển thị trước khi trả lời)"
                 value={item.draftHtml}
                 onChange={(v) => update({ ...item, draftHtml: v })}
               />
-              <TextAreaField
+              <RichTextAreaField
                 label="Bản nháp đã đánh dấu lỗi (hiển thị sau khi kiểm tra)"
                 value={item.draftHtmlMarked}
                 onChange={(v) => update({ ...item, draftHtmlMarked: v })}

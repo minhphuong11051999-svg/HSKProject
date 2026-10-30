@@ -1,5 +1,5 @@
 import Repeater from './Repeater';
-import { TextAreaField, LinesField } from './fields';
+import { RichTextAreaField, LinesField } from './fields';
 
 function blankId(index) {
   return `b${index + 1}`;
@@ -23,7 +23,7 @@ export default function ClozeExercisesEditor({ items, onChange }) {
       addLabel="Thêm bài điền khuyết"
       renderItem={(item, update) => (
         <div className="space-y-2">
-          <TextAreaField
+          <RichTextAreaField
             label="Đoạn văn có đánh dấu chỗ trống"
             rows={5}
             value={item.templateHtml}

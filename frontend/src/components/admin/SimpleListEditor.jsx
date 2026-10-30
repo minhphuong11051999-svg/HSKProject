@@ -1,5 +1,5 @@
 import Repeater from './Repeater';
-import { TextField, TextAreaField, NumberField, LinesField } from './fields';
+import { TextField, TextAreaField, RichTextAreaField, NumberField, LinesField } from './fields';
 
 export default function SimpleListEditor({ title, hint, items, onChange, fields, addLabel }) {
   function emptyItem() {
@@ -21,11 +21,14 @@ export default function SimpleListEditor({ title, hint, items, onChange, fields,
           {fields.map((f) => {
             const value = item[f.key];
             const set = (v) => update({ ...item, [f.key]: v });
-            const wide = f.type === 'textarea' || f.type === 'lines';
+            const wide = f.type === 'textarea' || f.type === 'richtext' || f.type === 'lines';
             return (
               <div key={f.key} className={wide ? 'sm:col-span-2' : ''}>
                 {f.type === 'textarea' && (
                   <TextAreaField label={f.label} value={value} onChange={set} placeholder={f.placeholder} />
+                )}
+                {f.type === 'richtext' && (
+                  <RichTextAreaField label={f.label} value={value} onChange={set} placeholder={f.placeholder} />
                 )}
                 {f.type === 'lines' && (
                   <LinesField label={f.label} value={value} onChange={set} placeholder={f.placeholder} />

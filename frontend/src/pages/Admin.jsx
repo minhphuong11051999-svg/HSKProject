@@ -192,7 +192,7 @@ export default function Admin() {
               addLabel="Thêm mục hướng dẫn"
               fields={[
                 { key: 'heading', label: 'Tiêu đề mục' },
-                { key: 'bodyHtml', label: 'Nội dung', type: 'textarea' },
+                { key: 'bodyHtml', label: 'Nội dung', type: 'richtext' },
               ]}
             />
 
