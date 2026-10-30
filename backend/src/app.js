@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 const env = require('./config/env');
 const routes = require('./routes');
 const errorHandler = require('./middleware/errorHandler');
+const prisma = require('./lib/prisma');
 
 const app = express();
 
@@ -15,7 +16,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 300 }));
 
-app.get('/health', (req, res) => res.json({ status: 'ok' }));
+app.get('/health', async (req, res) => {
+  await prisma.$queryRaw`SELECT 1`;
+  res.json({ status: 'ok' });
+});
 app.use('/api/v1', routes);
 
 app.use((req, res) => res.status(404).json({ message: 'Not found' }));
