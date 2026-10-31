@@ -35,6 +35,20 @@ async function createUser({ email, password, name, role }) {
   return { ...rest, submissionCount: 0 };
 }
 
+async function updatePlan(userId, plan) {
+  if (!['FREE', 'PREMIUM'].includes(plan)) {
+    const error = new Error('Invalid plan');
+    error.status = 400;
+    throw error;
+  }
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: { plan },
+    select: { id: true, email: true, name: true, role: true, plan: true, createdAt: true },
+  });
+  return user;
+}
+
 async function deleteUser(userId, requestingUserId) {
   if (userId === requestingUserId) {
     const error = new Error('Cannot delete your own account');
@@ -44,4 +58,4 @@ async function deleteUser(userId, requestingUserId) {
   await prisma.user.delete({ where: { id: userId } });
 }
 
-module.exports = { listUsers, createUser, deleteUser };
+module.exports = { listUsers, createUser, updatePlan, deleteUser };

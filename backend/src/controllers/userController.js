@@ -18,6 +18,15 @@ async function create(req, res, next) {
   }
 }
 
+async function updatePlan(req, res, next) {
+  try {
+    const user = await userService.updatePlan(req.params.id, req.body.plan);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function remove(req, res, next) {
   try {
     await userService.deleteUser(req.params.id, req.user.id);
@@ -27,4 +36,4 @@ async function remove(req, res, next) {
   }
 }
 
-module.exports = { list, create, remove };
+module.exports = { list, create, updatePlan, remove };

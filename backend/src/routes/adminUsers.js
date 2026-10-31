@@ -10,6 +10,7 @@ const router = Router();
 router.use(authenticate, authorize('ADMIN'));
 router.get('/', userController.list);
 router.post('/', validate(createUserSchema), userController.create);
+router.patch('/:id/plan', userController.updatePlan);
 router.delete('/:id', userController.remove);
 
 module.exports = router;

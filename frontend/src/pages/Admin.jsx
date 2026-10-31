@@ -178,7 +178,7 @@ export default function Admin() {
               </div>
               <TextAreaField label="Mô tả ngắn" value={form.description} onChange={(v) => set('description', v)} />
               <CheckboxField
-                label="Nội dung trả phí (premium) — hiện chưa áp dụng, để sẵn cho sau"
+                label="Khoá toàn bộ bài học, chỉ user Premium mới xem được"
                 checked={form.isPremium}
                 onChange={(v) => set('isPremium', v)}
               />

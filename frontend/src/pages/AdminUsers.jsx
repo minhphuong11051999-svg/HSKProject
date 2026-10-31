@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { listUsers, createUser, deleteUser } from '../api/users';
+import { listUsers, createUser, updateUserPlan, deleteUser } from '../api/users';
 
 const EMPTY_FORM = { name: '', email: '', password: '', role: 'USER' };
 
@@ -45,6 +45,17 @@ export default function AdminUsers() {
     }
   }
 
+  async function togglePremium(u) {
+    const nextPlan = u.plan === 'PREMIUM' ? 'FREE' : 'PREMIUM';
+    setUsers((prev) => prev.map((x) => (x.id === u.id ? { ...x, plan: nextPlan } : x)));
+    try {
+      await updateUserPlan(u.id, nextPlan);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Cập nhật gói thất bại');
+      refresh();
+    }
+  }
+
   return (
     <main className="max-w-5xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-6">
@@ -65,6 +76,7 @@ export default function AdminUsers() {
                   <th className="p-3 text-left">Vai trò</th>
                   <th className="p-3 text-left">Ngày tạo</th>
                   <th className="p-3 text-left">Số bài đã làm</th>
+                  <th className="p-3 text-left">Premium</th>
                   <th className="p-3"></th>
                 </tr>
               </thead>
@@ -76,6 +88,18 @@ export default function AdminUsers() {
                     <td className="p-3">{u.role}</td>
                     <td className="p-3 text-slate-400">{new Date(u.createdAt).toLocaleDateString('vi-VN')}</td>
                     <td className="p-3 text-center">{u.submissionCount}</td>
+                    <td className="p-3">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={u.plan === 'PREMIUM'}
+                          onChange={() => togglePremium(u)}
+                        />
+                        <span className={u.plan === 'PREMIUM' ? 'text-gold font-semibold' : 'text-slate-500'}>
+                          {u.plan === 'PREMIUM' ? '👑 PRO' : 'Free'}
+                        </span>
+                      </label>
+                    </td>
                     <td className="p-3 text-right">
                       {u.id !== me?.id && (
                         <button onClick={() => handleDelete(u)} className="text-red-400 underline">Xoá</button>
