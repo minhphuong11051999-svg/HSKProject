@@ -68,7 +68,11 @@ export default function LessonPlayer() {
               }`}
             >
               {t.label}
-              {isPartPremium(t.key) && !isPremiumUser && <span className="text-xs">🔒</span>}
+              {isPartPremium(t.key) && !isPremiumUser && (
+                <span className="bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                  PRO
+                </span>
+              )}
             </button>
           ))}
         </nav>
