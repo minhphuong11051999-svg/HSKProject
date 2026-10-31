@@ -6,6 +6,9 @@ import SimpleListEditor from '../components/admin/SimpleListEditor';
 import QuizQuestionsEditor from '../components/admin/QuizQuestionsEditor';
 import ClozeExercisesEditor from '../components/admin/ClozeExercisesEditor';
 import MatchItemsEditor from '../components/admin/MatchItemsEditor';
+import { LESSON_PARTS } from '../constants/lessonParts';
+
+const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
 
 const EMPTY_FORM = {
   id: null,
@@ -19,6 +22,7 @@ const EMPTY_FORM = {
   examYear: null,
   orderIndex: 0,
   isPremium: false,
+  premiumParts: DEFAULT_PREMIUM_PARTS,
   sections: [],
   sampleDocuments: [],
   vocabTerms: [],
@@ -83,6 +87,7 @@ export default function Admin() {
         examYear: form.type === 'EXAM' ? form.examYear : null,
         orderIndex: form.orderIndex || 0,
         isPremium: !!form.isPremium,
+        premiumParts: form.premiumParts || [],
         sections: withOrder(form.sections),
         sampleDocuments: withOrder(form.sampleDocuments),
         vocabTerms: form.vocabTerms,
@@ -182,6 +187,34 @@ export default function Admin() {
                 checked={form.isPremium}
                 onChange={(v) => set('isPremium', v)}
               />
+
+              <div>
+                <p className="text-xs text-slate-400 mb-1.5">
+                  Khoá riêng từng phần (chỉ áp dụng khi bài học KHÔNG bị khoá toàn bộ ở trên)
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                  {LESSON_PARTS.map((part) => {
+                    const checked = form.premiumParts.includes(part.key);
+                    return (
+                      <label key={part.key} className="flex items-center gap-1.5 text-xs text-slate-300">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(e) =>
+                            set(
+                              'premiumParts',
+                              e.target.checked
+                                ? [...form.premiumParts, part.key]
+                                : form.premiumParts.filter((k) => k !== part.key)
+                            )
+                          }
+                        />
+                        {part.label}
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             <SimpleListEditor

@@ -3,16 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getLesson, submitExercise } from '../api/lessons';
 import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
-
-const TABS = [
-  { key: 'theory', label: '① Duyệt lý thuyết' },
-  { key: 'samples', label: '② Bài mẫu' },
-  { key: 'quiz', label: '③ Nhận diện thể thức' },
-  { key: 'cloze', label: '④ Đục lỗ tái lập văn bản', premium: true },
-  { key: 'error', label: '⑤ Phân tích khuyết thiếu & sửa lỗi', premium: true },
-  { key: 'vocab', label: '⑥ Ghép từ vựng & viết câu', premium: true },
-  { key: 'writing', label: '⑦ Luyện viết hoàn chỉnh', premium: true },
-];
+import { LESSON_PARTS } from '../constants/lessonParts';
 
 export default function LessonPlayer() {
   const { slug } = useParams();
@@ -24,8 +15,12 @@ export default function LessonPlayer() {
   const [showTabPremium, setShowTabPremium] = useState(false);
   const isPremiumUser = user?.plan === 'PREMIUM';
 
+  function isPartPremium(key) {
+    return !!lesson?.premiumParts?.includes(key);
+  }
+
   function goToTab(t) {
-    if (t.premium && !isPremiumUser) {
+    if (isPartPremium(t.key) && !isPremiumUser) {
       setShowTabPremium(true);
       return;
     }
@@ -64,7 +59,7 @@ export default function LessonPlayer() {
         <p className="zh text-xl mb-1">{lesson.titleZh}</p>
         <h1 className="font-semibold mb-4">{lesson.titleVi}</h1>
         <nav className="flex md:flex-col gap-2 overflow-x-auto">
-          {TABS.map((t) => (
+          {LESSON_PARTS.map((t) => (
             <button
               key={t.key}
               onClick={() => goToTab(t)}
@@ -73,7 +68,7 @@ export default function LessonPlayer() {
               }`}
             >
               {t.label}
-              {t.premium && !isPremiumUser && <span className="text-xs">🔒</span>}
+              {isPartPremium(t.key) && !isPremiumUser && <span className="text-xs">🔒</span>}
             </button>
           ))}
         </nav>

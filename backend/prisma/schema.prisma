@@ -51,6 +51,7 @@ model Lesson {
   examYear    Int?
   orderIndex  Int        @default(0)
   isPremium   Boolean    @default(false)
+  premiumParts String[]  @default(["cloze", "error", "vocab", "writing"])
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 

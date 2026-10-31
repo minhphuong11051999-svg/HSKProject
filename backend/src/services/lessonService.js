@@ -89,7 +89,7 @@ async function getLessonForAdmin(lessonId) {
 }
 
 async function upsertLesson(data, lessonId) {
-  const { slug, titleZh, titleVi, description, themeKey, type, examMonth, examYear, orderIndex, isPremium } = data;
+  const { slug, titleZh, titleVi, description, themeKey, type, examMonth, examYear, orderIndex, isPremium, premiumParts } = data;
 
   const baseData = {
     slug,
@@ -102,6 +102,7 @@ async function upsertLesson(data, lessonId) {
     examYear: examYear ?? null,
     orderIndex: orderIndex ?? 0,
     isPremium: !!isPremium,
+    premiumParts: Array.isArray(premiumParts) ? premiumParts : [],
   };
 
   const nestedCreate = buildNestedCreate(data);
