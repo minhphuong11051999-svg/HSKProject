@@ -5,12 +5,13 @@ import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
 
 const TABS = [
-  { key: 'guide', label: '📖 Hướng dẫn & bài mẫu' },
-  { key: 'quiz', label: '① Nhận diện thể thức' },
-  { key: 'cloze', label: '② Đục lỗ tái lập văn bản' },
-  { key: 'error', label: '③ Phân tích khuyết thiếu & sửa lỗi' },
-  { key: 'vocab', label: '④ Ghép từ vựng & viết câu' },
-  { key: 'writing', label: '⑤ Luyện viết hoàn chỉnh' },
+  { key: 'theory', label: '① Duyệt lý thuyết' },
+  { key: 'samples', label: '② Bài mẫu' },
+  { key: 'quiz', label: '③ Nhận diện thể thức' },
+  { key: 'cloze', label: '④ Đục lỗ tái lập văn bản' },
+  { key: 'error', label: '⑤ Phân tích khuyết thiếu & sửa lỗi' },
+  { key: 'vocab', label: '⑥ Ghép từ vựng & viết câu' },
+  { key: 'writing', label: '⑦ Luyện viết hoàn chỉnh' },
 ];
 
 export default function LessonPlayer() {
@@ -18,7 +19,7 @@ export default function LessonPlayer() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [lesson, setLesson] = useState(null);
-  const [tab, setTab] = useState('guide');
+  const [tab, setTab] = useState('theory');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -68,7 +69,8 @@ export default function LessonPlayer() {
       </aside>
 
       <section className="flex-1 bg-night-800 border border-night-700 rounded-xl p-6">
-        {tab === 'guide' && <GuideTab lesson={lesson} />}
+        {tab === 'theory' && <TheoryTab lesson={lesson} />}
+        {tab === 'samples' && <SamplesTab lesson={lesson} />}
         {tab === 'quiz' && <QuizTab lessonId={lesson.id} questions={theoryQuestions} canSave={!!user} />}
         {tab === 'cloze' && <ClozeTab lessonId={lesson.id} exercises={lesson.clozeExercises} canSave={!!user} />}
         {tab === 'error' && <QuizTab lessonId={lesson.id} questions={errorQuestions} canSave={!!user} showDraft />}
@@ -79,7 +81,7 @@ export default function LessonPlayer() {
   );
 }
 
-function GuideTab({ lesson }) {
+function TheoryTab({ lesson }) {
   return (
     <div className="space-y-8">
       {lesson.description && <p className="text-slate-300">{lesson.description}</p>}
@@ -91,30 +93,16 @@ function GuideTab({ lesson }) {
         </div>
       ))}
 
-      {lesson.sampleDocuments.length > 0 && (
-        <div>
-          <h3 className="font-semibold mb-2">Bài mẫu</h3>
-          <div className="grid gap-4">
-            {lesson.sampleDocuments.map((doc) => (
-              <article key={doc.id} className="border border-night-700 bg-night-900 rounded-lg p-4">
-                <p className="text-xs text-slate-400 mb-1">{doc.label}</p>
-                {doc.audience && <p className="text-sm">{doc.audience}</p>}
-                <div className="whitespace-pre-line mt-2 text-sm">{doc.body}</div>
-                {(doc.signerOrg || doc.date) && (
-                  <p className="text-right text-xs text-slate-400 mt-2">
-                    {doc.signerOrg} {doc.date}
-                  </p>
-                )}
-              </article>
-            ))}
-          </div>
-        </div>
-      )}
-
       {lesson.fixedPhrases.length > 0 && (
         <div>
-          <h3 className="font-semibold mb-2">Mẫu câu cố định (套语)</h3>
+          <h3 className="font-semibold mb-2">Bộ mẫu câu cố định — 书面语 (套语)</h3>
           <table className="w-full text-sm border border-night-600">
+            <thead>
+              <tr className="bg-night-900">
+                <th className="p-2 text-left">中文</th>
+                <th className="p-2 text-left">Tiếng Việt</th>
+              </tr>
+            </thead>
             <tbody>
               {lesson.fixedPhrases.map((p) => (
                 <tr key={p.id} className="border-b border-night-700">
@@ -126,6 +114,29 @@ function GuideTab({ lesson }) {
           </table>
         </div>
       )}
+    </div>
+  );
+}
+
+function SamplesTab({ lesson }) {
+  if (lesson.sampleDocuments.length === 0) {
+    return <p className="text-slate-400">Chưa có bài mẫu cho phần này.</p>;
+  }
+
+  return (
+    <div className="grid gap-4">
+      {lesson.sampleDocuments.map((doc, idx) => (
+        <article key={doc.id} className="border border-night-700 bg-night-900 rounded-lg p-4">
+          <p className="text-xs text-slate-400 mb-1">Bài mẫu {idx + 1}{doc.label ? ` · ${doc.label}` : ''}</p>
+          {doc.audience && <p className="text-sm">{doc.audience}</p>}
+          <div className="whitespace-pre-line mt-2 text-sm zh">{doc.body}</div>
+          {(doc.signerOrg || doc.date) && (
+            <p className="text-right text-xs text-slate-400 mt-2">
+              {doc.signerOrg} {doc.date}
+            </p>
+          )}
+        </article>
+      ))}
     </div>
   );
 }
@@ -529,6 +540,17 @@ function countHanzi(text) {
   return (text.match(/[一-鿿]/g) || []).length;
 }
 
+// 2-character Chinese names/titles are conventionally spaced out (明芳 -> 明 芳);
+// 3+ characters are written normally.
+function spaceOutIfTwoChars(text) {
+  const trimmed = (text || '').trim();
+  const chars = Array.from(trimmed.replace(/\s+/g, ''));
+  if (chars.length === 2 && countHanzi(chars.join('')) === 2) {
+    return chars.join(' ');
+  }
+  return trimmed;
+}
+
 function WritingTab({ lesson }) {
   const [fields, setFields] = useState({});
   const [showModel, setShowModel] = useState(false);
@@ -551,14 +573,14 @@ function WritingTab({ lesson }) {
   const dateField = byRole.date?.[0];
   const otherFields = byRole.plain || [];
 
-  const title = titleField ? fields[titleField.name] || '' : '';
+  const title = spaceOutIfTwoChars(titleField ? fields[titleField.name] || '' : '');
   const greeting = greetingField ? fields[greetingField.name] || '' : '';
   const body = bodyField ? fields[bodyField.name] || '' : '';
   const paragraphs = body
     .split('\n')
     .map((l) => l.trim())
     .filter(Boolean);
-  const sign = signField ? fields[signField.name] || '' : '';
+  const sign = spaceOutIfTwoChars(signField ? fields[signField.name] || '' : '');
   const date = dateField ? fields[dateField.name] || '' : '';
   const saluteOn = saluteField ? !!fields[saluteField.name] : false;
   const closing1Text = closing1Field ? fields[closing1Field.name] || '' : saluteOn ? '此致' : '';
