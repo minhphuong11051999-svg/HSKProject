@@ -31,3 +31,28 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #e8716a;
 }
+
+.letter-paper {
+  --paper: #fbf9f2;
+  --paper-line: #e7e0cd;
+  --paper-ink: #1c2541;
+  background: linear-gradient(var(--paper-line) 1px, transparent 1px), var(--paper);
+  background-size: 100% 2.2em;
+  background-position: 0 4.6em;
+  border: 1px solid #ded5b8;
+  box-shadow: 0 1px 2px rgba(28, 37, 65, 0.06), 0 8px 24px -12px rgba(28, 37, 65, 0.25);
+  color: var(--paper-ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: #a3272c;
+  opacity: 0.85;
+}

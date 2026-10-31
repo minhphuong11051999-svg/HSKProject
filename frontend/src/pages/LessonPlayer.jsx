@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getLesson, submitExercise } from '../api/lessons';
 import { useAuth } from '../context/AuthContext';
+import PremiumModal from '../components/PremiumModal';
 
 const TABS = [
   { key: 'guide', label: '📖 Hướng dẫn & bài mẫu' },
@@ -15,6 +16,7 @@ const TABS = [
 export default function LessonPlayer() {
   const { slug } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [lesson, setLesson] = useState(null);
   const [tab, setTab] = useState('guide');
   const [loading, setLoading] = useState(true);
@@ -40,7 +42,7 @@ export default function LessonPlayer() {
       <main className="max-w-2xl mx-auto px-6 py-16 text-center">
         <p className="zh text-2xl">{lesson.titleZh}</p>
         <h1 className="text-xl font-bold mt-2">{lesson.titleVi}</h1>
-        <p className="mt-4 text-slate-400">🔒 Đây là nội dung nâng cao, cần nâng cấp tài khoản để mở khoá.</p>
+        <PremiumModal open onClose={() => navigate('/lessons')} />
       </main>
     );
   }
@@ -293,24 +295,6 @@ function ClozeTab({ lessonId, exercises, canSave }) {
 }
 
 function VocabTab({ lesson, canSave }) {
-  const [selected, setSelected] = useState({});
-  const [results, setResults] = useState({});
-
-  async function check(item) {
-    if (!canSave) return;
-    try {
-      const res = await submitExercise({
-        lessonId: lesson.id,
-        exerciseType: 'match',
-        exerciseId: item.id,
-        answerPayload: { selectedKey: selected[item.id] },
-      });
-      setResults((prev) => ({ ...prev, [item.id]: res.feedback }));
-    } catch {
-      // ignore, user can retry
-    }
-  }
-
   return (
     <div className="space-y-8">
       {lesson.vocabTerms.length > 0 && (
@@ -337,37 +321,7 @@ function VocabTab({ lesson, canSave }) {
       )}
 
       {lesson.matchItems.length > 0 && (
-        <div className="space-y-3">
-          <h3 className="font-semibold">Ghép từ vựng</h3>
-          {lesson.matchItems.map((item) => (
-            <div key={item.id} className="flex items-center gap-3">
-              <span className="text-sm w-40">{item.leftLabelVi}</span>
-              <select
-                value={selected[item.id] || ''}
-                disabled={!!results[item.id]}
-                onChange={(e) => setSelected((prev) => ({ ...prev, [item.id]: e.target.value }))}
-                className="bg-night-900 border border-night-600 rounded px-2 py-1 text-sm text-slate-100"
-              >
-                <option value="">Chọn...</option>
-                <option value={item.rightLabelZh}>{item.rightLabelZh}</option>
-              </select>
-              {!results[item.id] && (
-                <button onClick={() => check(item)} className="text-sm text-coral-400 underline">
-                  Kiểm tra
-                </button>
-              )}
-              {results[item.id] && (
-                <span className="text-sm">
-                  {results[item.id].isCorrect
-                    ? '✅'
-                    : `❌ Đáp án đúng: ${results[item.id].correctKey}${
-                        results[item.id].explanation ? ` (${results[item.id].explanation})` : ''
-                      }`}
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
+        <MatchBoard lessonId={lesson.id} items={lesson.matchItems} canSave={canSave} />
       )}
 
       {lesson.writingTasks.length > 0 && (
@@ -375,6 +329,151 @@ function VocabTab({ lesson, canSave }) {
           <h3 className="font-semibold">Viết câu</h3>
           {lesson.writingTasks.map((task) => (
             <WritingTaskCard key={task.id} task={task} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function MatchBoard({ lessonId, items, canSave }) {
+  const rightItems = useMemo(
+    () => shuffle(items.map((it) => ({ id: it.id, text: it.rightLabelZh }))),
+    [items]
+  );
+  const [selectedLeft, setSelectedLeft] = useState(null);
+  const [pairs, setPairs] = useState({});
+  const [results, setResults] = useState({});
+  const [checking, setChecking] = useState(false);
+  const done = Object.keys(results).length > 0;
+
+  const pairedRightIds = new Set(Object.values(pairs));
+
+  function clickLeft(item) {
+    if (done || pairs[item.id]) return;
+    setSelectedLeft((cur) => (cur === item.id ? null : item.id));
+  }
+
+  function clickRight(rightItem) {
+    if (done || pairedRightIds.has(rightItem.id) || !selectedLeft) return;
+    setPairs((prev) => ({ ...prev, [selectedLeft]: rightItem.id }));
+    setSelectedLeft(null);
+  }
+
+  function reset() {
+    setPairs({});
+    setSelectedLeft(null);
+    setResults({});
+  }
+
+  async function checkAll() {
+    if (!canSave) return;
+    setChecking(true);
+    try {
+      const entries = await Promise.all(
+        items.map(async (item) => {
+          const rightId = pairs[item.id];
+          const rightText = rightId ? rightItems.find((r) => r.id === rightId)?.text : null;
+          const res = await submitExercise({
+            lessonId,
+            exerciseType: 'match',
+            exerciseId: item.id,
+            answerPayload: { selectedKey: rightText },
+          });
+          return [item.id, res.feedback];
+        })
+      );
+      setResults(Object.fromEntries(entries));
+    } catch {
+      // ignore, user can retry
+    } finally {
+      setChecking(false);
+    }
+  }
+
+  function leftStatus(item) {
+    if (!done) return pairs[item.id] ? 'paired' : selectedLeft === item.id ? 'selected' : '';
+    return results[item.id]?.isCorrect ? 'correct' : 'wrong';
+  }
+
+  function rightStatus(rightItem) {
+    const leftId = Object.keys(pairs).find((l) => pairs[l] === rightItem.id);
+    if (!done) return leftId ? 'paired' : '';
+    if (!leftId) return '';
+    return results[leftId]?.isCorrect ? 'correct' : 'wrong';
+  }
+
+  const statusClass = {
+    '': 'border-night-600 bg-night-900 hover:border-coral-500/60',
+    selected: 'border-coral-500 bg-night-900 ring-1 ring-coral-500',
+    paired: 'border-slate-500 bg-night-700 opacity-70',
+    correct: 'border-green-500 bg-green-500/10 text-green-400',
+    wrong: 'border-red-500 bg-red-500/10 text-red-400',
+  };
+
+  return (
+    <div className="space-y-3">
+      <h3 className="font-semibold">Ghép từ vựng</h3>
+      <p className="text-xs text-slate-500">Chọn 1 thẻ ở cột trái rồi chọn thẻ tương ứng ở cột phải để ghép cặp.</p>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-slate-500">Cột A (Tiếng Việt)</p>
+          {items.map((item, idx) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => clickLeft(item)}
+              className={`w-full text-left text-sm px-3 py-2 rounded-lg border transition-colors ${statusClass[leftStatus(item)]}`}
+            >
+              <b>{idx + 1}.</b> {item.leftLabelVi}
+            </button>
+          ))}
+        </div>
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-slate-500">Cột B (Chữ Hán)</p>
+          {rightItems.map((rightItem, idx) => (
+            <button
+              key={rightItem.id}
+              type="button"
+              onClick={() => clickRight(rightItem)}
+              className={`w-full text-left text-sm zh px-3 py-2 rounded-lg border transition-colors ${statusClass[rightStatus(rightItem)]}`}
+            >
+              <b>{String.fromCharCode(65 + idx)}.</b> {rightItem.text}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        {!done ? (
+          <button
+            onClick={checkAll}
+            disabled={checking || Object.keys(pairs).length === 0}
+            className="text-sm bg-coral-500 hover:bg-coral-600 disabled:opacity-40 text-white px-3 py-1.5 rounded-lg transition-colors"
+          >
+            {checking ? 'Đang kiểm tra...' : 'Kiểm tra'}
+          </button>
+        ) : (
+          <button onClick={reset} className="text-sm bg-night-700 hover:bg-night-600 text-slate-100 px-3 py-1.5 rounded-lg transition-colors">
+            ↺ Thử lại
+          </button>
+        )}
+      </div>
+      {done && (
+        <div className="text-sm bg-night-900 border border-night-700 rounded-lg p-3 space-y-1">
+          {items.map((item) => (
+            <p key={item.id} className={results[item.id]?.isCorrect ? 'text-green-400' : 'text-red-400'}>
+              {item.leftLabelVi} → <span className="zh">{results[item.id]?.correctKey}</span>
+              {results[item.id]?.explanation ? ` (${results[item.id].explanation})` : ''}
+            </p>
           ))}
         </div>
       )}
@@ -405,12 +504,78 @@ function WritingTaskCard({ task }) {
   );
 }
 
+// Field "name" conventions used across lessons to drive the shared letter-paper
+// layout (see guidedWritingFields seed data for the lessons already authored).
+const FIELD_ROLE_RULES = [
+  { role: 'title', test: (n) => n === 'title' },
+  { role: 'greeting', test: (n) => /greet|recipient|audience/.test(n) },
+  { role: 'closing1', test: (n) => /cizhi|close1|closing1/.test(n) },
+  { role: 'closing2', test: (n) => /jingli|close2|closing2/.test(n) },
+  { role: 'salute', test: (n) => /salute/.test(n) },
+  { role: 'sign', test: (n) => /sign|name|org/.test(n) },
+  { role: 'date', test: (n) => n === 'date' },
+  { role: 'body', test: (n, f) => n === 'body' || f.inputType === 'textarea' },
+];
+
+function fieldRole(f) {
+  const n = f.name.toLowerCase();
+  for (const { role, test } of FIELD_ROLE_RULES) {
+    if (test(n, f)) return role;
+  }
+  return 'plain';
+}
+
+function countHanzi(text) {
+  return (text.match(/[一-鿿]/g) || []).length;
+}
+
 function WritingTab({ lesson }) {
   const [fields, setFields] = useState({});
   const [showModel, setShowModel] = useState(false);
 
+  const byRole = useMemo(() => {
+    const map = {};
+    for (const f of lesson.guidedWritingFields) {
+      (map[fieldRole(f)] ||= []).push(f);
+    }
+    return map;
+  }, [lesson.guidedWritingFields]);
+
+  const titleField = byRole.title?.[0];
+  const greetingField = byRole.greeting?.[0];
+  const bodyField = byRole.body?.[0];
+  const closing1Field = byRole.closing1?.[0];
+  const closing2Field = byRole.closing2?.[0];
+  const saluteField = byRole.salute?.[0];
+  const signField = byRole.sign?.[0];
+  const dateField = byRole.date?.[0];
+  const otherFields = byRole.plain || [];
+
+  const title = titleField ? fields[titleField.name] || '' : '';
+  const greeting = greetingField ? fields[greetingField.name] || '' : '';
+  const body = bodyField ? fields[bodyField.name] || '' : '';
+  const paragraphs = body
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean);
+  const sign = signField ? fields[signField.name] || '' : '';
+  const date = dateField ? fields[dateField.name] || '' : '';
+  const saluteOn = saluteField ? !!fields[saluteField.name] : false;
+  const closing1Text = closing1Field ? fields[closing1Field.name] || '' : saluteOn ? '此致' : '';
+  const closing2Text = closing2Field ? fields[closing2Field.name] || '' : saluteOn ? '敬礼！' : '';
+
+  const totalHanzi = countHanzi(Object.values(fields).join(''));
+  const counterClass =
+    totalHanzi === 0
+      ? 'bg-night-800 border-night-600 text-slate-400'
+      : totalHanzi < 80
+      ? 'bg-amber-500/10 border-amber-500 text-amber-400'
+      : totalHanzi <= 180
+      ? 'bg-green-500/10 border-green-500 text-green-400'
+      : 'bg-red-500/10 border-red-500 text-red-400';
+
   return (
-    <div className="grid md:grid-cols-2 gap-6">
+    <div className="grid lg:grid-cols-2 gap-6">
       <form className="space-y-3">
         {lesson.guidedWritingFields.map((f) => (
           <div key={f.id}>
@@ -423,6 +588,15 @@ function WritingTab({ lesson }) {
                 rows={4}
                 className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500"
               />
+            ) : f.inputType === 'checkbox' ? (
+              <label className="flex items-center gap-2 text-sm text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={!!fields[f.name]}
+                  onChange={(e) => setFields((prev) => ({ ...prev, [f.name]: e.target.checked }))}
+                />
+                {f.placeholder}
+              </label>
             ) : (
               <input
                 placeholder={f.placeholder}
@@ -433,13 +607,42 @@ function WritingTab({ lesson }) {
             )}
           </div>
         ))}
+        <span className={`inline-block text-xs px-2.5 py-1 rounded-full border ${counterClass}`}>
+          {totalHanzi} chữ Hán
+        </span>
       </form>
 
-      <div className="border border-night-700 bg-night-900 rounded-lg p-4">
-        <p className="text-xs text-slate-400 mb-2">Xem trước bản nháp</p>
-        <div className="whitespace-pre-line text-sm">
-          {lesson.guidedWritingFields.map((f) => fields[f.name]).filter(Boolean).join('\n\n') ||
-            'Nhập nội dung bên trái để xem bản nháp...'}
+      <div>
+        <p className="text-xs font-semibold text-slate-400 mb-2">Tờ giấy mô phỏng (real-time)</p>
+        <div className="letter-paper rounded-lg p-6 sm:p-8 text-sm zh leading-8 min-h-[22rem]">
+          {title && <p className="text-center font-bold mb-3">{title}</p>}
+          {greeting && <p className="text-left mb-2">{greeting}</p>}
+          {paragraphs.map((p, i) => (
+            <p key={i} style={{ textIndent: '2em' }}>
+              {p}
+            </p>
+          ))}
+          {otherFields.map((f) =>
+            fields[f.name] ? (
+              <p key={f.name} className="mt-2">
+                {fields[f.name]}
+              </p>
+            ) : null
+          )}
+          {(closing1Text || closing2Text) && (
+            <div className="mt-3">
+              {closing1Text && <p style={{ textIndent: '4em' }}>{closing1Text}</p>}
+              {closing2Text && <p>{closing2Text}</p>}
+            </div>
+          )}
+          {(sign || date) && (
+            <div className="flex justify-end mt-8">
+              <div className="inline-flex flex-col items-center">
+                <p>{sign || ' '}</p>
+                <p className="mt-1">{date || ' '}</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {lesson.guidedWritingScenarios.map((sc) => (
