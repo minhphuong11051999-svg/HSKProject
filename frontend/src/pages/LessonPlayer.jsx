@@ -58,19 +58,26 @@ export default function LessonPlayer() {
       <aside className="md:w-64 flex-shrink-0">
         <p className="zh text-xl mb-1">{lesson.titleZh}</p>
         <h1 className="font-semibold mb-4">{lesson.titleVi}</h1>
-        <nav className="flex md:flex-col gap-2 overflow-x-auto">
+        <nav className="flex flex-col gap-2">
           {LESSON_PARTS.map((t) => (
             <button
               key={t.key}
               onClick={() => goToTab(t)}
-              className={`text-left px-3 py-2 rounded-lg text-sm whitespace-nowrap flex items-center gap-1.5 ${
+              className={`w-full text-left px-3 py-2 rounded-lg text-sm flex items-center flex-wrap gap-x-2 gap-y-1 ${
                 tab === t.key ? 'bg-coral-500 text-white' : 'bg-night-800 border border-night-700'
               }`}
             >
-              {t.label}
+              <span
+                className={`flex-shrink-0 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center ${
+                  tab === t.key ? 'bg-white/25 text-white' : 'bg-night-700 text-slate-300'
+                }`}
+              >
+                {t.number}
+              </span>
+              <span className="min-w-0 break-words">{t.label}</span>
               {isPartPremium(t.key) && !isPremiumUser && (
-                <span className="bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
-                  PRO
+                <span className="flex-shrink-0 bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap">
+                  👑 PRO
                 </span>
               )}
             </button>

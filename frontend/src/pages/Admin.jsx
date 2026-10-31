@@ -209,7 +209,7 @@ export default function Admin() {
                             )
                           }
                         />
-                        {part.label}
+                        {part.number}. {part.label}
                       </label>
                     );
                   })}
