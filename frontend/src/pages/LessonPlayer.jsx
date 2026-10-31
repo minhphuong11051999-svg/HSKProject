@@ -8,10 +8,10 @@ const TABS = [
   { key: 'theory', label: '① Duyệt lý thuyết' },
   { key: 'samples', label: '② Bài mẫu' },
   { key: 'quiz', label: '③ Nhận diện thể thức' },
-  { key: 'cloze', label: '④ Đục lỗ tái lập văn bản' },
-  { key: 'error', label: '⑤ Phân tích khuyết thiếu & sửa lỗi' },
-  { key: 'vocab', label: '⑥ Ghép từ vựng & viết câu' },
-  { key: 'writing', label: '⑦ Luyện viết hoàn chỉnh' },
+  { key: 'cloze', label: '④ Đục lỗ tái lập văn bản', premium: true },
+  { key: 'error', label: '⑤ Phân tích khuyết thiếu & sửa lỗi', premium: true },
+  { key: 'vocab', label: '⑥ Ghép từ vựng & viết câu', premium: true },
+  { key: 'writing', label: '⑦ Luyện viết hoàn chỉnh', premium: true },
 ];
 
 export default function LessonPlayer() {
@@ -21,6 +21,16 @@ export default function LessonPlayer() {
   const [lesson, setLesson] = useState(null);
   const [tab, setTab] = useState('theory');
   const [loading, setLoading] = useState(true);
+  const [showTabPremium, setShowTabPremium] = useState(false);
+  const isPremiumUser = user?.plan === 'PREMIUM';
+
+  function goToTab(t) {
+    if (t.premium && !isPremiumUser) {
+      setShowTabPremium(true);
+      return;
+    }
+    setTab(t.key);
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -57,16 +67,19 @@ export default function LessonPlayer() {
           {TABS.map((t) => (
             <button
               key={t.key}
-              onClick={() => setTab(t.key)}
-              className={`text-left px-3 py-2 rounded-lg text-sm whitespace-nowrap ${
+              onClick={() => goToTab(t)}
+              className={`text-left px-3 py-2 rounded-lg text-sm whitespace-nowrap flex items-center gap-1.5 ${
                 tab === t.key ? 'bg-coral-500 text-white' : 'bg-night-800 border border-night-700'
               }`}
             >
               {t.label}
+              {t.premium && !isPremiumUser && <span className="text-xs">🔒</span>}
             </button>
           ))}
         </nav>
       </aside>
+
+      <PremiumModal open={showTabPremium} onClose={() => setShowTabPremium(false)} />
 
       <section className="flex-1 bg-night-800 border border-night-700 rounded-xl p-6">
         {tab === 'theory' && <TheoryTab lesson={lesson} />}
