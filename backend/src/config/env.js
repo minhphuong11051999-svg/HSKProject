@@ -3,7 +3,10 @@ require('dotenv').config();
 module.exports = {
   port: process.env.PORT || 4000,
   databaseUrl: process.env.DATABASE_URL,
-  corsOrigin: process.env.CORS_ORIGIN || '*',
+  // Comma-separated list of allowed origins, e.g. "https://a.netlify.app,https://b.vercel.app"
+  corsOrigin: process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',').map((o) => o.trim())
+    : '*',
   jwt: {
     accessSecret: process.env.JWT_ACCESS_SECRET,
     refreshSecret: process.env.JWT_REFRESH_SECRET,
