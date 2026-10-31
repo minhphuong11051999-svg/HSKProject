@@ -4,7 +4,7 @@ import { listLessons } from '../api/lessons';
 import PremiumModal from '../components/PremiumModal';
 
 const TITLES = {
-  practice: { heading: 'Đề mẫu', subtitle: 'Luyện tập với 7 bài mẫu, cập nhật thêm theo thời gian.' },
+  practice: { heading: 'Bài luyện tập', subtitle: 'Luyện tập với 7 bài học, cập nhật thêm theo thời gian.' },
   exam: { heading: 'Đề thi thật', subtitle: 'Đề thi thật theo tháng, cập nhật dần.' },
 };
 
@@ -41,7 +41,7 @@ export default function Lessons({ type }) {
         <p className="text-slate-500">Đang tải...</p>
       ) : (
         <>
-          <LessonSection title="Đề mẫu" subtitle={`${practice.length} bài học`} lessons={practice} />
+          <LessonSection title="Bài luyện tập" subtitle={`${practice.length} bài học`} lessons={practice} />
           <LessonSection title="Đề thi thật" subtitle={`${exam.length} bài học`} lessons={exam} />
           {practice.length === 0 && exam.length === 0 && (
             <p className="text-slate-500">Chưa có bài học nào trong mục này.</p>

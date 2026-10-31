@@ -28,8 +28,9 @@ export default function Dashboard() {
 
           <div className="bg-night-800 border border-night-700 rounded-xl p-5 mb-6">
             <h2 className="font-bold mb-4">Bắt đầu luyện tập</h2>
-            <div className="grid sm:grid-cols-3 gap-3">
-              <QuickLink to="/lessons/practice" emoji="📝" label="Đề mẫu" color="from-coral-500 to-coral-600" />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <QuickLink to="/lessons" emoji="📖" label="Bài học" color="from-sky-600 to-sky-800" />
+              <QuickLink to="/practice" emoji="📝" label="Đề mẫu" color="from-coral-500 to-coral-600" />
               <QuickLink to="/lessons/exam" emoji="🎯" label="Đề thi thật" color="from-indigo-600 to-indigo-900" />
               <QuickLink to="/history" emoji="🕘" label="Lịch sử làm bài" color="from-night-600 to-night-700" />
             </div>
