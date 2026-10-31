@@ -4,13 +4,14 @@ import { useAuth } from '../context/AuthContext';
 const NAV_ITEMS = [
   { to: '/', icon: '🏠', label: 'Trang chủ' },
   { to: '/lessons', icon: '📖', label: 'Bài học' },
-  { to: '/lessons/practice', icon: '📝', label: 'Đề mẫu' },
+  { to: '/practice', icon: '📝', label: 'Đề mẫu' },
   { to: '/lessons/exam', icon: '🎯', label: 'Đề thi thật' },
   { to: '/history', icon: '🕘', label: 'Lịch sử' },
 ];
 
 const ADMIN_ITEMS = [
   { to: '/admin', icon: '📚', label: 'Quản trị bài học' },
+  { to: '/admin/sample-papers', icon: '📝', label: 'Quản trị đề mẫu' },
   { to: '/admin/users', icon: '👥', label: 'Người dùng' },
 ];
 
