@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import ThemeToggle from './ThemeToggle';
 
 const NAV_ITEMS = [
   { to: '/', icon: '🏠', label: 'Trang chủ' },
@@ -31,10 +32,13 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 shrink-0 bg-night-900 border-r border-night-700 flex flex-col min-h-screen sticky top-0">
-      <Link to="/" className="flex items-center gap-2 px-5 py-5">
-        <span className="text-2xl">✍️</span>
-        <span className="zh text-lg font-bold text-coral-500">写作工坊 · HSK6</span>
-      </Link>
+      <div className="flex items-center justify-between gap-2 px-5 py-5">
+        <Link to="/" className="flex items-center gap-2.5 min-w-0">
+          <img src="/logo.svg" alt="" className="w-8 h-8 rounded-lg flex-shrink-0" />
+          <span className="zh text-lg font-bold text-coral-500 truncate">写作工坊 · HSK6</span>
+        </Link>
+        <ThemeToggle className="flex-shrink-0" />
+      </div>
 
       <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
         {NAV_ITEMS.map((item) => (

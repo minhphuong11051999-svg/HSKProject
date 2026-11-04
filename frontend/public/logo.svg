@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="brush" x1="4" y1="52" x2="56" y2="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ee847d" />
+      <stop offset="1" stop-color="#d85951" />
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="16" fill="#15151b" />
+
+  <!-- Brush stroke -->
+  <path
+    d="M16 44 C19 33 28 21 47 16"
+    fill="none"
+    stroke="url(#brush)"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+  <circle cx="16" cy="44" r="5.5" fill="url(#brush)" />
+
+  <!-- Seal stamp, echoing the red 印章 on the simulated writing paper -->
+  <rect x="40" y="38" width="14" height="14" rx="2.5" fill="#a33529" />
+</svg>
