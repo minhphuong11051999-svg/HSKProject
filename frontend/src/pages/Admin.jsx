@@ -6,7 +6,7 @@ import SimpleListEditor from '../components/admin/SimpleListEditor';
 import QuizQuestionsEditor from '../components/admin/QuizQuestionsEditor';
 import ClozeExercisesEditor from '../components/admin/ClozeExercisesEditor';
 import MatchItemsEditor from '../components/admin/MatchItemsEditor';
-import { LESSON_PARTS } from '../constants/lessonParts';
+import { ALL_LESSON_PARTS, BUILTIN_PART_KEYS, DEFAULT_SELECTED_PARTS, partLabel } from '../constants/lessonParts';
 
 const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
 
@@ -23,6 +23,7 @@ const EMPTY_FORM = {
   orderIndex: 0,
   isPremium: false,
   premiumParts: DEFAULT_PREMIUM_PARTS,
+  selectedParts: DEFAULT_SELECTED_PARTS,
   sections: [],
   sampleDocuments: [],
   vocabTerms: [],
@@ -71,6 +72,29 @@ export default function Admin() {
     return list.map((item, i) => ({ ...item, orderIndex: i }));
   }
 
+  function toggleSelectedPart(key, checked) {
+    setForm((prev) => ({
+      ...prev,
+      selectedParts: checked
+        ? [...prev.selectedParts, key]
+        : prev.selectedParts.filter((k) => k !== key),
+      // Dropping a part also drops its premium lock, so it can't stay locked while hidden.
+      premiumParts: checked ? prev.premiumParts : prev.premiumParts.filter((k) => k !== key),
+    }));
+  }
+
+  // Generic editor binding for lesson parts that have no dedicated content type yet
+  // (anything outside BUILTIN_PART_KEYS): reuses the `sections` table, tagged by `kind`.
+  // "theory" also matches legacy sections saved before `kind` existed (kind is null/"text").
+  function sectionsMatch(s, key) {
+    return key === 'theory' ? !s.kind || s.kind === 'text' || s.kind === 'theory' : s.kind === key;
+  }
+
+  function setGenericSectionsFor(key, items) {
+    const others = form.sections.filter((s) => !sectionsMatch(s, key));
+    set('sections', [...others, ...items.map((item) => ({ ...item, kind: key }))]);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
@@ -88,6 +112,7 @@ export default function Admin() {
         orderIndex: form.orderIndex || 0,
         isPremium: !!form.isPremium,
         premiumParts: form.premiumParts || [],
+        selectedParts: form.selectedParts?.length ? form.selectedParts : DEFAULT_SELECTED_PARTS,
         sections: withOrder(form.sections),
         sampleDocuments: withOrder(form.sampleDocuments),
         vocabTerms: form.vocabTerms,
@@ -190,13 +215,40 @@ export default function Admin() {
 
               <div>
                 <p className="text-xs text-slate-400 mb-1.5">
+                  Chọn đề mục cho bài học này — tick theo đúng thứ tự bạn muốn chúng xuất hiện, trang bài học sẽ tự
+                  đánh số lại theo thứ tự tick.
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                  {ALL_LESSON_PARTS.map((part) => {
+                    const checked = form.selectedParts.includes(part.key);
+                    const order = form.selectedParts.indexOf(part.key);
+                    return (
+                      <label key={part.key} className="flex items-center gap-1.5 text-xs text-slate-300">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(e) => toggleSelectedPart(part.key, e.target.checked)}
+                        />
+                        {checked ? `${order + 1}. ` : ''}
+                        {part.label}
+                        {!BUILTIN_PART_KEYS.includes(part.key) && (
+                          <span className="text-[10px] text-slate-500">(mới)</span>
+                        )}
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs text-slate-400 mb-1.5">
                   Khoá riêng từng phần (chỉ áp dụng khi bài học KHÔNG bị khoá toàn bộ ở trên)
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-                  {LESSON_PARTS.map((part) => {
-                    const checked = form.premiumParts.includes(part.key);
+                  {form.selectedParts.map((key, idx) => {
+                    const checked = form.premiumParts.includes(key);
                     return (
-                      <label key={part.key} className="flex items-center gap-1.5 text-xs text-slate-300">
+                      <label key={key} className="flex items-center gap-1.5 text-xs text-slate-300">
                         <input
                           type="checkbox"
                           checked={checked}
@@ -204,12 +256,12 @@ export default function Admin() {
                             set(
                               'premiumParts',
                               e.target.checked
-                                ? [...form.premiumParts, part.key]
-                                : form.premiumParts.filter((k) => k !== part.key)
+                                ? [...form.premiumParts, key]
+                                : form.premiumParts.filter((k) => k !== key)
                             )
                           }
                         />
-                        {part.number}. {part.label}
+                        {idx + 1}. {partLabel(key)}
                       </label>
                     );
                   })}
@@ -220,8 +272,8 @@ export default function Admin() {
             <SimpleListEditor
               title="Hướng dẫn (tab 1)"
               hint="Mỗi mục là một phần trong bài hướng dẫn, vd: Mục đích & yêu cầu, Cấu trúc chuẩn..."
-              items={form.sections}
-              onChange={(v) => set('sections', v)}
+              items={form.sections.filter((s) => sectionsMatch(s, 'theory'))}
+              onChange={(v) => setGenericSectionsFor('theory', v)}
               addLabel="Thêm mục hướng dẫn"
               fields={[
                 { key: 'heading', label: 'Tiêu đề mục' },
@@ -312,6 +364,22 @@ export default function Admin() {
                 { key: 'targetWordCount', label: 'Số chữ mục tiêu (có thể để trống)', type: 'number' },
               ]}
             />
+
+            {form.selectedParts
+              .filter((key) => !BUILTIN_PART_KEYS.includes(key))
+              .map((key) => (
+                <SimpleListEditor
+                  key={key}
+                  title={`${partLabel(key)} (mục mới — nội dung dạng văn bản, chưa chấm điểm tự động)`}
+                  items={form.sections.filter((s) => sectionsMatch(s, key))}
+                  onChange={(v) => setGenericSectionsFor(key, v)}
+                  addLabel={`Thêm nội dung cho "${partLabel(key)}"`}
+                  fields={[
+                    { key: 'heading', label: 'Tiêu đề (có thể để trống)' },
+                    { key: 'bodyHtml', label: 'Nội dung', type: 'richtext' },
+                  ]}
+                />
+              ))}
 
             {error && <p className="text-red-400 text-sm">{error}</p>}
             {savedMessage && <p className="text-green-400 text-sm">{savedMessage}</p>}

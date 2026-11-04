@@ -89,7 +89,7 @@ async function getLessonForAdmin(lessonId) {
 }
 
 async function upsertLesson(data, lessonId) {
-  const { slug, titleZh, titleVi, description, themeKey, type, examMonth, examYear, orderIndex, isPremium, premiumParts } = data;
+  const { slug, titleZh, titleVi, description, themeKey, type, examMonth, examYear, orderIndex, isPremium, premiumParts, selectedParts } = data;
 
   const baseData = {
     slug,
@@ -103,6 +103,10 @@ async function upsertLesson(data, lessonId) {
     orderIndex: orderIndex ?? 0,
     isPremium: !!isPremium,
     premiumParts: Array.isArray(premiumParts) ? premiumParts : [],
+    selectedParts:
+      Array.isArray(selectedParts) && selectedParts.length > 0
+        ? selectedParts
+        : ['theory', 'samples', 'quiz', 'cloze', 'error', 'vocab', 'writing'],
   };
 
   const nestedCreate = buildNestedCreate(data);

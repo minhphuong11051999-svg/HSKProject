@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getLesson, submitExercise } from '../api/lessons';
 import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
-import { LESSON_PARTS } from '../constants/lessonParts';
+import { BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
 
 export default function LessonPlayer() {
   const { slug } = useParams();
@@ -29,8 +29,19 @@ export default function LessonPlayer() {
 
   useEffect(() => {
     setLoading(true);
-    getLesson(slug).then(setLesson).finally(() => setLoading(false));
+    getLesson(slug)
+      .then((data) => {
+        setLesson(data);
+        const parts = data?.selectedParts?.length ? data.selectedParts : ['theory'];
+        setTab(parts[0]);
+      })
+      .finally(() => setLoading(false));
   }, [slug]);
+
+  const parts = useMemo(() => {
+    const keys = lesson?.selectedParts?.length ? lesson.selectedParts : [];
+    return keys.map((key, i) => ({ key, number: i + 1, label: partLabel(key) }));
+  }, [lesson]);
 
   const theoryQuestions = useMemo(
     () => lesson?.quizQuestions?.filter((q) => q.kind === 'THEORY') || [],
@@ -59,7 +70,7 @@ export default function LessonPlayer() {
         <p className="zh text-xl mb-1">{lesson.titleZh}</p>
         <h1 className="font-semibold mb-4">{lesson.titleVi}</h1>
         <nav className="flex flex-col gap-2">
-          {LESSON_PARTS.map((t) => (
+          {parts.map((t) => (
             <button
               key={t.key}
               onClick={() => goToTab(t)}
@@ -95,6 +106,7 @@ export default function LessonPlayer() {
         {tab === 'error' && <QuizTab lessonId={lesson.id} questions={errorQuestions} canSave={!!user} showDraft />}
         {tab === 'vocab' && <VocabTab lesson={lesson} canSave={!!user} />}
         {tab === 'writing' && <WritingTab lesson={lesson} />}
+        {!BUILTIN_PART_KEYS.includes(tab) && <GenericTab lesson={lesson} partKey={tab} />}
       </section>
     </main>
   );
@@ -105,12 +117,14 @@ function TheoryTab({ lesson }) {
     <div className="space-y-8">
       {lesson.description && <p className="text-slate-300">{lesson.description}</p>}
 
-      {lesson.sections.map((s) => (
-        <div key={s.id}>
-          <h3 className="font-semibold mb-2">{s.heading}</h3>
-          <div dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
-        </div>
-      ))}
+      {lesson.sections
+        .filter((s) => !s.kind || s.kind === 'text' || s.kind === 'theory')
+        .map((s) => (
+          <div key={s.id}>
+            <h3 className="font-semibold mb-2">{s.heading}</h3>
+            <div dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
+          </div>
+        ))}
 
       {lesson.fixedPhrases.length > 0 && (
         <div>
@@ -133,6 +147,28 @@ function TheoryTab({ lesson }) {
           </table>
         </div>
       )}
+    </div>
+  );
+}
+
+// Fallback renderer for any selected part that isn't one of BUILTIN_PART_KEYS yet
+// (its sections are stored tagged with kind === partKey). No auto-grading here —
+// the full interactive UI for each of these parts is built one at a time later.
+function GenericTab({ lesson, partKey }) {
+  const sections = lesson.sections.filter((s) => s.kind === partKey);
+
+  if (sections.length === 0) {
+    return <p className="text-slate-400">Chưa có nội dung cho phần "{partLabel(partKey)}".</p>;
+  }
+
+  return (
+    <div className="space-y-8">
+      {sections.map((s) => (
+        <div key={s.id}>
+          {s.heading && <h3 className="font-semibold mb-2">{s.heading}</h3>}
+          <div dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
+        </div>
+      ))}
     </div>
   );
 }
