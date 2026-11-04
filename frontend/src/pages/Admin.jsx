@@ -289,7 +289,7 @@ export default function Admin() {
               fields={[
                 { key: 'label', label: 'Nhãn (vd: Bài mẫu 1)' },
                 { key: 'audience', label: 'Lời chào / đối tượng nhận (có thể để trống)' },
-                { key: 'body', label: 'Nội dung văn bản', type: 'textarea' },
+                { key: 'body', label: 'Nội dung văn bản', type: 'richtext' },
                 { key: 'signerOrg', label: 'Đơn vị ký tên (có thể để trống)' },
                 { key: 'date', label: 'Ngày tháng (có thể để trống)' },
               ]}
@@ -332,10 +332,10 @@ export default function Admin() {
               addLabel="Thêm nhiệm vụ viết câu"
               fields={[
                 { key: 'title', label: 'Tiêu đề nhiệm vụ' },
-                { key: 'hint', label: 'Gợi ý (có thể để trống)', type: 'textarea' },
+                { key: 'hint', label: 'Gợi ý (có thể để trống)', type: 'richtext' },
                 { key: 'facts', label: 'Dữ kiện / câu gốc (mỗi dòng 1 ý)', type: 'lines' },
                 { key: 'requiredKeywords', label: 'Từ khoá bắt buộc (mỗi dòng 1 từ, có thể để trống)', type: 'lines' },
-                { key: 'referenceAnswer', label: 'Đáp án tham khảo', type: 'textarea' },
+                { key: 'referenceAnswer', label: 'Đáp án tham khảo', type: 'richtext' },
               ]}
             />
 
@@ -359,8 +359,8 @@ export default function Admin() {
               onChange={(v) => set('guidedWritingScenarios', v)}
               addLabel="Thêm đề bài"
               fields={[
-                { key: 'situationPrompt', label: 'Đề bài / tình huống', type: 'textarea' },
-                { key: 'modelAnswer', label: 'Bài mẫu tham khảo', type: 'textarea' },
+                { key: 'situationPrompt', label: 'Đề bài / tình huống', type: 'richtext' },
+                { key: 'modelAnswer', label: 'Bài mẫu tham khảo', type: 'richtext' },
                 { key: 'targetWordCount', label: 'Số chữ mục tiêu (có thể để trống)', type: 'number' },
               ]}
             />

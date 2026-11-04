@@ -184,7 +184,7 @@ function SamplesTab({ lesson }) {
         <article key={doc.id} className="border border-night-700 bg-night-900 rounded-lg p-4">
           <p className="text-xs text-slate-400 mb-1">Bài mẫu {idx + 1}{doc.label ? ` · ${doc.label}` : ''}</p>
           {doc.audience && <p className="text-sm">{doc.audience}</p>}
-          <div className="whitespace-pre-line mt-2 text-sm zh">{doc.body}</div>
+          <div className="whitespace-pre-line mt-2 text-sm zh" dangerouslySetInnerHTML={{ __html: doc.body }} />
           {(doc.signerOrg || doc.date) && (
             <p className="text-right text-xs text-slate-400 mt-2">
               {doc.signerOrg} {doc.date}
@@ -554,7 +554,11 @@ function WritingTaskCard({ task }) {
   return (
     <div className="border border-night-700 rounded-lg p-4">
       <p className="font-semibold text-sm">{task.title}</p>
-      {task.hint && <p className="text-xs text-slate-400 mt-1">Gợi ý: {task.hint}</p>}
+      {task.hint && (
+        <p className="text-xs text-slate-400 mt-1">
+          Gợi ý: <span dangerouslySetInnerHTML={{ __html: task.hint }} />
+        </p>
+      )}
       <textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -565,7 +569,12 @@ function WritingTaskCard({ task }) {
       <button onClick={() => setShowAnswer((v) => !v)} className="mt-2 text-sm text-coral-400 underline">
         {showAnswer ? 'Ẩn đáp án tham khảo' : 'Xem đáp án tham khảo'}
       </button>
-      {showAnswer && <p className="mt-2 text-sm bg-night-900 p-2 rounded">{task.referenceAnswer}</p>}
+      {showAnswer && (
+        <div
+          className="mt-2 text-sm bg-night-900 p-2 rounded"
+          dangerouslySetInnerHTML={{ __html: task.referenceAnswer }}
+        />
+      )}
     </div>
   );
 }
@@ -724,11 +733,16 @@ function WritingTab({ lesson }) {
 
         {lesson.guidedWritingScenarios.map((sc) => (
           <div key={sc.id} className="mt-4 pt-4 border-t border-night-700">
-            <p className="text-xs text-slate-400">{sc.situationPrompt}</p>
+            <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: sc.situationPrompt }} />
             <button onClick={() => setShowModel((v) => !v)} className="mt-2 text-sm text-coral-400 underline">
               {showModel ? 'Ẩn bài mẫu' : 'Xem bài mẫu tham khảo'}
             </button>
-            {showModel && <p className="mt-2 text-sm whitespace-pre-line">{sc.modelAnswer}</p>}
+            {showModel && (
+              <div
+                className="mt-2 text-sm whitespace-pre-line"
+                dangerouslySetInnerHTML={{ __html: sc.modelAnswer }}
+              />
+            )}
           </div>
         ))}
       </div>
