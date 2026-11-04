@@ -32,12 +32,11 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 shrink-0 bg-night-900 border-r border-night-700 flex flex-col min-h-screen sticky top-0">
-      <div className="flex items-center justify-between gap-2 px-5 py-5">
+      <div className="px-5 py-5">
         <Link to="/" className="flex items-center gap-2.5 min-w-0">
           <img src="/logo.svg" alt="" className="w-8 h-8 rounded-lg flex-shrink-0" />
           <span className="zh text-lg font-bold text-coral-500 truncate">写作工坊 · HSK6</span>
         </Link>
-        <ThemeToggle className="flex-shrink-0" />
       </div>
 
       <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
@@ -78,7 +77,10 @@ export default function Sidebar() {
       </nav>
 
       <div className="p-4 border-t border-night-700">
-        <p className="text-xs text-slate-500 mb-2 truncate">Xin chào, {user?.name}</p>
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs text-slate-500 truncate">Xin chào, {user?.name}</p>
+          <ThemeToggle className="flex-shrink-0" />
+        </div>
         <button
           onClick={handleLogout}
           className="w-full bg-coral-500 hover:bg-coral-600 text-white rounded-lg py-2 text-sm font-semibold transition-colors"
