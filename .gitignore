@@ -2,3 +2,10 @@ node_modules/
 .env
 dist/
 *.log
+
+# Reference/working files kept at the project root, not part of the app
+/*.docx
+/*.jpg
+/*.jpeg
+/*.png
+~$*
