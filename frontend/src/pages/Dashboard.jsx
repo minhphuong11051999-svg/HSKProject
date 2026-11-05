@@ -14,8 +14,10 @@ export default function Dashboard() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-10">
       <div className="mb-8">
-        <p className="zh text-xl text-coral-500">写作工坊</p>
-        <h1 className="text-2xl md:text-3xl font-bold mt-1">Xin chào, {user.name} 👋</h1>
+        <p className="zh text-xl text-coral-text">写作工坊</p>
+        <h1 className="text-2xl md:text-3xl font-bold mt-1">
+          Xin chào, {user.name} <span aria-hidden="true">👋</span>
+        </h1>
         <p className="text-slate-400 mt-1">Giữ vững chuỗi học và tiếp tục luyện viết mỗi ngày.</p>
       </div>
 
@@ -52,7 +54,7 @@ export default function Dashboard() {
 function StreakCard({ streak }) {
   return (
     <div className="bg-night-800 border border-night-700 rounded-xl p-5 flex items-center gap-4">
-      <span className="text-4xl">🔥</span>
+      <span className="text-4xl" aria-hidden="true">🔥</span>
       <div>
         <p className="text-xs text-slate-500">Streak hiện tại</p>
         <p className="text-2xl font-bold">{streak} ngày</p>
@@ -83,9 +85,9 @@ function QuickLink({ to, emoji, label }) {
   return (
     <Link
       to={to}
-      className="bg-gradient-to-br from-[#f7efdc] to-[#e8d6ad] border border-[#ddc98f]/70 rounded-lg p-4 text-center font-semibold text-[#5b4524] hover:brightness-105 transition-all"
+      className="bg-gradient-to-br from-[var(--c-quicklink-from)] to-[var(--c-quicklink-to)] border border-[var(--c-quicklink-border)] rounded-lg p-4 text-center font-semibold text-[var(--c-quicklink-text)] hover:brightness-110 transition-all"
     >
-      <div className="text-2xl mb-1">{emoji}</div>
+      <div className="text-2xl mb-1" aria-hidden="true">{emoji}</div>
       {label}
     </Link>
   );
@@ -94,7 +96,7 @@ function QuickLink({ to, emoji, label }) {
 function SummaryStat({ label, value }) {
   return (
     <div className="bg-night-800 border border-night-700 rounded-xl p-4 text-center">
-      <p className="text-xl font-bold text-coral-400">{value}</p>
+      <p className="text-xl font-bold text-coral-text">{value}</p>
       <p className="text-xs text-slate-500 mt-1">{label}</p>
     </div>
   );

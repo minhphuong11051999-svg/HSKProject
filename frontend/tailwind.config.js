@@ -34,6 +34,8 @@ export default {
           500: '#e8716a',
           600: '#d85951',
           700: '#b8453e',
+          // Theme-aware variant for text-on-background use (AA contrast in both themes)
+          text: 'var(--c-coral-text)',
         },
       },
       fontFamily: {

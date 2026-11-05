@@ -14,6 +14,12 @@
   --c-slate-300: #c7cbdc;
   --c-slate-400: #9aa0bd;
   --c-slate-500: #7b82a3;
+  /* coral-500 reads ~5.8:1 on dark surfaces; keep it as-is here */
+  --c-coral-text: #e8716a;
+  --c-quicklink-from: #3a3220;
+  --c-quicklink-to: #2a2415;
+  --c-quicklink-border: #5c4f2d;
+  --c-quicklink-text: #e8d6ad;
 }
 
 :root[data-theme='light'] {
@@ -27,6 +33,19 @@
   --c-slate-300: #4a4232;
   --c-slate-400: #6f654e;
   --c-slate-500: #8c8268;
+  /* coral-500 only reads ~2.7:1 on the light surface; use coral-700 for text so it stays AA */
+  --c-coral-text: #b8453e;
+  --c-quicklink-from: #f7efdc;
+  --c-quicklink-to: #e8d6ad;
+  --c-quicklink-border: #ddc98f;
+  --c-quicklink-text: #5b4524;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--c-coral-text);
+  outline-offset: 2px;
 }
 
 body {

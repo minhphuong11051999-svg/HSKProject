@@ -7,7 +7,7 @@ export default function TopNav() {
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5">
           <img src="/logo.svg" alt="" className="w-8 h-8 rounded-lg" />
-          <span className="zh text-lg font-bold text-coral-500">写作工坊 · HSK6</span>
+          <span className="zh text-lg font-bold text-coral-text">写作工坊 · HSK6</span>
         </Link>
         <nav className="flex items-center gap-3 text-sm">
           <ThemeToggle />

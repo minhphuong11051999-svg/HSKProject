@@ -9,3 +9,6 @@ dist/
 /*.jpeg
 /*.png
 ~$*
+
+# Local Claude Code skill config, not part of the app
+/.claude/
