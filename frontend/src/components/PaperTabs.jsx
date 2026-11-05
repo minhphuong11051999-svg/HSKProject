@@ -66,6 +66,23 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
     });
   }
 
+  function handleDraftPaste(e) {
+    e.preventDefault();
+    const el = draftRef.current;
+    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+    const start = el?.selectionStart ?? draft.length;
+    const end = el?.selectionEnd ?? draft.length;
+    const indentedPasted = pasted.replace(/\r\n|\r|\n/g, `\n${PARAGRAPH_INDENT}`);
+    const next = draft.slice(0, start) + indentedPasted + draft.slice(end);
+    setDraft(next);
+    requestAnimationFrame(() => {
+      if (!el) return;
+      const cursor = start + indentedPasted.length;
+      el.focus();
+      el.setSelectionRange(cursor, cursor);
+    });
+  }
+
   async function handleSubmitDraft() {
     setSaving(true);
     try {
@@ -160,6 +177,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={handleDraftKeyDown}
+                onPaste={handleDraftPaste}
                 rows={12}
                 placeholder="Viết bài làm của bạn ở đây..."
                 className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 zh leading-7"
