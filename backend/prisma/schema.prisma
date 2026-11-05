@@ -160,6 +160,7 @@ model GuidedWritingField {
   id          String @id @default(cuid())
   lessonId    String
   lesson      Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  group       String @default("writing")
   name        String
   label       String
   placeholder String?
@@ -171,6 +172,7 @@ model GuidedWritingScenario {
   id               String @id @default(cuid())
   lessonId         String
   lesson           Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  group            String @default("writing")
   situationPrompt  String
   modelAnswer      String
   targetWordCount  Int?

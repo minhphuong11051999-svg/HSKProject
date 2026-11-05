@@ -105,6 +105,7 @@ export default function LessonPlayer() {
         {tab === 'cloze' && <ClozeTab lessonId={lesson.id} exercises={lesson.clozeExercises} canSave={!!user} />}
         {tab === 'error' && <QuizTab lessonId={lesson.id} questions={errorQuestions} canSave={!!user} showDraft />}
         {tab === 'vocab' && <VocabTab lesson={lesson} canSave={!!user} />}
+        {tab === 'partial_writing' && <PartialWritingTab lesson={lesson} />}
         {tab === 'writing' && <WritingTab lesson={lesson} />}
         {!BUILTIN_PART_KEYS.includes(tab) && <GenericTab lesson={lesson} partKey={tab} />}
       </section>
@@ -615,17 +616,46 @@ function spaceOutIfTwoChars(text) {
   return trimmed;
 }
 
+// "Luyện viết hoàn chỉnh" (group: "writing") asks for the full letter including
+// the body paragraph(s). "Viết bán phần" (group: "partial_writing") is the same
+// form/live-preview UI but the admin only defines the structural fields
+// (title, recipient, closing, signature...) and leaves out a body field, so
+// students practice just the skeleton of the letter.
 function WritingTab({ lesson }) {
+  const fields = useMemo(
+    () => lesson.guidedWritingFields.filter((f) => !f.group || f.group === 'writing'),
+    [lesson.guidedWritingFields]
+  );
+  const scenarios = useMemo(
+    () => lesson.guidedWritingScenarios.filter((s) => !s.group || s.group === 'writing'),
+    [lesson.guidedWritingScenarios]
+  );
+  return <GuidedWritingForm fields={fields} scenarios={scenarios} />;
+}
+
+function PartialWritingTab({ lesson }) {
+  const fields = useMemo(
+    () => lesson.guidedWritingFields.filter((f) => f.group === 'partial_writing'),
+    [lesson.guidedWritingFields]
+  );
+  const scenarios = useMemo(
+    () => lesson.guidedWritingScenarios.filter((s) => s.group === 'partial_writing'),
+    [lesson.guidedWritingScenarios]
+  );
+  return <GuidedWritingForm fields={fields} scenarios={scenarios} />;
+}
+
+function GuidedWritingForm({ fields: guidedWritingFields, scenarios: guidedWritingScenarios }) {
   const [fields, setFields] = useState({});
   const [showModel, setShowModel] = useState(false);
 
   const byRole = useMemo(() => {
     const map = {};
-    for (const f of lesson.guidedWritingFields) {
+    for (const f of guidedWritingFields) {
       (map[fieldRole(f)] ||= []).push(f);
     }
     return map;
-  }, [lesson.guidedWritingFields]);
+  }, [guidedWritingFields]);
 
   const titleField = byRole.title?.[0];
   const greetingField = byRole.greeting?.[0];
@@ -660,10 +690,14 @@ function WritingTab({ lesson }) {
       ? 'bg-green-500/10 border-green-500 text-green-400'
       : 'bg-red-500/10 border-red-500 text-red-400';
 
+  if (guidedWritingFields.length === 0) {
+    return <p className="text-slate-400">Chưa có nội dung cho phần này.</p>;
+  }
+
   return (
     <div className="grid lg:grid-cols-2 gap-6">
       <form className="space-y-3">
-        {lesson.guidedWritingFields.map((f) => (
+        {guidedWritingFields.map((f) => (
           <div key={f.id}>
             <label className="text-sm text-slate-300 block mb-1">{f.label}</label>
             {f.inputType === 'textarea' ? (
@@ -731,7 +765,7 @@ function WritingTab({ lesson }) {
           )}
         </div>
 
-        {lesson.guidedWritingScenarios.map((sc) => (
+        {guidedWritingScenarios.map((sc) => (
           <div key={sc.id} className="mt-4 pt-4 border-t border-night-700">
             <p className="text-xs text-slate-400 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: sc.situationPrompt }} />
             <button onClick={() => setShowModel((v) => !v)} className="mt-2 text-sm text-coral-400 underline">

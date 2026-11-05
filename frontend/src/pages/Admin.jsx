@@ -10,6 +10,52 @@ import { ALL_LESSON_PARTS, BUILTIN_PART_KEYS, DEFAULT_SELECTED_PARTS, partLabel 
 
 const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
 
+// Standard field set for a brand-new lesson's guided-writing forms, so a new
+// lesson starts with a working template instead of an empty form the admin
+// has to build from scratch every time.
+const DEFAULT_WRITING_FIELDS = [
+  { label: 'Tiêu đề 标题', name: 'title', placeholder: 'Ví dụ: 关于举办留学生太极拳比赛的通知', inputType: 'text', group: 'writing' },
+  { label: 'Đối tượng nhận 被通知方', name: 'greeting', placeholder: 'Ví dụ: 各位同学', inputType: 'text', group: 'writing' },
+  {
+    label: 'Chính văn 正文 (mỗi đoạn xuống dòng riêng)',
+    name: 'body',
+    placeholder: 'Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới...',
+    inputType: 'textarea',
+    group: 'writing',
+  },
+  { label: 'Đơn vị phát hành 署名', name: 'sign', placeholder: 'Ví dụ: 留学生办公室', inputType: 'text', group: 'writing' },
+  { label: 'Ngày tháng 日期', name: 'date', placeholder: 'Ví dụ: 2026年9月1日', inputType: 'text', group: 'writing' },
+];
+
+const DEFAULT_PARTIAL_WRITING_FIELDS = [
+  { label: 'Tiêu đề (标题)', name: 'title', placeholder: '请假条', inputType: 'text', group: 'partial_writing' },
+  {
+    label: 'Xưng hô người nhận (称呼 – đúng dấu câu)',
+    name: 'greeting',
+    placeholder: '陈老师：',
+    inputType: 'text',
+    group: 'partial_writing',
+  },
+  {
+    label: 'Cú pháp thời gian dùng từ "拟于"',
+    name: 'timeClause',
+    placeholder: '我拟于10月15日上午请假半天。',
+    inputType: 'text',
+    group: 'partial_writing',
+  },
+  {
+    label: 'Lời đề nghị phê chuẩn ở cuối chính văn',
+    name: 'approvalRequest',
+    placeholder: '特向您请假，并望批准。',
+    inputType: 'text',
+    group: 'partial_writing',
+  },
+  { label: 'Lời kết 1 (此致)', name: 'closing1', placeholder: '此致', inputType: 'text', group: 'partial_writing' },
+  { label: 'Lời kết 2 (敬礼！)', name: 'closing2', placeholder: '敬礼！', inputType: 'text', group: 'partial_writing' },
+  { label: 'Tên người viết / ký tên (署名)', name: 'sign', placeholder: '美美', inputType: 'text', group: 'partial_writing' },
+  { label: 'Ngày tháng (日期)', name: 'date', placeholder: '2026年10月14日', inputType: 'text', group: 'partial_writing' },
+];
+
 const EMPTY_FORM = {
   id: null,
   slug: '',
@@ -32,7 +78,7 @@ const EMPTY_FORM = {
   clozeExercises: [],
   matchItems: [],
   writingTasks: [],
-  guidedWritingFields: [],
+  guidedWritingFields: [...DEFAULT_WRITING_FIELDS, ...DEFAULT_PARTIAL_WRITING_FIELDS],
   guidedWritingScenarios: [],
 };
 
@@ -93,6 +139,20 @@ export default function Admin() {
   function setGenericSectionsFor(key, items) {
     const others = form.sections.filter((s) => !sectionsMatch(s, key));
     set('sections', [...others, ...items.map((item) => ({ ...item, kind: key }))]);
+  }
+
+  function guidedMatch(item, group) {
+    return group === 'writing' ? !item.group || item.group === 'writing' : item.group === group;
+  }
+
+  function setGuidedWritingFieldsFor(group, items) {
+    const others = form.guidedWritingFields.filter((f) => !guidedMatch(f, group));
+    set('guidedWritingFields', [...others, ...items.map((item) => ({ ...item, group }))]);
+  }
+
+  function setGuidedWritingScenariosFor(group, items) {
+    const others = form.guidedWritingScenarios.filter((s) => !guidedMatch(s, group));
+    set('guidedWritingScenarios', [...others, ...items.map((item) => ({ ...item, group }))]);
   }
 
   async function handleSubmit(e) {
@@ -342,8 +402,8 @@ export default function Admin() {
             <SimpleListEditor
               title="Form luyện viết hoàn chỉnh — các trường nhập"
               hint="Mỗi mục là một ô nhập liệu trong form viết bài hoàn chỉnh (vd: Tiêu đề, Đối tượng nhận, Nội dung...)."
-              items={form.guidedWritingFields}
-              onChange={(v) => set('guidedWritingFields', v)}
+              items={form.guidedWritingFields.filter((f) => guidedMatch(f, 'writing'))}
+              onChange={(v) => setGuidedWritingFieldsFor('writing', v)}
               addLabel="Thêm ô nhập liệu"
               fields={[
                 { key: 'label', label: 'Nhãn hiển thị' },
@@ -355,8 +415,34 @@ export default function Admin() {
 
             <SimpleListEditor
               title="Form luyện viết hoàn chỉnh — đề bài & bài mẫu"
-              items={form.guidedWritingScenarios}
-              onChange={(v) => set('guidedWritingScenarios', v)}
+              items={form.guidedWritingScenarios.filter((s) => guidedMatch(s, 'writing'))}
+              onChange={(v) => setGuidedWritingScenariosFor('writing', v)}
+              addLabel="Thêm đề bài"
+              fields={[
+                { key: 'situationPrompt', label: 'Đề bài / tình huống', type: 'richtext' },
+                { key: 'modelAnswer', label: 'Bài mẫu tham khảo', type: 'richtext' },
+                { key: 'targetWordCount', label: 'Số chữ mục tiêu (có thể để trống)', type: 'number' },
+              ]}
+            />
+
+            <SimpleListEditor
+              title="Form viết bán phần — các trường nhập"
+              hint="Giống form luyện viết hoàn chỉnh nhưng KHÔNG thêm ô nội dung chính (Chính văn) — chỉ các trường khung thư (tiêu đề, xưng hô, mở đầu, lời kết, ký tên, ngày tháng...)."
+              items={form.guidedWritingFields.filter((f) => guidedMatch(f, 'partial_writing'))}
+              onChange={(v) => setGuidedWritingFieldsFor('partial_writing', v)}
+              addLabel="Thêm ô nhập liệu"
+              fields={[
+                { key: 'label', label: 'Nhãn hiển thị' },
+                { key: 'name', label: 'Tên trường (không dấu, không cách, vd: title)' },
+                { key: 'placeholder', label: 'Gợi ý nhập (có thể để trống)' },
+                { key: 'inputType', label: 'Loại nhập (text hoặc textarea)' },
+              ]}
+            />
+
+            <SimpleListEditor
+              title="Form viết bán phần — đề bài & bài mẫu"
+              items={form.guidedWritingScenarios.filter((s) => guidedMatch(s, 'partial_writing'))}
+              onChange={(v) => setGuidedWritingScenariosFor('partial_writing', v)}
               addLabel="Thêm đề bài"
               fields={[
                 { key: 'situationPrompt', label: 'Đề bài / tình huống', type: 'richtext' },
