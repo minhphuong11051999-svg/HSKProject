@@ -1,5 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getMySubmissionFor, submitExercise } from '../api/lessons';
+
+// Two full-width spaces — the standard first-line indent used when writing
+// Chinese compositions by hand, so typed paragraphs match exam-paper format.
+const PARAGRAPH_INDENT = '　　';
 
 const ALL_TABS = [
   { key: 'prompt', label: 'Đề bài', icon: '📋' },
@@ -27,6 +31,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
   const [submission, setSubmission] = useState(null);
   const [loadingDraft, setLoadingDraft] = useState(true);
   const [saving, setSaving] = useState(false);
+  const draftRef = useRef(null);
 
   const targetId = targetKey.samplePaperId || targetKey.examSittingId;
 
@@ -43,6 +48,23 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
       .finally(() => setLoadingDraft(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetId]);
+
+  function handleDraftKeyDown(e) {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const el = draftRef.current;
+    const start = el?.selectionStart ?? draft.length;
+    const end = el?.selectionEnd ?? draft.length;
+    const insert = `\n${PARAGRAPH_INDENT}`;
+    const next = draft.slice(0, start) + insert + draft.slice(end);
+    setDraft(next);
+    requestAnimationFrame(() => {
+      if (!el) return;
+      const cursor = start + insert.length;
+      el.focus();
+      el.setSelectionRange(cursor, cursor);
+    });
+  }
 
   async function handleSubmitDraft() {
     setSaving(true);
@@ -134,12 +156,17 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
           ) : (
             <>
               <textarea
+                ref={draftRef}
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
+                onKeyDown={handleDraftKeyDown}
                 rows={12}
                 placeholder="Viết bài làm của bạn ở đây..."
                 className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 zh leading-7"
               />
+              <p className="text-xs text-slate-500 mt-1">
+                Mỗi lần xuống dòng sẽ tự thụt đầu dòng 2 ô, đúng quy cách viết luận.
+              </p>
               <div className="flex flex-wrap items-center justify-between gap-2 mt-3">
                 <button
                   type="button"
