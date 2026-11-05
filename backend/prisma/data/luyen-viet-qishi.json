@@ -225,10 +225,10 @@
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "1. Tiêu đề 标题", "placeholder": "例如：寻物启事", "inputType": "text", "orderIndex": 0 },
-    { "name": "body", "label": "2. Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 1 },
-    { "name": "sign", "label": "3. Ký tên 署名", "placeholder": "例如：李大卫", "inputType": "text", "orderIndex": 2 },
-    { "name": "date", "label": "4. Ngày tháng 日期", "placeholder": "例如：2026年9月1日", "inputType": "text", "orderIndex": 3 }
+    { "name": "title", "label": "Tiêu đề 标题", "placeholder": "例如：寻物启事", "inputType": "text", "orderIndex": 0 },
+    { "name": "body", "label": "Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 1 },
+    { "name": "sign", "label": "Ký tên 署名", "placeholder": "例如：李大卫", "inputType": "text", "orderIndex": 2 },
+    { "name": "date", "label": "Ngày tháng 日期", "placeholder": "例如：2026年9月1日", "inputType": "text", "orderIndex": 3 }
   ],
   "guidedWritingScenarios": [
     {

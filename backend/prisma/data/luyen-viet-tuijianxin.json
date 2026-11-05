@@ -243,11 +243,11 @@
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "1. Tiêu đề (标题) — bỏ trống nếu là thư Loại 2 (không bắt buộc có tiêu đề riêng)", "placeholder": "推荐信 (nếu có)", "inputType": "text", "orderIndex": 0 },
-    { "name": "greet", "label": "2. Đối tượng nhận / Lời chào (称呼)", "placeholder": "大家好！", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "3. Chính văn (正文) — mỗi dòng Enter = 1 đoạn mới", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "sign", "label": "4. Đơn vị / Ký tên (署名)", "placeholder": "(có thể để trống)", "inputType": "text", "orderIndex": 3 },
-    { "name": "date", "label": "5. Ngày tháng (日期)", "placeholder": "(có thể để trống)", "inputType": "text", "orderIndex": 4 }
+    { "name": "title", "label": "Tiêu đề (标题) — bỏ trống nếu là thư Loại 2 (không bắt buộc có tiêu đề riêng)", "placeholder": "推荐信 (nếu có)", "inputType": "text", "orderIndex": 0 },
+    { "name": "greet", "label": "Đối tượng nhận / Lời chào (称呼)", "placeholder": "大家好！", "inputType": "text", "orderIndex": 1 },
+    { "name": "body", "label": "Chính văn (正文) — mỗi dòng Enter = 1 đoạn mới", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 2 },
+    { "name": "sign", "label": "Đơn vị / Ký tên (署名)", "placeholder": "(có thể để trống)", "inputType": "text", "orderIndex": 3 },
+    { "name": "date", "label": "Ngày tháng (日期)", "placeholder": "(có thể để trống)", "inputType": "text", "orderIndex": 4 }
   ],
   "guidedWritingScenarios": [
     {

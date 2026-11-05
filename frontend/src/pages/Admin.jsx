@@ -13,6 +13,9 @@ const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
 // Standard field set for a brand-new lesson's guided-writing forms, so a new
 // lesson starts with a working template instead of an empty form the admin
 // has to build from scratch every time.
+// Labels have no leading "1. "/"2. " — the field's position in the list numbers
+// it automatically (see GuidedWritingForm in LessonPlayer.jsx and the admin
+// list editors below), so reordering never leaves labels out of sync.
 const DEFAULT_WRITING_FIELDS = [
   { label: 'Tiêu đề 标题', name: 'title', placeholder: 'Ví dụ: 关于举办留学生太极拳比赛的通知', inputType: 'text', group: 'writing' },
   { label: 'Đối tượng nhận 被通知方', name: 'greeting', placeholder: 'Ví dụ: 各位同学', inputType: 'text', group: 'writing' },

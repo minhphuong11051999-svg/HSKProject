@@ -224,11 +224,11 @@
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "1. Tiêu đề 标题", "placeholder": "例如：关于举办留学生太极拳比赛的通知", "inputType": "text", "orderIndex": 0 },
-    { "name": "audience", "label": "2. Đối tượng nhận 被通知方", "placeholder": "例如：各位同学", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "3. Chính văn 正文 (mỗi đoạn xuống dòng riêng)", "placeholder": "Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới…", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "org", "label": "4. Đơn vị phát hành 署名", "placeholder": "例如：留学生办公室", "inputType": "text", "orderIndex": 3 },
-    { "name": "date", "label": "5. Ngày tháng 日期", "placeholder": "例如：2026年9月1日", "inputType": "text", "orderIndex": 4 }
+    { "name": "title", "label": "Tiêu đề 标题", "placeholder": "例如：关于举办留学生太极拳比赛的通知", "inputType": "text", "orderIndex": 0 },
+    { "name": "audience", "label": "Đối tượng nhận 被通知方", "placeholder": "例如：各位同学", "inputType": "text", "orderIndex": 1 },
+    { "name": "body", "label": "Chính văn 正文 (mỗi đoạn xuống dòng riêng)", "placeholder": "Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới…", "inputType": "textarea", "orderIndex": 2 },
+    { "name": "org", "label": "Đơn vị phát hành 署名", "placeholder": "例如：留学生办公室", "inputType": "text", "orderIndex": 3 },
+    { "name": "date", "label": "Ngày tháng 日期", "placeholder": "例如：2026年9月1日", "inputType": "text", "orderIndex": 4 }
   ],
   "guidedWritingScenarios": [
     {

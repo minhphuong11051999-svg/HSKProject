@@ -697,9 +697,11 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios: guidedWriti
   return (
     <div className="grid lg:grid-cols-2 gap-6">
       <form className="space-y-3">
-        {guidedWritingFields.map((f) => (
+        {guidedWritingFields.map((f, idx) => (
           <div key={f.id}>
-            <label className="text-sm text-slate-300 block mb-1">{f.label}</label>
+            <label className="text-sm text-slate-300 block mb-1">
+              {idx + 1}. {f.label}
+            </label>
             {f.inputType === 'textarea' ? (
               <textarea
                 placeholder={f.placeholder}

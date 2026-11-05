@@ -331,12 +331,12 @@
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "1. Tiêu đề 标题", "placeholder": "邀请函", "inputType": "text", "orderIndex": 0 },
-    { "name": "greet", "label": "2. Đối tượng nhận / Xưng hô 称呼", "placeholder": "亲爱的王老师：", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "3. Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "salute", "label": "4. Dùng lời chúc trang trọng 此致 / 敬礼！", "placeholder": "此致 lùi 4 ô, 敬礼！sát lề", "inputType": "checkbox", "orderIndex": 3 },
-    { "name": "sign", "label": "5. Đơn vị / Ký tên 署名", "placeholder": "您的学生：李明", "inputType": "text", "orderIndex": 4 },
-    { "name": "date", "label": "6. Ngày tháng 日期", "placeholder": "2026年12月18日", "inputType": "text", "orderIndex": 5 }
+    { "name": "title", "label": "Tiêu đề 标题", "placeholder": "邀请函", "inputType": "text", "orderIndex": 0 },
+    { "name": "greet", "label": "Đối tượng nhận / Xưng hô 称呼", "placeholder": "亲爱的王老师：", "inputType": "text", "orderIndex": 1 },
+    { "name": "body", "label": "Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 2 },
+    { "name": "salute", "label": "Dùng lời chúc trang trọng 此致 / 敬礼！", "placeholder": "此致 lùi 4 ô, 敬礼！sát lề", "inputType": "checkbox", "orderIndex": 3 },
+    { "name": "sign", "label": "Đơn vị / Ký tên 署名", "placeholder": "您的学生：李明", "inputType": "text", "orderIndex": 4 },
+    { "name": "date", "label": "Ngày tháng 日期", "placeholder": "2026年12月18日", "inputType": "text", "orderIndex": 5 }
   ],
   "guidedWritingScenarios": [
     {

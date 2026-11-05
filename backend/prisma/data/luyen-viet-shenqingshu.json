@@ -265,14 +265,14 @@
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "1. Tiêu đề 标题", "placeholder": "复学申请书", "inputType": "text", "orderIndex": 0 },
-    { "name": "recipient", "label": "2. Đối tượng nhận 称呼", "placeholder": "尊敬的校领导：", "inputType": "text", "orderIndex": 1 },
-    { "name": "greeting", "label": "3. Lời chào 问候语", "placeholder": "您好！", "inputType": "text", "orderIndex": 2 },
-    { "name": "body", "label": "4. Chính văn 正文 (tự giới thiệu → lý do → quyết tâm)", "placeholder": "我是汉语系汉语言专业24级2班的学生金泰民……", "inputType": "textarea", "orderIndex": 3 },
-    { "name": "cizhi", "label": "5. Lời kết 1 · 此致", "placeholder": "此致", "inputType": "text", "orderIndex": 4 },
-    { "name": "jingli", "label": "6. Lời kết 2 · 敬礼！", "placeholder": "敬礼！", "inputType": "text", "orderIndex": 5 },
-    { "name": "name", "label": "7. Ký tên 落款", "placeholder": "学生：金泰民", "inputType": "text", "orderIndex": 6 },
-    { "name": "date", "label": "8. Ngày tháng 日期", "placeholder": "2026年12月20日", "inputType": "text", "orderIndex": 7 }
+    { "name": "title", "label": "Tiêu đề 标题", "placeholder": "复学申请书", "inputType": "text", "orderIndex": 0 },
+    { "name": "recipient", "label": "Đối tượng nhận 称呼", "placeholder": "尊敬的校领导：", "inputType": "text", "orderIndex": 1 },
+    { "name": "greeting", "label": "Lời chào 问候语", "placeholder": "您好！", "inputType": "text", "orderIndex": 2 },
+    { "name": "body", "label": "Chính văn 正文 (tự giới thiệu → lý do → quyết tâm)", "placeholder": "我是汉语系汉语言专业24级2班的学生金泰民……", "inputType": "textarea", "orderIndex": 3 },
+    { "name": "cizhi", "label": "Lời kết 1 · 此致", "placeholder": "此致", "inputType": "text", "orderIndex": 4 },
+    { "name": "jingli", "label": "Lời kết 2 · 敬礼！", "placeholder": "敬礼！", "inputType": "text", "orderIndex": 5 },
+    { "name": "name", "label": "Ký tên 落款", "placeholder": "学生：金泰民", "inputType": "text", "orderIndex": 6 },
+    { "name": "date", "label": "Ngày tháng 日期", "placeholder": "2026年12月20日", "inputType": "text", "orderIndex": 7 }
   ],
   "guidedWritingScenarios": [
     {
