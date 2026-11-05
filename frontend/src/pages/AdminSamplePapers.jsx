@@ -15,6 +15,8 @@ const EMPTY_FORM = {
   titleZh: '',
   titleVi: '',
   prompt: '',
+  requirements: '',
+  outline: '',
   answer: '',
   orderIndex: 0,
   isPremium: false,
@@ -62,6 +64,8 @@ export default function AdminSamplePapers() {
         titleZh: form.titleZh,
         titleVi: form.titleVi,
         prompt: form.prompt,
+        requirements: form.requirements,
+        outline: form.outline,
         answer: form.answer,
         orderIndex: form.orderIndex || 0,
         isPremium: !!form.isPremium,
@@ -157,6 +161,18 @@ export default function AdminSamplePapers() {
             </div>
 
             <RichTextAreaField label="Đề bài" value={form.prompt} onChange={(v) => set('prompt', v)} rows={8} />
+            <RichTextAreaField
+              label="Kiểm tra yêu cầu đề (để trống nếu không cần)"
+              value={form.requirements}
+              onChange={(v) => set('requirements', v)}
+              rows={6}
+            />
+            <RichTextAreaField
+              label="Dàn ý gợi ý (để trống nếu không cần)"
+              value={form.outline}
+              onChange={(v) => set('outline', v)}
+              rows={6}
+            />
             <RichTextAreaField label="Đáp án" value={form.answer} onChange={(v) => set('answer', v)} rows={10} />
 
             {error && <p className="text-red-400 text-sm">{error}</p>}

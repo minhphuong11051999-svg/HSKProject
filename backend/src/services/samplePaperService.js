@@ -47,12 +47,14 @@ async function getSamplePaperForAdmin(id) {
 }
 
 async function upsertSamplePaper(data, id) {
-  const { slug, titleZh, titleVi, prompt, answer, orderIndex, isPremium } = data;
+  const { slug, titleZh, titleVi, prompt, requirements, outline, answer, orderIndex, isPremium } = data;
   const baseData = {
     slug,
     titleZh,
     titleVi,
     prompt,
+    requirements: requirements || null,
+    outline: outline || null,
     answer,
     orderIndex: orderIndex ?? 0,
     isPremium: !!isPremium,

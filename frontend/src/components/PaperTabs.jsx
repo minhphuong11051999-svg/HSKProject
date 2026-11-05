@@ -1,18 +1,26 @@
 import { useEffect, useState } from 'react';
 import { getMySubmissionFor, submitExercise } from '../api/lessons';
 
-const TABS = [
+const ALL_TABS = [
   { key: 'prompt', label: 'Đề bài', icon: '📋' },
+  { key: 'requirements', label: 'Kiểm tra yêu cầu đề', icon: '☑️' },
+  { key: 'outline', label: 'Dàn ý gợi ý', icon: '🗂️' },
   { key: 'draft', label: 'Bài làm', icon: '✍️' },
   { key: 'answer', label: 'Đáp án mẫu', icon: '✅' },
   { key: 'ai', label: 'AI Chấm Bài', icon: '🤖' },
 ];
 
-// Shared 4-tab content viewer for both sample papers (Đề mẫu) and real exam
+// Shared tabbed content viewer for both sample papers (Đề mẫu) and real exam
 // sittings (Đề thi thật) — the only difference between the two is which id
 // field is set on `targetKey`, which selects the FK used when saving/loading
-// the "Bài làm" submission.
-export default function PaperTabs({ prompt, answer, targetKey }) {
+// the "Bài làm" submission. "requirements"/"outline" tabs only show up when
+// the admin has actually filled them in for that paper.
+export default function PaperTabs({ prompt, requirements, outline, answer, targetKey }) {
+  const TABS = ALL_TABS.filter((t) => {
+    if (t.key === 'requirements') return !!requirements;
+    if (t.key === 'outline') return !!outline;
+    return true;
+  });
   const [tab, setTab] = useState('prompt');
   const [showAnswer, setShowAnswer] = useState(false);
   const [draft, setDraft] = useState('');
@@ -83,6 +91,33 @@ export default function PaperTabs({ prompt, answer, targetKey }) {
           className="bg-night-800 border border-night-700 rounded-xl p-6"
         >
           <div className="zh text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: prompt }} />
+        </section>
+      )}
+
+      {tab === 'requirements' && (
+        <section
+          id="panel-requirements"
+          role="tabpanel"
+          aria-labelledby="tab-requirements"
+          className="bg-night-800 border border-night-700 rounded-xl p-6"
+        >
+          <h2 className="font-semibold mb-3 text-slate-200">Kiểm tra yêu cầu đề</h2>
+          <div
+            className="text-sm leading-7 whitespace-pre-line"
+            dangerouslySetInnerHTML={{ __html: requirements }}
+          />
+        </section>
+      )}
+
+      {tab === 'outline' && (
+        <section
+          id="panel-outline"
+          role="tabpanel"
+          aria-labelledby="tab-outline"
+          className="bg-night-800 border border-night-700 rounded-xl p-6"
+        >
+          <h2 className="font-semibold mb-3 text-slate-200">Dàn ý gợi ý</h2>
+          <div className="zh text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: outline }} />
         </section>
       )}
 

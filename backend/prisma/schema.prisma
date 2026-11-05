@@ -177,16 +177,18 @@ model GuidedWritingScenario {
 }
 
 model SamplePaper {
-  id         String   @id @default(cuid())
-  slug       String   @unique
-  titleZh    String
-  titleVi    String
-  prompt     String
-  answer     String
-  orderIndex Int      @default(0)
-  isPremium  Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  titleZh      String
+  titleVi      String
+  prompt       String
+  requirements String?
+  outline      String?
+  answer       String
+  orderIndex   Int      @default(0)
+  isPremium    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   submissions Submission[]
 }
@@ -202,20 +204,22 @@ model ExamYear {
 }
 
 model ExamSitting {
-  id         String    @id @default(cuid())
-  examYearId String
-  examYear   ExamYear  @relation(fields: [examYearId], references: [id], onDelete: Cascade)
-  slug       String    @unique
-  label      String
-  examDate   DateTime?
-  titleZh    String
-  titleVi    String
-  prompt     String
-  answer     String
-  isPremium  Boolean   @default(false)
-  orderIndex Int       @default(0)
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  id           String    @id @default(cuid())
+  examYearId   String
+  examYear     ExamYear  @relation(fields: [examYearId], references: [id], onDelete: Cascade)
+  slug         String    @unique
+  label        String
+  examDate     DateTime?
+  titleZh      String
+  titleVi      String
+  prompt       String
+  requirements String?
+  outline      String?
+  answer       String
+  isPremium    Boolean   @default(false)
+  orderIndex   Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
   submissions Submission[]
 }

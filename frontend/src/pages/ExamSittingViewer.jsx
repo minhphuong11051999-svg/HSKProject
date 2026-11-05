@@ -38,7 +38,13 @@ export default function ExamSittingViewer() {
       <p className="zh text-xl mb-1">{sitting.titleZh}</p>
       <h1 className="text-xl font-bold mb-6">{sitting.titleVi}</h1>
 
-      <PaperTabs prompt={sitting.prompt} answer={sitting.answer} targetKey={{ examSittingId: sitting.id }} />
+      <PaperTabs
+        prompt={sitting.prompt}
+        requirements={sitting.requirements}
+        outline={sitting.outline}
+        answer={sitting.answer}
+        targetKey={{ examSittingId: sitting.id }}
+      />
     </main>
   );
 }

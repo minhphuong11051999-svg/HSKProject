@@ -35,7 +35,13 @@ export default function SamplePaperViewer() {
       <p className="zh text-xl mb-1">{paper.titleZh}</p>
       <h1 className="text-xl font-bold mb-6">{paper.titleVi}</h1>
 
-      <PaperTabs prompt={paper.prompt} answer={paper.answer} targetKey={{ samplePaperId: paper.id }} />
+      <PaperTabs
+        prompt={paper.prompt}
+        requirements={paper.requirements}
+        outline={paper.outline}
+        answer={paper.answer}
+        targetKey={{ samplePaperId: paper.id }}
+      />
     </main>
   );
 }
