@@ -46,21 +46,27 @@ const GRADERS = {
   match: gradeMatch,
 };
 
-async function createSubmission({ userId, lessonId, exerciseType, exerciseId, answerPayload }) {
-  const lesson = await lessonService.getLessonForGrading(lessonId);
-  if (!lesson) {
-    const error = new Error('Lesson not found');
-    error.status = 404;
-    throw error;
-  }
+async function createSubmission({ userId, lessonId, samplePaperId, examSittingId, exerciseType, exerciseId, answerPayload }) {
+  let result = null;
 
-  const grader = GRADERS[exerciseType];
-  const result = grader ? grader(lesson, exerciseId, answerPayload) : null;
+  if (lessonId) {
+    const lesson = await lessonService.getLessonForGrading(lessonId);
+    if (!lesson) {
+      const error = new Error('Lesson not found');
+      error.status = 404;
+      throw error;
+    }
+
+    const grader = GRADERS[exerciseType];
+    result = grader ? grader(lesson, exerciseId, answerPayload) : null;
+  }
 
   const submission = await prisma.submission.create({
     data: {
       userId,
-      lessonId,
+      lessonId: lessonId || null,
+      samplePaperId: samplePaperId || null,
+      examSittingId: examSittingId || null,
       exerciseType,
       exerciseId,
       answerPayload,
@@ -72,18 +78,24 @@ async function createSubmission({ userId, lessonId, exerciseType, exerciseId, an
   return { ...submission, feedback: result };
 }
 
-async function listMySubmissions(userId, lessonSlug) {
+async function listMySubmissions(userId, { lessonSlug, samplePaperId, examSittingId } = {}) {
   const where = { userId };
   if (lessonSlug) {
     const lesson = await prisma.lesson.findUnique({ where: { slug: lessonSlug } });
     if (!lesson) return [];
     where.lessonId = lesson.id;
   }
+  if (samplePaperId) where.samplePaperId = samplePaperId;
+  if (examSittingId) where.examSittingId = examSittingId;
 
   return prisma.submission.findMany({
     where,
     orderBy: { submittedAt: 'desc' },
-    include: { lesson: { select: { slug: true, titleZh: true, titleVi: true } } },
+    include: {
+      lesson: { select: { slug: true, titleZh: true, titleVi: true } },
+      samplePaper: { select: { slug: true, titleZh: true, titleVi: true } },
+      examSitting: { select: { slug: true, titleZh: true, titleVi: true, label: true } },
+    },
   });
 }
 

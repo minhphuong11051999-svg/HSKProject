@@ -10,6 +10,11 @@ export const submitExercise = (payload) => axiosClient.post('/submissions', payl
 export const listMySubmissions = (lessonSlug) =>
   axiosClient.get(lessonSlug ? `/submissions/me/${lessonSlug}` : '/submissions/me').then((r) => r.data);
 
+export const getMySubmissionFor = ({ samplePaperId, examSittingId }) =>
+  axiosClient
+    .get('/submissions/me', { params: { samplePaperId, examSittingId } })
+    .then((r) => r.data[0] || null);
+
 export const getMyStats = () => axiosClient.get('/submissions/me/stats').then((r) => r.data);
 
 export const getLessonForAdmin = (id) => axiosClient.get(`/admin/lessons/${id}`).then((r) => r.data);

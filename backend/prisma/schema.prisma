@@ -187,18 +187,53 @@ model SamplePaper {
   isPremium  Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  submissions Submission[]
+}
+
+model ExamYear {
+  id         String   @id @default(cuid())
+  year       Int      @unique
+  orderIndex Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  sittings ExamSitting[]
+}
+
+model ExamSitting {
+  id         String    @id @default(cuid())
+  examYearId String
+  examYear   ExamYear  @relation(fields: [examYearId], references: [id], onDelete: Cascade)
+  slug       String    @unique
+  label      String
+  examDate   DateTime?
+  titleZh    String
+  titleVi    String
+  prompt     String
+  answer     String
+  isPremium  Boolean   @default(false)
+  orderIndex Int       @default(0)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  submissions Submission[]
 }
 
 model Submission {
-  id            String   @id @default(cuid())
+  id            String       @id @default(cuid())
   userId        String
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  lessonId      String
-  lesson        Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId      String?
+  lesson        Lesson?      @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  samplePaperId String?
+  samplePaper   SamplePaper? @relation(fields: [samplePaperId], references: [id], onDelete: Cascade)
+  examSittingId String?
+  examSitting   ExamSitting? @relation(fields: [examSittingId], references: [id], onDelete: Cascade)
   exerciseType  String
   exerciseId    String
   answerPayload Json
   score         Int?
   maxScore      Int?
-  submittedAt   DateTime @default(now())
+  submittedAt   DateTime     @default(now())
 }

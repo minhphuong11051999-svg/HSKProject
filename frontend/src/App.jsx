@@ -14,6 +14,9 @@ const Lessons = lazy(() => import('./pages/Lessons'));
 const SamplePapers = lazy(() => import('./pages/SamplePapers'));
 const SamplePaperViewer = lazy(() => import('./pages/SamplePaperViewer'));
 const AdminSamplePapers = lazy(() => import('./pages/AdminSamplePapers'));
+const ExamSittings = lazy(() => import('./pages/ExamSittings'));
+const ExamSittingViewer = lazy(() => import('./pages/ExamSittingViewer'));
+const AdminExamSittings = lazy(() => import('./pages/AdminExamSittings'));
 
 function PageFallback() {
   return <div className="p-10 text-center text-slate-500">Đang tải...</div>;
@@ -47,7 +50,15 @@ export default function App() {
             path="/lessons/exam"
             element={
               <ProtectedRoute>
-                <Lessons type="exam" />
+                <ExamSittings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/exams/:slug"
+            element={
+              <ProtectedRoute>
+                <ExamSittingViewer />
               </ProtectedRoute>
             }
           />
@@ -104,6 +115,14 @@ export default function App() {
             element={
               <ProtectedRoute role="ADMIN">
                 <AdminSamplePapers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/exam-sittings"
+            element={
+              <ProtectedRoute role="ADMIN">
+                <AdminExamSittings />
               </ProtectedRoute>
             }
           />

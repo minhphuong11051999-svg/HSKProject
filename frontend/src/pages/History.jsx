@@ -3,6 +3,13 @@ import { listMySubmissions } from '../api/lessons';
 
 const PAGE_SIZE = 20;
 
+function describeSubmissionTarget(s) {
+  if (s.lesson) return { label: `Bài học · ${s.exerciseType}`, titleZh: s.lesson.titleZh };
+  if (s.samplePaper) return { label: `Đề mẫu · ${s.exerciseType}`, titleZh: s.samplePaper.titleZh };
+  if (s.examSitting) return { label: `Đề thi thật · ${s.examSitting.label}`, titleZh: s.examSitting.titleZh };
+  return { label: s.exerciseType, titleZh: '—' };
+}
+
 export default function History() {
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,21 +39,26 @@ export default function History() {
       ) : (
         <>
           <ul className="space-y-3">
-            {pageItems.map((s) => (
-              <li key={s.id} className="bg-night-800 border border-night-700 rounded-lg p-4 flex justify-between items-center">
-                <div>
-                  <p className="zh text-slate-100">{s.lesson.titleZh}</p>
-                  <p className="text-sm text-slate-500">
-                    {s.exerciseType} · {new Date(s.submittedAt).toLocaleString('vi-VN')}
-                  </p>
-                </div>
-                {s.maxScore != null && (
-                  <span className="font-semibold text-coral-400">
-                    {s.score}/{s.maxScore}
-                  </span>
-                )}
-              </li>
-            ))}
+            {pageItems.map((s) => {
+              const { label, titleZh } = describeSubmissionTarget(s);
+              return (
+                <li key={s.id} className="bg-night-800 border border-night-700 rounded-lg p-4 flex justify-between items-center">
+                  <div>
+                    <p className="zh text-slate-100">{titleZh}</p>
+                    <p className="text-sm text-slate-500">
+                      {label} · {new Date(s.submittedAt).toLocaleString('vi-VN')}
+                    </p>
+                  </div>
+                  {s.maxScore != null ? (
+                    <span className="font-semibold text-coral-400">
+                      {s.score}/{s.maxScore}
+                    </span>
+                  ) : (
+                    <span className="text-sm text-slate-500">Đã nộp</span>
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           {totalPages > 1 && (

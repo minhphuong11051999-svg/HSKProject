@@ -13,6 +13,7 @@ const NAV_ITEMS = [
 const ADMIN_ITEMS = [
   { to: '/admin', icon: '📚', label: 'Quản trị bài học' },
   { to: '/admin/sample-papers', icon: '📝', label: 'Quản trị đề mẫu' },
+  { to: '/admin/exam-sittings', icon: '🎯', label: 'Quản trị đề thi thật' },
   { to: '/admin/users', icon: '👥', label: 'Người dùng' },
 ];
 
