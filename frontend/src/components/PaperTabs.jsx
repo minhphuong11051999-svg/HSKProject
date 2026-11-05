@@ -82,7 +82,7 @@ export default function PaperTabs({ prompt, answer, targetKey }) {
           aria-labelledby="tab-prompt"
           className="bg-night-800 border border-night-700 rounded-xl p-6"
         >
-          <div className="zh text-sm leading-7" dangerouslySetInnerHTML={{ __html: prompt }} />
+          <div className="zh text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: prompt }} />
         </section>
       )}
 
@@ -143,7 +143,7 @@ export default function PaperTabs({ prompt, answer, targetKey }) {
             </button>
           </div>
           {showAnswer ? (
-            <div className="zh text-sm leading-7" dangerouslySetInnerHTML={{ __html: answer }} />
+            <div className="zh text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: answer }} />
           ) : (
             <p className="text-sm text-slate-500">Tự làm bài trước rồi bấm "Xem đáp án" để đối chiếu.</p>
           )}

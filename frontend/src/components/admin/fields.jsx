@@ -139,7 +139,7 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
       </div>
       {preview ? (
         <div
-          className="mt-1 w-full min-h-[8rem] bg-night-900 border border-night-600 rounded px-3 py-2 text-sm text-slate-100"
+          className="mt-1 w-full min-h-[8rem] bg-night-900 border border-night-600 rounded px-3 py-2 text-sm text-slate-100 whitespace-pre-line"
           dangerouslySetInnerHTML={{ __html: value || '<span class="text-slate-500">(trống)</span>' }}
         />
       ) : (

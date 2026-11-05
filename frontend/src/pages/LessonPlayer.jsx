@@ -122,7 +122,7 @@ function TheoryTab({ lesson }) {
         .map((s) => (
           <div key={s.id}>
             <h3 className="font-semibold mb-2">{s.heading}</h3>
-            <div dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
+            <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
           </div>
         ))}
 
@@ -166,7 +166,7 @@ function GenericTab({ lesson, partKey }) {
       {sections.map((s) => (
         <div key={s.id}>
           {s.heading && <h3 className="font-semibold mb-2">{s.heading}</h3>}
-          <div dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
+          <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
         </div>
       ))}
     </div>
@@ -231,7 +231,7 @@ function QuizTab({ lessonId, questions, canSave, showDraft }) {
             <p className="font-semibold">{q.title}</p>
             {showDraft && q.draftHtml && (
               <div
-                className="my-3 text-sm bg-night-900 p-3 rounded"
+                className="my-3 text-sm bg-night-900 p-3 rounded whitespace-pre-line"
                 dangerouslySetInnerHTML={{ __html: result ? q.draftHtmlMarked || q.draftHtml : q.draftHtml }}
               />
             )}
@@ -310,7 +310,7 @@ function ClozeTab({ lessonId, exercises, canSave }) {
         const result = results[ex.id];
         return (
           <div key={ex.id} className="border border-night-700 rounded-lg p-4">
-            <div dangerouslySetInnerHTML={{ __html: ex.templateHtml }} />
+            <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: ex.templateHtml }} />
             <div className="mt-3 flex flex-wrap gap-3">
               {ex.blanks.map((b) => {
                 const chosen = answers[ex.id]?.[b.id] || '';
@@ -556,7 +556,7 @@ function WritingTaskCard({ task }) {
       <p className="font-semibold text-sm">{task.title}</p>
       {task.hint && (
         <p className="text-xs text-slate-400 mt-1">
-          Gợi ý: <span dangerouslySetInnerHTML={{ __html: task.hint }} />
+          Gợi ý: <span className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: task.hint }} />
         </p>
       )}
       <textarea
@@ -571,7 +571,7 @@ function WritingTaskCard({ task }) {
       </button>
       {showAnswer && (
         <div
-          className="mt-2 text-sm bg-night-900 p-2 rounded"
+          className="mt-2 text-sm bg-night-900 p-2 rounded whitespace-pre-line"
           dangerouslySetInnerHTML={{ __html: task.referenceAnswer }}
         />
       )}
@@ -733,7 +733,7 @@ function WritingTab({ lesson }) {
 
         {lesson.guidedWritingScenarios.map((sc) => (
           <div key={sc.id} className="mt-4 pt-4 border-t border-night-700">
-            <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: sc.situationPrompt }} />
+            <p className="text-xs text-slate-400 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: sc.situationPrompt }} />
             <button onClick={() => setShowModel((v) => !v)} className="mt-2 text-sm text-coral-400 underline">
               {showModel ? 'Ẩn bài mẫu' : 'Xem bài mẫu tham khảo'}
             </button>
