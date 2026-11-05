@@ -14,7 +14,7 @@ export default function Dashboard() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-10">
       <div className="mb-8">
-        <p className="zh text-xl text-coral-text">写作工坊</p>
+        <p className="zh text-xl text-coral-400">写作工坊</p>
         <h1 className="text-2xl md:text-3xl font-bold mt-1">
           Xin chào, {user.name} <span aria-hidden="true">👋</span>
         </h1>
@@ -96,7 +96,7 @@ function QuickLink({ to, emoji, label }) {
 function SummaryStat({ label, value }) {
   return (
     <div className="bg-night-800 border border-night-700 rounded-xl p-4 text-center">
-      <p className="text-xl font-bold text-coral-text">{value}</p>
+      <p className="text-xl font-bold text-coral-400">{value}</p>
       <p className="text-xs text-slate-500 mt-1">{label}</p>
     </div>
   );

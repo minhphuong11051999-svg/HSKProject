@@ -35,7 +35,7 @@ export default function Sidebar() {
       <div className="px-5 py-5">
         <Link to="/" className="flex items-center gap-2.5 min-w-0">
           <img src="/logo.svg" alt="" className="w-8 h-8 rounded-lg flex-shrink-0" />
-          <span className="zh text-lg font-bold text-coral-text truncate">写作工坊 · HSK6</span>
+          <span className="zh text-lg font-bold text-coral-400 truncate">写作工坊 · HSK6</span>
         </Link>
       </div>
 
@@ -47,7 +47,7 @@ export default function Sidebar() {
             aria-current={isActive(item.to) ? 'page' : undefined}
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
               isActive(item.to)
-                ? 'bg-coral-500/15 text-coral-text font-semibold border-coral-text'
+                ? 'bg-coral-500/15 text-coral-400 font-semibold border-coral-400'
                 : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'
             }`}
           >
@@ -66,7 +66,7 @@ export default function Sidebar() {
                 aria-current={isActive(item.to) ? 'page' : undefined}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
                   isActive(item.to)
-                    ? 'bg-coral-500/15 text-coral-text font-semibold border-coral-text'
+                    ? 'bg-coral-500/15 text-coral-400 font-semibold border-coral-400'
                     : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'
                 }`}
               >

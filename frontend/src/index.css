@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  /* Dark theme (default) */
-  --c-night-950: #0a0a0d;
-  --c-night-900: #121216;
-  --c-night-800: #1a1a20;
-  --c-night-700: #242430;
-  --c-night-600: #32323f;
-  --c-slate-100: #e9ebf3;
-  --c-slate-200: #d7dae6;
-  --c-slate-300: #c7cbdc;
-  --c-slate-400: #9aa0bd;
-  --c-slate-500: #7b82a3;
-  /* coral-500 reads ~5.8:1 on dark surfaces; keep it as-is here */
-  --c-coral-text: #e8716a;
+  /* Dark theme (default) - Swiss Modernism: scholarly navy + gold accent */
+  --c-night-950: #0b111a;
+  --c-night-900: #11182a;
+  --c-night-800: #182236;
+  --c-night-700: #22304a;
+  --c-night-600: #2e405f;
+  --c-slate-100: #e6ecf5;
+  --c-slate-200: #cbd5e3;
+  --c-slate-300: #aab8cc;
+  --c-slate-400: #8794ac;
+  --c-slate-500: #66728c;
+  /* coral-400 (text accent) needs a brighter gold on dark surfaces to stay AA; coral-500 (buttons) stays a fixed darker gold everywhere */
+  --c-coral-accent: #e8a33d;
   --c-quicklink-from: #3a3220;
   --c-quicklink-to: #2a2415;
   --c-quicklink-border: #5c4f2d;
@@ -23,18 +23,18 @@
 }
 
 :root[data-theme='light'] {
-  --c-night-950: #f3f1ea;
+  --c-night-950: #f7f8fb;
   --c-night-900: #ffffff;
-  --c-night-800: #f6f4ec;
-  --c-night-700: #e6e1d2;
-  --c-night-600: #d6cfb8;
-  --c-slate-100: #241f18;
-  --c-slate-200: #342d22;
-  --c-slate-300: #4a4232;
-  --c-slate-400: #6f654e;
-  --c-slate-500: #8c8268;
-  /* coral-500 only reads ~2.7:1 on the light surface; use coral-700 for text so it stays AA */
-  --c-coral-text: #b8453e;
+  --c-night-800: #eef1f6;
+  --c-night-700: #dce2ec;
+  --c-night-600: #c7d2e0;
+  --c-slate-100: #152033;
+  --c-slate-200: #223049;
+  --c-slate-300: #3c4a66;
+  --c-slate-400: #5c6880;
+  --c-slate-500: #7c879c;
+  /* coral-400 (text accent) needs a darker gold on the light surface to stay AA */
+  --c-coral-accent: #92400e;
   --c-quicklink-from: #f7efdc;
   --c-quicklink-to: #e8d6ad;
   --c-quicklink-border: #ddc98f;
@@ -44,7 +44,7 @@
 a:focus-visible,
 button:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--c-coral-text);
+  outline: 2px solid var(--c-coral-accent);
   outline-offset: 2px;
 }
 
@@ -59,7 +59,7 @@ body {
 }
 
 ::selection {
-  background: #e8716a;
+  background: #b45309;
   color: #fff;
 }
 
@@ -75,7 +75,7 @@ body {
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #e8716a;
+  background: #b45309;
 }
 
 .letter-paper {

@@ -27,15 +27,15 @@ export default {
           600: 'var(--c-night-600)',
         },
         coral: {
-          50: '#fdeceb',
-          100: '#fbd9d6',
-          300: '#f29c96',
-          400: '#ee847d',
-          500: '#e8716a',
-          600: '#d85951',
-          700: '#b8453e',
-          // Theme-aware variant for text-on-background use (AA contrast in both themes)
-          text: 'var(--c-coral-text)',
+          // Scholarly gold accent. 400 is theme-aware (used as plain text/badges);
+          // 500/600 stay fixed so white button text keeps AA contrast in both themes.
+          50: '#fdf3e7',
+          100: '#fae3c2',
+          300: '#f0b873',
+          400: 'var(--c-coral-accent)',
+          500: '#b45309',
+          600: '#92400e',
+          700: '#78350f',
         },
       },
       fontFamily: {
