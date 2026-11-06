@@ -22,7 +22,7 @@ export default function ExamSittingViewer() {
 
   if (sitting.locked) {
     return (
-      <main className="max-w-2xl mx-auto px-6 py-16 text-center">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-10 sm:py-16 text-center">
         <p className="zh text-2xl">{sitting.titleZh}</p>
         <h1 className="text-xl font-bold mt-2">{sitting.titleVi}</h1>
         <PremiumModal open onClose={() => navigate('/lessons/exam')} />
@@ -31,7 +31,7 @@ export default function ExamSittingViewer() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-10">
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <p className="text-sm text-slate-500 mb-1">
         Năm {sitting.examYear?.year} · {sitting.label}
       </p>

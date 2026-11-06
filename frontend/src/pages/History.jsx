@@ -30,7 +30,7 @@ export default function History() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-10">
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <h1 className="text-xl font-bold mb-6">Lịch sử làm bài</h1>
       {loading ? (
         <p className="text-slate-500">Đang tải...</p>

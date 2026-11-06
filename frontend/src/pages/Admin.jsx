@@ -456,7 +456,7 @@ export default function Admin() {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-10">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <div className="grid lg:grid-cols-[320px_1fr] gap-8">
         <section>
           <div className="flex items-center justify-between mb-4">

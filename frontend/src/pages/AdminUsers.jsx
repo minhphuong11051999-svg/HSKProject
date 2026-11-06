@@ -57,7 +57,7 @@ export default function AdminUsers() {
   }
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-10">
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-bold">Quản lý người dùng</h1>
         <Link to="/admin" className="text-sm text-coral-400 underline">Quản trị bài học</Link>

@@ -10,7 +10,7 @@ const BTN_PRIMARY =
   'min-h-[40px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-colors';
 const BTN_SECONDARY =
   'min-h-[40px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-night-900 border border-night-600 hover:bg-night-700 text-slate-200 px-4 py-2 rounded-lg transition-colors';
-const CARD = 'bg-night-900 border border-night-700 rounded-xl p-5';
+const CARD = 'bg-night-900 border border-night-700 rounded-xl p-4 sm:p-5';
 const INPUT =
   'w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-coral-500';
 
@@ -65,7 +65,7 @@ export default function LessonPlayer() {
   if (!lesson) return <p className="text-center py-10 text-slate-400">Không tìm thấy bài học.</p>;
   if (lesson.locked) {
     return (
-      <main className="max-w-2xl mx-auto px-6 py-16 text-center">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-10 sm:py-16 text-center">
         <p className="zh text-2xl">{lesson.titleZh}</p>
         <h1 className="text-xl font-bold mt-2">{lesson.titleVi}</h1>
         <PremiumModal open onClose={() => navigate('/lessons')} />
@@ -78,11 +78,59 @@ export default function LessonPlayer() {
   const canSave = !!user;
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-6">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col md:flex-row gap-6">
       <aside className="md:w-64 flex-shrink-0 md:sticky md:top-6 md:self-start">
         <p className="zh text-xl mb-1">{lesson.titleZh}</p>
         <h1 className="font-semibold mb-4">{lesson.titleVi}</h1>
-        <nav className="flex flex-col gap-2" aria-label="Các bước của bài học">
+
+        {/* Phones: compact stepper instead of the tall step list */}
+        {current && (
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => parts[current.number - 2] && goToTab(parts[current.number - 2])}
+              disabled={current.number === 1}
+              aria-label="Bước trước"
+              className="w-11 h-11 flex-shrink-0 flex items-center justify-center rounded-lg bg-night-800 border border-night-700 disabled:opacity-40"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M15 6l-6 6 6 6" />
+              </svg>
+            </button>
+            <label className="sr-only" htmlFor="lesson-step-select">
+              Chọn bước
+            </label>
+            <select
+              id="lesson-step-select"
+              value={tab}
+              onChange={(e) => {
+                const t = parts.find((p) => p.key === e.target.value);
+                if (t) goToTab(t);
+              }}
+              className="flex-1 min-w-0 h-11 rounded-lg bg-coral-500 text-white font-semibold text-sm px-3 border-0"
+            >
+              {parts.map((t) => (
+                <option key={t.key} value={t.key} className="bg-night-900 text-slate-100">
+                  Bước {t.number}/{parts.length} · {t.label}
+                  {isPartPremium(t.key) && !isPremiumUser ? ' (PRO)' : ''}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              onClick={() => parts[current.number] && goToTab(parts[current.number])}
+              disabled={current.number === parts.length}
+              aria-label="Bước tiếp theo"
+              className="w-11 h-11 flex-shrink-0 flex items-center justify-center rounded-lg bg-night-800 border border-night-700 disabled:opacity-40"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        <nav className="hidden md:flex flex-col gap-2" aria-label="Các bước của bài học">
           {parts.map((t) => (
             <button
               key={t.key}
@@ -115,9 +163,9 @@ export default function LessonPlayer() {
 
       <PremiumModal open={showTabPremium} onClose={() => setShowTabPremium(false)} />
 
-      <section className="flex-1 min-w-0 bg-night-800 border border-night-700 rounded-xl p-5 sm:p-6">
+      <section className="flex-1 min-w-0 bg-night-800 border border-night-700 rounded-xl p-4 sm:p-6">
         {current && (
-          <header className="mb-6 pb-4 border-b border-night-700">
+          <header className="mb-5 sm:mb-6 pb-4 border-b border-night-700">
             <h2 className="text-lg font-bold text-slate-100">
               <span className="text-coral-400">Bước {current.number}</span> · {current.label}
             </h2>

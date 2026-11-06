@@ -18,7 +18,7 @@ export default function ExamSittings() {
   }, []);
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10">
+    <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <div className="mb-8">
         <p className="zh text-xl text-coral-400">写作工坊</p>
         <h1 className="text-2xl md:text-3xl font-bold mt-1">Đề thi thật</h1>

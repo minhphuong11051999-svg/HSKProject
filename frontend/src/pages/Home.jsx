@@ -9,7 +9,7 @@ export default function Home() {
 
 function Hero() {
   return (
-    <main className="max-w-6xl mx-auto px-6 py-20">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
           <p className="zh text-2xl text-coral-500 mb-3">写作工坊</p>

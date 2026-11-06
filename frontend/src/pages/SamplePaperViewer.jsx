@@ -22,7 +22,7 @@ export default function SamplePaperViewer() {
 
   if (paper.locked) {
     return (
-      <main className="max-w-2xl mx-auto px-6 py-16 text-center">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-10 sm:py-16 text-center">
         <p className="zh text-2xl">{paper.titleZh}</p>
         <h1 className="text-xl font-bold mt-2">{paper.titleVi}</h1>
         <PremiumModal open onClose={() => navigate('/practice')} />
@@ -31,7 +31,7 @@ export default function SamplePaperViewer() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-10">
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <p className="zh text-xl mb-1">{paper.titleZh}</p>
       <h1 className="text-xl font-bold mb-6">{paper.titleVi}</h1>
 

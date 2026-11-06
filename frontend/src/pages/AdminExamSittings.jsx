@@ -139,7 +139,7 @@ export default function AdminExamSittings() {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-10">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <div className="grid lg:grid-cols-[320px_1fr] gap-8">
         <section>
           <div className="flex items-center justify-between mb-4">
@@ -236,7 +236,7 @@ export default function AdminExamSittings() {
           {loadingEdit && <p className="text-slate-400 text-sm mb-3">Đang tải nội dung...</p>}
 
           {!selectedYearId ? (
-            <p className="text-slate-500 text-sm">Hãy thêm hoặc chọn một năm ở bên trái trước.</p>
+            <p className="text-slate-500 text-sm">Hãy thêm hoặc chọn một năm trong danh sách Năm trước.</p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="border border-night-600 rounded-lg p-4 space-y-2">

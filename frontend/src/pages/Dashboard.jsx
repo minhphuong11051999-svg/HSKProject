@@ -12,7 +12,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-10">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <div className="mb-8">
         <p className="zh text-xl text-coral-400">写作工坊</p>
         <h1 className="text-2xl md:text-3xl font-bold mt-1">
@@ -40,7 +40,7 @@ export default function Dashboard() {
 
           <ActivityHeatmap activity={stats.activity} />
 
-          <div className="grid sm:grid-cols-3 gap-4 mt-4">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-4">
             <SummaryStat label="Ngày có học" value={`${stats.daysActiveInWindow}/${stats.windowDays}`} />
             <SummaryStat label="Tổng số bài đã làm" value={stats.totalSubmissions} />
             <SummaryStat label="Chuỗi dài nhất" value={`${stats.longestStreak} ngày`} />

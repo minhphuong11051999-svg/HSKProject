@@ -18,7 +18,9 @@ const ADMIN_ITEMS = [
   { to: '/admin/users', icon: '👥', label: 'Người dùng' },
 ];
 
-export default function Sidebar() {
+// Desktop (lg+): sticky full-height column. Below lg: off-canvas drawer that
+// slides in from the left, opened from the top app bar in Layout.
+export default function Sidebar({ open = false, onClose }) {
   const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,9 +35,25 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="w-64 shrink-0 bg-night-900 border-r border-night-700 flex flex-col h-screen sticky top-0 self-start">
-      <div className="px-5 py-5">
+    <aside
+      id="app-sidebar"
+      aria-label="Điều hướng chính"
+      className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] h-[100dvh] bg-night-900 border-r border-night-700 flex flex-col
+        transition-transform duration-200 ease-out ${open ? 'translate-x-0' : '-translate-x-full invisible lg:visible'}
+        lg:sticky lg:top-0 lg:z-auto lg:w-64 lg:max-w-none lg:h-screen lg:translate-x-0 lg:self-start lg:shrink-0`}
+    >
+      <div className="px-5 py-5 flex items-center justify-between gap-2">
         <BrandLogo />
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Đóng menu"
+          className="lg:hidden w-11 h-11 flex items-center justify-center rounded-lg text-slate-300 hover:bg-night-800 transition-colors"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
       </div>
 
       <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
@@ -44,7 +62,7 @@ export default function Sidebar() {
             key={item.to}
             to={item.to}
             aria-current={isActive(item.to) ? 'page' : undefined}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
+            className={`flex items-center gap-3 min-h-[44px] px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
               isActive(item.to)
                 ? 'bg-coral-500/15 text-coral-400 font-semibold border-coral-400'
                 : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'
@@ -63,7 +81,7 @@ export default function Sidebar() {
                 key={item.to}
                 to={item.to}
                 aria-current={isActive(item.to) ? 'page' : undefined}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
+                className={`flex items-center gap-3 min-h-[44px] px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
                   isActive(item.to)
                     ? 'bg-coral-500/15 text-coral-400 font-semibold border-coral-400'
                     : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'

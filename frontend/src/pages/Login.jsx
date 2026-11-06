@@ -24,7 +24,7 @@ export default function Login() {
   }
 
   return (
-    <main className="max-w-sm mx-auto px-6 py-16">
+    <main className="max-w-sm mx-auto px-4 sm:px-6 py-10 sm:py-16">
       <h1 className="text-xl font-bold mb-6 text-center">Đăng nhập</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input

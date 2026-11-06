@@ -66,7 +66,7 @@ export default function LetterPaper({
   children,
 }) {
   return (
-    <div className={`letter-paper rounded-lg p-6 sm:p-8 pb-16 text-[15px] zh leading-8 ${minHeight}`}>
+    <div className={`letter-paper rounded-lg px-5 py-5 sm:p-8 pb-16 sm:pb-16 text-[15px] zh leading-8 ${minHeight}`}>
       {html ? (
         <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: html }} />
       ) : (
