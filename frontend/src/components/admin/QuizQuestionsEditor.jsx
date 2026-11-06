@@ -1,10 +1,14 @@
 import Repeater from './Repeater';
 import { TextField, TextAreaField, RichTextAreaField, SelectField } from './fields';
 
-export default function QuizQuestionsEditor({ items, onChange }) {
+// `kind` pins the editor to one question type (THEORY for "Nhận diện thể thức",
+// ERROR_ANALYSIS for "Tìm lỗi sai"); without it the admin picks per question.
+export default function QuizQuestionsEditor({ items, onChange, kind, title, hint }) {
   function emptyItem() {
     return {
-      kind: 'THEORY',
+      kind: kind || 'THEORY',
+      mode: 'choice',
+      correctedHtml: '',
       title: '',
       prompt: '',
       options: ['', ''],
@@ -17,8 +21,13 @@ export default function QuizQuestionsEditor({ items, onChange }) {
 
   return (
     <Repeater
-      title="Câu hỏi trắc nghiệm"
-      hint="Tab 'Nhận diện thể thức' (lý thuyết) và tab 'Phân tích khuyết thiếu' (lỗi sai) đều dùng chung loại này, phân biệt bằng Loại câu hỏi."
+      title={title || 'Câu hỏi trắc nghiệm'}
+      hint={hint}
+      itemLabel={(item, index) =>
+        item.kind === 'ERROR_ANALYSIS'
+          ? `Câu ${index + 1} · ${item.mode === 'fix' ? 'Dạng 1 — Tự sửa lỗi' : 'Dạng 2 — Trắc nghiệm lỗi'}`
+          : `Câu ${index + 1}`
+      }
       items={items}
       onChange={onChange}
       newItem={emptyItem}
@@ -26,6 +35,7 @@ export default function QuizQuestionsEditor({ items, onChange }) {
       renderItem={(item, update) => (
         <div className="space-y-2">
           <div className="grid sm:grid-cols-2 gap-2">
+            {!kind && (
             <SelectField
               label="Loại câu hỏi"
               value={item.kind}
@@ -35,6 +45,18 @@ export default function QuizQuestionsEditor({ items, onChange }) {
                 ['ERROR_ANALYSIS', 'Phân tích lỗi sai (có bản nháp)'],
               ]}
             />
+            )}
+            {item.kind === 'ERROR_ANALYSIS' && (
+              <SelectField
+                label="Dạng bài"
+                value={item.mode || 'choice'}
+                onChange={(v) => update({ ...item, mode: v })}
+                options={[
+                  ['fix', 'Dạng 1 — Tự sửa lỗi (2 ô nhập: dùng từ & bố cục)'],
+                  ['choice', 'Dạng 2 — Trắc nghiệm nhận diện lỗi (4 phương án)'],
+                ]}
+              />
+            )}
             <TextField label="Tiêu đề câu hỏi (vd: 1.1 ...)" value={item.title} onChange={(v) => update({ ...item, title: v })} />
           </div>
 
@@ -43,7 +65,7 @@ export default function QuizQuestionsEditor({ items, onChange }) {
           {item.kind === 'ERROR_ANALYSIS' && (
             <div className="grid sm:grid-cols-2 gap-2">
               <RichTextAreaField
-                label="Bản nháp có lỗi (hiển thị trước khi trả lời)"
+                label="Bản thảo / bài mẫu viết sai (hiển thị trước khi trả lời)"
                 value={item.draftHtml}
                 onChange={(v) => update({ ...item, draftHtml: v })}
               />
@@ -55,6 +77,15 @@ export default function QuizQuestionsEditor({ items, onChange }) {
             </div>
           )}
 
+          {item.kind === 'ERROR_ANALYSIS' && (
+            <RichTextAreaField
+              label="Bản thảo hoàn chỉnh (đã sửa hết lỗi — hiển thị sau khi kiểm tra)"
+              value={item.correctedHtml}
+              onChange={(v) => update({ ...item, correctedHtml: v })}
+            />
+          )}
+
+          {!(item.kind === 'ERROR_ANALYSIS' && item.mode === 'fix') && (
           <div>
             <p className="text-xs text-slate-400 mb-1">Các đáp án (chọn ô tròn cho đáp án ĐÚNG)</p>
             <div className="space-y-1">
@@ -97,6 +128,7 @@ export default function QuizQuestionsEditor({ items, onChange }) {
               + thêm đáp án
             </button>
           </div>
+          )}
 
           <TextAreaField
             label="Giải thích đáp án (hiển thị sau khi trả lời)"

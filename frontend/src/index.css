@@ -92,6 +92,37 @@ body {
   overflow: hidden;
 }
 
+/* Layout helpers used inside admin-authored rich text (seed data, model
+   answers, drafts) so it follows the same paper rules as the live preview. */
+.indent2 { text-indent: 2em; }
+.indent4 { text-indent: 4em; }
+.paper-title { text-align: center; font-weight: 700; }
+.doc-sign-block,
+.sig-block { display: flex; justify-content: flex-end; }
+.doc-sign-inner { display: inline-flex; flex-direction: column; align-items: center; text-align: center; }
+
+/* Faint red seal (印章) stamped in the bottom-right corner of every sheet. */
+.letter-paper::after {
+  content: '印章';
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 2px solid #a3272c;
+  border-radius: 9999px;
+  color: #a3272c;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-14deg);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
 .letter-paper::before {
   content: '';
   position: absolute;

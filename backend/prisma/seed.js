@@ -17,6 +17,7 @@ const NESTED_KEYS = [
   'writingTasks',
   'guidedWritingFields',
   'guidedWritingScenarios',
+  'exercises',
 ];
 
 const MODEL_NAME = {
@@ -30,6 +31,7 @@ const MODEL_NAME = {
   writingTasks: 'writingTask',
   guidedWritingFields: 'guidedWritingField',
   guidedWritingScenarios: 'guidedWritingScenario',
+  exercises: 'lessonExercise',
 };
 
 function loadContentFor(slug) {

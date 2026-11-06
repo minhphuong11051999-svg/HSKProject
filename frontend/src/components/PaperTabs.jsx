@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { getMySubmissionFor, submitExercise } from '../api/lessons';
+import LetterPaper, { HanziCount, countHanzi, htmlToText } from './LetterPaper';
 
 // Two full-width spaces — the standard first-line indent used when writing
 // Chinese compositions by hand, so typed paragraphs match exam-paper format.
@@ -182,9 +183,17 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
                 placeholder="Viết bài làm của bạn ở đây..."
                 className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 zh leading-7"
               />
-              <p className="text-xs text-slate-500 mt-1">
-                Mỗi lần xuống dòng sẽ tự thụt đầu dòng 2 ô, đúng quy cách viết luận.
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2 mt-1">
+                <p className="text-xs text-slate-500">Mỗi lần xuống dòng sẽ tự thụt đầu dòng 2 ô, đúng quy cách viết luận.</p>
+                <span
+                  aria-live="polite"
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full border tabular-nums ${
+                    countHanzi(draft) ? 'border-green-500 bg-green-500/10 text-green-400' : 'border-night-600 text-slate-400'
+                  }`}
+                >
+                  {countHanzi(draft)} chữ Hán
+                </span>
+              </div>
               <div className="flex flex-wrap items-center justify-between gap-2 mt-3">
                 <button
                   type="button"
@@ -212,8 +221,11 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
           aria-labelledby="tab-answer"
           className="bg-night-800 border border-night-700 rounded-xl p-6"
         >
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold text-slate-200">Đáp án mẫu</h2>
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h2 className="font-semibold text-slate-200 flex items-center gap-2">
+              Đáp án mẫu
+              {showAnswer && <HanziCount count={countHanzi(htmlToText(answer))} />}
+            </h2>
             <button
               type="button"
               onClick={() => setShowAnswer((v) => !v)}
@@ -223,7 +235,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
             </button>
           </div>
           {showAnswer ? (
-            <div className="zh text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: answer }} />
+            <LetterPaper html={answer} minHeight="" />
           ) : (
             <p className="text-sm text-slate-500">Tự làm bài trước rồi bấm "Xem đáp án" để đối chiếu.</p>
           )}

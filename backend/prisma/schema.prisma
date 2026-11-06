@@ -66,6 +66,7 @@ model Lesson {
   writingTasks          WritingTask[]
   guidedWritingFields   GuidedWritingField[]
   guidedWritingScenarios GuidedWritingScenario[]
+  exercises             LessonExercise[]
   submissions           Submission[]
 }
 
@@ -121,7 +122,26 @@ model QuizQuestion {
   explanation     String?
   draftHtml       String?
   draftHtmlMarked String?
+  // ERROR_ANALYSIS only: "choice" = pick the right diagnosis among options,
+  // "fix" = student rewrites the faulty parts themselves (ungraded).
+  mode            String   @default("choice")
+  correctedHtml   String?
   orderIndex      Int      @default(0)
+}
+
+// Free-form exercise rows for lesson parts that share the same
+// "prompt → student input → reference answer" shape:
+//   kind "translate": prompt = source sentence, hints = phrase tags, answer = model translation
+//   kind "outline":   prompt = guide shown on the left, answer = reference Chinese structure
+model LessonExercise {
+  id         String @id @default(cuid())
+  lessonId   String
+  lesson     Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  kind       String
+  prompt     String
+  hints      Json   @default("[]")
+  answer     String @default("")
+  orderIndex Int    @default(0)
 }
 
 model ClozeExercise {

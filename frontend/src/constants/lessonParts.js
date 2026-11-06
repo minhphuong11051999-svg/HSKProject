@@ -21,7 +21,21 @@ export const ALL_LESSON_PARTS = [
   { key: 'writing', label: 'Luyện viết hoàn chỉnh' },
 ];
 
-export const BUILTIN_PART_KEYS = ['theory', 'samples', 'quiz', 'cloze', 'error', 'vocab', 'partial_writing', 'writing'];
+export const BUILTIN_PART_KEYS = [
+  'theory',
+  'samples',
+  'quiz',
+  'matching',
+  'cloze',
+  'error',
+  'sentence_building',
+  'translate_transform',
+  'outline',
+  'fixed_phrases',
+  'vocab',
+  'partial_writing',
+  'writing',
+];
 
 export const DEFAULT_SELECTED_PARTS = ['theory', 'samples', 'quiz', 'cloze', 'error', 'vocab', 'writing'];
 

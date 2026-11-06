@@ -11,6 +11,20 @@ function gradeQuiz(lesson, exerciseId, answerPayload) {
     isCorrect: correct,
     correctIndex: question.correctIndex,
     explanation: question.explanation || null,
+    correctedHtml: question.correctedHtml || null,
+  };
+}
+
+// "Tìm lỗi sai" self-correction mode: free-text rewrite, not auto-graded — the
+// response just unlocks the explanation and the fully corrected draft.
+function gradeErrorFix(lesson, exerciseId) {
+  const question = lesson.quizQuestions.find((q) => q.id === exerciseId);
+  if (!question) return null;
+  return {
+    score: null,
+    maxScore: null,
+    explanation: question.explanation || null,
+    correctedHtml: question.correctedHtml || null,
   };
 }
 
@@ -44,6 +58,7 @@ const GRADERS = {
   quiz: gradeQuiz,
   cloze: gradeCloze,
   match: gradeMatch,
+  error_fix: gradeErrorFix,
 };
 
 async function createSubmission({ userId, lessonId, samplePaperId, examSittingId, exerciseType, exerciseId, answerPayload }) {

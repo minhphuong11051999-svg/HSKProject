@@ -1,4 +1,4 @@
-export default function Repeater({ title, hint, items, onChange, newItem, renderItem, addLabel }) {
+export default function Repeater({ title, hint, items, onChange, newItem, renderItem, addLabel, itemLabel }) {
   function updateItem(index, next) {
     const copy = items.slice();
     copy[index] = next;
@@ -37,7 +37,7 @@ export default function Repeater({ title, hint, items, onChange, newItem, render
               <button type="button" onClick={() => move(index, 1)} className="px-1.5 py-0.5 border border-night-600 rounded bg-night-800 text-slate-200" title="Xuống">↓</button>
               <button type="button" onClick={() => removeItem(index)} className="px-1.5 py-0.5 border border-red-500 text-red-400 rounded bg-night-800" title="Xoá">Xoá</button>
             </div>
-            <p className="text-xs text-slate-400 mb-2">#{index + 1}</p>
+            <p className="text-xs font-semibold text-slate-400 mb-2">{itemLabel ? itemLabel(item, index) : `#${index + 1}`}</p>
             {renderItem(item, (next) => updateItem(index, next))}
           </div>
         ))}

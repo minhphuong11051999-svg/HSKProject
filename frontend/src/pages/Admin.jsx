@@ -10,54 +10,68 @@ import { ALL_LESSON_PARTS, BUILTIN_PART_KEYS, DEFAULT_SELECTED_PARTS, partLabel 
 
 const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
 
-// Standard field set for a brand-new lesson's guided-writing forms, so a new
-// lesson starts with a working template instead of an empty form the admin
-// has to build from scratch every time.
-// Labels have no leading "1. "/"2. " — the field's position in the list numbers
-// it automatically (see GuidedWritingForm in LessonPlayer.jsx and the admin
-// list editors below), so reordering never leaves labels out of sync.
-const DEFAULT_WRITING_FIELDS = [
-  { label: 'Tiêu đề 标题', name: 'title', placeholder: 'Ví dụ: 关于举办留学生太极拳比赛的通知', inputType: 'text', group: 'writing' },
-  { label: 'Đối tượng nhận 被通知方', name: 'greeting', placeholder: 'Ví dụ: 各位同学', inputType: 'text', group: 'writing' },
-  {
-    label: 'Chính văn 正文 (mỗi đoạn xuống dòng riêng)',
-    name: 'body',
-    placeholder: 'Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới...',
-    inputType: 'textarea',
-    group: 'writing',
-  },
-  { label: 'Đơn vị phát hành 署名', name: 'sign', placeholder: 'Ví dụ: 留学生办公室', inputType: 'text', group: 'writing' },
-  { label: 'Ngày tháng 日期', name: 'date', placeholder: 'Ví dụ: 2026年9月1日', inputType: 'text', group: 'writing' },
+// The 8 standard slots of the shared letter form (UI/UX layout spec §I):
+// role key (stored in `name`) → where the text lands on the simulated paper.
+// Labels carry no leading "1. " — position numbers them automatically.
+const FIELD_ROLES = [
+  ['title', 'Ô 1 · Tiêu đề (标题) — căn giữa'],
+  ['greeting', 'Ô 2 · Xưng hô người nhận (称呼) — sát lề trái'],
+  ['body', 'Ô 3 · Chính văn / Thời gian (正文) — thụt 2 ô'],
+  ['bodyEnd', 'Ô 4 · Lời đề nghị / Kết chính văn — thụt 2 ô'],
+  ['closing1', 'Ô 5 · Lời kết 1 (此致) — thụt 4 ô'],
+  ['closing2', 'Ô 6 · Lời kết 2 (敬礼！) — sát lề trái'],
+  ['sign', 'Ô 7 · Tên người viết / ký tên (署名) — góc phải'],
+  ['date', 'Ô 8 · Ngày tháng (日期) — góc phải'],
 ];
 
-const DEFAULT_PARTIAL_WRITING_FIELDS = [
-  { label: 'Tiêu đề (标题)', name: 'title', placeholder: '请假条', inputType: 'text', group: 'partial_writing' },
-  {
-    label: 'Xưng hô người nhận (称呼 – đúng dấu câu)',
-    name: 'greeting',
-    placeholder: '陈老师：',
-    inputType: 'text',
-    group: 'partial_writing',
-  },
-  {
-    label: 'Cú pháp thời gian dùng từ "拟于"',
-    name: 'timeClause',
-    placeholder: '我拟于10月15日上午请假半天。',
-    inputType: 'text',
-    group: 'partial_writing',
-  },
-  {
-    label: 'Lời đề nghị phê chuẩn ở cuối chính văn',
-    name: 'approvalRequest',
-    placeholder: '特向您请假，并望批准。',
-    inputType: 'text',
-    group: 'partial_writing',
-  },
-  { label: 'Lời kết 1 (此致)', name: 'closing1', placeholder: '此致', inputType: 'text', group: 'partial_writing' },
-  { label: 'Lời kết 2 (敬礼！)', name: 'closing2', placeholder: '敬礼！', inputType: 'text', group: 'partial_writing' },
-  { label: 'Tên người viết / ký tên (署名)', name: 'sign', placeholder: '美美', inputType: 'text', group: 'partial_writing' },
-  { label: 'Ngày tháng (日期)', name: 'date', placeholder: '2026年10月14日', inputType: 'text', group: 'partial_writing' },
+const INPUT_TYPES = [
+  ['text', 'Một dòng'],
+  ['textarea', 'Nhiều dòng (mỗi dòng = 1 đoạn)'],
+  ['checkbox', 'Ô tick (bật/tắt)'],
 ];
+
+const STANDARD_LABELS = [
+  'Tiêu đề (标题)',
+  'Xưng hô người nhận (称呼)',
+  'Chính văn / Thời gian (正文)',
+  'Lời đề nghị phê chuẩn / Kết chính văn (正文 - 结尾句)',
+  'Lời kết 1 (此致)',
+  'Lời kết 2 (敬礼！)',
+  'Tên người viết / Ký tên (署名)',
+  'Ngày tháng (日期)',
+];
+
+function standardFields(group, placeholders) {
+  return FIELD_ROLES.map(([name], i) => ({
+    name,
+    label: STANDARD_LABELS[i],
+    placeholder: placeholders[i] || '',
+    inputType: name === 'body' ? 'textarea' : 'text',
+    group,
+  }));
+}
+
+const DEFAULT_WRITING_FIELDS = standardFields('writing', [
+  'Ví dụ: 请假条 / 推荐信 / 通知',
+  'Ví dụ: 王老师：/ 各位同学：',
+  'Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới...',
+  'Ví dụ: 特向您请假，并望批准。',
+  '此致',
+  '敬礼！',
+  'Ví dụ: 美美 / 留学生办公室',
+  'Ví dụ: 2026年10月14日',
+]);
+
+const DEFAULT_PARTIAL_WRITING_FIELDS = standardFields('partial_writing', [
+  '请假条',
+  '陈老师：',
+  '我拟于10月15日上午请假半天。',
+  '特向您请假，并望批准。',
+  '此致',
+  '敬礼！',
+  '美美',
+  '2026年10月14日',
+]);
 
 const EMPTY_FORM = {
   id: null,
@@ -83,6 +97,7 @@ const EMPTY_FORM = {
   writingTasks: [],
   guidedWritingFields: [...DEFAULT_WRITING_FIELDS, ...DEFAULT_PARTIAL_WRITING_FIELDS],
   guidedWritingScenarios: [],
+  exercises: [],
 };
 
 export default function Admin() {
@@ -158,6 +173,237 @@ export default function Admin() {
     set('guidedWritingScenarios', [...others, ...items.map((item) => ({ ...item, group }))]);
   }
 
+  function setQuizFor(kind, items) {
+    const others = form.quizQuestions.filter((q) => q.kind !== kind);
+    set('quizQuestions', [...others, ...items.map((item) => ({ ...item, kind }))]);
+  }
+
+  function setExercisesFor(kind, items) {
+    const others = form.exercises.filter((e) => e.kind !== kind);
+    set('exercises', [...others, ...items.map((item) => ({ ...item, kind }))]);
+  }
+
+  function writingFieldsEditor(group) {
+    return (
+      <SimpleListEditor
+        title="Các ô nhập liệu (Ô 1 → Ô 8)"
+        hint="Số thứ tự Ô 1, Ô 2... tự đánh theo vị trí. Chọn đúng Vai trò để tờ giấy mô phỏng căn lề đúng quy chuẩn (tiêu đề giữa, xưng hô trái, chính văn thụt 2 ô, 此致 thụt 4 ô, ký tên & ngày tháng góc phải)."
+        items={form.guidedWritingFields.filter((f) => guidedMatch(f, group))}
+        onChange={(v) => setGuidedWritingFieldsFor(group, v)}
+        addLabel="Thêm ô nhập liệu"
+        itemLabel={(_, i) => `Ô ${i + 1}`}
+        newItem={(current) => {
+          const used = new Set(current.map((f) => f.name));
+          const role = FIELD_ROLES.find(([r]) => !used.has(r))?.[0] || '';
+          return { label: '', name: role, placeholder: '', inputType: role === 'body' ? 'textarea' : 'text' };
+        }}
+        fields={[
+          { key: 'label', label: 'Nhãn hiển thị (vd: Tiêu đề 标题)' },
+          { key: 'name', label: 'Vai trò trên tờ giấy', type: 'select', options: FIELD_ROLES },
+          { key: 'placeholder', label: 'Gợi ý nhập / placeholder (có thể để trống)' },
+          { key: 'inputType', label: 'Loại ô nhập', type: 'select', options: INPUT_TYPES },
+        ]}
+      />
+    );
+  }
+
+  function writingScenariosEditor(group) {
+    return (
+      <SimpleListEditor
+        title="Đề bài & bài mẫu"
+        items={form.guidedWritingScenarios.filter((s) => guidedMatch(s, group))}
+        onChange={(v) => setGuidedWritingScenariosFor(group, v)}
+        addLabel="Thêm đề bài"
+        itemLabel={(_, i) => `Đề ${i + 1}`}
+        fields={[
+          { key: 'situationPrompt', label: 'Đề bài / tình huống', type: 'richtext' },
+          { key: 'modelAnswer', label: 'Bài mẫu tham khảo', type: 'richtext' },
+          { key: 'targetWordCount', label: 'Số chữ mục tiêu (có thể để trống)', type: 'number' },
+        ]}
+      />
+    );
+  }
+
+  function fixedPhrasesEditor() {
+    return (
+      <SimpleListEditor
+        title="Bộ mẫu câu cố định (套语) — cột Trung văn / cột Tiếng Việt"
+        items={form.fixedPhrases}
+        onChange={(v) => set('fixedPhrases', v)}
+        addLabel="Thêm mẫu câu"
+        itemLabel={(_, i) => `Mẫu câu ${i + 1}`}
+        fields={[
+          { key: 'chinese', label: 'Trung văn (中文)' },
+          { key: 'viExplanation', label: 'Tiếng Việt' },
+        ]}
+      />
+    );
+  }
+
+  function matchEditor() {
+    return <MatchItemsEditor items={form.matchItems} onChange={(v) => set('matchItems', v)} />;
+  }
+
+  function sentenceTasksEditor() {
+    return (
+      <SimpleListEditor
+        title="Nhiệm vụ lắp ráp câu"
+        items={form.writingTasks}
+        onChange={(v) => set('writingTasks', v)}
+        addLabel="Thêm nhiệm vụ"
+        itemLabel={(_, i) => `Nhiệm vụ ${i + 1}`}
+        fields={[
+          { key: 'title', label: 'Tiêu đề nhiệm vụ (vd: Nhiệm vụ 1 · Lắp ráp câu thông báo)' },
+          { key: 'facts', label: 'Thành phần dữ liệu đầu vào (mỗi dòng 1 ý)', type: 'lines' },
+          { key: 'requiredKeywords', label: 'Từ khoá bắt buộc (mỗi dòng 1 từ, có thể để trống)', type: 'lines' },
+          { key: 'hint', label: '💡 Công thức gợi ý (có thể để trống)', type: 'richtext' },
+          { key: 'referenceAnswer', label: 'Đáp án mẫu', type: 'richtext' },
+        ]}
+      />
+    );
+  }
+
+  // One editor block per ticked part, in the same order (and with the same
+  // "Bước N" numbering) the student sees on the lesson page.
+  function renderPartEditor(key) {
+    switch (key) {
+      case 'theory':
+        return (
+          <>
+            <SimpleListEditor
+              title="Các thẻ nội dung lý thuyết"
+              hint="Mỗi mục hiển thị thành một thẻ (card) riêng, vd: Mục đích & yêu cầu, Cấu trúc chuẩn..."
+              items={form.sections.filter((s) => sectionsMatch(s, 'theory'))}
+              onChange={(v) => setGenericSectionsFor('theory', v)}
+              addLabel="Thêm thẻ lý thuyết"
+              itemLabel={(_, i) => `Thẻ ${i + 1}`}
+              fields={[
+                { key: 'heading', label: 'Tiêu đề thẻ' },
+                { key: 'bodyHtml', label: 'Nội dung', type: 'richtext' },
+              ]}
+            />
+            {!form.selectedParts.includes('fixed_phrases') && fixedPhrasesEditor()}
+          </>
+        );
+      case 'samples':
+        return (
+          <SimpleListEditor
+            title="Bài mẫu (hiển thị trên tờ giấy mô phỏng, tự đếm số chữ)"
+            hint="Dòng đầu tiên ngắn của Nội dung (vd: 关于春节放假的通知) sẽ tự căn giữa làm tiêu đề."
+            items={form.sampleDocuments}
+            onChange={(v) => set('sampleDocuments', v)}
+            addLabel="Thêm bài mẫu"
+            itemLabel={(_, i) => `Bài mẫu ${i + 1}`}
+            fields={[
+              { key: 'label', label: 'Nhãn (vd: Thông báo hành chính)' },
+              { key: 'audience', label: 'Xưng hô / đối tượng nhận (có thể để trống)' },
+              { key: 'body', label: 'Nội dung văn bản (mỗi dòng = 1 đoạn)', type: 'richtext' },
+              { key: 'signerOrg', label: 'Ký tên / đơn vị (có thể để trống)' },
+              { key: 'date', label: 'Ngày tháng (có thể để trống)' },
+            ]}
+          />
+        );
+      case 'quiz':
+        return (
+          <QuizQuestionsEditor
+            kind="THEORY"
+            title="Câu hỏi trắc nghiệm lý thuyết"
+            hint="Mỗi câu gồm 4 phương án A, B, C, D — chọn ô tròn cho đáp án đúng; phần giải thích hiện trong hộp phản hồi sau khi kiểm tra."
+            items={form.quizQuestions.filter((q) => q.kind === 'THEORY')}
+            onChange={(v) => setQuizFor('THEORY', v)}
+          />
+        );
+      case 'matching':
+        return matchEditor();
+      case 'cloze':
+        return <ClozeExercisesEditor items={form.clozeExercises} onChange={(v) => set('clozeExercises', v)} />;
+      case 'error':
+        return (
+          <QuizQuestionsEditor
+            kind="ERROR_ANALYSIS"
+            title="Bài tìm lỗi sai"
+            hint="Dạng 1: học viên tự sửa lỗi vào 2 ô (dùng từ & bố cục), sau khi kiểm tra hiện giải thích + bản thảo hoàn chỉnh. Dạng 2: 4 phương án trắc nghiệm, sau khi kiểm tra hiện đáp án đúng + bản thảo hoàn chỉnh."
+            items={form.quizQuestions.filter((q) => q.kind === 'ERROR_ANALYSIS')}
+            onChange={(v) => setQuizFor('ERROR_ANALYSIS', v)}
+          />
+        );
+      case 'sentence_building':
+        return sentenceTasksEditor();
+      case 'translate_transform':
+        return (
+          <SimpleListEditor
+            title="Câu dịch - chuyển đổi"
+            items={form.exercises.filter((e) => e.kind === 'translate')}
+            onChange={(v) => setExercisesFor('translate', v)}
+            addLabel="Thêm câu"
+            itemLabel={(_, i) => `Câu ${i + 1}`}
+            fields={[
+              { key: 'prompt', label: 'Câu nguồn', type: 'richtext' },
+              { key: 'hints', label: 'Tag cụm từ gợi ý (mỗi dòng 1 tag, hiển thị xếp hàng ngang)', type: 'lines' },
+              { key: 'answer', label: 'Đáp án chuẩn', type: 'richtext' },
+            ]}
+          />
+        );
+      case 'outline':
+        return (
+          <SimpleListEditor
+            title="Dàn ý — mỗi mục là 1 hàng (trái: gợi ý, phải: ô trống cho học viên)"
+            items={form.exercises.filter((e) => e.kind === 'outline')}
+            onChange={(v) => setExercisesFor('outline', v)}
+            addLabel="Thêm hàng dàn ý"
+            itemLabel={(_, i) => `Hàng ${i + 1}`}
+            fields={[
+              { key: 'prompt', label: 'Nội dung gợi ý (cột trái)', type: 'richtext' },
+              { key: 'answer', label: 'Cấu trúc tiếng Trung đáp án (hiện khi bấm Xem đáp án)', type: 'textarea' },
+            ]}
+          />
+        );
+      case 'fixed_phrases':
+        return fixedPhrasesEditor();
+      case 'vocab':
+        return (
+          <>
+            <SimpleListEditor
+              title="Từ vựng"
+              items={form.vocabTerms}
+              onChange={(v) => set('vocabTerms', v)}
+              addLabel="Thêm từ vựng"
+              itemLabel={(_, i) => `Từ ${i + 1}`}
+              fields={[
+                { key: 'literary', label: '书面语 (văn viết)' },
+                { key: 'colloquial', label: '口语 (khẩu ngữ)' },
+                { key: 'meaningVi', label: 'Nghĩa tiếng Việt' },
+                { key: 'example', label: 'Ví dụ (có thể để trống)' },
+              ]}
+            />
+            {!form.selectedParts.includes('matching') && matchEditor()}
+            {!form.selectedParts.includes('sentence_building') && sentenceTasksEditor()}
+          </>
+        );
+      case 'partial_writing':
+      case 'writing':
+        return (
+          <>
+            {writingFieldsEditor(key)}
+            {writingScenariosEditor(key)}
+          </>
+        );
+      default:
+        return (
+          <SimpleListEditor
+            title="Nội dung dạng văn bản (chưa chấm điểm tự động)"
+            items={form.sections.filter((s) => sectionsMatch(s, key))}
+            onChange={(v) => setGenericSectionsFor(key, v)}
+            addLabel={`Thêm nội dung cho "${partLabel(key)}"`}
+            fields={[
+              { key: 'heading', label: 'Tiêu đề (có thể để trống)' },
+              { key: 'bodyHtml', label: 'Nội dung', type: 'richtext' },
+            ]}
+          />
+        );
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
@@ -186,6 +432,7 @@ export default function Admin() {
         writingTasks: withOrder(form.writingTasks),
         guidedWritingFields: withOrder(form.guidedWritingFields),
         guidedWritingScenarios: form.guidedWritingScenarios,
+        exercises: withOrder(form.exercises),
       };
 
       if (form.id) {
@@ -332,143 +579,23 @@ export default function Admin() {
               </div>
             </div>
 
-            <SimpleListEditor
-              title="Hướng dẫn (tab 1)"
-              hint="Mỗi mục là một phần trong bài hướng dẫn, vd: Mục đích & yêu cầu, Cấu trúc chuẩn..."
-              items={form.sections.filter((s) => sectionsMatch(s, 'theory'))}
-              onChange={(v) => setGenericSectionsFor('theory', v)}
-              addLabel="Thêm mục hướng dẫn"
-              fields={[
-                { key: 'heading', label: 'Tiêu đề mục' },
-                { key: 'bodyHtml', label: 'Nội dung', type: 'richtext' },
-              ]}
-            />
+            {form.selectedParts.length === 0 && (
+              <p className="text-sm text-slate-400">Chưa chọn đề mục nào — hãy tick các đề mục ở phần Thông tin cơ bản.</p>
+            )}
 
-            <SimpleListEditor
-              title="Bài mẫu"
-              items={form.sampleDocuments}
-              onChange={(v) => set('sampleDocuments', v)}
-              addLabel="Thêm bài mẫu"
-              fields={[
-                { key: 'label', label: 'Nhãn (vd: Bài mẫu 1)' },
-                { key: 'audience', label: 'Lời chào / đối tượng nhận (có thể để trống)' },
-                { key: 'body', label: 'Nội dung văn bản', type: 'richtext' },
-                { key: 'signerOrg', label: 'Đơn vị ký tên (có thể để trống)' },
-                { key: 'date', label: 'Ngày tháng (có thể để trống)' },
-              ]}
-            />
-
-            <SimpleListEditor
-              title="Từ vựng"
-              items={form.vocabTerms}
-              onChange={(v) => set('vocabTerms', v)}
-              addLabel="Thêm từ vựng"
-              fields={[
-                { key: 'literary', label: '书面语 (văn viết)' },
-                { key: 'colloquial', label: '口语 (khẩu ngữ)' },
-                { key: 'meaningVi', label: 'Nghĩa tiếng Việt' },
-                { key: 'example', label: 'Ví dụ (có thể để trống)' },
-              ]}
-            />
-
-            <SimpleListEditor
-              title="Mẫu câu cố định (套语)"
-              items={form.fixedPhrases}
-              onChange={(v) => set('fixedPhrases', v)}
-              addLabel="Thêm mẫu câu"
-              fields={[
-                { key: 'chinese', label: 'Câu/cụm tiếng Trung' },
-                { key: 'viExplanation', label: 'Giải thích tiếng Việt' },
-              ]}
-            />
-
-            <QuizQuestionsEditor items={form.quizQuestions} onChange={(v) => set('quizQuestions', v)} />
-
-            <ClozeExercisesEditor items={form.clozeExercises} onChange={(v) => set('clozeExercises', v)} />
-
-            <MatchItemsEditor items={form.matchItems} onChange={(v) => set('matchItems', v)} />
-
-            <SimpleListEditor
-              title="Nhiệm vụ viết câu"
-              items={form.writingTasks}
-              onChange={(v) => set('writingTasks', v)}
-              addLabel="Thêm nhiệm vụ viết câu"
-              fields={[
-                { key: 'title', label: 'Tiêu đề nhiệm vụ' },
-                { key: 'hint', label: 'Gợi ý (có thể để trống)', type: 'richtext' },
-                { key: 'facts', label: 'Dữ kiện / câu gốc (mỗi dòng 1 ý)', type: 'lines' },
-                { key: 'requiredKeywords', label: 'Từ khoá bắt buộc (mỗi dòng 1 từ, có thể để trống)', type: 'lines' },
-                { key: 'referenceAnswer', label: 'Đáp án tham khảo', type: 'richtext' },
-              ]}
-            />
-
-            <SimpleListEditor
-              title="Form luyện viết hoàn chỉnh — các trường nhập"
-              hint="Mỗi mục là một ô nhập liệu trong form viết bài hoàn chỉnh (vd: Tiêu đề, Đối tượng nhận, Nội dung...)."
-              items={form.guidedWritingFields.filter((f) => guidedMatch(f, 'writing'))}
-              onChange={(v) => setGuidedWritingFieldsFor('writing', v)}
-              addLabel="Thêm ô nhập liệu"
-              fields={[
-                { key: 'label', label: 'Nhãn hiển thị' },
-                { key: 'name', label: 'Tên trường (không dấu, không cách, vd: title)' },
-                { key: 'placeholder', label: 'Gợi ý nhập (có thể để trống)' },
-                { key: 'inputType', label: 'Loại nhập (text hoặc textarea)' },
-              ]}
-            />
-
-            <SimpleListEditor
-              title="Form luyện viết hoàn chỉnh — đề bài & bài mẫu"
-              items={form.guidedWritingScenarios.filter((s) => guidedMatch(s, 'writing'))}
-              onChange={(v) => setGuidedWritingScenariosFor('writing', v)}
-              addLabel="Thêm đề bài"
-              fields={[
-                { key: 'situationPrompt', label: 'Đề bài / tình huống', type: 'richtext' },
-                { key: 'modelAnswer', label: 'Bài mẫu tham khảo', type: 'richtext' },
-                { key: 'targetWordCount', label: 'Số chữ mục tiêu (có thể để trống)', type: 'number' },
-              ]}
-            />
-
-            <SimpleListEditor
-              title="Form viết bán phần — các trường nhập"
-              hint="Giống form luyện viết hoàn chỉnh nhưng KHÔNG thêm ô nội dung chính (Chính văn) — chỉ các trường khung thư (tiêu đề, xưng hô, mở đầu, lời kết, ký tên, ngày tháng...)."
-              items={form.guidedWritingFields.filter((f) => guidedMatch(f, 'partial_writing'))}
-              onChange={(v) => setGuidedWritingFieldsFor('partial_writing', v)}
-              addLabel="Thêm ô nhập liệu"
-              fields={[
-                { key: 'label', label: 'Nhãn hiển thị' },
-                { key: 'name', label: 'Tên trường (không dấu, không cách, vd: title)' },
-                { key: 'placeholder', label: 'Gợi ý nhập (có thể để trống)' },
-                { key: 'inputType', label: 'Loại nhập (text hoặc textarea)' },
-              ]}
-            />
-
-            <SimpleListEditor
-              title="Form viết bán phần — đề bài & bài mẫu"
-              items={form.guidedWritingScenarios.filter((s) => guidedMatch(s, 'partial_writing'))}
-              onChange={(v) => setGuidedWritingScenariosFor('partial_writing', v)}
-              addLabel="Thêm đề bài"
-              fields={[
-                { key: 'situationPrompt', label: 'Đề bài / tình huống', type: 'richtext' },
-                { key: 'modelAnswer', label: 'Bài mẫu tham khảo', type: 'richtext' },
-                { key: 'targetWordCount', label: 'Số chữ mục tiêu (có thể để trống)', type: 'number' },
-              ]}
-            />
-
-            {form.selectedParts
-              .filter((key) => !BUILTIN_PART_KEYS.includes(key))
-              .map((key) => (
-                <SimpleListEditor
-                  key={key}
-                  title={`${partLabel(key)} (mục mới — nội dung dạng văn bản, chưa chấm điểm tự động)`}
-                  items={form.sections.filter((s) => sectionsMatch(s, key))}
-                  onChange={(v) => setGenericSectionsFor(key, v)}
-                  addLabel={`Thêm nội dung cho "${partLabel(key)}"`}
-                  fields={[
-                    { key: 'heading', label: 'Tiêu đề (có thể để trống)' },
-                    { key: 'bodyHtml', label: 'Nội dung', type: 'richtext' },
-                  ]}
-                />
-              ))}
+            {form.selectedParts.map((key, idx) => (
+              <section key={key} className="border border-night-600 rounded-xl p-4 space-y-4 bg-night-800/40">
+                <h3 className="font-bold text-slate-100">
+                  <span className="text-coral-400">Bước {idx + 1}</span> · {partLabel(key)}
+                  {form.premiumParts.includes(key) && (
+                    <span className="ml-2 align-middle bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                      PRO
+                    </span>
+                  )}
+                </h3>
+                {renderPartEditor(key)}
+              </section>
+            ))}
 
             {error && <p className="text-red-400 text-sm">{error}</p>}
             {savedMessage && <p className="text-green-400 text-sm">{savedMessage}</p>}

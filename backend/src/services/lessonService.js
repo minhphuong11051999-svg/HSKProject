@@ -11,6 +11,7 @@ const FULL_INCLUDE = {
   writingTasks: { orderBy: { orderIndex: 'asc' } },
   guidedWritingFields: { orderBy: { orderIndex: 'asc' } },
   guidedWritingScenarios: true,
+  exercises: { orderBy: { orderIndex: 'asc' } },
 };
 
 const NESTED_KEYS = Object.keys(FULL_INCLUDE);
@@ -23,7 +24,7 @@ function canAccess(lesson, user) {
 function stripAnswers(lesson) {
   return {
     ...lesson,
-    quizQuestions: lesson.quizQuestions?.map(({ correctIndex, explanation, ...rest }) => rest),
+    quizQuestions: lesson.quizQuestions?.map(({ correctIndex, explanation, correctedHtml, ...rest }) => rest),
     clozeExercises: lesson.clozeExercises?.map(({ blanks, ...rest }) => ({
       ...rest,
       blanks: blanks?.map(({ answer, ...b }) => b),
@@ -149,6 +150,7 @@ const MODEL_NAME = {
   writingTasks: 'writingTask',
   guidedWritingFields: 'guidedWritingField',
   guidedWritingScenarios: 'guidedWritingScenario',
+  exercises: 'lessonExercise',
 };
 
 function modelNameFor(key) {
