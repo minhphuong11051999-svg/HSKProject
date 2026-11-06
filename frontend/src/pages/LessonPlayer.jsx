@@ -1161,11 +1161,13 @@ function VocabTab({ lesson, canSave, showMatching, showSentenceTasks }) {
 
 /* ------------------------------------------------- 11/12. Viết hoàn chỉnh & bán phần */
 
-// The 8 standard input slots shared by both writing exercises. A field's role
+// The 7 standard input slots shared by both writing exercises. A field's role
 // comes from its `name` when it matches a known convention (seed lessons use
 // names like "audience", "cizhi"...); otherwise its position in the list
 // decides, so admin-created fields always land in the right spot on the sheet.
-const SLOT_ROLES = ['title', 'greeting', 'body', 'bodyEnd', 'closing1', 'closing2', 'sign', 'date'];
+const SLOT_ROLES = ['title', 'greeting', 'body', 'closing1', 'closing2', 'sign', 'date'];
+// 'bodyEnd' is no longer a standard slot but is still recognised by name for
+// lessons saved with the earlier 8-slot template (rendered as a body paragraph).
 
 const FIELD_ROLE_RULES = [
   { role: 'title', test: (n) => n === 'title' },
@@ -1351,7 +1353,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
             <div className="flex gap-2 ml-auto">
               {scenario?.modelAnswer && (
                 <button type="button" onClick={() => setShowModel((v) => !v)} className={BTN_PRIMARY}>
-                  {showModel ? 'Ẩn bài mẫu' : 'Xem bài mẫu'}
+                  {showModel ? 'Ẩn đáp án mẫu' : 'Đáp án mẫu'}
                 </button>
               )}
               <button
@@ -1384,7 +1386,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
       {showModel && scenario?.modelAnswer && (
         <div>
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm font-semibold text-slate-200">Bài mẫu tham khảo</p>
+            <p className="text-sm font-semibold text-slate-200">Đáp án mẫu</p>
             <HanziCount count={countHanzi(htmlToText(scenario.modelAnswer))} />
           </div>
           <LetterPaper html={scenario.modelAnswer} minHeight="" />

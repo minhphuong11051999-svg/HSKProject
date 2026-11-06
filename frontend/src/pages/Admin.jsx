@@ -10,18 +10,17 @@ import { ALL_LESSON_PARTS, BUILTIN_PART_KEYS, DEFAULT_SELECTED_PARTS, partLabel 
 
 const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
 
-// The 8 standard slots of the shared letter form (UI/UX layout spec §I):
+// The 7 standard slots shared by "Luyện viết hoàn chỉnh" and "Viết bán phần":
 // role key (stored in `name`) → where the text lands on the simulated paper.
 // Labels carry no leading "1. " — position numbers them automatically.
 const FIELD_ROLES = [
-  ['title', 'Ô 1 · Tiêu đề (标题) — căn giữa'],
-  ['greeting', 'Ô 2 · Xưng hô người nhận (称呼) — sát lề trái'],
-  ['body', 'Ô 3 · Chính văn / Thời gian (正文) — thụt 2 ô'],
-  ['bodyEnd', 'Ô 4 · Lời đề nghị / Kết chính văn — thụt 2 ô'],
-  ['closing1', 'Ô 5 · Lời kết 1 (此致) — thụt 4 ô'],
-  ['closing2', 'Ô 6 · Lời kết 2 (敬礼！) — sát lề trái'],
-  ['sign', 'Ô 7 · Tên người viết / ký tên (署名) — góc phải'],
-  ['date', 'Ô 8 · Ngày tháng (日期) — góc phải'],
+  ['title', 'Ô 1 · Tiêu đề — căn giữa (2 chữ tự cách: 明 芳)'],
+  ['greeting', 'Ô 2 · Xưng hô — lề trái, kèm dấu ：'],
+  ['body', 'Ô 3 · Chính văn — mỗi đoạn thụt đầu dòng 2 ô'],
+  ['closing1', 'Ô 4 · Lời kết 1: 此致 (nếu có) — cách 4 ô'],
+  ['closing2', 'Ô 5 · Lời kết 2: 敬礼！ (nếu có) — sát lề trái'],
+  ['sign', 'Ô 6 · Ký tên — góc dưới bên phải'],
+  ['date', 'Ô 7 · Ngày tháng năm — góc dưới bên phải'],
 ];
 
 const INPUT_TYPES = [
@@ -32,13 +31,12 @@ const INPUT_TYPES = [
 
 const STANDARD_LABELS = [
   'Tiêu đề (标题)',
-  'Xưng hô người nhận (称呼)',
-  'Chính văn / Thời gian (正文)',
-  'Lời đề nghị phê chuẩn / Kết chính văn (正文 - 结尾句)',
-  'Lời kết 1 (此致)',
-  'Lời kết 2 (敬礼！)',
-  'Tên người viết / Ký tên (署名)',
-  'Ngày tháng (日期)',
+  'Xưng hô (称呼)',
+  'Chính văn (正文)',
+  'Lời kết 1 (此致) — nếu có',
+  'Lời kết 2 (敬礼！) — nếu có',
+  'Ký tên (署名)',
+  'Ngày tháng năm (日期)',
 ];
 
 function standardFields(group, placeholders) {
@@ -55,18 +53,16 @@ const DEFAULT_WRITING_FIELDS = standardFields('writing', [
   'Ví dụ: 请假条 / 推荐信 / 通知',
   'Ví dụ: 王老师：/ 各位同学：',
   'Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới...',
-  'Ví dụ: 特向您请假，并望批准。',
   '此致',
   '敬礼！',
-  'Ví dụ: 美美 / 留学生办公室',
+  'Ví dụ: 明芳 / 留学生办公室',
   'Ví dụ: 2026年10月14日',
 ]);
 
 const DEFAULT_PARTIAL_WRITING_FIELDS = standardFields('partial_writing', [
   '请假条',
   '陈老师：',
-  '我拟于10月15日上午请假半天。',
-  '特向您请假，并望批准。',
+  '我拟于10月15日上午请假半天……特向您请假，并望批准。',
   '此致',
   '敬礼！',
   '美美',
@@ -186,7 +182,7 @@ export default function Admin() {
   function writingFieldsEditor(group) {
     return (
       <SimpleListEditor
-        title="Các ô nhập liệu (Ô 1 → Ô 8)"
+        title="Các ô nhập liệu (Ô 1 → Ô 7)"
         hint="Số thứ tự Ô 1, Ô 2... tự đánh theo vị trí. Chọn đúng Vai trò để tờ giấy mô phỏng căn lề đúng quy chuẩn (tiêu đề giữa, xưng hô trái, chính văn thụt 2 ô, 此致 thụt 4 ô, ký tên & ngày tháng góc phải)."
         items={form.guidedWritingFields.filter((f) => guidedMatch(f, group))}
         onChange={(v) => setGuidedWritingFieldsFor(group, v)}
