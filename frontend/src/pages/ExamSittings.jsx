@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listExamYears } from '../api/examSittings';
 import PremiumModal from '../components/PremiumModal';
+import ProLabel from '../components/ProLabel';
 
 export default function ExamSittings() {
   const [years, setYears] = useState([]);
@@ -92,7 +93,7 @@ function SittingRow({ sitting }) {
       </div>
       {sitting.isPremium && (
         <span className="flex-shrink-0 bg-gold/90 text-night-950 text-xs font-bold px-2 py-0.5 rounded-full">
-          👑 PRO
+          <ProLabel />
         </span>
       )}
     </div>

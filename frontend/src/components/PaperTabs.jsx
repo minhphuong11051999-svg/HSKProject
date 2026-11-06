@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { getMySubmissionFor, submitExercise } from '../api/lessons';
 import LetterPaper, { HanziCount, countHanzi, htmlToText } from './LetterPaper';
+import { ClipboardText, ListChecks, TreeStructure, PencilLine, SealCheck, Robot } from '@phosphor-icons/react';
 
 // Two full-width spaces — the standard first-line indent used when writing
 // Chinese compositions by hand, so typed paragraphs match exam-paper format.
 const PARAGRAPH_INDENT = '　　';
 
 const ALL_TABS = [
-  { key: 'prompt', label: 'Đề bài', icon: '📋' },
-  { key: 'requirements', label: 'Kiểm tra yêu cầu đề', icon: '☑️' },
-  { key: 'outline', label: 'Dàn ý gợi ý', icon: '🗂️' },
-  { key: 'draft', label: 'Bài làm', icon: '✍️' },
-  { key: 'answer', label: 'Đáp án mẫu', icon: '✅' },
-  { key: 'ai', label: 'AI Chấm Bài', icon: '🤖' },
+  { key: 'prompt', label: 'Đề bài', icon: ClipboardText },
+  { key: 'requirements', label: 'Kiểm tra yêu cầu đề', icon: ListChecks },
+  { key: 'outline', label: 'Dàn ý gợi ý', icon: TreeStructure },
+  { key: 'draft', label: 'Bài làm', icon: PencilLine },
+  { key: 'answer', label: 'Đáp án mẫu', icon: SealCheck },
+  { key: 'ai', label: 'AI Chấm Bài', icon: Robot },
 ];
 
 // Shared tabbed content viewer for both sample papers (Đề mẫu) and real exam
@@ -117,7 +118,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
                 : 'bg-night-800 border border-night-700 text-slate-300 hover:bg-night-700 hover:text-white'
             }`}
           >
-            <span aria-hidden="true">{t.icon}</span>
+            <t.icon size={18} weight={tab === t.key ? 'fill' : 'regular'} aria-hidden="true" />
             {t.label}
           </button>
         ))}
@@ -249,7 +250,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
           aria-labelledby="tab-ai"
           className="bg-night-800 border border-night-700 rounded-xl p-6 text-center"
         >
-          <p className="text-4xl mb-3" aria-hidden="true">🤖</p>
+          <Robot size={44} weight="duotone" className="mx-auto mb-3 text-coral-400" aria-hidden="true" />
           <h2 className="font-semibold text-slate-200 mb-2">Chấm bài bằng AI</h2>
           <p className="text-sm text-slate-400 mb-4 max-w-md mx-auto">
             Tính năng AI chấm điểm và nhận xét bài làm đang được phát triển. Hãy quay lại sau nhé!

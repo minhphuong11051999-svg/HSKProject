@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { Paperclip, Eye } from '@phosphor-icons/react';
 
 export function TextField({ label, value, onChange, placeholder }) {
   return (
@@ -120,7 +121,7 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
           U
         </button>
         <button type="button" className={RICH_TOOLBAR_BTN} onClick={() => fileInputRef.current?.click()}>
-          📎 Thêm ảnh/Word
+          <span className="inline-flex items-center gap-1"><Paperclip size={14} aria-hidden="true" />Thêm ảnh/Word</span>
         </button>
         <input
           ref={fileInputRef}
@@ -134,7 +135,7 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
           className={`${RICH_TOOLBAR_BTN} ${preview ? 'bg-coral-600 border-coral-500 text-white' : ''}`}
           onClick={() => setPreview((p) => !p)}
         >
-          {preview ? 'Chỉnh sửa' : '👁 Xem trước'}
+          {preview ? 'Chỉnh sửa' : <span className="inline-flex items-center gap-1"><Eye size={14} aria-hidden="true" />Xem trước</span>}
         </button>
       </div>
       {preview ? (

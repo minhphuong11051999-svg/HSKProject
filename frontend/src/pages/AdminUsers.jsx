@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { listUsers, createUser, updateUserPlan, deleteUser } from '../api/users';
+import ProLabel from '../components/ProLabel';
 
 const EMPTY_FORM = { name: '', email: '', password: '', role: 'USER' };
 
@@ -96,7 +97,7 @@ export default function AdminUsers() {
                           onChange={() => togglePremium(u)}
                         />
                         <span className={u.plan === 'PREMIUM' ? 'text-gold font-semibold' : 'text-slate-500'}>
-                          {u.plan === 'PREMIUM' ? '👑 PRO' : 'Free'}
+                          {u.plan === 'PREMIUM' ? <ProLabel /> : 'Free'}
                         </span>
                       </label>
                     </td>

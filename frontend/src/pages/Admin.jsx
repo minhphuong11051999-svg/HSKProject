@@ -252,7 +252,7 @@ export default function Admin() {
           { key: 'title', label: 'Tiêu đề nhiệm vụ (vd: Nhiệm vụ 1 · Lắp ráp câu thông báo)' },
           { key: 'facts', label: 'Thành phần dữ liệu đầu vào (mỗi dòng 1 ý)', type: 'lines' },
           { key: 'requiredKeywords', label: 'Từ khoá bắt buộc (mỗi dòng 1 từ, có thể để trống)', type: 'lines' },
-          { key: 'hint', label: '💡 Công thức gợi ý (có thể để trống)', type: 'richtext' },
+          { key: 'hint', label: 'Công thức gợi ý (có thể để trống)', type: 'richtext' },
           { key: 'referenceAnswer', label: 'Đáp án mẫu', type: 'richtext' },
         ]}
       />

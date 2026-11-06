@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getMyStats } from '../api/lessons';
+import { BookOpen, NotePencil, Target, ClockCounterClockwise, Flame } from '@phosphor-icons/react';
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -16,7 +17,7 @@ export default function Dashboard() {
       <div className="mb-8">
         <p className="zh text-xl text-coral-400">写作工坊</p>
         <h1 className="text-2xl md:text-3xl font-bold mt-1">
-          Xin chào, {user.name} <span aria-hidden="true">👋</span>
+          Xin chào, {user.name}
         </h1>
         <p className="text-slate-400 mt-1">Giữ vững chuỗi học và tiếp tục luyện viết mỗi ngày.</p>
       </div>
@@ -31,10 +32,10 @@ export default function Dashboard() {
           <div className="bg-night-800 border border-night-700 rounded-xl p-5 mb-6">
             <h2 className="font-bold mb-4">Bắt đầu luyện tập</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <QuickLink to="/lessons" emoji="📖" label="Bài học" />
-              <QuickLink to="/practice" emoji="📝" label="Đề mẫu" />
-              <QuickLink to="/lessons/exam" emoji="🎯" label="Đề thi thật" />
-              <QuickLink to="/history" emoji="🕘" label="Lịch sử làm bài" />
+              <QuickLink to="/lessons" icon={BookOpen} label="Bài học" />
+              <QuickLink to="/practice" icon={NotePencil} label="Đề mẫu" />
+              <QuickLink to="/lessons/exam" icon={Target} label="Đề thi thật" />
+              <QuickLink to="/history" icon={ClockCounterClockwise} label="Lịch sử làm bài" />
             </div>
           </div>
 
@@ -54,7 +55,7 @@ export default function Dashboard() {
 function StreakCard({ streak }) {
   return (
     <div className="bg-night-800 border border-night-700 rounded-xl p-5 flex items-center gap-4">
-      <span className="text-4xl" aria-hidden="true">🔥</span>
+      <Flame size={40} weight="fill" className="text-orange-500 flex-shrink-0" aria-hidden="true" />
       <div>
         <p className="text-xs text-slate-500">Streak hiện tại</p>
         <p className="text-2xl font-bold">{streak} ngày</p>
@@ -81,13 +82,13 @@ function LevelCard({ level, xpIntoLevel, xpPerLevel }) {
   );
 }
 
-function QuickLink({ to, emoji, label }) {
+function QuickLink({ to, icon: Icon, label }) {
   return (
     <Link
       to={to}
       className="bg-gradient-to-br from-[var(--c-quicklink-from)] to-[var(--c-quicklink-to)] border border-[var(--c-quicklink-border)] rounded-lg p-4 text-center font-semibold text-[var(--c-quicklink-text)] hover:brightness-110 transition-all"
     >
-      <div className="text-2xl mb-1" aria-hidden="true">{emoji}</div>
+      <Icon size={28} weight="duotone" className="mx-auto mb-1.5" aria-hidden="true" />
       {label}
     </Link>
   );

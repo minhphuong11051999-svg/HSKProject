@@ -2,20 +2,21 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
 import BrandLogo from './BrandLogo';
+import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree } from '@phosphor-icons/react';
 
 const NAV_ITEMS = [
-  { to: '/', icon: '🏠', label: 'Trang chủ' },
-  { to: '/lessons', icon: '📖', label: 'Bài học' },
-  { to: '/practice', icon: '📝', label: 'Đề mẫu' },
-  { to: '/lessons/exam', icon: '🎯', label: 'Đề thi thật' },
-  { to: '/history', icon: '🕘', label: 'Lịch sử' },
+  { to: '/', icon: House, label: 'Trang chủ' },
+  { to: '/lessons', icon: BookOpen, label: 'Bài học' },
+  { to: '/practice', icon: NotePencil, label: 'Đề mẫu' },
+  { to: '/lessons/exam', icon: Target, label: 'Đề thi thật' },
+  { to: '/history', icon: ClockCounterClockwise, label: 'Lịch sử' },
 ];
 
 const ADMIN_ITEMS = [
-  { to: '/admin', icon: '📚', label: 'Quản trị bài học' },
-  { to: '/admin/sample-papers', icon: '📝', label: 'Quản trị đề mẫu' },
-  { to: '/admin/exam-sittings', icon: '🎯', label: 'Quản trị đề thi thật' },
-  { to: '/admin/users', icon: '👥', label: 'Người dùng' },
+  { to: '/admin', icon: Books, label: 'Quản trị bài học' },
+  { to: '/admin/sample-papers', icon: NotePencil, label: 'Quản trị đề mẫu' },
+  { to: '/admin/exam-sittings', icon: Target, label: 'Quản trị đề thi thật' },
+  { to: '/admin/users', icon: UsersThree, label: 'Người dùng' },
 ];
 
 // Desktop (lg+): sticky full-height column. Below lg: off-canvas drawer that
@@ -68,7 +69,7 @@ export default function Sidebar({ open = false, onClose }) {
                 : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'
             }`}
           >
-            <span aria-hidden="true">{item.icon}</span>
+            <item.icon size={20} weight={isActive(item.to) ? 'fill' : 'regular'} aria-hidden="true" className="flex-shrink-0" />
             {item.label}
           </Link>
         ))}
@@ -87,7 +88,7 @@ export default function Sidebar({ open = false, onClose }) {
                     : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'
                 }`}
               >
-                <span aria-hidden="true">{item.icon}</span>
+                <item.icon size={20} weight={isActive(item.to) ? 'fill' : 'regular'} aria-hidden="true" className="flex-shrink-0" />
                 {item.label}
               </Link>
             ))}

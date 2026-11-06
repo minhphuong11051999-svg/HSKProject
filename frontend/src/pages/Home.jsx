@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Dashboard from './Dashboard';
+import { BookOpen, SealCheck, NotePencil } from '@phosphor-icons/react';
 
 export default function Home() {
   const { user } = useAuth();
@@ -35,10 +36,10 @@ function Hero() {
           <div className="bg-night-800 border border-night-700 rounded-2xl p-10 text-center">
             <p className="zh text-6xl text-coral-500 mb-4">通知</p>
             <p className="text-slate-400 text-sm">Thông báo · Bố cáo · Thư mời · Đơn xin...</p>
-            <div className="grid grid-cols-3 gap-3 mt-8 text-2xl">
-              <span>📖</span>
-              <span>✅</span>
-              <span>📝</span>
+            <div className="grid grid-cols-3 gap-3 mt-8 text-coral-400 justify-items-center" aria-hidden="true">
+              <BookOpen size={30} weight="duotone" />
+              <SealCheck size={30} weight="duotone" />
+              <NotePencil size={30} weight="duotone" />
             </div>
           </div>
         </div>

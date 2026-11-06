@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
 import LetterPaper, { HanziCount, countHanzi, htmlToText, toParagraphs } from '../components/LetterPaper';
 import { BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
+import ProLabel from '../components/ProLabel';
+import { CheckCircle, XCircle, Lightbulb } from '@phosphor-icons/react';
 
 const BTN_PRIMARY =
   'min-h-[40px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-colors';
@@ -153,7 +155,7 @@ export default function LessonPlayer() {
               <span className="min-w-0 break-words">{t.label}</span>
               {isPartPremium(t.key) && !isPremiumUser && (
                 <span className="flex-shrink-0 bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap">
-                  👑 PRO
+                  <ProLabel />
                 </span>
               )}
             </button>
@@ -423,8 +425,8 @@ function ChoiceQuestion({ index, lessonId, question: q, canSave, showDraft = fal
           isCorrect={result.isCorrect}
           title={
             result.isCorrect
-              ? '✅ Chính xác!'
-              : `❌ Chưa đúng — đáp án đúng là ${String.fromCharCode(65 + result.correctIndex)}.`
+              ? <span className="inline-flex items-center gap-1.5"><CheckCircle size={18} weight="fill" aria-hidden="true" />Chính xác!</span>
+              : <span className="inline-flex items-center gap-1.5"><XCircle size={18} weight="fill" aria-hidden="true" />Chưa đúng — đáp án đúng là {String.fromCharCode(65 + result.correctIndex)}.</span>
           }
         >
           {result.explanation && <p className="text-slate-300 whitespace-pre-line">{result.explanation}</p>}
@@ -1009,7 +1011,8 @@ function SentenceTaskCard({ task }) {
       <div className="flex flex-wrap gap-2 mt-3">
         {task.hint && (
           <button type="button" onClick={() => setShowHint((v) => !v)} className={BTN_SECONDARY}>
-            💡 {showHint ? 'Ẩn công thức' : 'Công thức gợi ý'}
+            <Lightbulb size={16} weight="fill" className="text-amber-400" aria-hidden="true" />
+            {showHint ? 'Ẩn công thức' : 'Công thức gợi ý'}
           </button>
         )}
         <button type="button" onClick={() => setShowAnswer((v) => !v)} className={BTN_PRIMARY}>

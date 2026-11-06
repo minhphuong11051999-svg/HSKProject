@@ -1,3 +1,4 @@
+import { Crown, Lock } from '@phosphor-icons/react';
 export default function PremiumModal({ open, onClose }) {
   if (!open) return null;
 
@@ -18,7 +19,7 @@ export default function PremiumModal({ open, onClose }) {
           ✕
         </button>
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gold to-amber-600 text-3xl">
-          🔒
+          <Lock size={30} weight="fill" className="text-night-950" aria-hidden="true" />
         </div>
         <h2 className="text-lg font-bold text-slate-100">Tính năng Premium</h2>
         <p className="mt-2 text-sm text-slate-400">
@@ -32,7 +33,7 @@ export default function PremiumModal({ open, onClose }) {
           }}
           className="mt-5 w-full rounded-lg bg-gradient-to-r from-coral-500 to-gold py-2.5 text-sm font-semibold text-night-950 hover:opacity-90 transition-opacity"
         >
-          👑 Mở khoá PRO
+          <span className="inline-flex items-center justify-center gap-1.5"><Crown size={16} weight="fill" aria-hidden="true" />Mở khoá PRO</span>
         </button>
       </div>
     </div>

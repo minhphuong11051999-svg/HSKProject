@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listSamplePapers } from '../api/samplePapers';
 import PremiumModal from '../components/PremiumModal';
+import ProLabel from '../components/ProLabel';
+import { Lock } from '@phosphor-icons/react';
 
 export default function SamplePapers() {
   const [papers, setPapers] = useState([]);
@@ -48,14 +50,14 @@ function SamplePaperCard({ paper, index }) {
         </span>
         {paper.isPremium && (
           <span className="absolute top-2 right-2 bg-gold/90 text-night-950 text-xs font-bold px-2 py-0.5 rounded-full">
-            👑 PRO
+            <ProLabel />
           </span>
         )}
       </div>
       <div className="p-4">
         <p className="font-semibold text-sm text-slate-100 truncate">{paper.titleVi}</p>
         {paper.locked ? (
-          <p className="text-xs text-gold mt-2">🔒 Mở khoá bằng PRO →</p>
+          <p className="text-xs text-gold mt-2"><span className="inline-flex items-center gap-1"><Lock size={12} weight="bold" aria-hidden="true" />Mở khoá bằng PRO →</span></p>
         ) : (
           <p className="text-xs text-coral-400 mt-2">Xem đề &amp; đáp án →</p>
         )}

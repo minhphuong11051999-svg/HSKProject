@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listLessons } from '../api/lessons';
 import PremiumModal from '../components/PremiumModal';
+import ProLabel from '../components/ProLabel';
+import { Lock } from '@phosphor-icons/react';
 
 const TITLES = {
   practice: { heading: 'Bài luyện tập', subtitle: 'Luyện tập với 7 bài học, cập nhật thêm theo thời gian.' },
@@ -85,7 +87,7 @@ function LessonCard({ lesson, index }) {
         </span>
         {lesson.isPremium && (
           <span className="absolute top-2 right-2 bg-gold/90 text-night-950 text-xs font-bold px-2 py-0.5 rounded-full">
-            👑 PRO
+            <ProLabel />
           </span>
         )}
         {lesson.type === 'EXAM' && (
@@ -97,7 +99,7 @@ function LessonCard({ lesson, index }) {
       <div className="p-4">
         <p className="font-semibold text-sm text-slate-100 truncate">{lesson.titleVi}</p>
         {lesson.locked ? (
-          <p className="text-xs text-gold mt-2">🔒 Mở khoá bằng PRO →</p>
+          <p className="text-xs text-gold mt-2"><span className="inline-flex items-center gap-1"><Lock size={12} weight="bold" aria-hidden="true" />Mở khoá bằng PRO →</span></p>
         ) : (
           <p className="text-xs text-coral-400 mt-2">Bắt đầu luyện tập →</p>
         )}
