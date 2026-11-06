@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom';
 
-// Belle Chinese Lab lockup: crane mark + "Belle" in an elegant italic serif
-// over a small, widely tracked "CHINESE LAB" — mirrors the brand references
-// (script "Belle", spaced sans subtitle) while staying legible in the sidebar.
+// Belle Chinese Lab lockup, matching the brand artwork: the red-crowned crane
+// app icon, "Belle" in a copperplate script and "CHINESE LAB" in flared serif
+// capitals underneath.
 export default function BrandLogo({ className = '' }) {
   return (
     <Link to="/" className={`flex items-center gap-3 min-w-0 ${className}`} aria-label="Belle Chinese Lab — Trang chủ">
-      <img src="/logo.svg" alt="" width="40" height="40" className="w-10 h-10 rounded-xl flex-shrink-0 shadow-sm" />
-      <span className="flex flex-col leading-none min-w-0">
-        <span className="font-brand italic font-semibold text-[26px] text-slate-100 tracking-tight">Belle</span>
-        <span className="mt-1 text-[10px] font-semibold tracking-[0.32em] text-slate-400 whitespace-nowrap">
+      <img
+        src="/logo-64.png"
+        srcSet="/logo-64.png 1x, /logo-192.png 3x"
+        alt=""
+        width="44"
+        height="44"
+        className="w-11 h-11 flex-shrink-0 drop-shadow-sm"
+      />
+      <span className="flex flex-col min-w-0">
+        <span className="font-brand text-[38px] leading-[0.95] text-slate-100">Belle</span>
+        <span className="font-brandSerif text-[11px] leading-none tracking-[0.22em] text-slate-400 whitespace-nowrap">
           CHINESE LAB
         </span>
       </span>

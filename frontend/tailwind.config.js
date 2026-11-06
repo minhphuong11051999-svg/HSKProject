@@ -40,7 +40,8 @@ export default {
       },
       fontFamily: {
         zh: ['"Noto Serif SC"', '"Be Vietnam Pro"', 'serif'],
-        brand: ['"Cormorant Garamond"', '"Noto Serif SC"', 'serif'],
+        brand: ['"Pinyon Script"', 'Georgia', 'serif'],
+        brandSerif: ['Marcellus', '"Noto Serif SC"', 'serif'],
         sans: ['"Be Vietnam Pro"', '"Noto Sans SC"', 'sans-serif'],
       },
     },
