@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getExamSitting } from '../api/examSittings';
 import PremiumModal from '../components/PremiumModal';
 import PaperTabs from '../components/PaperTabs';
+import BackLink from '../components/BackLink';
 
 export default function ExamSittingViewer() {
   const { slug } = useParams();
@@ -31,7 +32,8 @@ export default function ExamSittingViewer() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
+      <BackLink to="/lessons/exam" className="mb-3">Danh sách đề thi thật</BackLink>
       <p className="text-sm text-slate-500 mb-1">
         Năm {sitting.examYear?.year} · {sitting.label}
       </p>

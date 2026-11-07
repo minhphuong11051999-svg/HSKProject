@@ -3,7 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getLesson, submitExercise } from '../api/lessons';
 import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
-import LetterPaper, { HanziCount, countHanzi, htmlToText, toParagraphs } from '../components/LetterPaper';
+import BackLink from '../components/BackLink';
+import LetterPaper, { HanziCount, countHanzi, htmlToText, parseLetter, toParagraphs } from '../components/LetterPaper';
 import { BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
 import ProLabel from '../components/ProLabel';
 import { CheckCircle, XCircle, Lightbulb } from '@phosphor-icons/react';
@@ -82,6 +83,7 @@ export default function LessonPlayer() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col md:flex-row gap-6">
       <aside className="md:w-64 flex-shrink-0 md:sticky md:top-6 md:self-start">
+        <BackLink to="/lessons" className="mb-2">Chủ đề bài học</BackLink>
         <p className="zh text-xl mb-1">{lesson.titleZh}</p>
         <h1 className="font-semibold mb-4">{lesson.titleVi}</h1>
 
@@ -283,24 +285,22 @@ function GenericTab({ lesson, partKey }) {
 
 /* ---------------------------------------------------------------- 2. Bài mẫu */
 
-// Sample bodies are stored as plain text where the first short line is
-// usually the document title (e.g. "关于春节放假的通知"); lift it out so it
-// renders centred above the greeting like on a real sheet.
-function splitSampleBody(body) {
-  const lines = toParagraphs(htmlToText(body));
-  if (lines.length > 1 && lines[0].length <= 24 && !/[。！？，]/.test(lines[0])) {
-    return { title: lines[0], paragraphs: lines.slice(1) };
-  }
-  return { title: '', paragraphs: lines };
-}
-
+// Sample bodies are stored as free text (title, body, 此致/敬礼 …); split them
+// into paper slots so 此致 gets its 4-char indent, 敬礼！ sits flush left, etc.
+// The dedicated audience / signer / date fields win over anything parsed.
 function SamplesTab({ lesson }) {
   if (lesson.sampleDocuments.length === 0) return <Empty>Chưa có bài mẫu cho phần này.</Empty>;
   return (
     <div className="grid gap-6">
       {lesson.sampleDocuments.map((doc, idx) => {
-        const { title, paragraphs } = splitSampleBody(doc.body);
-        const total = countHanzi([title, doc.audience, ...paragraphs, doc.signerOrg, doc.date].join(''));
+        const parsed = parseLetter(htmlToText(doc.body));
+        const greeting = doc.audience || parsed.greeting;
+        const sign = doc.signerOrg ? [doc.signerOrg] : parsed.sign;
+        const date = doc.date || parsed.date;
+        const { title, paragraphs, closing1, closing2 } = parsed;
+        const total = countHanzi(
+          [title, greeting, ...paragraphs, closing1, closing2, ...sign, date].join('')
+        );
         return (
           <article key={doc.id}>
             <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
@@ -312,10 +312,12 @@ function SamplesTab({ lesson }) {
             </div>
             <LetterPaper
               title={title}
-              greeting={doc.audience}
+              greeting={greeting}
               paragraphs={paragraphs}
-              sign={doc.signerOrg}
-              date={doc.date}
+              closing1={closing1}
+              closing2={closing2}
+              sign={sign}
+              date={date}
               minHeight=""
             />
           </article>
@@ -822,7 +824,7 @@ function ClozeCard({ index, lessonId, exercise: ex, canSave }) {
           />
           <div className="mt-4">
             <p className="text-xs font-semibold text-slate-400 mb-1">Đáp án mẫu toàn văn</p>
-            <LetterPaper html={fullAnswerHtml} minHeight="" />
+            <LetterPaper html={fullAnswerHtml} autoFormat minHeight="" />
           </div>
         </>
       )}
@@ -1440,7 +1442,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
             <p className="text-sm font-semibold text-slate-200">Đáp án mẫu</p>
             <HanziCount count={countHanzi(htmlToText(scenario.modelAnswer))} />
           </div>
-          <LetterPaper html={scenario.modelAnswer} minHeight="" />
+          <LetterPaper html={scenario.modelAnswer} autoFormat minHeight="" />
         </div>
       )}
     </div>

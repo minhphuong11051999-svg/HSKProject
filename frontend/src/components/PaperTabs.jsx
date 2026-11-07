@@ -236,7 +236,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
             </button>
           </div>
           {showAnswer ? (
-            <LetterPaper html={answer} minHeight="" />
+            <LetterPaper html={answer} autoFormat minHeight="" />
           ) : (
             <p className="text-sm text-slate-500">Tự làm bài trước rồi bấm "Xem đáp án" để đối chiếu.</p>
           )}

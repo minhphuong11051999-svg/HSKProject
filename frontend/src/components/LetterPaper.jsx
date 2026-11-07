@@ -20,6 +20,14 @@ export function spaceOutIfTwoChars(text) {
   return trimmed;
 }
 
+// "张明" → "张 明"; "学生：张明" → "学生：张 明" (only the name part is spaced).
+export function formatSign(text) {
+  const trimmed = (text || '').trim();
+  const m = trimmed.match(/^(.*[：:])\s*(.+)$/);
+  if (m) return `${m[1]}${spaceOutIfTwoChars(m[2])}`;
+  return spaceOutIfTwoChars(trimmed);
+}
+
 export function withColon(text) {
   const trimmed = (text || '').trim();
   if (!trimmed) return '';
@@ -39,7 +47,80 @@ export function htmlToText(html) {
     .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<\/(p|div|li|h\d)>/gi, '\n')
     .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/g, ' ');
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&');
+}
+
+const CLOSING1_RE = /^此致[，,。]?$/;
+const CLOSING2_RE = /^敬礼[！!。]?$/;
+const DATE_RE = /(\d{2,4}|[〇零○一二三四五六七八九十]{2,4})\s*年.*月.*日[。]?$|^\d{4}\s*[./-]\s*\d{1,2}\s*[./-]\s*\d{1,2}$/;
+const SENTENCE_END_RE = /[。！？!?；;…，,]$/;
+
+function isShortLabel(line, max = 24) {
+  return line.length <= max && !SENTENCE_END_RE.test(line);
+}
+
+// Splits a free-form letter (plain text or rich-text answer typed by an admin)
+// into the 7 paper slots so it can be laid out with the same rules as the
+// guided writing form: title / greeting / body / 此致 / 敬礼 / signature / date.
+export function parseLetter(text) {
+  const lines = toParagraphs(text);
+  const out = { title: '', greeting: '', paragraphs: [], closing1: '', closing2: '', sign: [], date: '' };
+  if (lines.length === 0) return out;
+
+  let start = 0;
+  let end = lines.length;
+
+  // Head: optional title, then a greeting ending with a colon.
+  if (lines.length > 1 && isShortLabel(lines[0]) && !/[：:]$/.test(lines[0]) && !DATE_RE.test(lines[0])) {
+    out.title = lines[0];
+    start = 1;
+  }
+  if (start < end && /[：:]$/.test(lines[start]) && lines[start].length <= 40) {
+    out.greeting = lines[start];
+    start += 1;
+  }
+
+  // Tail: date, then up to two short signature lines right above it.
+  if (end - 1 >= start && DATE_RE.test(lines[end - 1]) && lines[end - 1].length <= 24) {
+    out.date = lines[end - 1];
+    end -= 1;
+    while (
+      out.sign.length < 2 &&
+      end - 1 >= start &&
+      isShortLabel(lines[end - 1], 20) &&
+      !CLOSING1_RE.test(lines[end - 1]) &&
+      !CLOSING2_RE.test(lines[end - 1])
+    ) {
+      out.sign.unshift(lines[end - 1]);
+      end -= 1;
+    }
+  }
+
+  // 此致 / 敬礼！ — whatever follows 敬礼！ (without a date) is the signature.
+  const c2 = lines.slice(start, end).findIndex((l) => CLOSING2_RE.test(l));
+  if (c2 !== -1) {
+    const idx = start + c2;
+    if (out.sign.length === 0) out.sign = lines.slice(idx + 1, end).slice(0, 2);
+    out.closing2 = lines[idx];
+    end = idx;
+  }
+  if (end - 1 >= start && CLOSING1_RE.test(lines[end - 1])) {
+    out.closing1 = lines[end - 1];
+    end -= 1;
+  }
+
+  out.paragraphs = lines.slice(start, end);
+  return out;
+}
+
+// Rich text with images / tables / highlights can't be re-flowed safely.
+function canAutoFormat(html) {
+  return !/<(img|table|mark|ul|ol)\b/i.test(html || '');
 }
 
 export function HanziCount({ count, className = '' }) {
@@ -62,9 +143,28 @@ export default function LetterPaper({
   sign,
   date,
   html,
+  autoFormat = false,
   minHeight = 'min-h-[22rem]',
   children,
 }) {
+  if (html && autoFormat && canAutoFormat(html)) {
+    const p = parseLetter(htmlToText(html));
+    return (
+      <LetterPaper
+        title={p.title}
+        greeting={p.greeting}
+        paragraphs={p.paragraphs}
+        closing1={p.closing1}
+        closing2={p.closing2}
+        sign={p.sign}
+        date={p.date}
+        minHeight={minHeight}
+      >
+        {children}
+      </LetterPaper>
+    );
+  }
+  const signLines = (Array.isArray(sign) ? sign : [sign]).filter(Boolean);
   return (
     <div className={`letter-paper rounded-lg px-5 py-5 sm:p-8 pb-16 sm:pb-16 text-[15px] zh leading-8 ${minHeight}`}>
       {html ? (
@@ -81,16 +181,15 @@ export default function LetterPaper({
           {extraLines.map((p, i) => (
             <p key={`x${i}`}>{p}</p>
           ))}
-          {(closing1 || closing2) && (
-            <div className="mt-2">
-              {closing1 && <p style={{ textIndent: '4em' }}>{closing1}</p>}
-              {closing2 && <p className="text-left">{closing2}</p>}
-            </div>
-          )}
-          {(sign || date) && (
-            <div className="flex justify-end mt-6">
+          {closing1 && <p style={{ textIndent: '4em' }}>{closing1}</p>}
+          {closing2 && <p className="text-left">{closing2}</p>}
+          {(signLines.length > 0 || date) && (
+            // One blank line between the body and the signature block.
+            <div className="flex justify-end mt-8">
               <div className="inline-flex flex-col items-center text-center">
-                {sign && <p>{spaceOutIfTwoChars(sign)}</p>}
+                {signLines.map((s, i) => (
+                  <p key={i}>{formatSign(s)}</p>
+                ))}
                 {date && <p>{date}</p>}
               </div>
             </div>

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getSamplePaper } from '../api/samplePapers';
 import PremiumModal from '../components/PremiumModal';
 import PaperTabs from '../components/PaperTabs';
+import BackLink from '../components/BackLink';
 
 export default function SamplePaperViewer() {
   const { slug } = useParams();
@@ -31,7 +32,8 @@ export default function SamplePaperViewer() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
+      <BackLink to="/practice" className="mb-3">Danh sách đề mẫu</BackLink>
       <p className="zh text-xl mb-1">{paper.titleZh}</p>
       <h1 className="text-xl font-bold mb-6">{paper.titleVi}</h1>
 
