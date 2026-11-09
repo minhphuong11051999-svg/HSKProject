@@ -20,6 +20,10 @@
   --c-quicklink-to: #2a2415;
   --c-quicklink-border: #5c4f2d;
   --c-quicklink-text: #e8d6ad;
+  /* Red "formula / hint" callouts: light red text on dark (~8:1), deep red on light (~6:1) */
+  --c-hint-text: #fca5a5;
+  --c-hint-bg: rgba(239, 68, 68, 0.12);
+  --c-hint-border: rgba(239, 68, 68, 0.5);
 }
 
 :root:not(.dark) {
@@ -39,6 +43,9 @@
   --c-quicklink-to: #e8d6ad;
   --c-quicklink-border: #ddc98f;
   --c-quicklink-text: #5b4524;
+  --c-hint-text: #b91c1c;
+  --c-hint-bg: #fef2f2;
+  --c-hint-border: #fca5a5;
 }
 
 a:focus-visible,

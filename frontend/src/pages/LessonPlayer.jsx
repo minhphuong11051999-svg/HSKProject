@@ -228,7 +228,7 @@ function Empty({ children = 'Chưa có nội dung cho phần này.' }) {
 
 function LoginHint({ canSave }) {
   if (canSave) return null;
-  return <p className="text-xs text-amber-400 mt-2">Đăng nhập để kiểm tra đáp án.</p>;
+  return <p className="text-xs text-[var(--c-hint-text)] mt-2">Đăng nhập để kiểm tra đáp án.</p>;
 }
 
 function Html({ html, className = '' }) {
@@ -1041,7 +1041,7 @@ function SentenceTaskCard({ task }) {
       </div>
       {showHint && task.hint && (
         <Reveal offset={8}>
-          <div className="mt-3 rounded-lg border border-amber-500/50 bg-amber-500/10 p-3 text-sm text-amber-200">
+          <div className="mt-3 rounded-lg border border-[var(--c-hint-border)] bg-[var(--c-hint-bg)] p-3 text-sm font-medium text-[var(--c-hint-text)]">
             <Html html={task.hint} />
           </div>
         </Reveal>
