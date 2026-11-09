@@ -18,6 +18,7 @@ const NESTED_KEYS = [
   'guidedWritingFields',
   'guidedWritingScenarios',
   'exercises',
+  'flashcards',
 ];
 
 const MODEL_NAME = {
@@ -32,6 +33,7 @@ const MODEL_NAME = {
   guidedWritingFields: 'guidedWritingField',
   guidedWritingScenarios: 'guidedWritingScenario',
   exercises: 'lessonExercise',
+  flashcards: 'flashcard',
 };
 
 function loadContentFor(slug) {

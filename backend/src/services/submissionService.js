@@ -54,7 +54,24 @@ function gradeMatch(lesson, exerciseId, answerPayload) {
   };
 }
 
+// Whole flashcard round: answers = { [flashcardId]: [chosenIndex × 4 questions] }.
+function gradeFlashcards(lesson, _exerciseId, answerPayload) {
+  const answers = answerPayload?.answers || {};
+  let score = 0;
+  let maxScore = 0;
+  for (const card of lesson.flashcards || []) {
+    const questions = Array.isArray(card.questions) ? card.questions : [];
+    const chosen = Array.isArray(answers[card.id]) ? answers[card.id] : [];
+    questions.forEach((q, i) => {
+      maxScore += 1;
+      if (Number.isInteger(chosen[i]) && chosen[i] === q.answer) score += 1;
+    });
+  }
+  return { score, maxScore };
+}
+
 const GRADERS = {
+  flashcard: gradeFlashcards,
   quiz: gradeQuiz,
   cloze: gradeCloze,
   match: gradeMatch,

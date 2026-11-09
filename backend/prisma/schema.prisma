@@ -67,6 +67,7 @@ model Lesson {
   guidedWritingFields   GuidedWritingField[]
   guidedWritingScenarios GuidedWritingScenario[]
   exercises             LessonExercise[]
+  flashcards            Flashcard[]
   submissions           Submission[]
 }
 
@@ -133,6 +134,24 @@ model QuizQuestion {
 // "prompt → student input → reference answer" shape:
 //   kind "translate": prompt = source sentence, hints = phrase tags, answer = model translation
 //   kind "outline":   prompt = guide shown on the left, answer = reference Chinese structure
+// Vocabulary flashcard shown from the "Bài mẫu" step: a 2-sided card followed by
+// 4 practice questions (choice / fill / translate / listen).
+model Flashcard {
+  id           String @id @default(cuid())
+  lessonId     String
+  lesson       Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  word         String
+  pinyin       String @default("")
+  meaning      String @default("")
+  partOfSpeech String @default("")
+  imageUrl     String @default("")
+  phrases      Json   @default("[]")
+  exampleZh    String @default("")
+  exampleVi    String @default("")
+  questions    Json   @default("[]")
+  orderIndex   Int    @default(0)
+}
+
 model LessonExercise {
   id         String @id @default(cuid())
   lessonId   String

@@ -6,6 +6,7 @@ import SimpleListEditor from '../components/admin/SimpleListEditor';
 import QuizQuestionsEditor from '../components/admin/QuizQuestionsEditor';
 import ClozeExercisesEditor from '../components/admin/ClozeExercisesEditor';
 import MatchItemsEditor from '../components/admin/MatchItemsEditor';
+import FlashcardsEditor from '../components/admin/FlashcardsEditor';
 import { ALL_LESSON_PARTS, BUILTIN_PART_KEYS, DEFAULT_SELECTED_PARTS, partLabel } from '../constants/lessonParts';
 
 const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
@@ -94,6 +95,7 @@ const EMPTY_FORM = {
   guidedWritingFields: [...DEFAULT_WRITING_FIELDS, ...DEFAULT_PARTIAL_WRITING_FIELDS],
   guidedWritingScenarios: [],
   exercises: [],
+  flashcards: [],
 };
 
 export default function Admin() {
@@ -283,6 +285,7 @@ export default function Admin() {
         );
       case 'samples':
         return (
+          <>
           <SimpleListEditor
             title="Bài mẫu (hiển thị trên tờ giấy mô phỏng, tự đếm số chữ)"
             hint="Dòng đầu tiên ngắn của Nội dung (vd: 关于春节放假的通知) sẽ tự căn giữa làm tiêu đề."
@@ -298,6 +301,8 @@ export default function Admin() {
               { key: 'date', label: 'Ngày tháng (có thể để trống)' },
             ]}
           />
+          <FlashcardsEditor items={form.flashcards} onChange={(v) => set('flashcards', v)} />
+          </>
         );
       case 'quiz':
         return (
@@ -429,6 +434,7 @@ export default function Admin() {
         guidedWritingFields: withOrder(form.guidedWritingFields),
         guidedWritingScenarios: form.guidedWritingScenarios,
         exercises: withOrder(form.exercises),
+        flashcards: withOrder(form.flashcards),
       };
 
       if (form.id) {

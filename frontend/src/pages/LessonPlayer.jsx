@@ -7,10 +7,11 @@ import BackLink from '../components/BackLink';
 import LetterPaper, { HanziCount, countHanzi, htmlToText, parseLetter, toParagraphs } from '../components/LetterPaper';
 import { BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
 import ProLabel from '../components/ProLabel';
-import { CheckCircle, XCircle, Lightbulb } from '@phosphor-icons/react';
+import { CheckCircle, XCircle, Lightbulb, Star } from '@phosphor-icons/react';
 import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
 import PressButton from '../components/motion/PressButton';
 import Reveal from '../components/motion/Reveal';
+import FlashcardGame from '../components/flashcards/FlashcardGame';
 
 const BTN_PRIMARY =
   'min-h-[40px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-colors';
@@ -192,7 +193,7 @@ export default function LessonPlayer() {
         )}
 
         {tab === 'theory' && <TheoryTab lesson={lesson} showFixedPhrases={!selected.includes('fixed_phrases')} />}
-        {tab === 'samples' && <SamplesTab lesson={lesson} />}
+        {tab === 'samples' && <SamplesTab lesson={lesson} canSave={canSave} />}
         {tab === 'quiz' && <QuizList lessonId={lesson.id} questions={theoryQuestions} canSave={canSave} />}
         {tab === 'matching' && <MatchingTab lesson={lesson} canSave={canSave} />}
         {tab === 'cloze' && <ClozeTab lessonId={lesson.id} exercises={lesson.clozeExercises} canSave={canSave} />}
@@ -306,10 +307,36 @@ function GenericTab({ lesson, partKey }) {
 // Sample bodies are stored as free text (title, body, 此致/敬礼 …); split them
 // into paper slots so 此致 gets its 4-char indent, 敬礼！ sits flush left, etc.
 // The dedicated audience / signer / date fields win over anything parsed.
-function SamplesTab({ lesson }) {
-  if (lesson.sampleDocuments.length === 0) return <Empty>Chưa có bài mẫu cho phần này.</Empty>;
+function SamplesTab({ lesson, canSave }) {
+  const [showCards, setShowCards] = useState(false);
+  const cards = lesson.flashcards || [];
   return (
     <div className="grid gap-6">
+      {cards.length > 0 && (
+        <div className="flex justify-end -mt-2">
+          <PressButton
+            onClick={() => setShowCards(true)}
+            className="group min-h-[44px] inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gradient-to-r from-coral-500/15 to-gold/15 pl-3 pr-4 text-sm font-semibold text-coral-400 hover:border-gold transition-colors"
+          >
+            <Star
+              size={22}
+              weight="fill"
+              className="text-[#f5b301] drop-shadow transition-transform duration-300 group-hover:rotate-[72deg] group-hover:scale-110 motion-reduce:transform-none"
+              aria-hidden="true"
+            />
+            Luyện với flashcard
+            <span className="rounded-full bg-night-900/70 px-2 py-0.5 text-xs text-slate-300">{cards.length} từ</span>
+          </PressButton>
+          <FlashcardGame
+            open={showCards}
+            onClose={() => setShowCards(false)}
+            cards={cards}
+            lessonId={lesson.id}
+            canSave={canSave}
+          />
+        </div>
+      )}
+      {lesson.sampleDocuments.length === 0 && <Empty>Chưa có bài mẫu cho phần này.</Empty>}
       {lesson.sampleDocuments.map((doc, idx) => {
         const parsed = parseLetter(htmlToText(doc.body));
         const greeting = doc.audience || parsed.greeting;

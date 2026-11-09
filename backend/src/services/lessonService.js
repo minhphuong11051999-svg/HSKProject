@@ -12,6 +12,7 @@ const FULL_INCLUDE = {
   guidedWritingFields: { orderBy: { orderIndex: 'asc' } },
   guidedWritingScenarios: true,
   exercises: { orderBy: { orderIndex: 'asc' } },
+  flashcards: { orderBy: { orderIndex: 'asc' } },
 };
 
 const NESTED_KEYS = Object.keys(FULL_INCLUDE);
@@ -151,6 +152,7 @@ const MODEL_NAME = {
   guidedWritingFields: 'guidedWritingField',
   guidedWritingScenarios: 'guidedWritingScenario',
   exercises: 'lessonExercise',
+  flashcards: 'flashcard',
 };
 
 function modelNameFor(key) {
