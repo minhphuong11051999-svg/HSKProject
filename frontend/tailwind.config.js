@@ -10,21 +10,22 @@ export default {
         paperline: '#eae7dc',
         seal: '#a33529',
         gold: '#b08a3e',
-        // Neutral scales are CSS variables so the whole app can flip between the
+        // Neutral scales are CSS variables (RGB channels, so opacity modifiers like
+        // bg-night-900/80 work) so the whole app can flip between the
         // dark and light theme (see index.css) without touching every className.
         slate: {
-          100: 'var(--c-slate-100)',
-          200: 'var(--c-slate-200)',
-          300: 'var(--c-slate-300)',
-          400: 'var(--c-slate-400)',
-          500: 'var(--c-slate-500)',
+          100: 'rgb(var(--c-slate-100) / <alpha-value>)',
+          200: 'rgb(var(--c-slate-200) / <alpha-value>)',
+          300: 'rgb(var(--c-slate-300) / <alpha-value>)',
+          400: 'rgb(var(--c-slate-400) / <alpha-value>)',
+          500: 'rgb(var(--c-slate-500) / <alpha-value>)',
         },
         night: {
-          950: 'var(--c-night-950)',
-          900: 'var(--c-night-900)',
-          800: 'var(--c-night-800)',
-          700: 'var(--c-night-700)',
-          600: 'var(--c-night-600)',
+          950: 'rgb(var(--c-night-950) / <alpha-value>)',
+          900: 'rgb(var(--c-night-900) / <alpha-value>)',
+          800: 'rgb(var(--c-night-800) / <alpha-value>)',
+          700: 'rgb(var(--c-night-700) / <alpha-value>)',
+          600: 'rgb(var(--c-night-600) / <alpha-value>)',
         },
         coral: {
           // Scholarly gold accent. 400 is theme-aware (used as plain text/badges);
