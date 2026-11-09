@@ -65,6 +65,27 @@ function isShortLabel(line, max = 24) {
   return line.length <= max && !SENTENCE_END_RE.test(line);
 }
 
+// A body line that ends like this closes its paragraph (。！？…；： plus any
+// closing quote/bracket). Anything else — no punctuation, or a comma — means the
+// line was hard-wrapped mid-sentence (typical when pasting from Word/PDF).
+const PARAGRAPH_END_RE = /[。！？!?…；;：:][”’」』）)】]*$/;
+
+// Re-joins hard-wrapped lines so each real paragraph gets ONE 2-character
+// indent and its continuation lines wrap back to the left margin.
+export function mergeWrappedLines(lines) {
+  const out = [];
+  let buf = '';
+  for (const line of lines) {
+    buf += line;
+    if (PARAGRAPH_END_RE.test(line)) {
+      out.push(buf);
+      buf = '';
+    }
+  }
+  if (buf) out.push(buf);
+  return out;
+}
+
 // Splits a free-form letter (plain text or rich-text answer typed by an admin)
 // into the 7 paper slots so it can be laid out with the same rules as the
 // guided writing form: title / greeting / body / 此致 / 敬礼 / signature / date.
@@ -115,7 +136,7 @@ export function parseLetter(text) {
     end -= 1;
   }
 
-  out.paragraphs = lines.slice(start, end);
+  out.paragraphs = mergeWrappedLines(lines.slice(start, end));
   return out;
 }
 
