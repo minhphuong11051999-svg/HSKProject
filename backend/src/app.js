@@ -13,7 +13,8 @@ const app = express();
 app.use(helmet());
 app.use(cors({ origin: env.corsOrigin, credentials: true }));
 app.use(morgan('dev'));
-app.use(express.json());
+// Lessons are saved in one request including uploaded images / audio (data URLs).
+app.use(express.json({ limit: '15mb' }));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 300 }));
 
 app.get('/health', async (req, res) => {

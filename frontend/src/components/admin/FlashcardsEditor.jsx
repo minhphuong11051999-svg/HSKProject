@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Repeater from './Repeater';
 import { TextField, TextAreaField } from './fields';
 
@@ -10,7 +10,13 @@ const QUESTION_KINDS = [
 ];
 
 function emptyQuestion(kind) {
-  return { kind, prompt: '', options: ['', '', '', ''], answer: 0, ...(kind === 'listen' ? { audioZh: '', audioVi: '' } : {}) };
+  return {
+    kind,
+    prompt: '',
+    options: ['', '', '', ''],
+    answer: 0,
+    ...(kind === 'listen' ? { audioZh: '', audioVi: '', audioUrl: '' } : {}),
+  };
 }
 
 function emptyCard() {
@@ -20,6 +26,7 @@ function emptyCard() {
     meaning: '',
     partOfSpeech: '',
     imageUrl: '',
+    audioUrl: '',
     phrases: ['', ''],
     exampleZh: '',
     exampleVi: '',
@@ -98,6 +105,75 @@ function ImageField({ value, onChange }) {
   );
 }
 
+const MAX_AUDIO_BYTES = 300 * 1024;
+
+// Short pronunciation clip stored inline (data URL) or linked by URL. Left empty,
+// the game falls back to the browser's Chinese text-to-speech voice.
+function AudioField({ label, value, onChange }) {
+  const inputRef = useRef(null);
+  const [error, setError] = useState('');
+  const isUpload = value?.startsWith('data:');
+  return (
+    <div className="mb-2">
+      <p className="text-xs text-slate-400 mb-1">{label}</p>
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          className="text-xs px-2.5 py-1.5 rounded border border-night-600 bg-night-800 text-slate-200 hover:bg-night-700"
+        >
+          Tải file âm thanh
+        </button>
+        {value && (
+          <button
+            type="button"
+            onClick={() => {
+              setError('');
+              onChange('');
+            }}
+            className="text-xs px-2.5 py-1.5 rounded border border-red-500/60 text-red-400"
+          >
+            Xoá âm thanh
+          </button>
+        )}
+        <input
+          value={isUpload ? '' : value || ''}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={isUpload ? 'Đang dùng file tải lên' : '…hoặc dán link file (https://...mp3)'}
+          className="flex-1 min-w-[12rem] bg-night-900 border border-night-600 rounded px-2 py-1.5 text-xs text-slate-100 placeholder-slate-500"
+        />
+      </div>
+      {value && <audio controls src={value} className="mt-2 h-9 w-full max-w-sm" />}
+      {error ? (
+        <p className="mt-1 text-[11px] text-red-400" role="alert">{error}</p>
+      ) : (
+        <p className="mt-1 text-[11px] text-slate-500">
+          mp3 / m4a / wav, tối đa 300KB (khoảng 10–20 giây). Để trống thì dùng giọng đọc của trình duyệt.
+        </p>
+      )}
+      <input
+        ref={inputRef}
+        type="file"
+        accept="audio/*"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          e.target.value = '';
+          if (!file) return;
+          if (file.size > MAX_AUDIO_BYTES) {
+            setError(`File nặng ${Math.round(file.size / 1024)}KB — vượt giới hạn 300KB. Hãy cắt ngắn / nén lại, hoặc dán link file.`);
+            return;
+          }
+          setError('');
+          const reader = new FileReader();
+          reader.onload = () => onChange(reader.result);
+          reader.readAsDataURL(file);
+        }}
+      />
+    </div>
+  );
+}
+
 function QuestionEditor({ question: q, onChange, title }) {
   const options = Array.from({ length: 4 }, (_, i) => q.options?.[i] ?? '');
   return (
@@ -112,6 +188,13 @@ function QuestionEditor({ question: q, onChange, title }) {
           />
           <TextField label="Bản dịch (hiện sau khi trả lời)" value={q.audioVi} onChange={(v) => onChange({ ...q, audioVi: v })} />
         </div>
+      )}
+      {q.kind === 'listen' && (
+        <AudioField
+          label="File âm thanh câu luyện nghe (có thể để trống)"
+          value={q.audioUrl}
+          onChange={(v) => onChange({ ...q, audioUrl: v })}
+        />
       )}
       <TextAreaField label="Câu hỏi" rows={2} value={q.prompt} onChange={(v) => onChange({ ...q, prompt: v })} />
       <div className="grid sm:grid-cols-2 gap-2">
@@ -174,6 +257,11 @@ export default function FlashcardsEditor({ items, onChange }) {
               />
             </div>
             <ImageField value={card.imageUrl} onChange={(v) => update({ ...card, imageUrl: v })} />
+            <AudioField
+              label="Phát âm của từ — phát khi bấm “Nghe từ” (có thể để trống)"
+              value={card.audioUrl}
+              onChange={(v) => update({ ...card, audioUrl: v })}
+            />
             <div className="grid sm:grid-cols-2 gap-2">
               {phrases.map((p, i) => (
                 <TextField

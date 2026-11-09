@@ -25,6 +25,27 @@ const KIND_LABELS = {
 // First variant of "申请 / 申请书" style entries is what goes on the card face.
 const mainOf = (text) => (text || '').split(' / ')[0];
 
+let currentAudio = null;
+
+// Plays the uploaded/linked clip when there is one; otherwise (or if it fails to
+// load) reads the Chinese text with the browser's text-to-speech voice.
+function play(audioUrl, text) {
+  try {
+    window.speechSynthesis?.cancel();
+  } catch {
+    // ignore
+  }
+  currentAudio?.pause();
+  currentAudio = null;
+  if (audioUrl) {
+    const audio = new Audio(audioUrl);
+    currentAudio = audio;
+    audio.play().catch(() => text && speak(text));
+    return;
+  }
+  if (text) speak(text);
+}
+
 function speak(text) {
   try {
     window.speechSynthesis.cancel();
@@ -64,7 +85,18 @@ export default function FlashcardGame({ open, onClose, cards, lessonId, canSave 
   }
 
   useEffect(() => {
-    if (open) restart();
+    if (open) {
+      restart();
+      return undefined;
+    }
+    // Closing the dialog silences anything still playing.
+    currentAudio?.pause();
+    try {
+      window.speechSynthesis?.cancel();
+    } catch {
+      // ignore
+    }
+    return undefined;
   }, [open]);
 
   const done = n >= steps.length;
@@ -190,7 +222,7 @@ function CardStep({ card, flipped, onFlip, onNext }) {
       <div className="flex flex-wrap justify-center gap-3 mt-5">
         <button
           type="button"
-          onClick={() => speak(mainOf(card.word))}
+          onClick={() => play(card.audioUrl, mainOf(card.word))}
           className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-600 bg-night-800 px-5 text-sm font-semibold text-slate-200 hover:bg-night-700 transition-colors"
         >
           <SpeakerHigh size={18} weight="fill" aria-hidden="true" />
@@ -281,13 +313,16 @@ function Hint({ children }) {
 function QuestionStep({ question, chosen, onChoose, onNext }) {
   const answered = chosen !== undefined;
   const correct = answered && chosen === question.answer;
-  const isListen = question.kind === 'listen' && question.audioZh;
+  const isListen = question.kind === 'listen' && (question.audioZh || question.audioUrl);
 
   useEffect(() => {
     if (!isListen) return undefined;
-    const t = setTimeout(() => speak(question.audioZh), 350);
-    return () => clearTimeout(t);
-  }, [isListen, question.audioZh]);
+    const t = setTimeout(() => play(question.audioUrl, question.audioZh), 350);
+    return () => {
+      clearTimeout(t);
+      currentAudio?.pause();
+    };
+  }, [isListen, question.audioUrl, question.audioZh]);
 
   return (
     <div className="rounded-2xl border border-night-700 bg-night-800 p-4 sm:p-6">
@@ -296,7 +331,7 @@ function QuestionStep({ question, chosen, onChoose, onNext }) {
       </p>
       {isListen && (
         <PressButton
-          onClick={() => speak(question.audioZh)}
+          onClick={() => play(question.audioUrl, question.audioZh)}
           aria-label="Phát lại câu"
           className="mx-auto mb-4 flex w-20 h-20 items-center justify-center rounded-full bg-gradient-to-br from-[#16213f] to-[#0e1730] text-white shadow-lg"
         >

@@ -145,6 +145,7 @@ model Flashcard {
   meaning      String @default("")
   partOfSpeech String @default("")
   imageUrl     String @default("")
+  audioUrl     String @default("")
   phrases      Json   @default("[]")
   exampleZh    String @default("")
   exampleVi    String @default("")
