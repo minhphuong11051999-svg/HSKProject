@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { motion } from 'motion/react';
 import { listMySubmissions } from '../api/lessons';
 
 const PAGE_SIZE = 20;
@@ -39,10 +40,16 @@ export default function History() {
       ) : (
         <>
           <ul className="space-y-3">
-            {pageItems.map((s) => {
+            {pageItems.map((s, i) => {
               const { label, titleZh } = describeSubmissionTarget(s);
               return (
-                <li key={s.id} className="bg-night-800 border border-night-700 rounded-lg p-4 flex justify-between items-center">
+                <motion.li
+                  key={s.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30, delay: Math.min(i, 10) * 0.035 }}
+                  className="bg-night-800 border border-night-700 rounded-lg p-4 flex justify-between items-center hover:border-night-600 transition-colors"
+                >
                   <div>
                     <p className="zh text-slate-100">{titleZh}</p>
                     <p className="text-sm text-slate-500">
@@ -56,7 +63,7 @@ export default function History() {
                   ) : (
                     <span className="text-sm text-slate-500">Đã nộp</span>
                   )}
-                </li>
+                </motion.li>
               );
             })}
           </ul>

@@ -11,7 +11,11 @@
 <script>
   (function () {
     var saved = localStorage.getItem('hsk6-theme');
-    document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+    var theme = saved === 'light' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = theme;
+    // The palette is keyed off the .dark class (see index.css) so the Animate UI
+    // theme wipe can flip it inside its view transition.
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />

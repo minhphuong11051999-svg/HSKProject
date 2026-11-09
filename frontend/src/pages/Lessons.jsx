@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { listLessons } from '../api/lessons';
 import PremiumModal from '../components/PremiumModal';
 import ProLabel from '../components/ProLabel';
+import Reveal from '../components/motion/Reveal';
 import { Lock } from '@phosphor-icons/react';
 
 const TITLES = {
@@ -68,7 +69,9 @@ function LessonSection({ title, subtitle, lessons }) {
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {lessons.map((lesson, idx) => (
-          <LessonCard key={lesson.slug} lesson={lesson} index={idx} />
+          <Reveal key={lesson.slug} index={idx} className="h-full">
+              <LessonCard lesson={lesson} index={idx} />
+            </Reveal>
         ))}
       </div>
     </section>
@@ -79,9 +82,9 @@ function LessonCard({ lesson, index }) {
   const [showPremium, setShowPremium] = useState(false);
 
   const body = (
-    <div className="bg-night-800 border border-night-700 rounded-xl overflow-hidden transition-all hover:border-coral-500/60 hover:-translate-y-0.5">
+    <div className="group h-full bg-night-800 border border-night-700 rounded-xl overflow-hidden transition-all duration-300 hover:border-coral-500/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 motion-reduce:transform-none">
       <div className="relative bg-gradient-to-br from-night-700 to-night-800 h-28 flex items-center justify-center">
-        <span className="zh text-4xl text-coral-500/90">{lesson.titleZh}</span>
+        <span className="zh text-4xl text-coral-500/90 transition-transform duration-300 group-hover:scale-110 motion-reduce:transform-none">{lesson.titleZh}</span>
         <span className="absolute top-2 left-2 bg-night-900/80 text-coral-400 text-xs font-bold px-2 py-0.5 rounded-full">
           #{index + 1}
         </span>
@@ -110,7 +113,7 @@ function LessonCard({ lesson, index }) {
   if (lesson.locked) {
     return (
       <>
-        <button type="button" onClick={() => setShowPremium(true)} className="text-left w-full">
+        <button type="button" onClick={() => setShowPremium(true)} className="text-left w-full h-full">
           {body}
         </button>
         <PremiumModal open={showPremium} onClose={() => setShowPremium(false)} />
@@ -118,5 +121,5 @@ function LessonCard({ lesson, index }) {
     );
   }
 
-  return <Link to={`/lessons/${lesson.slug}`}>{body}</Link>;
+  return <Link to={`/lessons/${lesson.slug}`} className="block h-full">{body}</Link>;
 }

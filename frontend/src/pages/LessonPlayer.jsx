@@ -8,6 +8,9 @@ import LetterPaper, { HanziCount, countHanzi, htmlToText, parseLetter, toParagra
 import { BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
 import ProLabel from '../components/ProLabel';
 import { CheckCircle, XCircle, Lightbulb } from '@phosphor-icons/react';
+import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
+import PressButton from '../components/motion/PressButton';
+import Reveal from '../components/motion/Reveal';
 
 const BTN_PRIMARY =
   'min-h-[40px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-colors';
@@ -134,40 +137,52 @@ export default function LessonPlayer() {
           </div>
         )}
 
-        <nav className="hidden md:flex flex-col gap-2" aria-label="Các bước của bài học">
-          {parts.map((t) => (
-            <button
-              key={t.key}
-              type="button"
-              onClick={() => goToTab(t)}
-              aria-current={tab === t.key ? 'step' : undefined}
-              className={`w-full min-h-[40px] text-left px-3 py-2 rounded-lg text-sm flex items-center flex-wrap gap-x-2 gap-y-1 transition-colors ${
-                tab === t.key
-                  ? 'bg-coral-500 text-white'
-                  : 'bg-night-800 border border-night-700 hover:bg-night-700'
-              }`}
-            >
-              <span
-                className={`flex-shrink-0 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center ${
-                  tab === t.key ? 'bg-white/25 text-white' : 'bg-night-700 text-slate-300'
-                }`}
-              >
-                {t.number}
-              </span>
-              <span className="min-w-0 break-words">{t.label}</span>
-              {isPartPremium(t.key) && !isPremiumUser && (
-                <span className="flex-shrink-0 bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap">
-                  <ProLabel />
-                </span>
-              )}
-            </button>
-          ))}
+        <nav className="hidden md:block" aria-label="Các bước của bài học">
+          {/* Animate UI Highlight: the gold step pill glides to the chosen step. */}
+          <Highlight
+            controlledItems
+            value={tab}
+            className="inset-0 rounded-lg bg-coral-500 shadow-md shadow-coral-500/20"
+            transition={{ type: 'spring', stiffness: 380, damping: 34 }}
+          >
+            <div className="flex flex-col gap-2">
+              {parts.map((t) => (
+                <HighlightItem key={t.key} value={t.key}>
+                  <button
+                    type="button"
+                    onClick={() => goToTab(t)}
+                    aria-current={tab === t.key ? 'step' : undefined}
+                    className={`w-full min-h-[40px] text-left px-3 py-2 rounded-lg text-sm flex items-center flex-wrap gap-x-2 gap-y-1 border transition-colors ${
+                      tab === t.key
+                        ? 'text-white border-transparent'
+                        : 'bg-night-800 border-night-700 hover:bg-night-700'
+                    }`}
+                  >
+                    <span
+                      className={`flex-shrink-0 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center transition-colors ${
+                        tab === t.key ? 'bg-white/25 text-white' : 'bg-night-700 text-slate-300'
+                      }`}
+                    >
+                      {t.number}
+                    </span>
+                    <span className="min-w-0 break-words">{t.label}</span>
+                    {isPartPremium(t.key) && !isPremiumUser && (
+                      <span className="flex-shrink-0 bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap">
+                        <ProLabel />
+                      </span>
+                    )}
+                  </button>
+                </HighlightItem>
+              ))}
+            </div>
+          </Highlight>
         </nav>
       </aside>
 
       <PremiumModal open={showTabPremium} onClose={() => setShowTabPremium(false)} />
 
       <section className="flex-1 min-w-0 bg-night-800 border border-night-700 rounded-xl p-4 sm:p-6">
+        <Reveal key={tab} offset={10}>
         {current && (
           <header className="mb-5 sm:mb-6 pb-4 border-b border-night-700">
             <h2 className="text-lg font-bold text-slate-100">
@@ -197,6 +212,7 @@ export default function LessonPlayer() {
         {tab === 'partial_writing' && <PartialWritingTab lesson={lesson} />}
         {tab === 'writing' && <WritingTab lesson={lesson} />}
         {!BUILTIN_PART_KEYS.includes(tab) && <GenericTab lesson={lesson} partKey={tab} />}
+        </Reveal>
       </section>
     </main>
   );
@@ -227,6 +243,7 @@ function FeedbackBox({ isCorrect, title, children }) {
       ? 'border-green-500/60 bg-green-500/10'
       : 'border-red-500/60 bg-red-500/10';
   return (
+    <Reveal offset={8}>
     <div className={`mt-4 rounded-lg border p-4 text-sm ${tone}`} role="status">
       {title && (
         <p
@@ -239,6 +256,7 @@ function FeedbackBox({ isCorrect, title, children }) {
       )}
       {children}
     </div>
+    </Reveal>
   );
 }
 
@@ -411,9 +429,9 @@ function ChoiceQuestion({ index, lessonId, question: q, canSave, showDraft = fal
 
       <div className="flex flex-wrap gap-2 mt-4">
         {!result ? (
-          <button type="button" onClick={check} disabled={checking || selected === null || !canSave} className={BTN_PRIMARY}>
+          <PressButton type="button" onClick={check} disabled={checking || selected === null || !canSave} className={BTN_PRIMARY}>
             {checking ? 'Đang kiểm tra...' : 'Kiểm tra đáp án'}
-          </button>
+          </PressButton>
         ) : (
           <button type="button" onClick={retry} className={BTN_SECONDARY}>
             ↺ Thử lại
@@ -645,14 +663,14 @@ function MatchBoard({ lessonId, items, canSave }) {
 
       <div className="flex flex-wrap gap-2">
         {!done ? (
-          <button
+          <PressButton
             type="button"
             onClick={checkAll}
             disabled={checking || Object.keys(pairs).length === 0 || !canSave}
             className={BTN_PRIMARY}
           >
             {checking ? 'Đang kiểm tra...' : 'Kiểm tra đáp án'}
-          </button>
+          </PressButton>
         ) : null}
         <button type="button" onClick={reset} className={BTN_SECONDARY} disabled={Object.keys(pairs).length === 0 && !done}>
           ↺ Thử lại
@@ -805,9 +823,9 @@ function ClozeCard({ index, lessonId, exercise: ex, canSave }) {
 
       <div className="flex flex-wrap gap-2 mt-4">
         {!result ? (
-          <button type="button" onClick={check} disabled={checking || !canSave} className={BTN_PRIMARY}>
+          <PressButton type="button" onClick={check} disabled={checking || !canSave} className={BTN_PRIMARY}>
             {checking ? 'Đang kiểm tra...' : 'Kiểm tra'}
-          </button>
+          </PressButton>
         ) : (
           <button type="button" onClick={retry} className={BTN_SECONDARY}>
             ↺ Thử lại
@@ -916,14 +934,14 @@ function ErrorFixCard({ index, lessonId, question: q, canSave }) {
       </div>
       <div className="flex flex-wrap gap-2 mt-4">
         {!result ? (
-          <button
+          <PressButton
             type="button"
             onClick={check}
             disabled={checking || !canSave || (!wordFix.trim() && !layoutFix.trim())}
             className={BTN_PRIMARY}
           >
             {checking ? 'Đang tải...' : 'Kiểm tra đáp án'}
-          </button>
+          </PressButton>
         ) : (
           <button type="button" onClick={retry} className={BTN_SECONDARY}>
             ↺ Thử lại
@@ -1017,14 +1035,16 @@ function SentenceTaskCard({ task }) {
             {showHint ? 'Ẩn công thức' : 'Công thức gợi ý'}
           </button>
         )}
-        <button type="button" onClick={() => setShowAnswer((v) => !v)} className={BTN_PRIMARY}>
+        <PressButton type="button" onClick={() => setShowAnswer((v) => !v)} className={BTN_PRIMARY}>
           {showAnswer ? 'Ẩn đáp án mẫu' : 'Xem đáp án mẫu'}
-        </button>
+        </PressButton>
       </div>
       {showHint && task.hint && (
-        <div className="mt-3 rounded-lg border border-amber-500/50 bg-amber-500/10 p-3 text-sm text-amber-200">
-          <Html html={task.hint} />
-        </div>
+        <Reveal offset={8}>
+          <div className="mt-3 rounded-lg border border-amber-500/50 bg-amber-500/10 p-3 text-sm text-amber-200">
+            <Html html={task.hint} />
+          </div>
+        </Reveal>
       )}
       {showAnswer && (
         <FeedbackBox isCorrect title="Đáp án mẫu">
@@ -1079,9 +1099,9 @@ function TranslateCard({ index, exercise: ex }) {
         placeholder="Viết câu dịch / câu chuyển đổi của bạn..."
         aria-label={`Bài làm câu ${index + 1}`}
       />
-      <button type="button" onClick={() => setShowAnswer((v) => !v)} className={`${BTN_PRIMARY} mt-3`}>
+      <PressButton type="button" onClick={() => setShowAnswer((v) => !v)} className={`${BTN_PRIMARY} mt-3`}>
         {showAnswer ? 'Ẩn đáp án chuẩn' : 'Xem đáp án chuẩn'}
-      </button>
+      </PressButton>
       {showAnswer && (
         <FeedbackBox isCorrect title="Đáp án chuẩn">
           <Html html={ex.answer} className="zh text-slate-200" />
@@ -1119,14 +1139,16 @@ function OutlineTab({ exercises }) {
               aria-label={`Ô điền cho mục ${i + 1}`}
             />
             {showAnswer && ex.answer && (
-              <p className="mt-1 text-sm zh text-green-400 whitespace-pre-line">→ {htmlToText(ex.answer).trim()}</p>
+              <Reveal index={i} offset={6}>
+                <p className="mt-1 text-sm zh text-green-400 whitespace-pre-line">→ {htmlToText(ex.answer).trim()}</p>
+              </Reveal>
             )}
           </div>
         </div>
       ))}
-      <button type="button" onClick={() => setShowAnswer((v) => !v)} className={BTN_PRIMARY}>
+      <PressButton type="button" onClick={() => setShowAnswer((v) => !v)} className={BTN_PRIMARY}>
         {showAnswer ? 'Ẩn đáp án gợi ý' : 'Xem đáp án gợi ý'}
-      </button>
+      </PressButton>
     </div>
   );
 }
@@ -1405,9 +1427,9 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
             </span>
             <div className="flex gap-2 ml-auto">
               {scenario?.modelAnswer && (
-                <button type="button" onClick={() => setShowModel((v) => !v)} className={BTN_PRIMARY}>
+                <PressButton type="button" onClick={() => setShowModel((v) => !v)} className={BTN_PRIMARY}>
                   {showModel ? 'Ẩn đáp án mẫu' : 'Đáp án mẫu'}
-                </button>
+                </PressButton>
               )}
               <button
                 type="button"
@@ -1437,13 +1459,13 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
       </div>
 
       {showModel && scenario?.modelAnswer && (
-        <div>
+        <Reveal>
           <div className="flex items-center justify-between mb-2">
             <p className="text-sm font-semibold text-slate-200">Đáp án mẫu</p>
             <HanziCount count={countHanzi(htmlToText(scenario.modelAnswer))} />
           </div>
           <LetterPaper html={scenario.modelAnswer} autoFormat minHeight="" />
-        </div>
+        </Reveal>
       )}
     </div>
   );

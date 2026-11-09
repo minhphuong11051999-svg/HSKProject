@@ -22,7 +22,7 @@
   --c-quicklink-text: #e8d6ad;
 }
 
-:root[data-theme='light'] {
+:root:not(.dark) {
   --c-night-950: #f7f8fb;
   --c-night-900: #ffffff;
   --c-night-800: #eef1f6;
@@ -46,6 +46,14 @@ button:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--c-coral-accent);
   outline-offset: 2px;
+}
+
+/* Tactile press feedback on every button that doesn't already animate itself
+   (Animate UI buttons set their own transform inline, which wins). */
+@media (prefers-reduced-motion: no-preference) {
+  button:not(:disabled):not(.w-full):active {
+    transform: scale(0.97);
+  }
 }
 
 body {

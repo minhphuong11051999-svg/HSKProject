@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Accordion } from '@animate-ui/react/primitives/radix-ui/accordion';
+import { CaretDown } from '@phosphor-icons/react';
 import { listExamYears } from '../api/examSittings';
 import PremiumModal from '../components/PremiumModal';
 import ProLabel from '../components/ProLabel';
+import Reveal from '../components/motion/Reveal';
 
 export default function ExamSittings() {
   const [years, setYears] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [openYearId, setOpenYearId] = useState(null);
+  const [openYearId, setOpenYearId] = useState('');
 
   useEffect(() => {
     listExamYears()
@@ -31,54 +34,46 @@ export default function ExamSittings() {
       ) : years.length === 0 ? (
         <p className="text-slate-500">Chưa có đề thi thật nào.</p>
       ) : (
-        <div className="space-y-3">
-          {years.map((year) => (
-            <ExamYearAccordion
-              key={year.id}
-              year={year}
-              open={openYearId === year.id}
-              onToggle={() => setOpenYearId((prev) => (prev === year.id ? null : year.id))}
-            />
+        // Animate UI Accordion: panels expand/collapse with a spring height animation.
+        <Accordion.Root type="single" collapsible value={openYearId} onValueChange={setOpenYearId} className="space-y-3">
+          {years.map((year, i) => (
+            <Reveal key={year.id} index={i}>
+              <ExamYearItem year={year} />
+            </Reveal>
           ))}
-        </div>
+        </Accordion.Root>
       )}
     </main>
   );
 }
 
-function ExamYearAccordion({ year, open, onToggle }) {
-  const panelId = `exam-year-panel-${year.id}`;
-  const buttonId = `exam-year-button-${year.id}`;
-
+function ExamYearItem({ year }) {
   return (
-    <div className="bg-night-800 border border-night-700 rounded-xl overflow-hidden">
-      <button
-        type="button"
-        id={buttonId}
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={onToggle}
-        className="w-full min-h-[44px] flex items-center justify-between px-5 py-4 text-left hover:bg-night-700 transition-colors"
-      >
-        <span className="font-bold text-lg">Năm {year.year}</span>
-        <span className="flex items-center gap-3 text-sm text-slate-400">
-          {year.sittings.length} đề
-          <span aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
-            ▾
+    <Accordion.Item value={year.id} className="bg-night-800 border border-night-700 rounded-xl overflow-hidden">
+      <Accordion.Header>
+        <Accordion.Trigger className="group w-full min-h-[44px] flex items-center justify-between px-5 py-4 text-left hover:bg-night-700 transition-colors">
+          <span className="font-bold text-lg">Năm {year.year}</span>
+          <span className="flex items-center gap-3 text-sm text-slate-400">
+            {year.sittings.length} đề
+            <CaretDown
+              size={16}
+              weight="bold"
+              aria-hidden="true"
+              className="transition-transform duration-300 group-data-[state=open]:rotate-180 motion-reduce:transition-none"
+            />
           </span>
-        </span>
-      </button>
-
-      {open && (
-        <div id={panelId} role="region" aria-labelledby={buttonId} className="border-t border-night-700 p-4 space-y-2">
+        </Accordion.Trigger>
+      </Accordion.Header>
+      <Accordion.Content>
+        <div className="border-t border-night-700 p-4 space-y-2">
           {year.sittings.length === 0 ? (
             <p className="text-sm text-slate-500 px-1">Chưa có đề nào trong năm này.</p>
           ) : (
             year.sittings.map((sitting) => <SittingRow key={sitting.id} sitting={sitting} />)
           )}
         </div>
-      )}
-    </div>
+      </Accordion.Content>
+    </Accordion.Item>
   );
 }
 
@@ -86,7 +81,7 @@ function SittingRow({ sitting }) {
   const [showPremium, setShowPremium] = useState(false);
 
   const body = (
-    <div className="flex items-center justify-between gap-3 min-h-[44px] px-4 py-3 rounded-lg bg-night-900 border border-night-700 hover:border-coral-500/60 transition-colors">
+    <div className="flex items-center justify-between gap-3 min-h-[44px] px-4 py-3 rounded-lg bg-night-900 border border-night-700 hover:border-coral-500/60 hover:translate-x-1 transition-all duration-200 motion-reduce:transform-none">
       <div className="min-w-0">
         <p className="font-semibold text-sm text-slate-100 truncate">{sitting.label}</p>
         <p className="text-xs text-slate-500 truncate">{sitting.titleVi}</p>

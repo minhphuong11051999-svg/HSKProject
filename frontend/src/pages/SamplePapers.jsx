@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { listSamplePapers } from '../api/samplePapers';
 import PremiumModal from '../components/PremiumModal';
 import ProLabel from '../components/ProLabel';
+import Reveal from '../components/motion/Reveal';
 import { Lock } from '@phosphor-icons/react';
 
 export default function SamplePapers() {
@@ -30,7 +31,9 @@ export default function SamplePapers() {
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {papers.map((paper, idx) => (
-            <SamplePaperCard key={paper.slug} paper={paper} index={idx} />
+            <Reveal key={paper.slug} index={idx} className="h-full">
+              <SamplePaperCard paper={paper} index={idx} />
+            </Reveal>
           ))}
         </div>
       )}
@@ -42,9 +45,9 @@ function SamplePaperCard({ paper, index }) {
   const [showPremium, setShowPremium] = useState(false);
 
   const body = (
-    <div className="bg-night-800 border border-night-700 rounded-xl overflow-hidden transition-all hover:border-coral-500/60 hover:-translate-y-0.5">
+    <div className="group h-full bg-night-800 border border-night-700 rounded-xl overflow-hidden transition-all duration-300 hover:border-coral-500/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 motion-reduce:transform-none">
       <div className="relative bg-gradient-to-br from-night-700 to-night-800 h-28 flex items-center justify-center">
-        <span className="zh text-4xl text-coral-500/90">{paper.titleZh}</span>
+        <span className="zh text-4xl text-coral-500/90 transition-transform duration-300 group-hover:scale-110 motion-reduce:transform-none">{paper.titleZh}</span>
         <span className="absolute top-2 left-2 bg-night-900/80 text-coral-400 text-xs font-bold px-2 py-0.5 rounded-full">
           #{index + 1}
         </span>
@@ -68,7 +71,7 @@ function SamplePaperCard({ paper, index }) {
   if (paper.locked) {
     return (
       <>
-        <button type="button" onClick={() => setShowPremium(true)} className="text-left w-full">
+        <button type="button" onClick={() => setShowPremium(true)} className="text-left w-full h-full">
           {body}
         </button>
         <PremiumModal open={showPremium} onClose={() => setShowPremium(false)} />
@@ -76,5 +79,5 @@ function SamplePaperCard({ paper, index }) {
     );
   }
 
-  return <Link to={`/practice/${paper.slug}`}>{body}</Link>;
+  return <Link to={`/practice/${paper.slug}`} className="block h-full">{body}</Link>;
 }

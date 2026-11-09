@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
 import BrandLogo from './BrandLogo';
+import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
 import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree } from '@phosphor-icons/react';
 
 const NAV_ITEMS = [
@@ -31,9 +32,7 @@ export default function Sidebar({ open = false, onClose }) {
     navigate('/');
   }
 
-  function isActive(to) {
-    return location.pathname === to;
-  }
+  const activeTo = activeNavTarget(location.pathname, user?.role === 'ADMIN');
 
   return (
     <aside
@@ -57,43 +56,22 @@ export default function Sidebar({ open = false, onClose }) {
         </button>
       </div>
 
-      <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
-        {NAV_ITEMS.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            aria-current={isActive(item.to) ? 'page' : undefined}
-            className={`flex items-center gap-3 min-h-[44px] px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
-              isActive(item.to)
-                ? 'bg-coral-500/15 text-coral-400 font-semibold border-coral-400'
-                : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'
-            }`}
-          >
-            <item.icon size={20} weight={isActive(item.to) ? 'fill' : 'regular'} aria-hidden="true" className="flex-shrink-0" />
-            {item.label}
-          </Link>
-        ))}
-
-        {user?.role === 'ADMIN' && (
-          <>
-            <p className="px-3 pt-5 pb-1 text-xs tracking-wider text-slate-500 font-semibold">QUẢN TRỊ</p>
-            {ADMIN_ITEMS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                aria-current={isActive(item.to) ? 'page' : undefined}
-                className={`flex items-center gap-3 min-h-[44px] px-3 py-2.5 rounded-lg text-sm border-l-2 transition-colors ${
-                  isActive(item.to)
-                    ? 'bg-coral-500/15 text-coral-400 font-semibold border-coral-400'
-                    : 'text-slate-300 border-transparent hover:bg-night-800 hover:text-white'
-                }`}
-              >
-                <item.icon size={20} weight={isActive(item.to) ? 'fill' : 'regular'} aria-hidden="true" className="flex-shrink-0" />
-                {item.label}
-              </Link>
-            ))}
-          </>
-        )}
+      <nav className="flex-1 px-3 overflow-y-auto">
+        {/* Animate UI Highlight: one gold pill that glides to the active item. */}
+        <Highlight
+          controlledItems
+          value={activeTo}
+          className="inset-0 rounded-lg bg-coral-500/15 border-l-2 border-coral-400"
+          transition={{ type: 'spring', stiffness: 380, damping: 34 }}
+        >
+          <NavGroup items={NAV_ITEMS} activeTo={activeTo} />
+          {user?.role === 'ADMIN' && (
+            <>
+              <p className="px-3 pt-5 pb-1 text-xs tracking-wider text-slate-500 font-semibold">QUẢN TRỊ</p>
+              <NavGroup items={ADMIN_ITEMS} activeTo={activeTo} />
+            </>
+          )}
+        </Highlight>
       </nav>
 
       <div className="p-4 border-t border-night-700">
@@ -109,5 +87,39 @@ export default function Sidebar({ open = false, onClose }) {
         </button>
       </div>
     </aside>
+  );
+}
+
+// Detail pages light up their parent list (e.g. /practice/abc → Đề mẫu).
+function activeNavTarget(pathname, isAdmin) {
+  const all = isAdmin ? [...NAV_ITEMS, ...ADMIN_ITEMS] : NAV_ITEMS;
+  if (all.some((i) => i.to === pathname)) return pathname;
+  if (pathname.startsWith('/practice/')) return '/practice';
+  if (pathname.startsWith('/exams/')) return '/lessons/exam';
+  if (pathname.startsWith('/lessons/')) return '/lessons';
+  return null;
+}
+
+function NavGroup({ items, activeTo }) {
+  return (
+    <div className="space-y-1">
+      {items.map((item) => {
+        const active = activeTo === item.to;
+        return (
+          <HighlightItem key={item.to} value={item.to}>
+            <Link
+              to={item.to}
+              aria-current={active ? 'page' : undefined}
+              className={`flex items-center gap-3 min-h-[44px] px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                active ? 'text-coral-400 font-semibold' : 'text-slate-300 hover:bg-night-800 hover:text-white'
+              }`}
+            >
+              <item.icon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" className="flex-shrink-0" />
+              {item.label}
+            </Link>
+          </HighlightItem>
+        );
+      })}
+    </div>
   );
 }

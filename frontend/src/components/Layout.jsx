@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import Sidebar from './Sidebar';
 import TopNav from './TopNav';
 import BrandLogo from './BrandLogo';
+import PageTransition from './motion/PageTransition';
 
 export default function Layout() {
   const { user, loading } = useAuth();
@@ -73,7 +74,9 @@ export default function Layout() {
         <Sidebar open={menuOpen} onClose={() => setMenuOpen(false)} />
 
         <div id="main-content" className="flex-1 min-w-0">
-          <Outlet />
+          <PageTransition>
+            <Outlet />
+          </PageTransition>
         </div>
       </div>
     );
@@ -82,7 +85,9 @@ export default function Layout() {
   return (
     <div className="min-h-screen bg-night-950 text-slate-100">
       <TopNav />
-      <Outlet />
+      <PageTransition>
+        <Outlet />
+      </PageTransition>
     </div>
   );
 }

@@ -6,6 +6,7 @@
 //   - body paragraphs indented 2 characters
 //   - 此致 indented 4 characters, 敬礼！ flush left
 //   - signature + date in the bottom-right corner, centred on each other
+import { SlidingNumber } from '@animate-ui/react/primitives/texts/sliding-number';
 
 export function countHanzi(text) {
   return ((text || '').match(/[一-鿿]/g) || []).length;
@@ -128,7 +129,7 @@ export function HanziCount({ count, className = '' }) {
     <span
       className={`inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full border border-night-600 bg-night-900 text-slate-300 tabular-nums ${className}`}
     >
-      （{count} 字）
+      （<SlidingNumber number={count} />字）
     </span>
   );
 }
