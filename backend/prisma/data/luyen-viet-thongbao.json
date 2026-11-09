@@ -46,25 +46,94 @@
     }
   ],
   "vocabTerms": [
-    { "literary": "本", "colloquial": "这个", "meaningVi": "Này / tuần này", "example": "本周日（Chủ Nhật tuần này）" },
-    { "literary": "将", "colloquial": "要", "meaningVi": "Sẽ / chuẩn bị", "example": "将在静园举行" },
-    { "literary": "于", "colloquial": "在", "meaningVi": "Vào lúc / tại", "example": "将于5月4日举办" },
-    { "literary": "至", "colloquial": "到", "meaningVi": "Đến", "example": "2月7日至13日" },
-    { "literary": "欲", "colloquial": "想", "meaningVi": "Muốn / dự định", "example": "欲参加者请……" },
-    { "literary": "与", "colloquial": "和", "meaningVi": "Và / với", "example": "为企业与人才提供机会" },
-    { "literary": "共", "colloquial": "一共", "meaningVi": "Tổng cộng", "example": "共7天" },
-    { "literary": "已", "colloquial": "已经", "meaningVi": "Đã", "example": "已去医院" },
-    { "literary": "及", "colloquial": "和", "meaningVi": "Và / cùng với", "example": "办公室领导及工作人员" }
+    {
+      "literary": "本",
+      "colloquial": "这个",
+      "meaningVi": "Này / tuần này",
+      "example": "本周日（Chủ Nhật tuần này）"
+    },
+    {
+      "literary": "将",
+      "colloquial": "要",
+      "meaningVi": "Sẽ / chuẩn bị",
+      "example": "将在静园举行"
+    },
+    {
+      "literary": "于",
+      "colloquial": "在",
+      "meaningVi": "Vào lúc / tại",
+      "example": "将于5月4日举办"
+    },
+    {
+      "literary": "至",
+      "colloquial": "到",
+      "meaningVi": "Đến",
+      "example": "2月7日至13日"
+    },
+    {
+      "literary": "欲",
+      "colloquial": "想",
+      "meaningVi": "Muốn / dự định",
+      "example": "欲参加者请……"
+    },
+    {
+      "literary": "与",
+      "colloquial": "和",
+      "meaningVi": "Và / với",
+      "example": "为企业与人才提供机会"
+    },
+    {
+      "literary": "共",
+      "colloquial": "一共",
+      "meaningVi": "Tổng cộng",
+      "example": "共7天"
+    },
+    {
+      "literary": "已",
+      "colloquial": "已经",
+      "meaningVi": "Đã",
+      "example": "已去医院"
+    },
+    {
+      "literary": "及",
+      "colloquial": "和",
+      "meaningVi": "Và / cùng với",
+      "example": "办公室领导及工作人员"
+    }
   ],
   "fixedPhrases": [
-    { "chinese": "现将有关事宜通知如下。", "viExplanation": "Nay thông báo các vấn đề liên quan như sau (câu chuyển tiếp trước khi chia mục)." },
-    { "chinese": "经[Chủ thể]批准，特做如下通知。", "viExplanation": "Được sự phê duyệt của..., nay đặc biệt thông báo như sau." },
-    { "chinese": "欢迎届时参加。", "viExplanation": "Hoan nghênh tham gia đúng giờ." },
-    { "chinese": "[Sự kiện]将于[Thời gian]举行。", "viExplanation": "[Sự kiện] sẽ được tổ chức vào lúc..." },
-    { "chinese": "现把通知转发给各部门，望遵照执行。", "viExplanation": "Nay chuyển tiếp thông báo này đến các bộ phận, mong tuân thủ thực hiện." },
-    { "chinese": "根据[Chủ thể]的指示，[Nội dung sự việc]。", "viExplanation": "Theo chỉ thị của..., [Nội dung hành động]." },
-    { "chinese": "请互相转告。", "viExplanation": "Xin hãy truyền đạt/báo lại cho nhau (mẫu kết cực phổ biến)." },
-    { "chinese": "至于其他有关问题，另行通知。", "viExplanation": "Về các vấn đề liên quan khác, sẽ có thông báo sau." }
+    {
+      "chinese": "现将有关事宜通知如下。",
+      "viExplanation": "Nay thông báo các vấn đề liên quan như sau (câu chuyển tiếp trước khi chia mục)."
+    },
+    {
+      "chinese": "经[Chủ thể]批准，特做如下通知。",
+      "viExplanation": "Được sự phê duyệt của..., nay đặc biệt thông báo như sau."
+    },
+    {
+      "chinese": "欢迎届时参加。",
+      "viExplanation": "Hoan nghênh tham gia đúng giờ."
+    },
+    {
+      "chinese": "[Sự kiện]将于[Thời gian]举行。",
+      "viExplanation": "[Sự kiện] sẽ được tổ chức vào lúc..."
+    },
+    {
+      "chinese": "现把通知转发给各部门，望遵照执行。",
+      "viExplanation": "Nay chuyển tiếp thông báo này đến các bộ phận, mong tuân thủ thực hiện."
+    },
+    {
+      "chinese": "根据[Chủ thể]的指示，[Nội dung sự việc]。",
+      "viExplanation": "Theo chỉ thị của..., [Nội dung hành động]."
+    },
+    {
+      "chinese": "请互相转告。",
+      "viExplanation": "Xin hãy truyền đạt/báo lại cho nhau (mẫu kết cực phổ biến)."
+    },
+    {
+      "chinese": "至于其他有关问题，另行通知。",
+      "viExplanation": "Về các vấn đề liên quan khác, sẽ có thông báo sau."
+    }
   ],
   "quizQuestions": [
     {
@@ -168,20 +237,86 @@
     {
       "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">关于举办留学生中国文化体验日的通知</p><p class=\"mb-2\">各位同学：</p><p class=\"indent2 mb-1\">为了增进中外学生交流，_____(1)_____，留学生办公室_____(2)_____本周五（9月4日）下午2:00在学校体育馆举办\"中国文化体验日\"活动。</p><p class=\"indent2 mb-1\">本次活动内容包括京剧脸谱绘制、传统书法体验及中华武术表演。活动_____(3)_____为留学生朋友提供感知中国文化的平台，尽可能地满足大家的兴趣需求。</p><p class=\"indent2\">_____(4)_____。请大家互相转告。</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>留学生办公室</p><p>2026年9月1日</p></div></div>",
       "blanks": [
-        { "id": "blank1", "answer": "丰富同学们的课余生活", "options": ["丰富同学们的课余生活", "将于", "旨在", "欢迎各位同学届时参加"] },
-        { "id": "blank2", "answer": "将于", "options": ["丰富同学们的课余生活", "将于", "旨在", "欢迎各位同学届时参加"] },
-        { "id": "blank3", "answer": "旨在", "options": ["丰富同学们的课余生活", "将于", "旨在", "欢迎各位同学届时参加"] },
-        { "id": "blank4", "answer": "欢迎各位同学届时参加", "options": ["丰富同学们的课余生活", "将于", "旨在", "欢迎各位同学届时参加"] }
+        {
+          "id": "blank1",
+          "answer": "丰富同学们的课余生活",
+          "options": [
+            "丰富同学们的课余生活",
+            "将于",
+            "旨在",
+            "欢迎各位同学届时参加"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "将于",
+          "options": [
+            "丰富同学们的课余生活",
+            "将于",
+            "旨在",
+            "欢迎各位同学届时参加"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "旨在",
+          "options": [
+            "丰富同学们的课余生活",
+            "将于",
+            "旨在",
+            "欢迎各位同学届时参加"
+          ]
+        },
+        {
+          "id": "blank4",
+          "answer": "欢迎各位同学届时参加",
+          "options": [
+            "丰富同学们的课余生活",
+            "将于",
+            "旨在",
+            "欢迎各位同学届时参加"
+          ]
+        }
       ],
       "orderIndex": 0
     }
   ],
   "matchItems": [
-    { "leftLabelVi": "Cái tuần này, tuần này (这个星期、这周)", "rightLabelZh": "本", "correctKey": "本", "explanation": "这个星期 ➔ 本周 / 本周五: \"本\" chỉ đối tượng đang được nhắc đến trực tiếp trong thông báo.", "orderIndex": 0 },
-    { "leftLabelVi": "Sẽ làm, chuẩn bị làm (想要、准备在……办)", "rightLabelZh": "将", "correctKey": "将", "explanation": "准备在……办 ➔ 将在……举办: \"将\" là phó từ chỉ hành động sẽ xảy ra trong tương lai.", "orderIndex": 1 },
-    { "leftLabelVi": "Làm vào lúc, tổ chức tại (在星期五、在学校)", "rightLabelZh": "于", "correctKey": "于", "explanation": "在学校体育馆 ➔ 于学校体育馆 / 于本周五: \"于\" là giới từ chỉ thời gian, không gian trang trọng.", "orderIndex": 2 },
-    { "leftLabelVi": "Muốn tham gia, ai có ý định (想要参加的人)", "rightLabelZh": "欲", "correctKey": "欲", "explanation": "想要参加的人 ➔ 欲参加者 / 欲参赛者: \"欲\" chỉ mong muốn, dự định trong văn viết.", "orderIndex": 3 },
-    { "leftLabelVi": "Gặp gỡ và giao lưu với học sinh (和学生、跟学生)", "rightLabelZh": "与", "correctKey": "与", "explanation": "和学生、跟学生 ➔ 与学生: \"与\" là liên từ nối các đối tượng song song trong văn bản hành chính.", "orderIndex": 4 }
+    {
+      "leftLabelVi": "Cái tuần này, tuần này (这个星期、这周)",
+      "rightLabelZh": "本",
+      "correctKey": "本",
+      "explanation": "这个星期 ➔ 本周 / 本周五: \"本\" chỉ đối tượng đang được nhắc đến trực tiếp trong thông báo.",
+      "orderIndex": 0
+    },
+    {
+      "leftLabelVi": "Sẽ làm, chuẩn bị làm (想要、准备在……办)",
+      "rightLabelZh": "将",
+      "correctKey": "将",
+      "explanation": "准备在……办 ➔ 将在……举办: \"将\" là phó từ chỉ hành động sẽ xảy ra trong tương lai.",
+      "orderIndex": 1
+    },
+    {
+      "leftLabelVi": "Làm vào lúc, tổ chức tại (在星期五、在学校)",
+      "rightLabelZh": "于",
+      "correctKey": "于",
+      "explanation": "在学校体育馆 ➔ 于学校体育馆 / 于本周五: \"于\" là giới từ chỉ thời gian, không gian trang trọng.",
+      "orderIndex": 2
+    },
+    {
+      "leftLabelVi": "Muốn tham gia, ai có ý định (想要参加的人)",
+      "rightLabelZh": "欲",
+      "correctKey": "欲",
+      "explanation": "想要参加的人 ➔ 欲参加者 / 欲参赛者: \"欲\" chỉ mong muốn, dự định trong văn viết.",
+      "orderIndex": 3
+    },
+    {
+      "leftLabelVi": "Gặp gỡ và giao lưu với học sinh (和学生、跟学生)",
+      "rightLabelZh": "与",
+      "correctKey": "与",
+      "explanation": "和学生、跟学生 ➔ 与学生: \"与\" là liên từ nối các đối tượng song song trong văn bản hành chính.",
+      "orderIndex": 4
+    }
   ],
   "writingTasks": [
     {
@@ -192,7 +327,11 @@
         "Địa điểm: 学校操场 (Sân vận động trường)",
         "Nội dung sự kiện: 举办留学生趣味运动会 (Tổ chức đại hội thể thao vui nhộn)"
       ],
-      "requiredKeywords": ["将于", "本", "在"],
+      "requiredKeywords": [
+        "将于",
+        "本",
+        "在"
+      ],
       "hint": "Công thức: [Chủ thể] + 将于 + [Thời gian] + 在 + [Địa điểm] + 举办 + [Hoạt động].",
       "referenceAnswer": "留学生办公室将于本周六上午9:00在学校操场举办\"留学生趣味运动会\"。",
       "orderIndex": 0
@@ -205,7 +344,11 @@
         "Địa điểm: 多功能厅 (Phòng đa năng)",
         "Nội dung cuộc họp: 召开全体教师工作会议 (Triệu tập cuộc họp công tác toàn thể giáo viên)"
       ],
-      "requiredKeywords": ["将于", "在", "召开"],
+      "requiredKeywords": [
+        "将于",
+        "在",
+        "召开"
+      ],
       "hint": "Luôn sử dụng động từ chuyên dụng 召开 đi kèm danh từ cuộc họp, thay vì dùng từ khẩu ngữ \"开会\".",
       "referenceAnswer": "对外汉语教育学院将于下周一（9月7日）下午4:00在多功能厅召开全体教师工作会议。",
       "orderIndex": 1
@@ -217,24 +360,370 @@
         "Yêu cầu thiết bị: 将手机调至静音状态 (Chuyển điện thoại sang chế độ im lặng)",
         "Yêu cầu trật tự: 保持会场安静 (Giữ trật tự hội trường)"
       ],
-      "requiredKeywords": ["请", "并", "以"],
+      "requiredKeywords": [
+        "请",
+        "并",
+        "以"
+      ],
       "hint": "Sử dụng liên từ 并 để nối hai hành động song song và giới từ 以 để chỉ mục đích một cách trang trọng. (Giúp tăng dung lượng thêm ~29 chữ Hán cực kỳ tự nhiên.)",
       "referenceAnswer": "请与会人员提前15分钟入场，并将手机调至静音状态，以保持会场安静。",
       "orderIndex": 2
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "Tiêu đề 标题", "placeholder": "例如：关于举办留学生太极拳比赛的通知", "inputType": "text", "orderIndex": 0 },
-    { "name": "audience", "label": "Đối tượng nhận 被通知方", "placeholder": "例如：各位同学", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "Chính văn 正文 (mỗi đoạn xuống dòng riêng)", "placeholder": "Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới…", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "org", "label": "Đơn vị phát hành 署名", "placeholder": "例如：留学生办公室", "inputType": "text", "orderIndex": 3 },
-    { "name": "date", "label": "Ngày tháng 日期", "placeholder": "例如：2026年9月1日", "inputType": "text", "orderIndex": 4 }
+    {
+      "name": "title",
+      "label": "Tiêu đề 标题",
+      "placeholder": "例如：关于举办留学生太极拳比赛的通知",
+      "inputType": "text",
+      "orderIndex": 0
+    },
+    {
+      "name": "audience",
+      "label": "Đối tượng nhận 被通知方",
+      "placeholder": "例如：各位同学",
+      "inputType": "text",
+      "orderIndex": 1
+    },
+    {
+      "name": "body",
+      "label": "Chính văn 正文 (mỗi đoạn xuống dòng riêng)",
+      "placeholder": "Gõ từng đoạn, xuống dòng (Enter) để tạo đoạn mới…",
+      "inputType": "textarea",
+      "orderIndex": 2
+    },
+    {
+      "name": "org",
+      "label": "Đơn vị phát hành 署名",
+      "placeholder": "例如：留学生办公室",
+      "inputType": "text",
+      "orderIndex": 3
+    },
+    {
+      "name": "date",
+      "label": "Ngày tháng 日期",
+      "placeholder": "例如：2026年9月1日",
+      "inputType": "text",
+      "orderIndex": 4
+    }
   ],
   "guidedWritingScenarios": [
     {
       "situationPrompt": "Tình huống: Bạn là nhân viên Văn phòng Du học sinh （留学生办公室）. Nhằm làm phong phú đời sống ngoài giờ học của các bạn học sinh và quảng bá văn hóa thể thao truyền thống Trung Hoa, văn phòng quyết định tổ chức \"Giải thi đấu Thái Cực Quyền / 太极拳比赛\" vào lúc 2 giờ chiều thứ Sáu tuần này (ngày 4 tháng 9 năm 2026) tại Sân vận động của trường （学校操场）. Đối tượng tham gia là toàn thể du học sinh trong trường. Người chiến thắng sẽ nhận được những phần quà lưu niệm ý nghĩa.",
       "modelAnswer": "关于举办留学生太极拳比赛的通知\n\n各位同学：\n\n为了丰富同学们的课余生活，推广中国传统体育文化，留学生办公室将于本周五（9月4日）下午2:00在学校操场举办\"留学生太极拳比赛\"。\n\n本次比赛旨在为同学们提供一个展示自我、强身健体的平台。比赛前三名将获得精美礼品，欢迎各位留学生朋友届时参加。欲参赛者请于明日下午5:00前到办公室登记。请大家互相转告。\n\n留学生办公室\n2026年9月1日\n\n（172 字）",
       "targetWordCount": 172
+    }
+  ],
+  "flashcards": [
+    {
+      "word": "通知",
+      "pinyin": "tōngzhī",
+      "meaning": "Thông báo",
+      "partOfSpeech": "Danh từ / Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiNDUzMDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjQ1MzA5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTI0MCwxMjBhNDAsNDAsMCwwLDEtNDAsNDBIMTYwVjgwaDQwQTQwLDQwLDAsMCwxLDI0MCwxMjBaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjQ4LDEyMGE0OC4wNSw0OC4wNSwwLDAsMC00OC00OEgxNjAuMmMtMi45MS0uMTctNTMuNjItMy43NC0xMDEuOTEtNDQuMjRBMTYsMTYsMCwwLDAsMzIsNDBWMjAwYTE2LDE2LDAsMCwwLDI2LjI5LDEyLjI1YzM3Ljc3LTMxLjY4LDc3LTQwLjc2LDkzLjcxLTQzLjN2MzEuNzJBMTYsMTYsMCwwLDAsMTU5LjEyLDIxNGwxMSw3LjMzQTE2LDE2LDAsMCwwLDE5NC41LDIxMmwxMS43Ny00NC4zNkE0OC4wNyw0OC4wNywwLDAsMCwyNDgsMTIwWk00OCwxOTkuOTNWNDBoMGM0Mi44MSwzNS45MSw4Ni42Myw0NSwxMDQsNDcuMjR2NjUuNDhDMTM0LjY1LDE1NSw5MC44NCwxNjQuMDcsNDgsMTk5LjkzWm0xMzEsOCwwLC4xMS0xMS03LjMzVjE2OGgyMS42Wk0yMDAsMTUySDE2OFY4OGgzMmEzMiwzMiwwLDEsMSwwLDY0WiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "关于...的通知",
+        "发出通知"
+      ],
+      "exampleZh": "这是一个重要通知。",
+      "exampleVi": "Đây là một thông báo quan trọng.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Tiêu đề quen thuộc nhất trên đầu các văn bản hành chính dạng thông báo là:",
+          "options": [
+            "申请书",
+            "通知",
+            "简历",
+            "证明"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 公司昨天发出了一个重要________。",
+          "options": [
+            "申请",
+            "答复",
+            "附件",
+            "通知"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Đây là một thông báo.\"",
+          "options": [
+            "这是一个申请。",
+            "这是一个通知。",
+            "这是一个答复。",
+            "这是一个附件。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "请注意查收这份通知。",
+          "audioVi": "Xin chú ý kiểm tra và nhận thông báo này.",
+          "prompt": "Người nói đang yêu cầu điều gì?",
+          "options": [
+            "Viết đơn xin nghỉ học",
+            "Kiểm tra thông báo được gửi đến",
+            "Nộp hồ sơ cá nhân",
+            "Phê duyệt đơn xin việc"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 0
+    },
+    {
+      "word": "举行",
+      "pinyin": "jǔxíng",
+      "meaning": "Tổ chức",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiNDUzMDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjQ1MzA5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIyNCw1NlYxNzZhOCw4LDAsMCwxLTgsOEg0MGE4LDgsMCwwLDEtOC04VjU2YTgsOCwwLDAsMSw4LThIMjE2QTgsOCwwLDAsMSwyMjQsNTZaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjE2LDQwSDEzNlYyNGE4LDgsMCwwLDAtMTYsMFY0MEg0MEExNiwxNiwwLDAsMCwyNCw1NlYxNzZhMTYsMTYsMCwwLDAsMTYsMTZINzkuMzZMNTcuNzUsMjE5YTgsOCwwLDAsMCwxMi41LDEwbDI5LjU5LTM3aDU2LjMybDI5LjU5LDM3YTgsOCwwLDEsMCwxMi41LTEwbC0yMS42MS0yN0gyMTZhMTYsMTYsMCwwLDAsMTYtMTZWNTZBMTYsMTYsMCwwLDAsMjE2LDQwWm0wLDEzNkg0MFY1NkgyMTZWMTc2Wk0xMDQsMTIwdjI0YTgsOCwwLDAsMS0xNiwwVjEyMGE4LDgsMCwwLDEsMTYsMFptMzItMTZ2NDBhOCw4LDAsMCwxLTE2LDBWMTA0YTgsOCwwLDAsMSwxNiwwWm0zMi0xNnY1NmE4LDgsMCwwLDEtMTYsMFY4OGE4LDgsMCwwLDEsMTYsMFoiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "举行会议",
+        "举行仪式"
+      ],
+      "exampleZh": "会议将于明天举行。",
+      "exampleVi": "Cuộc họp sẽ được tổ chức vào ngày mai.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Từ vựng hành chính dùng để chỉ hành động tổ chức một cuộc họp hoặc sự kiện là:",
+          "options": [
+            "耽误",
+            "举行",
+            "附上",
+            "恳请"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 部门会议将于下周一________。",
+          "options": [
+            "申请",
+            "答复",
+            "举行",
+            "附件"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Hội nghị sẽ được tổ chức vào ngày mai.\"",
+          "options": [
+            "会议将于明天申请。",
+            "会议将于明天答复。",
+            "会议将于明天举行。",
+            "会议将于明天耽误。"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "listen",
+          "audioZh": "会议将于明天举行。",
+          "audioVi": "Cuộc họp sẽ được tổ chức vào ngày mai.",
+          "prompt": "Thời gian diễn ra cuộc họp là khi nào?",
+          "options": [
+            "Hôm nay",
+            "Ngày mai",
+            "Tuần tới",
+            "Tháng sau"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 1
+    },
+    {
+      "word": "安排",
+      "pinyin": "ānpái",
+      "meaning": "Sắp xếp",
+      "partOfSpeech": "Động từ / Danh từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiNDUzMDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjQ1MzA5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIxNiw0OFY4OEg0MFY0OGE4LDgsMCwwLDEsOC04SDIwOEE4LDgsMCwwLDEsMjE2LDQ4WiIgb3BhY2l0eT0iMC4yIj48L3BhdGg+PHBhdGggZD0iTTIwOCwzMkgxODRWMjRhOCw4LDAsMCwwLTE2LDB2OEg4OFYyNGE4LDgsMCwwLDAtMTYsMHY4SDQ4QTE2LDE2LDAsMCwwLDMyLDQ4VjIwOGExNiwxNiwwLDAsMCwxNiwxNkgyMDhhMTYsMTYsMCwwLDAsMTYtMTZWNDhBMTYsMTYsMCwwLDAsMjA4LDMyWk03Miw0OHY4YTgsOCwwLDAsMCwxNiwwVjQ4aDgwdjhhOCw4LDAsMCwwLDE2LDBWNDhoMjRWODBINDhWNDhaTTIwOCwyMDhINDhWOTZIMjA4VjIwOFptLTM4LjM0LTg1LjY2YTgsOCwwLDAsMSwwLDExLjMybC00OCw0OGE4LDgsMCwwLDEtMTEuMzIsMGwtMjQtMjRhOCw4LDAsMCwxLDExLjMyLTExLjMyTDExNiwxNjQuNjlsNDIuMzQtNDIuMzVBOCw4LDAsMCwxLDE2OS42NiwxMjIuMzRaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "做好安排",
+        "工作安排"
+      ],
+      "exampleZh": "请提前做好工作安排。",
+      "exampleVi": "Xin vui lòng sắp xếp công việc trước.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Từ vựng chỉ việc lên kế hoạch, phân công hoặc bố trí công việc là:",
+          "options": [
+            "安排",
+            "举行",
+            "欢迎",
+            "申请"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 请大家提前做好时间________。",
+          "options": [
+            "举行",
+            "答复",
+            "安排",
+            "批准"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Xin hãy sắp xếp thời gian trước.\"",
+          "options": [
+            "请提前做好时间举行。",
+            "请提前做好时间安排。",
+            "请提前做好时间答复。",
+            "请提前做好时间申请。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "请提前做好时间安排。",
+          "audioVi": "Xin hãy sắp xếp thời gian trước.",
+          "prompt": "Người nghe được yêu cầu làm gì?",
+          "options": [
+            "Hủy bỏ lịch trình",
+            "Chủ động sắp xếp thời gian trước",
+            "Đến muộn trong buổi họp",
+            "Nộp đơn xin nghỉ phép"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 2
+    },
+    {
+      "word": "参加",
+      "pinyin": "cānjiā",
+      "meaning": "Tham gia",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiNDUzMDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjQ1MzA5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIwMCwzMkg1NmE4LDgsMCwwLDAtOCw4VjIxNmE4LDgsMCwwLDAsOCw4SDIwMGE4LDgsMCwwLDAsOC04VjQwQTgsOCwwLDAsMCwyMDAsMzJaTTEyOCwxNjhhMzIsMzIsMCwxLDEsMzItMzJBMzIsMzIsMCwwLDEsMTI4LDE2OFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik03NS4xOSwxOTguNGE4LDgsMCwwLDAsMTEuMjEtMS42LDUyLDUyLDAsMCwxLDgzLjIsMCw4LDgsMCwxLDAsMTIuOC05LjZBNjcuODgsNjcuODgsMCwwLDAsMTU1LDE2NS41MWE0MCw0MCwwLDEsMC01My45NCwwQTY3Ljg4LDY3Ljg4LDAsMCwwLDczLjYsMTg3LjIsOCw4LDAsMCwwLDc1LjE5LDE5OC40Wk0xMjgsMTEyYTI0LDI0LDAsMSwxLTI0LDI0QTI0LDI0LDAsMCwxLDEyOCwxMTJabTcyLTg4SDU2QTE2LDE2LDAsMCwwLDQwLDQwVjIxNmExNiwxNiwwLDAsMCwxNiwxNkgyMDBhMTYsMTYsMCwwLDAsMTYtMTZWNDBBMTYsMTYsMCwwLDAsMjAwLDI0Wm0wLDE5Mkg1NlY0MEgyMDBaTTg4LDY0YTgsOCwwLDAsMSw4LThoNjRhOCw4LDAsMCwxLDAsMTZIOTZBOCw4LDAsMCwxLDg4LDY0WiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "准时参加",
+        "参加会议"
+      ],
+      "exampleZh": "各位必须准时参加。",
+      "exampleVi": "Mọi người bắt buộc phải tham gia đúng giờ.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Khi thông báo yêu cầu nhân viên hoặc học sinh góp mặt vào sự kiện, dùng từ:",
+          "options": [
+            "耽误",
+            "答复",
+            "附件",
+            "参加"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 请全体员工准时________会议。",
+          "options": [
+            "举行",
+            "安排",
+            "参加",
+            "申请"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Xin mời mọi người tham gia đúng giờ.\"",
+          "options": [
+            "请大家准时举行。",
+            "请大家准时安排。",
+            "请大家准时答复。",
+            "请大家准时参加。"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "listen",
+          "audioZh": "请全体员工准时参加。",
+          "audioVi": "Mời toàn thể nhân viên tham gia đúng giờ.",
+          "prompt": "Yêu cầu về thời gian đối với người tham gia là gì?",
+          "options": [
+            "Đến sớm trước nửa tiếng",
+            "Có thể đến muộn tùy ý",
+            "Phải có mặt đúng giờ",
+            "Không cần tham gia trực tiếp"
+          ],
+          "answer": 2
+        }
+      ],
+      "orderIndex": 3
+    },
+    {
+      "word": "配合",
+      "pinyin": "pèihé",
+      "meaning": "Phối hợp",
+      "partOfSpeech": "Động từ / Danh từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiNDUzMDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjQ1MzA5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIwMCwxNTJsLTQwLDQwTDk2LDE3Niw0MCwxMzYsNzIuNjgsNzAuNjMsMTI4LDU2bDU1LjMyLDE0LjYzTDE4My42LDcySDE0NEw5OC4zNCwxMTYuMjlhOCw4LDAsMCwwLDEuMzgsMTIuNDJDMTE3LjIzLDEzOS45LDE0MSwxMzkuMTMsMTYwLDEyMFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yNTQuMywxMDcuOTEsMjI4Ljc4LDU2Ljg1YTE2LDE2LDAsMCwwLTIxLjQ3LTcuMTVMMTgyLjQ0LDYyLjEzLDEzMC4wNSw0OC4yN2E4LjE0LDguMTQsMCwwLDAtNC4xLDBMNzMuNTYsNjIuMTMsNDguNjksNDkuN2ExNiwxNiwwLDAsMC0yMS40Nyw3LjE1TDEuNywxMDcuOWExNiwxNiwwLDAsMCw3LjE1LDIxLjQ3bDI3LDEzLjUxLDU1LjQ5LDM5LjYzYTguMDYsOC4wNiwwLDAsMCwyLjcxLDEuMjVsNjQsMTZhOCw4LDAsMCwwLDcuNi0yLjFsNTUuMDctNTUuMDgsMjYuNDItMTMuMjFhMTYsMTYsMCwwLDAsNy4xNS0yMS40NlptLTU0Ljg5LDMzLjM3TDE2NSwxMTMuNzJhOCw4LDAsMCwwLTEwLjY4LjYxQzEzNi41MSwxMzIuMjcsMTE2LjY2LDEzMCwxMDQsMTIyTDE0Ny4yNCw4MGgzMS44MWwyNy4yMSw1NC40MVpNNDEuNTMsNjQsNjIsNzQuMjIsMzYuNDMsMTI1LjI3LDE2LDExNS4wNlptMTE2LDExOS4xM0w5OS40MiwxNjguNjFsLTQ5LjItMzUuMTQsMjgtNTZMMTI4LDY0LjI4bDkuOCwyLjU5LTQ1LDQzLjY4LS4wOC4wOWExNiwxNiwwLDAsMCwyLjcyLDI0LjgxYzIwLjU2LDEzLjEzLDQ1LjM3LDExLDY0LjkxLTVMMTg4LDE1Mi42NlptNjItNTcuODctMjUuNTItNTFMMjE0LjQ3LDY0LDI0MCwxMTUuMDZabS04Ny43NSw5Mi42N2E4LDgsMCwwLDEtNy43NSw2LjA2LDguMTMsOC4xMywwLDAsMS0xLjk1LS4yNEw4MC40MSwyMTMuMzNhNy44OSw3Ljg5LDAsMCwxLTIuNzEtMS4yNUw1MS4zNSwxOTMuMjZhOCw4LDAsMCwxLDkuMy0xM2wyNS4xMSwxNy45NEwxMjYsMjA4LjI0QTgsOCwwLDAsMSwxMzEuODIsMjE3Ljk0WiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "感谢配合",
+        "予以配合"
+      ],
+      "exampleZh": "感谢大家的配合。",
+      "exampleVi": "Cảm ơn sự phối hợp của mọi người.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Từ vựng thường nằm ở cuối thông báo để cảm ơn sự hỗ trợ, chung tay của mọi người là:",
+          "options": [
+            "举行",
+            "安排",
+            "参加",
+            "配合"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 谢谢各位的理解与________。",
+          "options": [
+            "举行",
+            "申请",
+            "答复",
+            "配合"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Cảm ơn mọi người đã phối hợp.\"",
+          "options": [
+            "谢谢大家的举行。",
+            "谢谢大家的安排。",
+            "谢谢大家的参加。",
+            "谢谢大家的配合。"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "listen",
+          "audioZh": "感谢大家的配合。",
+          "audioVi": "Cảm ơn sự phối hợp của mọi người.",
+          "prompt": "Thông điệp của người viết ở cuối thông báo là gì?",
+          "options": [
+            "Phàn nàn về thái độ làm việc",
+            "Gửi lời cảm ơn vì sự hợp tác, phối hợp",
+            "Yêu cầu nộp phạt vi phạm nội quy",
+            "Thông báo sa thải nhân sự"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 4
     }
   ]
 }

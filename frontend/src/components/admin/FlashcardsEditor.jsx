@@ -224,12 +224,12 @@ function QuestionEditor({ question: q, onChange, title }) {
   );
 }
 
-// Admin editor for the vocabulary flashcards launched from "Bài mẫu".
+// Admin editor for the vocabulary flashcards launched from "Nhận diện thể thức".
 // Field numbers ①–④ mirror the card layout spec (front / back).
 export default function FlashcardsEditor({ items, onChange }) {
   return (
     <Repeater
-      title="Flashcard từ vựng (nút ★ “Luyện với flashcard” trong Bài mẫu)"
+      title="Flashcard từ vựng (nút ★ “Luyện với flashcard” trong Nhận diện thể thức)"
       hint="Mỗi từ: thẻ 2 mặt + 4 câu bài tập (trắc nghiệm, điền từ, dịch câu, luyện nghe). Để trống danh sách thì nút flashcard sẽ không hiện."
       items={items}
       onChange={onChange}

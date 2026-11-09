@@ -52,33 +52,110 @@
     }
   ],
   "vocabTerms": [
-    { "literary": "不慎丢失", "colloquial": "不小心丢了/掉了", "meaningVi": "Vô ý làm mất, làm rơi", "example": "不慎丢失一部手表" },
-    { "literary": "内装有……等重要物品", "colloquial": "包里装有重要东西", "meaningVi": "Bên trong có đựng... những vật quan trọng", "example": "包内装有护照等重要物品" },
-    { "literary": "十分焦急", "colloquial": "急得不得了", "meaningVi": "Vô cùng lo lắng, sốt ruột", "example": "本人十分焦急" },
-    { "literary": "必有重谢", "colloquial": "会给钱感谢", "meaningVi": "Chắc chắn sẽ hậu tạ", "example": "必有重谢！" },
-    { "literary": "现出售", "colloquial": "想便宜卖", "meaningVi": "Nay bán ra, rao bán", "example": "现出售一辆二手自行车" },
-    { "literary": "好骑", "colloquial": "骑着挺好", "meaningVi": "Đi êm, chạy tốt (xe đạp)", "example": "自行车好骑" },
-    { "literary": "价格面议", "colloquial": "见面再商量价格", "meaningVi": "Giá cả thương lượng trực tiếp", "example": "价格面议" },
-    { "literary": "现欲求租", "colloquial": "现在想要租房", "meaningVi": "Nay muốn tìm thuê", "example": "现欲在中关村附近求租一套住房" },
-    { "literary": "交通便利，设施齐全", "colloquial": "交通挺方便，东西挺全", "meaningVi": "Giao thông thuận tiện, tiện nghi đầy đủ", "example": "要求交通便利，设施齐全" }
+    {
+      "literary": "不慎丢失",
+      "colloquial": "不小心丢了/掉了",
+      "meaningVi": "Vô ý làm mất, làm rơi",
+      "example": "不慎丢失一部手表"
+    },
+    {
+      "literary": "内装有……等重要物品",
+      "colloquial": "包里装有重要东西",
+      "meaningVi": "Bên trong có đựng... những vật quan trọng",
+      "example": "包内装有护照等重要物品"
+    },
+    {
+      "literary": "十分焦急",
+      "colloquial": "急得不得了",
+      "meaningVi": "Vô cùng lo lắng, sốt ruột",
+      "example": "本人十分焦急"
+    },
+    {
+      "literary": "必有重谢",
+      "colloquial": "会给钱感谢",
+      "meaningVi": "Chắc chắn sẽ hậu tạ",
+      "example": "必有重谢！"
+    },
+    {
+      "literary": "现出售",
+      "colloquial": "想便宜卖",
+      "meaningVi": "Nay bán ra, rao bán",
+      "example": "现出售一辆二手自行车"
+    },
+    {
+      "literary": "好骑",
+      "colloquial": "骑着挺好",
+      "meaningVi": "Đi êm, chạy tốt (xe đạp)",
+      "example": "自行车好骑"
+    },
+    {
+      "literary": "价格面议",
+      "colloquial": "见面再商量价格",
+      "meaningVi": "Giá cả thương lượng trực tiếp",
+      "example": "价格面议"
+    },
+    {
+      "literary": "现欲求租",
+      "colloquial": "现在想要租房",
+      "meaningVi": "Nay muốn tìm thuê",
+      "example": "现欲在中关村附近求租一套住房"
+    },
+    {
+      "literary": "交通便利，设施齐全",
+      "colloquial": "交通挺方便，东西挺全",
+      "meaningVi": "Giao thông thuận tiện, tiện nghi đầy đủ",
+      "example": "要求交通便利，设施齐全"
+    }
   ],
   "fixedPhrases": [
-    { "chinese": "不慎丢失……", "viExplanation": "Vô ý/sơ ý làm mất... (mở đầu mô tả sự việc trong 寻物启事)." },
-    { "chinese": "包内装有……等重要物品", "viExplanation": "Bên trong có đựng... những đồ vật quan trọng." },
-    { "chinese": "本人十分焦急", "viExplanation": "Bản thân vô cùng lo lắng, sốt ruột." },
-    { "chinese": "请拾到……的好心人尽快与我联系", "viExplanation": "Xin người tốt bụng nhặt được... nhanh chóng liên hệ với tôi." },
-    { "chinese": "必有重谢！", "viExplanation": "Nhất định sẽ hậu tạ! (câu kết cố định của 寻物启事)." },
-    { "chinese": "本人因即将回国，现欲便宜转让自用……", "viExplanation": "Vì sắp về nước, nay muốn nhượng lại rẻ đồ dùng của bản thân..." },
-    { "chinese": "性能良好，价格面议", "viExplanation": "Chất lượng/hiệu năng tốt, giá cả thương lượng." },
-    { "chinese": "现欲在[地点]附近求租一套……", "viExplanation": "Nay muốn tìm thuê một căn... gần khu vực..." },
-    { "chinese": "本人保证按时交费，保持环境卫生", "viExplanation": "Bản thân cam kết đóng tiền đúng hạn, giữ gìn vệ sinh môi trường." }
+    {
+      "chinese": "不慎丢失……",
+      "viExplanation": "Vô ý/sơ ý làm mất... (mở đầu mô tả sự việc trong 寻物启事)."
+    },
+    {
+      "chinese": "包内装有……等重要物品",
+      "viExplanation": "Bên trong có đựng... những đồ vật quan trọng."
+    },
+    {
+      "chinese": "本人十分焦急",
+      "viExplanation": "Bản thân vô cùng lo lắng, sốt ruột."
+    },
+    {
+      "chinese": "请拾到……的好心人尽快与我联系",
+      "viExplanation": "Xin người tốt bụng nhặt được... nhanh chóng liên hệ với tôi."
+    },
+    {
+      "chinese": "必有重谢！",
+      "viExplanation": "Nhất định sẽ hậu tạ! (câu kết cố định của 寻物启事)."
+    },
+    {
+      "chinese": "本人因即将回国，现欲便宜转让自用……",
+      "viExplanation": "Vì sắp về nước, nay muốn nhượng lại rẻ đồ dùng của bản thân..."
+    },
+    {
+      "chinese": "性能良好，价格面议",
+      "viExplanation": "Chất lượng/hiệu năng tốt, giá cả thương lượng."
+    },
+    {
+      "chinese": "现欲在[地点]附近求租一套……",
+      "viExplanation": "Nay muốn tìm thuê một căn... gần khu vực..."
+    },
+    {
+      "chinese": "本人保证按时交费，保持环境卫生",
+      "viExplanation": "Bản thân cam kết đóng tiền đúng hạn, giữ gìn vệ sinh môi trường."
+    }
   ],
   "quizQuestions": [
     {
       "kind": "THEORY",
       "title": "1.1 · Nhận diện lỗi đặt tiêu đề",
       "prompt": "Dựa vào 5 cách viết tiêu đề chuẩn đã học, tiêu đề nào sau đây viết SAI quy phạm của một tờ 启事?",
-      "options": ["A. 启事", "B. 寻物启事", "C. 寻物", "D. 寻物启事条"],
+      "options": [
+        "A. 启事",
+        "B. 寻物启事",
+        "C. 寻物",
+        "D. 寻物启事条"
+      ],
       "correctIndex": 3,
       "explanation": "Đáp án đúng là D. Giáo trình chỉ quy định 5 cách đặt tiêu đề chuẩn, không có dạng kết hợp thêm từ \"条\" vào sau \"启事\".",
       "draftHtml": null,
@@ -170,27 +247,135 @@
     {
       "templateHtml": "<p class=\"text-center font-bold mb-4\">寻物启事</p><p class=\"indent2\">本人于2017年3月1日在中关村电子城_____(1)_____一个黑色皮质双肩包，包内装有本人的护照、一部华为手机、钱包以及本人的工作资料_____(2)_____。本人_____(3)_____，请拾到双肩包的好心人尽快打电话 1390xxxxxxx 与我联系。_____(4)_____！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>失　主</p><p>2017年3月2日</p></div></div>",
       "blanks": [
-        { "id": "blank1", "answer": "不慎丢失", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] },
-        { "id": "blank2", "answer": "等重要物品", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] },
-        { "id": "blank3", "answer": "十分焦急", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] },
-        { "id": "blank4", "answer": "必有重谢", "options": ["不慎丢失", "等重要物品", "十分焦急", "必有重谢"] }
+        {
+          "id": "blank1",
+          "answer": "不慎丢失",
+          "options": [
+            "不慎丢失",
+            "等重要物品",
+            "十分焦急",
+            "必有重谢"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "等重要物品",
+          "options": [
+            "不慎丢失",
+            "等重要物品",
+            "十分焦急",
+            "必有重谢"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "十分焦急",
+          "options": [
+            "不慎丢失",
+            "等重要物品",
+            "十分焦急",
+            "必有重谢"
+          ]
+        },
+        {
+          "id": "blank4",
+          "answer": "必有重谢",
+          "options": [
+            "不慎丢失",
+            "等重要物品",
+            "十分焦急",
+            "必有重谢"
+          ]
+        }
       ],
       "orderIndex": 0
     }
   ],
   "matchItems": [
-    { "leftLabelVi": "Vô ý làm rơi, mất ví tiền (不小心掉了、丢了钱包)", "rightLabelZh": "不慎丢失钱包", "correctKey": "不慎丢失钱包", "explanation": "不小心掉了、丢了钱包 ➔ 不慎丢失钱包: \"不慎\" là phó từ văn viết thay cho \"不小心\" trong khẩu ngữ.", "orderIndex": 0 },
-    { "leftLabelVi": "Trong túi có đựng đồ quan trọng (包里装有重要东西)", "rightLabelZh": "内装有……等重要物品", "correctKey": "内装有……等重要物品", "explanation": "包里装有重要东西 ➔ 内装有……等重要物品: cấu trúc liệt kê trang trọng dùng trong 寻物启事.", "orderIndex": 1 },
-    { "leftLabelVi": "Lo lắng không chịu nổi (急得不得了)", "rightLabelZh": "十分焦急", "correctKey": "十分焦急", "explanation": "急得不得了 ➔ 十分焦急: cụm từ văn viết diễn tả tâm trạng lo lắng một cách trang trọng.", "orderIndex": 2 },
-    { "leftLabelVi": "Sẽ đưa tiền cảm ơn (会给钱感谢)", "rightLabelZh": "必有重谢", "correctKey": "必有重谢", "explanation": "会给钱感谢 ➔ 必有重谢: câu kết cố định (套语) bắt buộc của mọi tờ 寻物启事.", "orderIndex": 3 },
-    { "leftLabelVi": "Sắp về nước rồi (快要回国了)", "rightLabelZh": "我将回国", "correctKey": "我将回国", "explanation": "快要回国了 ➔ 我将回国: \"将\" là phó từ văn viết chỉ hành động sắp xảy ra.", "orderIndex": 4 },
-    { "leftLabelVi": "Muốn bán rẻ xe đạp cũ tự dùng (想便宜卖自用旧自行车)", "rightLabelZh": "现出售一辆二手自行车", "correctKey": "现出售一辆二手自行车", "explanation": "想便宜卖自用旧自行车 ➔ 现出售一辆二手自行车: \"现出售\" là mẫu câu mở đầu trang trọng của 出售启事.", "orderIndex": 5 },
-    { "leftLabelVi": "Xe đạp đi rất tốt (自行车骑着挺好)", "rightLabelZh": "好骑 / 骑行良好", "correctKey": "好骑 / 骑行良好", "explanation": "骑着挺好 ➔ 好骑 / 骑行良好: tính từ ghép súc tích thay cho cụm khẩu ngữ dài dòng.", "orderIndex": 6 },
-    { "leftLabelVi": "Gặp mặt rồi thương lượng giá (见面再商量价格)", "rightLabelZh": "价格面议", "correctKey": "价格面议", "explanation": "见面再商量价格 ➔ 价格面议: cụm từ 4 chữ cố định chuyên dùng trong tin rao bán.", "orderIndex": 7 },
-    { "leftLabelVi": "Bây giờ muốn thuê nhà (现在想要租房)", "rightLabelZh": "现欲求租 / 求租", "correctKey": "现欲求租 / 求租", "explanation": "现在想要租房 ➔ 现欲求租 / 求租: \"现欲\" là mẫu mở đầu trang trọng của 求租启事.", "orderIndex": 8 },
-    { "leftLabelVi": "Trong phòng có điều hòa, tủ lạnh, máy giặt, tivi đầy đủ (屋里空调、冰箱、洗衣机、电视都有)", "rightLabelZh": "要求冰箱、洗衣机、空调、电视等家电齐全", "correctKey": "要求冰箱、洗衣机、空调、电视等家电齐全", "explanation": "屋里……都有 ➔ 要求……等家电齐全: cấu trúc liệt kê yêu cầu tiện nghi trang trọng.", "orderIndex": 9 },
-    { "leftLabelVi": "Giao thông khá tiện lợi, đồ dùng khá đầy đủ (交通挺方便，东西挺全)", "rightLabelZh": "交通便利，设施齐全", "correctKey": "交通便利，设施齐全", "explanation": "交通挺方便，东西挺全 ➔ 交通便利，设施齐全: cặp thành ngữ 4 chữ song song, trang trọng hơn hẳn khẩu ngữ \"挺\".", "orderIndex": 10 },
-    { "leftLabelVi": "Cam kết không ồn ào, sạch sẽ, trả tiền đúng hạn (保证不吵闹、干净、按时给钱)", "rightLabelZh": "保证不吵闹，保持环境卫生，按时交纳有关费用", "correctKey": "保证不吵闹，保持环境卫生，按时交纳有关费用", "explanation": "保证不吵闹、干净、按时给钱 ➔ 保证不吵闹，保持环境卫生，按时交纳有关费用: diễn đạt đầy đủ 3 cam kết bắt buộc trong 求租启事.", "orderIndex": 11 }
+    {
+      "leftLabelVi": "Vô ý làm rơi, mất ví tiền (不小心掉了、丢了钱包)",
+      "rightLabelZh": "不慎丢失钱包",
+      "correctKey": "不慎丢失钱包",
+      "explanation": "不小心掉了、丢了钱包 ➔ 不慎丢失钱包: \"不慎\" là phó từ văn viết thay cho \"不小心\" trong khẩu ngữ.",
+      "orderIndex": 0
+    },
+    {
+      "leftLabelVi": "Trong túi có đựng đồ quan trọng (包里装有重要东西)",
+      "rightLabelZh": "内装有……等重要物品",
+      "correctKey": "内装有……等重要物品",
+      "explanation": "包里装有重要东西 ➔ 内装有……等重要物品: cấu trúc liệt kê trang trọng dùng trong 寻物启事.",
+      "orderIndex": 1
+    },
+    {
+      "leftLabelVi": "Lo lắng không chịu nổi (急得不得了)",
+      "rightLabelZh": "十分焦急",
+      "correctKey": "十分焦急",
+      "explanation": "急得不得了 ➔ 十分焦急: cụm từ văn viết diễn tả tâm trạng lo lắng một cách trang trọng.",
+      "orderIndex": 2
+    },
+    {
+      "leftLabelVi": "Sẽ đưa tiền cảm ơn (会给钱感谢)",
+      "rightLabelZh": "必有重谢",
+      "correctKey": "必有重谢",
+      "explanation": "会给钱感谢 ➔ 必有重谢: câu kết cố định (套语) bắt buộc của mọi tờ 寻物启事.",
+      "orderIndex": 3
+    },
+    {
+      "leftLabelVi": "Sắp về nước rồi (快要回国了)",
+      "rightLabelZh": "我将回国",
+      "correctKey": "我将回国",
+      "explanation": "快要回国了 ➔ 我将回国: \"将\" là phó từ văn viết chỉ hành động sắp xảy ra.",
+      "orderIndex": 4
+    },
+    {
+      "leftLabelVi": "Muốn bán rẻ xe đạp cũ tự dùng (想便宜卖自用旧自行车)",
+      "rightLabelZh": "现出售一辆二手自行车",
+      "correctKey": "现出售一辆二手自行车",
+      "explanation": "想便宜卖自用旧自行车 ➔ 现出售一辆二手自行车: \"现出售\" là mẫu câu mở đầu trang trọng của 出售启事.",
+      "orderIndex": 5
+    },
+    {
+      "leftLabelVi": "Xe đạp đi rất tốt (自行车骑着挺好)",
+      "rightLabelZh": "好骑 / 骑行良好",
+      "correctKey": "好骑 / 骑行良好",
+      "explanation": "骑着挺好 ➔ 好骑 / 骑行良好: tính từ ghép súc tích thay cho cụm khẩu ngữ dài dòng.",
+      "orderIndex": 6
+    },
+    {
+      "leftLabelVi": "Gặp mặt rồi thương lượng giá (见面再商量价格)",
+      "rightLabelZh": "价格面议",
+      "correctKey": "价格面议",
+      "explanation": "见面再商量价格 ➔ 价格面议: cụm từ 4 chữ cố định chuyên dùng trong tin rao bán.",
+      "orderIndex": 7
+    },
+    {
+      "leftLabelVi": "Bây giờ muốn thuê nhà (现在想要租房)",
+      "rightLabelZh": "现欲求租 / 求租",
+      "correctKey": "现欲求租 / 求租",
+      "explanation": "现在想要租房 ➔ 现欲求租 / 求租: \"现欲\" là mẫu mở đầu trang trọng của 求租启事.",
+      "orderIndex": 8
+    },
+    {
+      "leftLabelVi": "Trong phòng có điều hòa, tủ lạnh, máy giặt, tivi đầy đủ (屋里空调、冰箱、洗衣机、电视都有)",
+      "rightLabelZh": "要求冰箱、洗衣机、空调、电视等家电齐全",
+      "correctKey": "要求冰箱、洗衣机、空调、电视等家电齐全",
+      "explanation": "屋里……都有 ➔ 要求……等家电齐全: cấu trúc liệt kê yêu cầu tiện nghi trang trọng.",
+      "orderIndex": 9
+    },
+    {
+      "leftLabelVi": "Giao thông khá tiện lợi, đồ dùng khá đầy đủ (交通挺方便，东西挺全)",
+      "rightLabelZh": "交通便利，设施齐全",
+      "correctKey": "交通便利，设施齐全",
+      "explanation": "交通挺方便，东西挺全 ➔ 交通便利，设施齐全: cặp thành ngữ 4 chữ song song, trang trọng hơn hẳn khẩu ngữ \"挺\".",
+      "orderIndex": 10
+    },
+    {
+      "leftLabelVi": "Cam kết không ồn ào, sạch sẽ, trả tiền đúng hạn (保证不吵闹、干净、按时给钱)",
+      "rightLabelZh": "保证不吵闹，保持环境卫生，按时交纳有关费用",
+      "correctKey": "保证不吵闹，保持环境卫生，按时交纳有关费用",
+      "explanation": "保证不吵闹、干净、按时给钱 ➔ 保证不吵闹，保持环境卫生，按时交纳有关费用: diễn đạt đầy đủ 3 cam kết bắt buộc trong 求租启事.",
+      "orderIndex": 11
+    }
   ],
   "writingTasks": [
     {
@@ -198,7 +383,12 @@
       "facts": [
         "Tình huống: \"Sáng nay tôi đi xe bus trường học thì đánh rơi mất cái đồng hồ Apple Watch thông minh màu bạc. Cái đồng hồ này vô cùng quan trọng với tôi, tôi đang rất cuống, ai nhặt được làm ơn trả tôi với.\""
       ],
-      "requiredKeywords": ["不慎丢失", "银色苹果智能手表", "对本人十分重要", "心中十分焦急"],
+      "requiredKeywords": [
+        "不慎丢失",
+        "银色苹果智能手表",
+        "对本人十分重要",
+        "心中十分焦急"
+      ],
       "hint": "Chuyển ngôn ngữ nói sang văn viết trang trọng, dùng đủ 4 cụm từ gợi ý trên theo đúng thứ tự diễn đạt sự việc.",
       "referenceAnswer": "本人于今早乘坐学校班车时，不慎丢失一部银色苹果智能手表（Apple Watch）。该手表对本人十分重要，心中十分焦急。",
       "orderIndex": 0
@@ -208,7 +398,16 @@
       "facts": [
         "Tình huống: \"Tôi là du học sinh trường Đại học Ngôn ngữ, tháng sau sắp về nước rồi nên muốn bán rẻ cái xe đạp cũ tự dùng. Xe là kiểu xe đạp nữ cỡ 24, màu đen, mới 60%, đi rất tốt, có cả hóa đơn mua xe nữa, giá cả thương lượng trực tiếp nhé.\""
       ],
-      "requiredKeywords": ["我是语言大学的留学生", "下个月我将回国", "现出售一辆二手自行车", "自行车为女式24型", "黑色，六成新", "好骑", "有购车发票", "价格面议"],
+      "requiredKeywords": [
+        "我是语言大学的留学生",
+        "下个月我将回国",
+        "现出售一辆二手自行车",
+        "自行车为女式24型",
+        "黑色，六成新",
+        "好骑",
+        "有购车发票",
+        "价格面议"
+      ],
       "hint": "Ghép nối tuần tự các cụm từ gợi ý thành đoạn văn liền mạch giới thiệu thân phận, lý do bán và tình trạng xe.",
       "referenceAnswer": "我是语言大学的留学生，下个月我将回国，现出售一辆二手自行车。自行车为女式24型，黑色，六成新，好骑，有购车发票，价格面议。",
       "orderIndex": 1
@@ -218,17 +417,48 @@
       "facts": [
         "Tình huống: \"Tôi là học sinh Đại học Bắc Kinh. Bây giờ tôi đang rất muốn tìm thuê một phòng rộng khoảng 30 mét vuông ở quanh khu Trung Quan Thôn. Trong phòng cần trang bị sẵn giường tủ, tủ lạnh, máy giặt, tivi, điều hòa đầy đủ để tôi dọn vào ở luôn. Tôi hứa là sẽ tuân thủ quy định của khu phố, giữ gìn phòng sạch sẽ, không gây ồn ào và đóng tiền nhà đúng hạn mỗi tháng.\""
       ],
-      "requiredKeywords": ["我是北京大学的留学生", "现欲", "求租一间30平米左右的住房", "要求冰箱、洗衣机、空调、电视等家电齐全，有床、衣柜等家具", "房屋地点最好在中关村附近", "保证遵守小区有关规定，不吵闹，保持环境卫生，按时交纳有关费用"],
+      "requiredKeywords": [
+        "我是北京大学的留学生",
+        "现欲",
+        "求租一间30平米左右的住房",
+        "要求冰箱、洗衣机、空调、电视等家电齐全，有床、衣柜等家具",
+        "房屋地点最好在中关村附近",
+        "保证遵守小区有关规定，不吵闹，保持环境卫生，按时交纳有关费用"
+      ],
       "hint": "Trình bày theo thứ tự: thân phận → nhu cầu thuê + vị trí → yêu cầu tiện nghi → lời cam kết với chủ nhà.",
       "referenceAnswer": "我是北京大学的留学生，现欲在中关村附近求租一间30平米左右的住房。要求冰箱、洗衣机、空调、电视等家电齐全，有床、衣柜等家具。本人保证遵守小区有关规定，不吵闹，保持环境卫生，按时交纳有关费用。",
       "orderIndex": 2
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "Tiêu đề 标题", "placeholder": "例如：寻物启事", "inputType": "text", "orderIndex": 0 },
-    { "name": "body", "label": "Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 1 },
-    { "name": "sign", "label": "Ký tên 署名", "placeholder": "例如：李大卫", "inputType": "text", "orderIndex": 2 },
-    { "name": "date", "label": "Ngày tháng 日期", "placeholder": "例如：2026年9月1日", "inputType": "text", "orderIndex": 3 }
+    {
+      "name": "title",
+      "label": "Tiêu đề 标题",
+      "placeholder": "例如：寻物启事",
+      "inputType": "text",
+      "orderIndex": 0
+    },
+    {
+      "name": "body",
+      "label": "Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)",
+      "placeholder": "输入正文…",
+      "inputType": "textarea",
+      "orderIndex": 1
+    },
+    {
+      "name": "sign",
+      "label": "Ký tên 署名",
+      "placeholder": "例如：李大卫",
+      "inputType": "text",
+      "orderIndex": 2
+    },
+    {
+      "name": "date",
+      "label": "Ngày tháng 日期",
+      "placeholder": "例如：2026年9月1日",
+      "inputType": "text",
+      "orderIndex": 3
+    }
   ],
   "guidedWritingScenarios": [
     {
@@ -240,6 +470,318 @@
       "situationPrompt": "Tình huống: Bạn tên là Anna (张安娜), du học sinh Đại học Ngôn ngữ. Tháng sau về nước, cần bán xe đạp nữ cỡ 24 màu đen, mới 60%, đi tốt, có hóa đơn, giá thỏa thuận. Đăng ngày 5/2/2017.",
       "modelAnswer": "出售二手自行车\n\n我是语言大学的留学生，下个月我将回国，现出售一辆二手自行车。\n\n自行车为女式24型，黑色，六成新，好骑，有购车发票，价格面议。有意者请与我联系。\n\n联系电话：xxxxxxxx；联系人：张安娜。\n\n张　安娜\n2017年2月5日",
       "targetWordCount": 90
+    }
+  ],
+  "flashcards": [
+    {
+      "word": "寻",
+      "pinyin": "xún",
+      "meaning": "Tìm kiếm",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMwZjc2NmUiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMGY3NjZlIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTE5MiwxMTJhODAsODAsMCwxLDEtODAtODBBODAsODAsMCwwLDEsMTkyLDExMloiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMjkuNjYsMjE4LjM0LDE3OS42LDE2OC4yOGE4OC4yMSw4OC4yMSwwLDEsMC0xMS4zMiwxMS4zMWw1MC4wNiw1MC4wN2E4LDgsMCwwLDAsMTEuMzItMTEuMzJaTTQwLDExMmE3Miw3MiwwLDEsMSw3Miw3MkE3Mi4wOCw3Mi4wOCwwLDAsMSw0MCwxMTJaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "寻物启事",
+        "寻找"
+      ],
+      "exampleZh": "特此登载寻物启事。",
+      "exampleVi": "Đặc biệt đăng tải thông báo tìm đồ.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Tiêu đề quen thuộc nhất trên đầu các văn bản thông báo tìm đồ thất lạc là:",
+          "options": [
+            "招聘启事",
+            "寻物启事",
+            "出售启事",
+            "租房启事"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 本人丢失护照一本，特发此________启事。",
+          "options": [
+            "出售",
+            "招聘",
+            "租房",
+            "寻物"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Đăng thông báo tìm đồ.\"",
+          "options": [
+            "发出出售启事。",
+            "发出寻物启事。",
+            "发出招聘启事。",
+            "发出租房启事。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "特此登载寻物启事。",
+          "audioVi": "Đặc biệt đăng tải thông báo tìm đồ.",
+          "prompt": "Mục đích của văn bản thông báo này là gì?",
+          "options": [
+            "Đăng thông báo bán xe cũ",
+            "Đăng thông báo tìm đồ bị mất",
+            "Đăng thông báo tuyển dụng nhân sự",
+            "Đăng thông báo cho thuê phòng"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 0
+    },
+    {
+      "word": "焦急",
+      "pinyin": "jiāojí",
+      "meaning": "Lo lắng",
+      "partOfSpeech": "Tính từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMwZjc2NmUiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMGY3NjZlIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTE4OC44Miw4MiwxMjgsMTI4LDY3LjIsODIuNEE4LDgsMCwwLDEsNjQsNzZWNDBhOCw4LDAsMCwxLDgtOEgxODRhOCw4LDAsMCwxLDgsOFY3NS42NEE4LDgsMCwwLDEsMTg4LjgyLDgyWk02NCwxODB2MzZhOCw4LDAsMCwwLDgsOEgxODRhOCw4LDAsMCwwLDgtOFYxODAuMzZhOCw4LDAsMCwwLTMuMTgtNi4zOEwxMjgsMTI4LDY3LjIsMTczLjZBOCw4LDAsMCwwLDY0LDE4MFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMDAsNzUuNjRWNDBhMTYsMTYsMCwwLDAtMTYtMTZINzJBMTYsMTYsMCwwLDAsNTYsNDBWNzZhMTYuMDcsMTYuMDcsMCwwLDAsNi40LDEyLjhMMTE0LjY3LDEyOCw2Mi40LDE2Ny4yQTE2LjA3LDE2LjA3LDAsMCwwLDU2LDE4MHYzNmExNiwxNiwwLDAsMCwxNiwxNkgxODRhMTYsMTYsMCwwLDAsMTYtMTZWMTgwLjM2YTE2LjA5LDE2LjA5LDAsMCwwLTYuMzUtMTIuNzdMMTQxLjI3LDEyOGw1Mi4zOC0zOS41OUExNi4wOSwxNi4wOSwwLDAsMCwyMDAsNzUuNjRaTTE4NCwyMTZINzJWMTgwbDU2LTQyLDU2LDQyLjM1Wm0wLTE0MC4zNkwxMjgsMTE4LDcyLDc2VjQwSDE4NFoiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "十分焦急",
+        "心中焦急"
+      ],
+      "exampleZh": "失主十分焦急。",
+      "exampleVi": "Chủ nhân đồ bị mất vô cùng lo lắng.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Từ vựng diễn tả tâm trạng lo lắng, mong mỏi tìm lại đồ đạc của chủ nhân trong thông báo là:",
+          "options": [
+            "配合",
+            "焦急",
+            "举行",
+            "安排"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 该物品对本人十分重要，心中十分________。",
+          "options": [
+            "举行",
+            "安排",
+            "焦急",
+            "批准"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Chủ nhân đồ bị mất vô cùng lo lắng.\"",
+          "options": [
+            "失主十分配合。",
+            "失主十分焦急。",
+            "失主十分安排。",
+            "失主十分举行。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "该证件十分重要，失主心中十分焦急。",
+          "audioVi": "Giấy tờ này rất quan trọng, người mất vô cùng lo lắng.",
+          "prompt": "Tâm trạng của người bị mất giấy tờ như thế nào?",
+          "options": [
+            "Bình tĩnh chờ đợi",
+            "Vô cùng lo lắng, sốt ruột",
+            "Rất vui vẻ thoải mái",
+            "Thất vọng bỏ cuộc"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 1
+    },
+    {
+      "word": "联系",
+      "pinyin": "liánxì",
+      "meaning": "Liên hệ",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMwZjc2NmUiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMGY3NjZlIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIxNS45NCwxODIuMDhBNDguMzMsNDguMzMsMCwwLDEsMTY4LDIyNCwxMzYsMTM2LDAsMCwxLDMyLDg4LDQ4LjMzLDQ4LjMzLDAsMCwxLDczLjkyLDQwLjA2YTgsOCwwLDAsMSw4LjMsNC44bDIxLjEzLDQ3LjJhOCw4LDAsMCwxLS42Niw3LjUzTDgxLjMyLDEyNWE3LjkzLDcuOTMsMCwwLDAtLjU0LDcuODFjOC4yNywxNi45MywyNS43NywzNC4yMiw0Mi43NSw0Mi40MWE3LjkyLDcuOTIsMCwwLDAsNy44My0uNTlsMjUtMjEuM2E4LDgsMCwwLDEsNy41OS0uNjlsNDcuMTYsMjEuMTNBOCw4LDAsMCwxLDIxNS45NCwxODIuMDhaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMTQ0LjI3LDQ1LjkzYTgsOCwwLDAsMSw5LjgtNS42Niw4Ni4yMiw4Ni4yMiwwLDAsMSw2MS42Niw2MS42Niw4LDgsMCwwLDEtNS42Niw5LjhBOC4yMyw4LjIzLDAsMCwxLDIwOCwxMTJhOCw4LDAsMCwxLTcuNzMtNS45NCw3MC4zNSw3MC4zNSwwLDAsMC01MC4zMy01MC4zM0E4LDgsMCwwLDEsMTQ0LjI3LDQ1LjkzWm0tMi4zMyw0MS44YzEzLjc5LDMuNjgsMjIuNjUsMTIuNTQsMjYuMzMsMjYuMzNBOCw4LDAsMCwwLDE3NiwxMjBhOC4yMyw4LjIzLDAsMCwwLDIuMDctLjI3LDgsOCwwLDAsMCw1LjY2LTkuOGMtNS4xMi0xOS4xNi0xOC41LTMyLjU0LTM3LjY2LTM3LjY2YTgsOCwwLDEsMC00LjEzLDE1LjQ2Wm04MS45NCw5NS4zNUE1Ni4yNiw1Ni4yNiwwLDAsMSwxNjgsMjMyQzg4LjYsMjMyLDI0LDE2Ny40LDI0LDg4QTU2LjI2LDU2LjI2LDAsMCwxLDcyLjkyLDMyLjEyYTE2LDE2LDAsMCwxLDE2LjYyLDkuNTJsMjEuMTIsNDcuMTUsMCwuMTJBMTYsMTYsMCwwLDEsMTA5LjM5LDEwNGMtLjE4LjI3LS4zNy41Mi0uNTcuNzdMODgsMTI5LjQ1YzcuNDksMTUuMjIsMjMuNDEsMzEsMzguODMsMzguNTFsMjQuMzQtMjAuNzFhOC4xMiw4LjEyLDAsMCwxLC43NS0uNTYsMTYsMTYsMCwwLDEsMTUuMTctMS40bC4xMy4wNiw0Ny4xMSwyMS4xMUExNiwxNiwwLDAsMSwyMjMuODgsMTgzLjA4Wm0tMTUuODgtMnMtLjA3LDAtLjExLDBoMGwtNDctMjEuMDUtMjQuMzUsMjAuNzFhOC40NCw4LjQ0LDAsMCwxLS43NC41NiwxNiwxNiwwLDAsMS0xNS43NSwxLjE0Yy0xOC43My05LjA1LTM3LjQtMjcuNTgtNDYuNDYtNDYuMTFhMTYsMTYsMCwwLDEsMS0xNS43LDYuMTMsNi4xMywwLDAsMSwuNTctLjc3TDk2LDk1LjE1bC0yMS00N2EuNjEuNjEsMCwwLDEsMC0uMTJBNDAuMiw0MC4yLDAsMCwwLDQwLDg4LDEyOC4xNCwxMjguMTQsMCwwLDAsMTY4LDIxNiw0MC4yMSw0MC4yMSwwLDAsMCwyMDgsMTgxLjA3WiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "与我联系",
+        "尽快联系"
+      ],
+      "exampleZh": "请拾到者与我联系。",
+      "exampleVi": "Xin người nhặt được liên hệ với tôi.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Động từ dùng để đề nghị người đọc/người nhặt được đồ chủ động tương tác, gọi điện lại cho mình là:",
+          "options": [
+            "耽误",
+            "联系",
+            "举行",
+            "申请"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 有意者请尽快与本人________。",
+          "options": [
+            "耽误",
+            "批准",
+            "联系",
+            "附件"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Xin người nhặt được nhanh chóng liên hệ với tôi.\"",
+          "options": [
+            "请拾到者尽快与我耽误。",
+            "请拾到者尽快与我联系。",
+            "请拾到者尽快与我批准。",
+            "请拾到者尽快与我答复。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "请拾到者尽快与我联系。",
+          "audioVi": "Xin người nhặt được nhanh chóng liên hệ với tôi.",
+          "prompt": "Lời nhắn ở cuối thông báo yêu cầu điều gì?",
+          "options": [
+            "Nộp đồ trực tiếp cho công an",
+            "Nhanh chóng liên hệ với người mất đồ",
+            "Chờ người mất đồ đến tận nhà tìm",
+            "Đăng tin lên mạng xã hội giúp"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 2
+    },
+    {
+      "word": "重谢",
+      "pinyin": "zhòngxiè",
+      "meaning": "Hậu tạ",
+      "partOfSpeech": "Động từ / Danh từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMwZjc2NmUiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMGY3NjZlIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIwOCwxMjh2NzJhOCw4LDAsMCwxLTgsOEg1NmE4LDgsMCwwLDEtOC04VjEyOFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMTYsNzJIMTgwLjkyYy4zOS0uMzMuNzktLjY1LDEuMTctMUEyOS41MywyOS41MywwLDAsMCwxOTIsNDkuNTcsMzIuNjIsMzIuNjIsMCwwLDAsMTU4LjQ0LDE2LDI5LjUzLDI5LjUzLDAsMCwwLDEzNywyNS45MWE1NC45NCw1NC45NCwwLDAsMC05LDE0LjQ4LDU0Ljk0LDU0Ljk0LDAsMCwwLTktMTQuNDhBMjkuNTMsMjkuNTMsMCwwLDAsOTcuNTYsMTYsMzIuNjIsMzIuNjIsMCwwLDAsNjQsNDkuNTcsMjkuNTMsMjkuNTMsMCwwLDAsNzMuOTEsNzFjLjM4LjMzLjc4LjY1LDEuMTcsMUg0MEExNiwxNiwwLDAsMCwyNCw4OHYzMmExNiwxNiwwLDAsMCwxNiwxNnY2NGExNiwxNiwwLDAsMCwxNiwxNkgyMDBhMTYsMTYsMCwwLDAsMTYtMTZWMTM2YTE2LDE2LDAsMCwwLDE2LTE2Vjg4QTE2LDE2LDAsMCwwLDIxNiw3MlpNMTQ5LDM2LjUxYTEzLjY5LDEzLjY5LDAsMCwxLDEwLTQuNWguNDlBMTYuNjIsMTYuNjIsMCwwLDEsMTc2LDQ5LjA4YTEzLjY5LDEzLjY5LDAsMCwxLTQuNSwxMGMtOS40OSw4LjQtMjUuMjQsMTEuMzYtMzUsMTIuNEMxMzcuNyw2MC44OSwxNDEsNDUuNSwxNDksMzYuNTFabS02NC4wOS4zNkExNi42MywxNi42MywwLDAsMSw5Ni41OSwzMmguNDlhMTMuNjksMTMuNjksMCwwLDEsMTAsNC41YzguMzksOS40OCwxMS4zNSwyNS4yLDEyLjM5LDM0LjkyLTkuNzItMS0yNS40NC00LTM0LjkyLTEyLjM5YTEzLjY5LDEzLjY5LDAsMCwxLTQuNS0xMEExNi42LDE2LjYsMCwwLDEsODQuODcsMzYuODdaTTQwLDg4aDgwdjMySDQwWm0xNiw0OGg2NHY2NEg1NlptMTQ0LDY0SDEzNlYxMzZoNjRabTE2LTgwSDEzNlY4OGg4MHYzMloiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "必有重谢",
+        "当面重谢"
+      ],
+      "exampleZh": "拾到者必有重谢。",
+      "exampleVi": "Người nhặt được nhất định sẽ được hậu tạ.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Mẫu câu kết quen thuộc nhất mang tính cam kết đền đáp tài chính/vật chất khi tìm đồ là:",
+          "options": [
+            "谢谢配合",
+            "必有重谢",
+            "敬请批准",
+            "欢迎参加"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 凡归还者，本人必有________。",
+          "options": [
+            "耽误",
+            "申请",
+            "重谢",
+            "附件"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Nhất định sẽ hậu tạ!\"",
+          "options": [
+            "必有答复！",
+            "必有重谢！",
+            "必有申请！",
+            "必有耽误！"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "如有拾到并归还者，必有重谢。",
+          "audioVi": "Nếu có ai nhặt được và trả lại, nhất định sẽ có hậu tạ.",
+          "prompt": "Người mất đồ hứa hẹn điều gì khi nhận lại đồ?",
+          "options": [
+            "Sẽ mời đi ăn tối",
+            "Nhất định sẽ có phần quà/tiền hậu tạ chu đáo",
+            "Sẽ viết thư cảm ơn lên công ty",
+            "Không có nghĩa vụ trả tiền đền đáp"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 3
+    },
+    {
+      "word": "出售",
+      "pinyin": "chūshòu",
+      "meaning": "Bán",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMwZjc2NmUiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMGY3NjZlIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIzNy42NiwxNTMsMTUzLDIzNy42NmE4LDgsMCwwLDEtMTEuMzEsMEw0Mi4zNCwxMzguMzRBOCw4LDAsMCwxLDQwLDEzMi42OVY0MGg5Mi42OWE4LDgsMCwwLDEsNS42NSwyLjM0bDk5LjMyLDk5LjMyQTgsOCwwLDAsMSwyMzcuNjYsMTUzWiIgb3BhY2l0eT0iMC4yIj48L3BhdGg+PHBhdGggZD0iTTI0My4zMSwxMzYsMTQ0LDM2LjY5QTE1Ljg2LDE1Ljg2LDAsMCwwLDEzMi42OSwzMkg0MGE4LDgsMCwwLDAtOCw4djkyLjY5QTE1Ljg2LDE1Ljg2LDAsMCwwLDM2LjY5LDE0NEwxMzYsMjQzLjMxYTE2LDE2LDAsMCwwLDIyLjYzLDBsODQuNjgtODQuNjhhMTYsMTYsMCwwLDAsMC0yMi42M1ptLTk2LDk2TDQ4LDEzMi42OVY0OGg4NC42OUwyMzIsMTQ3LjMxWk05Niw4NEExMiwxMiwwLDEsMSw4NCw3MiwxMiwxMiwwLDAsMSw5Niw4NFoiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "出售二手物品",
+        "出售自行车"
+      ],
+      "exampleZh": "现出售二手自行车一辆。",
+      "exampleVi": "Nay cần bán một chiếc xe đạp cũ.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Trong các bài thông báo rao bán đồ cũ hoặc sang nhượng đồ đạc, từ vựng hành chính chuẩn xác dùng để chỉ hành động bán là:",
+          "options": [
+            "耽误",
+            "出售",
+            "答复",
+            "恳请"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 现因毕业回国，特便宜________二手电脑。",
+          "options": [
+            "耽误",
+            "批准",
+            "出售",
+            "答复"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Nay cần bán một chiếc xe đạp cũ.\"",
+          "options": [
+            "现答复二手自行车一辆。",
+            "现出售二手自行车一辆。",
+            "现耽误二手自行车一辆。",
+            "现申请二手自行车一辆。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "本人因即将回国，现低价出售自用物品。",
+          "audioVi": "Tôi vì sắp về nước, nay bán giá rẻ đồ dùng cá nhân.",
+          "prompt": "Mục đích chính của người rao bán trong thông báo là gì?",
+          "options": [
+            "Mua thêm đồ mới để dùng",
+            "Bán lại đồ cá nhân do sắp về nước",
+            "Tặng miễn phí đồ đạc cho hàng xóm",
+            "Thuê lại đồ đạc từ người khác"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 4
     }
   ]
 }

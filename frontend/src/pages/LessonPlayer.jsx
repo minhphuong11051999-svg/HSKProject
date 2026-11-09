@@ -193,8 +193,13 @@ export default function LessonPlayer() {
         )}
 
         {tab === 'theory' && <TheoryTab lesson={lesson} showFixedPhrases={!selected.includes('fixed_phrases')} />}
-        {tab === 'samples' && <SamplesTab lesson={lesson} canSave={canSave} />}
-        {tab === 'quiz' && <QuizList lessonId={lesson.id} questions={theoryQuestions} canSave={canSave} />}
+        {tab === 'samples' && <SamplesTab lesson={lesson} />}
+        {tab === 'quiz' && (
+          <>
+            <FlashcardLauncher lesson={lesson} canSave={canSave} />
+            <QuizList lessonId={lesson.id} questions={theoryQuestions} canSave={canSave} />
+          </>
+        )}
         {tab === 'matching' && <MatchingTab lesson={lesson} canSave={canSave} />}
         {tab === 'cloze' && <ClozeTab lessonId={lesson.id} exercises={lesson.clozeExercises} canSave={canSave} />}
         {tab === 'error' && <ErrorTab lessonId={lesson.id} questions={errorQuestions} canSave={canSave} />}
@@ -307,35 +312,9 @@ function GenericTab({ lesson, partKey }) {
 // Sample bodies are stored as free text (title, body, 此致/敬礼 …); split them
 // into paper slots so 此致 gets its 4-char indent, 敬礼！ sits flush left, etc.
 // The dedicated audience / signer / date fields win over anything parsed.
-function SamplesTab({ lesson, canSave }) {
-  const [showCards, setShowCards] = useState(false);
-  const cards = lesson.flashcards || [];
+function SamplesTab({ lesson }) {
   return (
     <div className="grid gap-6">
-      {cards.length > 0 && (
-        <div className="flex justify-end -mt-2">
-          <PressButton
-            onClick={() => setShowCards(true)}
-            className="group min-h-[44px] inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gradient-to-r from-coral-500/15 to-gold/15 pl-3 pr-4 text-sm font-semibold text-coral-400 hover:border-gold transition-colors"
-          >
-            <Star
-              size={22}
-              weight="fill"
-              className="text-[#f5b301] drop-shadow transition-transform duration-300 group-hover:rotate-[72deg] group-hover:scale-110 motion-reduce:transform-none"
-              aria-hidden="true"
-            />
-            Luyện với flashcard
-            <span className="rounded-full bg-night-900/70 px-2 py-0.5 text-xs text-slate-300">{cards.length} từ</span>
-          </PressButton>
-          <FlashcardGame
-            open={showCards}
-            onClose={() => setShowCards(false)}
-            cards={cards}
-            lessonId={lesson.id}
-            canSave={canSave}
-          />
-        </div>
-      )}
       {lesson.sampleDocuments.length === 0 && <Empty>Chưa có bài mẫu cho phần này.</Empty>}
       {lesson.sampleDocuments.map((doc, idx) => {
         const parsed = parseLetter(htmlToText(doc.body));
@@ -373,6 +352,38 @@ function SamplesTab({ lesson, canSave }) {
 }
 
 /* ---------------------------------------------------- 3. Nhận diện thể thức */
+
+/* Vocabulary flashcards, launched from "Nhận diện thể thức" (★ button, top right). */
+function FlashcardLauncher({ lesson, canSave }) {
+  const [showCards, setShowCards] = useState(false);
+  const cards = lesson.flashcards || [];
+  if (cards.length === 0) return null;
+  return (
+    <div className="flex justify-end -mt-2 mb-4">
+      <PressButton
+        onClick={() => setShowCards(true)}
+        className="group min-h-[44px] inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gradient-to-r from-coral-500/15 to-gold/15 pl-3 pr-4 text-sm font-semibold text-coral-400 hover:border-gold transition-colors"
+      >
+        <Star
+          size={22}
+          weight="fill"
+          className="text-[#f5b301] drop-shadow transition-transform duration-300 group-hover:rotate-[72deg] group-hover:scale-110 motion-reduce:transform-none"
+          aria-hidden="true"
+        />
+        Luyện với flashcard
+        <span className="rounded-full bg-night-900/70 px-2 py-0.5 text-xs text-slate-300">{cards.length} từ</span>
+      </PressButton>
+      <FlashcardGame
+        open={showCards}
+        onClose={() => setShowCards(false)}
+        cards={cards}
+        lessonId={lesson.id}
+        canSave={canSave}
+      />
+    </div>
+  );
+}
+
 
 function QuizList({ lessonId, questions, canSave }) {
   if (questions.length === 0) return <Empty>Chưa có câu hỏi cho phần này.</Empty>;

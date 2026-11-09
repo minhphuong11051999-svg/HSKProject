@@ -30,24 +30,88 @@
     }
   ],
   "vocabTerms": [
-    { "literary": "因事请假", "colloquial": "有事情、有私事", "meaningVi": "Vì có việc riêng, xin nghỉ vì bận việc", "example": "我因事，父母拟于本周五来华探望我……" },
-    { "literary": "来华探望我", "colloquial": "父母坐飞机来中国看我", "meaningVi": "Đến Trung Quốc thăm tôi", "example": "父母拟于9月18日上午来华探望我。" },
-    { "literary": "前往机场接机", "colloquial": "去机场接人", "meaningVi": "Đi đến sân bay đón máy bay", "example": "需前往机场接机并协助安排其入住。" },
-    { "literary": "协助安排其入住", "colloquial": "帮父母在宾馆办住下", "meaningVi": "Hỗ trợ sắp xếp nhận phòng (khách sạn)", "example": "由于其不通汉语，我需前往机场接机并协助安排其入住。" },
-    { "literary": "办理签证延期手续", "colloquial": "去办签证、办延期", "meaningVi": "Làm thủ tục gia hạn visa", "example": "急需于下周一上午前往出入境管理局办理签证延期手续。" },
-    { "literary": "前往出入境管理局", "colloquial": "去出入境管理局那儿", "meaningVi": "Đi đến Cục Quản lý Xuất nhập cảnh", "example": "急需于10月15日上午前往出入境管理局办理签证延期手续。" },
-    { "literary": "签证即将到期", "colloquial": "签证快要到期了", "meaningVi": "Visa sắp hết hạn", "example": "我因签证即将到期，急需于……前往出入境管理局……" },
-    { "literary": "无法正常上课 / 无法出勤", "colloquial": "没办法去上课", "meaningVi": "Không thể lên lớp/đi làm bình thường", "example": "……急需于下周一上午前往出入境管理局办理签证延期手续，无法正常上课。" }
+    {
+      "literary": "因事请假",
+      "colloquial": "有事情、有私事",
+      "meaningVi": "Vì có việc riêng, xin nghỉ vì bận việc",
+      "example": "我因事，父母拟于本周五来华探望我……"
+    },
+    {
+      "literary": "来华探望我",
+      "colloquial": "父母坐飞机来中国看我",
+      "meaningVi": "Đến Trung Quốc thăm tôi",
+      "example": "父母拟于9月18日上午来华探望我。"
+    },
+    {
+      "literary": "前往机场接机",
+      "colloquial": "去机场接人",
+      "meaningVi": "Đi đến sân bay đón máy bay",
+      "example": "需前往机场接机并协助安排其入住。"
+    },
+    {
+      "literary": "协助安排其入住",
+      "colloquial": "帮父母在宾馆办住下",
+      "meaningVi": "Hỗ trợ sắp xếp nhận phòng (khách sạn)",
+      "example": "由于其不通汉语，我需前往机场接机并协助安排其入住。"
+    },
+    {
+      "literary": "办理签证延期手续",
+      "colloquial": "去办签证、办延期",
+      "meaningVi": "Làm thủ tục gia hạn visa",
+      "example": "急需于下周一上午前往出入境管理局办理签证延期手续。"
+    },
+    {
+      "literary": "前往出入境管理局",
+      "colloquial": "去出入境管理局那儿",
+      "meaningVi": "Đi đến Cục Quản lý Xuất nhập cảnh",
+      "example": "急需于10月15日上午前往出入境管理局办理签证延期手续。"
+    },
+    {
+      "literary": "签证即将到期",
+      "colloquial": "签证快要到期了",
+      "meaningVi": "Visa sắp hết hạn",
+      "example": "我因签证即将到期，急需于……前往出入境管理局……"
+    },
+    {
+      "literary": "无法正常上课 / 无法出勤",
+      "colloquial": "没办法去上课",
+      "meaningVi": "Không thể lên lớp/đi làm bình thường",
+      "example": "……急需于下周一上午前往出入境管理局办理签证延期手续，无法正常上课。"
+    }
   ],
   "fixedPhrases": [
-    { "chinese": "特向您请假，并望批准。", "viExplanation": "Nay xin phép nghỉ, và mong ngài phê chuẩn (câu kết cố định ở cuối chính văn)." },
-    { "chinese": "我因[lý do]，无法正常[lên lớp/đi làm]。", "viExplanation": "Tôi vì [lý do] nên không thể [lên lớp/đi làm] bình thường (mẫu câu nêu lý do dẫn đến hệ quả)." },
-    { "chinese": "因此，我拟于[thời gian]请假[số ngày/giờ]。", "viExplanation": "Do đó, tôi dự định xin nghỉ vào [thời gian] với [số ngày/giờ] (câu nêu rõ thời hạn xin nghỉ)." },
-    { "chinese": "此致", "viExplanation": "Lời chào kết thúc trang trọng, xuống dòng lùi 4 ô (空四格), không dùng dấu câu ở sau." },
-    { "chinese": "敬礼！", "viExplanation": "Lời chào kết thúc, xuống dòng viết sát lề trái (顶格), bắt buộc dùng dấu chấm than (！)." },
-    { "chinese": "急需于……前往……", "viExplanation": "Cấp thiết cần phải đến... vào... (nhấn mạnh tính khẩn cấp của việc xin nghỉ)." },
-    { "chinese": "由于其不通汉语", "viExplanation": "Do họ (người thân) không biết tiếng Trung (câu nêu lý do phụ, bổ sung tính chính đáng)." },
-    { "chinese": "我已阅读请假注意事项，回校后将按时销假！", "viExplanation": "Tôi đã đọc các lưu ý khi xin nghỉ phép, sau khi về trường sẽ hủy phép (báo cáo trở lại) đúng hạn (câu cam kết mở rộng dung lượng cuối chính văn)." }
+    {
+      "chinese": "特向您请假，并望批准。",
+      "viExplanation": "Nay xin phép nghỉ, và mong ngài phê chuẩn (câu kết cố định ở cuối chính văn)."
+    },
+    {
+      "chinese": "我因[lý do]，无法正常[lên lớp/đi làm]。",
+      "viExplanation": "Tôi vì [lý do] nên không thể [lên lớp/đi làm] bình thường (mẫu câu nêu lý do dẫn đến hệ quả)."
+    },
+    {
+      "chinese": "因此，我拟于[thời gian]请假[số ngày/giờ]。",
+      "viExplanation": "Do đó, tôi dự định xin nghỉ vào [thời gian] với [số ngày/giờ] (câu nêu rõ thời hạn xin nghỉ)."
+    },
+    {
+      "chinese": "此致",
+      "viExplanation": "Lời chào kết thúc trang trọng, xuống dòng lùi 4 ô (空四格), không dùng dấu câu ở sau."
+    },
+    {
+      "chinese": "敬礼！",
+      "viExplanation": "Lời chào kết thúc, xuống dòng viết sát lề trái (顶格), bắt buộc dùng dấu chấm than (！)."
+    },
+    {
+      "chinese": "急需于……前往……",
+      "viExplanation": "Cấp thiết cần phải đến... vào... (nhấn mạnh tính khẩn cấp của việc xin nghỉ)."
+    },
+    {
+      "chinese": "由于其不通汉语",
+      "viExplanation": "Do họ (người thân) không biết tiếng Trung (câu nêu lý do phụ, bổ sung tính chính đáng)."
+    },
+    {
+      "chinese": "我已阅读请假注意事项，回校后将按时销假！",
+      "viExplanation": "Tôi đã đọc các lưu ý khi xin nghỉ phép, sau khi về trường sẽ hủy phép (báo cáo trở lại) đúng hạn (câu cam kết mở rộng dung lượng cuối chính văn)."
+    }
   ],
   "quizQuestions": [
     {
@@ -103,22 +167,94 @@
     {
       "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">请假条</p><p class=\"mb-2\">陈老师：</p><p class=\"indent2 mb-1\">我因签证即将到期，急需于10月15日上午前往出入境管理局_____(1)_____，无法正常上课。因此，我_____(2)_____10月15日上午请假半天。_____(3)_____。</p><p class=\"indent4 mb-1\">此致</p><p class=\"mb-1\">敬礼！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>美 美</p><p>2026年10月14日</p></div></div>",
       "blanks": [
-        { "id": "blank1", "answer": "办理签证延期手续", "options": ["特向您请假，并望批准", "办理签证延期手续", "拟于"] },
-        { "id": "blank2", "answer": "拟于", "options": ["特向您请假，并望批准", "办理签证延期手续", "拟于"] },
-        { "id": "blank3", "answer": "特向您请假，并望批准", "options": ["特向您请假，并望批准", "办理签证延期手续", "拟于"] }
+        {
+          "id": "blank1",
+          "answer": "办理签证延期手续",
+          "options": [
+            "特向您请假，并望批准",
+            "办理签证延期手续",
+            "拟于"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "拟于",
+          "options": [
+            "特向您请假，并望批准",
+            "办理签证延期手续",
+            "拟于"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "特向您请假，并望批准",
+          "options": [
+            "特向您请假，并望批准",
+            "办理签证延期手续",
+            "拟于"
+          ]
+        }
       ],
       "orderIndex": 0
     }
   ],
   "matchItems": [
-    { "leftLabelVi": "Có việc riêng, có việc bận (有事情、有私事)", "rightLabelZh": "因事请假", "correctKey": "因事请假", "explanation": "有私事 ➔ 因事请假: Diễn đạt nguyên nhân một cách khách quan, lịch sự và súc tích.", "orderIndex": 0 },
-    { "leftLabelVi": "Bố mẹ đi máy bay sang Trung Quốc thăm tôi (父母坐飞机来中国看我)", "rightLabelZh": "来华探望我", "correctKey": "来华探望我", "explanation": "坐飞机来中国看我 ➔ 来华探望我: Sử dụng từ ghép trang trọng chuyên dụng trong văn bản hành chính.", "orderIndex": 1 },
-    { "leftLabelVi": "Đi sân bay đón người (去机场接人)", "rightLabelZh": "前往机场接机", "correctKey": "前往机场接机", "explanation": "去机场接人 ➔ 前往机场接机: Tăng tính quy phạm, chuyên nghiệp và trang trọng trong đơn từ.", "orderIndex": 2 },
-    { "leftLabelVi": "Giúp bố mẹ làm thủ tục nhận phòng khách sạn (帮父母在宾馆办住下)", "rightLabelZh": "协助安排其入住", "correctKey": "协助安排其入住", "explanation": "帮父母在宾馆办住下 ➔ 协助安排其入住: Ngôn từ chuẩn mực hành chính thay cho khẩu ngữ nói hằng ngày.", "orderIndex": 3 },
-    { "leftLabelVi": "Đi làm visa, làm thủ tục gia hạn (去办签证、办延期)", "rightLabelZh": "办理签证延期手续", "correctKey": "办理签证延期手续", "explanation": "去办签证、办延期 ➔ 办理签证延期手续: Diễn đạt đầy đủ tên thủ tục hành chính quy phạm để tăng tính chuyên nghiệp.", "orderIndex": 4 },
-    { "leftLabelVi": "Đi đến Cục Quản lý Xuất nhập cảnh (去出入境管理局那儿)", "rightLabelZh": "前往出入境管理局", "correctKey": "前往出入境管理局", "explanation": "去出入境管理局那儿 ➔ 前往出入境管理局: Dùng động từ trang trọng \"前往\" thay cho từ \"去\".", "orderIndex": 5 },
-    { "leftLabelVi": "Visa sắp hết hạn rồi (签证快要到期了)", "rightLabelZh": "签证即将到期", "correctKey": "签证即将到期", "explanation": "签证快要到期了 ➔ 签证即将到期: Thay phó từ khẩu ngữ \"快要\" bằng từ hành chính trang trọng \"即将\".", "orderIndex": 6 },
-    { "leftLabelVi": "Không thể đi học được (没办法去上课)", "rightLabelZh": "无法正常上课 / 无法出勤", "correctKey": "无法正常上课 / 无法出勤", "explanation": "没办法去上课 ➔ 无法正常上课 / 无法出勤: Cách diễn đạt chuẩn văn viết lịch sự.", "orderIndex": 7 }
+    {
+      "leftLabelVi": "Có việc riêng, có việc bận (有事情、有私事)",
+      "rightLabelZh": "因事请假",
+      "correctKey": "因事请假",
+      "explanation": "有私事 ➔ 因事请假: Diễn đạt nguyên nhân một cách khách quan, lịch sự và súc tích.",
+      "orderIndex": 0
+    },
+    {
+      "leftLabelVi": "Bố mẹ đi máy bay sang Trung Quốc thăm tôi (父母坐飞机来中国看我)",
+      "rightLabelZh": "来华探望我",
+      "correctKey": "来华探望我",
+      "explanation": "坐飞机来中国看我 ➔ 来华探望我: Sử dụng từ ghép trang trọng chuyên dụng trong văn bản hành chính.",
+      "orderIndex": 1
+    },
+    {
+      "leftLabelVi": "Đi sân bay đón người (去机场接人)",
+      "rightLabelZh": "前往机场接机",
+      "correctKey": "前往机场接机",
+      "explanation": "去机场接人 ➔ 前往机场接机: Tăng tính quy phạm, chuyên nghiệp và trang trọng trong đơn từ.",
+      "orderIndex": 2
+    },
+    {
+      "leftLabelVi": "Giúp bố mẹ làm thủ tục nhận phòng khách sạn (帮父母在宾馆办住下)",
+      "rightLabelZh": "协助安排其入住",
+      "correctKey": "协助安排其入住",
+      "explanation": "帮父母在宾馆办住下 ➔ 协助安排其入住: Ngôn từ chuẩn mực hành chính thay cho khẩu ngữ nói hằng ngày.",
+      "orderIndex": 3
+    },
+    {
+      "leftLabelVi": "Đi làm visa, làm thủ tục gia hạn (去办签证、办延期)",
+      "rightLabelZh": "办理签证延期手续",
+      "correctKey": "办理签证延期手续",
+      "explanation": "去办签证、办延期 ➔ 办理签证延期手续: Diễn đạt đầy đủ tên thủ tục hành chính quy phạm để tăng tính chuyên nghiệp.",
+      "orderIndex": 4
+    },
+    {
+      "leftLabelVi": "Đi đến Cục Quản lý Xuất nhập cảnh (去出入境管理局那儿)",
+      "rightLabelZh": "前往出入境管理局",
+      "correctKey": "前往出入境管理局",
+      "explanation": "去出入境管理局那儿 ➔ 前往出入境管理局: Dùng động từ trang trọng \"前往\" thay cho từ \"去\".",
+      "orderIndex": 5
+    },
+    {
+      "leftLabelVi": "Visa sắp hết hạn rồi (签证快要到期了)",
+      "rightLabelZh": "签证即将到期",
+      "correctKey": "签证即将到期",
+      "explanation": "签证快要到期了 ➔ 签证即将到期: Thay phó từ khẩu ngữ \"快要\" bằng từ hành chính trang trọng \"即将\".",
+      "orderIndex": 6
+    },
+    {
+      "leftLabelVi": "Không thể đi học được (没办法去上课)",
+      "rightLabelZh": "无法正常上课 / 无法出勤",
+      "correctKey": "无法正常上课 / 无法出勤",
+      "explanation": "没办法去上课 ➔ 无法正常上课 / 无法出勤: Cách diễn đạt chuẩn văn viết lịch sự.",
+      "orderIndex": 7
+    }
   ],
   "writingTasks": [
     {
@@ -126,7 +262,13 @@
       "facts": [
         "Tình huống khẩu ngữ: Vì có việc riêng, bố mẹ tôi dự định sang thăm tôi vào thứ Sáu tuần này. Do họ không biết tiếng Trung, tôi cần ra sân bay đón và giúp họ làm thủ tục nhận phòng khách sạn."
       ],
-      "requiredKeywords": ["因事", "父母拟于……来华探望我", "由于其不通汉语", "需前往机场接机", "并协助安排其入住"],
+      "requiredKeywords": [
+        "因事",
+        "父母拟于……来华探望我",
+        "由于其不通汉语",
+        "需前往机场接机",
+        "并协助安排其入住"
+      ],
       "hint": "Hãy kết hợp các từ gợi ý trên để viết lại lý do này thành 1 đến 2 câu văn viết ngắn gọn và trang trọng nhất.",
       "referenceAnswer": "我因事，父母拟于本周五来华探望我，由于其不通汉语，需前往机场接机并协助安排其入住。",
       "orderIndex": 0
@@ -136,7 +278,13 @@
       "facts": [
         "Tình huống khẩu ngữ: Visa của tôi sắp hết hạn rồi. Tôi cần gấp đến Cục Quản lý Xuất nhập cảnh vào sáng thứ Hai tới để làm thủ tục gia hạn visa, nên không thể lên lớp bình thường."
       ],
-      "requiredKeywords": ["因签证即将到期", "急需于……前往", "出入境管理局", "办理签证延期手续", "无法正常上课"],
+      "requiredKeywords": [
+        "因签证即将到期",
+        "急需于……前往",
+        "出入境管理局",
+        "办理签证延期手续",
+        "无法正常上课"
+      ],
       "hint": "Hãy kết hợp các từ gợi ý trên để viết lại lý do này thành 1 đến 2 câu văn viết ngắn gọn và trang trọng nhất.",
       "referenceAnswer": "我因签证即将到期，急需于下周一上午前往出入境管理局办理签证延期手续，无法正常上课。",
       "orderIndex": 1
@@ -146,26 +294,384 @@
       "facts": [
         "Bạn tên là 李明 (Lý Minh). Sáng thứ Sáu này (ngày 18 tháng 9 năm 2026), bạn bắt buộc phải ra sân bay đón bố mẹ từ nước ngoài sang chơi, không thể lên lớp học tiếng Trung buổi sáng của Cô Vương (王老师)."
       ],
-      "requiredKeywords": ["拟于", "请假半天", "特向您请假，并望批准"],
+      "requiredKeywords": [
+        "拟于",
+        "请假半天",
+        "特向您请假，并望批准"
+      ],
       "hint": "Lắp ráp khung thể thức và các câu chuyển tiếp trang trọng, kể cả các phần cố định (标题, 此致, 敬礼！); chưa cần viết chi tiết lý do đón người thân ở bước này.",
       "referenceAnswer": "请假条\n王老师：\n……（正文，暂不需要写理由）我拟于9月18日上午请假半天。特向您请假，并望批准。\n此致\n敬礼！\n李 明\n2026年9月17日",
       "orderIndex": 2
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "标题 · Tiêu đề", "placeholder": "请假条", "inputType": "text", "orderIndex": 0 },
-    { "name": "recipient", "label": "称呼 · Người nhận", "placeholder": "尊敬的王老师：", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "正文 · Chính văn (mỗi dòng = 1 đoạn, tự thụt 2 ô)", "placeholder": "Viết lý do (bố mẹ sang thăm, không biết tiếng Trung, cần ra sân bay đón) → thời gian nghỉ (18/9 buổi sáng) → lời xin phép...", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "close1", "label": "此致", "placeholder": "此致", "inputType": "text", "orderIndex": 3 },
-    { "name": "close2", "label": "敬礼！", "placeholder": "敬礼！", "inputType": "text", "orderIndex": 4 },
-    { "name": "name", "label": "署名 · Ký tên", "placeholder": "李明", "inputType": "text", "orderIndex": 5 },
-    { "name": "date", "label": "日期 · Ngày tháng", "placeholder": "2026年9月17日", "inputType": "text", "orderIndex": 6 }
+    {
+      "name": "title",
+      "label": "标题 · Tiêu đề",
+      "placeholder": "请假条",
+      "inputType": "text",
+      "orderIndex": 0
+    },
+    {
+      "name": "recipient",
+      "label": "称呼 · Người nhận",
+      "placeholder": "尊敬的王老师：",
+      "inputType": "text",
+      "orderIndex": 1
+    },
+    {
+      "name": "body",
+      "label": "正文 · Chính văn (mỗi dòng = 1 đoạn, tự thụt 2 ô)",
+      "placeholder": "Viết lý do (bố mẹ sang thăm, không biết tiếng Trung, cần ra sân bay đón) → thời gian nghỉ (18/9 buổi sáng) → lời xin phép...",
+      "inputType": "textarea",
+      "orderIndex": 2
+    },
+    {
+      "name": "close1",
+      "label": "此致",
+      "placeholder": "此致",
+      "inputType": "text",
+      "orderIndex": 3
+    },
+    {
+      "name": "close2",
+      "label": "敬礼！",
+      "placeholder": "敬礼！",
+      "inputType": "text",
+      "orderIndex": 4
+    },
+    {
+      "name": "name",
+      "label": "署名 · Ký tên",
+      "placeholder": "李明",
+      "inputType": "text",
+      "orderIndex": 5
+    },
+    {
+      "name": "date",
+      "label": "日期 · Ngày tháng",
+      "placeholder": "2026年9月17日",
+      "inputType": "text",
+      "orderIndex": 6
+    }
   ],
   "guidedWritingScenarios": [
     {
       "situationPrompt": "Tình huống: Bố mẹ của bạn sắp sang Trung Quốc thăm bạn. Vì họ hoàn toàn không biết một chút tiếng Trung nào (一点汉语也不会说), nên bạn bắt buộc phải ra sân bay để đón họ vào sáng thứ Sáu ngày 18 tháng 9 năm 2026. Nhiệm vụ: Bạn tên là 李明 (Lý Minh). Hãy vận dụng cấu trúc chuẩn 6 phần và văn phong trang trọng (书面语) đã học để viết một tờ 请假条 gửi cho Cô Vương (王老师) để xin nghỉ phép nửa ngày (buổi sáng ngày 18 tháng 9). (Giả định ngày viết đơn là ngày 17 tháng 9). Chính văn có thể tách nhiều đoạn — mỗi đoạn xuống dòng sẽ tự động thụt đầu 2 ô.",
       "modelAnswer": "请假条\n\n尊敬的王老师：\n\n我父母拟于9月18日上午来华探望我。由于其不通汉语，我需前往机场接机并协助安排其入住，无法正常上课。因此，我拟于9月18日上午请假半天。特向您请假，并望批准。\n\n本人清楚学校学院有关研究生管理的规章制度，离校期间我将严格遵守国家法律、学校、学院有关安全管理规定，对自己的行为和人身安全负责；我已阅读请假注意事项，回校后将按时销假！\n\n此致\n敬礼！\n\n李 明\n2026年9月17日\n\n（187字）",
       "targetWordCount": 187
+    }
+  ],
+  "flashcards": [
+    {
+      "word": "因事",
+      "pinyin": "yīnshì",
+      "meaning": "Việc bận",
+      "partOfSpeech": "Cụm danh từ / Trạng ngữ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiM2ZDI4ZDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjNmQyOGQ5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTE1MiwxNTJ2MzJsMTYsMTZ2MzJsLTQwLTE2TDg4LDIzMlYyMDBsMTYtMTZWMTUyTDI0LDE2OFYxMzZsODAtNDBWNDhhMjQsMjQsMCwwLDEsNDgsMFY5Nmw4MCw0MHYzMloiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMzUuNTgsMTI4Ljg0LDE2MCw5MS4wNlY0OGEzMiwzMiwwLDAsMC02NCwwVjkxLjA2TDIwLjQyLDEyOC44NEE4LDgsMCwwLDAsMTYsMTM2djMyYTgsOCwwLDAsMCw5LjU3LDcuODRMOTYsMTYxLjc2djE4LjkzTDgyLjM0LDE5NC4zNEE4LDgsMCwwLDAsODAsMjAwdjMyYTgsOCwwLDAsMCwxMSw3LjQzbDM3LTE0LjgxLDM3LDE0LjgxQTgsOCwwLDAsMCwxNzYsMjMyVjIwMGE4LDgsMCwwLDAtMi4zNC01LjY2TDE2MCwxODAuNjlWMTYxLjc2bDcwLjQzLDE0LjA4QTgsOCwwLDAsMCwyNDAsMTY4VjEzNkE4LDgsMCwwLDAsMjM1LjU4LDEyOC44NFpNMjI0LDE1OC4yNGwtNzAuNDMtMTQuMDhBOCw4LDAsMCwwLDE0NCwxNTJ2MzJhOCw4LDAsMCwwLDIuMzQsNS42NkwxNjAsMjAzLjMxdjE2Ljg3bC0yOS0xMS42MWE4LDgsMCwwLDAtNS45NCwwTDk2LDIyMC4xOFYyMDMuMzFsMTMuNjYtMTMuNjVBOCw4LDAsMCwwLDExMiwxODRWMTUyYTgsOCwwLDAsMC05LjU3LTcuODRMMzIsMTU4LjI0di0xNy4zbDc1LjU4LTM3Ljc4QTgsOCwwLDAsMCwxMTIsOTZWNDhhMTYsMTYsMCwwLDEsMzIsMFY5NmE4LDgsMCwwLDAsNC40Miw3LjE2TDIyNCwxNDAuOTRaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "因事请假",
+        "因签证 办手续"
+      ],
+      "exampleZh": "因签证即将到期，急需前往出入境管理局办理签证延期手续。",
+      "exampleVi": "Do visa sắp hết hạn, cấp thiết cần đến Cục quản lý xuất nhập cảnh làm thủ tục gia hạn visa.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Mẫu câu mở đầu đơn xin nghỉ để giải quyết các công việc hành chính cá nhân (như gia hạn visa) là:",
+          "options": [
+            "荣幸期待",
+            "寻物重谢",
+            "因事请假",
+            "毫不保留"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 我________因私事需要处理，特此请假。",
+          "options": [
+            "因事",
+            "举行",
+            "出售",
+            "邀请"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Do visa sắp hết hạn, cần đi làm thủ tục.\"",
+          "options": [
+            "因签证即将到期，急需办理手续。",
+            "因举行即将到期，急需办理手续。",
+            "因出售即将到期，急需办理手续。",
+            "因推荐即将到期，急需办理手续。"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "listen",
+          "audioZh": "我因签证即将到期，急需于10月15日上午前往出入境管理局办理签证延期手续。",
+          "audioVi": "Do visa của tôi sắp hết hạn, gấp rút đến Cục quản lý xuất nhập cảnh vào sáng ngày 15 tháng 10 để làm thủ tục gia hạn visa.",
+          "prompt": "Mục đích của việc xin nghỉ là gì?",
+          "options": [
+            "Đi du lịch nghỉ dưỡng",
+            "Đến cơ quan xuất nhập cảnh gia hạn visa",
+            "Khám bệnh tổng quát",
+            "Tham gia hội thảo khoa học"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 0
+    },
+    {
+      "word": "急需",
+      "pinyin": "jíxū",
+      "meaning": "Cần gấp",
+      "partOfSpeech": "Phó từ / Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiM2ZDI4ZDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjNmQyOGQ5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIxNiwxMzZhODgsODgsMCwxLDEtODgtODhBODgsODgsMCwwLDEsMjE2LDEzNloiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMjgsNDBhOTYsOTYsMCwxLDAsOTYsOTZBOTYuMTEsOTYuMTEsMCwwLDAsMTI4LDQwWm0wLDE3NmE4MCw4MCwwLDEsMSw4MC04MEE4MC4wOSw4MC4wOSwwLDAsMSwxMjgsMjE2Wk02MS42NiwzNy42NmwtMzIsMzJBOCw4LDAsMCwxLDE4LjM0LDU4LjM0bDMyLTMyQTgsOCwwLDAsMSw2MS42NiwzNy42NlptMTc2LDMyYTgsOCwwLDAsMS0xMS4zMiwwbC0zMi0zMmE4LDgsMCwwLDEsMTEuMzItMTEuMzJsMzIsMzJBOCw4LDAsMCwxLDIzNy42Niw2OS42NlpNMTg0LDEyOGE4LDgsMCwwLDEsMCwxNkgxMjhhOCw4LDAsMCwxLTgtOFY4MGE4LDgsMCwwLDEsMTYsMHY0OFoiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "急需前往",
+        "急需办理"
+      ],
+      "exampleZh": "急需办理签证延期手续。",
+      "exampleVi": "Cấp thiết cần làm thủ tục gia hạn visa.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Phó từ hành chính dùng để nhấn mạnh tính khẩn cấp của công việc cần giải quyết ngay trong đơn là:",
+          "options": [
+            "耽误",
+            "急需",
+            "举行",
+            "配合"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 手续复杂，我________您的帮助。",
+          "options": [
+            "举行",
+            "安排",
+            "急需",
+            "参加"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Cấp thiết cần phải đi đến...\"",
+          "options": [
+            "举行前往...",
+            "安排前往...",
+            "急需前往...",
+            "参加前往..."
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "listen",
+          "audioZh": "急需于10月15日上午前往出入境管理局。",
+          "audioVi": "Cấp thiết cần đến Cục quản lý xuất nhập cảnh vào sáng ngày 15 tháng 10.",
+          "prompt": "Tính chất của việc đi đến cơ quan quản lý xuất nhập cảnh là gì?",
+          "options": [
+            "Rất khẩn cấp, cần phải đi ngay",
+            "Có thể hoãn lại sang năm sau",
+            "Không quan trọng và không cần thiết",
+            "Chỉ đi chơi dạo mát"
+          ],
+          "answer": 0
+        }
+      ],
+      "orderIndex": 1
+    },
+    {
+      "word": "无法",
+      "pinyin": "wúfǎ",
+      "meaning": "Không thể",
+      "partOfSpeech": "Cụm phó từ / Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiM2ZDI4ZDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjNmQyOGQ5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIyNCwxMjhhOTYsOTYsMCwxLDEtOTYtOTZBOTYsOTYsMCwwLDEsMjI0LDEyOFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMjgsMjRBMTA0LDEwNCwwLDEsMCwyMzIsMTI4LDEwNC4xMSwxMDQuMTEsMCwwLDAsMTI4LDI0Wm04OCwxMDRhODcuNTYsODcuNTYsMCwwLDEtMjAuNDEsNTYuMjhMNzEuNzIsNjAuNEE4OCw4OCwwLDAsMSwyMTYsMTI4Wk00MCwxMjhBODcuNTYsODcuNTYsMCwwLDEsNjAuNDEsNzEuNzJMMTg0LjI4LDE5NS42QTg4LDg4LDAsMCwxLDQwLDEyOFoiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "无法正常上课",
+        "无法正常工作"
+      ],
+      "exampleZh": "因此无法正常上课。",
+      "exampleVi": "Do đó không thể lên lớp bình thường.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Cụm từ hành chính dùng để nối từ lý do sang hệ quả rằng bản thân không thể duy trì sinh hoạt/công việc bình thường là:",
+          "options": [
+            "寻物启事",
+            "无法",
+            "毫不保留",
+            "必有重谢"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 因交通堵塞，我今天________上班。",
+          "options": [
+            "举行",
+            "安排",
+            "无法",
+            "配合"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Do đó không thể lên lớp bình thường.\"",
+          "options": [
+            "因此无法举行。",
+            "因此无法正常上课。",
+            "因此无法出售。",
+            "因此无法推荐。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "因处理事务，无法正常上课，特此请假半天。",
+          "audioVi": "Vì giải quyết việc bận không thể lên lớp bình thường, nay xin nghỉ phép nửa ngày.",
+          "prompt": "Hệ quả của việc bận rộn giải quyết thủ tục là gì?",
+          "options": [
+            "Phải nghỉ học/lên lớp nửa ngày",
+            "Được tăng lương và khen thưởng",
+            "Được nghỉ phép nguyên một tháng",
+            "Chuyển hẳn sang lớp học khác"
+          ],
+          "answer": 0
+        }
+      ],
+      "orderIndex": 2
+    },
+    {
+      "word": "歉意",
+      "pinyin": "qiànyì",
+      "meaning": "Xin lỗi",
+      "partOfSpeech": "Cụm thành ngữ / Thán từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiM2ZDI4ZDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjNmQyOGQ5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIyNCwxMjhhOTYsOTYsMCwxLDEtOTYtOTZBOTYsOTYsMCwwLDEsMjI0LDEyOFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMjgsMjRBMTA0LDEwNCwwLDEsMCwyMzIsMTI4LDEwNC4xMSwxMDQuMTEsMCwwLDAsMTI4LDI0Wm0wLDE5MmE4OCw4OCwwLDEsMSw4OC04OEE4OC4xLDg4LjEsMCwwLDEsMTI4LDIxNlpNODAsMTA4YTEyLDEyLDAsMSwxLDEyLDEyQTEyLDEyLDAsMCwxLDgwLDEwOFptOTYsMGExMiwxMiwwLDEsMS0xMi0xMkExMiwxMiwwLDAsMSwxNzYsMTA4Wm0tMS4wOCw2NGE4LDgsMCwxLDEtMTMuODQsOGMtNy40Ny0xMi45MS0xOS4yMS0yMC0zMy4wOC0yMHMtMjUuNjEsNy4xLTMzLjA4LDIwYTgsOCwwLDEsMS0xMy44NC04YzEwLjI5LTE3Ljc5LDI3LjM5LTI4LDQ2LjkyLTI4UzE2NC42MywxNTQuMiwxNzQuOTIsMTcyWiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "深表歉意",
+        "对...深表歉意"
+      ],
+      "exampleZh": "在此期间因请假影响公司/团队工作深表歉意。",
+      "exampleVi": "Chân thành xin lỗi vì việc xin nghỉ trong thời gian này ảnh hưởng đến công việc chung của công ty/đội ngũ.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Cụm từ hành chính trang trọng dùng trong đơn từ để bày tỏ sự áy náy, xin lỗi vì việc vắng mặt gây ảnh hưởng là:",
+          "options": [
+            "必有重谢",
+            "深表歉意",
+            "此致敬礼",
+            "欢迎光临"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 针对此次延误，我方________。",
+          "options": [
+            "举行",
+            "安排",
+            "深表歉意",
+            "参加"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Tôi vô cùng xin lỗi vì đã gây ảnh hưởng đến công việc chung.\"",
+          "options": [
+            "对此深表举行。",
+            "对此期间因请假影响工作深表歉意。",
+            "对此深表安排。",
+            "对此深表申请。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "在此期间因请假影响公司工作，深表歉意。",
+          "audioVi": "Trong thời gian này do xin nghỉ ảnh hưởng đến công việc công ty, xin chân thành xin lỗi.",
+          "prompt": "Thái độ của người viết đơn đối với tập thể/công ty khi xin nghỉ là gì?",
+          "options": [
+            "Dửng dưng không màng tới",
+            "Vô cùng áy náy và xin lỗi vì ảnh hưởng chung",
+            "Tự hào vì được nghỉ phép nhiều",
+            "Buộc tội đồng nghiệp làm thay việc"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 3
+    },
+    {
+      "word": "请假",
+      "pinyin": "qǐngjià",
+      "meaning": "Xin nghỉ",
+      "partOfSpeech": "Mẫu câu cố định cuối chính văn",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiM2ZDI4ZDkiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjNmQyOGQ5IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTE1OS40Niw1M2wtMTcuNzgsODNIMTE0LjMyTDk2LjU0LDUzQTI0LDI0LDAsMCwxLDEyMCwyNGgxNkEyNCwyNCwwLDAsMSwxNTkuNDYsNTNaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjI0LDIyNGE4LDgsMCwwLDEtOCw4SDQwYTgsOCwwLDAsMSwwLTE2SDIxNkE4LDgsMCwwLDEsMjI0LDIyNFptMC04MHY0MGExNiwxNiwwLDAsMS0xNiwxNkg0OGExNiwxNiwwLDAsMS0xNi0xNlYxNDRhMTYsMTYsMCwwLDEsMTYtMTZoNTYuNDNMODguNzIsNTQuNzFBMzIsMzIsMCwwLDEsMTIwLDE2aDE2YTMyLDMyLDAsMCwxLDMxLjI5LDM4LjcxTDE1MS41NywxMjhIMjA4QTE2LDE2LDAsMCwxLDIyNCwxNDRaTTEyMC43OSwxMjhoMTQuNDJsMTYuNDMtNzYuNjVBMTYsMTYsMCwwLDAsMTM2LDMySDEyMGExNiwxNiwwLDAsMC0xNS42NSwxOS4zNVpNMjA4LDE4NFYxNDRINDh2NDBIMjA4WiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "特向您请假",
+        "并望批准"
+      ],
+      "exampleZh": "特向您请假，并望批准。",
+      "exampleVi": "Nay xin phép nghỉ, và mong ngài phê chuẩn (câu kết cố định ở cuối chính văn).",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Mẫu câu kết luận chính văn quen thuộc nhất trong đơn xin nghỉ phép gửi cấp trên là:",
+          "options": [
+            "此致敬礼",
+            "特向您请假，并望批准",
+            "必有重谢",
+            "毫不保留"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: ________，并望批准。",
+          "options": [
+            "特向您请假",
+            "举行会议",
+            "出售电脑",
+            "推荐学生"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Nay xin phép nghỉ, và mong ngài phê chuẩn.\"",
+          "options": [
+            "特向您请假，并望批准。",
+            "特向您举行，并望批准。",
+            "特向您安排，并望批准。",
+            "特向您答复，并望批准。"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "listen",
+          "audioZh": "特向您请假，并望批准。",
+          "audioVi": "Nay xin phép nghỉ, và mong ngài phê chuẩn.",
+          "prompt": "Mục đích của câu văn này ở cuối phần nội dung đơn là gì?",
+          "options": [
+            "Thể hiện sự tôn trọng và khẩn cầu cấp trên chấp thuận đơn",
+            "Thông báo từ chức",
+            "Yêu cầu tăng lương",
+            "Báo cáo hoàn thành công việc"
+          ],
+          "answer": 0
+        }
+      ],
+      "orderIndex": 4
     }
   ]
 }

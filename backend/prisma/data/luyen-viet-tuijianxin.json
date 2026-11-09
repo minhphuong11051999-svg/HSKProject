@@ -46,23 +46,80 @@
     }
   ],
   "vocabTerms": [
-    { "literary": "获悉 / 欣闻", "colloquial": "知道", "meaningVi": "Biết được, nghe nói", "example": "获悉贵院近期正在招聘兼职英语教师，我诚挚地向您推荐我的学生吉米。" },
-    { "literary": "颇为 / 极", "colloquial": "很、非常", "meaningVi": "Rất, khá", "example": "对中国文化也颇为熟悉。" },
-    { "literary": "主修 / 攻读", "colloquial": "学习", "meaningVi": "Học ngành chính là / theo học", "example": "现主修中国文化。" },
-    { "literary": "诚挚地向您推荐 / 郑重推荐", "colloquial": "推荐", "meaningVi": "Giới thiệu, tiến cử", "example": "我诚挚地向您推荐我的学生吉米。" },
-    { "literary": "完全可以胜任该项工作", "colloquial": "做得好这个工作", "meaningVi": "Có thể làm tốt việc này", "example": "我深信该生完全可以胜任这份工作，并为贵校做出积极贡献。" },
-    { "literary": "非常乐意", "colloquial": "很乐意", "meaningVi": "Rất sẵn lòng", "example": "非常乐意为贵院提供进一步的资料。" }
+    {
+      "literary": "获悉 / 欣闻",
+      "colloquial": "知道",
+      "meaningVi": "Biết được, nghe nói",
+      "example": "获悉贵院近期正在招聘兼职英语教师，我诚挚地向您推荐我的学生吉米。"
+    },
+    {
+      "literary": "颇为 / 极",
+      "colloquial": "很、非常",
+      "meaningVi": "Rất, khá",
+      "example": "对中国文化也颇为熟悉。"
+    },
+    {
+      "literary": "主修 / 攻读",
+      "colloquial": "学习",
+      "meaningVi": "Học ngành chính là / theo học",
+      "example": "现主修中国文化。"
+    },
+    {
+      "literary": "诚挚地向您推荐 / 郑重推荐",
+      "colloquial": "推荐",
+      "meaningVi": "Giới thiệu, tiến cử",
+      "example": "我诚挚地向您推荐我的学生吉米。"
+    },
+    {
+      "literary": "完全可以胜任该项工作",
+      "colloquial": "做得好这个工作",
+      "meaningVi": "Có thể làm tốt việc này",
+      "example": "我深信该生完全可以胜任这份工作，并为贵校做出积极贡献。"
+    },
+    {
+      "literary": "非常乐意",
+      "colloquial": "很乐意",
+      "meaningVi": "Rất sẵn lòng",
+      "example": "非常乐意为贵院提供进一步的资料。"
+    }
   ],
   "fixedPhrases": [
-    { "chinese": "招聘兼职汉语教师", "viExplanation": "Thay thế cho cách nói khẩu ngữ \"招汉语老师\" — dùng động từ chính thức 招聘 kèm danh từ chức danh đầy đủ." },
-    { "chinese": "我诚挚地向您推荐我的学生吉米", "viExplanation": "Thay thế cho cách nói khẩu ngữ \"我想把我的学生吉米介绍给你们\" — dùng mẫu câu tiến cử trang trọng 诚挚地向您推荐。" },
-    { "chinese": "该生", "viExplanation": "Thay thế cho cách nói khẩu ngữ \"这个学生\" — đại từ chỉ định trang trọng dùng trong văn bản hành chính." },
-    { "chinese": "已经获得教育学学士学位", "viExplanation": "Thay thế cho cách nói khẩu ngữ \"拿到了学士学位\" — động từ 获得 trang trọng hơn 拿到。" },
-    { "chinese": "汉语已达到新HSK六级水平", "viExplanation": "Thay thế cho cách nói khẩu ngữ \"中文非常棒\" — nêu minh chứng cụ thể, định lượng thay vì khen chung chung." },
-    { "chinese": "相信能给您的学生一个轻松愉快的学习氛围", "viExplanation": "Thay thế cho cách nói khẩu ngữ \"肯定能和你们的学生玩得开心\" — diễn đạt trang trọng, phù hợp văn phong công vụ." },
-    { "chinese": "获悉[Đơn vị]……，我诚挚地向您推荐……。", "viExplanation": "Mẫu câu mở đầu thư giới thiệu chính thống: được biết... nay tôi xin chân thành tiến cử..." },
-    { "chinese": "我深信……完全可以胜任……，并为……做出积极贡献。", "viExplanation": "Mẫu câu khẳng định tiến cử: tôi tin tưởng sâu sắc rằng... hoàn toàn có thể đảm nhiệm... và đóng góp cho..." },
-    { "chinese": "相信……会有所帮助，祝……学习进步！", "viExplanation": "Mẫu câu kết thúc bài chia sẻ trải nghiệm (Loại 2): tin rằng... sẽ giúp ích, chúc... học tập tiến bộ." }
+    {
+      "chinese": "招聘兼职汉语教师",
+      "viExplanation": "Thay thế cho cách nói khẩu ngữ \"招汉语老师\" — dùng động từ chính thức 招聘 kèm danh từ chức danh đầy đủ."
+    },
+    {
+      "chinese": "我诚挚地向您推荐我的学生吉米",
+      "viExplanation": "Thay thế cho cách nói khẩu ngữ \"我想把我的学生吉米介绍给你们\" — dùng mẫu câu tiến cử trang trọng 诚挚地向您推荐。"
+    },
+    {
+      "chinese": "该生",
+      "viExplanation": "Thay thế cho cách nói khẩu ngữ \"这个学生\" — đại từ chỉ định trang trọng dùng trong văn bản hành chính."
+    },
+    {
+      "chinese": "已经获得教育学学士学位",
+      "viExplanation": "Thay thế cho cách nói khẩu ngữ \"拿到了学士学位\" — động từ 获得 trang trọng hơn 拿到。"
+    },
+    {
+      "chinese": "汉语已达到新HSK六级水平",
+      "viExplanation": "Thay thế cho cách nói khẩu ngữ \"中文非常棒\" — nêu minh chứng cụ thể, định lượng thay vì khen chung chung."
+    },
+    {
+      "chinese": "相信能给您的学生一个轻松愉快的学习氛围",
+      "viExplanation": "Thay thế cho cách nói khẩu ngữ \"肯定能和你们的学生玩得开心\" — diễn đạt trang trọng, phù hợp văn phong công vụ."
+    },
+    {
+      "chinese": "获悉[Đơn vị]……，我诚挚地向您推荐……。",
+      "viExplanation": "Mẫu câu mở đầu thư giới thiệu chính thống: được biết... nay tôi xin chân thành tiến cử..."
+    },
+    {
+      "chinese": "我深信……完全可以胜任……，并为……做出积极贡献。",
+      "viExplanation": "Mẫu câu khẳng định tiến cử: tôi tin tưởng sâu sắc rằng... hoàn toàn có thể đảm nhiệm... và đóng góp cho..."
+    },
+    {
+      "chinese": "相信……会有所帮助，祝……学习进步！",
+      "viExplanation": "Mẫu câu kết thúc bài chia sẻ trải nghiệm (Loại 2): tin rằng... sẽ giúp ích, chúc... học tập tiến bộ."
+    }
   ],
   "quizQuestions": [
     {
@@ -150,110 +207,636 @@
     {
       "templateHtml": "<p class=\"text-xs font-semibold text-slate-500 mb-2\">Câu 1 · Giới thiệu thân phận bản thân và nêu rõ ý định tiến cử</p><p class=\"cjk leading-8\">_____(1)_____贵院近期正在招聘_____(2)_____，我诚挚地向您推荐_____(3)_____。</p>",
       "blanks": [
-        { "id": "blank1", "answer": "获悉", "options": ["获悉", "兼职汉语教师", "我的学生吉米"] },
-        { "id": "blank2", "answer": "兼职汉语教师", "options": ["获悉", "兼职汉语教师", "我的学生吉米"] },
-        { "id": "blank3", "answer": "我的学生吉米", "options": ["获悉", "兼职汉语教师", "我的学生吉米"] }
+        {
+          "id": "blank1",
+          "answer": "获悉",
+          "options": [
+            "获悉",
+            "兼职汉语教师",
+            "我的学生吉米"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "兼职汉语教师",
+          "options": [
+            "获悉",
+            "兼职汉语教师",
+            "我的学生吉米"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "我的学生吉米",
+          "options": [
+            "获悉",
+            "兼职汉语教师",
+            "我的学生吉米"
+          ]
+        }
       ],
       "orderIndex": 0
     },
     {
       "templateHtml": "<p class=\"text-xs font-semibold text-slate-500 mb-2\">Câu 2 · Kể thành tích học tập và năng lực ngoại ngữ của ứng viên</p><p class=\"cjk leading-8\">该生在_____(1)_____已经获得_____(2)_____学位，且汉语已达到_____(3)_____水平。</p>",
       "blanks": [
-        { "id": "blank1", "answer": "英国", "options": ["英国", "教育学学士", "新HSK六级"] },
-        { "id": "blank2", "answer": "教育学学士", "options": ["英国", "教育学学士", "新HSK六级"] },
-        { "id": "blank3", "answer": "新HSK六级", "options": ["英国", "教育学学士", "新HSK六级"] }
+        {
+          "id": "blank1",
+          "answer": "英国",
+          "options": [
+            "英国",
+            "教育学学士",
+            "新HSK六级"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "教育学学士",
+          "options": [
+            "英国",
+            "教育学学士",
+            "新HSK六级"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "新HSK六级",
+          "options": [
+            "英国",
+            "教育学学士",
+            "新HSK六级"
+          ]
+        }
       ],
       "orderIndex": 1
     },
     {
       "templateHtml": "<p class=\"text-xs font-semibold text-slate-500 mb-2\">Câu 3 · Nhận xét tính cách và khẳng định đóng góp của ứng viên</p><p class=\"cjk leading-8\">吉米_____(1)_____，相信能给您的学生一个_____(2)_____的学习氛围。</p>",
       "blanks": [
-        { "id": "blank1", "answer": "性格活跃开朗", "options": ["性格活跃开朗", "轻松愉快"] },
-        { "id": "blank2", "answer": "轻松愉快", "options": ["性格活跃开朗", "轻松愉快"] }
+        {
+          "id": "blank1",
+          "answer": "性格活跃开朗",
+          "options": [
+            "性格活跃开朗",
+            "轻松愉快"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "轻松愉快",
+          "options": [
+            "性格活跃开朗",
+            "轻松愉快"
+          ]
+        }
       ],
       "orderIndex": 2
     },
     {
       "templateHtml": "<p class=\"text-xs font-semibold text-slate-500 mb-2\">Câu 4 · Kể lại trải nghiệm thực tế của bản thân và giới thiệu khóa học</p><p class=\"cjk leading-8\">_____(1)_____我_____(2)_____一门线上汉语课程，觉得_____(3)_____，所以想推荐给大家。</p>",
       "blanks": [
-        { "id": "blank1", "answer": "最近", "options": ["最近", "参加了", "收获很大"] },
-        { "id": "blank2", "answer": "参加了", "options": ["最近", "参加了", "收获很大"] },
-        { "id": "blank3", "answer": "收获很大", "options": ["最近", "参加了", "收获很大"] }
+        {
+          "id": "blank1",
+          "answer": "最近",
+          "options": [
+            "最近",
+            "参加了",
+            "收获很大"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "参加了",
+          "options": [
+            "最近",
+            "参加了",
+            "收获很大"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "收获很大",
+          "options": [
+            "最近",
+            "参加了",
+            "收获很大"
+          ]
+        }
       ],
       "orderIndex": 3
     },
     {
       "templateHtml": "<p class=\"text-xs font-semibold text-slate-500 mb-2\">Câu 5 · Giới thiệu tính phù hợp của sản phẩm đối với đối tượng cụ thể</p><p class=\"cjk leading-8\">我认为这门课程特别适合_____(1)_____和_____(2)_____的同学。</p>",
       "blanks": [
-        { "id": "blank1", "answer": "汉语初学者", "options": ["汉语初学者", "想提高口语水平"] },
-        { "id": "blank2", "answer": "想提高口语水平", "options": ["汉语初学者", "想提高口语水平"] }
+        {
+          "id": "blank1",
+          "answer": "汉语初学者",
+          "options": [
+            "汉语初学者",
+            "想提高口语水平"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "想提高口语水平",
+          "options": [
+            "汉语初学者",
+            "想提高口语水平"
+          ]
+        }
       ],
       "orderIndex": 4
     },
     {
       "templateHtml": "<p class=\"text-xs font-semibold text-slate-500 mb-2\">Câu 6 · Đưa ra lời khuyên học tập thực tế để đạt hiệu quả</p><p class=\"cjk leading-8\">如果你想学好汉语，建议每天_____(1)_____，_____(2)_____作业，这样_____(3)_____。</p>",
       "blanks": [
-        { "id": "blank1", "answer": "坚持学习", "options": ["坚持学习", "认真完成", "进步会更快"] },
-        { "id": "blank2", "answer": "认真完成", "options": ["坚持学习", "认真完成", "进步会更快"] },
-        { "id": "blank3", "answer": "进步会更快", "options": ["坚持学习", "认真完成", "进步会更快"] }
+        {
+          "id": "blank1",
+          "answer": "坚持学习",
+          "options": [
+            "坚持学习",
+            "认真完成",
+            "进步会更快"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "认真完成",
+          "options": [
+            "坚持学习",
+            "认真完成",
+            "进步会更快"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "进步会更快",
+          "options": [
+            "坚持学习",
+            "认真完成",
+            "进步会更快"
+          ]
+        }
       ],
       "orderIndex": 5
     }
   ],
   "matchItems": [
-    { "leftLabelVi": "Biết được, nghe nói (知道)", "rightLabelZh": "获悉 / 欣闻", "correctKey": "获悉 / 欣闻", "explanation": "知道 ➔ 获悉 / 欣闻: dùng trong câu mở đầu thư giới thiệu, ví dụ 获悉贵院近期正在招聘兼职英语教师。", "orderIndex": 0 },
-    { "leftLabelVi": "Rất, khá (很、非常)", "rightLabelZh": "颇为 / 极", "correctKey": "颇为 / 极", "explanation": "很、非常 ➔ 颇为 / 极: ví dụ 对中国文化也颇为熟悉。", "orderIndex": 1 },
-    { "leftLabelVi": "Học ngành chính là / theo học (学习)", "rightLabelZh": "主修 / 攻读", "correctKey": "主修 / 攻读", "explanation": "学习 ➔ 主修 / 攻读: ví dụ 现主修中国文化。", "orderIndex": 2 },
-    { "leftLabelVi": "Giới thiệu, tiến cử (推荐)", "rightLabelZh": "诚挚地向您推荐 / 郑重推荐", "correctKey": "诚挚地向您推荐 / 郑重推荐", "explanation": "推荐 ➔ 诚挚地向您推荐 / 郑重推荐: ví dụ 我诚挚地向您推荐我的学生吉米。", "orderIndex": 3 },
-    { "leftLabelVi": "Có thể làm tốt việc này (做得好这个工作)", "rightLabelZh": "完全可以胜任该项工作", "correctKey": "完全可以胜任该项工作", "explanation": "做得好这个工作 ➔ 完全可以胜任该项工作: cách diễn đạt trang trọng khi khẳng định năng lực ứng viên, ví dụ 我深信该生完全可以胜任这份工作。", "orderIndex": 4 },
-    { "leftLabelVi": "Rất sẵn lòng (很乐意)", "rightLabelZh": "非常乐意", "correctKey": "非常乐意", "explanation": "很乐意 ➔ 非常乐意: tăng mức độ trang trọng khi bày tỏ sự sẵn lòng trong văn phong viết.", "orderIndex": 5 }
+    {
+      "leftLabelVi": "Biết được, nghe nói (知道)",
+      "rightLabelZh": "获悉 / 欣闻",
+      "correctKey": "获悉 / 欣闻",
+      "explanation": "知道 ➔ 获悉 / 欣闻: dùng trong câu mở đầu thư giới thiệu, ví dụ 获悉贵院近期正在招聘兼职英语教师。",
+      "orderIndex": 0
+    },
+    {
+      "leftLabelVi": "Rất, khá (很、非常)",
+      "rightLabelZh": "颇为 / 极",
+      "correctKey": "颇为 / 极",
+      "explanation": "很、非常 ➔ 颇为 / 极: ví dụ 对中国文化也颇为熟悉。",
+      "orderIndex": 1
+    },
+    {
+      "leftLabelVi": "Học ngành chính là / theo học (学习)",
+      "rightLabelZh": "主修 / 攻读",
+      "correctKey": "主修 / 攻读",
+      "explanation": "学习 ➔ 主修 / 攻读: ví dụ 现主修中国文化。",
+      "orderIndex": 2
+    },
+    {
+      "leftLabelVi": "Giới thiệu, tiến cử (推荐)",
+      "rightLabelZh": "诚挚地向您推荐 / 郑重推荐",
+      "correctKey": "诚挚地向您推荐 / 郑重推荐",
+      "explanation": "推荐 ➔ 诚挚地向您推荐 / 郑重推荐: ví dụ 我诚挚地向您推荐我的学生吉米。",
+      "orderIndex": 3
+    },
+    {
+      "leftLabelVi": "Có thể làm tốt việc này (做得好这个工作)",
+      "rightLabelZh": "完全可以胜任该项工作",
+      "correctKey": "完全可以胜任该项工作",
+      "explanation": "做得好这个工作 ➔ 完全可以胜任该项工作: cách diễn đạt trang trọng khi khẳng định năng lực ứng viên, ví dụ 我深信该生完全可以胜任这份工作。",
+      "orderIndex": 4
+    },
+    {
+      "leftLabelVi": "Rất sẵn lòng (很乐意)",
+      "rightLabelZh": "非常乐意",
+      "correctKey": "非常乐意",
+      "explanation": "很乐意 ➔ 非常乐意: tăng mức độ trang trọng khi bày tỏ sự sẵn lòng trong văn phong viết.",
+      "orderIndex": 5
+    }
   ],
   "writingTasks": [
     {
       "title": "Nhiệm vụ 1 · 开头 (Mở đầu tiến cử)",
-      "facts": ["Câu cần dịch: Được biết quý công ty gần đây đang tuyển dụng nhân viên marketing, tôi xin chân thành giới thiệu học sinh của tôi là Vương Vĩ đến ngài."],
-      "requiredKeywords": ["获悉", "诚挚地向您推荐"],
+      "facts": [
+        "Câu cần dịch: Được biết quý công ty gần đây đang tuyển dụng nhân viên marketing, tôi xin chân thành giới thiệu học sinh của tôi là Vương Vĩ đến ngài."
+      ],
+      "requiredKeywords": [
+        "获悉",
+        "诚挚地向您推荐"
+      ],
       "hint": "获悉……，我诚挚地向您推荐……",
       "referenceAnswer": "获悉贵公司近期正在招聘市场营销人员，我诚挚地向您推荐我的学生王伟。",
       "orderIndex": 0
     },
     {
       "title": "Nhiệm vụ 2 · 评价 (Đánh giá năng lực)",
-      "facts": ["Câu cần dịch: Cậu ấy là người trung thực, năng lực tổ chức tốt, là một nhân tài hiếm có."],
-      "requiredKeywords": ["为人", "组织能力", "不可多得的人才"],
+      "facts": [
+        "Câu cần dịch: Cậu ấy là người trung thực, năng lực tổ chức tốt, là một nhân tài hiếm có."
+      ],
+      "requiredKeywords": [
+        "为人",
+        "组织能力",
+        "不可多得的人才"
+      ],
       "hint": "为人……，组织能力……，是不可多得的人才",
       "referenceAnswer": "该生为人诚实，组织能力强，是不可多得的人才。",
       "orderIndex": 1
     },
     {
       "title": "Nhiệm vụ 3 · 推荐 (Khẳng định tiến cử)",
-      "facts": ["Câu cần dịch: Tôi tin tưởng sâu sắc rằng cậu ấy hoàn toàn có thể đảm nhiệm tốt công việc này và đóng góp cho quý trường."],
-      "requiredKeywords": ["我深信", "完全可以胜任", "并为"],
+      "facts": [
+        "Câu cần dịch: Tôi tin tưởng sâu sắc rằng cậu ấy hoàn toàn có thể đảm nhiệm tốt công việc này và đóng góp cho quý trường."
+      ],
+      "requiredKeywords": [
+        "我深信",
+        "完全可以胜任",
+        "并为"
+      ],
       "hint": "我深信……完全可以胜任……并为贵校……",
       "referenceAnswer": "我深信该生完全可以胜任这份工作，并为贵校做出积极贡献。",
       "orderIndex": 2
     },
     {
       "title": "Nhiệm vụ 4 · 结尾祝愿 (Lời chúc kết thúc)",
-      "facts": ["Câu cần dịch: Tôi tin rằng phần mềm này sẽ giúp ích rất nhiều cho mọi người, chúc các bạn học tập tiến bộ!"],
-      "requiredKeywords": ["相信", "会有所帮助", "祝", "学习进步"],
+      "facts": [
+        "Câu cần dịch: Tôi tin rằng phần mềm này sẽ giúp ích rất nhiều cho mọi người, chúc các bạn học tập tiến bộ!"
+      ],
+      "requiredKeywords": [
+        "相信",
+        "会有所帮助",
+        "祝",
+        "学习进步"
+      ],
       "hint": "相信……会有所帮助 / 祝……学习进步！",
       "referenceAnswer": "相信这款软件对大家会有所帮助，祝大家学习进步！",
       "orderIndex": 3
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "Tiêu đề (标题) — bỏ trống nếu là thư Loại 2 (không bắt buộc có tiêu đề riêng)", "placeholder": "推荐信 (nếu có)", "inputType": "text", "orderIndex": 0 },
-    { "name": "greet", "label": "Đối tượng nhận / Lời chào (称呼)", "placeholder": "大家好！", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "Chính văn (正文) — mỗi dòng Enter = 1 đoạn mới", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "sign", "label": "Đơn vị / Ký tên (署名)", "placeholder": "(có thể để trống)", "inputType": "text", "orderIndex": 3 },
-    { "name": "date", "label": "Ngày tháng (日期)", "placeholder": "(có thể để trống)", "inputType": "text", "orderIndex": 4 }
+    {
+      "name": "title",
+      "label": "Tiêu đề (标题) — bỏ trống nếu là thư Loại 2 (không bắt buộc có tiêu đề riêng)",
+      "placeholder": "推荐信 (nếu có)",
+      "inputType": "text",
+      "orderIndex": 0
+    },
+    {
+      "name": "greet",
+      "label": "Đối tượng nhận / Lời chào (称呼)",
+      "placeholder": "大家好！",
+      "inputType": "text",
+      "orderIndex": 1
+    },
+    {
+      "name": "body",
+      "label": "Chính văn (正文) — mỗi dòng Enter = 1 đoạn mới",
+      "placeholder": "输入正文…",
+      "inputType": "textarea",
+      "orderIndex": 2
+    },
+    {
+      "name": "sign",
+      "label": "Đơn vị / Ký tên (署名)",
+      "placeholder": "(có thể để trống)",
+      "inputType": "text",
+      "orderIndex": 3
+    },
+    {
+      "name": "date",
+      "label": "Ngày tháng (日期)",
+      "placeholder": "(có thể để trống)",
+      "inputType": "text",
+      "orderIndex": 4
+    }
   ],
   "guidedWritingScenarios": [
     {
       "situationPrompt": "Đề bài: Gần đây bạn đã trải nghiệm ứng dụng \"笔顺背汉字\" rất hiệu quả. Hãy viết bài chia sẻ trải nghiệm (Loại 2), khoảng 100–120 chữ, giới thiệu & khuyên dùng ứng dụng này tới các bạn cùng lớp trên nhóm chat chung.",
       "modelAnswer": "大家好！\n\n最近我使用了一款名为\"笔顺背汉字\"的手机软件，觉得对汉字学习收获很大，所以想推荐给大家。这个软件主要展示汉字的笔顺动画，还配有标准的汉语发音，内容非常生动实用。\n\n通过使用这个软件，我记住了很多难写的汉字，也写得更规范了，不再害怕写汉字。我认为这款软件特别适合汉字初学者和想写好汉字的同学。\n\n如果你想提高汉字水平，建议每天坚持使用这个软件练习十分钟，认真模仿汉字的笔顺，这样进步会更快。\n\n希望大家有机会也来试试，相信对你们一定会有所帮助！祝大家学习进步！",
       "targetWordCount": 115
+    }
+  ],
+  "flashcards": [
+    {
+      "word": "推荐",
+      "pinyin": "tuījiàn",
+      "meaning": "Giới thiệu",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMxZDRlZDgiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMWQ0ZWQ4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTgwLDEwNFYyMDhIMzJhOCw4LDAsMCwxLTgtOFYxMTJhOCw4LDAsMCwxLDgtOFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMzQsODAuMTJBMjQsMjQsMCwwLDAsMjE2LDcySDE2MFY1NmE0MCw0MCwwLDAsMC00MC00MCw4LDgsMCwwLDAtNy4xNiw0LjQyTDc1LjA2LDk2SDMyYTE2LDE2LDAsMCwwLTE2LDE2djg4YTE2LDE2LDAsMCwwLDE2LDE2SDIwNGEyNCwyNCwwLDAsMCwyMy44Mi0yMWwxMi05NkEyNCwyNCwwLDAsMCwyMzQsODAuMTJaTTMyLDExMkg3MnY4OEgzMlpNMjIzLjk0LDk3bC0xMiw5NmE4LDgsMCwwLDEtNy45NCw3SDg4VjEwNS44OWwzNi43MS03My40M0EyNCwyNCwwLDAsMSwxNDQsNTZWODBhOCw4LDAsMCwwLDgsOGg2NGE4LDgsMCwwLDEsNy45NCw5WiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "诚挚地推荐",
+        "无保留地推荐"
+      ],
+      "exampleZh": "我诚挚地推荐我的学生吉米。",
+      "exampleVi": "Tôi chân thành tiến cử học sinh của tôi - Jimmy.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Động từ hành chính chuẩn mực dùng để viết thư giới thiệu, tiến cử nhân sự hoặc ứng viên là:",
+          "options": [
+            "耽误",
+            "推荐",
+            "答复",
+            "附件"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 本人特此向贵单位________优秀毕业生。",
+          "options": [
+            "耽误",
+            "答复",
+            "申请",
+            "推荐"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Tôi chân thành tiến cử học sinh của tôi.\"",
+          "options": [
+            "我诚挚地答复我的学生。",
+            "我诚挚地推荐我的学生。",
+            "我诚挚地耽误我的学生。",
+            "我诚挚地申请我的学生。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "我诚挚地向您推荐我的学生吉米。",
+          "audioVi": "Tôi chân thành tiến cử học sinh của tôi - Jimmy đến ngài.",
+          "prompt": "Mục đích chính của câu văn này trong thư là gì?",
+          "options": [
+            "Từ chối nhận học sinh vào lớp",
+            "Tiến cử và giới thiệu học sinh với người nhận thư",
+            "Phàn nàn về thành tích học tập của học sinh",
+            "Thông báo hủy lịch gặp mặt"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 0
+    },
+    {
+      "word": "获得",
+      "pinyin": "huòdé",
+      "meaning": "Đạt được",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMxZDRlZDgiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMWQ0ZWQ4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIwMCw0OHY2My4xYzAsMzkuNy0zMS43NSw3Mi42LTcxLjQ1LDcyLjlBNzIsNzIsMCwwLDEsNTYsMTEyVjQ4WiIgb3BhY2l0eT0iMC4yIj48L3BhdGg+PHBhdGggZD0iTTIzMiw2NEgyMDhWNDhhOCw4LDAsMCwwLTgtOEg1NmE4LDgsMCwwLDAtOCw4VjY0SDI0QTE2LDE2LDAsMCwwLDgsODBWOTZhNDAsNDAsMCwwLDAsNDAsNDBoMy42NUE4MC4xMyw4MC4xMywwLDAsMCwxMjAsMTkxLjYxVjIxNkg5NmE4LDgsMCwwLDAsMCwxNmg2NGE4LDgsMCwwLDAsMC0xNkgxMzZWMTkxLjU4YzMxLjk0LTMuMjMsNTguNDQtMjUuNjQsNjguMDgtNTUuNThIMjA4YTQwLDQwLDAsMCwwLDQwLTQwVjgwQTE2LDE2LDAsMCwwLDIzMiw2NFpNNDgsMTIwQTI0LDI0LDAsMCwxLDI0LDk2VjgwSDQ4djMycTAsNCwuMzksOFptMTQ0LTguOWMwLDM1LjUyLTI5LDY0LjY0LTY0LDY0LjlhNjQsNjQsMCwwLDEtNjQtNjRWNTZIMTkyWk0yMzIsOTZhMjQsMjQsMCwwLDEtMjQsMjRoLS41YTgxLjgxLDgxLjgxLDAsMCwwLC41LTguOVY4MGgyNFoiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "获得学位",
+        "获得资格"
+      ],
+      "exampleZh": "该生已经获得教育学学士学位。",
+      "exampleVi": "Em học sinh này đã nhận được bằng cử nhân giáo dục.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Động từ trang trọng dùng để thay thế cho từ 'lấy được / cầm được' bằng văn phong hành chính khi nói về văn bằng, học vị là:",
+          "options": [
+            "举行",
+            "安排",
+            "获得",
+            "参加"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 候选人已经________硕士学位。",
+          "options": [
+            "举行",
+            "安排",
+            "参加",
+            "获得"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Em ấy đã nhận được bằng cử nhân giáo dục.\"",
+          "options": [
+            "该生已经举行教育学学士学位。",
+            "该生已经安排教育学学士学位。",
+            "该生已经获得教育学学士学位。",
+            "该生已经参加教育学学士学位。"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "listen",
+          "audioZh": "该生已经获得教育学学士学位。",
+          "audioVi": "Em học sinh này đã nhận được bằng cử nhân giáo dục.",
+          "prompt": "Thông tin về học vấn của ứng viên được đề cập là gì?",
+          "options": [
+            "Đang học tiểu học năm cuối",
+            "Chưa từng tham gia trường lớp nào",
+            "Đã đạt được bằng cấp cử nhân chuyên ngành giáo dục",
+            "Đang xin bảo lưu kết quả học tập"
+          ],
+          "answer": 2
+        }
+      ],
+      "orderIndex": 1
+    },
+    {
+      "word": "胜任",
+      "pinyin": "shèngrèn",
+      "meaning": "Đảm nhận",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMxZDRlZDgiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMWQ0ZWQ4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIzMiwxMjhjMCwxMi41MS0xNy44MiwyMS45NS0yMi42OCwzMy42OS00LjY4LDExLjMyLDEuNDIsMzAuNjUtNy43OCwzOS44NXMtMjguNTMsMy4xLTM5Ljg1LDcuNzhDMTUwLDIxNC4xOCwxNDAuNSwyMzIsMTI4LDIzMnMtMjItMTcuODItMzMuNjktMjIuNjhjLTExLjMyLTQuNjgtMzAuNjUsMS40Mi0zOS44NS03Ljc4cy0zLjEtMjguNTMtNy43OC0zOS44NUM0MS44MiwxNTAsMjQsMTQwLjUsMjQsMTI4czE3LjgyLTIyLDIyLjY4LTMzLjY5QzUxLjM2LDgzLDQ1LjI2LDYzLjY2LDU0LjQ2LDU0LjQ2UzgzLDUxLjM2LDk0LjMxLDQ2LjY4QzEwNi4wNSw0MS44MiwxMTUuNSwyNCwxMjgsMjRTMTUwLDQxLjgyLDE2MS42OSw0Ni42OGMxMS4zMiw0LjY4LDMwLjY1LTEuNDIsMzkuODUsNy43OHMzLjEsMjguNTMsNy43OCwzOS44NUMyMTQuMTgsMTA2LjA1LDIzMiwxMTUuNSwyMzIsMTI4WiIgb3BhY2l0eT0iMC4yIj48L3BhdGg+PHBhdGggZD0iTTIyNS44NiwxMDIuODJjLTMuNzctMy45NC03LjY3LTgtOS4xNC0xMS41Ny0xLjM2LTMuMjctMS40NC04LjY5LTEuNTItMTMuOTQtLjE1LTkuNzYtLjMxLTIwLjgyLTgtMjguNTFzLTE4Ljc1LTcuODUtMjguNTEtOGMtNS4yNS0uMDgtMTAuNjctLjE2LTEzLjk0LTEuNTItMy41Ni0xLjQ3LTcuNjMtNS4zNy0xMS41Ny05LjE0QzE0Ni4yOCwyMy41MSwxMzguNDQsMTYsMTI4LDE2cy0xOC4yNyw3LjUxLTI1LjE4LDE0LjE0Yy0zLjk0LDMuNzctOCw3LjY3LTExLjU3LDkuMTRDODgsNDAuNjQsODIuNTYsNDAuNzIsNzcuMzEsNDAuOGMtOS43Ni4xNS0yMC44Mi4zMS0yOC41MSw4UzQxLDY3LjU1LDQwLjgsNzcuMzFjLS4wOCw1LjI1LS4xNiwxMC42Ny0xLjUyLDEzLjk0LTEuNDcsMy41Ni01LjM3LDcuNjMtOS4xNCwxMS41N0MyMy41MSwxMDkuNzIsMTYsMTE3LjU2LDE2LDEyOHM3LjUxLDE4LjI3LDE0LjE0LDI1LjE4YzMuNzcsMy45NCw3LjY3LDgsOS4xNCwxMS41NywxLjM2LDMuMjcsMS40NCw4LjY5LDEuNTIsMTMuOTQuMTUsOS43Ni4zMSwyMC44Miw4LDI4LjUxczE4Ljc1LDcuODUsMjguNTEsOGM1LjI1LjA4LDEwLjY3LjE2LDEzLjk0LDEuNTIsMy41NiwxLjQ3LDcuNjMsNS4zNywxMS41Nyw5LjE0QzEwOS43MiwyMzIuNDksMTE3LjU2LDI0MCwxMjgsMjQwczE4LjI3LTcuNTEsMjUuMTgtMTQuMTRjMy45NC0zLjc3LDgtNy42NywxMS41Ny05LjE0LDMuMjctMS4zNiw4LjY5LTEuNDQsMTMuOTQtMS41Miw5Ljc2LS4xNSwyMC44Mi0uMzEsMjguNTEtOHM3Ljg1LTE4Ljc1LDgtMjguNTFjLjA4LTUuMjUuMTYtMTAuNjcsMS41Mi0xMy45NCwxLjQ3LTMuNTYsNS4zNy03LjYzLDkuMTQtMTEuNTdDMjMyLjQ5LDE0Ni4yOCwyNDAsMTM4LjQ0LDI0MCwxMjhTMjMyLjQ5LDEwOS43MywyMjUuODYsMTAyLjgyWm0tMTEuNTUsMzkuMjljLTQuNzksNS05Ljc1LDEwLjE3LTEyLjM4LDE2LjUyLTIuNTIsNi4xLTIuNjMsMTMuMDctMi43MywxOS44Mi0uMSw3LS4yMSwxNC4zMy0zLjMyLDE3LjQzcy0xMC4zOSwzLjIyLTE3LjQzLDMuMzJjLTYuNzUuMS0xMy43Mi4yMS0xOS44MiwyLjczLTYuMzUsMi42My0xMS41Miw3LjU5LTE2LjUyLDEyLjM4UzEzMiwyMjQsMTI4LDIyNHMtOS4xNS00LjkyLTE0LjExLTkuNjktMTAuMTctOS43NS0xNi41Mi0xMi4zOGMtNi4xLTIuNTItMTMuMDctMi42My0xOS44Mi0yLjczLTctLjEtMTQuMzMtLjIxLTE3LjQzLTMuMzJzLTMuMjItMTAuMzktMy4zMi0xNy40M2MtLjEtNi43NS0uMjEtMTMuNzItMi43My0xOS44Mi0yLjYzLTYuMzUtNy41OS0xMS41Mi0xMi4zOC0xNi41MlMzMiwxMzIsMzIsMTI4czQuOTItOS4xNSw5LjY5LTE0LjExLDkuNzUtMTAuMTcsMTIuMzgtMTYuNTJjMi41Mi02LjEsMi42My0xMy4wNywyLjczLTE5LjgyLjEtNywuMjEtMTQuMzMsMy4zMi0xNy40M1M3MC41MSw1Ni45LDc3LjU1LDU2LjhjNi43NS0uMSwxMy43Mi0uMjEsMTkuODItMi43Myw2LjM1LTIuNjMsMTEuNTItNy41OSwxNi41Mi0xMi4zOFMxMjQsMzIsMTI4LDMyczkuMTUsNC45MiwxNC4xMSw5LjY5LDEwLjE3LDkuNzUsMTYuNTIsMTIuMzhjNi4xLDIuNTIsMTMuMDcsMi42MywxOS44MiwyLjczLDcsLjEsMTQuMzMuMjEsMTcuNDMsMy4zMnMzLjIyLDEwLjM5LDMuMzIsMTcuNDNjLjEsNi43NS4yMSwxMy43MiwyLjczLDE5LjgyLDIuNjMsNi4zNSw3LjU5LDExLjUyLDEyLjM4LDE2LjUyUzIyNCwxMjQsMjI0LDEyOCwyMTkuMDgsMTM3LjE1LDIxNC4zMSwxNDIuMTFaTTE3My42Niw5OC4zNGE4LDgsMCwwLDEsMCwxMS4zMmwtNTYsNTZhOCw4LDAsMCwxLTExLjMyLDBsLTI0LTI0YTgsOCwwLDAsMSwxMS4zMi0xMS4zMkwxMTIsMTQ4LjY5bDUwLjM0LTUwLjM1QTgsOCwwLDAsMSwxNzMuNjYsOTguMzRaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "完全可以胜任",
+        "胜任工作"
+      ],
+      "exampleZh": "我深信完全可以胜任。",
+      "exampleVi": "Tôi tin tưởng sâu sắc rằng hoàn toàn có thể đảm nhận.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Động từ hành chính dùng để khẳng định năng lực của ứng viên có đủ khả năng đảm đương vị trí công việc hay không là:",
+          "options": [
+            "耽误",
+            "答复",
+            "胜任",
+            "申请"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 我相信他完全可以________这项工作。",
+          "options": [
+            "答复",
+            "耽误",
+            "申请",
+            "胜任"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Tôi tin tưởng hoàn toàn có thể đảm nhận.\"",
+          "options": [
+            "我深信完全可以答复。",
+            "我深信完全可以胜任。",
+            "我深信完全可以耽误。",
+            "我深信完全可以申请。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "我深信吉米完全可以胜任兼职汉语教师的工作。",
+          "audioVi": "Tôi tin tưởng sâu sắc rằng Jimmy hoàn toàn có thể đảm nhận công việc giáo viên tiếng Trung bán thời gian.",
+          "prompt": "Người viết đánh giá thế nào về năng lực của ứng viên đối với công việc?",
+          "options": [
+            "Chưa đủ kinh nghiệm để làm việc",
+            "Hoàn toàn tin tưởng ứng viên có đủ năng lực đảm nhận công việc",
+            "Cần phải thử việc thêm một năm nữa",
+            "Cần tham gia thêm các khóa đào tạo phụ"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 2
+    },
+    {
+      "word": "贡献",
+      "pinyin": "gòngxiàn",
+      "meaning": "Đóng góp",
+      "partOfSpeech": "Danh từ / Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMxZDRlZDgiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMWQ0ZWQ4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIzMiw1NnY2NEwxNjgsNTZaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjMyLDQ4SDE2OGE4LDgsMCwwLDAtNS42NiwxMy42NkwxODguNjksODgsMTM2LDE0MC42OWwtMzQuMzQtMzQuMzVhOCw4LDAsMCwwLTExLjMyLDBsLTcyLDcyYTgsOCwwLDAsMCwxMS4zMiwxMS4zMkw5NiwxMjMuMzFsMzQuMzQsMzQuMzVhOCw4LDAsMCwwLDExLjMyLDBMMjAwLDk5LjMxbDI2LjM0LDI2LjM1QTgsOCwwLDAsMCwyNDAsMTIwVjU2QTgsOCwwLDAsMCwyMzIsNDhabS04LDUyLjY5TDE4Ny4zMSw2NEgyMjRaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "做出积极贡献",
+        "重要贡献"
+      ],
+      "exampleZh": "为贵单位做出积极贡献。",
+      "exampleVi": "Đóng góp tích cực cho quý đơn vị.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Từ vựng dùng trong thư tiến cử để khẳng định ứng viên sẽ mang lại giá trị và sự phát triển cho cơ quan/đơn vị là:",
+          "options": [
+            "举行",
+            "安排",
+            "贡献",
+            "参加"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 希望他能为公司做出积极________。",
+          "options": [
+            "举行",
+            "安排",
+            "参加",
+            "贡献"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Đóng góp tích cực cho quý đơn vị.\"",
+          "options": [
+            "为贵单位做出积极举行。",
+            "为贵单位做出积极安排。",
+            "为贵单位做出积极贡献。",
+            "为贵单位做出积极参加。"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "listen",
+          "audioZh": "并为贵单位的发展,做出积极贡献。",
+          "audioVi": "Và đưa ra những đóng góp tích cực cho sự phát triển của quý đơn vị.",
+          "prompt": "Cam kết của người tiến cử về sự cống hiến của ứng viên là gì?",
+          "options": [
+            "Sẽ gây ra nhiều khó khăn nội bộ",
+            "Sẽ chỉ làm việc đúng giờ rồi về",
+            "Sẽ mang lại những đóng góp thiết thực, tích cực cho tổ chức",
+            "Sẽ yêu cầu tăng lương sau một tuần"
+          ],
+          "answer": 2
+        }
+      ],
+      "orderIndex": 3
+    },
+    {
+      "word": "毫不保留",
+      "pinyin": "háo bù bǎoliú",
+      "meaning": "Hoàn toàn tin tưởng",
+      "partOfSpeech": "Thành ngữ / Cụm trạng ngữ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiMxZDRlZDgiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjMWQ0ZWQ4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIzMiwxMDJjMCw2Ni0xMDQsMTIyLTEwNCwxMjJTMjQsMTY4LDI0LDEwMkE1NCw1NCwwLDAsMSw3OCw0OGMyMi41OSwwLDQxLjk0LDEyLjMxLDUwLDMyLDguMDYtMTkuNjksMjcuNDEtMzIsNTAtMzJBNTQsNTQsMCwwLDEsMjMyLDEwMloiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0xNzgsNDBjLTIwLjY1LDAtMzguNzMsOC44OC01MCwyMy44OUMxMTYuNzMsNDguODgsOTguNjUsNDAsNzgsNDBhNjIuMDcsNjIuMDcsMCwwLDAtNjIsNjJjMCw3MCwxMDMuNzksMTI2LjY2LDEwOC4yMSwxMjlhOCw4LDAsMCwwLDcuNTgsMEMxMzYuMjEsMjI4LjY2LDI0MCwxNzIsMjQwLDEwMkE2Mi4wNyw2Mi4wNywwLDAsMCwxNzgsNDBaTTEyOCwyMTQuOEMxMDkuNzQsMjA0LjE2LDMyLDE1NS42OSwzMiwxMDJBNDYuMDYsNDYuMDYsMCwwLDEsNzgsNTZjMTkuNDUsMCwzNS43OCwxMC4zNiw0Mi42LDI3YTgsOCwwLDAsMCwxNC44LDBjNi44Mi0xNi42NywyMy4xNS0yNyw0Mi42LTI3YTQ2LjA2LDQ2LjA2LDAsMCwxLDQ2LDQ2QzIyNCwxNTUuNjEsMTQ2LjI0LDIwNC4xNSwxMjgsMjE0LjhaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "毫不保留地推荐",
+        "毫不保留地分享"
+      ],
+      "exampleZh": "我毫不保留地向您推荐他。",
+      "exampleVi": "Tôi không chút do dự tiến cử anh ấy đến ngài.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Cụm từ hành chính dùng ở phần kết thư tiến cử thể hiện sự tín nhiệm tuyệt đối, hoàn toàn không mảy may nghi ngờ khi giới thiệu ứng viên là:",
+          "options": [
+            "耽误时间",
+            "答复 Tình hình",
+            "毫不保留",
+            "安排 考试"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 鉴于以上情况，我________地向您推荐他。",
+          "options": [
+            "耽误",
+            "答复",
+            "申请",
+            "毫不保留"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Tôi không chút do dự tiến cử anh ấy đến ngài.\"",
+          "options": [
+            "我耽误地向您推荐他。",
+            "我答复地向您推荐他。",
+            "我毫不保留地向您推荐他。",
+            "我申请地向您推荐他。"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "listen",
+          "audioZh": "鉴于以上情况，我毫不保留地向您推荐他。",
+          "audioVi": "Xét các điều kiện trên, tôi không chút do dự tiến cử anh ấy đến ngài.",
+          "prompt": "Thái độ và mức độ tín nhiệm của người viết thư ở phần kết luận như thế nào?",
+          "options": [
+            "Hoàn toàn hoài nghi về năng lực ứng viên",
+            "Hoàn toàn tín nhiệm, không chút do dự khi giới thiệu ứng viên",
+            "Khuyên người nhận nên từ chối ứng viên",
+            "Đề nghị phải phỏng vấn lại nhiều lần"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 4
     }
   ]
 }

@@ -46,21 +46,70 @@
     }
   ],
   "vocabTerms": [
-    { "literary": "于", "colloquial": "在", "meaningVi": "Ở, tại / vào lúc (trang trọng)", "example": "我们很荣幸地邀请您于本月15日到我院做一次报告。" },
-    { "literary": "欲 / 拟", "colloquial": "想", "meaningVi": "Muốn / dự định", "example": "欲参加者请提前通过微信或电话回复。" },
-    { "literary": "将", "colloquial": "要", "meaningVi": "Sẽ / sắp", "example": "聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。" },
-    { "literary": "届时", "colloquial": "到时候", "meaningVi": "Đến lúc đó / đúng giờ đó", "example": "届时大家将一起唱圣诞歌曲、交换小礼物，气氛一定十分热闹。" },
-    { "literary": "及", "colloquial": "和", "meaningVi": "Và / cùng với", "example": "敬请各位来宾及家属届时光临。" }
+    {
+      "literary": "于",
+      "colloquial": "在",
+      "meaningVi": "Ở, tại / vào lúc (trang trọng)",
+      "example": "我们很荣幸地邀请您于本月15日到我院做一次报告。"
+    },
+    {
+      "literary": "欲 / 拟",
+      "colloquial": "想",
+      "meaningVi": "Muốn / dự định",
+      "example": "欲参加者请提前通过微信或电话回复。"
+    },
+    {
+      "literary": "将",
+      "colloquial": "要",
+      "meaningVi": "Sẽ / sắp",
+      "example": "聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。"
+    },
+    {
+      "literary": "届时",
+      "colloquial": "到时候",
+      "meaningVi": "Đến lúc đó / đúng giờ đó",
+      "example": "届时大家将一起唱圣诞歌曲、交换小礼物，气氛一定十分热闹。"
+    },
+    {
+      "literary": "及",
+      "colloquial": "和",
+      "meaningVi": "Và / cùng với",
+      "example": "敬请各位来宾及家属届时光临。"
+    }
   ],
   "fixedPhrases": [
-    { "chinese": "我们很荣幸地邀请您于[时间]到[地点]参加/做[活动]。", "viExplanation": "Chúng tôi rất vinh dự kính mời quý vị đến [địa điểm] tham gia/thực hiện [hoạt động] vào lúc [thời gian] (mở đầu thư mời trang trọng)." },
-    { "chinese": "我们打算在[时间]举行一次[活动]，真诚希望您能够参加。", "viExplanation": "Chúng tôi dự định tổ chức một [hoạt động] vào [thời gian], chân thành mong quý vị có thể tham gia." },
-    { "chinese": "聚会/婚礼定于[时间]在[地点]举行。", "viExplanation": "Buổi tiệc/lễ cưới được ấn định tổ chức vào [thời gian] tại [địa điểm]." },
-    { "chinese": "报告题目和具体时间由您自行决定。", "viExplanation": "Đề tài báo cáo và thời gian cụ thể do ngài tự quyết định (nhường quyền chủ động, thể hiện sự tôn trọng)." },
-    { "chinese": "如有素食等特殊饮食要求，请提前告知。", "viExplanation": "Nếu có yêu cầu ăn chay hoặc chế độ ăn đặc biệt khác, xin vui lòng báo trước." },
-    { "chinese": "你不用准备礼物，只要带着愉快的心情来就可以了。", "viExplanation": "Bạn không cần chuẩn bị quà, chỉ cần mang theo tâm trạng vui vẻ đến là được (câu dặn dò tế nhị trong thư mời thân mật)." },
-    { "chinese": "如果你能参加，请在[时间]之前通过微信或电话回复我。", "viExplanation": "Nếu bạn có thể tham gia, xin hãy phản hồi cho tôi qua WeChat hoặc điện thoại trước [thời gian]." },
-    { "chinese": "非常感谢您对我院学术工作的支持，并诚挚期待着聆听您的精彩报告。", "viExplanation": "Rất cảm ơn sự ủng hộ của ngài đối với công tác học thuật của viện chúng tôi, và chân thành mong đợi được lắng nghe bài báo cáo xuất sắc của ngài (lời kết thư mời trang trọng)." }
+    {
+      "chinese": "我们很荣幸地邀请您于[时间]到[地点]参加/做[活动]。",
+      "viExplanation": "Chúng tôi rất vinh dự kính mời quý vị đến [địa điểm] tham gia/thực hiện [hoạt động] vào lúc [thời gian] (mở đầu thư mời trang trọng)."
+    },
+    {
+      "chinese": "我们打算在[时间]举行一次[活动]，真诚希望您能够参加。",
+      "viExplanation": "Chúng tôi dự định tổ chức một [hoạt động] vào [thời gian], chân thành mong quý vị có thể tham gia."
+    },
+    {
+      "chinese": "聚会/婚礼定于[时间]在[地点]举行。",
+      "viExplanation": "Buổi tiệc/lễ cưới được ấn định tổ chức vào [thời gian] tại [địa điểm]."
+    },
+    {
+      "chinese": "报告题目和具体时间由您自行决定。",
+      "viExplanation": "Đề tài báo cáo và thời gian cụ thể do ngài tự quyết định (nhường quyền chủ động, thể hiện sự tôn trọng)."
+    },
+    {
+      "chinese": "如有素食等特殊饮食要求，请提前告知。",
+      "viExplanation": "Nếu có yêu cầu ăn chay hoặc chế độ ăn đặc biệt khác, xin vui lòng báo trước."
+    },
+    {
+      "chinese": "你不用准备礼物，只要带着愉快的心情来就可以了。",
+      "viExplanation": "Bạn không cần chuẩn bị quà, chỉ cần mang theo tâm trạng vui vẻ đến là được (câu dặn dò tế nhị trong thư mời thân mật)."
+    },
+    {
+      "chinese": "如果你能参加，请在[时间]之前通过微信或电话回复我。",
+      "viExplanation": "Nếu bạn có thể tham gia, xin hãy phản hồi cho tôi qua WeChat hoặc điện thoại trước [thời gian]."
+    },
+    {
+      "chinese": "非常感谢您对我院学术工作的支持，并诚挚期待着聆听您的精彩报告。",
+      "viExplanation": "Rất cảm ơn sự ủng hộ của ngài đối với công tác học thuật của viện chúng tôi, và chân thành mong đợi được lắng nghe bài báo cáo xuất sắc của ngài (lời kết thư mời trang trọng)."
+    }
   ],
   "quizQuestions": [
     {
@@ -265,84 +314,533 @@
     {
       "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">邀请信</p><p class=\"mb-2\">尊敬的李友教授：</p><p class=\"indent2 mb-1\">我们很荣幸地邀请您于本月15日到我院做一次关于当前中国经济情况的报告。_____(1)_____。_____(2)_____。</p><p class=\"indent2 mb-1\">非常感谢您对我院学术工作的支持，_____(3)_____。</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>经济学院：钱德</p><p>2016年6月8日</p></div></div>",
       "blanks": [
-        { "id": "blank1", "answer": "报告题目和具体时间由您自行决定", "options": ["报告题目和具体时间由您自行决定", "如需投影或其他设备请于11日17点前告知", "并诚挚期待着聆听您的精彩报告"] },
-        { "id": "blank2", "answer": "如需投影或其他设备请于11日17点前告知", "options": ["报告题目和具体时间由您自行决定", "如需投影或其他设备请于11日17点前告知", "并诚挚期待着聆听您的精彩报告"] },
-        { "id": "blank3", "answer": "并诚挚期待着聆听您的精彩报告", "options": ["报告题目和具体时间由您自行决定", "如需投影或其他设备请于11日17点前告知", "并诚挚期待着聆听您的精彩报告"] }
+        {
+          "id": "blank1",
+          "answer": "报告题目和具体时间由您自行决定",
+          "options": [
+            "报告题目和具体时间由您自行决定",
+            "如需投影或其他设备请于11日17点前告知",
+            "并诚挚期待着聆听您的精彩报告"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "如需投影或其他设备请于11日17点前告知",
+          "options": [
+            "报告题目和具体时间由您自行决定",
+            "如需投影或其他设备请于11日17点前告知",
+            "并诚挚期待着聆听您的精彩报告"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "并诚挚期待着聆听您的精彩报告",
+          "options": [
+            "报告题目和具体时间由您自行决定",
+            "如需投影或其他设备请于11日17点前告知",
+            "并诚挚期待着聆听您的精彩报告"
+          ]
+        }
       ],
       "orderIndex": 0
     },
     {
       "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">邀请信</p><p class=\"mb-2\">亲爱的朋友：</p><p class=\"indent2 mb-1\">你好！_____(1)_____，希望我们能够一起度过一个愉快而难忘的晚上。</p><p class=\"indent2 mb-1\">聚会将于8月15日晚上6点在学校附近的阳光餐厅举行。当天我们会一起吃晚饭、切生日蛋糕、玩一些有趣的小游戏，还会一起拍照留念。</p><p class=\"indent2 mb-1\">_____(2)_____。_____(3)_____，方便我提前预订座位和安排活动。</p><p class=\"indent2\">期待你的到来！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>你的朋友</p><p>2026年8月5日</p></div></div>",
       "blanks": [
-        { "id": "blank1", "answer": "我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "options": ["我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "你不用准备礼物，只要带着愉快的心情来就可以了", "如果你能参加，请在8月12日之前通过微信或电话回复我"] },
-        { "id": "blank2", "answer": "你不用准备礼物，只要带着愉快的心情来就可以了", "options": ["我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "你不用准备礼物，只要带着愉快的心情来就可以了", "如果你能参加，请在8月12日之前通过微信或电话回复我"] },
-        { "id": "blank3", "answer": "如果你能参加，请在8月12日之前通过微信或电话回复我", "options": ["我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加", "你不用准备礼物，只要带着愉快的心情来就可以了", "如果你能参加，请在8月12日之前通过微信或电话回复我"] }
+        {
+          "id": "blank1",
+          "answer": "我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加",
+          "options": [
+            "我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加",
+            "你不用准备礼物，只要带着愉快的心情来就可以了",
+            "如果你能参加，请在8月12日之前通过微信或电话回复我"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "你不用准备礼物，只要带着愉快的心情来就可以了",
+          "options": [
+            "我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加",
+            "你不用准备礼物，只要带着愉快的心情来就可以了",
+            "如果你能参加，请在8月12日之前通过微信或电话回复我"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "如果你能参加，请在8月12日之前通过微信或电话回复我",
+          "options": [
+            "我的生日快到了，为了庆祝这个特别的日子，我准备举办一个生日聚会，真诚地邀请你来参加",
+            "你不用准备礼物，只要带着愉快的心情来就可以了",
+            "如果你能参加，请在8月12日之前通过微信或电话回复我"
+          ]
+        }
       ],
       "orderIndex": 1
     }
   ],
   "matchItems": [
-    { "leftLabelVi": "Ở, tại (在星期五、在学校)", "rightLabelZh": "于", "correctKey": "于", "explanation": "在学校体育馆 ➔ 于学校体育馆: \"于\" là giới từ trang trọng chỉ thời gian, địa điểm thay cho \"在\" trong văn viết hành chính.", "orderIndex": 0 },
-    { "leftLabelVi": "Muốn, dự định (想参加、想邀请)", "rightLabelZh": "欲 / 拟", "correctKey": "欲 / 拟", "explanation": "想参加的人 ➔ 欲参加者: \"欲\"／\"拟\" là phó từ văn viết chỉ ý định, mong muốn, trang trọng hơn \"想\".", "orderIndex": 1 },
-    { "leftLabelVi": "Sẽ, sắp (要在……举行、要邀请)", "rightLabelZh": "将", "correctKey": "将", "explanation": "聚会要在8月15日举行 ➔ 聚会将于8月15日举行: \"将\" là phó từ chỉ hành động sẽ xảy ra trong tương lai gần.", "orderIndex": 2 },
-    { "leftLabelVi": "Đến lúc đó, khi đó (到时候大家一起……)", "rightLabelZh": "届时", "correctKey": "届时", "explanation": "到时候大家一起唱歌 ➔ 届时大家将一起唱圣诞歌曲: \"届时\" là phó từ văn viết chuyên dùng trong thư mời/thông báo sự kiện.", "orderIndex": 3 },
-    { "leftLabelVi": "Và, cùng với (来宾和家属)", "rightLabelZh": "及", "correctKey": "及", "explanation": "来宾和家属 ➔ 来宾及家属: \"及\" là liên từ trang trọng nối các đối tượng song song trong văn bản hành chính.", "orderIndex": 4 }
+    {
+      "leftLabelVi": "Ở, tại (在星期五、在学校)",
+      "rightLabelZh": "于",
+      "correctKey": "于",
+      "explanation": "在学校体育馆 ➔ 于学校体育馆: \"于\" là giới từ trang trọng chỉ thời gian, địa điểm thay cho \"在\" trong văn viết hành chính.",
+      "orderIndex": 0
+    },
+    {
+      "leftLabelVi": "Muốn, dự định (想参加、想邀请)",
+      "rightLabelZh": "欲 / 拟",
+      "correctKey": "欲 / 拟",
+      "explanation": "想参加的人 ➔ 欲参加者: \"欲\"／\"拟\" là phó từ văn viết chỉ ý định, mong muốn, trang trọng hơn \"想\".",
+      "orderIndex": 1
+    },
+    {
+      "leftLabelVi": "Sẽ, sắp (要在……举行、要邀请)",
+      "rightLabelZh": "将",
+      "correctKey": "将",
+      "explanation": "聚会要在8月15日举行 ➔ 聚会将于8月15日举行: \"将\" là phó từ chỉ hành động sẽ xảy ra trong tương lai gần.",
+      "orderIndex": 2
+    },
+    {
+      "leftLabelVi": "Đến lúc đó, khi đó (到时候大家一起……)",
+      "rightLabelZh": "届时",
+      "correctKey": "届时",
+      "explanation": "到时候大家一起唱歌 ➔ 届时大家将一起唱圣诞歌曲: \"届时\" là phó từ văn viết chuyên dùng trong thư mời/thông báo sự kiện.",
+      "orderIndex": 3
+    },
+    {
+      "leftLabelVi": "Và, cùng với (来宾和家属)",
+      "rightLabelZh": "及",
+      "correctKey": "及",
+      "explanation": "来宾和家属 ➔ 来宾及家属: \"及\" là liên từ trang trọng nối các đối tượng song song trong văn bản hành chính.",
+      "orderIndex": 4
+    }
   ],
   "writingTasks": [
     {
       "title": "Nhiệm vụ 1 · Chuyển câu khẩu ngữ ➔ văn viết (hỏi đề tài & thời gian thuyết trình)",
-      "facts": ["Câu khẩu ngữ gốc: 你想讲什么题目，还有什么时候来，你自己决定就行。"],
-      "requiredKeywords": ["由您自行决定"],
+      "facts": [
+        "Câu khẩu ngữ gốc: 你想讲什么题目，还有什么时候来，你自己决定就行。"
+      ],
+      "requiredKeywords": [
+        "由您自行决定"
+      ],
       "hint": "Dùng cụm \"由您自行决定\" (Do ngài tự quyết định) để nhường quyền chủ động cho chuyên gia/giảng viên một cách lịch sự.",
       "referenceAnswer": "报告题目和具体时间由您自行决定。",
       "orderIndex": 0
     },
     {
       "title": "Nhiệm vụ 2 · Chuyển câu khẩu ngữ ➔ văn viết (dặn dò về quà cáp)",
-      "facts": ["Câu khẩu ngữ gốc: 你来就行了，千万别给我买礼物，人来我就最高兴了。"],
-      "requiredKeywords": ["不用准备礼物", "只要……就可以了"],
+      "facts": [
+        "Câu khẩu ngữ gốc: 你来就行了，千万别给我买礼物，人来我就最高兴了。"
+      ],
+      "requiredKeywords": [
+        "不用准备礼物",
+        "只要……就可以了"
+      ],
       "hint": "Dùng cấu trúc \"不用准备……，只要……就可以了\" để dặn dò tế nhị, giúp khách mời cảm thấy thoải mái.",
       "referenceAnswer": "你不用准备礼物，只要带着愉快的心情来就可以了。",
       "orderIndex": 1
     },
     {
       "title": "Nhiệm vụ 3 · Chuyển câu khẩu ngữ ➔ văn viết (hỏi về ăn chay)",
-      "facts": ["Câu khẩu ngữ gốc: 如果你不能吃肉、只吃素，记得提前和我说。"],
-      "requiredKeywords": ["如有……要求", "请提前告知"],
+      "facts": [
+        "Câu khẩu ngữ gốc: 如果你不能吃肉、只吃素，记得提前和我说。"
+      ],
+      "requiredKeywords": [
+        "如有……要求",
+        "请提前告知"
+      ],
       "hint": "Sử dụng cụm \"如有素食等特殊饮食要求，请提前告知\" để câu văn gọn gàng, trang nhã hơn khẩu ngữ.",
       "referenceAnswer": "如有素食等特殊饮食要求，请提前告知。",
       "orderIndex": 2
     },
     {
       "title": "Nhiệm vụ 4 · Chuyển câu khẩu ngữ ➔ văn viết (hỏi về kiêng kỵ món ăn, khách trang trọng)",
-      "facts": ["Câu khẩu ngữ gốc: 为了让我们安排好菜，如果你有什么东西不能吃，回信的时候跟我说一下。"],
-      "requiredKeywords": ["饮食禁忌", "回复时说明"],
+      "facts": [
+        "Câu khẩu ngữ gốc: 为了让我们安排好菜，如果你有什么东西不能吃，回信的时候跟我说一下。"
+      ],
+      "requiredKeywords": [
+        "饮食禁忌",
+        "回复时说明"
+      ],
       "hint": "Dùng từ \"饮食禁忌\" (kiêng kỵ ăn uống) và cụm \"请在回复时说明\" cho văn phong hành chính lịch sự.",
       "referenceAnswer": "为了方便我们安排菜品，如果您有任何饮食禁忌，请在回复时说明。",
       "orderIndex": 3
     },
     {
       "title": "Nhiệm vụ 5 · Chuyển câu khẩu ngữ ➔ văn viết (hạn chót & phương thức phản hồi)",
-      "facts": ["Câu khẩu ngữ gốc: 要是你来，在8月12号前发微信或者打电话跟我说。"],
-      "requiredKeywords": ["如果……请在……之前", "通过微信或电话"],
+      "facts": [
+        "Câu khẩu ngữ gốc: 要是你来，在8月12号前发微信或者打电话跟我说。"
+      ],
+      "requiredKeywords": [
+        "如果……请在……之前",
+        "通过微信或电话"
+      ],
       "hint": "Chuyển \"要是\" thành \"如果\", \"发微信或者打电话\" thành cụm giới từ \"通过微信或电话\".",
       "referenceAnswer": "如果你能参加，请在8月12日之前通过微信或电话回复我。",
       "orderIndex": 4
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "Tiêu đề 标题", "placeholder": "邀请函", "inputType": "text", "orderIndex": 0 },
-    { "name": "greet", "label": "Đối tượng nhận / Xưng hô 称呼", "placeholder": "亲爱的王老师：", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)", "placeholder": "输入正文…", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "salute", "label": "Dùng lời chúc trang trọng 此致 / 敬礼！", "placeholder": "此致 lùi 4 ô, 敬礼！sát lề", "inputType": "checkbox", "orderIndex": 3 },
-    { "name": "sign", "label": "Đơn vị / Ký tên 署名", "placeholder": "您的学生：李明", "inputType": "text", "orderIndex": 4 },
-    { "name": "date", "label": "Ngày tháng 日期", "placeholder": "2026年12月18日", "inputType": "text", "orderIndex": 5 }
+    {
+      "name": "title",
+      "label": "Tiêu đề 标题",
+      "placeholder": "邀请函",
+      "inputType": "text",
+      "orderIndex": 0
+    },
+    {
+      "name": "greet",
+      "label": "Đối tượng nhận / Xưng hô 称呼",
+      "placeholder": "亲爱的王老师：",
+      "inputType": "text",
+      "orderIndex": 1
+    },
+    {
+      "name": "body",
+      "label": "Chính văn 正文 (mỗi dòng Enter = 1 đoạn mới)",
+      "placeholder": "输入正文…",
+      "inputType": "textarea",
+      "orderIndex": 2
+    },
+    {
+      "name": "salute",
+      "label": "Dùng lời chúc trang trọng 此致 / 敬礼！",
+      "placeholder": "此致 lùi 4 ô, 敬礼！sát lề",
+      "inputType": "checkbox",
+      "orderIndex": 3
+    },
+    {
+      "name": "sign",
+      "label": "Đơn vị / Ký tên 署名",
+      "placeholder": "您的学生：李明",
+      "inputType": "text",
+      "orderIndex": 4
+    },
+    {
+      "name": "date",
+      "label": "Ngày tháng 日期",
+      "placeholder": "2026年12月18日",
+      "inputType": "text",
+      "orderIndex": 5
+    }
   ],
   "guidedWritingScenarios": [
     {
       "situationPrompt": "Sắp đến Lễ Giáng sinh, bạn muốn mời thầy Vương (王老师) — giáo viên dạy tiếng Trung — đến tham dự \"Buổi liên hoan đón Giáng sinh của du học sinh\" (中外学生圣诞联谊会). Thời gian: 7 giờ tối 24/12. Địa điểm: Trung tâm hoạt động sinh viên (学生活动中心). Thầy không cần chuẩn bị quà; nếu bận xin gọi điện báo trước ngày 20/12. Viết 120–150 chữ Hán, chia 2 đoạn (mỗi đoạn thụt 2 ô), ký tên căn lề phải cân đối.",
       "modelAnswer": "邀请函\n\n亲爱的王老师：\n\n我们打算在圣诞节前夕举行一次中外学生联谊会，特此诚挚邀请您拨冗参加。联谊会定于12月24日晚上7点开始，活动地点为学生会活动中心，届时大家将一起唱圣诞歌曲、交换小礼物，气氛一定十分热闹。\n\n您不用准备礼物，只要带着愉快的心情出席即可。若您因故不能参加，请于12月20日之前拨打电话xxxxxxxx告知，以便我们及时安排座位。\n\n我们真诚希望您能够拨冗参加，期待您的光临！\n\n此致\n敬礼！\n\n您的学生：王小亚等\n2026年12月18日",
       "targetWordCount": 174
+    }
+  ],
+  "flashcards": [
+    {
+      "word": "邀请",
+      "pinyin": "yāoqǐng",
+      "meaning": "Mời",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiZTE4NWQiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYmUxODVkIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIyNCw5NmwtNzguNTUsNTZoLTM0LjlMMzIsOTZsOTYtNjRaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjI4LjQ0LDg5LjM0bC05Ni02NGE4LDgsMCwwLDAtOC44OCwwbC05Niw2NEE4LDgsMCwwLDAsMjQsOTZWMjAwYTE2LDE2LDAsMCwwLDE2LDE2SDIxNmExNiwxNiwwLDAsMCwxNi0xNlY5NkE4LDgsMCwwLDAsMjI4LjQ0LDg5LjM0Wk05Ni43MiwxNTIsNDAsMTkyVjExMS41M1ptMTYuMzcsOGgyOS44Mmw1Ni42Myw0MEg1Ni40NlptNDYuMTktOEwyMTYsMTExLjUzVjE5MlpNMTI4LDQxLjYxbDgxLjkxLDU0LjYxLTY3LDQ3Ljc4SDExMy4xMWwtNjctNDcuNzhaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "荣幸地邀请",
+        "真诚邀请"
+      ],
+      "exampleZh": "我们很荣幸地邀请您。",
+      "exampleVi": "Chúng tôi rất vinh hạnh được kính mời ngài.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Động từ hành chính trang trọng dùng để ngỏ lời mời đối tác, chuyên gia hoặc khách quý là:",
+          "options": [
+            "耽误",
+            "邀请",
+            "答复",
+            "附件"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 我们很荣幸地________您参加本次会议。",
+          "options": [
+            "耽误",
+            "答复",
+            "邀请",
+            "申请"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Chúng tôi rất vinh hạnh kính mời ngài.\"",
+          "options": [
+            "我们很荣幸地答复您。",
+            "我们很荣幸地邀请您。",
+            "我们很荣幸地耽误您。",
+            "我们很荣幸地申请您。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "我们很荣幸地邀请您参加会议。",
+          "audioVi": "Chúng tôi rất vinh hạnh kính mời ngài tham gia hội nghị.",
+          "prompt": "Thái độ và thông điệp của ban tổ chức trong câu là gì?",
+          "options": [
+            "Thể hiện sự tôn trọng và vinh hạnh khi mời khách quý",
+            "Phàn nàn về việc khách mời đến muộn",
+            "Thông báo hủy bỏ sự kiện hội nghị",
+            "Yêu cầu khách mời nộp phí tham dự"
+          ],
+          "answer": 0
+        }
+      ],
+      "orderIndex": 0
+    },
+    {
+      "word": "荣幸",
+      "pinyin": "róngxìng",
+      "meaning": "Vinh hạnh",
+      "partOfSpeech": "Tính từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiZTE4NWQiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYmUxODVkIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTE3Niw5NmE0OCw0OCwwLDEsMS00OC00OEE0OCw0OCwwLDAsMSwxNzYsOTZaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjE2LDk2QTg4LDg4LDAsMSwwLDcyLDE2My44M1YyNDBhOCw4LDAsMCwwLDExLjU4LDcuMTZMMTI4LDIyNWw0NC40MywyMi4yMUE4LjA3LDguMDcsMCwwLDAsMTc2LDI0OGE4LDgsMCwwLDAsOC04VjE2My44M0E4Ny44NSw4Ny44NSwwLDAsMCwyMTYsOTZaTTU2LDk2YTcyLDcyLDAsMSwxLDcyLDcyQTcyLjA4LDcyLjA4LDAsMCwxLDU2LDk2Wk0xNjgsMjI3LjA2bC0zNi40My0xOC4yMWE4LDgsMCwwLDAtNy4xNiwwTDg4LDIyNy4wNlYxNzQuMzdhODcuODksODcuODksMCwwLDAsODAsMFpNMTI4LDE1MkE1Niw1NiwwLDEsMCw3Miw5Niw1Ni4wNiw1Ni4wNiwwLDAsMCwxMjgsMTUyWm0wLTk2QTQwLDQwLDAsMSwxLDg4LDk2LDQwLDQwLDAsMCwxLDEyOCw1NloiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "感到荣幸",
+        "很荣幸地"
+      ],
+      "exampleZh": "能邀请到您，我们感到十分荣幸。",
+      "exampleVi": "Có thể mời được ngài, chúng tôi cảm thấy vô cùng vinh hạnh.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Tính từ thể hiện niềm vinh dự, sự trân trọng khi được đón tiếp khách mời trong thư tín ngoại giao/thương mại là:",
+          "options": [
+            "焦急",
+            "荣幸",
+            "耽误",
+            "胜任"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 能够邀请到各位专家，我们感到非常________。",
+          "options": [
+            "耽误",
+            "焦急",
+            "荣幸",
+            "申请"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Chúng tôi rất vinh hạnh được kính mời ngài.\"",
+          "options": [
+            "我们很焦急地邀请您。",
+            "我们很荣幸地邀请您。",
+            "我们很耽误地邀请您。",
+            "我们很胜任地邀请您。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "能够邀请到各位专家莅临指导，我们感到十分荣幸。",
+          "audioVi": "Có thể kính mời các vị chuyên gia đến chỉ đạo, chúng tôi cảm thấy vô cùng vinh hạnh.",
+          "prompt": "Cảm xúc của đơn vị tổ chức đối với sự hiện diện của chuyên gia là gì?",
+          "options": [
+            "Lo lắng và bất an",
+            "Vô cùng vinh hạnh và tự hào",
+            "Thờ ơ và không quan tâm",
+            "Tức giận vì chuyên gia đến muộn"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 1
+    },
+    {
+      "word": "期待",
+      "pinyin": "qīdài",
+      "meaning": "Mong đợi",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiZTE4NWQiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYmUxODVkIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTEwNCwxNjhhNDAsNDAsMCwxLDEtNDAtNDBBNDAsNDAsMCwwLDEsMTA0LDE2OFptODgtNDBhNDAsNDAsMCwxLDAsNDAsNDBBNDAsNDAsMCwwLDAsMTkyLDEyOFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMzcuMiwxNTEuODd2MGE0Ny4xLDQ3LjEsMCwwLDAtMi4zNS01LjQ1TDE5My4yNiw1MS44YTcuODIsNy44MiwwLDAsMC0xLjY2LTIuNDQsMzIsMzIsMCwwLDAtNDUuMjYsMEE4LDgsMCwwLDAsMTQ0LDU1VjgwSDExMlY1NWE4LDgsMCwwLDAtMi4zNC01LjY2LDMyLDMyLDAsMCwwLTQ1LjI2LDAsNy44Miw3LjgyLDAsMCwwLTEuNjYsMi40NEwyMS4xNSwxNDYuNGE0Ny4xLDQ3LjEsMCwwLDAtMi4zNSw1LjQ1djBBNDgsNDgsMCwxLDAsMTEyLDE2OFY5NmgzMnY3MmE0OCw0OCwwLDEsMCw5My4yLTE2LjEzWk03Ni43MSw1OS43NWExNiwxNiwwLDAsMSwxOS4yOS0xdjczLjUxYTQ3LjksNDcuOSwwLDAsMC00Ni43OS05LjkyWk02NCwyMDBhMzIsMzIsMCwxLDEsMzItMzJBMzIsMzIsMCwwLDEsNjQsMjAwWk0xNjAsNTguNzRhMTYsMTYsMCwwLDEsMTkuMjksMWwyNy41LDYyLjU4QTQ3LjksNDcuOSwwLDAsMCwxNjAsMTMyLjI1Wk0xOTIsMjAwYTMyLDMyLDAsMSwxLDMyLTMyQTMyLDMyLDAsMCwxLDE5MiwyMDBaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "期待您的光临",
+        "恭候光临"
+      ],
+      "exampleZh": "我们真诚期待您的光临。",
+      "exampleVi": "Chúng tôi chân thành mong đợi sự quang lâm (hiện diện) của ngài.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Động từ trang trọng dùng ở cuối thư mời để thể hiện sự ngóng chờ, chào đón khách quý đến tham dự là:",
+          "options": [
+            "耽误",
+            "期待",
+            "答复",
+            "申请"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 备档完毕，我们衷心________各位领导的光临。",
+          "options": [
+            "耽误",
+            "答复",
+            "期待",
+            "附件"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Chúng tôi chân thành mong đợi sự hiện diện của ngài.\"",
+          "options": [
+            "我们真诚答复您的光临。",
+            "我们真诚期待您的光临。",
+            "我们真诚耽误您的光临。",
+            "我们真诚申请您的光临。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "我们真诚期待您的光临，恭候大驾。",
+          "audioVi": "Chúng tôi chân thành mong đợi sự quang lâm của ngài, kính cẩn đón chờ.",
+          "prompt": "Thái độ của ban tổ chức đối với khách mời như thế nào?",
+          "options": [
+            "Cung kính đón chờ và nhiệt liệt chào đón",
+            "Yêu cầu khách không cần đến nữa",
+            "Hối thúc khách trả lại thiệp mời",
+            "Phàn nàn về thủ tục đăng ký"
+          ],
+          "answer": 0
+        }
+      ],
+      "orderIndex": 2
+    },
+    {
+      "word": "告知",
+      "pinyin": "gàozhī",
+      "meaning": "Báo tin",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiZTE4NWQiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYmUxODVkIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIyMy42OSw0Mi4xOGwtNTguMjIsMTkyYTgsOCwwLDAsMS0xNC45MiwxLjI1TDEwOCwxNDgsMjAuNTgsMTA1LjQ1YTgsOCwwLDAsMSwxLjI1LTE0LjkybDE5Mi01OC4yMkE4LDgsMCwwLDEsMjIzLjY5LDQyLjE4WiIgb3BhY2l0eT0iMC4yIj48L3BhdGg+PHBhdGggZD0iTTIyNy4zMiwyOC42OGExNiwxNiwwLDAsMC0xNS42Ni00LjA4bC0uMTUsMEwxOS41Nyw4Mi44NGExNiwxNiwwLDAsMC0yLjQ5LDI5LjhMMTAyLDE1NGw0MS4zLDg0Ljg3QTE1Ljg2LDE1Ljg2LDAsMCwwLDE1Ny43NCwyNDhxLjY5LDAsMS4zOC0uMDZhMTUuODgsMTUuODgsMCwwLDAsMTQtMTEuNTFsNTguMi0xOTEuOTRjMC0uMDUsMC0uMSwwLS4xNUExNiwxNiwwLDAsMCwyMjcuMzIsMjguNjhaTTE1Ny44MywyMzEuODVsLS4wNS4xNCwwLS4wNy00MC4wNi04Mi4zLDQ4LTQ4YTgsOCwwLDAsMC0xMS4zMS0xMS4zMWwtNDgsNDhMMjQuMDgsOTguMjVsLS4wNywwLC4xNCwwTDIxNiw0MFoiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "提前告知",
+        "务必告知"
+      ],
+      "exampleZh": "如有特殊饮食要求，请提前告知。",
+      "exampleVi": "Nếu có yêu cầu ăn uống đặc biệt, xin vui lòng báo trước.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Động từ hành chính dùng để yêu cầu khách mời phản hồi thông tin hoặc báo trước yêu cầu cá nhân là:",
+          "options": [
+            "举行",
+            "安排",
+            "告知",
+            "参加"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 若不能参加，请电话________我们。",
+          "options": [
+            "举行",
+            "安排",
+            "告知",
+            "批准"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Nếu không thể tham gia, xin hãy báo cho chúng tôi biết.\"",
+          "options": [
+            "若不能参加，请电话举行我们。",
+            "若不能参加，请电话安排我们。",
+            "若不能参加，请电话告知我们。",
+            "若不能参加，请电话参加我们。"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "listen",
+          "audioZh": "若不能出席，请于10日前告知主办方。",
+          "audioVi": "Nếu không thể tham dự, xin hãy thông báo cho ban tổ chức trước ngày 10.",
+          "prompt": "Yêu cầu đặt ra cho khách mời không thể tham dự là gì?",
+          "options": [
+            "Giữ bí mật lý do vắng mặt",
+            "Phải thông báo trước thời hạn cho ban tổ chức",
+            "Tự ý vắng mặt không cần báo",
+            "Đóng phạt vi phạm hợp đồng"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 3
+    },
+    {
+      "word": "敬礼",
+      "pinyin": "jìnglǐ",
+      "meaning": "Kính thư",
+      "partOfSpeech": "Động từ / Thán từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiZTE4NWQiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYmUxODVkIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIyOS42NiwxOTcsMTk3LDIyOS42NmE4LDgsMCwwLDEtMTEuMzEsMGwtMTguMzUtMTguMzUsNDQtNDQsMTguMzUsMTguMzVBOCw4LDAsMCwxLDIyOS42NiwxOTdaTTI2LjM0LDE4NS42NmE4LDgsMCwwLDAsMCwxMS4zMUw1OSwyMjkuNjZhOCw4LDAsMCwwLDExLjMxLDBsMTguMzUtMTguMzUtNDQtNDRaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjM1LjMyLDE4MGwtMzYuMjQtMzYuMjVMMTYyLjYyLDIzLjQ2QTIxLjc2LDIxLjc2LDAsMCwwLDEyOCwxMi45MywyMS43NiwyMS43NiwwLDAsMCw5My4zOCwyMy40Nkw1Ni45MiwxNDMuNzYsMjAuNjgsMTgwYTE2LDE2LDAsMCwwLDAsMjIuNjJsMzIuNjksMzIuNjlhMTYsMTYsMCwwLDAsMjIuNjMsMEwxMjQuMjgsMTg3YTQwLjY4LDQwLjY4LDAsMCwwLDMuNzItNC4yOSw0MC42OCw0MC42OCwwLDAsMCwzLjcyLDQuMjlMMTgwLDIzNS4zMmExNiwxNiwwLDAsMCwyMi42MywwbDMyLjY5LTMyLjY5QTE2LDE2LDAsMCwwLDIzNS4zMiwxODBaTTY0LjY4LDIyNCwzMiwxOTEuMzJsMTIuNjktMTIuNjksMzIuNjksMzIuNjlaTTEyMCwxNTguNzVhMjMuODUsMjMuODUsMCwwLDEtNywxN0w4OC42OCwyMDAsNTYsMTY3LjMybDEzLjY1LTEzLjY2YTgsOCwwLDAsMCwyLTMuMzRsMzctMTIyLjIyQTUuNzgsNS43OCwwLDAsMSwxMjAsMjkuNzhabTIzLDE3YTIzLjg1LDIzLjg1LDAsMCwxLTctMTd2LTEyOWE1Ljc4LDUuNzgsMCwwLDEsMTEuMzEtMS42OGwzNywxMjIuMjJhOCw4LDAsMCwwLDIsMy4zNGwxNC40OSwxNC40OS0zMy40LDMyWk0xOTEuMzIsMjI0bC0xMi41Ni0xMi41NywzMy4zOS0zMkwyMjQsMTkxLjMyWiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "此致 敬礼"
+      ],
+      "exampleZh": "此致敬礼！",
+      "exampleVi": "Kính thư / Kính lễ!",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Công thức kết thư trang trọng nhất thường đi liền với '此致' ở cuối văn bản hành chính/thư mời là:",
+          "options": [
+            "举行",
+            "安排",
+            "参加",
+            "敬礼"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 顺祝祺安，此致________！",
+          "options": [
+            "举行",
+            "申请",
+            "答复",
+            "敬礼"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Kính thư! / Kính lễ!\"",
+          "options": [
+            "此致举行！",
+            "此致安排！",
+            "此致参加！",
+            "此致敬礼！"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "listen",
+          "audioZh": "信末惯用语：此致，敬礼！",
+          "audioVi": "Thuật ngữ cuối thư quen thuộc: Kính thư, kính lễ!",
+          "prompt": "Cụm từ này xuất hiện ở vị trí nào trong văn bản?",
+          "options": [
+            "Phần tiêu đề mở đầu thư",
+            "Phần công thức chào kết thúc thư trang trọng",
+            "Phần liệt kê địa điểm tổ chức",
+            "Phần phụ lục đính kèm tài liệu"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 4
     }
   ]
 }

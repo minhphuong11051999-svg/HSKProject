@@ -301,11 +301,12 @@ export default function Admin() {
               { key: 'date', label: 'Ngày tháng (có thể để trống)' },
             ]}
           />
-          <FlashcardsEditor items={form.flashcards} onChange={(v) => set('flashcards', v)} />
           </>
         );
       case 'quiz':
         return (
+          <>
+          <FlashcardsEditor items={form.flashcards} onChange={(v) => set('flashcards', v)} />
           <QuizQuestionsEditor
             kind="THEORY"
             title="Câu hỏi trắc nghiệm lý thuyết"
@@ -313,6 +314,7 @@ export default function Admin() {
             items={form.quizQuestions.filter((q) => q.kind === 'THEORY')}
             onChange={(v) => setQuizFor('THEORY', v)}
           />
+          </>
         );
       case 'matching':
         return matchEditor();

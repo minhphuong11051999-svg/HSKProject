@@ -4,6 +4,7 @@ import { Dialog } from '@animate-ui/react/primitives/radix-ui/dialog';
 import { SlidingNumber } from '@animate-ui/react/primitives/texts/sliding-number';
 import {
   ArrowClockwise,
+  ArrowLeft,
   ArrowRight,
   CheckCircle,
   Confetti,
@@ -130,6 +131,12 @@ export default function FlashcardGame({ open, onClose, cards, lessonId, canSave 
     setN((v) => (v === from ? v + 1 : v));
   }
 
+  // Step back to the previous card / question (answers already given are kept).
+  function prev(from) {
+    setFlipped(false);
+    setN((v) => (v === from && v > 0 ? v - 1 : v));
+  }
+
   return (
     <Dialog.Root open={open} onOpenChange={(v) => !v && onClose()}>
       <Dialog.Portal>
@@ -182,13 +189,20 @@ export default function FlashcardGame({ open, onClose, cards, lessonId, canSave 
               {done ? (
                 <EndScreen score={score} total={total} onRestart={restart} onClose={onClose} />
               ) : step.type === 'card' ? (
-                <CardStep card={card} flipped={flipped} onFlip={() => setFlipped((v) => !v)} onNext={() => next(n)} />
+                <CardStep
+                  card={card}
+                  flipped={flipped}
+                  onFlip={() => setFlipped((v) => !v)}
+                  onNext={() => next(n)}
+                  onPrev={n > 0 ? () => prev(n) : null}
+                />
               ) : (
                 <QuestionStep
                   question={card.questions[step.j]}
                   chosen={answers[`${card.id}:${step.j}`]}
                   onChoose={choose}
                   onNext={() => next(n)}
+                  onPrev={n > 0 ? () => prev(n) : null}
                 />
               )}
             </motion.div>
@@ -198,7 +212,21 @@ export default function FlashcardGame({ open, onClose, cards, lessonId, canSave 
   );
 }
 
-function CardStep({ card, flipped, onFlip, onNext }) {
+function BackButton({ onPrev }) {
+  return (
+    <button
+      type="button"
+      onClick={onPrev || undefined}
+      disabled={!onPrev}
+      className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-600 bg-night-800 px-4 text-sm font-semibold text-slate-200 hover:bg-night-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+    >
+      <ArrowLeft size={18} weight="bold" aria-hidden="true" />
+      Câu trước
+    </button>
+  );
+}
+
+function CardStep({ card, flipped, onFlip, onNext, onPrev }) {
   return (
     <div>
       <p className="text-xs font-bold tracking-[0.2em] text-coral-400 mb-3">— THẺ TỪ VỰNG</p>
@@ -220,6 +248,7 @@ function CardStep({ card, flipped, onFlip, onNext }) {
       </button>
 
       <div className="flex flex-wrap justify-center gap-3 mt-5">
+        <BackButton onPrev={onPrev} />
         <button
           type="button"
           onClick={() => play(card.audioUrl, mainOf(card.word))}
@@ -310,7 +339,7 @@ function Hint({ children }) {
   );
 }
 
-function QuestionStep({ question, chosen, onChoose, onNext }) {
+function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
   const answered = chosen !== undefined;
   const correct = answered && chosen === question.answer;
   const isListen = question.kind === 'listen' && (question.audioZh || question.audioUrl);
@@ -386,18 +415,22 @@ function QuestionStep({ question, chosen, onChoose, onNext }) {
                 </>
               )}
             </div>
-            <div className="flex justify-center mt-4">
-              <PressButton
-                onClick={onNext}
-                className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-coral-500 hover:bg-coral-600 px-6 text-sm font-semibold text-white transition-colors"
-              >
-                Tiếp tục
-                <ArrowRight size={18} weight="bold" aria-hidden="true" />
-              </PressButton>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="flex flex-wrap justify-center gap-3 mt-4">
+        <BackButton onPrev={onPrev} />
+        {answered && (
+          <PressButton
+            onClick={onNext}
+            className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-coral-500 hover:bg-coral-600 px-6 text-sm font-semibold text-white transition-colors"
+          >
+            Tiếp tục
+            <ArrowRight size={18} weight="bold" aria-hidden="true" />
+          </PressButton>
+        )}
+      </div>
     </div>
   );
 }

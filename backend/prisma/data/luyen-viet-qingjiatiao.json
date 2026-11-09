@@ -44,24 +44,88 @@
     }
   ],
   "vocabTerms": [
-    { "literary": "脑门发热", "colloquial": "头有点热、发烧", "meaningVi": "Sốt nhẹ, đầu nóng", "example": "今天起床后我感到脑门发热，嗓子疼，全身不适。" },
-    { "literary": "嗓子疼", "colloquial": "喉咙痛、脖子疼", "meaningVi": "Đau họng", "example": "我感到……嗓子疼，全身不适。" },
-    { "literary": "全身不适", "colloquial": "浑身难受", "meaningVi": "Toàn thân khó chịu, không khỏe", "example": "我感到脑门发热，嗓子疼，全身不适。" },
-    { "literary": "上呼吸道感染", "colloquial": "感冒、发炎了", "meaningVi": "Nhiễm trùng đường hô hấp trên", "example": "医生说我是上呼吸道感染并建议我卧床静养。" },
-    { "literary": "卧床静养", "colloquial": "好好躺在床上休息", "meaningVi": "Nằm giường tĩnh dưỡng", "example": "医嘱建议我卧床静养两天。" },
-    { "literary": "拟于", "colloquial": "准备在", "meaningVi": "Dự định vào (mốc thời gian)", "example": "我拟于12月26-29日请假四天。" },
-    { "literary": "不慎着凉", "colloquial": "不小心感冒了", "meaningVi": "Không cẩn thận bị cảm lạnh", "example": "我因昨晚不慎着凉，今天发烧、咳嗽不止。" },
-    { "literary": "遵医嘱", "colloquial": "听医生的话", "meaningVi": "Tuân theo chỉ định của bác sĩ", "example": "我遵医嘱在家休息两天（9月1日至2日）。" }
+    {
+      "literary": "脑门发热",
+      "colloquial": "头有点热、发烧",
+      "meaningVi": "Sốt nhẹ, đầu nóng",
+      "example": "今天起床后我感到脑门发热，嗓子疼，全身不适。"
+    },
+    {
+      "literary": "嗓子疼",
+      "colloquial": "喉咙痛、脖子疼",
+      "meaningVi": "Đau họng",
+      "example": "我感到……嗓子疼，全身不适。"
+    },
+    {
+      "literary": "全身不适",
+      "colloquial": "浑身难受",
+      "meaningVi": "Toàn thân khó chịu, không khỏe",
+      "example": "我感到脑门发热，嗓子疼，全身不适。"
+    },
+    {
+      "literary": "上呼吸道感染",
+      "colloquial": "感冒、发炎了",
+      "meaningVi": "Nhiễm trùng đường hô hấp trên",
+      "example": "医生说我是上呼吸道感染并建议我卧床静养。"
+    },
+    {
+      "literary": "卧床静养",
+      "colloquial": "好好躺在床上休息",
+      "meaningVi": "Nằm giường tĩnh dưỡng",
+      "example": "医嘱建议我卧床静养两天。"
+    },
+    {
+      "literary": "拟于",
+      "colloquial": "准备在",
+      "meaningVi": "Dự định vào (mốc thời gian)",
+      "example": "我拟于12月26-29日请假四天。"
+    },
+    {
+      "literary": "不慎着凉",
+      "colloquial": "不小心感冒了",
+      "meaningVi": "Không cẩn thận bị cảm lạnh",
+      "example": "我因昨晚不慎着凉，今天发烧、咳嗽不止。"
+    },
+    {
+      "literary": "遵医嘱",
+      "colloquial": "听医生的话",
+      "meaningVi": "Tuân theo chỉ định của bác sĩ",
+      "example": "我遵医嘱在家休息两天（9月1日至2日）。"
+    }
   ],
   "fixedPhrases": [
-    { "chinese": "因病/因事请假……", "viExplanation": "Xin nghỉ phép vì lý do bệnh/việc bận (mẫu mở đầu nêu lý do)." },
-    { "chinese": "遵医嘱休息……", "viExplanation": "Nghỉ ngơi theo chỉ định của bác sĩ." },
-    { "chinese": "请假一周 / 请假半天", "viExplanation": "Xin nghỉ một tuần / Xin nghỉ nửa ngày (mẫu câu nêu thời lượng nghỉ)." },
-    { "chinese": "特向您请假，并望批准。", "viExplanation": "Nay xin phép nghỉ, và mong ngài phê chuẩn (lời đề nghị phê duyệt cuối chính văn)." },
-    { "chinese": "恳请批准为盼。", "viExplanation": "Khẩn khoản kính mong được phê chuẩn." },
-    { "chinese": "特此请假。", "viExplanation": "Nay xin nghỉ phép." },
-    { "chinese": "此致", "viExplanation": "Lời kết thúc trang trọng, lùi vào 4 ô (空四格), không dùng dấu câu phía sau." },
-    { "chinese": "敬礼！", "viExplanation": "Lời chào kính lễ, viết sát lề trái (顶格) ngay dòng dưới 此致, bắt buộc dùng dấu chấm than." }
+    {
+      "chinese": "因病/因事请假……",
+      "viExplanation": "Xin nghỉ phép vì lý do bệnh/việc bận (mẫu mở đầu nêu lý do)."
+    },
+    {
+      "chinese": "遵医嘱休息……",
+      "viExplanation": "Nghỉ ngơi theo chỉ định của bác sĩ."
+    },
+    {
+      "chinese": "请假一周 / 请假半天",
+      "viExplanation": "Xin nghỉ một tuần / Xin nghỉ nửa ngày (mẫu câu nêu thời lượng nghỉ)."
+    },
+    {
+      "chinese": "特向您请假，并望批准。",
+      "viExplanation": "Nay xin phép nghỉ, và mong ngài phê chuẩn (lời đề nghị phê duyệt cuối chính văn)."
+    },
+    {
+      "chinese": "恳请批准为盼。",
+      "viExplanation": "Khẩn khoản kính mong được phê chuẩn."
+    },
+    {
+      "chinese": "特此请假。",
+      "viExplanation": "Nay xin nghỉ phép."
+    },
+    {
+      "chinese": "此致",
+      "viExplanation": "Lời kết thúc trang trọng, lùi vào 4 ô (空四格), không dùng dấu câu phía sau."
+    },
+    {
+      "chinese": "敬礼！",
+      "viExplanation": "Lời chào kính lễ, viết sát lề trái (顶格) ngay dòng dưới 此致, bắt buộc dùng dấu chấm than."
+    }
   ],
   "quizQuestions": [
     {
@@ -133,25 +197,121 @@
     {
       "templateHtml": "<p class=\"text-center font-bold text-lg mb-4\">请假条</p><p class=\"mb-2\">王院长：</p><p class=\"indent2 mb-1\">今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我_____(1)_____。因此，我_____(2)_____12月26—29日请假_____(3)_____天。_____(4)_____。</p><p class=\"indent4 mt-1\">此致</p><p>敬礼！</p><div class=\"doc-sign-block mt-6\"><div class=\"doc-sign-inner\"><p>张大伟</p><p>2026年8月31日</p></div></div>",
       "blanks": [
-        { "id": "blank1", "answer": "卧床静养", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] },
-        { "id": "blank2", "answer": "拟于", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] },
-        { "id": "blank3", "answer": "四", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] },
-        { "id": "blank4", "answer": "特向您请假，并望批准", "options": ["特向您请假，并望批准", "拟于", "卧床静养", "四"] }
+        {
+          "id": "blank1",
+          "answer": "卧床静养",
+          "options": [
+            "特向您请假，并望批准",
+            "拟于",
+            "卧床静养",
+            "四"
+          ]
+        },
+        {
+          "id": "blank2",
+          "answer": "拟于",
+          "options": [
+            "特向您请假，并望批准",
+            "拟于",
+            "卧床静养",
+            "四"
+          ]
+        },
+        {
+          "id": "blank3",
+          "answer": "四",
+          "options": [
+            "特向您请假，并望批准",
+            "拟于",
+            "卧床静养",
+            "四"
+          ]
+        },
+        {
+          "id": "blank4",
+          "answer": "特向您请假，并望批准",
+          "options": [
+            "特向您请假，并望批准",
+            "拟于",
+            "卧床静养",
+            "四"
+          ]
+        }
       ],
       "orderIndex": 0
     }
   ],
   "matchItems": [
-    { "leftLabelVi": "头有点热、发烧 (đầu hơi nóng, sốt nhẹ)", "rightLabelZh": "脑门发热", "correctKey": "脑门发热", "explanation": "头有点热、发烧 ➔ 脑门发热: Chỉ trạng thái sốt nhẹ một cách khách quan.", "orderIndex": 0 },
-    { "leftLabelVi": "喉咙痛、脖子疼 (đau họng, đau cổ)", "rightLabelZh": "嗓子疼", "correctKey": "嗓子疼", "explanation": "喉咙痛 ➔ 嗓子疼: Thuật ngữ chuẩn trong văn bản để chỉ triệu chứng đau họng.", "orderIndex": 1 },
-    { "leftLabelVi": "浑身难受 (toàn thân khó chịu)", "rightLabelZh": "全身不适", "correctKey": "全身不适", "explanation": "浑身难受 ➔ 全身不适: Cách diễn đạt trang trọng thể hiện toàn thân không khỏe.", "orderIndex": 2 },
-    { "leftLabelVi": "感冒、发炎了 (cảm cúm, bị viêm)", "rightLabelZh": "上呼吸道感染", "correctKey": "上呼吸道感染", "explanation": "感冒、发炎了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác \"nhiễm trùng đường hô hấp trên\" thay vì gọi chung chung là cảm cúm.", "orderIndex": 3 },
-    { "leftLabelVi": "好好躺在床上休息 (nằm yên trên giường nghỉ ngơi)", "rightLabelZh": "卧床静养", "correctKey": "卧床静养", "explanation": "好好躺在床上休息 ➔ 卧床静养: \"Nằm giường tĩnh dưỡng\", thuật ngữ hành chính thể hiện việc nghỉ ngơi nghiêm túc theo chỉ định điều trị.", "orderIndex": 4 },
-    { "leftLabelVi": "头/额头有点热、发烧 (đầu/trán hơi nóng, sốt nhẹ)", "rightLabelZh": "脑门发热", "correctKey": "脑门发热", "explanation": "额头有点热 ➔ 脑门发热: Diễn đạt trạng thái sốt nhẹ một cách khách quan.", "orderIndex": 5 },
-    { "leftLabelVi": "喉咙痛、脖子疼 (đau họng, đau cổ)", "rightLabelZh": "嗓子疼", "correctKey": "嗓子疼", "explanation": "喉咙痛 ➔ 嗓子疼: Cách diễn đạt chuẩn mực y tế thông thường trong văn bản.", "orderIndex": 6 },
-    { "leftLabelVi": "浑身难受、没力气 (toàn thân khó chịu, không còn sức)", "rightLabelZh": "全身不适", "correctKey": "全身不适", "explanation": "浑身难受 ➔ 全身不适: Cụm từ hành chính thay thế cho cảm giác mệt mỏi chủ quan.", "orderIndex": 7 },
-    { "leftLabelVi": "感冒、发炎了 (cảm cúm, bị viêm)", "rightLabelZh": "上呼吸道感染", "correctKey": "上呼吸道感染", "explanation": "感冒了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác giúp tăng tính thuyết phục cho đơn xin nghỉ.", "orderIndex": 8 },
-    { "leftLabelVi": "在床上好好躺着休息 (nằm yên trên giường nghỉ ngơi)", "rightLabelZh": "卧床静养", "correctKey": "卧床静养", "explanation": "好好躺着休息 ➔ 卧床静养: Thể hiện việc tuân thủ nghiêm túc chế độ điều trị của bác sĩ.", "orderIndex": 9 }
+    {
+      "leftLabelVi": "头有点热、发烧 (đầu hơi nóng, sốt nhẹ)",
+      "rightLabelZh": "脑门发热",
+      "correctKey": "脑门发热",
+      "explanation": "头有点热、发烧 ➔ 脑门发热: Chỉ trạng thái sốt nhẹ một cách khách quan.",
+      "orderIndex": 0
+    },
+    {
+      "leftLabelVi": "喉咙痛、脖子疼 (đau họng, đau cổ)",
+      "rightLabelZh": "嗓子疼",
+      "correctKey": "嗓子疼",
+      "explanation": "喉咙痛 ➔ 嗓子疼: Thuật ngữ chuẩn trong văn bản để chỉ triệu chứng đau họng.",
+      "orderIndex": 1
+    },
+    {
+      "leftLabelVi": "浑身难受 (toàn thân khó chịu)",
+      "rightLabelZh": "全身不适",
+      "correctKey": "全身不适",
+      "explanation": "浑身难受 ➔ 全身不适: Cách diễn đạt trang trọng thể hiện toàn thân không khỏe.",
+      "orderIndex": 2
+    },
+    {
+      "leftLabelVi": "感冒、发炎了 (cảm cúm, bị viêm)",
+      "rightLabelZh": "上呼吸道感染",
+      "correctKey": "上呼吸道感染",
+      "explanation": "感冒、发炎了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác \"nhiễm trùng đường hô hấp trên\" thay vì gọi chung chung là cảm cúm.",
+      "orderIndex": 3
+    },
+    {
+      "leftLabelVi": "好好躺在床上休息 (nằm yên trên giường nghỉ ngơi)",
+      "rightLabelZh": "卧床静养",
+      "correctKey": "卧床静养",
+      "explanation": "好好躺在床上休息 ➔ 卧床静养: \"Nằm giường tĩnh dưỡng\", thuật ngữ hành chính thể hiện việc nghỉ ngơi nghiêm túc theo chỉ định điều trị.",
+      "orderIndex": 4
+    },
+    {
+      "leftLabelVi": "头/额头有点热、发烧 (đầu/trán hơi nóng, sốt nhẹ)",
+      "rightLabelZh": "脑门发热",
+      "correctKey": "脑门发热",
+      "explanation": "额头有点热 ➔ 脑门发热: Diễn đạt trạng thái sốt nhẹ một cách khách quan.",
+      "orderIndex": 5
+    },
+    {
+      "leftLabelVi": "喉咙痛、脖子疼 (đau họng, đau cổ)",
+      "rightLabelZh": "嗓子疼",
+      "correctKey": "嗓子疼",
+      "explanation": "喉咙痛 ➔ 嗓子疼: Cách diễn đạt chuẩn mực y tế thông thường trong văn bản.",
+      "orderIndex": 6
+    },
+    {
+      "leftLabelVi": "浑身难受、没力气 (toàn thân khó chịu, không còn sức)",
+      "rightLabelZh": "全身不适",
+      "correctKey": "全身不适",
+      "explanation": "浑身难受 ➔ 全身不适: Cụm từ hành chính thay thế cho cảm giác mệt mỏi chủ quan.",
+      "orderIndex": 7
+    },
+    {
+      "leftLabelVi": "感冒、发炎了 (cảm cúm, bị viêm)",
+      "rightLabelZh": "上呼吸道感染",
+      "correctKey": "上呼吸道感染",
+      "explanation": "感冒了 ➔ 上呼吸道感染: Thuật ngữ y khoa chuẩn xác giúp tăng tính thuyết phục cho đơn xin nghỉ.",
+      "orderIndex": 8
+    },
+    {
+      "leftLabelVi": "在床上好好躺着休息 (nằm yên trên giường nghỉ ngơi)",
+      "rightLabelZh": "卧床静养",
+      "correctKey": "卧床静养",
+      "explanation": "好好躺着休息 ➔ 卧床静养: Thể hiện việc tuân thủ nghiêm túc chế độ điều trị của bác sĩ.",
+      "orderIndex": 9
+    }
   ],
   "writingTasks": [
     {
@@ -163,7 +323,13 @@
         "Người nhận: 陈老师",
         "Thời gian xin nghỉ: sáng ngày 15/10/2026, nghỉ nửa ngày (请假半天)"
       ],
-      "requiredKeywords": ["拟于", "请假半天", "特向您请假，并望批准", "此致", "敬礼"],
+      "requiredKeywords": [
+        "拟于",
+        "请假半天",
+        "特向您请假，并望批准",
+        "此致",
+        "敬礼"
+      ],
       "hint": "Công thức: [称呼：] + 我拟于[Thời gian cụ thể]请假半天。特向您请假，并望批准。 + 此致（空四格）+ 敬礼！（顶格）+ 署名 + 日期。",
       "referenceAnswer": "陈老师：\n……（正文，暂不需要写理由）我拟于10月15日上午请假半天。特向您请假，并望批准。\n此致\n敬礼！\n美 美\n2026年10月14日",
       "orderIndex": 0
@@ -173,7 +339,15 @@
       "facts": [
         "Tình huống: Tôi bị đau dạ dày dữ dội từ đêm qua, sáng nay đau không dậy nổi, phải đi bệnh viện khám. Bác sĩ bảo tôi bị viêm dạ dày cấp tính, phải ở nhà nằm yên trên giường nghỉ ngơi truyền dịch 2 ngày."
       ],
-      "requiredKeywords": ["昨晚不慎", "胃痛难忍", "去医院就诊", "确诊为", "急性胃炎", "医嘱建议 / 遵医嘱", "卧床静养"],
+      "requiredKeywords": [
+        "昨晚不慎",
+        "胃痛难忍",
+        "去医院就诊",
+        "确诊为",
+        "急性胃炎",
+        "医嘱建议 / 遵医嘱",
+        "卧床静养"
+      ],
       "hint": "Hãy kết hợp các từ gợi ý trên để viết lại lý do này thành 1 đến 2 câu văn viết ngắn gọn và trang trọng nhất.",
       "referenceAnswer": "我因昨晚不慎吃坏肚子，胃痛难忍。今早去医院就诊，确诊为急性胃炎。医嘱建议我卧床静养两天。",
       "orderIndex": 1
@@ -183,26 +357,389 @@
       "facts": [
         "Tình huống: Sáng nay ngủ dậy tôi thấy đầu trán cứ nóng hâm hấp (sốt nhẹ), cổ họng thì đau buốt, cả người mệt mỏi khó chịu lắm. Tôi liền đi bệnh viện khám ngay, bác sĩ nói tôi bị viêm đường hô hấp trên và khuyên tôi nên nằm yên trên giường để nghỉ ngơi dưỡng bệnh."
       ],
-      "requiredKeywords": ["今天起床后", "脑门发热", "嗓子疼", "全身不适", "到医院看病", "上呼吸道感染", "建议我", "卧床静养"],
+      "requiredKeywords": [
+        "今天起床后",
+        "脑门发热",
+        "嗓子疼",
+        "全身不适",
+        "到医院看病",
+        "上呼吸道感染",
+        "建议我",
+        "卧床静养"
+      ],
       "hint": "Hãy sử dụng toàn bộ các từ vựng gợi ý trên để liên kết và viết lại tình huống khẩu ngữ thành 1 đến 2 câu văn viết chuẩn mực nhất.",
       "referenceAnswer": "今天起床后我感到脑门发热，嗓子疼，全身不适。我马上到医院看病，医生说我是上呼吸道感染并建议我卧床静养。",
       "orderIndex": 2
     }
   ],
   "guidedWritingFields": [
-    { "name": "title", "label": "标题 · Tiêu đề", "placeholder": "请假条", "inputType": "text", "orderIndex": 0 },
-    { "name": "audience", "label": "称呼 · Người nhận", "placeholder": "张老师", "inputType": "text", "orderIndex": 1 },
-    { "name": "body", "label": "正文 · Chính văn", "placeholder": "Viết lý do (cảm lạnh, sốt, ho) → chẩn đoán 重感冒 → thời gian nghỉ (1-2/9) → lời xin phép...", "inputType": "textarea", "orderIndex": 2 },
-    { "name": "cizhi", "label": "此致 · Lời kết 1", "placeholder": "此致", "inputType": "text", "orderIndex": 3 },
-    { "name": "jingli", "label": "敬礼！ · Lời kết 2", "placeholder": "敬礼！", "inputType": "text", "orderIndex": 4 },
-    { "name": "name", "label": "署名 · Ký tên", "placeholder": "你的名字", "inputType": "text", "orderIndex": 5 },
-    { "name": "date", "label": "日期 · Ngày tháng", "placeholder": "2026年8月31日", "inputType": "text", "orderIndex": 6 }
+    {
+      "name": "title",
+      "label": "标题 · Tiêu đề",
+      "placeholder": "请假条",
+      "inputType": "text",
+      "orderIndex": 0
+    },
+    {
+      "name": "audience",
+      "label": "称呼 · Người nhận",
+      "placeholder": "张老师",
+      "inputType": "text",
+      "orderIndex": 1
+    },
+    {
+      "name": "body",
+      "label": "正文 · Chính văn",
+      "placeholder": "Viết lý do (cảm lạnh, sốt, ho) → chẩn đoán 重感冒 → thời gian nghỉ (1-2/9) → lời xin phép...",
+      "inputType": "textarea",
+      "orderIndex": 2
+    },
+    {
+      "name": "cizhi",
+      "label": "此致 · Lời kết 1",
+      "placeholder": "此致",
+      "inputType": "text",
+      "orderIndex": 3
+    },
+    {
+      "name": "jingli",
+      "label": "敬礼！ · Lời kết 2",
+      "placeholder": "敬礼！",
+      "inputType": "text",
+      "orderIndex": 4
+    },
+    {
+      "name": "name",
+      "label": "署名 · Ký tên",
+      "placeholder": "你的名字",
+      "inputType": "text",
+      "orderIndex": 5
+    },
+    {
+      "name": "date",
+      "label": "日期 · Ngày tháng",
+      "placeholder": "2026年8月31日",
+      "inputType": "text",
+      "orderIndex": 6
+    }
   ],
   "guidedWritingScenarios": [
     {
       "situationPrompt": "Tình huống: Tối qua bạn không cẩn thận bị cảm lạnh. Hôm nay bạn bị sốt, ho không dứt, toàn thân vô lực. Sau khi đi khám, bác sĩ chẩn đoán bạn bị cảm nặng (重感冒) và khuyên nên nằm giường tĩnh dưỡng (卧床静养). Bạn quyết định nghe theo lời bác sĩ và nghỉ ngơi tại nhà 2 ngày (từ mùng 1 đến mùng 2 tháng 9). Nhiệm vụ: Hãy viết một tờ 请假条 gửi cô giáo Trương (张老师) để xin nghỉ phép các buổi học tiếng Trung của ngày mai và ngày kia. (Giả định ngày viết đơn là ngày 31 tháng 8).",
       "modelAnswer": "张老师：\n我因昨晚不慎着凉，今天发烧、咳嗽不止，全身无力。我已去医院看病，医生说我是重感冒，建议我卧床静养。为了尽快恢复健康，我遵医嘱在家休息两天（9月1日至2日）。\n为此，明后两天的汉语课我无法出勤，特向您请假，并望批准。\n此致\n敬礼！\n学生：李 伟\n2026年8月31日",
       "targetWordCount": 150
+    }
+  ],
+  "flashcards": [
+    {
+      "word": "请假",
+      "pinyin": "qǐngjià",
+      "meaning": "Xin nghỉ",
+      "partOfSpeech": "Động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiOTFjMWMiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjkxYzFjIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIxNiw0OFY4OEg0MFY0OGE4LDgsMCwwLDEsOC04SDIwOEE4LDgsMCwwLDEsMjE2LDQ4WiIgb3BhY2l0eT0iMC4yIj48L3BhdGg+PHBhdGggZD0iTTIwOCwzMkgxODRWMjRhOCw4LDAsMCwwLTE2LDB2OEg4OFYyNGE4LDgsMCwwLDAtMTYsMHY4SDQ4QTE2LDE2LDAsMCwwLDMyLDQ4VjIwOGExNiwxNiwwLDAsMCwxNiwxNkgyMDhhMTYsMTYsMCwwLDAsMTYtMTZWNDhBMTYsMTYsMCwwLDAsMjA4LDMyWk03Miw0OHY4YTgsOCwwLDAsMCwxNiwwVjQ4aDgwdjhhOCw4LDAsMCwwLDE2LDBWNDhoMjRWODBINDhWNDhaTTIwOCwyMDhINDhWOTZIMjA4VjIwOFptLTUwLjM0LTc0LjM0TDEzOS4zMSwxNTJsMTguMzUsMTguMzRhOCw4LDAsMCwxLTExLjMyLDExLjMyTDEyOCwxNjMuMzFsLTE4LjM0LDE4LjM1YTgsOCwwLDAsMS0xMS4zMi0xMS4zMkwxMTYuNjksMTUyLDk4LjM0LDEzMy42NmE4LDgsMCwwLDEsMTEuMzItMTEuMzJMMTI4LDE0MC42OWwxOC4zNC0xOC4zNWE4LDgsMCwwLDEsMTEuMzIsMTEuMzJaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "请假条",
+        "向上司请假"
+      ],
+      "exampleZh": "我特向您请假。",
+      "exampleVi": "Tôi xin phép được nghỉ phép với ngài.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Tiêu đề quen thuộc nhất trên đầu các văn bản xin nghỉ phép gửi lên cấp trên hoặc giáo viên là:",
+          "options": [
+            "寻物启事",
+            "请假条",
+            "推荐信",
+            "邀请函"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 因身体不适，本人今天需要向公司________。",
+          "options": [
+            "举行",
+            "出售",
+            "推荐",
+            "请假"
+          ],
+          "answer": 3
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Tôi nay xin phép được nghỉ phép bốn ngày.\"",
+          "options": [
+            "特向您举行四天。",
+            "特向您请假四天。",
+            "特向您出售四天。",
+            "特向您推荐四天。"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "listen",
+          "audioZh": "因此，我拟于12月26-29日请假四天。",
+          "audioVi": "Do đó, tôi dự định xin nghỉ phép 4 ngày từ 26 đến 29 tháng 12.",
+          "prompt": "Kế hoạch xin nghỉ phép của nhân viên là trong bao lâu?",
+          "options": [
+            "Nghỉ 2 ngày cuối tuần",
+            "Nghỉ 4 ngày từ ngày 26 đến 29 tháng 12",
+            "Nghỉ nửa tháng theo chỉ định bác sĩ",
+            "Nghỉ dài hạn trọn một năm"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 0
+    },
+    {
+      "word": "因病",
+      "pinyin": "yīnbìng",
+      "meaning": "Do bệnh",
+      "partOfSpeech": "Cụm danh từ / Trạng ngữ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiOTFjMWMiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjkxYzFjIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTE1MiwxMzhWNDhhMzIsMzIsMCwwLDAtNjQsMHY5MGE1Niw1NiwwLDEsMCw2NCwwWm0tMzIsNzBhMjQsMjQsMCwxLDEsMjQtMjRBMjQsMjQsMCwwLDEsMTIwLDIwOFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMTIsNTZhMjgsMjgsMCwxLDAsMjgsMjhBMjgsMjgsMCwwLDAsMjEyLDU2Wm0wLDQwYTEyLDEyLDAsMSwxLDEyLTEyQTEyLDEyLDAsMCwxLDIxMiw5NlptLTg0LDU3Vjg4YTgsOCwwLDAsMC0xNiwwdjY1YTMyLDMyLDAsMSwwLDE2LDBabS04LDQ3YTE2LDE2LDAsMSwxLDE2LTE2QTE2LDE2LDAsMCwxLDEyMCwyMDBabTQwLTY2VjQ4YTQwLDQwLDAsMCwwLTgwLDB2ODZhNjQsNjQsMCwxLDAsODAsMFptLTQwLDk4YTQ4LDQ4LDAsMCwxLTI3LjQyLTg3LjRBOCw4LDAsMCwwLDk2LDEzOFY0OGEyNCwyNCwwLDAsMSw0OCwwdjkwYTgsOCwwLDAsMCwzLjQyLDYuNTZBNDgsNDgsMCwwLDEsMTIwLDIzMloiPjwvcGF0aD48L3N2Zz48L2c+PC9zdmc+",
+      "phrases": [
+        "因病请假",
+        "因事请假"
+      ],
+      "exampleZh": "因病请假…",
+      "exampleVi": "Xin nghỉ phép vì lý do bệnh (mẫu mở đầu nêu lý do).",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Cụm từ hành chính dùng ở phần mở đầu đơn xin nghỉ ốm để nêu rõ lý do sức khỏe là:",
+          "options": [
+            "荣幸期待",
+            "寻物重谢",
+            "因病",
+            "毫不保留"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 我________身体不适，需要请假休息。",
+          "options": [
+            "因病",
+            "举行",
+            "出售",
+            "邀请"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Xin nghỉ phép vì lý do bệnh.\"",
+          "options": [
+            "因病请假。",
+            "因举行请假。",
+            "因出售请假。",
+            "因推荐请假。"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "listen",
+          "audioZh": "今天起床后我感到脑门发热，嗓子疼，全身不适。",
+          "audioVi": "Hôm nay ngủ dậy tôi cảm thấy nóng đầu, đau họng, toàn thân khó chịu.",
+          "prompt": "Tình trạng sức khỏe của người viết đơn như thế nào?",
+          "options": [
+            "Khỏe mạnh bình thường",
+            "Bị sốt, đau họng và khó chịu toàn thân",
+            "Đi du lịch dài ngày",
+            "Hoàn thành xuất sắc công việc"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 1
+    },
+    {
+      "word": "静养",
+      "pinyin": "jìngyǎng",
+      "meaning": "Tịnh dưỡng",
+      "partOfSpeech": "Cụm động từ",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiOTFjMWMiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjkxYzFjIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTI0MCwxNjBhMzIsMzIsMCwxLDEtMzItMzJBMzIsMzIsMCwwLDEsMjQwLDE2MFoiIG9wYWNpdHk9IjAuMiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMjAsMTYwYTEyLDEyLDAsMSwxLTEyLTEyQTEyLDEyLDAsMCwxLDIyMCwxNjBabS00LjU1LDM5LjI5QTQ4LjA4LDQ4LjA4LDAsMCwxLDE2OCwyNDBIMTQ0YTQ4LjA1LDQ4LjA1LDAsMCwxLTQ4LTQ4VjE1MS40OUE2NCw2NCwwLDAsMSw0MCw4OFY0MGE4LDgsMCwwLDEsOC04SDcyYTgsOCwwLDAsMSwwLDE2SDU2Vjg4YTQ4LDQ4LDAsMCwwLDQ4LjY0LDQ4YzI2LjExLS4zNCw0Ny4zNi0yMi4yNSw0Ny4zNi00OC44M1Y0OEgxMzZhOCw4LDAsMCwxLDAtMTZoMjRhOCw4LDAsMCwxLDgsOFY4Ny4xN2MwLDMyLjg0LTI0LjUzLDYwLjI5LTU2LDY0LjMxVjE5MmEzMiwzMiwwLDAsMCwzMiwzMmgyNGEzMi4wNiwzMi4wNiwwLDAsMCwzMS4yMi0yNSw0MCw0MCwwLDEsMSwxNi4yMy4yN1pNMjMyLDE2MGEyNCwyNCwwLDEsMC0yNCwyNEEyNCwyNCwwLDAsMCwyMzIsMTYwWiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "遵医嘱休息",
+        "卧床静养"
+      ],
+      "exampleZh": "医生说我是上呼吸道感染并建议我卧床静养。",
+      "exampleVi": "Bác sĩ nói tôi bị nhiễm trùng đường hô hấp trên và khuyên tôi nằm viện/ở giường tịnh dưỡng.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Cụm từ diễn tả việc tuân theo lời dặn dò của bác sĩ để nghỉ ngơi điều trị là:",
+          "options": [
+            "耽误时间",
+            "卧床静养",
+            "举办活动",
+            "安排 考试"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 医生建议我________。",
+          "options": [
+            "举行会议",
+            "申请签证",
+            "卧床静养",
+            "购置 A4 纸"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Nghỉ tịnh dưỡng theo chỉ định của bác sĩ.\"",
+          "options": [
+            "遵医嘱静养。",
+            "安排静养。",
+            "举行静养。",
+            "答复静养。"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "listen",
+          "audioZh": "医生说我是上呼吸道感染并建议我卧床静养。",
+          "audioVi": "Bác sĩ nói tôi bị nhiễm trùng đường hô hấp trên và khuyên nằm giường tịnh dưỡng.",
+          "prompt": "Chẩn đoán của bác sĩ đối với bệnh nhân là gì?",
+          "options": [
+            "Sức khỏe hoàn toàn bình thường",
+            "Nhiễm trùng đường hô hấp trên, cần nằm nghỉ tịnh dưỡng",
+            "Bị gãy chân do tai nạn giao thông",
+            "Cần đi làm việc ngay lập tức"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 2
+    },
+    {
+      "word": "盼望",
+      "pinyin": "pànwàng",
+      "meaning": "Mong mỏi",
+      "partOfSpeech": "Thành ngữ / Mẫu câu cố định",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiOTFjMWMiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjkxYzFjIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTE1OS40Niw1M2wtMTcuNzgsODNIMTE0LjMyTDk2LjU0LDUzQTI0LDI0LDAsMCwxLDEyMCwyNGgxNkEyNCwyNCwwLDAsMSwxNTkuNDYsNTNaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjI0LDIyNGE4LDgsMCwwLDEtOCw4SDQwYTgsOCwwLDAsMSwwLTE2SDIxNkE4LDgsMCwwLDEsMjI0LDIyNFptMC04MHY0MGExNiwxNiwwLDAsMS0xNiwxNkg0OGExNiwxNiwwLDAsMS0xNi0xNlYxNDRhMTYsMTYsMCwwLDEsMTYtMTZoNTYuNDNMODguNzIsNTQuNzFBMzIsMzIsMCwwLDEsMTIwLDE2aDE2YTMyLDMyLDAsMCwxLDMxLjI5LDM4LjcxTDE1MS41NywxMjhIMjA4QTE2LDE2LDAsMCwxLDIyNCwxNDRaTTEyMC43OSwxMjhoMTQuNDJsMTYuNDMtNzYuNjVBMTYsMTYsMCwwLDAsMTM2LDMySDEyMGExNiwxNiwwLDAsMC0xNS42NSwxOS4zNVpNMjA4LDE4NFYxNDRINDh2NDBIMjA4WiI+PC9wYXRoPjwvc3ZnPjwvZz48L3N2Zz4=",
+      "phrases": [
+        "恳请批准为盼",
+        "盼望批准"
+      ],
+      "exampleZh": "特向您请假，并望批准。",
+      "exampleVi": "Nay xin phép nghỉ, và mong ngài phê chuẩn (lời đề nghị phê duyệt cuối chính văn).",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Mẫu câu kết luận chính văn trong đơn xin nghỉ mang ý nghĩa khẩn khoản mong cấp trên phê duyệt là:",
+          "options": [
+            "必有重谢",
+            "恳请批准为盼 (盼望批准)",
+            "毫不保留",
+            "欢迎光临"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 务必妥善处理，________。",
+          "options": [
+            "耽误",
+            "出售",
+            "盼望批准",
+            "举行"
+          ],
+          "answer": 2
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Khẩn khoản kính mong được phê chuẩn.\"",
+          "options": [
+            "盼望批准。",
+            "盼望举行。",
+            "盼望安排。",
+            "盼望答复。"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "listen",
+          "audioZh": "特向您请假，并望批准。",
+          "audioVi": "Nay xin phép nghỉ, và mong ngài phê chuẩn.",
+          "prompt": "Lời đề nghị cuối phần nội dung đơn xin nghỉ là gì?",
+          "options": [
+            "Xin từ chức ngay lập tức",
+            "Xin nghỉ phép và mong cấp trên phê duyệt",
+            "Xin tăng lương thâm niên",
+            "Xin chuyển sang bộ phận khác"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 3
+    },
+    {
+      "word": "此致",
+      "pinyin": "cǐzhì",
+      "meaning": "Kính thư",
+      "partOfSpeech": "Công thức văn phong hành chính",
+      "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzgiIGZpbGw9IiNiOTFjMWMiIGZpbGwtb3BhY2l0eT0iMC4wOSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4IDM4KSI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iMTI0IiBmaWxsPSIjYjkxYzFjIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIxNiw2NFYxOTJINDBWNjRaIiBvcGFjaXR5PSIwLjIiPjwvcGF0aD48cGF0aCBkPSJNMjI0LDEyOGE4LDgsMCwwLDEtOCw4SDExMmE4LDgsMCwwLDEsMC0xNkgyMTZBOCw4LDAsMCwxLDIyNCwxMjhaTTExMiw3MkgyMTZhOCw4LDAsMCwwLDAtMTZIMTEyYTgsOCwwLDAsMCwwLDE2Wk0yMTYsMTg0SDQwYTgsOCwwLDAsMCwwLDE2SDIxNmE4LDgsMCwwLDAsMC0xNlpNMzQuMzQsMTQxLjY2YTgsOCwwLDAsMCwxMS4zMiwwbDQwLTQwYTgsOCwwLDAsMCwwLTExLjMybC00MC00MEE4LDgsMCwwLDAsMzQuMzQsNjEuNjZMNjguNjksOTYsMzQuMzQsMTMwLjM0QTgsOCwwLDAsMCwzNC4zNCwxNDEuNjZaIj48L3BhdGg+PC9zdmc+PC9nPjwvc3ZnPg==",
+      "phrases": [
+        "此致 (xuống dòng, viết sát lề trái)",
+        "敬礼！"
+      ],
+      "exampleZh": "此致敬礼！",
+      "exampleVi": "Lời kết thúc trang trọng, lùi vào 4 ô (空四格), không dùng dấu câu phía sau; dòng dưới '敬礼！' viết sát lề trái.",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Quy tắc trình bày phần chào kết thúc '此致' ở cuối đơn từ hành chính chuẩn xác là:",
+          "options": [
+            "Viết giữa trang, dùng dấu phẩy ở sau",
+            "Xuống dòng lùi vào 4 ô (空四格), không dùng dấu câu",
+            "Viết sát lề phải và gạch chân",
+            "Dùng dấu chấm than ngay sau 此致"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "fill",
+          "prompt": "Hoàn thành câu: 结尾处：________敬礼！",
+          "options": [
+            "举行",
+            "此致",
+            "申请",
+            "答复"
+          ],
+          "answer": 1
+        },
+        {
+          "kind": "translate",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: \"Lời kết thúc trang trọng, không dùng dấu câu.\"",
+          "options": [
+            "此致 (không dùng dấu câu)。",
+            "举行。",
+            "安排。",
+            "答复。"
+          ],
+          "answer": 0
+        },
+        {
+          "kind": "listen",
+          "audioZh": "此致，敬礼！",
+          "audioVi": "Kính thư, kính lễ!",
+          "prompt": "Quy tắc viết từ '敬礼！' ngay dưới '此致' là gì?",
+          "options": [
+            "Phải viết lùi vào 4 ô",
+            "Phải viết sát lề trái (顶格) và bắt buộc có dấu chấm than",
+            "Viết ở góc trên cùng bên phải",
+            "Không cần xuống dòng"
+          ],
+          "answer": 1
+        }
+      ],
+      "orderIndex": 4
     }
   ]
 }

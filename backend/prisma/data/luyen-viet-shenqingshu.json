@@ -502,7 +502,7 @@
     {
       "word": "批准",
       "pinyin": "pīzhǔn",
-      "meaning": "Phê duyệt, chấp thuận",
+      "meaning": "Phê duyệt",
       "partOfSpeech": "Động từ",
       "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48ZyB0cmFuc2Zvcm09InJvdGF0ZSgtMTIgMTAwIDEwOCkiPjxyZWN0IHg9IjIyIiB5PSI3MCIgd2lkdGg9IjE1NiIgaGVpZ2h0PSI3NiIgcng9IjEwIiBmaWxsPSJub25lIiBzdHJva2U9IiNkOTNhM2EiIHN0cm9rZS13aWR0aD0iNiIvPjxyZWN0IHg9IjMxIiB5PSI3OSIgd2lkdGg9IjEzOCIgaGVpZ2h0PSI1OCIgcng9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q5M2EzYSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMTAwIiB5PSIxMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHRleHRMZW5ndGg9IjExOCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nQW5kR2x5cGhzIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssQXJpYWwsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2Q5M2EzYSI+QVBQUk9WRUQ8L3RleHQ+PC9nPjxjaXJjbGUgY3g9IjE1OCIgY3k9IjQyIiByPSIyMiIgZmlsbD0iIzJmYjM2ZCIvPjxwYXRoIGQ9Ik0xNDcgNDJsOCA4IDE1LTE3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+",
       "phrases": [
@@ -514,7 +514,7 @@
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Khi nhìn thấy con dấu đỏ “APPROVED”, bạn chọn từ tiếng Trung nào?",
+          "prompt": "Khi nhìn thấy con dấu đỏ 'APPROVED', bạn chọn từ tiếng Trung nào?",
           "options": [
             "耽误",
             "批准",
@@ -536,7 +536,7 @@
         },
         {
           "kind": "translate",
-          "prompt": "Chọn câu dịch chuẩn xác nhất: “Em hy vọng lãnh đạo phê duyệt đơn xin của em.”",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: 'Em hy vọng lãnh đạo phê duyệt đơn xin của em.'",
           "options": [
             "我希望领导能答复我的申请。",
             "希望领导能批准我的申请。",
@@ -547,6 +547,8 @@
         },
         {
           "kind": "listen",
+          "audioZh": "希望领导能批准我的申请。",
+          "audioVi": "Hy vọng lãnh đạo có thể phê duyệt đơn xin của tôi.",
           "prompt": "Câu văn thể hiện mong muốn gì với cấp trên?",
           "options": [
             "Yêu cầu cấp trên giải thích lý do",
@@ -554,17 +556,15 @@
             "Báo cáo hoàn thành công việc",
             "Xin hoãn lịch nộp hồ sơ"
           ],
-          "answer": 1,
-          "audioZh": "希望领导能批准我的申请。",
-          "audioVi": "Hy vọng lãnh đạo có thể phê duyệt đơn xin của tôi."
+          "answer": 1
         }
       ],
       "orderIndex": 0
     },
     {
-      "word": "申请 / 申请书",
-      "pinyin": "shēnqǐng / shēnqǐngshū",
-      "meaning": "Nộp đơn / Lá đơn",
+      "word": "申请",
+      "pinyin": "shēnqǐng",
+      "meaning": "Nộp đơn",
       "partOfSpeech": "Động từ / Danh từ",
       "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB4PSI0MCIgeT0iMjIiIHdpZHRoPSIxMDgiIGhlaWdodD0iMTUwIiByeD0iNiIgZmlsbD0iI2Y1ZjdmOCIgc3Ryb2tlPSIjOGFhMGEwIiBzdHJva2Utd2lkdGg9IjMiLz48dGV4dCB4PSI5NCIgeT0iNTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxNDQyM2YiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgQ0pLIFNDLE1pY3Jvc29mdCBZYUhlaSxzYW5zLXNlcmlmIj7nlLPor7fkuaY8L3RleHQ+PHBhdGggZD0iTTU4IDc0aDcyTTU4IDkwaDcyTTU4IDEwNmg3Mk01OCAxMjJoNDQiIHN0cm9rZT0iI2I3YzRjNCIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNNTggMTUwaDQ0IiBzdHJva2U9IiMxNDQyM2YiIHN0cm9rZS13aWR0aD0iMiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKDM1IDE1MCAxMzApIj48cmVjdCB4PSIxNDMiIHk9Ijg0IiB3aWR0aD0iMTQiIGhlaWdodD0iNjAiIHJ4PSIzIiBmaWxsPSIjZTVhMDJiIi8+PHBhdGggZD0iTTE0MyAxNDRoMTRsLTcgMTZ6IiBmaWxsPSIjZjJkOWE4Ii8+PHBhdGggZD0iTTE0OCAxNTZoNGwtMiA1eiIgZmlsbD0iIzMzMyIvPjwvZz48L3N2Zz4=",
       "phrases": [
@@ -576,7 +576,7 @@
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Cụm từ nào có nghĩa là “nộp/đưa ra đơn xin”?",
+          "prompt": "Cụm từ nào đi với nhau có nghĩa là 'nộp/đưa ra đơn xin'?",
           "options": [
             "批准申请",
             "提出申请",
@@ -598,7 +598,7 @@
         },
         {
           "kind": "translate",
-          "prompt": "Chọn câu dịch chuẩn xác nhất: “Em chính thức nộp đơn xin phục học lên nhà trường.”",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: 'Em chính thức nộp đơn xin phục học lên nhà trường.'",
           "options": [
             "我正式向学校答复复学申请。",
             "我正式向学校提出复学申请。",
@@ -609,6 +609,8 @@
         },
         {
           "kind": "listen",
+          "audioZh": "我正式向学校提出复学申请。",
+          "audioVi": "Tôi chính thức nộp đơn xin phục học lên nhà trường.",
           "prompt": "Nội dung người viết gửi đến nhà trường là gì?",
           "options": [
             "Xin thôi học vĩnh viễn",
@@ -616,9 +618,7 @@
             "Xin nghỉ học một buổi",
             "Đăng ký nhận bảng điểm"
           ],
-          "answer": 1,
-          "audioZh": "我正式向学校提出复学申请。",
-          "audioVi": "Tôi chính thức nộp đơn xin phục học lên nhà trường."
+          "answer": 1
         }
       ],
       "orderIndex": 1
@@ -626,7 +626,7 @@
     {
       "word": "答复",
       "pinyin": "dáfù",
-      "meaning": "Hồi đáp, câu trả lời chính thức",
+      "meaning": "Hồi đáp",
       "partOfSpeech": "Động từ / Danh từ",
       "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNMzAgNzJMMTAwIDI0bDcwIDQ4eiIgZmlsbD0iI2NmZDlkYiIgc3Ryb2tlPSIjOGFhMGEwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSI1MiIgeT0iNDQiIHdpZHRoPSI5NiIgaGVpZ2h0PSI4MCIgcng9IjQiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2I3YzRjNCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTY0IDY0aDcyTTY0IDgwaDcyTTY0IDk2aDQ0IiBzdHJva2U9IiNiN2M0YzQiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTMwIDcydjkzYTggOCAwIDAgMCA4IDhoMTI0YTggOCAwIDAgMCA4LThWNzJMMTAwIDEyOHoiIGZpbGw9IiNlOWVlZjAiIHN0cm9rZT0iIzhhYTBhMCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTI4IiByPSIxNCIgZmlsbD0iI2Q5M2EzYSIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEyOCIgcj0iNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIvPjwvc3ZnPg==",
       "phrases": [
@@ -638,7 +638,7 @@
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Khi muốn bày tỏ mong sớm nhận được câu trả lời từ cấp trên, cụm nào được dùng?",
+          "prompt": "Khi muốn bày tỏ mong muốn sớm nhận được câu trả lời từ cấp trên, cụm từ nào được dùng?",
           "options": [
             "耽误答复",
             "附上答复",
@@ -660,7 +660,7 @@
         },
         {
           "kind": "translate",
-          "prompt": "Chọn câu dịch chuẩn xác nhất: “Em rất mong sớm nhận được hồi đáp của thầy cô.”",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: 'Em rất mong sớm nhận được hồi đáp của thầy cô.'",
           "options": [
             "我盼望早日批准您的申请。",
             "我盼望早日耽误您的答复。",
@@ -671,6 +671,8 @@
         },
         {
           "kind": "listen",
+          "audioZh": "我盼望早日得到您的答复。",
+          "audioVi": "Tôi rất mong sớm nhận được hồi đáp của ngài/thầy cô.",
           "prompt": "Thái độ của người viết thư thể hiện điều gì?",
           "options": [
             "Từ chối nhận các câu trả lời",
@@ -678,9 +680,7 @@
             "Mong mỏi sớm nhận được câu trả lời chính thức",
             "Hối thúc cấp dưới làm việc nhanh hơn"
           ],
-          "answer": 2,
-          "audioZh": "我盼望早日得到您的答复。",
-          "audioVi": "Tôi rất mong sớm nhận được hồi đáp của ngài/thầy cô."
+          "answer": 2
         }
       ],
       "orderIndex": 2
@@ -688,7 +688,7 @@
     {
       "word": "耽误",
       "pinyin": "dānwu",
-      "meaning": "Trễ nải, làm ảnh hưởng tiến độ",
+      "meaning": "Trễ nải",
       "partOfSpeech": "Động từ",
       "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB4PSI0OCIgeT0iMjIiIHdpZHRoPSIxMDQiIGhlaWdodD0iMTIiIHJ4PSI1IiBmaWxsPSIjOGE1YTJiIi8+PHJlY3QgeD0iNDgiIHk9IjE2NiIgd2lkdGg9IjEwNCIgaGVpZ2h0PSIxMiIgcng9IjUiIGZpbGw9IiM4YTVhMmIiLz48cGF0aCBkPSJNNTggMzRoODRjMCAzNi0zMCA0OC0zMCA2NnMzMCAzMCAzMCA2Nkg1OGMwLTM2IDMwLTQ4IDMwLTY2UzU4IDcwIDU4IDM0eiIgZmlsbD0iI2VhZjZmOCIgc3Ryb2tlPSIjNmZhM2I1IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTAwIDEwMHY0NCIgc3Ryb2tlPSIjZjBiNDNjIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNzAgMTY0YzEwLTIyIDIwLTI2IDMwLTI2czIwIDQgMzAgMjZ6IiBmaWxsPSIjZjBiNDNjIi8+PC9zdmc+",
       "phrases": [
@@ -700,7 +700,7 @@
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Từ nào diễn tả “làm trễ nải việc học, ảnh hưởng tiến độ”?",
+          "prompt": "Từ nào sau đây diễn tả ý nghĩa 'làm trễ nải việc học, ảnh hưởng tiến độ'?",
           "options": [
             "批准",
             "耽误",
@@ -722,7 +722,7 @@
         },
         {
           "kind": "translate",
-          "prompt": "Chọn câu dịch chuẩn xác nhất: “Để không làm ảnh hưởng đến việc học, em muốn sớm phục học.”",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: 'Để không làm ảnh hưởng đến việc học, em muốn sớm phục học.'",
           "options": [
             "为了不答复学习，我想尽快复学。",
             "为了不批准学习，我想尽快复学。",
@@ -733,6 +733,8 @@
         },
         {
           "kind": "listen",
+          "audioZh": "为了不耽误学习，我想尽快复学。",
+          "audioVi": "Để không làm ảnh hưởng việc học, tôi muốn sớm phục học.",
           "prompt": "Mục đích của việc muốn phục học sớm là gì?",
           "options": [
             "Kéo dài thời gian nghỉ ngơi",
@@ -740,17 +742,15 @@
             "Tránh bị phạt tiền chuyên cần",
             "Hoàn thành sớm thủ tục hành chính"
           ],
-          "answer": 1,
-          "audioZh": "为了不耽误学习，我想尽快复学。",
-          "audioVi": "Để không làm ảnh hưởng việc học, tôi muốn sớm phục học."
+          "answer": 1
         }
       ],
       "orderIndex": 3
     },
     {
-      "word": "恳请 / 请求",
-      "pinyin": "kěnqǐng / qǐngqiú",
-      "meaning": "Khẩn cầu, kính xin",
+      "word": "恳请",
+      "pinyin": "kěnqǐng",
+      "meaning": "Khẩn cầu",
       "partOfSpeech": "Động từ",
       "imageUrl": "data:image/jpeg;base64,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",
       "phrases": [
@@ -762,12 +762,12 @@
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Trong đơn từ hành chính, từ nào thể hiện thái độ khẩn cầu, kính xin trang trọng nhất?",
+          "prompt": "Trong đơn từ hành chính, từ nào thể hiện thái độ khẩn cầu, kính xin trang trọng nhất với cấp trên?",
           "options": [
-            "叫 (jiào)",
-            "要 (yào)",
+            "叫 (Jiào)",
+            "要 (Yào)",
             "恳请",
-            "看 (kàn)"
+            "看 (Kàn)"
           ],
           "answer": 2
         },
@@ -784,7 +784,7 @@
         },
         {
           "kind": "translate",
-          "prompt": "Chọn câu dịch chuẩn xác nhất: “Em khẩn cầu lãnh đạo xem xét những khó khăn thực tế của em.”",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: 'Em khẩn cầu lãnh đạo xem xét những khó khăn thực tế của em.'",
           "options": [
             "我耽误领导考虑我的实际困难。",
             "我恳请领导考虑我的实际困难。",
@@ -795,6 +795,8 @@
         },
         {
           "kind": "listen",
+          "audioZh": "我恳请领导考虑我的实际困难。",
+          "audioVi": "Tôi khẩn cầu lãnh đạo xem xét những khó khăn thực tế của tôi.",
           "prompt": "Nội dung khẩn cầu trong câu nhắm tới việc gì?",
           "options": [
             "Ra lệnh cho cấp dưới giải quyết",
@@ -802,17 +804,15 @@
             "Yêu cầu tăng thêm phúc lợi cá nhân",
             "Mong lãnh đạo xem xét các khó khăn thực tế"
           ],
-          "answer": 3,
-          "audioZh": "我恳请领导考虑我的实际困难。",
-          "audioVi": "Tôi khẩn cầu lãnh đạo xem xét những khó khăn thực tế của tôi."
+          "answer": 3
         }
       ],
       "orderIndex": 4
     },
     {
-      "word": "附件 / 附上",
-      "pinyin": "fùjiàn / fùshàng",
-      "meaning": "Kèm theo, tệp đính kèm",
+      "word": "附件",
+      "pinyin": "fùjiàn",
+      "meaning": "Đính kèm",
       "partOfSpeech": "Danh từ / Động từ",
       "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB4PSI0NCIgeT0iMzAiIHdpZHRoPSIxMTIiIGhlaWdodD0iMTQ2IiByeD0iNiIgZmlsbD0iI2Y1ZjdmOCIgc3Ryb2tlPSIjOGFhMGEwIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNjIgOTBoNzZNNjIgMTA4aDc2TTYyIDEyNmg3Nk02MiAxNDRoNTAiIHN0cm9rZT0iI2I3YzRjNCIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMTI4IDE4djY2YTE0IDE0IDAgMCAxLTI4IDBWMzRhOSA5IDAgMCAxIDE4IDB2NDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzNiODJjNCIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=",
       "phrases": [
@@ -824,7 +824,7 @@
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Khi thấy biểu tượng chiếc kẹp giấy trong hồ sơ hành chính, bạn dùng cặp từ nào?",
+          "prompt": "Khi nhìn thấy biểu tượng chiếc kẹp giấy tài liệu trong hồ sơ hành chính, bạn dùng cặp từ nào?",
           "options": [
             "批准 / 申请",
             "答复 / 耽误",
@@ -846,7 +846,7 @@
         },
         {
           "kind": "translate",
-          "prompt": "Chọn câu dịch chuẩn xác nhất: “Phía sau thư đã đính kèm giấy chẩn đoán của em.”",
+          "prompt": "Chọn câu dịch tiếng Trung chuẩn xác nhất cho: 'Phía sau thư đã đính kèm giấy chẩn đoán của em.'",
           "options": [
             "信后已批准我的诊断证明。",
             "信后已耽误我的诊断证明。",
@@ -857,6 +857,8 @@
         },
         {
           "kind": "listen",
+          "audioZh": "信后已附上我的诊断证明。",
+          "audioVi": "Phía sau thư đã đính kèm giấy chứng nhận chẩn đoán của tôi.",
           "prompt": "Phần tài liệu được gửi kèm theo đơn là gì?",
           "options": [
             "Bản tường trình sự việc trực tiếp",
@@ -864,9 +866,7 @@
             "Giấy chẩn đoán y tế / tài liệu chứng minh",
             "Hóa đơn thanh toán học phí"
           ],
-          "answer": 2,
-          "audioZh": "信后已附上我的诊断证明。",
-          "audioVi": "Phía sau thư đã đính kèm giấy chẩn đoán của tôi."
+          "answer": 2
         }
       ],
       "orderIndex": 5
