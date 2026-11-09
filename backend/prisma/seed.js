@@ -81,12 +81,17 @@ async function main() {
 
     if (existing) {
       if (content) {
+        // Flashcards are edited by admins in the lesson editor, so the data file
+        // only provides the starting set: once a lesson has cards, keep them.
+        const hasCards = (await prisma.flashcard.count({ where: { lessonId: existing.id } })) > 0;
+        const keys = NESTED_KEYS.filter((key) => !(key === 'flashcards' && hasCards));
+        const seedContent = hasCards ? { ...content, flashcards: undefined } : content;
         await prisma.$transaction(
-          NESTED_KEYS.map((key) => prisma[MODEL_NAME[key]].deleteMany({ where: { lessonId: existing.id } }))
+          keys.map((key) => prisma[MODEL_NAME[key]].deleteMany({ where: { lessonId: existing.id } }))
         );
         await prisma.lesson.update({
           where: { id: existing.id },
-          data: { ...lesson, ...buildNestedCreate(content) },
+          data: { ...lesson, ...buildNestedCreate(seedContent) },
         });
       } else {
         await prisma.lesson.update({ where: { id: existing.id }, data: lesson });
