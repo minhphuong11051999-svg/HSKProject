@@ -15,7 +15,8 @@ const TITLES = {
 };
 
 // Classification map of HSK6 writing (from belle_hsk6_map.html). Each entry is
-// [titleZh, sub-label, Vietnamese name, lesson slug or null when not written yet].
+// [titleZh, sub-label, Vietnamese name, lesson slug]. A card lights up as soon as a
+// lesson with that slug exists in Quản trị bài học; until then it shows "Đang soạn".
 const MAP = [
   {
     title: 'Loại I · Có',
@@ -25,10 +26,10 @@ const MAP = [
         ['请假条', '', 'Đơn xin nghỉ phép', 'luyen-viet-qingjiatiao'],
         ['请假条', '（事假/事务）', 'Đơn xin nghỉ phép (việc riêng / công việc)', 'luyen-viet-qingjiatiao-shijia'],
         ['申请书', '', 'Đơn xin', 'luyen-viet-shenqingshu'],
-        ['求职信', '', 'Thư xin việc', null],
+        ['求职信', '', 'Thư xin việc', 'luyen-viet-qiuzhixin'],
       ]],
       ['1.2 Cho người khác', [['推荐信', '', 'Thư giới thiệu', 'luyen-viet-tuijianxin']]],
-      ['1.3 Cho tổ chức', [['建议信', '', 'Thư đề xuất', null]]],
+      ['1.3 Cho tổ chức', [['建议信', '', 'Thư đề xuất', 'luyen-viet-jianyixin']]],
     ],
   },
   {
@@ -38,14 +39,14 @@ const MAP = [
       ['Loại 1 · Báo cho biết', [
         ['启事', '', 'Bố cáo / Rao vặt', 'luyen-viet-qishi'],
         ['通知', '', 'Thông báo', 'luyen-viet-thongbao'],
-        ['通告', '', 'Thông cáo', null],
-        ['声明', '', 'Tuyên bố', null],
+        ['通告', '', 'Thông cáo', 'luyen-viet-tonggao'],
+        ['声明', '', 'Tuyên bố', 'luyen-viet-shengming'],
       ]],
       ['Loại 2 · Kết nối tình cảm', [
-        ['感谢信', '', 'Thư cảm ơn', null],
-        ['贺信', '', 'Thư chúc mừng', null],
+        ['感谢信', '', 'Thư cảm ơn', 'luyen-viet-ganxiexin'],
+        ['贺信', '', 'Thư chúc mừng', 'luyen-viet-hexin'],
         ['邀请信', '', 'Thư mời', 'luyen-viet-yaoqingxin'],
-        ['致辞', '', 'Diễn văn', null],
+        ['致辞', '', 'Diễn văn', 'luyen-viet-zhici'],
       ]],
     ],
   },
