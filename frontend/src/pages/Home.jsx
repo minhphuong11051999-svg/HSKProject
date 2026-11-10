@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'motion/react';
-import { ArrowRight, MagnifyingGlass, PersonSimpleWalk, PencilLine, Cards, Check, Lock } from '@phosphor-icons/react';
+import { ArrowRight, BookOpenText, Flame, Brain, Exam, Check } from '@phosphor-icons/react';
 import { useAuth } from '../context/AuthContext';
 import Dashboard from './Dashboard';
 import Reveal from '../components/motion/Reveal';
@@ -23,24 +23,35 @@ export default function Home() {
 
 const PRIMARY = 'Tạo tài khoản miễn phí';
 
+// Quy tắc 4S: the four things every lesson is built to do.
 const METHODS = [
   {
-    zh: '范文倒推',
-    vi: 'Đọc ngược bài mẫu',
-    icon: MagnifyingGlass,
-    text: 'Tách bài mẫu thành khung: mỗi đoạn làm nhiệm vụ gì, câu nào là mẫu câu cố định của thể loại.',
+    zh: '学',
+    vi: 'Truyền đạt kiến thức',
+    icon: BookOpenText,
+    text: 'Giúp bạn nắm vững cách viết chi tiết cho từng dạng bài.',
+    nudge: 'Hiểu rồi chứ?',
   },
   {
-    zh: '生活预演',
-    vi: 'Diễn tập tình huống thật',
-    icon: PersonSimpleWalk,
-    text: 'Đặt mình vào tình huống xin nghỉ, mời, thông báo, rồi chọn từ văn viết thay cho khẩu ngữ.',
+    zh: '燃',
+    vi: 'Tạo động lực, nhắc bạn quay lại',
+    icon: Flame,
+    text: 'Giao diện bắt mắt, các cuộc đua và bảng xếp hạng, cùng lời nhắc học đều đặn để bạn giữ nhịp luyện viết.',
+    nudge: 'Hôm nay bạn đã luyện chưa?',
   },
   {
-    zh: '写改升',
-    vi: 'Viết, sửa, nâng cấp',
-    icon: PencilLine,
-    text: 'Tìm lỗi sai trong bài viết mẫu, xem bản sửa, rồi tự viết bài của mình trên tờ giấy mô phỏng.',
+    zh: '记',
+    vi: 'Ghi nhớ',
+    icon: Brain,
+    text: 'Củng cố qua các nội dung bài học và luyện tập phong phú.',
+    nudge: 'Làm thêm một bài nữa.',
+  },
+  {
+    zh: '用',
+    vi: 'Dùng được khi đi thi',
+    icon: Exam,
+    text: 'Mục tiêu cuối cùng: giúp bạn tự tin ứng phó với đề viết HSK6 (3.0).',
+    nudge: 'Sẵn sàng thi chưa?',
   },
 ];
 
@@ -49,19 +60,6 @@ const GENRES = [
   { zh: '启事', vi: 'Bố cáo, tìm đồ, rao bán' },
   { zh: '推荐信', vi: 'Thư giới thiệu' },
   { zh: '邀请信', vi: 'Thư mời' },
-  { zh: '请假条', vi: 'Đơn xin nghỉ ốm' },
-  { zh: '请假条', vi: 'Đơn xin nghỉ việc riêng' },
-  { zh: '申请书', vi: 'Đơn xin' },
-];
-
-const STEPS = [
-  'Duyệt lý thuyết',
-  'Bài mẫu',
-  'Nhận diện thể thức',
-  'Đục lỗ',
-  'Tìm lỗi sai',
-  'Ghép từ vựng & viết câu',
-  'Luyện viết hoàn chỉnh',
 ];
 
 const PAPER_RULES = [
@@ -93,7 +91,6 @@ function Landing() {
       <MethodSection />
       <PaperSection />
       <GenreSection />
-      <StepsSection />
       <CloseSection />
     </div>
   );
@@ -123,19 +120,19 @@ function Hero() {
           </Reveal>
           <Reveal index={1}>
             <h1 id="hero-title" className="l-h1">
-              Luyện viết văn ứng dụng HSK6 cho người Việt
+              Belle Chinese Lab - HSK6 (3.0)
             </h1>
           </Reveal>
           <Reveal index={2}>
-            <p className="l-lead">
-              7 dạng văn bản ứng dụng, luyện viết trên tờ giấy mô phỏng đúng thể thức thi. Bài trắc nghiệm, điền từ và ghép từ được chấm ngay.
+            <p className="l-lead zh" lang="zh">
+              降低认知的门槛，人人皆可抵达
             </p>
           </Reveal>
           <Reveal index={3}>
             <div className="flex flex-col sm:flex-row gap-3 mt-8">
               <PrimaryButton />
               <a href="#dang-bai" className="l-btn l-btn-ghost">
-                Xem 7 dạng bài
+                Xem các dạng bài có sẵn
               </a>
             </div>
           </Reveal>
@@ -172,21 +169,28 @@ function MethodSection() {
   return (
     <section className="l-section" aria-labelledby="method-title">
       <div className="l-wrap">
-        <SectionHead id="method-title" zh="范文不是用来背的" title="Bài mẫu không phải để học thuộc">
-          Ba cách luyện giúp bạn hiểu vì sao bài mẫu được viết như vậy, rồi tự viết được bài của mình.
-        </SectionHead>
-        <ol className="grid md:grid-cols-3 gap-5 mt-10">
+        <div className="max-w-2xl">
+          <p className="zh l-kicker">四步学习法</p>
+          <h2 id="method-title" className="l-h2">Mindset Belle Chinese Lab</h2>
+          <ul className="l-body mt-3 flex flex-wrap gap-x-6 gap-y-1">
+            <li>Đảm bảo <span className="zh text-[var(--l-ink)]">学</span></li>
+            <li>Củng cố <span className="zh text-[var(--l-ink)]">燃</span></li>
+            <li>Hướng đến <span className="zh text-[var(--l-ink)]">记</span></li>
+          </ul>
+        </div>
+        <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
           {METHODS.map((m, i) => (
-            <li key={m.zh} className="l-card">
+            <li key={m.zh} className="l-card flex flex-col">
               <div className="flex items-center justify-between">
                 <span className="l-icon">
                   <m.icon size={26} weight="duotone" aria-hidden="true" />
                 </span>
-                <span className="l-num">0{i + 1}</span>
+                <span className="l-num">S{i + 1}</span>
               </div>
-              <p className="zh text-2xl mt-6 text-[var(--l-ink)]">{m.zh}</p>
+              <p className="zh text-3xl mt-6 text-[var(--l-ink)]" lang="zh">{m.zh}</p>
               <h3 className="l-h3 mt-1">{m.vi}</h3>
               <p className="l-body mt-3">{m.text}</p>
+              <p className="l-nudge mt-auto pt-4">{m.nudge}</p>
             </li>
           ))}
         </ol>
@@ -254,7 +258,7 @@ function GenreSection() {
   return (
     <section id="dang-bai" className="l-section" aria-labelledby="genre-title">
       <div className="l-wrap">
-        <SectionHead id="genre-title" title="7 dạng văn bản trong đề thi viết HSK6">
+        <SectionHead id="genre-title" title="Một số dạng bài trong đề thi viết HSK6">
           Mỗi dạng là một bài học riêng, đi từ bài mẫu đến bài viết hoàn chỉnh của bạn.
         </SectionHead>
         <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
@@ -270,36 +274,7 @@ function GenreSection() {
               </Link>
             </li>
           ))}
-          <li className="l-card l-genre l-genre-note">
-            <Cards size={30} weight="duotone" aria-hidden="true" className="text-[var(--l-blue)]" />
-            <span className="l-h3 mt-3">Flashcard từ vựng</span>
-            <span className="l-body mt-1">Mỗi chủ đề có thẻ từ, phát âm tự động và 4 dạng bài tập.</span>
-          </li>
         </ul>
-      </div>
-    </section>
-  );
-}
-
-function StepsSection() {
-  return (
-    <section className="l-section l-section-tint" aria-labelledby="steps-title">
-      <div className="l-wrap">
-        <SectionHead id="steps-title" title="7 bước trong mỗi bài học">
-          Bước 1 đến 3 học miễn phí. Tài khoản PRO mở bước 4 đến 7 và các đề thi thật có nhãn PRO.
-        </SectionHead>
-        <ol className="l-steps mt-10">
-          {STEPS.map((s, i) => (
-            <li key={s} className="l-step">
-              <span className={`l-step-num ${i < 3 ? 'is-free' : ''}`}>{i + 1}</span>
-              <span className="l-step-label">{s}</span>
-              <span className={`l-step-tag ${i < 3 ? '' : 'is-pro'}`}>
-                {i >= 3 && <Lock size={12} weight="bold" aria-hidden="true" />}
-                {i < 3 ? 'Miễn phí' : 'PRO'}
-              </span>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   );
