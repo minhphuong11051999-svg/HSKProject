@@ -185,7 +185,7 @@ function MethodSection() {
                 <span className="l-icon">
                   <m.icon size={26} weight="duotone" aria-hidden="true" />
                 </span>
-                <span className="l-num">S{i + 1}</span>
+                <span className="l-num">0{i + 1}</span>
               </div>
               <p className="zh text-3xl mt-6 text-[var(--l-ink)]" lang="zh">{m.zh}</p>
               <h3 className="l-h3 mt-1">{m.vi}</h3>

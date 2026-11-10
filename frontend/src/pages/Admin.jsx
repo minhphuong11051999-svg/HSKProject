@@ -7,6 +7,19 @@ import QuizQuestionsEditor from '../components/admin/QuizQuestionsEditor';
 import ClozeExercisesEditor from '../components/admin/ClozeExercisesEditor';
 import MatchItemsEditor from '../components/admin/MatchItemsEditor';
 import FlashcardsEditor from '../components/admin/FlashcardsEditor';
+import PageHeader from '../components/PageHeader';
+import {
+  PANEL,
+  PANEL_TITLE,
+  HINT,
+  BTN_PRIMARY,
+  BTN_SECONDARY,
+  BTN_LINK,
+  BTN_LINK_DANGER,
+  ERROR_TEXT,
+  SUCCESS_TEXT,
+  CHECKBOX,
+} from '../components/admin/ui';
 import { ALL_LESSON_PARTS, BUILTIN_PART_KEYS, DEFAULT_SELECTED_PARTS, partLabel } from '../constants/lessonParts';
 
 const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
@@ -465,44 +478,47 @@ export default function Admin() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      <div className="grid lg:grid-cols-[320px_1fr] gap-8">
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl font-bold">Danh sách bài học</h1>
-            <Link to="/admin/users" className="text-sm text-coral-400 underline">Quản lý người dùng</Link>
-          </div>
+      <PageHeader
+        title="Quản trị bài học"
+        actions={
+          <Link to="/admin/users" className={BTN_SECONDARY}>Quản lý người dùng</Link>
+        }
+      />
+      <div className="grid lg:grid-cols-[320px_1fr] gap-6 lg:gap-8 items-start">
+        <section className={PANEL}>
+          <h2 className={`${PANEL_TITLE} mb-4`}>Danh sách bài học</h2>
           <ul className="space-y-2">
             {lessons.map((lesson) => (
-              <li key={lesson.id} className="bg-night-800 border border-night-700 rounded-lg p-3 flex justify-between items-center">
-                <div>
-                  <p className="zh">{lesson.titleZh}</p>
-                  <p className="text-xs text-slate-400">{lesson.slug} · {lesson.type}</p>
+              <li key={lesson.id} className="bg-night-900 border border-night-700 rounded-xl py-2 pl-4 pr-1 flex justify-between items-center gap-2">
+                <div className="min-w-0">
+                  <p className="zh text-slate-100 truncate">{lesson.titleZh}</p>
+                  <p className="text-xs text-slate-400 truncate">{lesson.slug} · {lesson.type}</p>
                 </div>
-                <div className="flex gap-2 text-sm">
-                  <button onClick={() => edit(lesson)} className="text-coral-400 underline">Sửa</button>
-                  <button onClick={() => handleDelete(lesson.id)} className="text-red-400 underline">Xoá</button>
+                <div className="flex flex-shrink-0">
+                  <button onClick={() => edit(lesson)} className={BTN_LINK}>Sửa</button>
+                  <button onClick={() => handleDelete(lesson.id)} className={BTN_LINK_DANGER}>Xoá</button>
                 </div>
               </li>
             ))}
           </ul>
         </section>
 
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold">{form.id ? 'Sửa bài học' : 'Thêm bài học mới'}</h2>
+        <section className="min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-100">{form.id ? 'Sửa bài học' : 'Thêm bài học mới'}</h2>
             {form.id && (
-              <button type="button" onClick={() => setForm(EMPTY_FORM)} className="text-sm px-3 py-1.5 border border-night-600 rounded-lg">
+              <button type="button" onClick={() => setForm(EMPTY_FORM)} className={BTN_SECONDARY}>
                 + Tạo bài học mới
               </button>
             )}
           </div>
 
-          {loadingEdit && <p className="text-slate-400 text-sm mb-3">Đang tải nội dung...</p>}
+          {loadingEdit && <p className={`${HINT} mb-3`} role="status">Đang tải nội dung...</p>}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="border border-night-600 rounded-lg p-4 space-y-2">
-              <h3 className="font-semibold text-sm mb-1">Thông tin cơ bản</h3>
-              <div className="grid sm:grid-cols-2 gap-2">
+            <div className={`${PANEL} space-y-2`}>
+              <h3 className={`${PANEL_TITLE} mb-3`}>Thông tin cơ bản</h3>
+              <div className="grid sm:grid-cols-2 gap-x-4">
                 <TextField label="Slug (vd: luyen-viet-thongbao)" value={form.slug} onChange={(v) => set('slug', v)} />
                 <TextField label="Tiêu đề chữ Hán" value={form.titleZh} onChange={(v) => set('titleZh', v)} />
                 <TextField label="Tiêu đề tiếng Việt" value={form.titleVi} onChange={(v) => set('titleVi', v)} />
@@ -527,26 +543,27 @@ export default function Admin() {
                 onChange={(v) => set('isPremium', v)}
               />
 
-              <div>
-                <p className="text-xs text-slate-400 mb-1.5">
+              <div className="border-t border-night-700 pt-4">
+                <p className={`${HINT} mb-2`}>
                   Chọn đề mục cho bài học này — tick theo đúng thứ tự bạn muốn chúng xuất hiện, trang bài học sẽ tự
                   đánh số lại theo thứ tự tick.
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-3">
                   {ALL_LESSON_PARTS.map((part) => {
                     const checked = form.selectedParts.includes(part.key);
                     const order = form.selectedParts.indexOf(part.key);
                     return (
-                      <label key={part.key} className="flex items-center gap-1.5 text-xs text-slate-300">
+                      <label key={part.key} className="flex items-center gap-2.5 min-h-[44px] text-sm text-slate-300 cursor-pointer">
                         <input
                           type="checkbox"
+                          className={CHECKBOX}
                           checked={checked}
                           onChange={(e) => toggleSelectedPart(part.key, e.target.checked)}
                         />
                         {checked ? `${order + 1}. ` : ''}
                         {part.label}
                         {!BUILTIN_PART_KEYS.includes(part.key) && (
-                          <span className="text-[10px] text-slate-500">(mới)</span>
+                          <span className="text-xs text-slate-500">(mới)</span>
                         )}
                       </label>
                     );
@@ -554,17 +571,18 @@ export default function Admin() {
                 </div>
               </div>
 
-              <div>
-                <p className="text-xs text-slate-400 mb-1.5">
+              <div className="border-t border-night-700 pt-4">
+                <p className={`${HINT} mb-2`}>
                   Khoá riêng từng phần (chỉ áp dụng khi bài học KHÔNG bị khoá toàn bộ ở trên)
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-3">
                   {form.selectedParts.map((key, idx) => {
                     const checked = form.premiumParts.includes(key);
                     return (
-                      <label key={key} className="flex items-center gap-1.5 text-xs text-slate-300">
+                      <label key={key} className="flex items-center gap-2.5 min-h-[44px] text-sm text-slate-300 cursor-pointer">
                         <input
                           type="checkbox"
+                          className={CHECKBOX}
                           checked={checked}
                           onChange={(e) =>
                             set(
@@ -584,15 +602,15 @@ export default function Admin() {
             </div>
 
             {form.selectedParts.length === 0 && (
-              <p className="text-sm text-slate-400">Chưa chọn đề mục nào — hãy tick các đề mục ở phần Thông tin cơ bản.</p>
+              <p className={HINT}>Chưa chọn đề mục nào — hãy tick các đề mục ở phần Thông tin cơ bản.</p>
             )}
 
             {form.selectedParts.map((key, idx) => (
-              <section key={key} className="border border-night-600 rounded-xl p-4 space-y-4 bg-night-800/40">
-                <h3 className="font-bold text-slate-100">
+              <section key={key} className={`${PANEL} space-y-4`}>
+                <h3 className="text-lg font-extrabold tracking-tight text-slate-100">
                   <span className="text-coral-400">Bước {idx + 1}</span> · {partLabel(key)}
                   {form.premiumParts.includes(key) && (
-                    <span className="ml-2 align-middle bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                    <span className="ml-2 align-middle bg-gold text-ink-900 text-[11px] font-bold px-2 py-0.5 rounded-full">
                       PRO
                     </span>
                   )}
@@ -601,10 +619,10 @@ export default function Admin() {
               </section>
             ))}
 
-            {error && <p className="text-red-400 text-sm">{error}</p>}
-            {savedMessage && <p className="text-green-400 text-sm">{savedMessage}</p>}
-            <div className="flex gap-2 sticky bottom-0 bg-night-950 py-3">
-              <button type="submit" disabled={saving} className="bg-coral-500 hover:bg-coral-600 text-white rounded-lg px-4 py-2 font-semibold transition-colors">
+            {error && <p className={ERROR_TEXT} role="alert">{error}</p>}
+            {savedMessage && <p className={SUCCESS_TEXT} role="status">{savedMessage}</p>}
+            <div className="surface sticky bottom-3 z-10 flex flex-wrap items-center gap-3 px-4 py-3">
+              <button type="submit" disabled={saving} className={BTN_PRIMARY}>
                 {saving ? 'Đang lưu...' : form.id ? 'Lưu thay đổi' : 'Tạo bài học'}
               </button>
             </div>

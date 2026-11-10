@@ -12,7 +12,7 @@ export default function TopNav() {
           <ThemeToggle />
           <Link
             to="/login"
-            className="min-h-[44px] flex items-center text-slate-300 hover:text-white px-2.5 sm:px-3 whitespace-nowrap"
+            className="min-h-[44px] flex items-center text-slate-300 hover:text-coral-400 px-2.5 sm:px-3 whitespace-nowrap"
           >
             Đăng nhập
           </Link>

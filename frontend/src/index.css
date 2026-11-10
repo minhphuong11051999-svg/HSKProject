@@ -3,63 +3,70 @@
 @tailwind utilities;
 
 :root {
-  /* Dark theme (default) - Swiss Modernism: scholarly navy + gold accent */
-  --c-night-950: 11 17 26;
-  --c-night-900: 17 24 42;
-  --c-night-800: 24 34 54;
-  --c-night-700: 34 48 74;
-  --c-night-600: 46 64 95;
-  --c-slate-100: 230 236 245;
-  --c-slate-200: 203 213 227;
-  --c-slate-300: 170 184 204;
-  --c-slate-400: 135 148 172;
-  --c-slate-500: 102 114 140;
-  /* coral-400 (text accent) needs a brighter gold on dark surfaces to stay AA; coral-500 (buttons) stays a fixed darker gold everywhere */
-  --c-coral-accent: #e8a33d;
-  --c-quicklink-from: #3a3220;
-  --c-quicklink-to: #2a2415;
-  --c-quicklink-border: #5c4f2d;
-  --c-quicklink-text: #e8d6ad;
+  /* Dark theme (default): night-blue porcelain. Same family as the landing page,
+     with the blue lifted so text accents stay AA on the dark surfaces. */
+  --c-night-950: 9 15 31;
+  --c-night-900: 13 21 42;
+  --c-night-800: 19 29 56;
+  --c-night-700: 30 44 80;
+  --c-night-600: 45 62 106;
+  --c-slate-100: 233 239 250;
+  --c-slate-200: 207 218 238;
+  --c-slate-300: 172 187 214;
+  --c-slate-400: 140 156 188;
+  --c-slate-500: 112 128 162;
+  /* coral-* is the brand accent (porcelain cobalt). 400 = theme-aware text accent. */
+  --c-coral-accent: 150 180 242;
+  --c-kicker: #d9b56c;
+  --c-quicklink-from: #1b2b55;
+  --c-quicklink-to: #15224a;
+  --c-quicklink-border: #2d4278;
+  --c-quicklink-text: #d6e1f8;
+  --c-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 14px 30px -20px rgba(0, 0, 0, 0.6);
+  --c-hero-veil: linear-gradient(100deg, rgba(13, 21, 42, 0.94) 0%, rgba(13, 21, 42, 0.82) 55%, rgba(13, 21, 42, 0.6) 100%);
   /* Red "formula / hint" callouts: light red text on dark (~8:1), deep red on light (~6:1) */
   --c-hint-text: #fca5a5;
   --c-hint-bg: rgba(239, 68, 68, 0.12);
   --c-hint-border: rgba(239, 68, 68, 0.5);
-  --c-crit-bg: rgba(245, 158, 11, 0.12);
-  --c-crit-border: rgba(245, 158, 11, 0.6);
-  --c-crit-text: #fde68a;
-  --c-crit-label: #fbbf24;
+  --c-crit-bg: rgba(217, 181, 108, 0.12);
+  --c-crit-border: rgba(217, 181, 108, 0.55);
+  --c-crit-text: #f3e3bd;
+  --c-crit-label: #d9b56c;
 }
 
 :root:not(.dark) {
-  --c-night-950: 247 248 251;
+  /* Light theme: the landing page's blue-and-white porcelain palette. */
+  --c-night-950: 245 247 251;
   --c-night-900: 255 255 255;
-  --c-night-800: 238 241 246;
-  --c-night-700: 220 226 236;
-  --c-night-600: 199 210 224;
-  --c-slate-100: 21 32 51;
-  --c-slate-200: 34 48 73;
-  --c-slate-300: 60 74 102;
-  --c-slate-400: 92 104 128;
-  --c-slate-500: 124 135 156;
-  /* coral-400 (text accent) needs a darker gold on the light surface to stay AA */
-  --c-coral-accent: #92400e;
-  --c-quicklink-from: #f7efdc;
-  --c-quicklink-to: #e8d6ad;
-  --c-quicklink-border: #ddc98f;
-  --c-quicklink-text: #5b4524;
+  --c-night-800: 255 255 255;
+  --c-night-700: 223 231 244;
+  --c-night-600: 196 209 232;
+  --c-slate-100: 20 34 79;
+  --c-slate-200: 30 47 99;
+  --c-slate-300: 52 68 110;
+  --c-slate-400: 74 88 120;
+  --c-slate-500: 98 112 143;
+  --c-coral-accent: 31 63 143;
+  --c-kicker: #8a6420;
+  --c-quicklink-from: #f4f7fd;
+  --c-quicklink-to: #e3eaf7;
+  --c-quicklink-border: #d5deee;
+  --c-quicklink-text: #1f3f8f;
+  --c-shadow: 0 1px 2px rgba(20, 34, 79, 0.05), 0 14px 30px -22px rgba(20, 34, 79, 0.35);
+  --c-hero-veil: linear-gradient(100deg, rgba(245, 247, 251, 0.95) 0%, rgba(245, 247, 251, 0.85) 55%, rgba(245, 247, 251, 0.55) 100%);
   --c-hint-text: #b91c1c;
   --c-hint-bg: #fef2f2;
   --c-hint-border: #fca5a5;
-  --c-crit-bg: #fef3c7;
-  --c-crit-border: #f59e0b;
-  --c-crit-text: #451a03;
-  --c-crit-label: #b45309;
+  --c-crit-bg: #fbf5e6;
+  --c-crit-border: #d9b56c;
+  --c-crit-text: #3d2c0b;
+  --c-crit-label: #8a6420;
 }
 
 a:focus-visible,
 button:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--c-coral-accent);
+  outline: 2px solid rgb(var(--c-coral-accent));
   outline-offset: 2px;
 }
 
@@ -82,7 +89,7 @@ body {
 }
 
 ::selection {
-  background: #b45309;
+  background: #1f3f8f;
   color: #fff;
 }
 
@@ -98,7 +105,7 @@ body {
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b45309;
+  background: #1f3f8f;
 }
 
 .letter-paper {
@@ -329,3 +336,52 @@ body {
 /* Lesson map: the yellow "classification criterion" callout, theme-aware. */
 .lesson-crit { background: var(--c-crit-bg); border-color: var(--c-crit-border); color: var(--c-crit-text); }
 .lesson-crit-label { color: var(--c-crit-label); }
+
+/* ------------------------------------------------------------------ App surfaces
+   The inner pages share the landing page's card language: white (or night-blue)
+   surface, hairline border, 1.25rem radius, soft long shadow. Kept in
+   @layer components so Tailwind utilities can still override them. */
+@layer components {
+.surface {
+  background: rgb(var(--c-night-800));
+  border: 1px solid rgb(var(--c-night-700));
+  border-radius: 1.25rem;
+  box-shadow: var(--c-shadow);
+}
+a.surface, button.surface, a > .surface, button > .surface { transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+a.surface:hover, button.surface:hover, a:hover > .surface, button:hover > .surface { transform: translateY(-2px); border-color: rgb(var(--c-coral-accent) / 0.6); }
+@media (prefers-reduced-motion: reduce) { a.surface:hover, button.surface:hover, a:hover > .surface, button:hover > .surface { transform: none; } }
+
+.kicker { font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; color: var(--c-kicker); }
+
+}
+
+/* Page banner: the brand artwork, blurred, behind the page title. */
+.app-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 1.5rem;
+  border: 1px solid rgb(var(--c-night-700));
+  box-shadow: var(--c-shadow);
+}
+.app-hero::before {
+  content: '';
+  position: absolute;
+  inset: -30px;
+  z-index: -2;
+  background: url('/img/home-hero-800.webp') center / cover no-repeat;
+  filter: blur(22px) saturate(1.1);
+  transform: scale(1.1);
+}
+.app-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--c-hero-veil);
+}
+.app-hero-art {
+  border-radius: 1rem;
+  box-shadow: 0 18px 40px -20px rgba(20, 34, 79, 0.55);
+}

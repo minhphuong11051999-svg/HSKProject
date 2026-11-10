@@ -10,6 +10,21 @@ import {
   deleteExamSitting,
 } from '../api/examSittings';
 import { TextField, NumberField, CheckboxField, RichTextAreaField } from '../components/admin/fields';
+import PageHeader from '../components/PageHeader';
+import {
+  PANEL,
+  PANEL_TITLE,
+  HINT,
+  INPUT,
+  LABEL,
+  LABEL_TEXT,
+  BTN_PRIMARY,
+  BTN_SECONDARY,
+  BTN_LINK,
+  BTN_LINK_DANGER,
+  ERROR_TEXT,
+  SUCCESS_TEXT,
+} from '../components/admin/ui';
 
 const EMPTY_SITTING = {
   id: null,
@@ -140,26 +155,28 @@ export default function AdminExamSittings() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      <div className="grid lg:grid-cols-[320px_1fr] gap-8">
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl font-bold">Đề thi thật</h1>
-            <Link to="/admin/sample-papers" className="text-sm text-coral-400 underline">
-              Quản trị đề mẫu
-            </Link>
-          </div>
-
+      <PageHeader
+        title="Đề thi thật"
+        actions={
+          <Link to="/admin/sample-papers" className={BTN_SECONDARY}>
+            Quản trị đề mẫu
+          </Link>
+        }
+      />
+      <div className="grid lg:grid-cols-[320px_1fr] gap-6 lg:gap-8 items-start">
+        <section className={PANEL}>
           <form onSubmit={handleAddYear} className="flex gap-2 mb-4">
             <input
               type="number"
+              aria-label="Thêm năm, vd 2026"
               value={newYear}
               onChange={(e) => setNewYear(e.target.value)}
               placeholder="Thêm năm, vd 2026"
-              className="flex-1 bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+              className={`${INPUT} flex-1 min-w-0`}
             />
             <button
               type="submit"
-              className="bg-coral-500 hover:bg-coral-600 text-white rounded-lg px-3 py-1.5 text-sm font-semibold transition-colors"
+              className={`${BTN_PRIMARY} flex-shrink-0`}
             >
               + Năm
             </button>
@@ -169,21 +186,22 @@ export default function AdminExamSittings() {
             {years.map((year) => (
               <li key={year.id}>
                 <div
-                  className={`flex justify-between items-center rounded-lg p-3 border ${
+                  className={`flex justify-between items-center gap-2 rounded-xl py-1 pl-1 pr-1 border transition-colors ${
                     selectedYearId === year.id
-                      ? 'bg-coral-500/15 border-coral-400'
-                      : 'bg-night-800 border-night-700'
+                      ? 'bg-coral-400/10 border-coral-400'
+                      : 'bg-night-900 border-night-700 hover:border-coral-400/60'
                   }`}
                 >
                   <button
                     type="button"
                     onClick={() => setSelectedYearId(year.id)}
-                    className="text-left flex-1"
+                    aria-pressed={selectedYearId === year.id}
+                    className="text-left flex-1 min-h-[44px] rounded-lg px-3 py-1.5"
                   >
-                    <p className="font-semibold">Năm {year.year}</p>
+                    <p className="font-bold text-slate-100">Năm {year.year}</p>
                     <p className="text-xs text-slate-400">{year.sittings.length} đề</p>
                   </button>
-                  <button onClick={() => handleDeleteYear(year.id)} className="text-red-400 underline text-sm ml-2">
+                  <button onClick={() => handleDeleteYear(year.id)} className={BTN_LINK_DANGER}>
                     Xoá
                   </button>
                 </div>
@@ -193,22 +211,22 @@ export default function AdminExamSittings() {
 
           {selectedYear && (
             <>
-              <h2 className="font-semibold text-sm mb-2 text-slate-300">Các đề trong năm {selectedYear.year}</h2>
+              <h2 className={`${PANEL_TITLE} mb-3 pt-4 border-t border-night-700`}>Các đề trong năm {selectedYear.year}</h2>
               <ul className="space-y-2">
                 {selectedYear.sittings.map((sitting) => (
                   <li
                     key={sitting.id}
-                    className="bg-night-800 border border-night-700 rounded-lg p-3 flex justify-between items-center"
+                    className="bg-night-900 border border-night-700 rounded-xl py-2 pl-4 pr-1 flex justify-between items-center gap-2"
                   >
-                    <div>
-                      <p>{sitting.label}</p>
-                      <p className="text-xs text-slate-400">{sitting.slug}</p>
+                    <div className="min-w-0">
+                      <p className="text-slate-100 truncate">{sitting.label}</p>
+                      <p className="text-xs text-slate-400 truncate">{sitting.slug}</p>
                     </div>
-                    <div className="flex gap-2 text-sm">
-                      <button onClick={() => edit(sitting)} className="text-coral-400 underline">
+                    <div className="flex flex-shrink-0">
+                      <button onClick={() => edit(sitting)} className={BTN_LINK}>
                         Sửa
                       </button>
-                      <button onClick={() => handleDeleteSitting(sitting.id)} className="text-red-400 underline">
+                      <button onClick={() => handleDeleteSitting(sitting.id)} className={BTN_LINK_DANGER}>
                         Xoá
                       </button>
                     </div>
@@ -219,39 +237,39 @@ export default function AdminExamSittings() {
           )}
         </section>
 
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold">{form.id ? 'Sửa đề thi' : 'Thêm đề thi mới'}</h2>
+        <section className="min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-100">{form.id ? 'Sửa đề thi' : 'Thêm đề thi mới'}</h2>
             {form.id && (
               <button
                 type="button"
                 onClick={newSittingForm}
-                className="text-sm px-3 py-1.5 border border-night-600 rounded-lg"
+                className={BTN_SECONDARY}
               >
                 + Tạo đề mới
               </button>
             )}
           </div>
 
-          {loadingEdit && <p className="text-slate-400 text-sm mb-3">Đang tải nội dung...</p>}
+          {loadingEdit && <p className={`${HINT} mb-3`} role="status">Đang tải nội dung...</p>}
 
           {!selectedYearId ? (
-            <p className="text-slate-500 text-sm">Hãy thêm hoặc chọn một năm trong danh sách Năm trước.</p>
+            <p className={`${PANEL} ${HINT}`}>Hãy thêm hoặc chọn một năm trong danh sách Năm trước.</p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="border border-night-600 rounded-lg p-4 space-y-2">
-                <h3 className="font-semibold text-sm mb-1">Thông tin cơ bản</h3>
-                <p className="text-xs text-slate-500 mb-2">Thuộc năm: {selectedYear?.year}</p>
-                <div className="grid sm:grid-cols-2 gap-2">
+              <div className={`${PANEL} space-y-2`}>
+                <h3 className={PANEL_TITLE}>Thông tin cơ bản</h3>
+                <p className={`${HINT} mb-3`}>Thuộc năm: {selectedYear?.year}</p>
+                <div className="grid sm:grid-cols-2 gap-x-4">
                   <TextField label="Slug (vd: de-thi-2026-09-20)" value={form.slug} onChange={(v) => set('slug', v)} />
                   <TextField label="Nhãn ngày (vd: 20/09)" value={form.label} onChange={(v) => set('label', v)} />
-                  <label className="block text-xs text-slate-400 mb-2">
-                    Ngày ra đề
+                  <label className={LABEL}>
+                    <span className={LABEL_TEXT}>Ngày ra đề</span>
                     <input
                       type="date"
                       value={form.examDate || ''}
                       onChange={(e) => set('examDate', e.target.value)}
-                      className="mt-1 w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100"
+                      className={INPUT}
                     />
                   </label>
                   <NumberField label="Thứ tự hiển thị" value={form.orderIndex} onChange={(v) => set('orderIndex', v)} />
@@ -265,6 +283,7 @@ export default function AdminExamSittings() {
                 />
               </div>
 
+              <div className={PANEL}>
               <RichTextAreaField label="Đề bài" value={form.prompt} onChange={(v) => set('prompt', v)} rows={8} />
               <RichTextAreaField
                 label="Kiểm tra yêu cầu đề (để trống nếu không cần)"
@@ -279,14 +298,15 @@ export default function AdminExamSittings() {
                 rows={6}
               />
               <RichTextAreaField label="Đáp án mẫu" value={form.answer} onChange={(v) => set('answer', v)} rows={10} />
+              </div>
 
-              {error && <p className="text-red-400 text-sm">{error}</p>}
-              {savedMessage && <p className="text-green-400 text-sm">{savedMessage}</p>}
-              <div className="flex gap-2 sticky bottom-0 bg-night-950 py-3">
+              {error && <p className={ERROR_TEXT} role="alert">{error}</p>}
+              {savedMessage && <p className={SUCCESS_TEXT} role="status">{savedMessage}</p>}
+              <div className="surface sticky bottom-3 z-10 flex flex-wrap items-center gap-3 px-4 py-3">
                 <button
                   type="submit"
                   disabled={saving}
-                  className="bg-coral-500 hover:bg-coral-600 text-white rounded-lg px-4 py-2 font-semibold transition-colors"
+                  className={BTN_PRIMARY}
                 >
                   {saving ? 'Đang lưu...' : form.id ? 'Lưu thay đổi' : 'Tạo đề thi'}
                 </button>

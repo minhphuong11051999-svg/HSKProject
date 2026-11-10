@@ -61,13 +61,13 @@ export default function Sidebar({ open = false, onClose }) {
         <Highlight
           controlledItems
           value={activeTo}
-          className="inset-0 rounded-lg bg-coral-500/15 border-l-2 border-coral-400"
+          className="inset-0 rounded-xl bg-coral-400/10 ring-1 ring-inset ring-coral-400/25"
           transition={{ type: 'spring', stiffness: 380, damping: 34 }}
         >
           <NavGroup items={NAV_ITEMS} activeTo={activeTo} />
           {user?.role === 'ADMIN' && (
             <>
-              <p className="px-3 pt-5 pb-1 text-xs tracking-wider text-slate-500 font-semibold">QUẢN TRỊ</p>
+              <p className="px-3 pt-6 pb-2 text-xs tracking-[0.12em] text-kicker font-bold">QUẢN TRỊ</p>
               <NavGroup items={ADMIN_ITEMS} activeTo={activeTo} />
             </>
           )}
@@ -81,7 +81,7 @@ export default function Sidebar({ open = false, onClose }) {
         </div>
         <button
           onClick={handleLogout}
-          className="w-full bg-coral-500 hover:bg-coral-600 text-white rounded-lg py-2 text-sm font-semibold transition-colors"
+          className="w-full min-h-[44px] border-[1.5px] border-night-600 bg-night-900 text-slate-200 hover:border-coral-400 hover:text-coral-400 rounded-xl text-sm font-bold transition-colors"
         >
           Đăng xuất
         </button>
@@ -110,8 +110,8 @@ function NavGroup({ items, activeTo }) {
             <Link
               to={item.to}
               aria-current={active ? 'page' : undefined}
-              className={`flex items-center gap-3 min-h-[44px] px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                active ? 'text-coral-400 font-semibold' : 'text-slate-300 hover:bg-night-800 hover:text-white'
+              className={`flex items-center gap-3 min-h-[44px] px-3 py-2.5 rounded-xl text-[0.9375rem] transition-colors ${
+                active ? 'text-coral-400 font-bold' : 'text-slate-300 hover:bg-night-700/50 hover:text-slate-100'
               }`}
             >
               <item.icon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" className="flex-shrink-0" />

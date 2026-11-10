@@ -1,3 +1,5 @@
+import { BTN_TOOL, BTN_TOOL_DANGER, BTN_ADD, HINT } from './ui';
+
 export default function Repeater({ title, hint, items, onChange, newItem, renderItem, addLabel, itemLabel }) {
   function updateItem(index, next) {
     const copy = items.slice();
@@ -22,22 +24,24 @@ export default function Repeater({ title, hint, items, onChange, newItem, render
   }
 
   return (
-    <div className="border border-night-700 rounded-lg p-4">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="font-semibold text-sm">{title}</h3>
-        <span className="text-xs text-slate-400">{items.length} mục</span>
+    <div className="rounded-2xl border border-night-700 bg-night-900 p-4 sm:p-5">
+      <div className="flex items-start justify-between gap-3 mb-2">
+        <h3 className="font-extrabold tracking-tight text-slate-100">{title}</h3>
+        <span className="flex-shrink-0 rounded-full bg-coral-400/10 px-2.5 py-0.5 text-xs font-bold text-coral-400">{items.length} mục</span>
       </div>
-      {hint && <p className="text-xs text-slate-400 mb-3">{hint}</p>}
+      {hint && <p className={`${HINT} mb-4`}>{hint}</p>}
 
       <div className="space-y-3">
         {items.map((item, index) => (
-          <div key={index} className="relative bg-night-900 border border-night-700 rounded-lg p-3">
-            <div className="absolute top-2 right-2 flex gap-1 text-xs">
-              <button type="button" onClick={() => move(index, -1)} className="px-1.5 py-0.5 border border-night-600 rounded bg-night-800 text-slate-200" title="Lên">↑</button>
-              <button type="button" onClick={() => move(index, 1)} className="px-1.5 py-0.5 border border-night-600 rounded bg-night-800 text-slate-200" title="Xuống">↓</button>
-              <button type="button" onClick={() => removeItem(index)} className="px-1.5 py-0.5 border border-red-500 text-red-400 rounded bg-night-800" title="Xoá">Xoá</button>
+          <div key={index} className="bg-night-800 border border-night-700 rounded-xl p-4">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <p className="text-sm font-bold text-coral-400">{itemLabel ? itemLabel(item, index) : `#${index + 1}`}</p>
+              <div className="flex gap-1.5">
+                <button type="button" onClick={() => move(index, -1)} className={BTN_TOOL} title="Lên" aria-label="Lên">↑</button>
+                <button type="button" onClick={() => move(index, 1)} className={BTN_TOOL} title="Xuống" aria-label="Xuống">↓</button>
+                <button type="button" onClick={() => removeItem(index)} className={BTN_TOOL_DANGER} title="Xoá">Xoá</button>
+              </div>
             </div>
-            <p className="text-xs font-semibold text-slate-400 mb-2">{itemLabel ? itemLabel(item, index) : `#${index + 1}`}</p>
             {renderItem(item, (next) => updateItem(index, next))}
           </div>
         ))}
@@ -46,7 +50,7 @@ export default function Repeater({ title, hint, items, onChange, newItem, render
       <button
         type="button"
         onClick={addItem}
-        className="mt-3 text-sm px-3 py-1.5 border border-coral-500/50 text-coral-400 hover:bg-coral-500/10 rounded-lg"
+        className={`${BTN_ADD} mt-4`}
       >
         + {addLabel || 'Thêm mục'}
       </button>

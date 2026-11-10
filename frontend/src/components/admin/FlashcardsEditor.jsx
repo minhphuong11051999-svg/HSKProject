@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import Repeater from './Repeater';
+import { INPUT, LABEL_TEXT, BTN_TOOL, BTN_TOOL_DANGER, CHECKBOX } from './ui';
 import { TextField, TextAreaField } from './fields';
 
 const QUESTION_KINDS = [
@@ -61,10 +62,10 @@ function fileToSmallDataUrl(file) {
 function ImageField({ value, onChange }) {
   const inputRef = useRef(null);
   return (
-    <div className="mb-2">
-      <p className="text-xs text-slate-400 mb-1">③ Hình ảnh (mặt trước, bên phải trên)</p>
+    <div className="mb-3">
+      <p className={LABEL_TEXT}>③ Hình ảnh (mặt trước, bên phải trên)</p>
       <div className="flex items-center gap-3">
-        <div className="w-20 h-20 rounded-lg bg-white overflow-hidden flex items-center justify-center border border-night-600 flex-shrink-0">
+        <div className="w-20 h-20 rounded-xl bg-white overflow-hidden flex items-center justify-center border border-night-600 flex-shrink-0">
           {value ? <img src={value} alt="" className="w-full h-full object-cover" /> : <span className="text-[10px] text-slate-500">Chưa có</span>}
         </div>
         <div className="flex flex-col gap-1.5 min-w-0 flex-1">
@@ -72,12 +73,12 @@ function ImageField({ value, onChange }) {
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
-              className="text-xs px-2.5 py-1.5 rounded border border-night-600 bg-night-800 text-slate-200 hover:bg-night-700"
+              className={BTN_TOOL}
             >
               Tải ảnh lên
             </button>
             {value && (
-              <button type="button" onClick={() => onChange('')} className="text-xs px-2.5 py-1.5 rounded border border-red-500/60 text-red-400">
+              <button type="button" onClick={() => onChange('')} className={BTN_TOOL_DANGER}>
                 Xoá ảnh
               </button>
             )}
@@ -86,7 +87,8 @@ function ImageField({ value, onChange }) {
             value={value?.startsWith('data:') ? '' : value || ''}
             onChange={(e) => onChange(e.target.value)}
             placeholder={value?.startsWith('data:') ? 'Đang dùng ảnh tải lên' : '…hoặc dán link ảnh (https://...)'}
-            className="w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-xs text-slate-100 placeholder-slate-500"
+            aria-label="Link ảnh"
+            className={INPUT}
           />
         </div>
       </div>
@@ -114,13 +116,13 @@ function AudioField({ label, value, onChange }) {
   const [error, setError] = useState('');
   const isUpload = value?.startsWith('data:');
   return (
-    <div className="mb-2">
-      <p className="text-xs text-slate-400 mb-1">{label}</p>
+    <div className="mb-3">
+      <p className={LABEL_TEXT}>{label}</p>
       <div className="flex flex-wrap items-center gap-2">
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="text-xs px-2.5 py-1.5 rounded border border-night-600 bg-night-800 text-slate-200 hover:bg-night-700"
+          className={BTN_TOOL}
         >
           Tải file âm thanh
         </button>
@@ -131,7 +133,7 @@ function AudioField({ label, value, onChange }) {
               setError('');
               onChange('');
             }}
-            className="text-xs px-2.5 py-1.5 rounded border border-red-500/60 text-red-400"
+            className={BTN_TOOL_DANGER}
           >
             Xoá âm thanh
           </button>
@@ -140,14 +142,15 @@ function AudioField({ label, value, onChange }) {
           value={isUpload ? '' : value || ''}
           onChange={(e) => onChange(e.target.value)}
           placeholder={isUpload ? 'Đang dùng file tải lên' : '…hoặc dán link file (https://...mp3)'}
-          className="flex-1 min-w-[12rem] bg-night-900 border border-night-600 rounded px-2 py-1.5 text-xs text-slate-100 placeholder-slate-500"
+          aria-label="Link file âm thanh"
+          className={`${INPUT} flex-1 min-w-[12rem]`}
         />
       </div>
       {value && <audio controls src={value} className="mt-2 h-9 w-full max-w-sm" />}
       {error ? (
-        <p className="mt-1 text-[11px] text-red-400" role="alert">{error}</p>
+        <p className="mt-1.5 text-xs font-medium text-[color:var(--c-hint-text)]" role="alert">{error}</p>
       ) : (
-        <p className="mt-1 text-[11px] text-slate-500">
+        <p className="mt-1.5 text-xs text-slate-500">
           mp3 / m4a / wav, tối đa 300KB (khoảng 10–20 giây). Để trống thì dùng giọng đọc của trình duyệt.
         </p>
       )}
@@ -177,8 +180,8 @@ function AudioField({ label, value, onChange }) {
 function QuestionEditor({ question: q, onChange, title }) {
   const options = Array.from({ length: 4 }, (_, i) => q.options?.[i] ?? '');
   return (
-    <div className="rounded-lg border border-night-700 bg-night-800/60 p-3">
-      <p className="text-xs font-semibold text-coral-400 mb-2">{title}</p>
+    <div className="rounded-xl border border-night-700 bg-night-900 p-4">
+      <p className="text-sm font-bold text-coral-400 mb-3">{title}</p>
       {q.kind === 'listen' && (
         <div className="grid sm:grid-cols-2 gap-2">
           <TextField
@@ -199,9 +202,10 @@ function QuestionEditor({ question: q, onChange, title }) {
       <TextAreaField label="Câu hỏi" rows={2} value={q.prompt} onChange={(v) => onChange({ ...q, prompt: v })} />
       <div className="grid sm:grid-cols-2 gap-2">
         {options.map((opt, i) => (
-          <label key={i} className="flex items-center gap-2 text-xs text-slate-400">
+          <label key={i} className="flex items-center gap-2 text-sm text-slate-300">
             <input
               type="radio"
+              className={CHECKBOX}
               checked={q.answer === i}
               onChange={() => onChange({ ...q, answer: i })}
               aria-label={`Đáp án đúng là ${'ABCD'[i]}`}
@@ -214,12 +218,12 @@ function QuestionEditor({ question: q, onChange, title }) {
                 next[i] = e.target.value;
                 onChange({ ...q, options: next });
               }}
-              className="flex-1 min-w-0 bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100"
+              className={`${INPUT} flex-1 min-w-0`}
             />
           </label>
         ))}
       </div>
-      <p className="text-[11px] text-slate-500 mt-1">Chọn ô tròn cạnh phương án đúng.</p>
+      <p className="text-xs text-slate-500 mt-2">Chọn ô tròn cạnh phương án đúng.</p>
     </div>
   );
 }
@@ -243,7 +247,7 @@ export default function FlashcardsEditor({ items, onChange }) {
         );
         return (
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-slate-300">Mặt trước</p>
+            <p className="kicker">Mặt trước</p>
             <div className="grid sm:grid-cols-2 gap-2">
               <TextField
                 label="① Chữ Hán (vd: 批准 hoặc 申请 / 申请书)"
@@ -277,7 +281,7 @@ export default function FlashcardsEditor({ items, onChange }) {
               ))}
             </div>
 
-            <p className="text-xs font-semibold text-slate-300 pt-2">Mặt sau</p>
+            <p className="kicker pt-3">Mặt sau</p>
             <div className="grid sm:grid-cols-2 gap-2">
               <TextField label="① Pinyin" value={card.pinyin} onChange={(v) => update({ ...card, pinyin: v })} />
               <TextField label="② Nghĩa tiếng Việt" value={card.meaning} onChange={(v) => update({ ...card, meaning: v })} />
@@ -285,7 +289,7 @@ export default function FlashcardsEditor({ items, onChange }) {
               <TextField label="③ Bản dịch câu ví dụ" value={card.exampleVi} onChange={(v) => update({ ...card, exampleVi: v })} />
             </div>
 
-            <p className="text-xs font-semibold text-slate-300 pt-2">4 câu bài tập</p>
+            <p className="kicker pt-3">4 câu bài tập</p>
             <div className="space-y-2">
               {questions.map((q, i) => (
                 <QuestionEditor

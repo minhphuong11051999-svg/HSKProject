@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { INPUT_LG, LABEL_TEXT, BTN_PRIMARY_LG, ERROR_TEXT } from '../components/admin/ui';
 
-const inputClass =
-  'w-full bg-night-800 border border-night-600 rounded-lg px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-coral-500';
+const inputClass = INPUT_LG;
 
 export default function Register() {
   const { register } = useAuth();
@@ -25,41 +25,80 @@ export default function Register() {
   }
 
   return (
-    <main className="max-w-sm mx-auto px-4 sm:px-6 py-10 sm:py-16">
-      <h1 className="text-xl font-bold mb-6 text-center">Đăng ký</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          required
-          placeholder="Họ tên"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className={inputClass}
-        />
-        <input
-          type="email"
-          required
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={inputClass}
-        />
-        <input
-          type="password"
-          required
-          minLength={8}
-          placeholder="Mật khẩu (tối thiểu 8 ký tự)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={inputClass}
-        />
-        {error && <p className="text-red-400 text-sm">{error}</p>}
-        <button type="submit" className="w-full bg-coral-500 hover:bg-coral-600 text-white rounded-lg py-2 font-semibold transition-colors">
-          Đăng ký
-        </button>
-      </form>
-      <p className="text-sm text-center mt-4 text-slate-400">
-        Đã có tài khoản? <Link to="/login" className="text-coral-400 underline">Đăng nhập</Link>
-      </p>
+    <main className="px-4 sm:px-6 py-10 sm:py-16">
+      <div className="surface mx-auto max-w-sm lg:max-w-4xl overflow-hidden lg:grid lg:grid-cols-[1.1fr_1fr]">
+        <div className="hidden lg:flex items-center justify-center bg-coral-400/10 border-r border-night-700 p-8">
+          <img
+            src="/img/home-hero-800.webp"
+            alt=""
+            aria-hidden="true"
+            width="800"
+            height="510"
+            className="app-hero-art w-full h-auto"
+          />
+        </div>
+
+        <div className="px-6 py-8 sm:px-10 sm:py-12">
+          <p className="kicker">
+            <span className="zh" lang="zh">写作工坊</span> · HSK6
+          </p>
+          <h1 className="mt-2 mb-8 text-[2rem] leading-tight font-extrabold tracking-tight text-slate-100">Đăng ký</h1>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <label className="block">
+              <span className={LABEL_TEXT}>Họ tên</span>
+              <input
+                required
+                autoComplete="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={inputClass}
+              />
+            </label>
+            <label className="block">
+              <span className={LABEL_TEXT}>Email</span>
+              <input
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={inputClass}
+              />
+            </label>
+            <label className="block">
+              <span className={LABEL_TEXT}>Mật khẩu (tối thiểu 8 ký tự)</span>
+              <input
+                type="password"
+                required
+                minLength={8}
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={inputClass}
+              />
+            </label>
+            {error && (
+              <p className={ERROR_TEXT} role="alert">
+                {error}
+              </p>
+            )}
+            <button type="submit" className={`${BTN_PRIMARY_LG} w-full`}>
+              Đăng ký
+            </button>
+          </form>
+
+          <p className="text-sm mt-6 text-slate-400">
+            Đã có tài khoản?{' '}
+            <Link
+              to="/login"
+              className="inline-flex items-center min-h-[44px] font-bold text-coral-400 underline underline-offset-4"
+            >
+              Đăng nhập
+            </Link>
+          </p>
+        </div>
+      </div>
     </main>
   );
 }

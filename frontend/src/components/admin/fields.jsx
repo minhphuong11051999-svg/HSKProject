@@ -1,15 +1,16 @@
 import { useRef, useState } from 'react';
 import { Paperclip, Eye } from '@phosphor-icons/react';
+import { INPUT, LABEL, LABEL_TEXT, BTN_TOOL, CHECKBOX } from './ui';
 
 export function TextField({ label, value, onChange, placeholder }) {
   return (
-    <label className="block text-xs text-slate-400 mb-2">
-      {label}
+    <label className={LABEL}>
+      <span className={LABEL_TEXT}>{label}</span>
       <input
         value={value || ''}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+        className={INPUT}
       />
     </label>
   );
@@ -17,21 +18,20 @@ export function TextField({ label, value, onChange, placeholder }) {
 
 export function TextAreaField({ label, value, onChange, placeholder, rows = 3 }) {
   return (
-    <label className="block text-xs text-slate-400 mb-2">
-      {label}
+    <label className={LABEL}>
+      <span className={LABEL_TEXT}>{label}</span>
       <textarea
         value={value || ''}
         placeholder={placeholder}
         rows={rows}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+        className={INPUT}
       />
     </label>
   );
 }
 
-const RICH_TOOLBAR_BTN =
-  'px-2 py-1 text-xs rounded border border-night-600 bg-night-800 text-slate-200 hover:bg-night-700';
+const RICH_TOOLBAR_BTN = BTN_TOOL;
 
 // Textarea with an HTML formatting toolbar (bold/italic/underline/image) and an
 // inline preview, for fields whose value is raw HTML rendered via dangerouslySetInnerHTML.
@@ -104,9 +104,9 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
   }
 
   return (
-    <label className="block text-xs text-slate-400 mb-2">
-      {label}
-      <div className="mt-1 flex flex-wrap gap-1.5">
+    <label className={LABEL}>
+      <span className={LABEL_TEXT}>{label}</span>
+      <div className="mb-1.5 flex flex-wrap gap-1.5">
         <button type="button" className={`${RICH_TOOLBAR_BTN} font-bold`} onClick={() => wrapSelection('<b>', '</b>')}>
           B
         </button>
@@ -132,7 +132,7 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
         />
         <button
           type="button"
-          className={`${RICH_TOOLBAR_BTN} ${preview ? 'bg-coral-600 border-coral-500 text-white' : ''}`}
+          className={`${RICH_TOOLBAR_BTN} ${preview ? '!bg-coral-500 !border-coral-500 !text-white' : ''}`}
           onClick={() => setPreview((p) => !p)}
         >
           {preview ? 'Chỉnh sửa' : <span className="inline-flex items-center gap-1"><Eye size={14} aria-hidden="true" />Xem trước</span>}
@@ -140,7 +140,7 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
       </div>
       {preview ? (
         <div
-          className="mt-1 w-full min-h-[8rem] bg-night-900 border border-night-600 rounded px-3 py-2 text-sm text-slate-100 whitespace-pre-line"
+          className="w-full min-h-[8rem] bg-night-900 border border-night-600 rounded-xl px-3 py-2 text-sm text-slate-100 whitespace-pre-line"
           dangerouslySetInnerHTML={{ __html: value || '<span class="text-slate-500">(trống)</span>' }}
         />
       ) : (
@@ -150,7 +150,7 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
           placeholder={placeholder}
           rows={rows}
           onChange={(e) => onChange(e.target.value)}
-          className="mt-1 w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100 placeholder-slate-500 font-mono"
+          className={`${INPUT} font-mono leading-relaxed`}
         />
       )}
     </label>
@@ -159,14 +159,14 @@ export function RichTextAreaField({ label, value, onChange, placeholder, rows = 
 
 export function NumberField({ label, value, onChange, placeholder }) {
   return (
-    <label className="block text-xs text-slate-400 mb-2">
-      {label}
+    <label className={LABEL}>
+      <span className={LABEL_TEXT}>{label}</span>
       <input
         type="number"
         value={value ?? ''}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value === '' ? null : Number(e.target.value))}
-        className="mt-1 w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+        className={INPUT}
       />
     </label>
   );
@@ -174,12 +174,12 @@ export function NumberField({ label, value, onChange, placeholder }) {
 
 export function SelectField({ label, value, onChange, options }) {
   return (
-    <label className="block text-xs text-slate-400 mb-2">
-      {label}
+    <label className={LABEL}>
+      <span className={LABEL_TEXT}>{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+        className={INPUT}
       >
         {options.map(([val, text]) => (
           <option key={val} value={val}>
@@ -193,8 +193,8 @@ export function SelectField({ label, value, onChange, options }) {
 
 export function CheckboxField({ label, checked, onChange }) {
   return (
-    <label className="flex items-center gap-2 text-xs text-slate-400 mb-2">
-      <input type="checkbox" checked={!!checked} onChange={(e) => onChange(e.target.checked)} />
+    <label className="flex items-center gap-3 min-h-[44px] mb-1 text-sm font-medium text-slate-300 cursor-pointer">
+      <input type="checkbox" className={CHECKBOX} checked={!!checked} onChange={(e) => onChange(e.target.checked)} />
       {label}
     </label>
   );
@@ -204,14 +204,14 @@ export function CheckboxField({ label, checked, onChange }) {
 export function LinesField({ label, value, onChange, placeholder, rows = 3 }) {
   const text = (value || []).join('\n');
   return (
-    <label className="block text-xs text-slate-400 mb-2">
-      {label}
+    <label className={LABEL}>
+      <span className={LABEL_TEXT}>{label}</span>
       <textarea
         value={text}
         placeholder={placeholder}
         rows={rows}
         onChange={(e) => onChange(e.target.value.split('\n').map((l) => l.trim()).filter(Boolean))}
-        className="mt-1 w-full bg-night-900 border border-night-600 rounded px-2 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+        className={INPUT}
       />
     </label>
   );

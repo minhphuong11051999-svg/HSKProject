@@ -104,21 +104,21 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
     }
   }
 
-  const PANEL = 'bg-night-800 border border-night-700 rounded-xl p-6 focus-visible:outline-none';
+  const PANEL = 'surface p-6 sm:p-8 focus-visible:outline-none';
 
   return (
-    // Animate UI Tabs: the gold "selected" pill slides between tabs and panels
+    // Animate UI Tabs: the cobalt "selected" pill slides between tabs and panels
     // cross-fade. Radix supplies roles, ids and arrow-key navigation.
     <Tabs.Root value={tab} onValueChange={setTab}>
-      <Tabs.List aria-label="Các phần của đề" className="relative flex flex-wrap gap-2 mb-6">
+      <Tabs.List aria-label="Các phần của đề" className="relative flex flex-wrap gap-2 mb-7">
         {TABS.map((t) => (
           <Tabs.Trigger
             key={t.key}
             value={t.key}
-            className={`relative z-[1] min-h-[44px] px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2 ${
+            className={`relative z-[1] min-h-[44px] px-4 py-2 rounded-xl border text-sm font-semibold transition-colors flex items-center gap-2 ${
               tab === t.key
-                ? 'bg-coral-500 text-white'
-                : 'bg-night-800 border border-night-700 text-slate-300 hover:bg-night-700 hover:text-white'
+                ? 'bg-coral-400/10 border-coral-400/40 text-coral-400'
+                : 'bg-night-800 border-night-700 text-slate-400 hover:border-coral-400/40 hover:text-slate-100'
             }`}
           >
             <t.icon size={18} weight={tab === t.key ? 'fill' : 'regular'} aria-hidden="true" />
@@ -133,20 +133,20 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
 
       {requirements && (
         <Tabs.Content value="requirements" className={PANEL}>
-          <h2 className="font-semibold mb-3 text-slate-200">Kiểm tra yêu cầu đề</h2>
+          <h2 className="text-lg font-extrabold tracking-tight mb-3 text-slate-100">Kiểm tra yêu cầu đề</h2>
           <div className="text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: requirements }} />
         </Tabs.Content>
       )}
 
       {outline && (
         <Tabs.Content value="outline" className={PANEL}>
-          <h2 className="font-semibold mb-3 text-slate-200">Dàn ý gợi ý</h2>
+          <h2 className="text-lg font-extrabold tracking-tight mb-3 text-slate-100">Dàn ý gợi ý</h2>
           <div className="zh text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: outline }} />
         </Tabs.Content>
       )}
 
       <Tabs.Content value="draft" className={PANEL}>
-        <h2 className="font-semibold mb-3 text-slate-200">Bài làm của bạn</h2>
+        <h2 className="text-lg font-extrabold tracking-tight mb-3 text-slate-100">Bài làm của bạn</h2>
         {loadingDraft ? (
           <p className="text-sm text-slate-500">Đang tải...</p>
         ) : (
@@ -160,7 +160,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
               rows={12}
               placeholder="Viết bài làm của bạn ở đây..."
               aria-label="Bài làm của bạn"
-              className="w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 zh leading-7 transition-colors focus:border-coral-500 focus:outline-none"
+              className="w-full bg-night-950 border border-night-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 zh leading-7 transition-colors focus:border-coral-400 focus:ring-2 focus:ring-coral-400/20 focus:outline-none"
             />
             <div className="flex flex-wrap items-center justify-between gap-2 mt-1">
               <p className="text-xs text-slate-500">Mỗi lần xuống dòng sẽ tự thụt đầu dòng 2 ô, đúng quy cách viết luận.</p>
@@ -177,7 +177,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
               <PressButton
                 onClick={handleSubmitDraft}
                 disabled={saving || !draft.trim()}
-                className="min-h-[44px] bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg px-4 py-2 text-sm font-semibold transition-colors"
+                className="min-h-[44px] bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl px-5 py-2 text-sm font-bold shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors"
               >
                 {saving ? 'Đang lưu...' : 'Nộp bài làm'}
               </PressButton>
@@ -196,14 +196,14 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
 
       <Tabs.Content value="answer" className={PANEL}>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <h2 className="font-semibold text-slate-200 flex items-center gap-2">
+          <h2 className="text-lg font-extrabold tracking-tight text-slate-100 flex items-center gap-2">
             Đáp án mẫu
             {showAnswer && <HanziCount count={countHanzi(htmlToText(answer))} />}
           </h2>
           <PressButton
             onClick={() => setShowAnswer((v) => !v)}
             aria-expanded={showAnswer}
-            className="min-h-[44px] text-sm bg-coral-500 hover:bg-coral-600 text-white px-3 py-1.5 rounded-lg transition-colors"
+            className="min-h-[44px] text-sm bg-coral-500 hover:bg-coral-600 text-white font-bold px-5 py-1.5 rounded-xl shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors"
           >
             {showAnswer ? 'Ẩn đáp án' : 'Xem đáp án'}
           </PressButton>
@@ -219,14 +219,14 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
 
       <Tabs.Content value="ai" className={`${PANEL} text-center`}>
         <Robot size={44} weight="duotone" className="mx-auto mb-3 text-coral-400" aria-hidden="true" />
-        <h2 className="font-semibold text-slate-200 mb-2">Chấm bài bằng AI</h2>
+        <h2 className="text-lg font-extrabold tracking-tight text-slate-100 mb-2">Chấm bài bằng AI</h2>
         <p className="text-sm text-slate-400 mb-4 max-w-md mx-auto">
           Tính năng AI chấm điểm và nhận xét bài làm đang được phát triển. Hãy quay lại sau nhé!
         </p>
         <button
           type="button"
           disabled
-          className="min-h-[44px] bg-coral-500 text-white rounded-lg px-4 py-2 text-sm font-semibold opacity-50 cursor-not-allowed"
+          className="min-h-[44px] bg-coral-500 text-white rounded-xl px-5 py-2 text-sm font-bold opacity-50 cursor-not-allowed"
         >
           Chấm bài bằng AI (Sắp ra mắt)
         </button>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { listLessons } from '../api/lessons';
 import PremiumModal from '../components/PremiumModal';
 import ProLabel from '../components/ProLabel';
+import PageHeader from '../components/PageHeader';
 import Reveal from '../components/motion/Reveal';
 import { Lock } from '@phosphor-icons/react';
 
@@ -53,6 +54,12 @@ const COMING = [
   ['记叙文', 'Văn kể chuyện'],
 ];
 
+// Shared card pieces: the whole card is a `.surface` (hover lift lives on a/button),
+// with the Chinese title on a soft tinted tile inset at the top.
+const CARD = 'surface h-full w-full flex flex-col overflow-hidden text-left';
+const TILE = 'relative m-2 mb-0 rounded-2xl bg-night-700/60 flex flex-col items-center justify-center px-3';
+const BADGE = 'absolute top-3 text-xs font-bold px-2.5 py-0.5 rounded-full';
+
 export default function Lessons({ type }) {
   return type ? <LessonList type={type} /> : <LessonMap />;
 }
@@ -74,52 +81,49 @@ function LessonMap() {
   let n = 0;
 
   return (
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      <div className="mb-6">
-        <p className="zh text-xl text-coral-400">HSK 6 · 写作工坊</p>
-        <h1 className="text-2xl md:text-3xl font-bold mt-1">Bài học</h1>
-        <p className="text-slate-400 mt-1">
-          Sơ đồ phân loại bài viết HSK 6: <span className="zh">议论文</span>, <span className="zh">记叙文</span> và{' '}
-          <span className="zh">应用文</span> (3 nhóm).
-        </p>
-      </div>
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <PageHeader kicker="HSK 6 · 写作工坊" title="Bài học" art>
+        Sơ đồ phân loại bài viết HSK 6: <span className="zh">议论文</span>, <span className="zh">记叙文</span> và{' '}
+        <span className="zh">应用文</span> (3 nhóm).
+      </PageHeader>
 
-      <div className="lesson-crit max-w-lg rounded-2xl border-2 px-5 py-3">
-        <p className="text-[11px] font-extrabold tracking-wider lesson-crit-label">
-          TIÊU CHÍ PHÂN LOẠI <span className="zh">应用文</span>
-        </p>
-        <p className="font-bold">Người đọc có quyền quyết định điều bạn cần?</p>
-      </div>
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div className="lesson-crit max-w-lg rounded-2xl border-2 px-5 py-4">
+          <p className="text-[11px] font-extrabold tracking-wider lesson-crit-label">
+            TIÊU CHÍ PHÂN LOẠI <span className="zh">应用文</span>
+          </p>
+          <p className="font-bold mt-0.5">Người đọc có quyền quyết định điều bạn cần?</p>
+        </div>
 
-      <button
-        type="button"
-        onClick={() => setShowAll((v) => !v)}
-        aria-pressed={showAll}
-        className="mt-4 min-h-[44px] rounded-xl border-[1.5px] border-dashed border-coral-400 px-4 text-sm font-semibold text-coral-400 hover:bg-coral-400/10 transition-colors"
-      >
-        {showAll ? 'Ẩn các phần chưa làm' : `Hiện các phần chưa làm (${todoCount})`}
-      </button>
+        <button
+          type="button"
+          onClick={() => setShowAll((v) => !v)}
+          aria-pressed={showAll}
+          className="self-start sm:self-auto min-h-[44px] rounded-xl border-[1.5px] border-dashed border-coral-400 px-5 text-sm font-semibold text-coral-400 hover:bg-coral-400/10 transition-colors motion-reduce:transition-none"
+        >
+          {showAll ? 'Ẩn các phần chưa làm' : `Hiện các phần chưa làm (${todoCount})`}
+        </button>
+      </div>
 
       {lessons === null ? (
-        <p className="text-slate-500 mt-8">Đang tải...</p>
+        <p className="text-slate-500 mt-10">Đang tải...</p>
       ) : (
         <>
           {MAP.map((group) => {
             const total = group.subs.reduce((x, s) => x + s[1].length, 0);
             const done = group.subs.reduce((x, s) => x + s[1].filter(isDone).length, 0);
             return (
-              <section key={group.title} className="mt-10" aria-label={group.title}>
-                <MapHeading title={group.title} note={`${done}/${total} bài đã xong`} />
-                <p className="text-slate-400 font-semibold mt-1">{group.desc}</p>
+              <section key={group.title} className="mt-14" aria-label={group.title}>
+                <SectionHeading title={group.title} note={`${done}/${total} bài đã xong`} lead={group.desc} />
                 {group.subs.map(([label, items]) => {
                   const hasDone = items.some(isDone);
                   if (!hasDone && !showAll) return null;
                   return (
-                    <div key={label} className="mt-6">
-                      <h3 className="text-base font-bold text-slate-400 mb-3">
-                        {label} <span className="font-normal text-sm">· {items.length}</span>
+                    <div key={label} className="mt-8">
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
+                        {label} <span className="font-normal normal-case tracking-normal">· {items.length}</span>
                       </h3>
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {items.map((it) => {
                           const lesson = isDone(it) ? bySlug.get(it[3]) : null;
                           if (!lesson && !showAll) return null;
@@ -137,9 +141,9 @@ function LessonMap() {
           })}
 
           {showAll && (
-            <section className="mt-10" aria-label="议论文 · 记叙文">
-              <MapHeading title={<span className="zh">议论文 · 记叙文</span>} note="Sắp ra mắt" />
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+            <section className="mt-14" aria-label="议论文 · 记叙文">
+              <SectionHeading title={<span className="zh">议论文 · 记叙文</span>} note="Sắp ra mắt" />
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
                 {COMING.map(([zh, vi]) => (
                   <MapCard key={zh} zh={zh} vi={vi} lesson={null} soonLabel="Sắp ra mắt" />
                 ))}
@@ -152,69 +156,72 @@ function LessonMap() {
   );
 }
 
-function MapHeading({ title, note }) {
+function SectionHeading({ title, note, lead }) {
   return (
-    <div className="flex items-center justify-between gap-3">
-      <h2 className="text-xl md:text-2xl font-bold border-l-4 border-coral-400 pl-3">{title}</h2>
-      <span className="text-sm text-slate-500 shrink-0">{note}</span>
+    <div className="pb-4 border-b border-night-700">
+      <div className="flex items-baseline justify-between gap-3">
+        <h2 className="text-2xl md:text-[1.75rem] font-extrabold tracking-tight leading-tight text-slate-100">{title}</h2>
+        {note && <span className="text-sm font-semibold text-slate-500 shrink-0">{note}</span>}
+      </div>
+      {lead && <p className="text-slate-400 mt-1.5">{lead}</p>}
     </div>
+  );
+}
+
+function CardCta({ locked, label }) {
+  return locked ? (
+    <span className="inline-flex items-center gap-1 text-gold">
+      <Lock size={12} weight="bold" aria-hidden="true" />
+      Mở khoá bằng PRO →
+    </span>
+  ) : (
+    <span className="text-coral-400">{label}</span>
   );
 }
 
 function MapCard({ zh, zhNote = '', vi, lesson, number, soonLabel = 'Đang soạn' }) {
   const [showPremium, setShowPremium] = useState(false);
-  const body = (
-    <div
-      className={`group h-full flex flex-col bg-night-800 border border-night-700 rounded-2xl overflow-hidden text-left transition-all duration-200 ${
-        lesson ? 'hover:border-coral-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 motion-reduce:transform-none' : 'opacity-60'
-      }`}
-    >
-      <div className="relative h-36 bg-night-700 flex flex-col items-center justify-center px-3">
-        {number && (
-          <span className="absolute top-2.5 left-2.5 bg-night-800 text-coral-400 text-xs font-extrabold px-2.5 py-0.5 rounded-full">
-            #{number}
-          </span>
-        )}
+  const inner = (
+    <>
+      <div className={`${TILE} h-36`}>
+        {number && <span className={`${BADGE} left-3 bg-night-800 text-coral-400 font-extrabold`}>#{number}</span>}
         {lesson?.isPremium && (
-          <span className="absolute top-2.5 right-2.5 bg-gold/90 text-night-950 text-xs font-bold px-2 py-0.5 rounded-full">
+          <span className={`${BADGE} right-3 bg-gold/90 text-night-950`}>
             <ProLabel />
           </span>
         )}
         <span lang="zh" className="zh text-4xl md:text-[2.75rem] leading-tight text-coral-400 text-center">{zh}</span>
         {zhNote && <span lang="zh" className="zh text-base text-coral-400 mt-1">{zhNote}</span>}
       </div>
-      <div className="p-4 flex-1 flex flex-col">
-        <p className="font-semibold text-slate-100 leading-snug">{vi}</p>
-        <p className={`mt-auto pt-3 text-sm ${lesson ? (lesson.locked ? 'text-gold' : 'text-coral-400') : 'text-slate-500'}`}>
-          {!lesson ? (
-            soonLabel
-          ) : lesson.locked ? (
-            <span className="inline-flex items-center gap-1">
-              <Lock size={12} weight="bold" aria-hidden="true" />
-              Mở khoá bằng PRO →
-            </span>
-          ) : (
-            'Bắt đầu luyện tập →'
-          )}
+      <div className="px-5 pt-4 pb-5 flex-1 flex flex-col">
+        <p className="font-bold text-slate-100 leading-snug">{vi}</p>
+        <p className="mt-auto pt-3 text-sm font-semibold">
+          {lesson ? <CardCta locked={lesson.locked} label="Bắt đầu luyện tập →" /> : <span className="text-slate-500">{soonLabel}</span>}
         </p>
       </div>
-    </div>
+    </>
   );
 
-  if (!lesson) return <div aria-disabled="true">{body}</div>;
+  if (!lesson) {
+    return (
+      <div aria-disabled="true" className={`${CARD} opacity-60`}>
+        {inner}
+      </div>
+    );
+  }
   if (lesson.locked) {
     return (
       <>
-        <button type="button" onClick={() => setShowPremium(true)} className="block w-full h-full text-left">
-          {body}
+        <button type="button" onClick={() => setShowPremium(true)} className={CARD}>
+          {inner}
         </button>
         <PremiumModal open={showPremium} onClose={() => setShowPremium(false)} />
       </>
     );
   }
   return (
-    <Link to={`/lessons/${lesson.slug}`} className="block h-full rounded-2xl">
-      {body}
+    <Link to={`/lessons/${lesson.slug}`} className={CARD}>
+      {inner}
     </Link>
   );
 }
@@ -241,12 +248,8 @@ function LessonList({ type }) {
   const pageSubtitle = type ? TITLES[type]?.subtitle : 'Toàn bộ bài luyện viết và đề thi thật.';
 
   return (
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      <div className="mb-8">
-        <p className="zh text-xl text-coral-500">写作工坊</p>
-        <h1 className="text-2xl md:text-3xl font-bold mt-1">{pageTitle}</h1>
-        <p className="text-slate-400 mt-1">{pageSubtitle}</p>
-      </div>
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <PageHeader title={pageTitle}>{pageSubtitle}</PageHeader>
 
       {loading ? (
         <p className="text-slate-500">Đang tải...</p>
@@ -267,19 +270,13 @@ function LessonSection({ title, subtitle, lessons }) {
   if (lessons.length === 0) return null;
 
   return (
-    <section className="mb-10">
-      <div className="flex items-baseline justify-between mb-4">
-        <h2 className="text-lg font-bold flex items-center gap-2">
-          <span className="w-1 h-5 bg-coral-500 rounded-full inline-block" />
-          {title}
-        </h2>
-        <span className="text-xs text-slate-500">{subtitle}</span>
-      </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <section className="mb-14">
+      <SectionHeading title={title} note={subtitle} />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
         {lessons.map((lesson, idx) => (
           <Reveal key={lesson.slug} index={idx} className="h-full">
-              <LessonCard lesson={lesson} index={idx} />
-            </Reveal>
+            <LessonCard lesson={lesson} index={idx} />
+          </Reveal>
         ))}
       </div>
     </section>
@@ -289,45 +286,45 @@ function LessonSection({ title, subtitle, lessons }) {
 function LessonCard({ lesson, index }) {
   const [showPremium, setShowPremium] = useState(false);
 
-  const body = (
-    <div className="group h-full bg-night-800 border border-night-700 rounded-xl overflow-hidden transition-all duration-300 hover:border-coral-500/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 motion-reduce:transform-none">
-      <div className="relative bg-gradient-to-br from-night-700 to-night-800 h-28 flex items-center justify-center">
-        <span className="zh text-4xl text-coral-500/90 transition-transform duration-300 group-hover:scale-110 motion-reduce:transform-none">{lesson.titleZh}</span>
-        <span className="absolute top-2 left-2 bg-night-900/80 text-coral-400 text-xs font-bold px-2 py-0.5 rounded-full">
-          #{index + 1}
-        </span>
+  const inner = (
+    <>
+      <div className={`${TILE} h-32`}>
+        <span lang="zh" className="zh text-4xl leading-tight text-coral-400 text-center">{lesson.titleZh}</span>
+        <span className={`${BADGE} left-3 bg-night-800 text-coral-400 font-extrabold`}>#{index + 1}</span>
         {lesson.isPremium && (
-          <span className="absolute top-2 right-2 bg-gold/90 text-night-950 text-xs font-bold px-2 py-0.5 rounded-full">
+          <span className={`${BADGE} right-3 bg-gold/90 text-night-950`}>
             <ProLabel />
           </span>
         )}
         {lesson.type === 'EXAM' && (
-          <span className="absolute bottom-2 right-2 bg-night-900/80 text-slate-300 text-xs px-2 py-0.5 rounded-full">
+          <span className="absolute bottom-3 right-3 bg-night-800 text-slate-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">
             {lesson.examMonth}/{lesson.examYear}
           </span>
         )}
       </div>
-      <div className="p-4">
-        <p className="font-semibold text-sm text-slate-100 truncate">{lesson.titleVi}</p>
-        {lesson.locked ? (
-          <p className="text-xs text-gold mt-2"><span className="inline-flex items-center gap-1"><Lock size={12} weight="bold" aria-hidden="true" />Mở khoá bằng PRO →</span></p>
-        ) : (
-          <p className="text-xs text-coral-400 mt-2">Bắt đầu luyện tập →</p>
-        )}
+      <div className="px-5 pt-4 pb-5">
+        <p className="font-bold text-slate-100 truncate">{lesson.titleVi}</p>
+        <p className="text-sm font-semibold mt-2">
+          <CardCta locked={lesson.locked} label="Bắt đầu luyện tập →" />
+        </p>
       </div>
-    </div>
+    </>
   );
 
   if (lesson.locked) {
     return (
       <>
-        <button type="button" onClick={() => setShowPremium(true)} className="text-left w-full h-full">
-          {body}
+        <button type="button" onClick={() => setShowPremium(true)} className={CARD}>
+          {inner}
         </button>
         <PremiumModal open={showPremium} onClose={() => setShowPremium(false)} />
       </>
     );
   }
 
-  return <Link to={`/lessons/${lesson.slug}`} className="block h-full">{body}</Link>;
+  return (
+    <Link to={`/lessons/${lesson.slug}`} className={CARD}>
+      {inner}
+    </Link>
+  );
 }

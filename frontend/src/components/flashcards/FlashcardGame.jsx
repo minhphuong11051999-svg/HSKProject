@@ -140,19 +140,19 @@ export default function FlashcardGame({ open, onClose, cards, lessonId, canSave 
   return (
     <Dialog.Root open={open} onOpenChange={(v) => !v && onClose()}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-night-950/75 backdrop-blur-md" />
         <Dialog.Content
           aria-describedby={undefined}
-          className="fixed inset-x-3 inset-y-3 sm:inset-y-6 z-50 m-auto h-fit max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] max-w-3xl overflow-y-auto rounded-2xl border border-night-700 bg-night-900 p-4 sm:p-6 shadow-2xl focus:outline-none"
+          className="fixed inset-x-3 inset-y-3 sm:inset-y-6 z-50 m-auto h-fit max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] max-w-3xl overflow-y-auto surface p-4 sm:p-7 focus:outline-none"
         >
           <div className="flex items-center justify-between gap-3 mb-3">
-            <Dialog.Title className="flex items-center gap-2 font-bold text-slate-100">
+            <Dialog.Title className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-slate-100">
               <Cards size={22} weight="duotone" className="text-coral-400" aria-hidden="true" />
               Luyện với flashcard
             </Dialog.Title>
             <Dialog.Close
               aria-label="Đóng flashcard"
-              className="w-11 h-11 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-100 hover:bg-night-800 transition-colors"
+              className="w-11 h-11 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-100 hover:bg-night-700 transition-colors"
             >
               <X size={20} weight="bold" aria-hidden="true" />
             </Dialog.Close>
@@ -170,7 +170,7 @@ export default function FlashcardGame({ open, onClose, cards, lessonId, canSave 
               </div>
               <div className="h-1.5 rounded-full bg-night-700 mt-2 mb-5 overflow-hidden">
                 <motion.div
-                  className="h-full w-full origin-left bg-gradient-to-r from-coral-500 to-gold"
+                  className="h-full w-full origin-left bg-gradient-to-r from-coral-500 to-coral-300"
                   animate={{ scaleX: n / steps.length }}
                   transition={{ type: 'spring', stiffness: 120, damping: 22 }}
                 />
@@ -218,7 +218,7 @@ function BackButton({ onPrev }) {
       type="button"
       onClick={onPrev || undefined}
       disabled={!onPrev}
-      className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-600 bg-night-800 px-4 text-sm font-semibold text-slate-200 hover:bg-night-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+      className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-700 bg-night-800 px-4 text-sm font-semibold text-slate-200 hover:border-coral-400/60 hover:text-coral-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-night-700 disabled:hover:text-slate-200 transition-colors"
     >
       <ArrowLeft size={18} weight="bold" aria-hidden="true" />
       Câu trước
@@ -229,7 +229,7 @@ function BackButton({ onPrev }) {
 function CardStep({ card, flipped, onFlip, onNext, onPrev }) {
   return (
     <div>
-      <p className="text-xs font-bold tracking-[0.2em] text-coral-400 mb-3">— THẺ TỪ VỰNG</p>
+      <p className="kicker mb-3">— THẺ TỪ VỰNG</p>
       {/* 3D flip: both faces share one grid cell, so the card is as tall as the taller face. */}
       <button
         type="button"
@@ -252,14 +252,14 @@ function CardStep({ card, flipped, onFlip, onNext, onPrev }) {
         <button
           type="button"
           onClick={() => play(card.audioUrl, mainOf(card.word))}
-          className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-600 bg-night-800 px-5 text-sm font-semibold text-slate-200 hover:bg-night-700 transition-colors"
+          className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-700 bg-night-800 px-5 text-sm font-semibold text-slate-200 hover:border-coral-400/60 hover:text-coral-400 transition-colors"
         >
           <SpeakerHigh size={18} weight="fill" aria-hidden="true" />
           Nghe từ
         </button>
         <PressButton
           onClick={onNext}
-          className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-coral-500 hover:bg-coral-600 px-5 text-sm font-semibold text-white transition-colors"
+          className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-coral-500 hover:bg-coral-600 px-5 text-sm font-bold text-white shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors"
         >
           Làm bài tập
           <ArrowRight size={18} weight="bold" aria-hidden="true" />
@@ -270,17 +270,17 @@ function CardStep({ card, flipped, onFlip, onNext, onPrev }) {
 }
 
 const FACE =
-  'relative [grid-area:1/1] [backface-visibility:hidden] rounded-3xl text-white min-h-[22rem] px-5 pt-7 pb-12 sm:px-8 sm:pt-9 shadow-xl';
+  'relative [grid-area:1/1] [backface-visibility:hidden] rounded-3xl text-white min-h-[22rem] px-5 pt-7 pb-12 sm:px-8 sm:pt-9 ring-1 ring-inset ring-white/10 shadow-[0_18px_40px_-20px_rgba(20,34,79,0.55)]';
 
 function CardFront({ card }) {
   const phrases = (Array.isArray(card.phrases) ? card.phrases : []).filter(Boolean);
   return (
-    <div className={`${FACE} bg-gradient-to-br from-[#16213f] to-[#0e1730] grid sm:grid-cols-2 items-center gap-6`}>
+    <div className={`${FACE} bg-gradient-to-br from-[#2b4ea6] via-[#1f3f8f] to-[#172f6d] grid sm:grid-cols-2 items-center gap-6`}>
       {/* ① big hanzi + ② part of speech */}
       <div className="flex flex-col items-center gap-5">
         <p className="zh text-7xl sm:text-8xl font-black tracking-wide leading-none text-center">{mainOf(card.word)}</p>
         {card.partOfSpeech && (
-          <span className="rounded-full border border-gold/40 bg-white/10 px-4 py-1 text-xs font-extrabold tracking-wider text-[#f0c36a] uppercase">
+          <span className="rounded-full border border-[#e9c97a]/50 bg-white/10 px-4 py-1 text-xs font-extrabold tracking-wider text-[#f1d592] uppercase">
             {card.partOfSpeech}
           </span>
         )}
@@ -310,22 +310,22 @@ function CardFront({ card }) {
 function CardBack({ card }) {
   return (
     <div
-      className={`${FACE} [transform:rotateY(180deg)] bg-gradient-to-br from-[#1f2a44] to-[#141c30] flex flex-col items-center justify-center gap-4 text-center`}
+      className={`${FACE} [transform:rotateY(180deg)] bg-gradient-to-br from-[#1f3f8f] via-[#172f6d] to-[#14224f] flex flex-col items-center justify-center gap-4 text-center`}
     >
       {/* ① hanzi + pinyin */}
       <div>
         <p className="zh text-5xl sm:text-6xl font-black">{mainOf(card.word)}</p>
-        <p className="mt-2 text-xl sm:text-2xl tracking-wide text-[#9fd8cd]">{card.pinyin}</p>
+        <p className="mt-2 text-xl sm:text-2xl tracking-wide text-[#c9d8f6]">{card.pinyin}</p>
       </div>
       {/* ② Vietnamese meaning */}
       {card.meaning && (
-        <p className="rounded-2xl bg-white/10 px-5 py-3 text-base sm:text-lg font-bold text-[#f6d77a]">{card.meaning}</p>
+        <p className="rounded-2xl bg-white/10 px-5 py-3 text-base sm:text-lg font-bold text-[#f1d592]">{card.meaning}</p>
       )}
       {/* ③ example + translation */}
       {card.exampleZh && (
-        <div className="w-full rounded-2xl bg-[#e9e4d6] px-5 py-4 text-left text-[#2b3445]">
+        <div className="w-full rounded-2xl bg-[#f5f7fb] px-5 py-4 text-left text-[#14224f]">
           <p className="zh text-lg sm:text-xl font-semibold">{card.exampleZh}</p>
-          {card.exampleVi && <p className="mt-1 text-sm text-[#5a6272]">{card.exampleVi}</p>}
+          {card.exampleVi && <p className="mt-1 text-sm text-[#4a5878]">{card.exampleVi}</p>}
         </div>
       )}
       <Hint>↻ Xem lại mặt trước</Hint>
@@ -335,7 +335,7 @@ function CardBack({ card }) {
 
 function Hint({ children }) {
   return (
-    <span className="absolute bottom-4 left-0 right-0 text-center text-xs font-bold text-white/50">{children}</span>
+    <span className="absolute bottom-4 left-0 right-0 text-center text-xs font-bold text-white/60">{children}</span>
   );
 }
 
@@ -354,15 +354,15 @@ function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
   }, [isListen, question.audioUrl, question.audioZh]);
 
   return (
-    <div className="rounded-2xl border border-night-700 bg-night-800 p-4 sm:p-6">
-      <p className="text-xs font-bold tracking-wider text-coral-400 mb-3 uppercase">
+    <div className="rounded-[1.25rem] border border-night-700 bg-night-950 p-4 sm:p-6">
+      <p className="kicker mb-3">
         {KIND_LABELS[question.kind] || 'Câu hỏi'}
       </p>
       {isListen && (
         <PressButton
           onClick={() => play(question.audioUrl, question.audioZh)}
           aria-label="Phát lại câu"
-          className="mx-auto mb-4 flex w-20 h-20 items-center justify-center rounded-full bg-gradient-to-br from-[#16213f] to-[#0e1730] text-white shadow-lg"
+          className="mx-auto mb-4 flex w-20 h-20 items-center justify-center rounded-full bg-gradient-to-br from-coral-500 to-coral-600 text-white shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)]"
         >
           <SpeakerHigh size={34} weight="fill" aria-hidden="true" />
         </PressButton>
@@ -374,12 +374,12 @@ function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
           const isAnswer = k === question.answer;
           const isChosen = k === chosen;
           const tone = !answered
-            ? 'border-night-600 hover:border-coral-500'
+            ? 'border-night-700 bg-night-800 hover:border-coral-400'
             : isAnswer
             ? 'border-green-500 bg-green-500/15'
             : isChosen
             ? 'border-red-500 bg-red-500/15'
-            : 'border-night-700 opacity-60';
+            : 'border-night-700 bg-night-800 opacity-60';
           return (
             <button
               key={k}
@@ -424,7 +424,7 @@ function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
         {answered && (
           <PressButton
             onClick={onNext}
-            className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-coral-500 hover:bg-coral-600 px-6 text-sm font-semibold text-white transition-colors"
+            className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-coral-500 hover:bg-coral-600 px-6 text-sm font-bold text-white shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors"
           >
             Tiếp tục
             <ArrowRight size={18} weight="bold" aria-hidden="true" />
@@ -437,7 +437,7 @@ function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
 
 function EndScreen({ score, total, onRestart, onClose }) {
   return (
-    <div className="rounded-2xl border border-night-700 bg-night-800 px-5 py-10 text-center">
+    <div className="rounded-[1.25rem] border border-night-700 bg-night-950 px-5 py-10 text-center">
       <motion.div
         initial={{ scale: 0.4, rotate: -20, opacity: 0 }}
         animate={{ scale: 1, rotate: 0, opacity: 1 }}
@@ -446,7 +446,7 @@ function EndScreen({ score, total, onRestart, onClose }) {
       >
         <Confetti size={64} weight="duotone" className="text-coral-400" aria-hidden="true" />
       </motion.div>
-      <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-slate-100">Hoàn thành!</h2>
+      <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-100">Hoàn thành!</h2>
       <p className="mt-2 text-lg text-slate-300">
         Bạn đúng <b className="text-coral-400">{score}/{total}</b> câu
       </p>
@@ -454,14 +454,14 @@ function EndScreen({ score, total, onRestart, onClose }) {
         <button
           type="button"
           onClick={onRestart}
-          className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-600 bg-night-900 px-5 text-sm font-semibold text-slate-200 hover:bg-night-700 transition-colors"
+          className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-700 bg-night-800 px-5 text-sm font-semibold text-slate-200 hover:border-coral-400/60 hover:text-coral-400 transition-colors"
         >
           <ArrowClockwise size={18} weight="bold" aria-hidden="true" />
           Làm lại
         </button>
         <PressButton
           onClick={onClose}
-          className="min-h-[44px] rounded-xl bg-coral-500 hover:bg-coral-600 px-6 text-sm font-semibold text-white transition-colors"
+          className="min-h-[44px] rounded-xl bg-coral-500 hover:bg-coral-600 px-6 text-sm font-bold text-white shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors"
         >
           Đóng
         </PressButton>

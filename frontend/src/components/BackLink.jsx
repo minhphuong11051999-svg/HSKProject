@@ -7,7 +7,7 @@ export default function BackLink({ to, children, className = '' }) {
   return (
     <Link
       to={to}
-      className={`group inline-flex items-center gap-2 min-h-[44px] -ml-2 pl-2 pr-3 rounded-lg text-sm font-medium text-slate-400 hover:text-coral-400 hover:bg-night-800 transition-colors ${className}`}
+      className={`group inline-flex items-center gap-2 min-h-[44px] -ml-2 pl-2 pr-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-coral-400 hover:bg-coral-400/10 transition-colors ${className}`}
     >
       <ArrowLeft
         size={18}

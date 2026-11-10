@@ -14,12 +14,13 @@ import Reveal from '../components/motion/Reveal';
 import FlashcardGame from '../components/flashcards/FlashcardGame';
 
 const BTN_PRIMARY =
-  'min-h-[40px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-colors';
+  'min-h-[44px] inline-flex items-center justify-center gap-1.5 text-sm font-bold bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-5 py-2 rounded-xl shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors';
 const BTN_SECONDARY =
-  'min-h-[40px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-night-900 border border-night-600 hover:bg-night-700 text-slate-200 px-4 py-2 rounded-lg transition-colors';
-const CARD = 'bg-night-900 border border-night-700 rounded-xl p-4 sm:p-5';
+  'min-h-[44px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-night-800 border border-night-700 hover:border-coral-400/60 hover:text-coral-400 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-night-700 disabled:hover:text-slate-200 text-slate-200 px-5 py-2 rounded-xl transition-colors';
+// Inset card inside the white lesson surface: the landing page's soft blue tint.
+const CARD = 'bg-night-950 border border-night-700 rounded-2xl p-4 sm:p-6';
 const INPUT =
-  'w-full bg-night-900 border border-night-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-coral-500';
+  'w-full bg-night-800 border border-night-700 rounded-xl px-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 transition-colors focus:border-coral-400 focus:ring-2 focus:ring-coral-400/20 focus:outline-none';
 
 export default function LessonPlayer() {
   const { slug } = useParams();
@@ -73,8 +74,8 @@ export default function LessonPlayer() {
   if (lesson.locked) {
     return (
       <main className="max-w-2xl mx-auto px-4 sm:px-6 py-10 sm:py-16 text-center">
-        <p className="zh text-2xl">{lesson.titleZh}</p>
-        <h1 className="text-xl font-bold mt-2">{lesson.titleVi}</h1>
+        <p className="zh text-2xl text-coral-400">{lesson.titleZh}</p>
+        <h1 className="text-2xl sm:text-[1.75rem] leading-tight font-extrabold tracking-tight text-slate-100 [text-wrap:balance] mt-2">{lesson.titleVi}</h1>
         <PremiumModal open onClose={() => navigate('/lessons')} />
       </main>
     );
@@ -88,8 +89,8 @@ export default function LessonPlayer() {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col md:flex-row gap-6">
       <aside className="md:w-64 flex-shrink-0 md:sticky md:top-6 md:self-start">
         <BackLink to="/lessons" className="mb-2">Chủ đề bài học</BackLink>
-        <p className="zh text-xl mb-1">{lesson.titleZh}</p>
-        <h1 className="font-semibold mb-4">{lesson.titleVi}</h1>
+        <p className="zh text-xl text-coral-400 mb-1">{lesson.titleZh}</p>
+        <h1 className="text-lg leading-snug font-extrabold tracking-tight text-slate-100 mb-5 [text-wrap:balance]">{lesson.titleVi}</h1>
 
         {/* Phones: compact stepper instead of the tall step list */}
         {current && (
@@ -99,7 +100,7 @@ export default function LessonPlayer() {
               onClick={() => parts[current.number - 2] && goToTab(parts[current.number - 2])}
               disabled={current.number === 1}
               aria-label="Bước trước"
-              className="w-11 h-11 flex-shrink-0 flex items-center justify-center rounded-lg bg-night-800 border border-night-700 disabled:opacity-40"
+              className="w-11 h-11 flex-shrink-0 flex items-center justify-center rounded-xl bg-night-800 border border-night-700 text-slate-300 hover:border-coral-400/60 hover:text-coral-400 disabled:opacity-40 disabled:hover:border-night-700 disabled:hover:text-slate-300 transition-colors"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M15 6l-6 6 6 6" />
@@ -115,7 +116,7 @@ export default function LessonPlayer() {
                 const t = parts.find((p) => p.key === e.target.value);
                 if (t) goToTab(t);
               }}
-              className="flex-1 min-w-0 h-11 rounded-lg bg-coral-500 text-white font-semibold text-sm px-3 border-0"
+              className="flex-1 min-w-0 h-11 rounded-xl bg-coral-400/10 border border-coral-400/40 text-coral-400 font-bold text-sm px-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-coral-400"
             >
               {parts.map((t) => (
                 <option key={t.key} value={t.key} className="bg-night-900 text-slate-100">
@@ -129,7 +130,7 @@ export default function LessonPlayer() {
               onClick={() => parts[current.number] && goToTab(parts[current.number])}
               disabled={current.number === parts.length}
               aria-label="Bước tiếp theo"
-              className="w-11 h-11 flex-shrink-0 flex items-center justify-center rounded-lg bg-night-800 border border-night-700 disabled:opacity-40"
+              className="w-11 h-11 flex-shrink-0 flex items-center justify-center rounded-xl bg-night-800 border border-night-700 text-slate-300 hover:border-coral-400/60 hover:text-coral-400 disabled:opacity-40 disabled:hover:border-night-700 disabled:hover:text-slate-300 transition-colors"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M9 6l6 6-6 6" />
@@ -138,37 +139,37 @@ export default function LessonPlayer() {
           </div>
         )}
 
-        <nav className="hidden md:block" aria-label="Các bước của bài học">
-          {/* Animate UI Highlight: the gold step pill glides to the chosen step. */}
+        <nav className="hidden md:block surface p-2" aria-label="Các bước của bài học">
+          {/* Animate UI Highlight: the soft cobalt step pill glides to the chosen step. */}
           <Highlight
             controlledItems
             value={tab}
-            className="inset-0 rounded-lg bg-coral-500 shadow-md shadow-coral-500/20"
+            className="inset-0 rounded-xl bg-coral-400/10 ring-1 ring-inset ring-coral-400/30"
             transition={{ type: 'spring', stiffness: 380, damping: 34 }}
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               {parts.map((t) => (
                 <HighlightItem key={t.key} value={t.key}>
                   <button
                     type="button"
                     onClick={() => goToTab(t)}
                     aria-current={tab === t.key ? 'step' : undefined}
-                    className={`w-full min-h-[40px] text-left px-3 py-2 rounded-lg text-sm flex items-center flex-wrap gap-x-2 gap-y-1 border transition-colors ${
+                    className={`w-full min-h-[44px] text-left px-3 py-2 rounded-xl text-sm flex items-center flex-wrap gap-x-2.5 gap-y-1 transition-colors ${
                       tab === t.key
-                        ? 'text-white border-transparent'
-                        : 'bg-night-800 border-night-700 hover:bg-night-700'
+                        ? 'text-coral-400 font-bold'
+                        : 'text-slate-300 hover:text-slate-100 hover:bg-night-700/50'
                     }`}
                   >
                     <span
                       className={`flex-shrink-0 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center transition-colors ${
-                        tab === t.key ? 'bg-white/25 text-white' : 'bg-night-700 text-slate-300'
+                        tab === t.key ? 'bg-coral-500 text-white' : 'bg-night-700 text-slate-400'
                       }`}
                     >
                       {t.number}
                     </span>
                     <span className="min-w-0 break-words">{t.label}</span>
                     {isPartPremium(t.key) && !isPremiumUser && (
-                      <span className="flex-shrink-0 bg-gold text-night-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap">
+                      <span className="flex-shrink-0 bg-gold/15 border border-gold/40 text-kicker text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap">
                         <ProLabel />
                       </span>
                     )}
@@ -182,12 +183,13 @@ export default function LessonPlayer() {
 
       <PremiumModal open={showTabPremium} onClose={() => setShowTabPremium(false)} />
 
-      <section className="flex-1 min-w-0 bg-night-800 border border-night-700 rounded-xl p-4 sm:p-6">
+      <section className="flex-1 min-w-0 surface p-5 sm:p-8">
         <Reveal key={tab} offset={10}>
         {current && (
-          <header className="mb-5 sm:mb-6 pb-4 border-b border-night-700">
-            <h2 className="text-lg font-bold text-slate-100">
-              <span className="text-coral-400">Bước {current.number}</span> · {current.label}
+          <header className="mb-6 sm:mb-8 pb-5 border-b border-night-700">
+            <h2 className="text-xl sm:text-2xl leading-tight font-extrabold tracking-tight text-slate-100 [text-wrap:balance]">
+              <span className="kicker block mb-1.5">Bước {current.number}<span className="sr-only"> · </span></span>
+              {current.label}
             </h2>
           </header>
         )}
@@ -244,13 +246,13 @@ function Html({ html, className = '' }) {
 function FeedbackBox({ isCorrect, title, children }) {
   const tone =
     isCorrect === undefined
-      ? 'border-night-600 bg-night-900'
+      ? 'border-night-700 bg-night-800'
       : isCorrect
       ? 'border-green-500/60 bg-green-500/10'
       : 'border-red-500/60 bg-red-500/10';
   return (
     <Reveal offset={8}>
-    <div className={`mt-4 rounded-lg border p-4 text-sm ${tone}`} role="status">
+    <div className={`mt-4 rounded-xl border p-4 text-sm ${tone}`} role="status">
       {title && (
         <p
           className={`font-semibold mb-1 ${
@@ -278,13 +280,13 @@ function TheoryTab({ lesson, showFixedPhrases }) {
       {lesson.description && <p className="text-slate-300">{lesson.description}</p>}
       {sections.map((s) => (
         <article key={s.id} className={CARD}>
-          {s.heading && <h3 className="font-semibold mb-2 text-slate-100">{s.heading}</h3>}
+          {s.heading && <h3 className="font-bold tracking-tight mb-2 text-slate-100">{s.heading}</h3>}
           <Html html={s.bodyHtml} className="text-sm leading-7 text-slate-300" />
         </article>
       ))}
       {showFixedPhrases && lesson.fixedPhrases.length > 0 && (
         <article className={CARD}>
-          <h3 className="font-semibold mb-3 text-slate-100">Bộ mẫu câu cố định — 书面语 (套语)</h3>
+          <h3 className="font-bold tracking-tight mb-3 text-slate-100">Bộ mẫu câu cố định — 书面语 (套语)</h3>
           <PhraseTable phrases={lesson.fixedPhrases} />
         </article>
       )}
@@ -299,7 +301,7 @@ function GenericTab({ lesson, partKey }) {
     <div className="space-y-4">
       {sections.map((s) => (
         <article key={s.id} className={CARD}>
-          {s.heading && <h3 className="font-semibold mb-2">{s.heading}</h3>}
+          {s.heading && <h3 className="font-bold tracking-tight mb-2">{s.heading}</h3>}
           <Html html={s.bodyHtml} className="text-sm leading-7" />
         </article>
       ))}
@@ -362,16 +364,16 @@ function FlashcardLauncher({ lesson, canSave }) {
     <div className="flex justify-end -mt-2 mb-4">
       <PressButton
         onClick={() => setShowCards(true)}
-        className="group min-h-[44px] inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gradient-to-r from-coral-500/15 to-gold/15 pl-3 pr-4 text-sm font-semibold text-coral-400 hover:border-gold transition-colors"
+        className="group min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-coral-400/40 bg-coral-400/10 pl-3 pr-3 text-sm font-bold text-coral-400 hover:border-coral-400 transition-colors"
       >
         <Star
           size={22}
           weight="fill"
-          className="text-[#f5b301] drop-shadow transition-transform duration-300 group-hover:rotate-[72deg] group-hover:scale-110 motion-reduce:transform-none"
+          className="text-kicker transition-transform duration-300 group-hover:rotate-[72deg] group-hover:scale-110 motion-reduce:transform-none"
           aria-hidden="true"
         />
         Luyện với flashcard
-        <span className="rounded-full bg-night-900/70 px-2 py-0.5 text-xs text-slate-300">{cards.length} từ</span>
+        <span className="rounded-full bg-night-800 border border-night-700 px-2 py-0.5 text-xs font-semibold text-slate-400">{cards.length} từ</span>
       </PressButton>
       <FlashcardGame
         open={showCards}
@@ -440,11 +442,11 @@ function ChoiceQuestion({ index, lessonId, question: q, canSave, showDraft = fal
         {q.options.map((opt, idx) => {
           const text = (typeof opt === 'string' ? opt : opt.text).replace(/^[A-D][.、．]\s*/, '');
           const letter = String.fromCharCode(65 + idx);
-          let tone = selected === idx ? 'border-coral-500 ring-1 ring-coral-500' : 'border-night-600 hover:border-coral-500/60';
+          let tone = selected === idx ? 'border-coral-400 ring-1 ring-coral-400 bg-coral-400/10' : 'border-night-700 bg-night-800 hover:border-coral-400/60';
           if (result) {
             if (idx === result.correctIndex) tone = 'border-green-500 bg-green-500/10 text-green-300';
             else if (idx === selected) tone = 'border-red-500 bg-red-500/10 text-red-300';
-            else tone = 'border-night-700 opacity-60';
+            else tone = 'border-night-700 bg-night-800 opacity-60';
           }
           return (
             <button
@@ -454,7 +456,7 @@ function ChoiceQuestion({ index, lessonId, question: q, canSave, showDraft = fal
               aria-checked={selected === idx}
               disabled={!!result}
               onClick={() => setSelected(idx)}
-              className={`w-full text-left flex items-start gap-3 px-3 py-2.5 rounded-lg border bg-night-800 text-sm transition-colors ${tone}`}
+              className={`w-full min-h-[44px] text-left flex items-start gap-3 px-3.5 py-2.5 rounded-xl border text-sm transition-colors ${tone}`}
             >
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-night-700 text-xs font-bold flex items-center justify-center">
                 {letter}
@@ -622,15 +624,15 @@ function MatchBoard({ lessonId, items, canSave }) {
   }
 
   const statusClass = {
-    '': 'border-night-600 bg-night-900 hover:border-coral-500/60',
-    selected: 'border-coral-500 bg-night-900 ring-2 ring-coral-500',
-    paired: 'border-coral-500/60 bg-coral-500/10',
+    '': 'border-night-700 bg-night-800 hover:border-coral-400/60',
+    selected: 'border-coral-400 bg-night-800 ring-2 ring-coral-400',
+    paired: 'border-coral-400/60 bg-coral-400/10',
     correct: 'border-green-500 bg-green-500/10 text-green-300',
     wrong: 'border-red-500 bg-red-500/10 text-red-300',
   };
 
   function lineColor(leftId) {
-    if (!done) return 'var(--c-coral-accent, #d4a03a)';
+    if (!done) return 'rgb(var(--c-coral-accent))';
     return results[leftId]?.isCorrect ? '#22c55e' : '#ef4444';
   }
 
@@ -677,7 +679,7 @@ function MatchBoard({ lessonId, items, canSave }) {
               type="button"
               onClick={() => clickLeft(item)}
               aria-pressed={selectedLeft === item.id}
-              className={`relative w-full min-h-[44px] text-left text-sm px-3 py-2 rounded-lg border transition-colors ${statusClass[leftStatus(item)]}`}
+              className={`relative w-full min-h-[44px] text-left text-sm px-3 py-2 rounded-xl border transition-colors ${statusClass[leftStatus(item)]}`}
             >
               <b className="mr-1">{idx + 1}.</b> {item.leftLabelVi}
             </button>
@@ -691,7 +693,7 @@ function MatchBoard({ lessonId, items, canSave }) {
               ref={(el) => (rightRefs.current[rightItem.id] = el)}
               type="button"
               onClick={() => clickRight(rightItem)}
-              className={`relative w-full min-h-[44px] text-left text-sm zh px-3 py-2 rounded-lg border transition-colors ${statusClass[rightStatus(rightItem)]}`}
+              className={`relative w-full min-h-[44px] text-left text-sm zh px-3 py-2 rounded-xl border transition-colors ${statusClass[rightStatus(rightItem)]}`}
             >
               <b className="mr-1">{String.fromCharCode(65 + idx)}.</b> {rightItem.text}
             </button>
@@ -1028,7 +1030,7 @@ function SentenceTaskCard({ task }) {
     <article className={CARD}>
       <p className="font-semibold text-slate-100">{task.title}</p>
       {facts.length > 0 && (
-        <div className="mt-3 rounded-lg border border-night-600 bg-night-800 p-3">
+        <div className="mt-3 rounded-xl border border-night-700 bg-night-800 p-3">
           <p className="text-xs font-semibold text-slate-400 mb-1">Dữ liệu đầu vào</p>
           <ul className="text-sm text-slate-300 space-y-1 list-disc pl-5">
             {facts.map((f, i) => (
@@ -1047,7 +1049,7 @@ function SentenceTaskCard({ task }) {
                 <span
                   key={k}
                   className={`zh text-sm px-2.5 py-0.5 rounded-full border ${
-                    used ? 'border-green-500 bg-green-500/10 text-green-400' : 'border-night-600 text-slate-300'
+                    used ? 'border-green-500 bg-green-500/10 text-green-400' : 'border-night-700 text-slate-300'
                   }`}
                 >
                   {used ? '✓ ' : ''}
@@ -1069,7 +1071,7 @@ function SentenceTaskCard({ task }) {
       <div className="flex flex-wrap gap-2 mt-3">
         {task.hint && (
           <button type="button" onClick={() => setShowHint((v) => !v)} className={BTN_SECONDARY}>
-            <Lightbulb size={16} weight="fill" className="text-amber-400" aria-hidden="true" />
+            <Lightbulb size={16} weight="fill" className="text-[var(--c-hint-text)]" aria-hidden="true" />
             {showHint ? 'Ẩn công thức' : 'Công thức gợi ý'}
           </button>
         )}
@@ -1079,7 +1081,7 @@ function SentenceTaskCard({ task }) {
       </div>
       {showHint && task.hint && (
         <Reveal offset={8}>
-          <div className="mt-3 rounded-lg border border-[var(--c-hint-border)] bg-[var(--c-hint-bg)] p-3 text-sm font-medium text-[var(--c-hint-text)]">
+          <div className="mt-3 rounded-xl border border-[var(--c-hint-border)] bg-[var(--c-hint-bg)] p-3 text-sm font-medium text-[var(--c-hint-text)]">
             <Html html={task.hint} />
           </div>
         </Reveal>
@@ -1113,7 +1115,7 @@ function TranslateCard({ index, exercise: ex }) {
   return (
     <article className={CARD}>
       <p className="text-xs font-semibold text-slate-500 mb-2">Câu {index + 1}</p>
-      <div className="rounded-lg border border-night-600 bg-night-800 p-3">
+      <div className="rounded-xl border border-night-700 bg-night-800 p-3">
         <p className="text-xs font-semibold text-slate-400 mb-1">Câu nguồn</p>
         <Html html={ex.prompt} className="text-sm text-slate-100" />
       </div>
@@ -1122,7 +1124,7 @@ function TranslateCard({ index, exercise: ex }) {
           <p className="text-xs font-semibold text-slate-400 mb-1">Cụm từ gợi ý</p>
           <div className="flex flex-wrap gap-1.5">
             {hints.map((h, i) => (
-              <span key={i} className="zh text-sm px-2.5 py-0.5 rounded-full bg-coral-500/15 text-coral-400 border border-coral-500/30">
+              <span key={i} className="zh text-sm px-2.5 py-0.5 rounded-full bg-coral-400/10 text-coral-400 border border-coral-400/30">
                 {h}
               </span>
             ))}
@@ -1163,7 +1165,7 @@ function OutlineTab({ exercises }) {
       </div>
       {exercises.map((ex, i) => (
         <div key={ex.id} className="grid sm:grid-cols-2 gap-3 sm:gap-4">
-          <div className="rounded-lg border border-night-600 bg-night-900 p-3 text-sm text-slate-200">
+          <div className="rounded-xl border border-night-700 bg-night-800 p-3 text-sm text-slate-200">
             <span className="font-semibold text-coral-400 mr-1">{i + 1}.</span>
             <Html html={ex.prompt} className="inline" />
           </div>
@@ -1195,10 +1197,10 @@ function OutlineTab({ exercises }) {
 
 function PhraseTable({ phrases }) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-night-600">
+    <div className="overflow-x-auto rounded-xl border border-night-700 bg-night-800">
       <table className="w-full text-sm">
         <thead>
-          <tr className="bg-night-800 text-slate-300">
+          <tr className="bg-night-950 text-slate-300">
             <th className="p-3 text-left w-1/2">Trung văn (中文)</th>
             <th className="p-3 text-left w-1/2">Tiếng Việt</th>
           </tr>
@@ -1231,10 +1233,10 @@ function VocabTab({ lesson, canSave, showMatching, showSentenceTasks }) {
   return (
     <div className="space-y-8">
       {hasVocab && (
-        <div className="overflow-x-auto rounded-lg border border-night-600">
+        <div className="overflow-x-auto rounded-xl border border-night-700 bg-night-800">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-night-900 text-slate-300">
+              <tr className="bg-night-950 text-slate-300">
                 <th className="p-3 text-left">书面语</th>
                 <th className="p-3 text-left">口语</th>
                 <th className="p-3 text-left">Nghĩa</th>
@@ -1256,13 +1258,13 @@ function VocabTab({ lesson, canSave, showMatching, showSentenceTasks }) {
       )}
       {hasMatch && (
         <div>
-          <h3 className="font-semibold mb-2">Ghép từ vựng</h3>
+          <h3 className="font-bold tracking-tight mb-2">Ghép từ vựng</h3>
           <MatchBoard lessonId={lesson.id} items={lesson.matchItems} canSave={canSave} />
         </div>
       )}
       {hasTasks && (
         <div className="space-y-4">
-          <h3 className="font-semibold">Viết câu</h3>
+          <h3 className="font-bold tracking-tight">Viết câu</h3>
           {lesson.writingTasks.map((task) => (
             <SentenceTaskCard key={task.id} task={task} />
           ))}
@@ -1373,7 +1375,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
   const target = scenario?.targetWordCount;
   const counterClass =
     totalHanzi === 0
-      ? 'bg-night-800 border-night-600 text-slate-400'
+      ? 'bg-night-800 border-night-700 text-slate-400'
       : target && totalHanzi < target * 0.8
       ? 'bg-amber-500/10 border-amber-500 text-amber-400'
       : 'bg-green-500/10 border-green-500 text-green-400';
@@ -1383,13 +1385,13 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
   return (
     <div className="space-y-5">
       {scenario && (
-        <div className="rounded-lg border border-night-600 bg-night-900 p-4">
+        <div className="rounded-2xl border border-night-700 bg-night-950 p-4 sm:p-5">
           <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <p className="text-xs font-semibold text-slate-400">
+            <p className="kicker">
               Đề bài{scenarios.length > 1 ? ` ${scenarioIdx + 1}/${scenarios.length}` : ''}
             </p>
             {scenarios.length > 1 && (
-              <div className="flex gap-1">
+              <div className="flex gap-1.5">
                 {scenarios.map((s, i) => (
                   <button
                     key={s.id || i}
@@ -1399,8 +1401,8 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
                       setShowModel(false);
                     }}
                     aria-pressed={i === scenarioIdx}
-                    className={`w-7 h-7 rounded-md text-xs font-bold ${
-                      i === scenarioIdx ? 'bg-coral-500 text-white' : 'bg-night-800 border border-night-600 text-slate-300'
+                    className={`min-w-[44px] h-11 rounded-xl border text-xs font-bold transition-colors ${
+                      i === scenarioIdx ? 'bg-coral-400/10 border-coral-400/40 text-coral-400' : 'bg-night-800 border-night-700 text-slate-400 hover:border-coral-400/60'
                     }`}
                   >
                     {i + 1}

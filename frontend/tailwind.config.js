@@ -28,16 +28,18 @@ export default {
           600: 'rgb(var(--c-night-600) / <alpha-value>)',
         },
         coral: {
-          // Scholarly gold accent. 400 is theme-aware (used as plain text/badges);
-          // 500/600 stay fixed so white button text keeps AA contrast in both themes.
-          50: '#fdf3e7',
-          100: '#fae3c2',
-          300: '#f0b873',
-          400: 'var(--c-coral-accent)',
-          500: '#b45309',
-          600: '#92400e',
-          700: '#78350f',
+          // Brand accent: porcelain cobalt from the landing artwork. 400 is
+          // theme-aware (text/badges, RGB channels so /10 opacity works);
+          // 500/600 stay fixed so white button text keeps AA in both themes.
+          50: '#eef3fb',
+          100: '#dfe8f7',
+          300: '#9db8f0',
+          400: 'rgb(var(--c-coral-accent) / <alpha-value>)',
+          500: '#1f3f8f',
+          600: '#172f6d',
+          700: '#122557',
         },
+        kicker: 'var(--c-kicker)',
       },
       fontFamily: {
         zh: ['"Noto Serif SC"', '"Be Vietnam Pro"', 'serif'],

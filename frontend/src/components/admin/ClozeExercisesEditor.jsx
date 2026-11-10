@@ -1,4 +1,5 @@
 import Repeater from './Repeater';
+import { INPUT, LABEL, LABEL_TEXT, BTN_LINK_DANGER, BTN_ADD } from './ui';
 import { RichTextAreaField, LinesField } from './fields';
 
 function blankId(index) {
@@ -32,12 +33,14 @@ export default function ClozeExercisesEditor({ items, onChange }) {
           />
 
           <div>
-            <p className="text-xs text-slate-400 mb-1">Các chỗ trống (theo đúng thứ tự 1, 2, 3...)</p>
+            <p className={LABEL_TEXT}>Các chỗ trống (theo đúng thứ tự 1, 2, 3...)</p>
             <div className="space-y-2">
               {item.blanks.map((b, i) => (
-                <div key={i} className="bg-night-900 border border-night-700 rounded p-2">
-                  <p className="text-xs text-slate-400 mb-1">Chỗ trống số {i + 1}</p>
+                <div key={i} className="bg-night-900 border border-night-700 rounded-xl p-3">
+                  <p className="text-sm font-bold text-slate-300 mb-2">Chỗ trống số {i + 1}</p>
                   <div className="grid sm:grid-cols-2 gap-2">
+                    <label className={LABEL}>
+                    <span className={LABEL_TEXT}>Đáp án đúng</span>
                     <input
                       value={b.answer}
                       onChange={(e) => {
@@ -46,8 +49,9 @@ export default function ClozeExercisesEditor({ items, onChange }) {
                         update({ ...item, blanks });
                       }}
                       placeholder="Đáp án đúng"
-                      className="bg-night-800 border border-night-600 rounded px-2 py-1 text-sm text-slate-100"
+                      className={INPUT}
                     />
+                    </label>
                     <LinesField
                       label="Các lựa chọn hiển thị (mỗi dòng 1 lựa chọn, nên gồm cả đáp án đúng ở trên)"
                       value={b.options}
@@ -66,7 +70,7 @@ export default function ClozeExercisesEditor({ items, onChange }) {
                         .map((blank, idx) => ({ ...blank, id: blankId(idx) }));
                       update({ ...item, blanks });
                     }}
-                    className="text-xs text-red-400 mt-1"
+                    className={`${BTN_LINK_DANGER} -ml-3`}
                   >
                     Xoá chỗ trống này
                   </button>
@@ -81,7 +85,7 @@ export default function ClozeExercisesEditor({ items, onChange }) {
                   blanks: [...item.blanks, { id: blankId(item.blanks.length), answer: '', options: [''] }],
                 })
               }
-              className="mt-1 text-xs text-coral-400 underline"
+              className={`${BTN_ADD} mt-3`}
             >
               + thêm chỗ trống
             </button>

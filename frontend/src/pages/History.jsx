@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { listMySubmissions } from '../api/lessons';
+import PageHeader from '../components/PageHeader';
 
 const PAGE_SIZE = 20;
+
+const PAGER_BTN =
+  'min-h-[44px] min-w-[44px] px-4 text-sm font-semibold rounded-xl border border-night-700 bg-night-800 text-slate-200 hover:border-coral-400/60 hover:text-coral-400 transition-colors motion-reduce:transition-none disabled:opacity-40 disabled:pointer-events-none';
 
 function describeSubmissionTarget(s) {
   if (s.lesson) return { label: `Bài học · ${s.exerciseType}`, titleZh: s.lesson.titleZh };
@@ -15,6 +19,7 @@ export default function History() {
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     listMySubmissions().then(setSubmissions).finally(() => setLoading(false));
@@ -31,8 +36,8 @@ export default function History() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      <h1 className="text-xl font-bold mb-6">Lịch sử làm bài</h1>
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <PageHeader title="Lịch sử làm bài" />
       {loading ? (
         <p className="text-slate-500">Đang tải...</p>
       ) : submissions.length === 0 ? (
@@ -45,23 +50,27 @@ export default function History() {
               return (
                 <motion.li
                   key={s.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 30, delay: Math.min(i, 10) * 0.035 }}
-                  className="bg-night-800 border border-night-700 rounded-lg p-4 flex justify-between items-center hover:border-night-600 transition-colors"
+                  className="surface p-3 pr-5 flex items-center gap-4"
                 >
-                  <div>
-                    <p className="zh text-slate-100">{titleZh}</p>
-                    <p className="text-sm text-slate-500">
-                      {label} · {new Date(s.submittedAt).toLocaleString('vi-VN')}
-                    </p>
+                  <span
+                    lang="zh"
+                    className="zh flex items-center justify-center flex-shrink-0 min-w-[3.5rem] max-w-[7rem] sm:max-w-[9rem] h-14 px-3 rounded-xl bg-night-700/60 text-coral-400 text-lg whitespace-nowrap overflow-hidden"
+                  >
+                    {titleZh}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-bold text-slate-100 truncate">{label}</p>
+                    <p className="text-sm text-slate-500">{new Date(s.submittedAt).toLocaleString('vi-VN')}</p>
                   </div>
                   {s.maxScore != null ? (
-                    <span className="font-semibold text-coral-400">
+                    <span className="flex-shrink-0 text-lg font-extrabold tracking-tight text-coral-400">
                       {s.score}/{s.maxScore}
                     </span>
                   ) : (
-                    <span className="text-sm text-slate-500">Đã nộp</span>
+                    <span className="flex-shrink-0 text-sm font-semibold text-slate-500">Đã nộp</span>
                   )}
                 </motion.li>
               );
@@ -69,27 +78,17 @@ export default function History() {
           </ul>
 
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-6">
-              <button
-                type="button"
-                onClick={() => goToPage(page - 1)}
-                disabled={page === 1}
-                className="px-3 py-1.5 text-sm rounded border border-night-600 bg-night-800 text-slate-200 disabled:opacity-40 hover:bg-night-700"
-              >
+            <nav aria-label="Phân trang" className="flex items-center justify-center gap-3 mt-8">
+              <button type="button" onClick={() => goToPage(page - 1)} disabled={page === 1} className={PAGER_BTN}>
                 ← Trước
               </button>
-              <span className="text-sm text-slate-400">
+              <span className="text-sm font-semibold text-slate-400" aria-live="polite">
                 Trang {page}/{totalPages}
               </span>
-              <button
-                type="button"
-                onClick={() => goToPage(page + 1)}
-                disabled={page === totalPages}
-                className="px-3 py-1.5 text-sm rounded border border-night-600 bg-night-800 text-slate-200 disabled:opacity-40 hover:bg-night-700"
-              >
+              <button type="button" onClick={() => goToPage(page + 1)} disabled={page === totalPages} className={PAGER_BTN}>
                 Sau →
               </button>
-            </div>
+            </nav>
           )}
         </>
       )}

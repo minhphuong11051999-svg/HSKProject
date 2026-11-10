@@ -8,6 +8,18 @@ import {
   deleteSamplePaper,
 } from '../api/samplePapers';
 import { TextField, NumberField, CheckboxField, RichTextAreaField } from '../components/admin/fields';
+import PageHeader from '../components/PageHeader';
+import {
+  PANEL,
+  PANEL_TITLE,
+  HINT,
+  BTN_PRIMARY,
+  BTN_SECONDARY,
+  BTN_LINK,
+  BTN_LINK_DANGER,
+  ERROR_TEXT,
+  SUCCESS_TEXT,
+} from '../components/admin/ui';
 
 const EMPTY_FORM = {
   id: null,
@@ -97,29 +109,32 @@ export default function AdminSamplePapers() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      <div className="grid lg:grid-cols-[320px_1fr] gap-8">
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl font-bold">Danh sách đề mẫu</h1>
-            <Link to="/admin" className="text-sm text-coral-400 underline">
-              Quản trị bài học
-            </Link>
-          </div>
+      <PageHeader
+        title="Quản trị đề mẫu"
+        actions={
+          <Link to="/admin" className={BTN_SECONDARY}>
+            Quản trị bài học
+          </Link>
+        }
+      />
+      <div className="grid lg:grid-cols-[320px_1fr] gap-6 lg:gap-8 items-start">
+        <section className={PANEL}>
+          <h2 className={`${PANEL_TITLE} mb-4`}>Danh sách đề mẫu</h2>
           <ul className="space-y-2">
             {papers.map((paper) => (
               <li
                 key={paper.id}
-                className="bg-night-800 border border-night-700 rounded-lg p-3 flex justify-between items-center"
+                className="bg-night-900 border border-night-700 rounded-xl py-2 pl-4 pr-1 flex justify-between items-center gap-2"
               >
-                <div>
-                  <p className="zh">{paper.titleZh}</p>
-                  <p className="text-xs text-slate-400">{paper.slug}</p>
+                <div className="min-w-0">
+                  <p className="zh text-slate-100 truncate">{paper.titleZh}</p>
+                  <p className="text-xs text-slate-400 truncate">{paper.slug}</p>
                 </div>
-                <div className="flex gap-2 text-sm">
-                  <button onClick={() => edit(paper)} className="text-coral-400 underline">
+                <div className="flex flex-shrink-0">
+                  <button onClick={() => edit(paper)} className={BTN_LINK}>
                     Sửa
                   </button>
-                  <button onClick={() => handleDelete(paper.id)} className="text-red-400 underline">
+                  <button onClick={() => handleDelete(paper.id)} className={BTN_LINK_DANGER}>
                     Xoá
                   </button>
                 </div>
@@ -128,26 +143,26 @@ export default function AdminSamplePapers() {
           </ul>
         </section>
 
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold">{form.id ? 'Sửa đề mẫu' : 'Thêm đề mẫu mới'}</h2>
+        <section className="min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-100">{form.id ? 'Sửa đề mẫu' : 'Thêm đề mẫu mới'}</h2>
             {form.id && (
               <button
                 type="button"
                 onClick={() => setForm(EMPTY_FORM)}
-                className="text-sm px-3 py-1.5 border border-night-600 rounded-lg"
+                className={BTN_SECONDARY}
               >
                 + Tạo đề mẫu mới
               </button>
             )}
           </div>
 
-          {loadingEdit && <p className="text-slate-400 text-sm mb-3">Đang tải nội dung...</p>}
+          {loadingEdit && <p className={`${HINT} mb-3`} role="status">Đang tải nội dung...</p>}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="border border-night-600 rounded-lg p-4 space-y-2">
-              <h3 className="font-semibold text-sm mb-1">Thông tin cơ bản</h3>
-              <div className="grid sm:grid-cols-2 gap-2">
+            <div className={`${PANEL} space-y-2`}>
+              <h3 className={`${PANEL_TITLE} mb-3`}>Thông tin cơ bản</h3>
+              <div className="grid sm:grid-cols-2 gap-x-4">
                 <TextField label="Slug (vd: de-mau-tuijianxin-1)" value={form.slug} onChange={(v) => set('slug', v)} />
                 <TextField label="Tiêu đề chữ Hán" value={form.titleZh} onChange={(v) => set('titleZh', v)} />
                 <TextField label="Tiêu đề tiếng Việt" value={form.titleVi} onChange={(v) => set('titleVi', v)} />
@@ -160,6 +175,7 @@ export default function AdminSamplePapers() {
               />
             </div>
 
+            <div className={PANEL}>
             <RichTextAreaField label="Đề bài" value={form.prompt} onChange={(v) => set('prompt', v)} rows={8} />
             <RichTextAreaField
               label="Kiểm tra yêu cầu đề (để trống nếu không cần)"
@@ -174,14 +190,15 @@ export default function AdminSamplePapers() {
               rows={6}
             />
             <RichTextAreaField label="Đáp án" value={form.answer} onChange={(v) => set('answer', v)} rows={10} />
+            </div>
 
-            {error && <p className="text-red-400 text-sm">{error}</p>}
-            {savedMessage && <p className="text-green-400 text-sm">{savedMessage}</p>}
-            <div className="flex gap-2 sticky bottom-0 bg-night-950 py-3">
+            {error && <p className={ERROR_TEXT} role="alert">{error}</p>}
+            {savedMessage && <p className={SUCCESS_TEXT} role="status">{savedMessage}</p>}
+            <div className="surface sticky bottom-3 z-10 flex flex-wrap items-center gap-3 px-4 py-3">
               <button
                 type="submit"
                 disabled={saving}
-                className="bg-coral-500 hover:bg-coral-600 text-white rounded-lg px-4 py-2 font-semibold transition-colors"
+                className={BTN_PRIMARY}
               >
                 {saving ? 'Đang lưu...' : form.id ? 'Lưu thay đổi' : 'Tạo đề mẫu'}
               </button>

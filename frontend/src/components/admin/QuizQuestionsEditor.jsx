@@ -1,4 +1,5 @@
 import Repeater from './Repeater';
+import { INPUT, LABEL_TEXT, BTN_LINK_DANGER, BTN_ADD, CHECKBOX } from './ui';
 import { TextField, TextAreaField, RichTextAreaField, SelectField } from './fields';
 
 // `kind` pins the editor to one question type (THEORY for "Nhận diện thể thức",
@@ -87,12 +88,14 @@ export default function QuizQuestionsEditor({ items, onChange, kind, title, hint
 
           {!(item.kind === 'ERROR_ANALYSIS' && item.mode === 'fix') && (
           <div>
-            <p className="text-xs text-slate-400 mb-1">Các đáp án (chọn ô tròn cho đáp án ĐÚNG)</p>
-            <div className="space-y-1">
+            <p className={LABEL_TEXT}>Các đáp án (chọn ô tròn cho đáp án ĐÚNG)</p>
+            <div className="space-y-2">
               {item.options.map((opt, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <input
                     type="radio"
+                    className={CHECKBOX}
+                    aria-label={`Đáp án ${String.fromCharCode(65 + i)} đúng`}
                     checked={item.correctIndex === i}
                     onChange={() => update({ ...item, correctIndex: i })}
                   />
@@ -104,7 +107,7 @@ export default function QuizQuestionsEditor({ items, onChange, kind, title, hint
                       update({ ...item, options });
                     }}
                     placeholder={`Đáp án ${String.fromCharCode(65 + i)}`}
-                    className="flex-1 bg-night-900 border border-night-600 rounded px-2 py-1 text-sm text-slate-100"
+                    className={`${INPUT} flex-1 min-w-0`}
                   />
                   <button
                     type="button"
@@ -113,7 +116,7 @@ export default function QuizQuestionsEditor({ items, onChange, kind, title, hint
                       const correctIndex = item.correctIndex >= options.length ? 0 : item.correctIndex;
                       update({ ...item, options, correctIndex });
                     }}
-                    className="text-xs text-red-400"
+                    className={BTN_LINK_DANGER}
                   >
                     Xoá
                   </button>
@@ -123,7 +126,7 @@ export default function QuizQuestionsEditor({ items, onChange, kind, title, hint
             <button
               type="button"
               onClick={() => update({ ...item, options: [...item.options, ''] })}
-              className="mt-1 text-xs text-coral-400 underline"
+              className={`${BTN_ADD} mt-3`}
             >
               + thêm đáp án
             </button>
