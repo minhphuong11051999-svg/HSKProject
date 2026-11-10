@@ -5,6 +5,14 @@ function canAccess(sitting, user) {
   return !!user && user.plan === 'PREMIUM';
 }
 
+// Free learners only get the suggested outline once the admin opens it for this paper;
+// PRO learners and admins always see it.
+function stripHiddenOutline(item, user) {
+  const full = !!user && (user.plan === 'PREMIUM' || user.role === 'ADMIN');
+  if (full || item.outlineOpen) return item;
+  return { ...item, outline: null, outlineHidden: !!item.outline };
+}
+
 async function listExamYears(user) {
   const years = await prisma.examYear.findMany({
     orderBy: { year: 'desc' },
@@ -54,7 +62,7 @@ async function getExamSittingBySlug(slug, user) {
     };
   }
 
-  return { ...sitting, locked: false };
+  return { ...stripHiddenOutline(sitting, user), locked: false };
 }
 
 async function listExamYearsForAdmin() {
@@ -99,6 +107,7 @@ async function upsertExamSitting(data, id) {
     prompt,
     requirements,
     outline,
+    outlineOpen,
     answer,
     orderIndex,
     isPremium,
@@ -113,6 +122,7 @@ async function upsertExamSitting(data, id) {
     prompt,
     requirements: requirements || null,
     outline: outline || null,
+    outlineOpen: !!outlineOpen,
     answer,
     orderIndex: orderIndex ?? 0,
     isPremium: !!isPremium,

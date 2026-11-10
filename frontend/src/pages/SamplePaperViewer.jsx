@@ -39,7 +39,6 @@ export default function SamplePaperViewer() {
 
       <PaperTabs
         prompt={paper.prompt}
-        requirements={paper.requirements}
         outline={paper.outline}
         answer={paper.answer}
         targetKey={{ samplePaperId: paper.id }}

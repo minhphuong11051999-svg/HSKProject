@@ -8,6 +8,7 @@ const adminLessons = require('./adminLessons');
 const adminUsers = require('./adminUsers');
 const adminSamplePapers = require('./adminSamplePapers');
 const adminExamSittings = require('./adminExamSittings');
+const settings = require('./settings');
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.use('/lessons', lessons);
 router.use('/submissions', submissions);
 router.use('/sample-papers', samplePapers);
 router.use('/exam-sittings', examSittings);
+router.use('/settings', settings);
 router.use('/admin/lessons', adminLessons);
 router.use('/admin/users', adminUsers);
 router.use('/admin/sample-papers', adminSamplePapers);

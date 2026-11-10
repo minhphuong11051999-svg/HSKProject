@@ -42,7 +42,6 @@ export default function ExamSittingViewer() {
 
       <PaperTabs
         prompt={sitting.prompt}
-        requirements={sitting.requirements}
         outline={sitting.outline}
         answer={sitting.answer}
         targetKey={{ examSittingId: sitting.id }}

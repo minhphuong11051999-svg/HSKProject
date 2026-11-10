@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { getMySubmissionFor, submitExercise } from '../api/lessons';
+import { useAuth } from '../context/AuthContext';
 import LetterPaper, { HanziCount, countHanzi, htmlToText } from './LetterPaper';
 import { Tabs } from '@animate-ui/react/primitives/radix-ui/tabs';
 import { SlidingNumber } from '@animate-ui/react/primitives/texts/sliding-number';
 import PressButton from './motion/PressButton';
 import Reveal from './motion/Reveal';
-import { ClipboardText, ListChecks, TreeStructure, PencilLine, SealCheck, Robot } from '@phosphor-icons/react';
+import { ClipboardText, MagnifyingGlass, TreeStructure, PencilLine, SealCheck, Robot } from '@phosphor-icons/react';
 
 // Two full-width spaces — the standard first-line indent used when writing
 // Chinese compositions by hand, so typed paragraphs match exam-paper format.
@@ -13,7 +14,7 @@ const PARAGRAPH_INDENT = '　　';
 
 const ALL_TABS = [
   { key: 'prompt', label: 'Đề bài', icon: ClipboardText },
-  { key: 'requirements', label: 'Kiểm tra yêu cầu đề', icon: ListChecks },
+  { key: 'analysis', label: 'Phân tích đề', icon: MagnifyingGlass },
   { key: 'outline', label: 'Dàn ý gợi ý', icon: TreeStructure },
   { key: 'draft', label: 'Bài làm', icon: PencilLine },
   { key: 'answer', label: 'Đáp án mẫu', icon: SealCheck },
@@ -23,17 +24,22 @@ const ALL_TABS = [
 // Shared tabbed content viewer for both sample papers (Đề mẫu) and real exam
 // sittings (Đề thi thật) — the only difference between the two is which id
 // field is set on `targetKey`, which selects the FK used when saving/loading
-// the "Bài làm" submission. "requirements"/"outline" tabs only show up when
-// the admin has actually filled them in for that paper.
-export default function PaperTabs({ prompt, requirements, outline, answer, targetKey }) {
+// the "Bài làm" submission. "Phân tích đề" is written by the learner and saved
+// with the draft. The outline only reaches Free learners once the admin opens
+// it (the backend leaves it out otherwise); AI grading is a PRO-only tab.
+export default function PaperTabs({ prompt, outline, answer, targetKey }) {
+  const { user } = useAuth();
+  const isPro = user?.plan === 'PREMIUM' || user?.role === 'ADMIN';
   const TABS = ALL_TABS.filter((t) => {
-    if (t.key === 'requirements') return !!requirements;
     if (t.key === 'outline') return !!outline;
+    if (t.key === 'ai') return isPro;
     return true;
   });
   const [tab, setTab] = useState('prompt');
   const [showAnswer, setShowAnswer] = useState(false);
   const [draft, setDraft] = useState('');
+  const [analysis, setAnalysis] = useState('');
+  const [savingAnalysis, setSavingAnalysis] = useState(false);
   const [submission, setSubmission] = useState(null);
   const [loadingDraft, setLoadingDraft] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -50,6 +56,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
       .then((s) => {
         setSubmission(s);
         setDraft(s?.answerPayload?.text || '');
+        setAnalysis(s?.answerPayload?.analysis || '');
       })
       .finally(() => setLoadingDraft(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -89,20 +96,23 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
     });
   }
 
-  async function handleSubmitDraft() {
-    setSaving(true);
+  // The analysis and the draft travel together in one submission, so the
+  // latest save always holds both.
+  async function save(setBusy) {
+    setBusy(true);
     try {
       const result = await submitExercise({
         ...targetKey,
         exerciseType: 'writing',
         exerciseId: targetId,
-        answerPayload: { text: draft },
+        answerPayload: { text: draft, analysis },
       });
       setSubmission(result);
     } finally {
-      setSaving(false);
+      setBusy(false);
     }
   }
+  const handleSubmitDraft = () => save(setSaving);
 
   const PANEL = 'surface p-6 sm:p-8 focus-visible:outline-none';
 
@@ -131,12 +141,46 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
         <div className="zh text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: prompt }} />
       </Tabs.Content>
 
-      {requirements && (
-        <Tabs.Content value="requirements" className={PANEL}>
-          <h2 className="text-lg font-extrabold tracking-tight mb-3 text-slate-100">Kiểm tra yêu cầu đề</h2>
-          <div className="text-sm leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: requirements }} />
-        </Tabs.Content>
-      )}
+      <Tabs.Content value="analysis" className={PANEL}>
+        <h2 className="text-lg font-extrabold tracking-tight mb-1 text-slate-100">Phân tích đề</h2>
+        <p className="text-sm text-slate-400 mb-4">
+          Tự ghi ra trước khi viết: thể loại, người viết và người nhận, mục đích, các ý bắt buộc phải có, số chữ.
+        </p>
+        {loadingDraft ? (
+          <p className="text-sm text-slate-500">Đang tải...</p>
+        ) : (
+          <>
+            <label htmlFor="paper-analysis" className="sr-only">Phân tích đề của bạn</label>
+            <textarea
+              id="paper-analysis"
+              value={analysis}
+              onChange={(e) => setAnalysis(e.target.value)}
+              rows={8}
+              placeholder={`Ví dụ:
+- Thể loại: 申请书
+- Gửi cho: nhà trường
+- Phải nêu: lý do, ưu điểm bản thân, mong muốn học được gì
+- Số chữ: ≥ 150`}
+              className="w-full bg-night-950 border border-night-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 leading-7 transition-colors focus:border-coral-400 focus:ring-2 focus:ring-coral-400/20 focus:outline-none"
+            />
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-3">
+              <PressButton
+                onClick={() => save(setSavingAnalysis)}
+                disabled={savingAnalysis || !analysis.trim()}
+                className="min-h-[44px] bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl px-5 py-2 text-sm font-bold shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors"
+              >
+                {savingAnalysis ? 'Đang lưu...' : 'Lưu phân tích'}
+              </PressButton>
+              {submission?.answerPayload?.analysis && (
+                <span className="text-xs text-slate-500 inline-flex items-center gap-1">
+                  <SealCheck size={14} weight="fill" className="text-green-400" aria-hidden="true" />
+                  Đã lưu lúc {new Date(submission.submittedAt).toLocaleString('vi-VN')}
+                </span>
+              )}
+            </div>
+          </>
+        )}
+      </Tabs.Content>
 
       {outline && (
         <Tabs.Content value="outline" className={PANEL}>
@@ -217,6 +261,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
         )}
       </Tabs.Content>
 
+      {isPro && (
       <Tabs.Content value="ai" className={`${PANEL} text-center`}>
         <Robot size={44} weight="duotone" className="mx-auto mb-3 text-coral-400" aria-hidden="true" />
         <h2 className="text-lg font-extrabold tracking-tight text-slate-100 mb-2">Chấm bài bằng AI</h2>
@@ -231,6 +276,7 @@ export default function PaperTabs({ prompt, requirements, outline, answer, targe
           Chấm bài bằng AI (Sắp ra mắt)
         </button>
       </Tabs.Content>
+      )}
     </Tabs.Root>
   );
 }

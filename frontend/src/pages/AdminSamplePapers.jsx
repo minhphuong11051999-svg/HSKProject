@@ -29,6 +29,7 @@ const EMPTY_FORM = {
   prompt: '',
   requirements: '',
   outline: '',
+  outlineOpen: false,
   answer: '',
   orderIndex: 0,
   isPremium: false,
@@ -78,6 +79,7 @@ export default function AdminSamplePapers() {
         prompt: form.prompt,
         requirements: form.requirements,
         outline: form.outline,
+        outlineOpen: !!form.outlineOpen,
         answer: form.answer,
         orderIndex: form.orderIndex || 0,
         isPremium: !!form.isPremium,
@@ -178,16 +180,15 @@ export default function AdminSamplePapers() {
             <div className={PANEL}>
             <RichTextAreaField label="Đề bài" value={form.prompt} onChange={(v) => set('prompt', v)} rows={8} />
             <RichTextAreaField
-              label="Kiểm tra yêu cầu đề (để trống nếu không cần)"
-              value={form.requirements}
-              onChange={(v) => set('requirements', v)}
-              rows={6}
-            />
-            <RichTextAreaField
               label="Dàn ý gợi ý (để trống nếu không cần)"
               value={form.outline}
               onChange={(v) => set('outline', v)}
               rows={6}
+            />
+            <CheckboxField
+              label="Mở dàn ý cho tài khoản Free (PRO luôn thấy dàn ý)"
+              checked={form.outlineOpen}
+              onChange={(v) => set('outlineOpen', v)}
             />
             <RichTextAreaField label="Đáp án" value={form.answer} onChange={(v) => set('answer', v)} rows={10} />
             </div>

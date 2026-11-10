@@ -5,6 +5,14 @@ function canAccess(paper, user) {
   return !!user && user.plan === 'PREMIUM';
 }
 
+// Free learners only get the suggested outline once the admin opens it for this paper;
+// PRO learners and admins always see it.
+function stripHiddenOutline(item, user) {
+  const full = !!user && (user.plan === 'PREMIUM' || user.role === 'ADMIN');
+  if (full || item.outlineOpen) return item;
+  return { ...item, outline: null, outlineHidden: !!item.outline };
+}
+
 async function listSamplePapers(user) {
   const papers = await prisma.samplePaper.findMany({
     orderBy: { orderIndex: 'asc' },
@@ -33,7 +41,7 @@ async function getSamplePaperBySlug(slug, user) {
     return { id: paper.id, slug: paper.slug, titleZh: paper.titleZh, titleVi: paper.titleVi, locked: true };
   }
 
-  return { ...paper, locked: false };
+  return { ...stripHiddenOutline(paper, user), locked: false };
 }
 
 async function getSamplePaperForAdmin(id) {
@@ -47,7 +55,7 @@ async function getSamplePaperForAdmin(id) {
 }
 
 async function upsertSamplePaper(data, id) {
-  const { slug, titleZh, titleVi, prompt, requirements, outline, answer, orderIndex, isPremium } = data;
+  const { slug, titleZh, titleVi, prompt, requirements, outline, outlineOpen, answer, orderIndex, isPremium } = data;
   const baseData = {
     slug,
     titleZh,
@@ -55,6 +63,7 @@ async function upsertSamplePaper(data, id) {
     prompt,
     requirements: requirements || null,
     outline: outline || null,
+    outlineOpen: !!outlineOpen,
     answer,
     orderIndex: orderIndex ?? 0,
     isPremium: !!isPremium,

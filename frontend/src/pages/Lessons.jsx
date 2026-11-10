@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listLessons } from '../api/lessons';
+import { getSettings, updateSettings } from '../api/settings';
+import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
 import ProLabel from '../components/ProLabel';
 import PageHeader from '../components/PageHeader';
@@ -64,15 +66,36 @@ export default function Lessons({ type }) {
   return type ? <LessonList type={type} /> : <LessonMap />;
 }
 
+// Learners only see finished lessons until the admin turns on "show upcoming" for
+// everyone; the admin can always preview the unfinished cards with the local toggle.
 function LessonMap() {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'ADMIN';
   const [lessons, setLessons] = useState(null);
-  const [showAll, setShowAll] = useState(false);
+  const [preview, setPreview] = useState(false);
+  const [publicUpcoming, setPublicUpcoming] = useState(false);
+  const [savingSetting, setSavingSetting] = useState(false);
 
   useEffect(() => {
     listLessons('practice')
       .then(setLessons)
       .catch(() => setLessons([]));
+    getSettings()
+      .then((st) => setPublicUpcoming(!!st.showUpcomingLessons))
+      .catch(() => {});
   }, []);
+
+  async function togglePublic() {
+    setSavingSetting(true);
+    try {
+      const st = await updateSettings({ showUpcomingLessons: !publicUpcoming });
+      setPublicUpcoming(!!st.showUpcomingLessons);
+    } finally {
+      setSavingSetting(false);
+    }
+  }
+
+  const showAll = publicUpcoming || (isAdmin && preview);
 
   const bySlug = new Map((lessons || []).map((l) => [l.slug, l]));
   const isDone = (item) => item[3] && bySlug.has(item[3]);
@@ -95,14 +118,30 @@ function LessonMap() {
           <p className="font-bold mt-0.5">Người đọc có quyền quyết định điều bạn cần?</p>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setShowAll((v) => !v)}
-          aria-pressed={showAll}
-          className="self-start sm:self-auto min-h-[44px] rounded-xl border-[1.5px] border-dashed border-coral-400 bg-night-800/70 px-5 text-sm font-semibold text-coral-400 hover:bg-coral-400/10 transition-colors motion-reduce:transition-none"
-        >
-          {showAll ? 'Ẩn các phần chưa làm' : `Hiện các phần chưa làm (${todoCount})`}
-        </button>
+        {isAdmin && (
+          <div className="flex flex-col items-start sm:items-end gap-2">
+            {!publicUpcoming && (
+              <button
+                type="button"
+                onClick={() => setPreview((v) => !v)}
+                aria-pressed={preview}
+                className="min-h-[44px] rounded-xl border-[1.5px] border-dashed border-coral-400 bg-night-800/70 px-5 text-sm font-semibold text-coral-400 hover:bg-coral-400/10 transition-colors motion-reduce:transition-none"
+              >
+                {preview ? 'Ẩn các phần chưa làm' : `Hiện các phần chưa làm (${todoCount})`}
+              </button>
+            )}
+            <label className="inline-flex items-center gap-2 min-h-[44px] text-sm font-semibold text-slate-300 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={publicUpcoming}
+                disabled={savingSetting}
+                onChange={togglePublic}
+                className="h-5 w-5 accent-coral-500 cursor-pointer disabled:cursor-wait"
+              />
+              Cho người học thấy các phần chưa làm
+            </label>
+          </div>
+        )}
       </div>
 
       {lessons === null ? (
