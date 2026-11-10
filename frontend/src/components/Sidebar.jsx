@@ -38,7 +38,7 @@ export default function Sidebar({ open = false, onClose }) {
     <aside
       id="app-sidebar"
       aria-label="Điều hướng chính"
-      className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] h-[100dvh] bg-night-900 border-r border-night-700 flex flex-col
+      className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] h-[100dvh] bg-night-900 lg:bg-night-900/75 lg:backdrop-blur-xl border-r border-night-700/70 flex flex-col
         transition-transform duration-200 ease-out ${open ? 'translate-x-0' : '-translate-x-full invisible lg:visible'}
         lg:sticky lg:top-0 lg:z-auto lg:w-64 lg:max-w-none lg:h-screen lg:translate-x-0 lg:self-start lg:shrink-0`}
     >

@@ -18,12 +18,14 @@
   /* coral-* is the brand accent (porcelain cobalt). 400 = theme-aware text accent. */
   --c-coral-accent: 150 180 242;
   --c-kicker: #d9b56c;
+  --c-app-bg-opacity: 0.18;
+  --c-surface-alpha: 0.86;
   --c-quicklink-from: #1b2b55;
   --c-quicklink-to: #15224a;
   --c-quicklink-border: #2d4278;
   --c-quicklink-text: #d6e1f8;
   --c-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 14px 30px -20px rgba(0, 0, 0, 0.6);
-  --c-hero-veil: linear-gradient(100deg, rgba(13, 21, 42, 0.94) 0%, rgba(13, 21, 42, 0.82) 55%, rgba(13, 21, 42, 0.6) 100%);
+  --c-hero-veil: linear-gradient(100deg, rgba(13, 21, 42, 0.94) 0%, rgba(13, 21, 42, 0.82) 55%, rgba(13, 21, 42, 0.78) 100%);
   /* Red "formula / hint" callouts: light red text on dark (~8:1), deep red on light (~6:1) */
   --c-hint-text: #fca5a5;
   --c-hint-bg: rgba(239, 68, 68, 0.12);
@@ -48,12 +50,14 @@
   --c-slate-500: 98 112 143;
   --c-coral-accent: 31 63 143;
   --c-kicker: #8a6420;
+  --c-app-bg-opacity: 0.3;
+  --c-surface-alpha: 0.9;
   --c-quicklink-from: #f4f7fd;
   --c-quicklink-to: #e3eaf7;
   --c-quicklink-border: #d5deee;
   --c-quicklink-text: #1f3f8f;
   --c-shadow: 0 1px 2px rgba(20, 34, 79, 0.05), 0 14px 30px -22px rgba(20, 34, 79, 0.35);
-  --c-hero-veil: linear-gradient(100deg, rgba(245, 247, 251, 0.95) 0%, rgba(245, 247, 251, 0.85) 55%, rgba(245, 247, 251, 0.55) 100%);
+  --c-hero-veil: linear-gradient(100deg, rgba(245, 247, 251, 0.95) 0%, rgba(245, 247, 251, 0.85) 55%, rgba(245, 247, 251, 0.8) 100%);
   --c-hint-text: #b91c1c;
   --c-hint-bg: #fef2f2;
   --c-hint-border: #fca5a5;
@@ -343,7 +347,9 @@ body {
    @layer components so Tailwind utilities can still override them. */
 @layer components {
 .surface {
-  background: rgb(var(--c-night-800));
+  background: rgb(var(--c-night-800) / var(--c-surface-alpha));
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   border: 1px solid rgb(var(--c-night-700));
   border-radius: 1.25rem;
   box-shadow: var(--c-shadow);
@@ -354,6 +360,39 @@ a.surface:hover, button.surface:hover, a:hover > .surface, button:hover > .surfa
 
 .kicker { font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; color: var(--c-kicker); }
 
+}
+
+/* Whole-app backdrop: the brand artwork, heavily blurred and faint, fixed
+   behind the content (same treatment as the landing hero background). */
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.app-bg::before {
+  content: '';
+  position: absolute;
+  inset: -60px;
+  background: url('/img/home-hero-800.webp') center 20% / cover no-repeat;
+  filter: blur(60px) saturate(1.1);
+  opacity: var(--c-app-bg-opacity);
+  /* Fade out the artwork's cream desk at the bottom. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent 92%);
+}
+/* Dark theme: soft cobalt glows instead of the light artwork (which greys out on navy). */
+.dark .app-bg::before {
+  background:
+    radial-gradient(38% 45% at 12% 18%, rgba(56, 92, 190, 0.45), transparent 70%),
+    radial-gradient(32% 40% at 88% 12%, rgba(80, 120, 220, 0.32), transparent 70%),
+    radial-gradient(40% 45% at 75% 80%, rgba(40, 70, 160, 0.4), transparent 70%),
+    radial-gradient(30% 35% at 30% 85%, rgba(217, 181, 108, 0.08), transparent 70%);
+  filter: blur(40px);
+  opacity: 1;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 /* Page banner: the brand artwork, blurred, behind the page title. */
@@ -373,6 +412,12 @@ a.surface:hover, button.surface:hover, a:hover > .surface, button:hover > .surfa
   background: url('/img/home-hero-800.webp') center / cover no-repeat;
   filter: blur(22px) saturate(1.1);
   transform: scale(1.1);
+}
+.dark .app-hero::before {
+  background:
+    radial-gradient(45% 80% at 85% 30%, rgba(80, 120, 220, 0.45), transparent 70%),
+    radial-gradient(35% 70% at 60% 100%, rgba(56, 92, 190, 0.35), transparent 70%);
+  filter: blur(20px);
 }
 .app-hero::after {
   content: '';

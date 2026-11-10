@@ -99,7 +99,7 @@ function LessonMap() {
           type="button"
           onClick={() => setShowAll((v) => !v)}
           aria-pressed={showAll}
-          className="self-start sm:self-auto min-h-[44px] rounded-xl border-[1.5px] border-dashed border-coral-400 px-5 text-sm font-semibold text-coral-400 hover:bg-coral-400/10 transition-colors motion-reduce:transition-none"
+          className="self-start sm:self-auto min-h-[44px] rounded-xl border-[1.5px] border-dashed border-coral-400 bg-night-800/70 px-5 text-sm font-semibold text-coral-400 hover:bg-coral-400/10 transition-colors motion-reduce:transition-none"
         >
           {showAll ? 'Ẩn các phần chưa làm' : `Hiện các phần chưa làm (${todoCount})`}
         </button>

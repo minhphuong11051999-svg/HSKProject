@@ -37,7 +37,9 @@ export default function Layout() {
 
   if (user) {
     return (
-      <div className="lg:flex min-h-screen bg-night-950 text-slate-100">
+      <div className="relative isolate lg:flex min-h-screen bg-night-950 text-slate-100">
+        {/* Blurred, faint brand artwork behind every page, like the landing hero. */}
+        <div className="app-bg" aria-hidden="true" />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-coral-500 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg"
@@ -83,7 +85,8 @@ export default function Layout() {
   }
 
   return (
-    <div className="min-h-screen bg-night-950 text-slate-100">
+    <div className="relative isolate min-h-screen bg-night-950 text-slate-100">
+      <div className="app-bg" aria-hidden="true" />
       <TopNav />
       <PageTransition>
         <Outlet />
