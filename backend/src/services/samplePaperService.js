@@ -1,16 +1,19 @@
 const prisma = require('../lib/prisma');
+const { readSettings } = require('../lib/settings');
 
 function canAccess(paper, user) {
   if (!paper.isPremium) return true;
   return !!user && user.plan === 'PREMIUM';
 }
 
-// Free learners only get the suggested outline once the admin opens it for this paper;
-// PRO learners and admins always see it.
-function stripHiddenOutline(item, user) {
-  const full = !!user && (user.plan === 'PREMIUM' || user.role === 'ADMIN');
-  if (full || item.outlineOpen) return item;
-  return { ...item, outline: null, outlineHidden: !!item.outline };
+// The "Từ vựng và luận điểm" (outline) tab stays hidden for everyone but the admin
+// until the admin opens it site-wide. The AI grading criteria never leave the server.
+function forLearner(item, user, settings) {
+  const { gradingCriteria, ...rest } = item;
+  const out = { ...rest, hasGradingCriteria: !!(gradingCriteria && gradingCriteria.trim()) };
+  const isAdmin = !!user && user.role === 'ADMIN';
+  if (!isAdmin && !settings.showOutlineTab) out.outline = null;
+  return out;
 }
 
 async function listSamplePapers(user) {
@@ -41,7 +44,7 @@ async function getSamplePaperBySlug(slug, user) {
     return { id: paper.id, slug: paper.slug, titleZh: paper.titleZh, titleVi: paper.titleVi, locked: true };
   }
 
-  return { ...stripHiddenOutline(paper, user), locked: false };
+  return { ...forLearner(paper, user, await readSettings()), locked: false };
 }
 
 async function getSamplePaperForAdmin(id) {
@@ -55,7 +58,7 @@ async function getSamplePaperForAdmin(id) {
 }
 
 async function upsertSamplePaper(data, id) {
-  const { slug, titleZh, titleVi, prompt, requirements, outline, outlineOpen, answer, orderIndex, isPremium } = data;
+  const { slug, titleZh, titleVi, prompt, requirements, outline, outlineOpen, gradingCriteria, answer, orderIndex, isPremium } = data;
   const baseData = {
     slug,
     titleZh,
@@ -64,6 +67,7 @@ async function upsertSamplePaper(data, id) {
     requirements: requirements || null,
     outline: outline || null,
     outlineOpen: !!outlineOpen,
+    gradingCriteria: gradingCriteria || null,
     answer,
     orderIndex: orderIndex ?? 0,
     isPremium: !!isPremium,

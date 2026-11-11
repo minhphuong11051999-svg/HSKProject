@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
 import BackLink from '../components/BackLink';
 import LetterPaper, { HanziCount, countHanzi, htmlToText, parseLetter, toParagraphs } from '../components/LetterPaper';
-import { BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
+import { ANALYSIS_QUESTIONS, BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
 import ProLabel from '../components/ProLabel';
 import { CheckCircle, XCircle, Lightbulb, Star } from '@phosphor-icons/react';
 import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
@@ -195,6 +195,7 @@ export default function LessonPlayer() {
         )}
 
         {tab === 'theory' && <TheoryTab lesson={lesson} showFixedPhrases={!selected.includes('fixed_phrases')} />}
+        {tab === 'analysis' && <AnalysisTab lesson={lesson} canSave={canSave} />}
         {tab === 'samples' && <SamplesTab lesson={lesson} />}
         {tab === 'quiz' && (
           <>
@@ -248,15 +249,15 @@ function FeedbackBox({ isCorrect, title, children }) {
     isCorrect === undefined
       ? 'border-night-700 bg-night-800'
       : isCorrect
-      ? 'border-green-500/60 bg-green-500/10'
-      : 'border-red-500/60 bg-red-500/10';
+      ? 'border-ok/50 bg-ok/10'
+      : 'border-err/50 bg-err/10';
   return (
     <Reveal offset={8}>
     <div className={`mt-4 rounded-xl border p-4 text-sm ${tone}`} role="status">
       {title && (
         <p
           className={`font-semibold mb-1 ${
-            isCorrect === undefined ? 'text-slate-200' : isCorrect ? 'text-green-400' : 'text-red-400'
+            isCorrect === undefined ? 'text-slate-200' : isCorrect ? 'text-ok' : 'text-err'
           }`}
         >
           {title}
@@ -305,6 +306,102 @@ function GenericTab({ lesson, partKey }) {
           <Html html={s.bodyHtml} className="text-sm leading-7" />
         </article>
       ))}
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------- Phân tích đề */
+
+// Same 5 questions for every lesson; the lesson supplies an optional prompt plus
+// a hint + reference answer per question. Styled like GuidedWritingForm.
+function AnalysisTab({ lesson, canSave }) {
+  const task = lesson.analysisTask || {};
+  const items = ANALYSIS_QUESTIONS.map((_, i) => task.items?.[i] || {});
+  const hasAnswers = items.some((it) => it.answer?.trim());
+  const [values, setValues] = useState({});
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [savedSnapshot, setSavedSnapshot] = useState('');
+
+  function toggleAnswers() {
+    const next = !showAnswers;
+    setShowAnswers(next);
+    // Keep a copy of the learner's analysis (ungraded) the first time they reveal
+    // the answers with something written — and again only if it changed since.
+    const answers = ANALYSIS_QUESTIONS.map((_, i) => values[i] || '');
+    const snapshot = JSON.stringify(answers);
+    if (next && canSave && answers.some((a) => a.trim()) && snapshot !== savedSnapshot) {
+      setSavedSnapshot(snapshot);
+      submitExercise({
+        lessonId: lesson.id,
+        exerciseType: 'analysis',
+        exerciseId: lesson.id,
+        answerPayload: { answers },
+      }).catch(() => {});
+    }
+  }
+
+  return (
+    <div className="space-y-5">
+      {task.prompt?.trim() && (
+        <div className="rounded-2xl border border-night-700 bg-night-950 p-4 sm:p-5">
+          <p className="kicker mb-1">Đề bài</p>
+          <Html html={task.prompt} className="text-sm text-slate-200 leading-7" />
+        </div>
+      )}
+
+      <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+        {ANALYSIS_QUESTIONS.map((question, i) => {
+          const id = `analysis-${i}`;
+          const hintId = `${id}-hint`;
+          const { hint, answer } = items[i];
+          return (
+            <div key={question} className={CARD}>
+              <label htmlFor={id} className="text-sm text-slate-300 block mb-1">
+                <span className="font-semibold text-slate-200">Câu {i + 1}</span> · {question}
+              </label>
+              {hint?.trim() && (
+                <p
+                  id={hintId}
+                  className="mb-2 flex items-start gap-1.5 rounded-xl border border-[var(--c-hint-border)] bg-[var(--c-hint-bg)] px-3 py-2 text-sm font-medium text-[var(--c-hint-text)] whitespace-pre-line"
+                >
+                  <Lightbulb size={16} weight="fill" className="mt-0.5 flex-shrink-0" aria-hidden="true" />
+                  <span>{hint}</span>
+                </p>
+              )}
+              <textarea
+                id={id}
+                rows={3}
+                value={values[i] || ''}
+                onChange={(e) => setValues((prev) => ({ ...prev, [i]: e.target.value }))}
+                aria-describedby={hint?.trim() ? hintId : undefined}
+                className={INPUT}
+                placeholder="Viết câu trả lời của bạn..."
+              />
+              {showAnswers && (
+                <FeedbackBox isCorrect title="Đáp án tham khảo">
+                  <p className="text-slate-200 whitespace-pre-line">{answer?.trim() || 'Chưa có đáp án tham khảo.'}</p>
+                </FeedbackBox>
+              )}
+            </div>
+          );
+        })}
+
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          {hasAnswers && (
+            <PressButton type="button" onClick={toggleAnswers} className={BTN_PRIMARY}>
+              {showAnswers ? 'Ẩn đáp án tham khảo' : 'Xem đáp án tham khảo'}
+            </PressButton>
+          )}
+          <button
+            type="button"
+            onClick={() => setValues({})}
+            disabled={!Object.values(values).some(Boolean)}
+            className={BTN_SECONDARY}
+          >
+            Xoá trắng
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

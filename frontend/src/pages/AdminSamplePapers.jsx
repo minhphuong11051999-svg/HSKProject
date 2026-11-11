@@ -9,6 +9,7 @@ import {
 } from '../api/samplePapers';
 import { TextField, NumberField, CheckboxField, RichTextAreaField } from '../components/admin/fields';
 import PageHeader from '../components/PageHeader';
+import PaperSettingsPanel from '../components/admin/PaperSettingsPanel';
 import {
   PANEL,
   PANEL_TITLE,
@@ -29,7 +30,7 @@ const EMPTY_FORM = {
   prompt: '',
   requirements: '',
   outline: '',
-  outlineOpen: false,
+  gradingCriteria: '',
   answer: '',
   orderIndex: 0,
   isPremium: false,
@@ -79,7 +80,7 @@ export default function AdminSamplePapers() {
         prompt: form.prompt,
         requirements: form.requirements,
         outline: form.outline,
-        outlineOpen: !!form.outlineOpen,
+        gradingCriteria: form.gradingCriteria,
         answer: form.answer,
         orderIndex: form.orderIndex || 0,
         isPremium: !!form.isPremium,
@@ -119,6 +120,8 @@ export default function AdminSamplePapers() {
           </Link>
         }
       />
+
+      <PaperSettingsPanel />
       <div className="grid lg:grid-cols-[320px_1fr] gap-6 lg:gap-8 items-start">
         <section className={PANEL}>
           <h2 className={`${PANEL_TITLE} mb-4`}>Danh sách đề mẫu</h2>
@@ -180,15 +183,16 @@ export default function AdminSamplePapers() {
             <div className={PANEL}>
             <RichTextAreaField label="Đề bài" value={form.prompt} onChange={(v) => set('prompt', v)} rows={8} />
             <RichTextAreaField
-              label="Dàn ý gợi ý (để trống nếu không cần)"
+              label="Từ vựng và luận điểm (để trống nếu không cần)"
               value={form.outline}
               onChange={(v) => set('outline', v)}
               rows={6}
             />
-            <CheckboxField
-              label="Mở dàn ý cho tài khoản Free (PRO luôn thấy dàn ý)"
-              checked={form.outlineOpen}
-              onChange={(v) => set('outlineOpen', v)}
+            <RichTextAreaField
+              label="Tiêu chuẩn chấm (AI dùng để chấm bài, học viên không nhìn thấy)"
+              value={form.gradingCriteria}
+              onChange={(v) => set('gradingCriteria', v)}
+              rows={6}
             />
             <RichTextAreaField label="Đáp án" value={form.answer} onChange={(v) => set('answer', v)} rows={10} />
             </div>

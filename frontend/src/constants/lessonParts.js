@@ -6,6 +6,7 @@
 // thuyết" but stored under its own `kind`.
 export const ALL_LESSON_PARTS = [
   { key: 'theory', label: 'Duyệt lý thuyết' },
+  { key: 'analysis', label: 'Phân tích đề' },
   { key: 'samples', label: 'Bài mẫu' },
   { key: 'quiz', label: 'Nhận diện thể thức' },
   { key: 'matching', label: 'Ghép nối' },
@@ -23,6 +24,7 @@ export const ALL_LESSON_PARTS = [
 
 export const BUILTIN_PART_KEYS = [
   'theory',
+  'analysis',
   'samples',
   'quiz',
   'matching',
@@ -38,6 +40,16 @@ export const BUILTIN_PART_KEYS = [
 ];
 
 export const DEFAULT_SELECTED_PARTS = ['theory', 'samples', 'quiz', 'cloze', 'error', 'vocab', 'writing'];
+
+// "Phân tích đề": the same 5 questions for every lesson. Per lesson the admin
+// only fills a hint + reference answer for each (lesson.analysisTask.items[i]).
+export const ANALYSIS_QUESTIONS = [
+  'Theo đề bài, tôi là ai?',
+  'Vấn đề là gì?',
+  'Tôi phải viết cho ai?',
+  'Thể loại văn bản nào?',
+  'Viết nhằm mục đích gì?',
+];
 
 export function partLabel(key) {
   return ALL_LESSON_PARTS.find((p) => p.key === key)?.label || key;

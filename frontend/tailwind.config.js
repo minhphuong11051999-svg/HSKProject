@@ -40,6 +40,9 @@ export default {
           700: '#122557',
         },
         kicker: 'var(--c-kicker)',
+        // Theme-aware right/wrong feedback colours (see --c-ok / --c-err).
+        ok: 'rgb(var(--c-ok) / <alpha-value>)',
+        err: 'rgb(var(--c-err) / <alpha-value>)',
       },
       fontFamily: {
         zh: ['"Noto Serif SC"', '"Be Vietnam Pro"', 'serif'],

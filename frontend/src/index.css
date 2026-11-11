@@ -34,6 +34,9 @@
   --c-crit-border: rgba(217, 181, 108, 0.55);
   --c-crit-text: #f3e3bd;
   --c-crit-label: #d9b56c;
+  /* Right / wrong feedback (AI grading): green-400 / red-400 on dark */
+  --c-ok: 74 222 128;
+  --c-err: 248 113 113;
 }
 
 :root:not(.dark) {
@@ -65,6 +68,9 @@
   --c-crit-border: #d9b56c;
   --c-crit-text: #3d2c0b;
   --c-crit-label: #8a6420;
+  /* green-700 / red-700 so small text keeps AA on white */
+  --c-ok: 21 128 61;
+  --c-err: 185 28 28;
 }
 
 a:focus-visible,

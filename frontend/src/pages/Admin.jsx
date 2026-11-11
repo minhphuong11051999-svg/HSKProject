@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listLessons, getLessonForAdmin, createLesson, updateLesson, deleteLesson } from '../api/lessons';
-import { TextField, TextAreaField, NumberField, SelectField, CheckboxField } from '../components/admin/fields';
+import { TextField, TextAreaField, RichTextAreaField, NumberField, SelectField, CheckboxField } from '../components/admin/fields';
 import SimpleListEditor from '../components/admin/SimpleListEditor';
 import QuizQuestionsEditor from '../components/admin/QuizQuestionsEditor';
 import ClozeExercisesEditor from '../components/admin/ClozeExercisesEditor';
@@ -20,7 +20,13 @@ import {
   SUCCESS_TEXT,
   CHECKBOX,
 } from '../components/admin/ui';
-import { ALL_LESSON_PARTS, BUILTIN_PART_KEYS, DEFAULT_SELECTED_PARTS, partLabel } from '../constants/lessonParts';
+import {
+  ALL_LESSON_PARTS,
+  ANALYSIS_QUESTIONS,
+  BUILTIN_PART_KEYS,
+  DEFAULT_SELECTED_PARTS,
+  partLabel,
+} from '../constants/lessonParts';
 
 const DEFAULT_PREMIUM_PARTS = ['cloze', 'error', 'vocab', 'writing'];
 
@@ -109,6 +115,7 @@ const EMPTY_FORM = {
   guidedWritingScenarios: [],
   exercises: [],
   flashcards: [],
+  analysisTask: null,
 };
 
 export default function Admin() {
@@ -235,6 +242,61 @@ export default function Admin() {
     );
   }
 
+  function analysisItem(i) {
+    return form.analysisTask?.items?.[i] || { hint: '', answer: '' };
+  }
+
+  function setAnalysis(patch) {
+    setForm((prev) => {
+      const task = prev.analysisTask || {};
+      const items = ANALYSIS_QUESTIONS.map((_, i) => ({ hint: '', answer: '', ...(task.items?.[i] || {}) }));
+      return { ...prev, analysisTask: { prompt: task.prompt || '', items, ...patch(items) } };
+    });
+  }
+
+  function setAnalysisItem(i, key, value) {
+    setAnalysis((items) => ({ items: items.map((it, j) => (j === i ? { ...it, [key]: value } : it)) }));
+  }
+
+  function analysisEditor() {
+    return (
+      <div className="rounded-2xl border border-night-700 bg-night-900 p-4 sm:p-5">
+        <h3 className="font-extrabold tracking-tight text-slate-100 mb-2">5 câu hỏi phân tích đề</h3>
+        <p className={`${HINT} mb-4`}>
+          5 câu hỏi cố định, giống nhau ở mọi bài. Với mỗi câu, nhập gợi ý (chỉ hiện khi có nội dung) và đáp án
+          tham khảo (hiện khi học viên bấm "Xem đáp án tham khảo" ở cuối phần).
+        </p>
+        <RichTextAreaField
+          label="Đề bài minh họa (có thể để trống)"
+          value={form.analysisTask?.prompt}
+          onChange={(v) => setAnalysis(() => ({ prompt: v }))}
+          rows={4}
+        />
+        <div className="space-y-3">
+          {ANALYSIS_QUESTIONS.map((question, i) => (
+            <div key={question} className="bg-night-800 border border-night-700 rounded-xl p-4">
+              <p className="text-sm font-bold text-coral-400 mb-3">
+                Câu {i + 1} · <span className="text-slate-100">{question}</span>
+              </p>
+              <TextAreaField
+                label="Gợi ý (có thể để trống)"
+                value={analysisItem(i).hint}
+                onChange={(v) => setAnalysisItem(i, 'hint', v)}
+                rows={2}
+              />
+              <TextAreaField
+                label="Đáp án tham khảo"
+                value={analysisItem(i).answer}
+                onChange={(v) => setAnalysisItem(i, 'answer', v)}
+                rows={3}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   function fixedPhrasesEditor() {
     return (
       <SimpleListEditor
@@ -296,6 +358,8 @@ export default function Admin() {
             {!form.selectedParts.includes('fixed_phrases') && fixedPhrasesEditor()}
           </>
         );
+      case 'analysis':
+        return analysisEditor();
       case 'samples':
         return (
           <>
@@ -450,6 +514,7 @@ export default function Admin() {
         guidedWritingScenarios: form.guidedWritingScenarios,
         exercises: withOrder(form.exercises),
         flashcards: withOrder(form.flashcards),
+        analysisTask: form.analysisTask || null,
       };
 
       if (form.id) {

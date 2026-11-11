@@ -1,3 +1,4 @@
+const { Prisma } = require('@prisma/client');
 const prisma = require('../lib/prisma');
 
 const FULL_INCLUDE = {
@@ -90,6 +91,22 @@ async function getLessonForAdmin(lessonId) {
   return lesson;
 }
 
+// "Phân tích đề": 5 fixed questions (titles live in the frontend); per lesson we
+// keep an optional illustrative prompt plus a hint + reference answer per question.
+const ANALYSIS_ITEM_COUNT = 5;
+
+function normalizeAnalysisTask(task) {
+  if (!task || typeof task !== 'object') return null;
+  const str = (v) => (typeof v === 'string' ? v : '');
+  const items = Array.from({ length: ANALYSIS_ITEM_COUNT }, (_, i) => {
+    const item = Array.isArray(task.items) ? task.items[i] : null;
+    return { hint: str(item?.hint), answer: str(item?.answer) };
+  });
+  const prompt = str(task.prompt);
+  if (!prompt.trim() && items.every((it) => !it.hint.trim() && !it.answer.trim())) return null;
+  return { prompt, items };
+}
+
 async function upsertLesson(data, lessonId) {
   const { slug, titleZh, titleVi, description, themeKey, type, examMonth, examYear, orderIndex, isPremium, premiumParts, selectedParts } = data;
 
@@ -110,6 +127,10 @@ async function upsertLesson(data, lessonId) {
         ? selectedParts
         : ['theory', 'samples', 'quiz', 'cloze', 'error', 'vocab', 'writing'],
   };
+  // Only touch the column when the client sends it, so older clients don't wipe it.
+  if (data.analysisTask !== undefined) {
+    baseData.analysisTask = normalizeAnalysisTask(data.analysisTask) ?? Prisma.DbNull;
+  }
 
   const nestedCreate = buildNestedCreate(data);
 
