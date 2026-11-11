@@ -52,6 +52,7 @@ model Lesson {
   orderIndex  Int        @default(0)
   isPremium   Boolean    @default(false)
   premiumParts String[]  @default(["cloze", "error", "vocab", "writing"])
+  hiddenParts  String[]  @default([])
   selectedParts String[] @default(["theory", "samples", "quiz", "cloze", "error", "vocab", "writing"])
   // "Phân tích đề" part: { prompt?: string, items: [{ hint, answer }] x5 } — the 5 questions are fixed in the frontend.
   analysisTask Json?

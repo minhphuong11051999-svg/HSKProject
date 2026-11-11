@@ -127,6 +127,10 @@ async function upsertLesson(data, lessonId) {
         ? selectedParts
         : ['theory', 'samples', 'quiz', 'cloze', 'error', 'vocab', 'writing'],
   };
+  // Steps the admin has ticked but not launched yet (content kept, hidden from learners).
+  if (Array.isArray(data.hiddenParts)) {
+    baseData.hiddenParts = data.hiddenParts.filter((k) => typeof k === 'string');
+  }
   // Only touch the column when the client sends it, so older clients don't wipe it.
   if (data.analysisTask !== undefined) {
     baseData.analysisTask = normalizeAnalysisTask(data.analysisTask) ?? Prisma.DbNull;

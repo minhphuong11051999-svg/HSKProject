@@ -1,0 +1,1 @@
+ALTER TABLE "Lesson" ADD COLUMN "hiddenParts" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[];

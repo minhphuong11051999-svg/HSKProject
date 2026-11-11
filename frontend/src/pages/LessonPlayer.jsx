@@ -45,13 +45,19 @@ export default function LessonPlayer() {
       .finally(() => setLoading(false));
   }, [slug]);
 
-  // Learners only see steps that actually have content; admins see every
-  // ticked step, with the empty ones flagged so they know what to fill in.
+  // Learners only see steps that have content and aren't hidden by the admin;
+  // admins see every ticked step, flagged "trống" / "đang ẩn".
   const parts = useMemo(() => {
     const keys = lesson?.selectedParts?.length ? lesson.selectedParts : [];
+    const hidden = lesson?.hiddenParts || [];
     return keys
-      .map((key) => ({ key, label: partLabel(key), empty: !partHasContent(lesson, key) }))
-      .filter((p) => isAdmin || !p.empty)
+      .map((key) => ({
+        key,
+        label: partLabel(key),
+        empty: !partHasContent(lesson, key),
+        hidden: hidden.includes(key),
+      }))
+      .filter((p) => isAdmin || (!p.empty && !p.hidden))
       .map((p, i) => ({ ...p, number: i + 1 }));
   }, [lesson, isAdmin]);
 
@@ -149,7 +155,7 @@ export default function LessonPlayer() {
                 <option key={t.key} value={t.key} className="bg-night-900 text-slate-100">
                   Bước {t.number}/{parts.length} · {t.label}
                   {isPartPremium(t.key) && !isPremiumUser ? ' (PRO)' : ''}
-                  {t.empty ? ' (trống)' : ''}
+                  {t.hidden ? ' (đang ẩn)' : t.empty ? ' (trống)' : ''}
                 </option>
               ))}
             </select>
@@ -201,7 +207,15 @@ export default function LessonPlayer() {
                         <ProLabel />
                       </span>
                     )}
-                    {t.empty && (
+                    {t.hidden && (
+                      <span
+                        className="flex-shrink-0 bg-night-800 border border-night-700 text-slate-400 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap"
+                        title="Bạn đã ẩn bước này trong Quản trị bài học — học viên sẽ không thấy"
+                      >
+                        đang ẩn
+                      </span>
+                    )}
+                    {t.empty && !t.hidden && (
                       <span
                         className="flex-shrink-0 bg-night-800 border border-night-700 text-slate-400 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap"
                         title="Bước này chưa có nội dung — học viên sẽ không thấy"

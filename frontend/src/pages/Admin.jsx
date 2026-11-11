@@ -102,6 +102,7 @@ const EMPTY_FORM = {
   orderIndex: 0,
   isPremium: false,
   premiumParts: DEFAULT_PREMIUM_PARTS,
+  hiddenParts: [],
   selectedParts: DEFAULT_SELECTED_PARTS,
   sections: [],
   sampleDocuments: [],
@@ -162,6 +163,7 @@ export default function Admin() {
         : prev.selectedParts.filter((k) => k !== key),
       // Dropping a part also drops its premium lock, so it can't stay locked while hidden.
       premiumParts: checked ? prev.premiumParts : prev.premiumParts.filter((k) => k !== key),
+      hiddenParts: checked ? prev.hiddenParts : (prev.hiddenParts || []).filter((k) => k !== key),
     }));
   }
 
@@ -502,6 +504,7 @@ export default function Admin() {
         orderIndex: form.orderIndex || 0,
         isPremium: !!form.isPremium,
         premiumParts: form.premiumParts || [],
+        hiddenParts: (form.hiddenParts || []).filter((k) => form.selectedParts.includes(k)),
         selectedParts: form.selectedParts?.length ? form.selectedParts : DEFAULT_SELECTED_PARTS,
         sections: withOrder(form.sections),
         sampleDocuments: withOrder(form.sampleDocuments),
@@ -665,6 +668,31 @@ export default function Admin() {
                   })}
                 </div>
               </div>
+
+              <div className="border-t border-night-700 pt-4">
+                <p className={`${HINT} mb-2`}>
+                  Ẩn bước với học viên: tick để tạm ẩn (nội dung vẫn được giữ). Bỏ tick khi muốn ra mắt bước đó.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-3">
+                  {form.selectedParts.map((key, idx) => {
+                    const hidden = form.hiddenParts || [];
+                    const checked = hidden.includes(key);
+                    return (
+                      <label key={key} className="flex items-center gap-2.5 min-h-[44px] text-sm text-slate-300 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className={CHECKBOX}
+                          checked={checked}
+                          onChange={(e) =>
+                            set('hiddenParts', e.target.checked ? [...hidden, key] : hidden.filter((k) => k !== key))
+                          }
+                        />
+                        {idx + 1}. {partLabel(key)}
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             {form.selectedParts.length === 0 && (
@@ -678,6 +706,11 @@ export default function Admin() {
                   {form.premiumParts.includes(key) && (
                     <span className="ml-2 align-middle bg-gold text-ink-900 text-[11px] font-bold px-2 py-0.5 rounded-full">
                       PRO
+                    </span>
+                  )}
+                  {form.hiddenParts?.includes(key) && (
+                    <span className="ml-2 align-middle bg-night-800 border border-night-700 text-slate-400 text-[11px] font-bold px-2 py-0.5 rounded-full">
+                      ĐANG ẨN
                     </span>
                   )}
                 </h3>
