@@ -36,4 +36,13 @@ async function remove(req, res, next) {
   }
 }
 
-module.exports = { list, create, updatePlan, remove };
+async function resetPassword(req, res, next) {
+  try {
+    await userService.resetPassword(req.params.id, req.body?.password);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { list, create, updatePlan, remove, resetPassword };

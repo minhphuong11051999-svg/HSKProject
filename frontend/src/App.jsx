@@ -18,6 +18,9 @@ const ExamSittings = lazy(() => import('./pages/ExamSittings'));
 const ExamSittingViewer = lazy(() => import('./pages/ExamSittingViewer'));
 const AdminExamSittings = lazy(() => import('./pages/AdminExamSittings'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Pro = lazy(() => import('./pages/Pro'));
+const Profile = lazy(() => import('./pages/Profile'));
+const AdminPricing = lazy(() => import('./pages/AdminPricing'));
 
 function PageFallback() {
   return <div className="p-10 text-center text-slate-500">Đang tải...</div>;
@@ -31,6 +34,23 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/pro" element={<Pro />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/pricing"
+            element={
+              <ProtectedRoute role="ADMIN">
+                <AdminPricing />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/lessons"
             element={

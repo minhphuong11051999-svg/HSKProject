@@ -11,6 +11,7 @@ router.use(authenticate, authorize('ADMIN'));
 router.get('/', userController.list);
 router.post('/', validate(createUserSchema), userController.create);
 router.patch('/:id/plan', userController.updatePlan);
+router.patch('/:id/password', userController.resetPassword);
 router.delete('/:id', userController.remove);
 
 module.exports = router;

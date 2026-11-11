@@ -15,6 +15,15 @@ const DEFAULTS = {
       { name: 'Ngữ pháp và từ vựng', max: 30 },
     ],
   },
+  // "Gói PRO" page: plans, bank transfer details and contact, all typed in by the admin.
+  pricing: {
+    plans: [],
+    bank: { bankName: '', accountNumber: '', accountName: '', transferNote: 'PRO [email của bạn]', qrImageUrl: '' },
+    contact: '',
+    note: '',
+  },
+  // Where learners are told to go when they forget their password (no email flow yet).
+  supportContact: '',
 };
 
 async function readSettings() {

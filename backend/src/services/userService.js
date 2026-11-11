@@ -58,4 +58,15 @@ async function deleteUser(userId, requestingUserId) {
   await prisma.user.delete({ where: { id: userId } });
 }
 
-module.exports = { listUsers, createUser, updatePlan, deleteUser };
+// "Quên mật khẩu" has no email flow: the learner contacts the admin, who sets a new one here.
+async function resetPassword(userId, password) {
+  if (!password || String(password).length < 8) {
+    const error = new Error('Mật khẩu mới cần tối thiểu 8 ký tự.');
+    error.status = 400;
+    throw error;
+  }
+  const passwordHash = await bcrypt.hash(String(password), 10);
+  await prisma.user.update({ where: { id: userId }, data: { passwordHash } });
+}
+
+module.exports = { listUsers, createUser, updatePlan, deleteUser, resetPassword };

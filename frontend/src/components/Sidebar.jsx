@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
 import BrandLogo from './BrandLogo';
 import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
-import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree } from '@phosphor-icons/react';
+import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree, Crown, UserCircle, CreditCard } from '@phosphor-icons/react';
 
 const NAV_ITEMS = [
   { to: '/', icon: House, label: 'Trang chủ' },
@@ -11,6 +11,8 @@ const NAV_ITEMS = [
   { to: '/practice', icon: NotePencil, label: 'Đề mẫu' },
   { to: '/lessons/exam', icon: Target, label: 'Đề thi thật' },
   { to: '/history', icon: ClockCounterClockwise, label: 'Lịch sử' },
+  { to: '/profile', icon: UserCircle, label: 'Hồ sơ' },
+  { to: '/pro', icon: Crown, label: 'Gói PRO' },
 ];
 
 const ADMIN_ITEMS = [
@@ -18,6 +20,7 @@ const ADMIN_ITEMS = [
   { to: '/admin/sample-papers', icon: NotePencil, label: 'Quản trị đề mẫu' },
   { to: '/admin/exam-sittings', icon: Target, label: 'Quản trị đề thi thật' },
   { to: '/admin/users', icon: UsersThree, label: 'Người dùng' },
+  { to: '/admin/pricing', icon: CreditCard, label: 'Gói PRO & thanh toán' },
 ];
 
 // Desktop (lg+): sticky full-height column. Below lg: off-canvas drawer that
@@ -76,7 +79,9 @@ export default function Sidebar({ open = false, onClose }) {
 
       <div className="p-4 border-t border-night-700">
         <div className="flex items-center justify-between mb-3">
-          <p className="text-xs text-slate-500 truncate">Xin chào, {user?.name}</p>
+          <Link to="/profile" className="min-w-0 text-xs text-slate-500 truncate hover:text-coral-400 transition-colors">
+            Xin chào, {user?.name}
+          </Link>
           <ThemeToggle className="flex-shrink-0" />
         </div>
         <button

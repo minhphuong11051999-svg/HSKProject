@@ -47,8 +47,13 @@ export function AuthProvider({ children }) {
     setUser(null);
   }
 
+  // Merge fresh fields (e.g. a renamed profile) into the signed-in user.
+  function updateUser(patch) {
+    setUser((prev) => (prev ? { ...prev, ...patch } : prev));
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

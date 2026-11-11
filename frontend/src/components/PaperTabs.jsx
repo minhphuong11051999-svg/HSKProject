@@ -352,7 +352,13 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
         </Tabs.Content>
       </Tabs.Root>
 
-      {!isPro && <PremiumModal open={premiumOpen} onClose={() => setPremiumOpen(false)} />}
+      {!isPro && (
+        <PremiumModal
+          open={premiumOpen}
+          onClose={() => setPremiumOpen(false)}
+          description="AI chấm bài dành cho tài khoản PRO: chấm điểm theo tiêu chí của đề, chỉ ra lỗi ngữ pháp và gợi ý mẫu câu."
+        />
+      )}
     </>
   );
 }

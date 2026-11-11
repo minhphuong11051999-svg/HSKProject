@@ -76,4 +76,29 @@ function toPublicUser(user) {
   };
 }
 
-module.exports = { register, login, refresh, toPublicUser };
+function badRequest(message, status = 400) {
+  const error = new Error(message);
+  error.status = status;
+  return error;
+}
+
+// Learner's own profile: only the display name is editable here.
+async function updateProfile(userId, { name }) {
+  const clean = String(name ?? '').trim();
+  if (!clean) throw badRequest('Vui lòng nhập họ tên.');
+  if (clean.length > 80) throw badRequest('Họ tên tối đa 80 ký tự.');
+  const user = await prisma.user.update({ where: { id: userId }, data: { name: clean } });
+  return toPublicUser(user);
+}
+
+async function changePassword(userId, { currentPassword, newPassword }) {
+  if (!newPassword || String(newPassword).length < 8) throw badRequest('Mật khẩu mới cần tối thiểu 8 ký tự.');
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw badRequest('User not found', 404);
+  const valid = await bcrypt.compare(String(currentPassword ?? ''), user.passwordHash);
+  if (!valid) throw badRequest('Mật khẩu hiện tại không đúng.');
+  const passwordHash = await bcrypt.hash(String(newPassword), 10);
+  await prisma.user.update({ where: { id: userId }, data: { passwordHash } });
+}
+
+module.exports = { register, login, refresh, toPublicUser, updateProfile, changePassword };

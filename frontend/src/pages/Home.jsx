@@ -36,7 +36,7 @@ const METHODS = [
     zh: '燃',
     vi: 'Tạo động lực, nhắc bạn quay lại',
     icon: Flame,
-    text: 'Giao diện bắt mắt, các cuộc đua và bảng xếp hạng, cùng lời nhắc học đều đặn để bạn giữ nhịp luyện viết.',
+    text: 'Chuỗi ngày học, level và XP, cùng lịch 90 ngày giúp bạn thấy mình tiến bộ và giữ nhịp luyện viết mỗi ngày.',
     nudge: 'Hôm nay bạn đã luyện chưa?',
   },
   {
@@ -176,6 +176,7 @@ function MethodSection() {
             <li>Đảm bảo <span className="zh text-[var(--l-ink)]">学</span></li>
             <li>Củng cố <span className="zh text-[var(--l-ink)]">燃</span></li>
             <li>Hướng đến <span className="zh text-[var(--l-ink)]">记</span></li>
+            <li>Dùng được <span className="zh text-[var(--l-ink)]">用</span></li>
           </ul>
         </div>
         <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">

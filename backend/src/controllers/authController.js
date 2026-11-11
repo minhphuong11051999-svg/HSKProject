@@ -38,4 +38,21 @@ async function me(req, res, next) {
   }
 }
 
-module.exports = { register, login, refresh, me };
+async function updateMe(req, res, next) {
+  try {
+    res.json(await authService.updateProfile(req.user.id, req.body || {}));
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function changePassword(req, res, next) {
+  try {
+    await authService.changePassword(req.user.id, req.body || {});
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { register, login, refresh, me, updateMe, changePassword };

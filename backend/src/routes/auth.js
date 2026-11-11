@@ -10,5 +10,7 @@ router.post('/register', validate(registerSchema), authController.register);
 router.post('/login', validate(loginSchema), authController.login);
 router.post('/refresh-token', validate(refreshSchema), authController.refresh);
 router.get('/me', authenticate, authController.me);
+router.patch('/me', authenticate, authController.updateMe);
+router.post('/change-password', authenticate, authController.changePassword);
 
 module.exports = router;

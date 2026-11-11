@@ -1,9 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import { Dialog } from '@animate-ui/react/primitives/radix-ui/dialog';
 import { Crown, Lock, X } from '@phosphor-icons/react';
 
+const DEFAULT_TITLE = 'Tính năng PRO';
+const DEFAULT_DESCRIPTION =
+  'Nội dung này dành cho tài khoản PRO. Nâng cấp để mở khoá AI chấm bài, các bài học và đề thi thật gắn nhãn PRO.';
+
 // Animate UI's animated Radix Dialog: zoom/fade in & out, focus trapped inside,
 // Escape and backdrop click close it, focus returns to the trigger afterwards.
-export default function PremiumModal({ open, onClose }) {
+// `title` / `description` let callers say which feature is locked.
+export default function PremiumModal({ open, onClose, title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION }) {
+  const navigate = useNavigate();
+
   return (
     <Dialog.Root open={!!open} onOpenChange={(next) => !next && onClose?.()}>
       <Dialog.Portal>
@@ -19,22 +27,19 @@ export default function PremiumModal({ open, onClose }) {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gold to-amber-600 shadow-lg shadow-gold/20">
             <Lock size={30} weight="fill" className="text-white" aria-hidden="true" />
           </div>
-          <Dialog.Title className="text-xl font-extrabold tracking-tight text-slate-100">Tính năng Premium</Dialog.Title>
-          <Dialog.Description className="mt-2 text-sm leading-relaxed text-slate-400">
-            Bài học này dành cho tài khoản PRO. Nâng cấp tài khoản của bạn để truy cập toàn bộ bài luyện viết (1-7) và
-            đề thi thật.
-          </Dialog.Description>
+          <Dialog.Title className="text-xl font-extrabold tracking-tight text-slate-100">{title}</Dialog.Title>
+          <Dialog.Description className="mt-2 text-sm leading-relaxed text-slate-400">{description}</Dialog.Description>
           <button
             type="button"
             onClick={() => {
-              alert('Tính năng nâng cấp PRO sẽ sớm được cập nhật, cảm ơn bạn đã quan tâm!');
               onClose?.();
+              navigate('/pro');
             }}
             className="mt-6 w-full min-h-[44px] rounded-xl bg-coral-500 py-2.5 shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] text-sm font-bold text-white hover:bg-coral-600 transition-colors"
           >
             <span className="inline-flex items-center justify-center gap-1.5">
               <Crown size={16} weight="fill" className="text-amber-200" aria-hidden="true" />
-              Mở khoá PRO
+              Xem gói PRO
             </span>
           </button>
         </Dialog.Content>

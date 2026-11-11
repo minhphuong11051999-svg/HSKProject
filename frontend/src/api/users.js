@@ -7,4 +7,7 @@ export const createUser = (payload) => axiosClient.post('/admin/users', payload)
 export const updateUserPlan = (id, plan) =>
   axiosClient.patch(`/admin/users/${id}/plan`, { plan }).then((r) => r.data);
 
+export const resetUserPassword = (id, password) =>
+  axiosClient.patch(`/admin/users/${id}/password`, { password }).then((r) => r.data);
+
 export const deleteUser = (id) => axiosClient.delete(`/admin/users/${id}`).then((r) => r.data);
