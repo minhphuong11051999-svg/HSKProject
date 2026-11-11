@@ -17,6 +17,7 @@ const AdminSamplePapers = lazy(() => import('./pages/AdminSamplePapers'));
 const ExamSittings = lazy(() => import('./pages/ExamSittings'));
 const ExamSittingViewer = lazy(() => import('./pages/ExamSittingViewer'));
 const AdminExamSittings = lazy(() => import('./pages/AdminExamSittings'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function PageFallback() {
   return <div className="p-10 text-center text-slate-500">Đang tải...</div>;
@@ -126,6 +127,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Suspense>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { getLesson, submitExercise } from '../api/lessons';
 import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
@@ -7,7 +7,7 @@ import BackLink from '../components/BackLink';
 import LetterPaper, { HanziCount, countHanzi, htmlToText, parseLetter, toParagraphs } from '../components/LetterPaper';
 import { ANALYSIS_QUESTIONS, BUILTIN_PART_KEYS, partLabel } from '../constants/lessonParts';
 import ProLabel from '../components/ProLabel';
-import { CheckCircle, XCircle, Lightbulb, Star } from '@phosphor-icons/react';
+import { CheckCircle, XCircle, Lightbulb, Star, ArrowLeft, ArrowRight, PaperPlaneTilt } from '@phosphor-icons/react';
 import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
 import PressButton from '../components/motion/PressButton';
 import Reveal from '../components/motion/Reveal';
@@ -26,39 +26,64 @@ export default function LessonPlayer() {
   const { slug } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [lesson, setLesson] = useState(null);
-  const [tab, setTab] = useState('theory');
   const [loading, setLoading] = useState(true);
   const [showTabPremium, setShowTabPremium] = useState(false);
+  const sectionRef = useRef(null);
   const isPremiumUser = user?.plan === 'PREMIUM';
+  const isAdmin = user?.role === 'ADMIN';
 
   function isPartPremium(key) {
     return !!lesson?.premiumParts?.includes(key);
   }
 
-  function goToTab(t) {
-    if (isPartPremium(t.key) && !isPremiumUser) {
-      setShowTabPremium(true);
-      return;
-    }
-    setTab(t.key);
-  }
-
   useEffect(() => {
     setLoading(true);
     getLesson(slug)
-      .then((data) => {
-        setLesson(data);
-        const parts = data?.selectedParts?.length ? data.selectedParts : ['theory'];
-        setTab(parts[0]);
-      })
+      .then((data) => setLesson(data))
       .finally(() => setLoading(false));
   }, [slug]);
 
+  // Learners only see steps that actually have content; admins see every
+  // ticked step, with the empty ones flagged so they know what to fill in.
   const parts = useMemo(() => {
     const keys = lesson?.selectedParts?.length ? lesson.selectedParts : [];
-    return keys.map((key, i) => ({ key, number: i + 1, label: partLabel(key) }));
-  }, [lesson]);
+    return keys
+      .map((key) => ({ key, label: partLabel(key), empty: !partHasContent(lesson, key) }))
+      .filter((p) => isAdmin || !p.empty)
+      .map((p, i) => ({ ...p, number: i + 1 }));
+  }, [lesson, isAdmin]);
+
+  // The open step lives in the URL (?buoc=<part key>) so a reload keeps it.
+  const requested = searchParams.get('buoc');
+  const requestedPart = parts.find((p) => p.key === requested);
+  const tab =
+    requestedPart && (!lesson?.premiumParts?.includes(requestedPart.key) || isPremiumUser)
+      ? requestedPart.key
+      : parts[0]?.key || 'theory';
+
+  function goToTab(t) {
+    if (isPartPremium(t.key) && !isPremiumUser) {
+      setShowTabPremium(true);
+      return false;
+    }
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set('buoc', t.key);
+        return next;
+      },
+      { replace: true }
+    );
+    return true;
+  }
+
+  function goToTabAndScroll(t) {
+    if (!goToTab(t)) return;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    sectionRef.current?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
 
   const theoryQuestions = useMemo(
     () => lesson?.quizQuestions?.filter((q) => q.kind === 'THEORY') || [],
@@ -83,6 +108,8 @@ export default function LessonPlayer() {
 
   const selected = lesson.selectedParts || [];
   const current = parts.find((p) => p.key === tab);
+  const prevPart = current ? parts[current.number - 2] : null;
+  const nextPart = current ? parts[current.number] : null;
   const canSave = !!user;
 
   return (
@@ -122,6 +149,7 @@ export default function LessonPlayer() {
                 <option key={t.key} value={t.key} className="bg-night-900 text-slate-100">
                   Bước {t.number}/{parts.length} · {t.label}
                   {isPartPremium(t.key) && !isPremiumUser ? ' (PRO)' : ''}
+                  {t.empty ? ' (trống)' : ''}
                 </option>
               ))}
             </select>
@@ -173,6 +201,14 @@ export default function LessonPlayer() {
                         <ProLabel />
                       </span>
                     )}
+                    {t.empty && (
+                      <span
+                        className="flex-shrink-0 bg-night-800 border border-night-700 text-slate-400 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none whitespace-nowrap"
+                        title="Bước này chưa có nội dung — học viên sẽ không thấy"
+                      >
+                        trống
+                      </span>
+                    )}
                   </button>
                 </HighlightItem>
               ))}
@@ -183,7 +219,7 @@ export default function LessonPlayer() {
 
       <PremiumModal open={showTabPremium} onClose={() => setShowTabPremium(false)} />
 
-      <section className="flex-1 min-w-0 surface p-5 sm:p-8">
+      <section ref={sectionRef} className="flex-1 min-w-0 surface p-5 sm:p-8 scroll-mt-4">
         <Reveal key={tab} offset={10}>
         {current && (
           <header className="mb-6 sm:mb-8 pb-5 border-b border-night-700">
@@ -218,10 +254,31 @@ export default function LessonPlayer() {
             showSentenceTasks={!selected.includes('sentence_building')}
           />
         )}
-        {tab === 'partial_writing' && <PartialWritingTab lesson={lesson} />}
-        {tab === 'writing' && <WritingTab lesson={lesson} />}
+        {tab === 'partial_writing' && <PartialWritingTab lesson={lesson} canSave={canSave} />}
+        {tab === 'writing' && <WritingTab lesson={lesson} canSave={canSave} />}
         {!BUILTIN_PART_KEYS.includes(tab) && <GenericTab lesson={lesson} partKey={tab} />}
         </Reveal>
+
+        {current && (prevPart || nextPart) && (
+          <nav
+            className="mt-8 pt-5 border-t border-night-700 flex flex-col-reverse sm:flex-row sm:items-center gap-2"
+            aria-label="Chuyển bước"
+          >
+            {prevPart && (
+              <button type="button" onClick={() => goToTabAndScroll(prevPart)} className={`${BTN_SECONDARY} text-left`}>
+                <ArrowLeft size={16} weight="bold" aria-hidden="true" className="flex-shrink-0" />
+                <span className="min-w-0 break-words">Bước trước: {prevPart.label}</span>
+              </button>
+            )}
+            {nextPart && (
+              <PressButton type="button" onClick={() => goToTabAndScroll(nextPart)} className={`${BTN_PRIMARY} sm:ml-auto text-left`}>
+                <span className="min-w-0 break-words">Bước tiếp: {nextPart.label}</span>
+                {isPartPremium(nextPart.key) && !isPremiumUser && <ProLabel />}
+                <ArrowRight size={16} weight="bold" aria-hidden="true" className="flex-shrink-0" />
+              </PressButton>
+            )}
+          </nav>
+        )}
       </section>
     </main>
   );
@@ -231,13 +288,59 @@ function exercisesOf(lesson, kind) {
   return (lesson.exercises || []).filter((e) => e.kind === kind);
 }
 
+// Mirrors what each tab renders, so a ticked-but-empty step can be hidden
+// from learners instead of showing "Chưa có nội dung".
+function partHasContent(lesson, key) {
+  if (!lesson) return false;
+  const has = (a) => Array.isArray(a) && a.length > 0;
+  const sections = lesson.sections || [];
+  const quiz = lesson.quizQuestions || [];
+  const fields = lesson.guidedWritingFields || [];
+  switch (key) {
+    case 'theory':
+      return (
+        !!lesson.description?.trim() ||
+        sections.some((s) => !s.kind || s.kind === 'text' || s.kind === 'theory') ||
+        has(lesson.fixedPhrases)
+      );
+    case 'analysis':
+      return true;
+    case 'samples':
+      return has(lesson.sampleDocuments);
+    case 'quiz':
+      return quiz.some((q) => q.kind === 'THEORY') || has(lesson.flashcards);
+    case 'matching':
+      return has(lesson.matchItems);
+    case 'cloze':
+      return has(lesson.clozeExercises);
+    case 'error':
+      return quiz.some((q) => q.kind === 'ERROR_ANALYSIS');
+    case 'sentence_building':
+      return has(lesson.writingTasks);
+    case 'translate_transform':
+      return exercisesOf(lesson, 'translate').length > 0;
+    case 'outline':
+      return exercisesOf(lesson, 'outline').length > 0;
+    case 'fixed_phrases':
+      return has(lesson.fixedPhrases);
+    case 'vocab':
+      return has(lesson.vocabTerms) || has(lesson.matchItems) || has(lesson.writingTasks);
+    case 'partial_writing':
+      return fields.some((f) => f.group === 'partial_writing');
+    case 'writing':
+      return fields.some((f) => !f.group || f.group === 'writing');
+    default:
+      return sections.some((s) => s.kind === key);
+  }
+}
+
 function Empty({ children = 'Chưa có nội dung cho phần này.' }) {
   return <p className="text-slate-400 text-sm">{children}</p>;
 }
 
-function LoginHint({ canSave }) {
+function LoginHint({ canSave, children = 'Đăng nhập để kiểm tra đáp án.' }) {
   if (canSave) return null;
-  return <p className="text-xs text-[var(--c-hint-text)] mt-2">Đăng nhập để kiểm tra đáp án.</p>;
+  return <p className="text-xs text-[var(--c-hint-text)] mt-2">{children}</p>;
 }
 
 function Html({ html, className = '' }) {
@@ -412,6 +515,8 @@ function AnalysisTab({ lesson, canSave }) {
 // into paper slots so 此致 gets its 4-char indent, 敬礼！ sits flush left, etc.
 // The dedicated audience / signer / date fields win over anything parsed.
 function SamplesTab({ lesson }) {
+  // Fallback paper title: the lesson's Chinese name up to the first space/bracket.
+  const baseTitle = (lesson.titleZh || '').split(/[\s（(]/)[0].trim();
   return (
     <div className="grid gap-6">
       {lesson.sampleDocuments.length === 0 && <Empty>Chưa có bài mẫu cho phần này.</Empty>}
@@ -420,7 +525,9 @@ function SamplesTab({ lesson }) {
         const greeting = doc.audience || parsed.greeting;
         const sign = doc.signerOrg ? [doc.signerOrg] : parsed.sign;
         const date = doc.date || parsed.date;
-        const { title, paragraphs, closing1, closing2 } = parsed;
+        const { paragraphs, closing1, closing2 } = parsed;
+        const title = doc.title?.trim() || parsed.title || baseTitle;
+        const label = (doc.label || '').replace(/^Bài mẫu\s*\d+\s*[·:.-]?\s*/i, '').trim();
         const total = countHanzi(
           [title, greeting, ...paragraphs, closing1, closing2, ...sign, date].join('')
         );
@@ -429,7 +536,7 @@ function SamplesTab({ lesson }) {
             <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
               <p className="text-sm font-semibold text-slate-200">
                 Bài mẫu {idx + 1}
-                {doc.label ? ` · ${doc.label}` : ''}
+                {label ? ` · ${label}` : ''}
               </p>
               <HanziCount count={total} />
             </div>
@@ -687,20 +794,20 @@ function MatchBoard({ lessonId, items, canSave }) {
     if (!canSave) return;
     setChecking(true);
     try {
-      const entries = await Promise.all(
-        items.map(async (item) => {
+      // One submission for the whole board (grader `match_set`).
+      const answers = Object.fromEntries(
+        items.map((item) => {
           const rightId = pairs[item.id];
-          const rightText = rightId ? rightItems.find((r) => r.id === rightId)?.text : null;
-          const res = await submitExercise({
-            lessonId,
-            exerciseType: 'match',
-            exerciseId: item.id,
-            answerPayload: { selectedKey: rightText },
-          });
-          return [item.id, res.feedback];
+          return [item.id, rightId ? rightItems.find((r) => r.id === rightId)?.text ?? null : null];
         })
       );
-      setResults(Object.fromEntries(entries));
+      const res = await submitExercise({
+        lessonId,
+        exerciseType: 'match_set',
+        exerciseId: lessonId,
+        answerPayload: { answers },
+      });
+      setResults(res?.feedback?.results || {});
     } catch {
       // ignore, user can retry
     } finally {
@@ -738,14 +845,12 @@ function MatchBoard({ lessonId, items, canSave }) {
     .map((item, idx) => (pairs[item.id] ? `${idx + 1}-${letterOf(pairs[item.id])}` : null))
     .filter(Boolean)
     .join(', ');
-  const correctAnswer = items
-    .map((item, idx) => {
-      const key = results[item.id]?.correctKey;
-      const r = rightItems.findIndex((ri) => ri.text === key);
-      return r >= 0 ? `${idx + 1}-${String.fromCharCode(65 + r)}` : null;
-    })
-    .filter(Boolean)
-    .join(', ');
+  // Only the wrong pairs, spelled out as text (letters are ambiguous when two
+  // right-hand cards carry the same text).
+  const allCorrect = done && items.every((it) => results[it.id]?.isCorrect);
+  const wrongPairs = items
+    .map((item, idx) => ({ item, n: idx + 1, r: results[item.id] }))
+    .filter(({ r }) => r && !r.isCorrect);
 
   return (
     <div className="space-y-4">
@@ -817,15 +922,24 @@ function MatchBoard({ lessonId, items, canSave }) {
 
       {done && (
         <FeedbackBox
-          isCorrect={items.every((it) => results[it.id]?.isCorrect)}
+          isCorrect={allCorrect}
           title={`Kết quả: ${items.filter((it) => results[it.id]?.isCorrect).length}/${items.length} cặp đúng`}
         >
           <p className="text-slate-300">
             Bạn nối: <span className="font-mono">{userAnswer || '—'}</span>
           </p>
-          <p className="text-slate-300">
-            Đáp án: <span className="font-mono text-green-400">{correctAnswer}</span>
-          </p>
+          {!allCorrect && wrongPairs.length > 0 && (
+            <div className="text-slate-300 mt-1">
+              <p>Đáp án đúng cho các cặp sai:</p>
+              <ul className="mt-1 space-y-0.5">
+                {wrongPairs.map(({ item, n, r }) => (
+                  <li key={item.id}>
+                    <b>{n}</b> → <span className="zh text-ok">{r.correctKey || '—'}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           {items.some((it) => results[it.id]?.explanation) && (
             <ul className="mt-2 space-y-1 text-slate-400 list-disc pl-5">
               {items
@@ -1423,7 +1537,7 @@ function fieldKey(f, idx) {
   return f.id || `idx-${idx}`;
 }
 
-function WritingTab({ lesson }) {
+function WritingTab({ lesson, canSave }) {
   const fields = useMemo(
     () => lesson.guidedWritingFields.filter((f) => !f.group || f.group === 'writing'),
     [lesson.guidedWritingFields]
@@ -1432,10 +1546,10 @@ function WritingTab({ lesson }) {
     () => lesson.guidedWritingScenarios.filter((s) => !s.group || s.group === 'writing'),
     [lesson.guidedWritingScenarios]
   );
-  return <GuidedWritingForm fields={fields} scenarios={scenarios} />;
+  return <GuidedWritingForm fields={fields} scenarios={scenarios} canSave={canSave} lessonId={lesson.id} group="writing" />;
 }
 
-function PartialWritingTab({ lesson }) {
+function PartialWritingTab({ lesson, canSave }) {
   const fields = useMemo(
     () => lesson.guidedWritingFields.filter((f) => f.group === 'partial_writing'),
     [lesson.guidedWritingFields]
@@ -1444,14 +1558,63 @@ function PartialWritingTab({ lesson }) {
     () => lesson.guidedWritingScenarios.filter((s) => s.group === 'partial_writing'),
     [lesson.guidedWritingScenarios]
   );
-  return <GuidedWritingForm fields={fields} scenarios={scenarios} />;
+  return (
+    <GuidedWritingForm fields={fields} scenarios={scenarios} canSave={canSave} lessonId={lesson.id} group="partial_writing" />
+  );
 }
 
-function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
-  const [values, setValues] = useState({});
+// Admin placeholders on the fixed letter slots tend to be the answer itself
+// (请假条, 此致 …), so those slots get neutral hints instead.
+const NEUTRAL_HINTS = {
+  title: 'Tiêu đề (căn giữa)',
+  greeting: 'Người nhận + dấu hai chấm',
+  closing1: 'Lời kết dòng 1',
+  closing2: 'Lời kết dòng 2',
+  sign: 'Tên người viết',
+  date: 'Ngày tháng (年月日)',
+};
+
+function readDraft(key) {
+  try {
+    const raw = window.localStorage.getItem(key);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeDraft(key, values) {
+  try {
+    if (Object.values(values).some(Boolean)) window.localStorage.setItem(key, JSON.stringify(values));
+    else window.localStorage.removeItem(key);
+  } catch {
+    // storage full / blocked — the draft simply isn't kept
+  }
+}
+
+function GuidedWritingForm({ fields: guidedWritingFields, scenarios, canSave, lessonId, group }) {
   const [showModel, setShowModel] = useState(false);
   const [scenarioIdx, setScenarioIdx] = useState(0);
+  const [view, setView] = useState('input'); // below lg: 'input' | 'paper'
+  const [submitting, setSubmitting] = useState(false);
+  const [submittedAt, setSubmittedAt] = useState(null);
+  const [submitError, setSubmitError] = useState('');
   const scenario = scenarios[scenarioIdx];
+
+  // Draft autosave: restore whenever the lesson / step / scenario changes.
+  const storageKey = `hsk6-gw:${lessonId}:${group}:${scenario?.id || 0}`;
+  const [values, setValues] = useState(() => readDraft(storageKey));
+  const [loadedKey, setLoadedKey] = useState(storageKey);
+  if (loadedKey !== storageKey) {
+    setLoadedKey(storageKey);
+    setValues(readDraft(storageKey));
+    setSubmittedAt(null);
+    setSubmitError('');
+  }
+  useEffect(() => {
+    writeDraft(storageKey, values);
+  }, [storageKey, values]);
 
   const roles = useMemo(() => resolveRoles(guidedWritingFields), [guidedWritingFields]);
 
@@ -1476,6 +1639,53 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
       : target && totalHanzi < target * 0.8
       ? 'bg-amber-500/10 border-amber-500 text-amber-400'
       : 'bg-green-500/10 border-green-500 text-green-400';
+
+  const hasText = Object.values(values).some((v) => typeof v === 'string' && v.trim());
+  const hasAnything = Object.values(values).some(Boolean);
+
+  // The letter as plain text, in sheet order, one line per paper line.
+  function assembleText() {
+    const signLines = [valueOfRole('sign')].flat();
+    return [
+      valueOfRole('title'),
+      valueOfRole('greeting'),
+      ...paragraphs,
+      ...extraLines,
+      closing1,
+      closing2,
+      ...signLines,
+      valueOfRole('date'),
+    ]
+      .filter((l) => typeof l === 'string' && l.trim())
+      .map((l) => l.trim())
+      .join('\n');
+  }
+
+  async function submit() {
+    if (!canSave || !hasText || submitting) return;
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      await submitExercise({
+        lessonId,
+        exerciseType: group === 'partial_writing' ? 'partial_writing' : 'writing',
+        exerciseId: scenario?.id || lessonId,
+        answerPayload: { values, text: assembleText(), scenarioId: scenario?.id ?? null },
+      });
+      setSubmittedAt(new Date());
+    } catch {
+      setSubmitError('Chưa nộp được bài, vui lòng thử lại.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  function clearAll() {
+    if (!window.confirm('Xoá toàn bộ nội dung đã viết?')) return;
+    setValues({});
+    writeDraft(storageKey, {});
+    setSubmittedAt(null);
+  }
 
   if (guidedWritingFields.length === 0) return <Empty />;
 
@@ -1512,11 +1722,32 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
         </div>
       )}
 
+      {/* Below lg the paper would sit far under the inputs: switch between them instead. */}
+      <div className="lg:hidden grid grid-cols-2 gap-1 p-1 rounded-xl bg-night-800 border border-night-700" role="group" aria-label="Chế độ hiển thị">
+        {[
+          ['input', 'Nhập bài'],
+          ['paper', 'Xem tờ giấy'],
+        ].map(([key, label]) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => setView(key)}
+            aria-pressed={view === key}
+            className={`min-h-[44px] rounded-lg text-sm font-bold transition-colors ${
+              view === key ? 'bg-coral-500 text-white' : 'text-slate-300 hover:text-coral-400'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
       <div className="grid lg:grid-cols-2 gap-6">
-        <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+        <form className={`space-y-3 ${view === 'input' ? '' : 'hidden lg:block'}`} onSubmit={(e) => e.preventDefault()}>
           {guidedWritingFields.map((f, idx) => {
             const key = fieldKey(f, idx);
             const id = `gw-${key}`;
+            const placeholder = NEUTRAL_HINTS[roles[idx]] ?? f.placeholder;
             return (
               <div key={key}>
                 <label htmlFor={id} className="text-sm text-slate-300 block mb-1">
@@ -1525,7 +1756,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
                 {f.inputType === 'textarea' ? (
                   <textarea
                     id={id}
-                    placeholder={f.placeholder}
+                    placeholder={placeholder}
                     value={values[key] || ''}
                     onChange={(e) => setValues((prev) => ({ ...prev, [key]: e.target.value }))}
                     rows={5}
@@ -1544,7 +1775,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
                 ) : (
                   <input
                     id={id}
-                    placeholder={f.placeholder}
+                    placeholder={placeholder}
                     value={values[key] || ''}
                     onChange={(e) => setValues((prev) => ({ ...prev, [key]: e.target.value }))}
                     className={`${INPUT} zh`}
@@ -1562,25 +1793,40 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios }) {
               {totalHanzi}
               {target ? ` / ${target}` : ''} chữ Hán
             </span>
-            <div className="flex gap-2 ml-auto">
-              {scenario?.modelAnswer && (
-                <PressButton type="button" onClick={() => setShowModel((v) => !v)} className={BTN_PRIMARY}>
-                  {showModel ? 'Ẩn đáp án mẫu' : 'Đáp án mẫu'}
-                </PressButton>
-              )}
-              <button
-                type="button"
-                onClick={() => setValues({})}
-                disabled={Object.keys(values).length === 0}
-                className={BTN_SECONDARY}
-              >
+            <div className="flex flex-wrap gap-2 ml-auto">
+              <button type="button" onClick={clearAll} disabled={!hasAnything} className={BTN_SECONDARY}>
                 Xoá trắng
               </button>
+              {scenario?.modelAnswer && (
+                <button type="button" onClick={() => setShowModel((v) => !v)} className={BTN_SECONDARY}>
+                  {showModel ? 'Ẩn đáp án mẫu' : 'Đáp án mẫu'}
+                </button>
+              )}
+              <PressButton
+                type="button"
+                onClick={submit}
+                disabled={!canSave || !hasText || submitting}
+                className={BTN_PRIMARY}
+              >
+                <PaperPlaneTilt size={16} weight="bold" aria-hidden="true" />
+                {submitting ? 'Đang nộp...' : submittedAt ? 'Nộp lại' : 'Nộp bài'}
+              </PressButton>
             </div>
           </div>
+          <div aria-live="polite">
+            {submittedAt && !submitting && (
+              <p className="flex items-center gap-1.5 text-sm font-semibold text-ok">
+                <CheckCircle size={18} weight="fill" aria-hidden="true" />
+                Đã nộp lúc {submittedAt.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+              </p>
+            )}
+            {submitError && <p className="text-sm text-err">{submitError}</p>}
+          </div>
+          <LoginHint canSave={canSave}>Đăng nhập để nộp bài.</LoginHint>
+          <p className="text-xs text-slate-500">Bài viết được tự lưu nháp trên trình duyệt này.</p>
         </form>
 
-        <div>
+        <div className={view === 'paper' ? '' : 'hidden lg:block'}>
           <p className="text-xs font-semibold text-slate-400 mb-2">Tờ giấy mô phỏng (real-time)</p>
           <LetterPaper
             title={valueOfRole('title')}

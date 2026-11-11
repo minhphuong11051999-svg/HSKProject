@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { listLessons } from '../api/lessons';
+import { listLessons, listMySubmissions } from '../api/lessons';
 import { getSettings, updateSettings } from '../api/settings';
 import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
 import ProLabel from '../components/ProLabel';
 import PageHeader from '../components/PageHeader';
 import Reveal from '../components/motion/Reveal';
-import { Lock } from '@phosphor-icons/react';
+import { Lock, CheckCircle } from '@phosphor-icons/react';
 
 const TITLES = {
   practice: { heading: 'Bài luyện tập', subtitle: 'Luyện tập với 7 bài học, cập nhật thêm theo thời gian.' },
@@ -86,6 +86,26 @@ function LessonMap() {
       .catch(() => {});
   }, []);
 
+  // Per-lesson progress from the learner's own submissions: practised at all,
+  // and whether a full letter has been handed in.
+  const [progress, setProgress] = useState({});
+  useEffect(() => {
+    if (!user) return;
+    listMySubmissions()
+      .then((subs) => {
+        const out = {};
+        for (const s of subs) {
+          const slug = s.lesson?.slug;
+          if (!slug) continue;
+          const p = (out[slug] ||= { practiced: false, wrote: false });
+          p.practiced = true;
+          if (s.exerciseType === 'writing') p.wrote = true;
+        }
+        setProgress(out);
+      })
+      .catch(() => {});
+  }, [user]);
+
   async function togglePublic() {
     setSavingSetting(true);
     try {
@@ -107,8 +127,13 @@ function LessonMap() {
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <PageHeader kicker="HSK 6 · 写作工坊" title="Bài học" art>
-        Sơ đồ phân loại bài viết HSK 6: <span className="zh">议论文</span>, <span className="zh">记叙文</span> và{' '}
-        <span className="zh">应用文</span> (3 nhóm).
+        Các dạng <span className="zh">应用文</span> (văn bản ứng dụng) trong đề viết HSK 6, chia theo người đọc.
+        {showAll && (
+          <>
+            {' '}
+            <span className="zh">议论文</span> và <span className="zh">记叙文</span> sắp ra mắt.
+          </>
+        )}
       </PageHeader>
 
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -154,14 +179,19 @@ function LessonMap() {
             const done = group.subs.reduce((x, s) => x + s[1].filter(isDone).length, 0);
             return (
               <section key={group.title} className="mt-14" aria-label={group.title}>
-                <SectionHeading title={group.title} note={`${done}/${total} bài đã xong`} lead={group.desc} />
+                <SectionHeading
+                  title={group.title}
+                  note={showAll ? `${done}/${total} bài đã ra mắt` : `${done} bài`}
+                  lead={group.desc}
+                />
                 {group.subs.map(([label, items]) => {
                   const hasDone = items.some(isDone);
                   if (!hasDone && !showAll) return null;
+                  const shown = showAll ? items.length : items.filter(isDone).length;
                   return (
                     <div key={label} className="mt-8">
                       <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
-                        {label} <span className="font-normal normal-case tracking-normal">· {items.length}</span>
+                        {label} <span className="font-normal normal-case tracking-normal">· {shown}</span>
                       </h3>
                       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {items.map((it) => {
@@ -169,7 +199,15 @@ function LessonMap() {
                           if (!lesson && !showAll) return null;
                           if (lesson) n += 1;
                           return (
-                            <MapCard key={it[0] + it[1]} zh={it[0]} zhNote={it[1]} vi={it[2]} lesson={lesson} number={lesson ? n : null} />
+                            <MapCard
+                              key={it[0] + it[1]}
+                              zh={it[0]}
+                              zhNote={it[1]}
+                              vi={it[2]}
+                              lesson={lesson}
+                              number={lesson ? n : null}
+                              progress={lesson ? progress[lesson.slug] : null}
+                            />
                           );
                         })}
                       </div>
@@ -219,7 +257,7 @@ function CardCta({ locked, label }) {
   );
 }
 
-function MapCard({ zh, zhNote = '', vi, lesson, number, soonLabel = 'Đang soạn' }) {
+function MapCard({ zh, zhNote = '', vi, lesson, number, progress, soonLabel = 'Đang soạn' }) {
   const [showPremium, setShowPremium] = useState(false);
   const inner = (
     <>
@@ -235,8 +273,18 @@ function MapCard({ zh, zhNote = '', vi, lesson, number, soonLabel = 'Đang soạ
       </div>
       <div className="px-5 pt-4 pb-5 flex-1 flex flex-col">
         <p className="font-bold text-slate-100 leading-snug">{vi}</p>
+        {progress?.practiced && (
+          <p className={`mt-2 inline-flex items-center gap-1 self-start rounded-full border px-2 py-0.5 text-xs font-semibold ${progress.wrote ? 'border-ok/40 bg-ok/10 text-ok' : 'border-night-600 text-slate-400'}`}>
+            {progress.wrote && <CheckCircle size={14} weight="fill" aria-hidden="true" />}
+            {progress.wrote ? 'Đã nộp bài viết' : 'Đã luyện'}
+          </p>
+        )}
         <p className="mt-auto pt-3 text-sm font-semibold">
-          {lesson ? <CardCta locked={lesson.locked} label="Bắt đầu luyện tập →" /> : <span className="text-slate-500">{soonLabel}</span>}
+          {lesson ? (
+            <CardCta locked={lesson.locked} label={progress?.practiced ? 'Học tiếp →' : 'Bắt đầu luyện tập →'} />
+          ) : (
+            <span className="text-slate-500">{soonLabel}</span>
+          )}
         </p>
       </div>
     </>

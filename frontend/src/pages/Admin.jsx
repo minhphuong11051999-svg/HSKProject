@@ -365,13 +365,14 @@ export default function Admin() {
           <>
           <SimpleListEditor
             title="Bài mẫu (hiển thị trên tờ giấy mô phỏng, tự đếm số chữ)"
-            hint="Dòng đầu tiên ngắn của Nội dung (vd: 关于春节放假的通知) sẽ tự căn giữa làm tiêu đề."
+            hint="Tiêu đề trên tờ giấy lấy theo thứ tự: ô Tiêu đề → dòng đầu tiên ngắn của Nội dung (vd: 关于春节放假的通知) → tên tiếng Trung của bài học."
             items={form.sampleDocuments}
             onChange={(v) => set('sampleDocuments', v)}
             addLabel="Thêm bài mẫu"
             itemLabel={(_, i) => `Bài mẫu ${i + 1}`}
             fields={[
               { key: 'label', label: 'Nhãn (vd: Thông báo hành chính)' },
+              { key: 'title', label: 'Tiêu đề trên tờ giấy (vd: 请假条; để trống = lấy tên bài học)' },
               { key: 'audience', label: 'Xưng hô / đối tượng nhận (có thể để trống)' },
               { key: 'body', label: 'Nội dung văn bản (mỗi dòng = 1 đoạn)', type: 'richtext' },
               { key: 'signerOrg', label: 'Ký tên / đơn vị (có thể để trống)' },

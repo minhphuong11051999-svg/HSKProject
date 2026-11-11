@@ -54,6 +54,21 @@ function gradeMatch(lesson, exerciseId, answerPayload) {
   };
 }
 
+// The whole matching board in one submission (one History row, one XP):
+// answers = { [matchItemId]: chosenRightText }. Graded by text, so two cards
+// with identical wording are interchangeable.
+function gradeMatchSet(lesson, _exerciseId, answerPayload) {
+  const answers = answerPayload?.answers || {};
+  const results = {};
+  let score = 0;
+  for (const item of lesson.matchItems || []) {
+    const correct = answers[item.id] != null && answers[item.id] === item.correctKey;
+    if (correct) score += 1;
+    results[item.id] = { isCorrect: correct, correctKey: item.correctKey, explanation: item.explanation || null };
+  }
+  return { score, maxScore: (lesson.matchItems || []).length, results };
+}
+
 // Whole flashcard round: answers = { [flashcardId]: [chosenIndex × 4 questions] }.
 function gradeFlashcards(lesson, _exerciseId, answerPayload) {
   const answers = answerPayload?.answers || {};
@@ -75,6 +90,7 @@ const GRADERS = {
   quiz: gradeQuiz,
   cloze: gradeCloze,
   match: gradeMatch,
+  match_set: gradeMatchSet,
   error_fix: gradeErrorFix,
 };
 
@@ -141,7 +157,7 @@ function toDateKey(date) {
 async function getUserStats(userId) {
   const submissions = await prisma.submission.findMany({
     where: { userId },
-    select: { submittedAt: true },
+    select: { submittedAt: true, exerciseType: true, exerciseId: true, lessonId: true, samplePaperId: true, examSittingId: true },
   });
 
   const activeDays = new Set(submissions.map((s) => toDateKey(s.submittedAt)));
@@ -173,7 +189,11 @@ async function getUserStats(userId) {
     prevDate = date;
   }
 
-  const totalSubmissions = submissions.length;
+  // XP counts each distinct exercise once, so retrying the same exercise keeps
+  // the streak alive but doesn't farm levels.
+  const totalSubmissions = new Set(
+    submissions.map((s) => [s.exerciseType, s.exerciseId, s.lessonId || s.samplePaperId || s.examSittingId || ''].join(':'))
+  ).size;
   const xpPerSubmission = 10;
   const xpPerLevel = 100;
   const totalXp = totalSubmissions * xpPerSubmission;

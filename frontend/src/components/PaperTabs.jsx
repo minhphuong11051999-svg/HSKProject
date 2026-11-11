@@ -8,7 +8,8 @@ import PressButton from './motion/PressButton';
 import Reveal from './motion/Reveal';
 import ExamTimer from './ExamTimer';
 import AiGradePanel from './AiGradePanel';
-import { ClipboardText, MagnifyingGlass, TreeStructure, PencilLine, SealCheck, Robot, Warning } from '@phosphor-icons/react';
+import PremiumModal from './PremiumModal';
+import { ClipboardText, MagnifyingGlass, TreeStructure, PencilLine, SealCheck, Robot, Warning, Lock, CheckCircle, Crown } from '@phosphor-icons/react';
 
 const ALL_TABS = [
   { key: 'prompt', label: 'Đề bài', icon: ClipboardText },
@@ -19,8 +20,18 @@ const ALL_TABS = [
   { key: 'ai', label: 'AI Chấm Bài', icon: Robot },
 ];
 
+const PRO_BENEFITS = [
+  'Chấm điểm theo tiêu chí của đề',
+  'Chỉ ra lỗi ngữ pháp và cách sửa',
+  <>
+    Gợi ý mẫu câu <span className="zh">套话</span> phù hợp
+  </>,
+];
+
 const PRIMARY_BTN =
   'min-h-[44px] bg-coral-500 hover:bg-coral-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl px-5 py-2 text-sm font-bold shadow-[0_8px_20px_-10px_rgba(31,63,143,0.7)] transition-colors';
+const SECONDARY_BTN =
+  'min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-night-700 bg-night-800 px-4 text-sm font-semibold text-slate-300 hover:border-coral-400/40 hover:text-slate-100 transition-colors';
 const TEXTAREA =
   'w-full bg-night-950 border border-night-700 rounded-xl px-4 py-3 text-sm text-slate-100 leading-7 transition-colors focus:border-coral-400 focus:ring-2 focus:ring-coral-400/20 focus:outline-none';
 
@@ -29,15 +40,14 @@ const TEXTAREA =
 // - "Từ vựng và luận điểm" (outline) arrives only once the admin opens it site-wide.
 // - "Bài làm" behaves like the exam room: plain text, no auto-formatting, and an
 //   unsubmitted draft is wiped the moment the learner leaves the browser tab.
-// - "AI Chấm Bài" is PRO-only and needs the paper's hidden grading criteria.
+// - "AI Chấm Bài" is shown to everyone; free users get a PRO teaser, PRO users
+//   the grader (which needs the paper's hidden grading criteria).
+// - While the exam timer runs, "Đáp án mẫu" stays locked until the draft is
+//   submitted, time runs out, or the timer is stopped.
 export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradingCriteria }) {
   const { user } = useAuth();
   const isPro = user?.plan === 'PREMIUM' || user?.role === 'ADMIN';
-  const TABS = ALL_TABS.filter((t) => {
-    if (t.key === 'outline') return !!outline;
-    if (t.key === 'ai') return isPro;
-    return true;
-  });
+  const TABS = ALL_TABS.filter((t) => t.key !== 'outline' || !!outline);
   const [tab, setTab] = useState('prompt');
   const [showAnswer, setShowAnswer] = useState(false);
   const [draft, setDraft] = useState('');
@@ -48,9 +58,15 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
   const [saving, setSaving] = useState(false);
   const [wiped, setWiped] = useState(false);
   const [timeUp, setTimeUp] = useState(false);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [submittedThisRun, setSubmittedThisRun] = useState(false);
+  const [stopSignal, setStopSignal] = useState(0);
+  const [premiumOpen, setPremiumOpen] = useState(false);
 
   const targetId = targetKey.samplePaperId || targetKey.examSittingId;
   const submittedText = submission?.answerPayload?.text || '';
+  const savedAnalysis = submission?.answerPayload?.analysis || '';
+  const answerLocked = timerRunning && !submittedThisRun;
 
   useEffect(() => {
     setTab('prompt');
@@ -85,21 +101,39 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
     return () => document.removeEventListener('visibilitychange', onVisibility);
   }, []);
 
-  // The analysis and the draft travel together in one submission, so the
-  // latest save always holds both. The draft is saved verbatim (no trimming),
-  // leading spaces included, so the grader can judge the layout.
-  async function save(setBusy) {
+  // The analysis and the draft travel together in one submission, so each
+  // save carries the other half as it was last saved: saving the analysis
+  // never submits an unsent draft, and submitting the draft keeps the saved
+  // analysis. The draft is saved verbatim (no trimming), leading spaces
+  // included, so the grader can judge the layout.
+  async function save(payload, setBusy) {
     setBusy(true);
     try {
       const result = await submitExercise({
         ...targetKey,
         exerciseType: 'writing',
         exerciseId: targetId,
-        answerPayload: { text: draft, analysis },
+        answerPayload: payload,
       });
       setSubmission(result);
+      return result;
     } finally {
       setBusy(false);
+    }
+  }
+  const saveAnalysis = () => save({ text: submittedText, analysis }, setSavingAnalysis);
+  async function submitDraft() {
+    await save({ text: draft, analysis: submission?.answerPayload?.analysis ?? analysis }, setSaving);
+    if (timerRunning) setSubmittedThisRun(true);
+  }
+
+  // A fresh timer run hides the answer again and unlocks the draft.
+  function onRunningChange(running) {
+    setTimerRunning(running);
+    if (running) {
+      setShowAnswer(false);
+      setSubmittedThisRun(false);
+      setTimeUp(false);
     }
   }
 
@@ -108,7 +142,13 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
 
   return (
     <>
-      <ExamTimer onPhase={(key) => TABS.some((t) => t.key === key) && setTab(key)} onFinish={() => setTimeUp(true)} />
+      <ExamTimer
+        hasOutline={!!outline}
+        stopSignal={stopSignal}
+        onRunningChange={onRunningChange}
+        onPhase={(key) => TABS.some((t) => t.key === key) && setTab(key)}
+        onFinish={() => setTimeUp(true)}
+      />
 
       {/* Animate UI Tabs: the selected pill slides between tabs, panels cross-fade;
           Radix supplies roles, ids and arrow-key navigation. */}
@@ -126,6 +166,11 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
             >
               <t.icon size={18} weight={tab === t.key ? 'fill' : 'regular'} aria-hidden="true" />
               {t.label}
+              {t.key === 'ai' && !isPro && (
+                <span className="rounded-full border border-gold/50 bg-gold/15 px-1.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-gold leading-none">
+                  PRO
+                </span>
+              )}
             </Tabs.Trigger>
           ))}
         </Tabs.List>
@@ -151,15 +196,15 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
               />
               <div className="flex flex-wrap items-center justify-between gap-2 mt-3">
                 <PressButton
-                  onClick={() => save(setSavingAnalysis)}
+                  onClick={saveAnalysis}
                   disabled={savingAnalysis || !analysis.trim()}
                   className={PRIMARY_BTN}
                 >
                   {savingAnalysis ? 'Đang lưu...' : 'Lưu phân tích'}
                 </PressButton>
-                {submission?.answerPayload?.analysis && (
+                {savedAnalysis.trim() && (
                   <span className="text-xs text-slate-500 inline-flex items-center gap-1">
-                    <SealCheck size={14} weight="fill" className="text-green-400" aria-hidden="true" />
+                    <SealCheck size={14} weight="fill" className="text-ok" aria-hidden="true" />
                     Đã lưu lúc {new Date(submission.submittedAt).toLocaleString('vi-VN')}
                   </span>
                 )}
@@ -184,7 +229,7 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
             Rời khỏi tab trình duyệt sẽ xoá toàn bộ bài làm chưa nộp.
           </p>
           {wiped && (
-            <p role="alert" className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-2.5 mb-4 text-sm font-semibold text-red-400">
+            <p role="alert" className="rounded-xl border border-err/40 bg-err/10 px-4 py-2.5 mb-4 text-sm font-semibold text-err">
               Bài làm đã bị xoá vì bạn rời khỏi trang trong lúc làm bài.
             </p>
           )}
@@ -192,6 +237,12 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
             <p className="text-sm text-slate-500">Đang tải...</p>
           ) : (
             <>
+              {timeUp && (
+                <p role="status" className="flex items-start gap-2 rounded-xl border border-gold/40 bg-gold/10 px-4 py-2.5 mb-3 text-sm font-semibold text-slate-200">
+                  <Lock size={18} weight="fill" className="text-gold shrink-0 mt-0.5" aria-hidden="true" />
+                  Hết giờ. Bài làm đã khoá, bấm Nộp bài làm để lưu.
+                </p>
+              )}
               <textarea
                 id="paper-draft"
                 value={draft}
@@ -209,20 +260,20 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
                 <span
                   aria-live="polite"
                   className={`text-xs font-semibold px-2.5 py-1 rounded-full border tabular-nums inline-flex items-center gap-1 transition-colors ${
-                    countHanzi(draft) ? 'border-green-500 bg-green-500/10 text-green-400' : 'border-night-600 text-slate-400'
+                    countHanzi(draft) ? 'border-ok bg-ok/10 text-ok' : 'border-night-600 text-slate-400'
                   }`}
                 >
                   <SlidingNumber number={countHanzi(draft)} /> chữ Hán
                 </span>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-2 mt-3">
-                <PressButton onClick={() => save(setSaving)} disabled={saving || !draft.trim()} className={PRIMARY_BTN}>
+                <PressButton onClick={submitDraft} disabled={saving || !draft.trim()} className={PRIMARY_BTN}>
                   {saving ? 'Đang lưu...' : 'Nộp bài làm'}
                 </PressButton>
-                {submission && (
+                {submittedText.trim() && (
                   <Reveal key={submission.submittedAt} offset={6}>
                     <span className="text-xs text-slate-500 inline-flex items-center gap-1">
-                      <SealCheck size={14} weight="fill" className="text-green-400" aria-hidden="true" />
+                      <SealCheck size={14} weight="fill" className="text-ok" aria-hidden="true" />
                       Đã nộp lúc {new Date(submission.submittedAt).toLocaleString('vi-VN')}
                     </span>
                   </Reveal>
@@ -233,39 +284,75 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
         </Tabs.Content>
 
         <Tabs.Content value="answer" className={PANEL}>
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-            <h2 className={`${H2} flex items-center gap-2`}>
-              Đáp án mẫu
-              {showAnswer && <HanziCount count={countHanzi(htmlToText(answer))} />}
-            </h2>
-            <PressButton
-              onClick={() => setShowAnswer((v) => !v)}
-              aria-expanded={showAnswer}
-              className={PRIMARY_BTN}
-            >
-              {showAnswer ? 'Ẩn đáp án' : 'Xem đáp án'}
-            </PressButton>
-          </div>
-          {showAnswer ? (
-            <Reveal>
-              <LetterPaper html={answer} autoFormat minHeight="" />
-            </Reveal>
+          {answerLocked ? (
+            <div className="text-center py-4">
+              <span className="mx-auto mb-3 grid place-items-center h-14 w-14 rounded-2xl bg-night-800 border border-night-700 text-slate-400">
+                <Lock size={28} weight="duotone" aria-hidden="true" />
+              </span>
+              <h2 className={`${H2} mb-2`}>Đáp án mẫu</h2>
+              <p className="text-sm text-slate-400 mb-5 max-w-md mx-auto">Đáp án mẫu sẽ mở khi bạn nộp bài hoặc hết giờ.</p>
+              <button type="button" onClick={() => setStopSignal((n) => n + 1)} className={SECONDARY_BTN}>
+                Dừng tính giờ để xem
+              </button>
+            </div>
           ) : (
-            <p className="text-sm text-slate-500">Tự làm bài trước rồi bấm "Xem đáp án" để đối chiếu.</p>
+            <>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <h2 className={`${H2} flex items-center gap-2`}>
+                  Đáp án mẫu
+                  {showAnswer && <HanziCount count={countHanzi(htmlToText(answer))} />}
+                </h2>
+                <PressButton
+                  onClick={() => setShowAnswer((v) => !v)}
+                  aria-expanded={showAnswer}
+                  className={PRIMARY_BTN}
+                >
+                  {showAnswer ? 'Ẩn đáp án' : 'Xem đáp án'}
+                </PressButton>
+              </div>
+              {showAnswer ? (
+                <Reveal>
+                  <LetterPaper html={answer} autoFormat minHeight="" />
+                </Reveal>
+              ) : (
+                <p className="text-sm text-slate-500">Tự làm bài trước rồi bấm "Xem đáp án" để đối chiếu.</p>
+              )}
+            </>
           )}
         </Tabs.Content>
 
-        {isPro && (
-          <Tabs.Content value="ai" className={PANEL}>
+        <Tabs.Content value="ai" className={PANEL}>
+          {isPro ? (
             <AiGradePanel
               targetKey={targetKey}
               text={submittedText || draft}
               hasGradingCriteria={!!hasGradingCriteria}
               onGoWrite={() => setTab('draft')}
             />
-          </Tabs.Content>
-        )}
+          ) : (
+            <div className="text-center py-2">
+              <span className="mx-auto mb-3 grid place-items-center h-14 w-14 rounded-2xl bg-coral-400/10 text-coral-400">
+                <Robot size={32} weight="duotone" aria-hidden="true" />
+              </span>
+              <h2 className={`${H2} mb-4`}>Chấm bài bằng AI · dành cho PRO</h2>
+              <ul className="mx-auto mb-6 max-w-sm space-y-2 text-left">
+                {PRO_BENEFITS.map((b, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-slate-300">
+                    <CheckCircle size={18} weight="fill" className="text-ok shrink-0 mt-0.5" aria-hidden="true" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <PressButton onClick={() => setPremiumOpen(true)} className={`${PRIMARY_BTN} inline-flex items-center gap-2`}>
+                <Crown size={16} weight="fill" aria-hidden="true" />
+                Tìm hiểu gói PRO
+              </PressButton>
+            </div>
+          )}
+        </Tabs.Content>
       </Tabs.Root>
+
+      {!isPro && <PremiumModal open={premiumOpen} onClose={() => setPremiumOpen(false)} />}
     </>
   );
 }

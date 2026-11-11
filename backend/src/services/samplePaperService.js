@@ -29,7 +29,9 @@ async function listSamplePapers(user) {
     },
   });
 
-  return papers.map((paper) => ({ ...paper, locked: !canAccess(paper, user) }));
+  return papers
+    .filter((paper) => paper.slug?.trim() || user?.role === 'ADMIN')
+    .map((paper) => ({ ...paper, locked: !canAccess(paper, user) }));
 }
 
 async function getSamplePaperBySlug(slug, user) {
@@ -59,6 +61,15 @@ async function getSamplePaperForAdmin(id) {
 
 async function upsertSamplePaper(data, id) {
   const { slug, titleZh, titleVi, prompt, requirements, outline, outlineOpen, gradingCriteria, answer, orderIndex, isPremium } = data;
+  const missing = [
+    [slug, 'đường dẫn (slug)'],
+    [prompt && String(prompt).replace(/<[^>]*>/g, ''), 'đề bài'],
+  ].filter(([v]) => !String(v ?? '').trim()).map(([, name]) => name);
+  if (missing.length) {
+    const error = new Error(`Vui lòng nhập ${missing.join(', ')}.`);
+    error.status = 400;
+    throw error;
+  }
   const baseData = {
     slug,
     titleZh,

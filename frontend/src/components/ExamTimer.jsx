@@ -2,26 +2,46 @@ import { useEffect, useRef, useState } from 'react';
 import { Timer, Play, SkipForward, Stop } from '@phosphor-icons/react';
 
 // Exam-room pacing: 2' analysing the prompt, 3' on vocabulary and arguments,
-// 10' writing (15' in all). Each phase opens its tab; when the writing phase
-// ends the draft locks (the learner can still submit it).
-const PHASES = [
+// 10' writing (15' in all). Without the outline tab the analysis phase absorbs
+// its 3' (5' + 10'). Each phase opens its tab; when the writing phase ends the
+// draft locks (the learner can still submit it).
+const PHASES_WITH_OUTLINE = [
   { key: 'analysis', label: 'Phân tích đề', minutes: 2 },
   { key: 'outline', label: 'Từ vựng và luận điểm', minutes: 3 },
   { key: 'draft', label: 'Làm bài', minutes: 10 },
 ];
-const TOTAL = PHASES.reduce((s, p) => s + p.minutes, 0);
+const PHASES_NO_OUTLINE = [
+  { key: 'analysis', label: 'Phân tích đề', minutes: 5 },
+  { key: 'draft', label: 'Làm bài', minutes: 10 },
+];
 
 const fmt = (ms) => {
   const s = Math.max(0, Math.ceil(ms / 1000));
   return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 };
 
-export default function ExamTimer({ onPhase, onFinish }) {
+// Props:
+// - hasOutline: include the "Từ vựng và luận điểm" phase (default true).
+// - onRunningChange(bool): reported whenever the timer starts or stops running.
+// - stopSignal: a counter; each increment stops the timer (back to idle), so a
+//   parent can stop it without owning its state.
+export default function ExamTimer({ onPhase, onFinish, onRunningChange, hasOutline = true, stopSignal = 0 }) {
+  const PHASES = hasOutline ? PHASES_WITH_OUTLINE : PHASES_NO_OUTLINE;
+  const TOTAL = PHASES.reduce((s, p) => s + p.minutes, 0);
   const [phase, setPhase] = useState(-1); // -1 idle, PHASES.length = finished
   const [endsAt, setEndsAt] = useState(0);
   const [now, setNow] = useState(Date.now());
-  const cb = useRef({ onPhase, onFinish });
-  cb.current = { onPhase, onFinish };
+  const cb = useRef({ onPhase, onFinish, onRunningChange });
+  cb.current = { onPhase, onFinish, onRunningChange };
+
+  // Stop on request from the parent; also reset if the phase set changes
+  // mid-run so the index never points at the wrong phase.
+  useEffect(() => {
+    if (stopSignal) setPhase(-1);
+  }, [stopSignal]);
+  useEffect(() => {
+    setPhase(-1);
+  }, [hasOutline]);
 
   function startPhase(i) {
     if (i >= PHASES.length) {
@@ -35,6 +55,10 @@ export default function ExamTimer({ onPhase, onFinish }) {
   }
 
   const running = phase >= 0 && phase < PHASES.length;
+
+  useEffect(() => {
+    cb.current.onRunningChange?.(running);
+  }, [running]);
 
   useEffect(() => {
     if (!running) return undefined;

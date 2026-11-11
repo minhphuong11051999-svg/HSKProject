@@ -38,7 +38,10 @@ async function listExamYears(user) {
 
   return years.map((year) => ({
     ...year,
-    sittings: year.sittings.map((sitting) => ({ ...sitting, locked: !canAccess(sitting, user) })),
+    // Half-filled records (no slug yet) have no page to open, so learners never see them.
+    sittings: year.sittings
+      .filter((sitting) => sitting.slug?.trim() || user?.role === 'ADMIN')
+      .map((sitting) => ({ ...sitting, locked: !canAccess(sitting, user) })),
   }));
 }
 
@@ -116,6 +119,16 @@ async function upsertExamSitting(data, id) {
     orderIndex,
     isPremium,
   } = data;
+  const missing = [
+    [slug, 'đường dẫn (slug)'],
+    [label, 'nhãn ngày thi'],
+    [prompt && String(prompt).replace(/<[^>]*>/g, ''), 'đề bài'],
+  ].filter(([v]) => !String(v ?? '').trim()).map(([, name]) => name);
+  if (missing.length) {
+    const error = new Error(`Vui lòng nhập ${missing.join(', ')}.`);
+    error.status = 400;
+    throw error;
+  }
   const baseData = {
     examYearId,
     slug,

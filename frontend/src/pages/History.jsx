@@ -8,11 +8,45 @@ const PAGE_SIZE = 20;
 const PAGER_BTN =
   'min-h-[44px] min-w-[44px] px-4 text-sm font-semibold rounded-xl border border-night-700 bg-night-800 text-slate-200 hover:border-coral-400/60 hover:text-coral-400 transition-colors motion-reduce:transition-none disabled:opacity-40 disabled:pointer-events-none';
 
+const EXERCISE_LABELS = {
+  quiz: 'Trắc nghiệm',
+  cloze: 'Đục lỗ',
+  match: 'Nối từ',
+  match_set: 'Nối từ',
+  flashcard: 'Flashcard',
+  error_fix: 'Tìm lỗi sai',
+  analysis: 'Phân tích đề',
+  writing: 'Bài viết',
+  partial_writing: 'Viết bán phần',
+};
+const exerciseLabel = (type) => EXERCISE_LABELS[type] || 'Bài tập';
+
 function describeSubmissionTarget(s) {
-  if (s.lesson) return { label: `Bài học · ${s.exerciseType}`, titleZh: s.lesson.titleZh };
-  if (s.samplePaper) return { label: `Đề mẫu · ${s.exerciseType}`, titleZh: s.samplePaper.titleZh };
+  if (s.lesson) return { label: `${s.lesson.titleVi || 'Bài học'} · ${exerciseLabel(s.exerciseType)}`, titleZh: s.lesson.titleZh };
+  if (s.samplePaper) return { label: `Đề mẫu · ${s.samplePaper.titleVi || s.samplePaper.titleZh}`, titleZh: s.samplePaper.titleZh };
   if (s.examSitting) return { label: `Đề thi thật · ${s.examSitting.label}`, titleZh: s.examSitting.titleZh };
-  return { label: s.exerciseType, titleZh: '—' };
+  return { label: exerciseLabel(s.exerciseType), titleZh: '—' };
+}
+
+// Older data stored one row per matching pair (all at the same second); fold
+// those into a single "Nối từ x/y" row so History reads like what was done.
+function collapseLegacyMatches(list) {
+  const out = [];
+  for (const s of list) {
+    const prev = out[out.length - 1];
+    const sameBurst =
+      prev &&
+      prev.exerciseType === 'match' &&
+      s.exerciseType === 'match' &&
+      prev.lessonId === s.lessonId &&
+      Math.abs(new Date(prev.submittedAt) - new Date(s.submittedAt)) < 5000;
+    if (sameBurst) {
+      out[out.length - 1] = { ...prev, score: (prev.score ?? 0) + (s.score ?? 0), maxScore: (prev.maxScore ?? 0) + (s.maxScore ?? 0) };
+    } else {
+      out.push(s);
+    }
+  }
+  return out;
 }
 
 export default function History() {
@@ -22,7 +56,9 @@ export default function History() {
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    listMySubmissions().then(setSubmissions).finally(() => setLoading(false));
+    listMySubmissions()
+      .then((list) => setSubmissions(collapseLegacyMatches(list)))
+      .finally(() => setLoading(false));
   }, []);
 
   const totalPages = Math.max(1, Math.ceil(submissions.length / PAGE_SIZE));
