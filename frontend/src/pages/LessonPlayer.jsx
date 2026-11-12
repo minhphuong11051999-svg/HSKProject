@@ -1656,13 +1656,9 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios, canSave, le
   const closing2 = roles.includes('closing2') ? valueOfRole('closing2') : saluteOn ? '敬礼！' : '';
 
   const totalHanzi = countHanzi(Object.values(values).filter((v) => typeof v === 'string').join(''));
-  const target = scenario?.targetWordCount;
+  // Practice inside a lesson has no word limit: just count.
   const counterClass =
-    totalHanzi === 0
-      ? 'bg-night-800 border-night-700 text-slate-400'
-      : target && totalHanzi < target * 0.8
-      ? 'bg-amber-500/10 border-amber-500 text-amber-400'
-      : 'bg-ok/10 border-ok text-ok';
+    totalHanzi === 0 ? 'bg-night-800 border-night-700 text-slate-400' : 'bg-ok/10 border-ok text-ok';
 
   const hasText = Object.values(values).some((v) => typeof v === 'string' && v.trim());
   const hasAnything = Object.values(values).some(Boolean);
@@ -1815,8 +1811,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios, canSave, le
               className={`inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full border tabular-nums ${counterClass}`}
               aria-live="polite"
             >
-              {totalHanzi}
-              {target ? ` / ${target}` : ''} chữ Hán
+              {totalHanzi} chữ Hán
             </span>
             <div className="flex flex-wrap gap-2 ml-auto">
               <button type="button" onClick={clearAll} disabled={!hasAnything} className={BTN_SECONDARY}>

@@ -12,15 +12,6 @@ export function countHanzi(text) {
   return ((text || '').match(/[一-鿿]/g) || []).length;
 }
 
-export function spaceOutIfTwoChars(text) {
-  const trimmed = (text || '').trim();
-  const chars = Array.from(trimmed.replace(/\s+/g, ''));
-  if (chars.length === 2 && countHanzi(chars.join('')) === 2) {
-    return chars.join(' ');
-  }
-  return trimmed;
-}
-
 // Titles follow the 稿纸 rule: a 2-character title leaves two empty cells
 // between the characters (通知 → 通　　知). U+3000 is one full character cell.
 export function formatTitle(text) {
@@ -40,12 +31,15 @@ function spaceOutHtmlTitles(html) {
   );
 }
 
-// "张明" → "张 明"; "学生：张明" → "学生：张 明" (only the name part is spaced).
+// A signature that is exactly 2 characters leaves one empty cell between them
+// (张明 → 张　明). Longer signatures (学生：李伟, 北京大学 刘玲玲) stay as written.
 export function formatSign(text) {
   const trimmed = (text || '').trim();
-  const m = trimmed.match(/^(.*[：:])\s*(.+)$/);
-  if (m) return `${m[1]}${spaceOutIfTwoChars(m[2])}`;
-  return spaceOutIfTwoChars(trimmed);
+  const chars = Array.from(trimmed.replace(/\s+/g, ''));
+  if (chars.length === 2 && countHanzi(chars.join('')) === 2) {
+    return chars.join('　');
+  }
+  return trimmed;
 }
 
 export function withColon(text) {
