@@ -125,7 +125,7 @@ function Hero() {
           </Reveal>
           <Reveal index={2}>
             <p className="l-lead zh" lang="zh">
-              降低认知门槛，人人皆可抵达
+              降低学习门槛，人人皆可抵达
             </p>
           </Reveal>
           <Reveal index={3}>

@@ -1,7 +1,7 @@
 // Shared "tờ giấy mô phỏng" (fixed paper layout) used by the live writing
 // preview, sample documents and model answers, so every letter in the app
 // follows the same administrative-format rules:
-//   - title centred, 2-character titles spaced out (明芳 → 明 芳)
+//   - title centred, 2-character titles get two empty cells (通知 → 通　　知)
 //   - greeting flush left, always ending with a full-width colon
 //   - body paragraphs indented 2 characters
 //   - 此致 indented 4 characters, 敬礼！ flush left
@@ -19,6 +19,25 @@ export function spaceOutIfTwoChars(text) {
     return chars.join(' ');
   }
   return trimmed;
+}
+
+// Titles follow the 稿纸 rule: a 2-character title leaves two empty cells
+// between the characters (通知 → 通　　知). U+3000 is one full character cell.
+export function formatTitle(text) {
+  const trimmed = (text || '').trim();
+  const chars = Array.from(trimmed.replace(/\s+/g, ''));
+  if (chars.length === 2 && countHanzi(chars.join('')) === 2) {
+    return chars.join('　　');
+  }
+  return trimmed;
+}
+
+// Same rule for a centred 2-character title inside admin-written HTML.
+function spaceOutHtmlTitles(html) {
+  return (html || '').replace(
+    /(<(p|h[1-6]|div)\b[^>]*text-center[^>]*>)((?:\s|<[^>]+>|&nbsp;)*)([一-鿿])(?:\s|&nbsp;|　)*([一-鿿])((?:\s|<[^>]+>|&nbsp;)*)(<\/\2>)/gi,
+    (_m, open, _tag, pre, a, b, post, close) => `${open}${pre}${a}　　${b}${post}${close}`
+  );
 }
 
 // "张明" → "张 明"; "学生：张明" → "学生：张 明" (only the name part is spaced).
@@ -190,10 +209,10 @@ export default function LetterPaper({
   return (
     <div className={`letter-paper rounded-lg px-5 py-5 sm:p-8 pb-16 sm:pb-16 text-[15px] zh leading-8 ${minHeight}`}>
       {html ? (
-        <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: html }} />
+        <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: spaceOutHtmlTitles(html) }} />
       ) : (
         <>
-          {title && <p className="text-center font-bold mb-3">{spaceOutIfTwoChars(title)}</p>}
+          {title && <p className="text-center font-bold mb-3">{formatTitle(title)}</p>}
           {greeting && <p className="text-left">{withColon(greeting)}</p>}
           {paragraphs.map((p, i) => (
             <p key={i} style={{ textIndent: '2em' }}>

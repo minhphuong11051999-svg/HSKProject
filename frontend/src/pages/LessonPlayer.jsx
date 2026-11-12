@@ -264,7 +264,6 @@ export default function LessonPlayer() {
           <VocabTab
             lesson={lesson}
             canSave={canSave}
-            showMatching={!selected.includes('matching')}
             showSentenceTasks={!selected.includes('sentence_building')}
           />
         )}
@@ -662,9 +661,9 @@ function ChoiceQuestion({ index, lessonId, question: q, canSave, showDraft = fal
           const letter = String.fromCharCode(65 + idx);
           let tone = selected === idx ? 'border-coral-400 ring-1 ring-coral-400 bg-coral-400/10' : 'border-night-700 bg-night-800 hover:border-coral-400/60';
           if (result) {
-            if (idx === result.correctIndex) tone = 'border-green-500 bg-green-500/10 text-green-300';
-            else if (idx === selected) tone = 'border-red-500 bg-red-500/10 text-red-300';
-            else tone = 'border-night-700 bg-night-800 opacity-60';
+            if (idx === result.correctIndex) tone = 'border-ok bg-ok/10 text-ok font-semibold';
+            else if (idx === selected) tone = 'border-err bg-err/10 text-err font-semibold';
+            else tone = 'border-night-700 bg-night-800 opacity-75';
           }
           return (
             <button
@@ -722,9 +721,9 @@ function ChoiceQuestion({ index, lessonId, question: q, canSave, showDraft = fal
 
 /* ---------------------------------------------------------------- 4. Ghép nối */
 
+// "Ghép nối": Từ vựng → Ghép từ vựng (same layout as the vocab step, minus Lắp ráp câu).
 function MatchingTab({ lesson, canSave }) {
-  if (lesson.matchItems.length === 0) return <Empty>Chưa có bài ghép nối.</Empty>;
-  return <MatchBoard lessonId={lesson.id} items={lesson.matchItems} canSave={canSave} />;
+  return <VocabTab lesson={lesson} canSave={canSave} showSentenceTasks={false} />;
 }
 
 function shuffle(arr) {
@@ -845,8 +844,8 @@ function MatchBoard({ lessonId, items, canSave }) {
     '': 'border-night-700 bg-night-800 hover:border-coral-400/60',
     selected: 'border-coral-400 bg-night-800 ring-2 ring-coral-400',
     paired: 'border-coral-400/60 bg-coral-400/10',
-    correct: 'border-green-500 bg-green-500/10 text-green-300',
-    wrong: 'border-red-500 bg-red-500/10 text-red-300',
+    correct: 'border-ok bg-ok/10 text-ok font-semibold',
+    wrong: 'border-err bg-err/10 text-err font-semibold',
   };
 
   function lineColor(leftId) {
@@ -1018,7 +1017,7 @@ function ClozeCard({ index, lessonId, exercise: ex, canSave }) {
   }
 
   function renderSelect(blank, number) {
-    if (!blank) return <span className="text-red-400">[?]</span>;
+    if (!blank) return <span className="text-err">[?]</span>;
     const chosen = answers[blank.id] || '';
     const correct = result?.correctAnswers?.[blank.id];
     const isRight = result && chosen === correct;
@@ -1032,8 +1031,8 @@ function ClozeCard({ index, lessonId, exercise: ex, canSave }) {
         className={`mx-1 align-baseline rounded-md border px-1.5 py-0.5 text-sm font-sans ${
           result
             ? isRight
-              ? 'border-green-600 bg-green-50 text-green-800'
-              : 'border-red-600 bg-red-50 text-red-800'
+              ? 'border-ok bg-ok/10 text-ok'
+              : 'border-err bg-err/10 text-err'
             : 'border-slate-400 bg-white text-slate-900'
         }`}
       >
@@ -1078,8 +1077,8 @@ function ClozeCard({ index, lessonId, exercise: ex, canSave }) {
         <ul className="mt-3 text-xs space-y-0.5">
           {ex.blanks.map((b, i) =>
             answers[b.id] === result.correctAnswers?.[b.id] ? null : (
-              <li key={b.id} className="text-red-400">
-                ({i + 1}) Đáp án đúng: <span className="zh text-green-400">{result.correctAnswers?.[b.id]}</span>
+              <li key={b.id} className="text-err">
+                ({i + 1}) Đáp án đúng: <span className="zh text-ok">{result.correctAnswers?.[b.id]}</span>
               </li>
             )
           )}
@@ -1237,14 +1236,21 @@ function SentenceBuildingTab({ tasks }) {
   if (!tasks || tasks.length === 0) return <Empty>Chưa có nhiệm vụ lắp ráp câu.</Empty>;
   return (
     <div className="space-y-5">
-      {tasks.map((task) => (
-        <SentenceTaskCard key={task.id} task={task} />
+      {tasks.map((task, i) => (
+        <SentenceTaskCard key={task.id} task={task} index={i} />
       ))}
     </div>
   );
 }
 
-function SentenceTaskCard({ task }) {
+// "Nhiệm vụ N · <title>", unless the admin already typed "Nhiệm vụ …" into the title.
+function taskHeading(task, index) {
+  const title = (task.title || '').trim();
+  if (/^nhiệm vụ/i.test(title)) return title;
+  return title ? `Nhiệm vụ ${index + 1} · ${title}` : `Nhiệm vụ ${index + 1}`;
+}
+
+function SentenceTaskCard({ task, index = 0 }) {
   const [value, setValue] = useState('');
   const [showHint, setShowHint] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -1253,7 +1259,7 @@ function SentenceTaskCard({ task }) {
 
   return (
     <article className={CARD}>
-      <p className="font-semibold text-slate-100">{task.title}</p>
+      <p className="font-semibold text-slate-100">{taskHeading(task, index)}</p>
       {facts.length > 0 && (
         <div className="mt-3 rounded-xl border border-night-700 bg-night-800 p-3">
           <p className="text-xs font-semibold text-slate-400 mb-1">Dữ liệu đầu vào</p>
@@ -1274,7 +1280,7 @@ function SentenceTaskCard({ task }) {
                 <span
                   key={k}
                   className={`zh text-sm px-2.5 py-0.5 rounded-full border ${
-                    used ? 'border-green-500 bg-green-500/10 text-green-400' : 'border-night-700 text-slate-300'
+                    used ? 'border-ok bg-ok/10 text-ok' : 'border-night-700 text-slate-300'
                   }`}
                 >
                   {used ? '✓ ' : ''}
@@ -1405,7 +1411,7 @@ function OutlineTab({ exercises }) {
             />
             {showAnswer && ex.answer && (
               <Reveal index={i} offset={6}>
-                <p className="mt-1 text-sm zh text-green-400 whitespace-pre-line">→ {htmlToText(ex.answer).trim()}</p>
+                <p className="mt-1 text-sm zh text-ok whitespace-pre-line">→ {htmlToText(ex.answer).trim()}</p>
               </Reveal>
             )}
           </div>
@@ -1450,35 +1456,40 @@ function FixedPhrasesTab({ phrases }) {
 
 /* ---------------------------------------------------------------- Từ vựng */
 
-function VocabTab({ lesson, canSave, showMatching, showSentenceTasks }) {
+// "Ghép từ vựng & viết câu": Từ vựng → Ghép từ vựng → Lắp ráp câu (if any).
+// Lắp ráp câu is left out here when the lesson also has it as its own step.
+function VocabTab({ lesson, canSave, showSentenceTasks }) {
   const hasVocab = lesson.vocabTerms.length > 0;
-  const hasMatch = showMatching && lesson.matchItems.length > 0;
+  const hasMatch = lesson.matchItems.length > 0;
   const hasTasks = showSentenceTasks && lesson.writingTasks.length > 0;
   if (!hasVocab && !hasMatch && !hasTasks) return <Empty />;
   return (
     <div className="space-y-8">
       {hasVocab && (
-        <div className="overflow-x-auto rounded-xl border border-night-700 bg-night-800">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-night-950 text-slate-300">
-                <th className="p-3 text-left">书面语</th>
-                <th className="p-3 text-left">口语</th>
-                <th className="p-3 text-left">Nghĩa</th>
-                <th className="p-3 text-left">Ví dụ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lesson.vocabTerms.map((v) => (
-                <tr key={v.id} className="border-t border-night-700 align-top">
-                  <td className="p-3 zh">{v.literary}</td>
-                  <td className="p-3 zh">{v.colloquial}</td>
-                  <td className="p-3">{v.meaningVi}</td>
-                  <td className="p-3 text-slate-400 zh">{v.example}</td>
+        <div>
+          <h3 className="font-bold tracking-tight mb-2">Từ vựng</h3>
+          <div className="overflow-x-auto rounded-xl border border-night-700 bg-night-800">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-night-950 text-slate-300">
+                  <th className="p-3 text-left">书面语</th>
+                  <th className="p-3 text-left">口语</th>
+                  <th className="p-3 text-left">Nghĩa</th>
+                  <th className="p-3 text-left">Ví dụ</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {lesson.vocabTerms.map((v) => (
+                  <tr key={v.id} className="border-t border-night-700 align-top">
+                    <td className="p-3 zh">{v.literary}</td>
+                    <td className="p-3 zh">{v.colloquial}</td>
+                    <td className="p-3">{v.meaningVi}</td>
+                    <td className="p-3 text-slate-400 zh">{v.example}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
       {hasMatch && (
@@ -1489,9 +1500,9 @@ function VocabTab({ lesson, canSave, showMatching, showSentenceTasks }) {
       )}
       {hasTasks && (
         <div className="space-y-4">
-          <h3 className="font-bold tracking-tight">Viết câu</h3>
-          {lesson.writingTasks.map((task) => (
-            <SentenceTaskCard key={task.id} task={task} />
+          <h3 className="font-bold tracking-tight">Lắp ráp câu</h3>
+          {lesson.writingTasks.map((task, i) => (
+            <SentenceTaskCard key={task.id} task={task} index={i} />
           ))}
         </div>
       )}
@@ -1577,8 +1588,7 @@ function PartialWritingTab({ lesson, canSave }) {
   );
 }
 
-// Admin placeholders on the fixed letter slots tend to be the answer itself
-// (请假条, 此致 …), so those slots get neutral hints instead.
+// Fallback hints for the fixed letter slots when the admin left a hint empty.
 const NEUTRAL_HINTS = {
   title: 'Tiêu đề (căn giữa)',
   greeting: 'Người nhận + dấu hai chấm',
@@ -1652,7 +1662,7 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios, canSave, le
       ? 'bg-night-800 border-night-700 text-slate-400'
       : target && totalHanzi < target * 0.8
       ? 'bg-amber-500/10 border-amber-500 text-amber-400'
-      : 'bg-green-500/10 border-green-500 text-green-400';
+      : 'bg-ok/10 border-ok text-ok';
 
   const hasText = Object.values(values).some((v) => typeof v === 'string' && v.trim());
   const hasAnything = Object.values(values).some(Boolean);
@@ -1761,7 +1771,8 @@ function GuidedWritingForm({ fields: guidedWritingFields, scenarios, canSave, le
           {guidedWritingFields.map((f, idx) => {
             const key = fieldKey(f, idx);
             const id = `gw-${key}`;
-            const placeholder = NEUTRAL_HINTS[roles[idx]] ?? f.placeholder;
+            // The admin's own hint wins; the neutral hint only fills an empty one.
+            const placeholder = f.placeholder?.trim() ? f.placeholder : NEUTRAL_HINTS[roles[idx]] ?? '';
             return (
               <div key={key}>
                 <label htmlFor={id} className="text-sm text-slate-300 block mb-1">

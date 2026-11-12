@@ -376,9 +376,9 @@ function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
           const tone = !answered
             ? 'border-night-700 bg-night-800 hover:border-coral-400'
             : isAnswer
-            ? 'border-green-500 bg-green-500/15'
+            ? 'border-ok bg-ok/15'
             : isChosen
-            ? 'border-red-500 bg-red-500/15'
+            ? 'border-err bg-err/15'
             : 'border-night-700 bg-night-800 opacity-60';
           return (
             <button
@@ -390,8 +390,8 @@ function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
             >
               <span className="w-6 flex-shrink-0 font-bold text-slate-400">{'ABCD'[k]}</span>
               <span className="flex-1">{opt}</span>
-              {answered && isAnswer && <CheckCircle size={22} weight="fill" className="text-green-400" aria-hidden="true" />}
-              {answered && isChosen && !isAnswer && <XCircle size={22} weight="fill" className="text-red-400" aria-hidden="true" />}
+              {answered && isAnswer && <CheckCircle size={22} weight="fill" className="text-ok" aria-hidden="true" />}
+              {answered && isChosen && !isAnswer && <XCircle size={22} weight="fill" className="text-err" aria-hidden="true" />}
             </button>
           );
         })}
@@ -402,10 +402,10 @@ function QuestionStep({ question, chosen, onChoose, onNext, onPrev }) {
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} role="status" className="mt-4">
             <div
               className={`rounded-xl border p-3 text-sm leading-relaxed ${
-                correct ? 'border-green-500/50 bg-green-500/10' : 'border-red-500/50 bg-red-500/10'
+                correct ? 'border-ok/50 bg-ok/10' : 'border-err/50 bg-err/10'
               }`}
             >
-              <p className={`font-semibold ${correct ? 'text-green-400' : 'text-red-400'}`}>
+              <p className={`font-semibold ${correct ? 'text-ok' : 'text-err'}`}>
                 {correct ? 'Chính xác!' : 'Chưa đúng.'} Đáp án: {'ABCD'[question.answer]}
               </p>
               {isListen && (
