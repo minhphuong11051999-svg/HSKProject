@@ -79,25 +79,10 @@ async function main() {
     const existing = await prisma.lesson.findUnique({ where: { slug: lesson.slug } });
     const content = loadContentFor(lesson.slug);
 
-    if (existing) {
-      if (content) {
-        // Flashcards are edited by admins in the lesson editor, so the data file
-        // only provides the starting set: once a lesson has cards, keep them.
-        const hasCards = (await prisma.flashcard.count({ where: { lessonId: existing.id } })) > 0;
-        const keys = NESTED_KEYS.filter((key) => !(key === 'flashcards' && hasCards));
-        const seedContent = hasCards ? { ...content, flashcards: undefined } : content;
-        await prisma.$transaction(
-          keys.map((key) => prisma[MODEL_NAME[key]].deleteMany({ where: { lessonId: existing.id } }))
-        );
-        await prisma.lesson.update({
-          where: { id: existing.id },
-          data: { ...lesson, ...buildNestedCreate(seedContent) },
-        });
-      } else {
-        await prisma.lesson.update({ where: { id: existing.id }, data: lesson });
-      }
-      continue;
-    }
+    // The seed runs on every deploy. Lessons that already exist belong to the
+    // admin (edited in "Quản trị bài học"), so never touch them: the data files
+    // only fill a brand-new, empty database.
+    if (existing) continue;
 
     await prisma.lesson.create({
       data: { ...lesson, type: 'PRACTICE', ...(content ? buildNestedCreate(content) : {}) },
