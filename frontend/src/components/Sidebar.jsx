@@ -1,17 +1,16 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import ThemeToggle from './ThemeToggle';
 import BrandLogo from './BrandLogo';
 import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
-import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree, Crown, UserCircle, CreditCard } from '@phosphor-icons/react';
+import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree, Crown, CreditCard } from '@phosphor-icons/react';
 
+// Hồ sơ + Đăng xuất now live in the account menu (top-right avatar).
 const NAV_ITEMS = [
   { to: '/', icon: House, label: 'Trang chủ' },
   { to: '/lessons', icon: BookOpen, label: 'Bài học' },
   { to: '/practice', icon: NotePencil, label: 'Đề mẫu' },
   { to: '/lessons/exam', icon: Target, label: 'Đề thi thật' },
   { to: '/history', icon: ClockCounterClockwise, label: 'Lịch sử' },
-  { to: '/profile', icon: UserCircle, label: 'Hồ sơ' },
   { to: '/pro', icon: Crown, label: 'Gói PRO' },
 ];
 
@@ -26,14 +25,8 @@ const ADMIN_ITEMS = [
 // Desktop (lg+): sticky full-height column. Below lg: off-canvas drawer that
 // slides in from the left, opened from the top app bar in Layout.
 export default function Sidebar({ open = false, onClose }) {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
-
-  function handleLogout() {
-    logout();
-    navigate('/');
-  }
 
   const activeTo = activeNavTarget(location.pathname, user?.role === 'ADMIN');
 
@@ -77,20 +70,6 @@ export default function Sidebar({ open = false, onClose }) {
         </Highlight>
       </nav>
 
-      <div className="p-4 border-t border-night-700">
-        <div className="flex items-center justify-between mb-3">
-          <Link to="/profile" className="min-w-0 text-xs text-slate-500 truncate hover:text-coral-400 transition-colors">
-            Xin chào, {user?.name}
-          </Link>
-          <ThemeToggle className="flex-shrink-0" />
-        </div>
-        <button
-          onClick={handleLogout}
-          className="w-full min-h-[44px] border-[1.5px] border-night-600 bg-night-900 text-slate-200 hover:border-coral-400 hover:text-coral-400 rounded-xl text-sm font-bold transition-colors"
-        >
-          Đăng xuất
-        </button>
-      </div>
     </aside>
   );
 }

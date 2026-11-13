@@ -120,7 +120,7 @@ export default function LessonPlayer() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col md:flex-row gap-6">
-      <aside className="md:w-64 flex-shrink-0 md:sticky md:top-6 md:self-start">
+      <aside className="md:w-64 flex-shrink-0 md:sticky md:top-[5.5rem] md:self-start">
         <BackLink to="/lessons" className="mb-2">Chủ đề bài học</BackLink>
         <p className="zh text-xl text-coral-400 mb-1">{lesson.titleZh}</p>
         <h1 className="text-lg leading-snug font-extrabold tracking-tight text-slate-100 mb-5 [text-wrap:balance]">{lesson.titleVi}</h1>

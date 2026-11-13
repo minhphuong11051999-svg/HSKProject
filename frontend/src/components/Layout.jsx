@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Sidebar from './Sidebar';
-import TopNav from './TopNav';
-import BrandLogo from './BrandLogo';
+import AppTopBar from './AppTopBar';
 import PageTransition from './motion/PageTransition';
 
 export default function Layout() {
@@ -47,23 +46,6 @@ export default function Layout() {
           Bỏ qua menu
         </a>
 
-        {/* Mobile / tablet top app bar */}
-        <header className="lg:hidden sticky top-0 z-30 h-16 flex items-center justify-between gap-3 px-4 bg-night-900/95 backdrop-blur border-b border-night-700">
-          <BrandLogo compact />
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Mở menu"
-            aria-expanded={menuOpen}
-            aria-controls="app-sidebar"
-            className="w-11 h-11 flex items-center justify-center rounded-lg border border-night-600 text-slate-200 hover:bg-night-800 transition-colors"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </button>
-        </header>
-
         {/* Backdrop behind the open drawer */}
         <div
           className={`lg:hidden fixed inset-0 z-40 bg-black/50 transition-opacity duration-200 ${
@@ -76,9 +58,12 @@ export default function Layout() {
         <Sidebar open={menuOpen} onClose={() => setMenuOpen(false)} />
 
         <div id="main-content" className="flex-1 min-w-0">
-          <PageTransition>
-            <Outlet />
-          </PageTransition>
+          <AppTopBar onOpenMenu={() => setMenuOpen(true)} menuOpen={menuOpen} />
+          <div>
+            <PageTransition>
+              <Outlet />
+            </PageTransition>
+          </div>
         </div>
       </div>
     );
@@ -87,10 +72,12 @@ export default function Layout() {
   return (
     <div className="relative isolate min-h-screen bg-night-950 text-slate-100">
       <div className="app-bg" aria-hidden="true" />
-      <TopNav />
-      <PageTransition>
-        <Outlet />
-      </PageTransition>
+      <AppTopBar showLogo />
+      <div id="main-content">
+        <PageTransition>
+          <Outlet />
+        </PageTransition>
+      </div>
     </div>
   );
 }

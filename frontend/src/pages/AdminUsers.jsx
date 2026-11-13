@@ -340,7 +340,7 @@ export default function AdminUsers() {
           )}
         </section>
 
-        <section className={`${PANEL} lg:sticky lg:top-6`}>
+        <section className={`${PANEL} lg:sticky lg:top-[5.5rem]`}>
           <h2 className={`${PANEL_TITLE} mb-4`}>Tạo tài khoản mới</h2>
           <form onSubmit={handleSubmit} className="space-y-3">
             <input
