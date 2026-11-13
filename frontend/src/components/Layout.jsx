@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import Sidebar from './Sidebar';
 import AppTopBar from './AppTopBar';
 import PageTransition from './motion/PageTransition';
+import FeedbackButton from './FeedbackButton';
 
 export default function Layout() {
   const { user, loading } = useAuth();
@@ -65,6 +66,7 @@ export default function Layout() {
             </PageTransition>
           </div>
         </div>
+        <FeedbackButton />
       </div>
     );
   }
@@ -78,6 +80,7 @@ export default function Layout() {
           <Outlet />
         </PageTransition>
       </div>
+      <FeedbackButton />
     </div>
   );
 }

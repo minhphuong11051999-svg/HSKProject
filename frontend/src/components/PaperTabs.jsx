@@ -20,7 +20,7 @@ const ALL_TABS = [
   { key: 'ai', label: 'AI Chấm Bài', icon: Robot },
 ];
 
-const PRO_BENEFITS = [
+const VIP_BENEFITS = [
   'Chấm điểm theo tiêu chí của đề',
   'Chỉ ra lỗi ngữ pháp và cách sửa',
   <>
@@ -40,13 +40,15 @@ const TEXTAREA =
 // - "Từ vựng và luận điểm" (outline) arrives only once the admin opens it site-wide.
 // - "Bài làm" behaves like the exam room: plain text, no auto-formatting, and an
 //   unsubmitted draft is wiped the moment the learner leaves the browser tab.
-// - "AI Chấm Bài" is shown to everyone; free users get a PRO teaser, PRO users
-//   the grader (which needs the paper's hidden grading criteria).
+// - "Đáp án mẫu" is a PRO benefit: free accounts get a teaser (the server
+//   doesn't send them the text).
+// - "AI Chấm Bài" belongs to the upcoming VIP plan: everyone but the admin sees
+//   a "sắp ra mắt" note; the admin keeps the grader for testing.
 // - While the exam timer runs, "Đáp án mẫu" stays locked until the draft is
 //   submitted, time runs out, or the timer is stopped.
-export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradingCriteria }) {
+export default function PaperTabs({ prompt, outline, answer, answerProLocked = false, targetKey, hasGradingCriteria }) {
   const { user } = useAuth();
-  const isPro = user?.plan === 'PREMIUM' || user?.role === 'ADMIN';
+  const isAdmin = user?.role === 'ADMIN';
   const TABS = ALL_TABS.filter((t) => t.key !== 'outline' || !!outline);
   const [tab, setTab] = useState('prompt');
   const [showAnswer, setShowAnswer] = useState(false);
@@ -166,9 +168,9 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
             >
               <t.icon size={18} weight={tab === t.key ? 'fill' : 'regular'} aria-hidden="true" />
               {t.label}
-              {t.key === 'ai' && !isPro && (
+              {((t.key === 'ai' && !isAdmin) || (t.key === 'answer' && answerProLocked)) && (
                 <span className="rounded-full border border-gold/50 bg-gold/15 px-1.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-gold leading-none">
-                  PRO
+                  {t.key === 'ai' ? 'VIP' : 'PRO'}
                 </span>
               )}
             </Tabs.Trigger>
@@ -284,7 +286,21 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
         </Tabs.Content>
 
         <Tabs.Content value="answer" className={PANEL}>
-          {answerLocked ? (
+          {answerProLocked ? (
+            <div className="text-center py-4">
+              <span className="mx-auto mb-3 grid place-items-center h-14 w-14 rounded-2xl bg-gold/15 text-gold">
+                <Crown size={28} weight="fill" aria-hidden="true" />
+              </span>
+              <h2 className={`${H2} mb-2`}>Đáp án mẫu · dành cho PRO</h2>
+              <p className="text-sm text-slate-400 mb-5 max-w-md mx-auto">
+                Nâng cấp PRO để xem đáp án mẫu của mọi đề và đối chiếu với bài làm của bạn.
+              </p>
+              <PressButton onClick={() => setPremiumOpen(true)} className={`${PRIMARY_BTN} inline-flex items-center gap-2`}>
+                <Crown size={16} weight="fill" aria-hidden="true" />
+                Tìm hiểu gói PRO
+              </PressButton>
+            </div>
+          ) : answerLocked ? (
             <div className="text-center py-4">
               <span className="mx-auto mb-3 grid place-items-center h-14 w-14 rounded-2xl bg-night-800 border border-night-700 text-slate-400">
                 <Lock size={28} weight="duotone" aria-hidden="true" />
@@ -322,7 +338,7 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
         </Tabs.Content>
 
         <Tabs.Content value="ai" className={PANEL}>
-          {isPro ? (
+          {isAdmin ? (
             <AiGradePanel
               targetKey={targetKey}
               text={submittedText || draft}
@@ -334,29 +350,26 @@ export default function PaperTabs({ prompt, outline, answer, targetKey, hasGradi
               <span className="mx-auto mb-3 grid place-items-center h-14 w-14 rounded-2xl bg-coral-400/10 text-coral-400">
                 <Robot size={32} weight="duotone" aria-hidden="true" />
               </span>
-              <h2 className={`${H2} mb-4`}>Chấm bài bằng AI · dành cho PRO</h2>
-              <ul className="mx-auto mb-6 max-w-sm space-y-2 text-left">
-                {PRO_BENEFITS.map((b, i) => (
+              <h2 className={`${H2} mb-1`}>Chấm bài bằng AI</h2>
+              <p className="mb-4 inline-block rounded-full bg-gold/15 px-3 py-0.5 text-xs font-bold text-gold">Gói VIP · sắp ra mắt</p>
+              <ul className="mx-auto mb-2 max-w-sm space-y-2 text-left">
+                {VIP_BENEFITS.map((b, i) => (
                   <li key={i} className="flex gap-2 text-sm text-slate-300">
                     <CheckCircle size={18} weight="fill" className="text-ok shrink-0 mt-0.5" aria-hidden="true" />
                     <span>{b}</span>
                   </li>
                 ))}
               </ul>
-              <PressButton onClick={() => setPremiumOpen(true)} className={`${PRIMARY_BTN} inline-flex items-center gap-2`}>
-                <Crown size={16} weight="fill" aria-hidden="true" />
-                Tìm hiểu gói PRO
-              </PressButton>
             </div>
           )}
         </Tabs.Content>
       </Tabs.Root>
 
-      {!isPro && (
+      {answerProLocked && (
         <PremiumModal
           open={premiumOpen}
           onClose={() => setPremiumOpen(false)}
-          description="AI chấm bài dành cho tài khoản PRO: chấm điểm theo tiêu chí của đề, chỉ ra lỗi ngữ pháp và gợi ý mẫu câu."
+          description="Đáp án mẫu dành cho tài khoản PRO: xem bài mẫu của mọi đề để đối chiếu với bài làm của bạn."
         />
       )}
     </>

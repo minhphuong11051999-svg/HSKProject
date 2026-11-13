@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const prisma = require('../lib/prisma');
+const { effectivePlan } = require('../lib/plan');
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../lib/tokens');
 
 async function register({ email, password, name }) {
@@ -72,7 +73,8 @@ function toPublicUser(user) {
     email: user.email,
     name: user.name,
     role: user.role,
-    plan: user.plan,
+    plan: effectivePlan(user),
+    planExpiresAt: user.plan === 'PREMIUM' ? user.planExpiresAt ?? null : null,
   };
 }
 

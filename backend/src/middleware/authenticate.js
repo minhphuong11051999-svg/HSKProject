@@ -1,4 +1,5 @@
 const { verifyAccessToken } = require('../lib/tokens');
+const { userFromTokenPayload } = require('../lib/plan');
 
 function authenticate(req, res, next) {
   const header = req.headers.authorization || '';
@@ -10,7 +11,7 @@ function authenticate(req, res, next) {
 
   try {
     const payload = verifyAccessToken(token);
-    req.user = { id: payload.sub, role: payload.role, plan: payload.plan };
+    req.user = userFromTokenPayload(payload);
     next();
   } catch {
     return res.status(401).json({ message: 'Invalid or expired access token' });

@@ -20,7 +20,7 @@ async function create(req, res, next) {
 
 async function updatePlan(req, res, next) {
   try {
-    const user = await userService.updatePlan(req.params.id, req.body.plan);
+    const user = await userService.updatePlan(req.params.id, req.body.plan, req.body.days);
     res.json(user);
   } catch (err) {
     next(err);

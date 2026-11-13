@@ -51,10 +51,15 @@ async function listLessons({ type }, user) {
       examYear: true,
       orderIndex: true,
       isPremium: true,
+      isPublished: true,
+      category: true,
     },
   });
 
-  return lessons.map((lesson) => ({ ...lesson, locked: !canAccess(lesson, user) }));
+  const isAdmin = user?.role === 'ADMIN';
+  return lessons
+    .filter((lesson) => isAdmin || lesson.isPublished)
+    .map((lesson) => ({ ...lesson, locked: !canAccess(lesson, user) }));
 }
 
 async function getLessonBySlug(slug, user) {
@@ -63,7 +68,7 @@ async function getLessonBySlug(slug, user) {
     include: FULL_INCLUDE,
   });
 
-  if (!lesson) {
+  if (!lesson || (!lesson.isPublished && user?.role !== 'ADMIN')) {
     const error = new Error('Lesson not found');
     error.status = 404;
     throw error;
@@ -121,6 +126,8 @@ async function upsertLesson(data, lessonId) {
     examYear: examYear ?? null,
     orderIndex: orderIndex ?? 0,
     isPremium: !!isPremium,
+    isPublished: data.isPublished === undefined ? true : !!data.isPublished,
+    category: typeof data.category === 'string' && data.category.trim() ? data.category.trim() : null,
     premiumParts: Array.isArray(premiumParts) ? premiumParts : [],
     selectedParts:
       Array.isArray(selectedParts) && selectedParts.length > 0

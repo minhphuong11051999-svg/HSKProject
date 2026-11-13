@@ -40,6 +40,11 @@ export default function UserMenu() {
   const name = user.name?.trim() || user.email || 'Bạn';
   const initial = Array.from(name)[0]?.toUpperCase() || '?';
   const isPro = user.plan === 'PREMIUM';
+  const proEnds = isPro && user.planExpiresAt ? new Date(user.planExpiresAt) : null;
+  const proUntil =
+    proEnds && !Number.isNaN(proEnds.getTime())
+      ? proEnds.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
+      : '';
 
   function handleLogout() {
     setOpen(false);
@@ -97,7 +102,7 @@ export default function UserMenu() {
                     isPro ? 'bg-amber-400/15 text-amber-400' : 'bg-night-800 text-slate-400'
                   }`}
                 >
-                  {isPro ? 'PRO' : 'Gói miễn phí'}
+                  {isPro ? (proUntil ? `PRO đến ${proUntil}` : 'PRO') : 'Gói miễn phí'}
                 </span>
               </div>
             </div>

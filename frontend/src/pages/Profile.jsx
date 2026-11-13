@@ -67,6 +67,11 @@ function InfoCard() {
   }, [user?.name]);
 
   const isPro = user?.plan === 'PREMIUM';
+  const proEnds = isPro && user?.planExpiresAt ? new Date(user.planExpiresAt) : null;
+  const proUntil =
+    proEnds && !Number.isNaN(proEnds.getTime())
+      ? proEnds.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
+      : '';
   const trimmed = name.trim();
   const unchanged = trimmed === (user?.name || '');
 
@@ -101,9 +106,20 @@ function InfoCard() {
           <dt className={LABEL_TEXT}>Gói</dt>
           <dd className="flex flex-wrap items-center gap-x-3 gap-y-1">
             {isPro ? (
-              <span className="bg-gold/90 text-night-950 text-xs font-bold px-2.5 py-1 rounded-full">
-                <ProLabel />
-              </span>
+              <>
+                <span className="bg-gold/90 text-night-950 text-xs font-bold px-2.5 py-1 rounded-full">
+                  <ProLabel />
+                </span>
+                <span className="text-sm text-slate-300">{proUntil ? `PRO đến ${proUntil}` : 'Không thời hạn'}</span>
+                {proUntil && (
+                  <Link
+                    to="/pro"
+                    className="inline-flex items-center min-h-[44px] text-sm font-bold text-coral-400 underline underline-offset-4"
+                  >
+                    Gia hạn
+                  </Link>
+                )}
+              </>
             ) : (
               <>
                 <span className="border border-night-600 text-slate-300 text-xs font-bold px-2.5 py-1 rounded-full">

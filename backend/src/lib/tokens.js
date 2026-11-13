@@ -1,8 +1,11 @@
 const jwt = require('jsonwebtoken');
 const env = require('../config/env');
+const { effectivePlan } = require('./plan');
 
 function signAccessToken(user) {
-  return jwt.sign({ sub: user.id, role: user.role, plan: user.plan }, env.jwt.accessSecret, {
+  const payload = { sub: user.id, role: user.role, plan: effectivePlan(user) };
+  if (payload.plan === 'PREMIUM' && user.planExpiresAt) payload.pexp = new Date(user.planExpiresAt).getTime();
+  return jwt.sign(payload, env.jwt.accessSecret, {
     expiresIn: env.jwt.accessExpiresIn,
   });
 }

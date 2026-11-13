@@ -13,6 +13,10 @@ function forLearner(item, user, settings) {
   const out = { ...rest, hasGradingCriteria: !!(gradingCriteria && gradingCriteria.trim()) };
   const isAdmin = !!user && user.role === 'ADMIN';
   if (!isAdmin && !settings.showOutlineTab) out.outline = null;
+  // "Đáp án mẫu" is a PRO benefit: free accounts never receive the text.
+  const isPro = isAdmin || (!!user && user.plan === 'PREMIUM');
+  out.answerLocked = !isPro;
+  if (!isPro) out.answer = null;
   return out;
 }
 

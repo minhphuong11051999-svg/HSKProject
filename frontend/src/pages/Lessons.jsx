@@ -7,55 +7,92 @@ import PremiumModal from '../components/PremiumModal';
 import ProLabel from '../components/ProLabel';
 import PageHeader from '../components/PageHeader';
 import Reveal from '../components/motion/Reveal';
-import { Lock, CheckCircle } from '@phosphor-icons/react';
+import { Lock, CheckCircle, EyeSlash } from '@phosphor-icons/react';
 
 const TITLES = {
   practice: { heading: 'Bài luyện tập', subtitle: 'Luyện tập với 7 bài học, cập nhật thêm theo thời gian.' },
   exam: { heading: 'Đề thi thật', subtitle: 'Đề thi thật theo tháng, cập nhật dần.' },
 };
 
-// Classification map of HSK6 writing (from belle_hsk6_map.html). Each entry is
-// [titleZh, sub-label, Vietnamese name, lesson slug]. A card lights up as soon as a
-// lesson with that slug exists in Quản trị bài học; until then it shows "Đang soạn".
-const MAP = [
-  {
-    title: 'Loại I · Có',
-    desc: 'Thỉnh cầu (xin, đề nghị)',
-    subs: [
-      ['1.1 Cho bản thân', [
-        ['请假条', '', 'Đơn xin nghỉ phép', 'luyen-viet-qingjiatiao'],
-        ['请假条', '（事假/事务）', 'Đơn xin nghỉ phép (việc riêng / công việc)', 'luyen-viet-qingjiatiao-shijia'],
-        ['申请书', '', 'Đơn xin', 'luyen-viet-shenqingshu'],
-        ['求职信', '', 'Thư xin việc', 'luyen-viet-qiuzhixin'],
-      ]],
-      ['1.2 Cho người khác', [['推荐信', '', 'Thư giới thiệu', 'luyen-viet-tuijianxin']]],
-      ['1.3 Cho tổ chức', [['建议信', '', 'Thư đề xuất', 'luyen-viet-jianyixin']]],
-    ],
-  },
-  {
-    title: 'Loại II · Không',
-    desc: 'Người đọc không quyết định điều bạn cần',
-    subs: [
-      ['Loại 1 · Báo cho biết', [
-        ['启事', '', 'Bố cáo / Rao vặt', 'luyen-viet-qishi'],
-        ['通知', '', 'Thông báo', 'luyen-viet-thongbao'],
-        ['通告', '', 'Thông cáo', 'luyen-viet-tonggao'],
-        ['声明', '', 'Tuyên bố', 'luyen-viet-shengming'],
-      ]],
-      ['Loại 2 · Kết nối tình cảm', [
-        ['感谢信', '', 'Thư cảm ơn', 'luyen-viet-ganxiexin'],
-        ['贺信', '', 'Thư chúc mừng', 'luyen-viet-hexin'],
-        ['邀请信', '', 'Thư mời', 'luyen-viet-yaoqingxin'],
-        ['致辞', '', 'Diễn văn', 'luyen-viet-zhici'],
-      ]],
-    ],
-  },
-];
+// "Phân loại bài học": groups → sub-groups, edited by the admin at /admin/lesson-map
+// and stored in settings.lessonMap. Each lesson picks one sub-group id (lesson.category);
+// a sub's "planned" items are types not written yet, shown as "Đang soạn" cards.
+// This copy of the backend default is only used when the settings can't be loaded.
+export const DEFAULT_LESSON_MAP = {
+  criterion: 'Người đọc có quyền quyết định điều bạn cần?',
+  groups: [
+    {
+      id: 'loai-1',
+      title: 'Loại I · Có',
+      desc: 'Thỉnh cầu (xin, đề nghị)',
+      subs: [
+        { id: 'loai1-ban-than', label: '1.1 Cho bản thân', planned: [] },
+        { id: 'loai1-nguoi-khac', label: '1.2 Cho người khác', planned: [] },
+        { id: 'loai1-to-chuc', label: '1.3 Cho tổ chức', planned: [{ zh: '建议信', vi: 'Thư đề xuất' }] },
+      ],
+    },
+    {
+      id: 'loai-2',
+      title: 'Loại II · Không',
+      desc: 'Người đọc không quyết định điều bạn cần',
+      subs: [
+        { id: 'loai2-bao-cho-biet', label: 'Loại 1 · Báo cho biết', planned: [{ zh: '通告', vi: 'Thông cáo' }] },
+        {
+          id: 'loai2-tinh-cam',
+          label: 'Loại 2 · Kết nối tình cảm',
+          planned: [
+            { zh: '感谢信', vi: 'Thư cảm ơn' },
+            { zh: '贺信', vi: 'Thư chúc mừng' },
+            { zh: '欢迎辞', vi: 'Lời chào mừng' },
+            { zh: '告别辞', vi: 'Lời từ biệt' },
+            { zh: '祝酒辞', vi: 'Lời chúc rượu' },
+            { zh: '致谢辞', vi: 'Lời cảm tạ' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'nghi-luan-ke-chuyen',
+      title: '议论文 · 记叙文',
+      desc: 'Sắp ra mắt',
+      subs: [
+        { id: 'nghi-luan', label: '议论文 · Văn nghị luận', planned: [{ zh: '议论文', vi: 'Văn nghị luận' }] },
+        { id: 'ke-chuyen', label: '记叙文 · Văn kể chuyện', planned: [{ zh: '记叙文', vi: 'Văn kể chuyện' }] },
+      ],
+    },
+  ],
+};
 
-const COMING = [
-  ['议论文', 'Văn nghị luận'],
-  ['记叙文', 'Văn kể chuyện'],
-];
+// Settings value → a map that is safe to render (missing pieces become empty).
+export function readLessonMap(value) {
+  if (!value || !Array.isArray(value.groups)) return DEFAULT_LESSON_MAP;
+  return {
+    criterion: value.criterion || '',
+    groups: value.groups.map((g) => ({
+      ...g,
+      subs: (Array.isArray(g.subs) ? g.subs : []).map((s) => ({ ...s, planned: Array.isArray(s.planned) ? s.planned : [] })),
+    })),
+  };
+}
+
+// "请假条 (事假/事务类)" → main "请假条" + note "(事假/事务类)".
+function splitTitle(titleZh = '') {
+  const m = titleZh.match(/^(.*?)\s*([(（].*)$/);
+  return m && m[1] ? { main: m[1], note: m[2] } : { main: titleZh, note: '' };
+}
+
+// Wraps runs of Chinese characters in the zh font, e.g. "议论文 · Văn nghị luận".
+function MixedText({ text = '' }) {
+  return text.split(/([㐀-鿿豈-﫿]+(?:\s*·\s*[㐀-鿿豈-﫿]+)*)/).map((part, i) =>
+    i % 2 ? (
+      <span key={i} lang="zh" className="zh">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+}
 
 // Shared card pieces: the whole card is a `.surface` (hover lift lives on a/button),
 // with the Chinese title on a soft tinted tile inset at the top.
@@ -73,6 +110,7 @@ function LessonMap() {
   const { user } = useAuth();
   const isAdmin = user?.role === 'ADMIN';
   const [lessons, setLessons] = useState(null);
+  const [lessonMap, setLessonMap] = useState(null);
   const [preview, setPreview] = useState(false);
   const [publicUpcoming, setPublicUpcoming] = useState(false);
   const [savingSetting, setSavingSetting] = useState(false);
@@ -82,8 +120,11 @@ function LessonMap() {
       .then(setLessons)
       .catch(() => setLessons([]));
     getSettings()
-      .then((st) => setPublicUpcoming(!!st.showUpcomingLessons))
-      .catch(() => {});
+      .then((st) => {
+        setPublicUpcoming(!!st.showUpcomingLessons);
+        setLessonMap(readLessonMap(st.lessonMap));
+      })
+      .catch(() => setLessonMap(DEFAULT_LESSON_MAP));
   }, []);
 
   // Per-lesson progress from the learner's own submissions: practised at all,
@@ -118,10 +159,27 @@ function LessonMap() {
 
   const showAll = publicUpcoming || (isAdmin && preview);
 
-  const bySlug = new Map((lessons || []).map((l) => [l.slug, l]));
-  const isDone = (item) => item[3] && bySlug.has(item[3]);
-  const allItems = MAP.flatMap((g) => g.subs.flatMap((s) => s[1]));
-  const todoCount = allItems.filter((it) => !isDone(it)).length + COMING.length;
+  // Build each sub-group's cards: its lessons (by orderIndex), then planned types
+  // that no lesson in the sub covers yet (same Chinese title, with or without note).
+  const map = lessonMap || DEFAULT_LESSON_MAP;
+  const subIds = new Set(map.groups.flatMap((g) => g.subs.map((s) => s.id)));
+  const byOrder = (a, b) => (a.orderIndex || 0) - (b.orderIndex || 0);
+  const groups = map.groups.map((g) => {
+    const subs = g.subs.map((s) => {
+      const subLessons = (lessons || []).filter((l) => l.category === s.id).sort(byOrder);
+      const titles = new Set(subLessons.flatMap((l) => [l.titleZh, splitTitle(l.titleZh).main]));
+      const planned = s.planned.filter((p) => p.zh && !titles.has(p.zh));
+      return { ...s, lessons: subLessons, planned };
+    });
+    return {
+      ...g,
+      subs,
+      done: subs.reduce((x, s) => x + s.lessons.length, 0),
+      todo: subs.reduce((x, s) => x + s.planned.length, 0),
+    };
+  });
+  const uncategorized = isAdmin ? (lessons || []).filter((l) => !l.category || !subIds.has(l.category)).sort(byOrder) : [];
+  const todoCount = groups.reduce((x, g) => x + g.todo, 0);
   let n = 0;
 
   return (
@@ -141,7 +199,7 @@ function LessonMap() {
           <p className="text-[11px] font-extrabold tracking-wider lesson-crit-label">
             TIÊU CHÍ PHÂN LOẠI <span className="zh">应用文</span>
           </p>
-          <p className="font-bold mt-0.5">Người đọc có quyền quyết định điều bạn cần?</p>
+          <p className="font-bold mt-0.5">{map.criterion}</p>
         </div>
 
         {isAdmin && (
@@ -170,47 +228,40 @@ function LessonMap() {
         )}
       </div>
 
-      {lessons === null ? (
-        <p className="text-slate-500 mt-10">Đang tải...</p>
+      {lessons === null || lessonMap === null ? (
+        <p className="text-slate-500 mt-10" role="status">Đang tải...</p>
       ) : (
         <>
-          {MAP.map((group) => {
-            const total = group.subs.reduce((x, s) => x + s[1].length, 0);
-            const done = group.subs.reduce((x, s) => x + s[1].filter(isDone).length, 0);
+          {groups.map((group) => {
+            if (!group.done && !showAll) return null;
             return (
-              <section key={group.title} className="mt-14" aria-label={group.title}>
+              <section key={group.id} className="mt-14" aria-label={group.title}>
                 <SectionHeading
-                  title={group.title}
-                  note={showAll ? `${done}/${total} bài đã ra mắt` : `${done} bài`}
+                  title={<MixedText text={group.title} />}
+                  note={showAll ? `${group.done}/${group.done + group.todo} bài đã ra mắt` : `${group.done} bài`}
                   lead={group.desc}
                 />
-                {group.subs.map(([label, items]) => {
-                  const hasDone = items.some(isDone);
-                  if (!hasDone && !showAll) return null;
-                  const shown = showAll ? items.length : items.filter(isDone).length;
+                {group.subs.map((sub) => {
+                  if (!sub.lessons.length && !showAll) return null;
+                  const shown = sub.lessons.length + (showAll ? sub.planned.length : 0);
                   return (
-                    <div key={label} className="mt-8">
+                    <div key={sub.id} className="mt-8">
                       <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
-                        {label} <span className="font-normal normal-case tracking-normal">· {shown}</span>
+                        <MixedText text={sub.label} />{' '}
+                        <span className="font-normal normal-case tracking-normal">· {shown}</span>
                       </h3>
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                        {items.map((it) => {
-                          const lesson = isDone(it) ? bySlug.get(it[3]) : null;
-                          if (!lesson && !showAll) return null;
-                          if (lesson) n += 1;
-                          return (
-                            <MapCard
-                              key={it[0] + it[1]}
-                              zh={it[0]}
-                              zhNote={it[1]}
-                              vi={it[2]}
-                              lesson={lesson}
-                              number={lesson ? n : null}
-                              progress={lesson ? progress[lesson.slug] : null}
-                            />
-                          );
-                        })}
-                      </div>
+                      {shown === 0 ? (
+                        <p className="text-sm text-slate-500">Chưa có bài nào trong nhóm này.</p>
+                      ) : (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                          {sub.lessons.map((lesson) => {
+                            n += 1;
+                            return <LessonMapCard key={lesson.id} lesson={lesson} number={n} progress={progress[lesson.slug]} />;
+                          })}
+                          {showAll &&
+                            sub.planned.map((p, i) => <MapCard key={`${p.zh}-${i}`} zh={p.zh} vi={p.vi} lesson={null} />)}
+                        </div>
+                      )}
                     </div>
                   );
                 })}
@@ -218,13 +269,26 @@ function LessonMap() {
             );
           })}
 
-          {showAll && (
-            <section className="mt-14" aria-label="议论文 · 记叙文">
-              <SectionHeading title={<span className="zh">议论文 · 记叙文</span>} note="Sắp ra mắt" />
+          {uncategorized.length > 0 && (
+            <section className="mt-14" aria-label="Chưa phân loại">
+              <SectionHeading
+                title="Chưa phân loại"
+                note={`${uncategorized.length} bài · chỉ quản trị viên thấy`}
+                lead={
+                  <>
+                    Người học không thấy các bài này trên trang Bài học. Chọn “Phân loại” cho từng bài trong{' '}
+                    <Link to="/admin" className="font-semibold text-coral-400 underline underline-offset-2">
+                      Quản trị bài học
+                    </Link>
+                    .
+                  </>
+                }
+              />
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
-                {COMING.map(([zh, vi]) => (
-                  <MapCard key={zh} zh={zh} vi={vi} lesson={null} soonLabel="Sắp ra mắt" />
-                ))}
+                {uncategorized.map((lesson) => {
+                  n += 1;
+                  return <LessonMapCard key={lesson.id} lesson={lesson} number={n} progress={progress[lesson.slug]} />;
+                })}
               </div>
             </section>
           )}
@@ -257,6 +321,11 @@ function CardCta({ locked, label }) {
   );
 }
 
+function LessonMapCard({ lesson, number, progress }) {
+  const { main, note } = splitTitle(lesson.titleZh);
+  return <MapCard zh={main} zhNote={note} vi={lesson.titleVi} lesson={lesson} number={number} progress={progress} />;
+}
+
 function MapCard({ zh, zhNote = '', vi, lesson, number, progress, soonLabel = 'Đang soạn' }) {
   const [showPremium, setShowPremium] = useState(false);
   const inner = (
@@ -266,6 +335,12 @@ function MapCard({ zh, zhNote = '', vi, lesson, number, progress, soonLabel = '�
         {lesson?.isPremium && (
           <span className={`${BADGE} right-3 bg-gold/90 text-night-950`}>
             <ProLabel />
+          </span>
+        )}
+        {lesson && lesson.isPublished === false && (
+          <span className="absolute bottom-2.5 left-3 inline-flex items-center gap-1 rounded-full border border-night-600 bg-night-800 px-2.5 py-0.5 text-xs font-semibold text-slate-300">
+            <EyeSlash size={12} weight="bold" aria-hidden="true" />
+            Đang ẩn
           </span>
         )}
         <span lang="zh" className="zh text-4xl md:text-[2.75rem] leading-tight text-coral-400 text-center">{zh}</span>

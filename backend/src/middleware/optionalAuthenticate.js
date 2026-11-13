@@ -1,4 +1,5 @@
 const { verifyAccessToken } = require('../lib/tokens');
+const { userFromTokenPayload } = require('../lib/plan');
 
 function optionalAuthenticate(req, res, next) {
   const header = req.headers.authorization || '';
@@ -7,7 +8,7 @@ function optionalAuthenticate(req, res, next) {
   if (token) {
     try {
       const payload = verifyAccessToken(token);
-      req.user = { id: payload.sub, role: payload.role, plan: payload.plan };
+      req.user = userFromTokenPayload(payload);
     } catch {
       req.user = null;
     }

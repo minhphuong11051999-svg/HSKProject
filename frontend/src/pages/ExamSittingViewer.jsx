@@ -44,6 +44,7 @@ export default function ExamSittingViewer() {
         prompt={sitting.prompt}
         outline={sitting.outline}
         answer={sitting.answer}
+        answerProLocked={!!sitting.answerLocked}
         hasGradingCriteria={sitting.hasGradingCriteria}
         targetKey={{ examSittingId: sitting.id }}
       />

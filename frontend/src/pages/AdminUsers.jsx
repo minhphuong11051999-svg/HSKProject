@@ -18,10 +18,32 @@ import {
   ERROR_TEXT,
   SUCCESS_TEXT,
   LABEL_TEXT,
-  CHECKBOX,
 } from '../components/admin/ui';
 
 const EMPTY_FORM = { name: '', email: '', password: '', role: 'USER' };
+// PRO periods the admin can grant after a bank transfer ('' = no end date).
+const PERIODS = [
+  ['15', '15 ngày'],
+  ['30', '30 ngày'],
+  ['90', '3 tháng (90 ngày)'],
+  ['', 'Không thời hạn'],
+];
+
+function formatDate(value) {
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+// FREE, PRO with no end date, PRO running until a date, or PRO whose date has passed
+// (the list returns the stored plan; the server treats an expired one as FREE).
+function planStatus(u) {
+  if (u.plan !== 'PREMIUM') return { kind: 'free' };
+  if (!u.planExpiresAt) return { kind: 'forever' };
+  const ends = new Date(u.planExpiresAt);
+  if (ends.getTime() <= Date.now()) return { kind: 'expired', date: formatDate(ends) };
+  return { kind: 'active', date: formatDate(ends) };
+}
 const MIN_PASSWORD = 8;
 // No look-alike characters (0/O, 1/l/I) so the password is easy to read out or retype.
 const READABLE = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789';
@@ -205,6 +227,105 @@ function ResetPasswordRow({ user, onClose }) {
   );
 }
 
+// Inline row under a user: grant PRO for a period, extend it, or turn it off.
+function PlanRow({ user, onSaved, onClose }) {
+  const status = planStatus(user);
+  const [days, setDays] = useState('30');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  const selectId = `plan-period-${user.id}`;
+  const hintId = `${selectId}-hint`;
+
+  const isOn = status.kind === 'active' || status.kind === 'forever';
+  const actionLabel = status.kind === 'active' ? 'Gia hạn' : status.kind === 'forever' ? 'Đặt thời hạn' : 'Bật PRO';
+  const nothingToDo = status.kind === 'forever' && days === '';
+  const periodText = PERIODS.find(([v]) => v === days)?.[1] || '';
+
+  let hint = 'Thời hạn tính từ hôm nay.';
+  if (status.kind === 'active') hint = `Thời gian mới được cộng nối tiếp vào ngày hết hạn hiện tại (${status.date}).`;
+  if (status.kind === 'forever') hint = 'Tài khoản đang PRO không thời hạn; chọn thời hạn sẽ thay bằng ngày hết hạn tính từ hôm nay.';
+  if (days === '') hint = 'PRO không có ngày hết hạn, chỉ tắt khi bạn tắt thủ công.';
+
+  async function save(plan, period) {
+    setError('');
+    setSaving(true);
+    try {
+      const updated = await updateUserPlan(user.id, plan, period === '' ? undefined : Number(period));
+      onSaved(user, updated && typeof updated === 'object' ? updated : { plan, planExpiresAt: null });
+    } catch (err) {
+      setError(err.response?.data?.message || 'Cập nhật gói thất bại');
+      setSaving(false);
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (nothingToDo) return;
+    if (status.kind === 'forever' && !confirm(`"${user.email}" đang PRO không thời hạn. Đổi thành PRO ${periodText} tính từ hôm nay?`)) return;
+    save('PREMIUM', days);
+  }
+
+  function handleTurnOff() {
+    if (!confirm(`Tắt PRO của "${user.email}"? Tài khoản trở về gói miễn phí ngay.`)) return;
+    save('FREE', '');
+  }
+
+  return (
+    <tr className="bg-coral-400/5">
+      <td colSpan={7} className="px-4 py-4">
+        <form onSubmit={handleSubmit} className="space-y-2">
+          <label htmlFor={selectId} className={LABEL_TEXT}>
+            Thời hạn PRO cho {user.email}
+          </label>
+          <div className="flex flex-wrap items-start gap-3">
+            <select
+              id={selectId}
+              value={days}
+              onChange={(e) => setDays(e.target.value)}
+              aria-describedby={hintId}
+              className={`${INPUT} w-full sm:w-56`}
+            >
+              {PERIODS.map(([value, text]) => (
+                <option key={value || 'none'} value={value}>
+                  {text}
+                </option>
+              ))}
+            </select>
+            <button type="submit" disabled={saving || nothingToDo} className={BTN_PRIMARY}>
+              {saving ? 'Đang lưu...' : actionLabel}
+            </button>
+            {(isOn || status.kind === 'expired') && (
+              <button type="button" onClick={handleTurnOff} disabled={saving} className={BTN_LINK_DANGER}>
+                Tắt PRO
+              </button>
+            )}
+            <button type="button" onClick={onClose} className={BTN_LINK}>Huỷ</button>
+          </div>
+          <p id={hintId} className={HINT}>{hint}</p>
+          {error && <p className={ERROR_TEXT} role="alert">{error}</p>}
+        </form>
+      </td>
+    </tr>
+  );
+}
+
+function PlanCell({ user }) {
+  const status = planStatus(user);
+  if (status.kind === 'free') return <span className="text-slate-500">Free</span>;
+  return (
+    <span className="flex flex-col">
+      <span className={status.kind === 'expired' ? 'text-slate-500 font-semibold' : 'text-gold font-semibold'}>
+        <ProLabel />
+      </span>
+      <span className={`text-xs whitespace-nowrap ${status.kind === 'expired' ? 'font-semibold text-[color:var(--c-hint-text)]' : 'text-slate-400'}`}>
+        {status.kind === 'forever' && 'Không thời hạn'}
+        {status.kind === 'active' && `Đến ${status.date}`}
+        {status.kind === 'expired' && `Hết hạn ${status.date}`}
+      </span>
+    </span>
+  );
+}
+
 export default function AdminUsers() {
   const { user: me } = useAuth();
   const [users, setUsers] = useState([]);
@@ -213,6 +334,8 @@ export default function AdminUsers() {
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
   const [resetFor, setResetFor] = useState(null);
+  const [planFor, setPlanFor] = useState(null);
+  const [planMessage, setPlanMessage] = useState('');
 
   function refresh() {
     setLoading(true);
@@ -246,15 +369,24 @@ export default function AdminUsers() {
     }
   }
 
-  async function togglePremium(u) {
-    const nextPlan = u.plan === 'PREMIUM' ? 'FREE' : 'PREMIUM';
-    setUsers((prev) => prev.map((x) => (x.id === u.id ? { ...x, plan: nextPlan } : x)));
-    try {
-      await updateUserPlan(u.id, nextPlan);
-    } catch (err) {
-      alert(err.response?.data?.message || 'Cập nhật gói thất bại');
-      refresh();
-    }
+  function handlePlanSaved(u, updated) {
+    const merged = { ...u, plan: updated.plan, planExpiresAt: updated.planExpiresAt ?? null };
+    setUsers((prev) => prev.map((x) => (x.id === u.id ? { ...x, ...merged } : x)));
+    setPlanFor(null);
+    const status = planStatus(merged);
+    setPlanMessage(
+      status.kind === 'free'
+        ? `Đã tắt PRO của ${u.email}.`
+        : status.kind === 'forever'
+          ? `Đã bật PRO không thời hạn cho ${u.email}.`
+          : `${u.email} là PRO đến hết ${status.date}.`,
+    );
+  }
+
+  function togglePlanRow(id) {
+    setPlanMessage('');
+    setPlanFor(planFor === id ? null : id);
+    if (resetFor === id) setResetFor(null);
   }
 
   return (
@@ -275,8 +407,10 @@ export default function AdminUsers() {
           ) : (
             <>
             <p className={`${HINT} mb-3`}>
-              Sau khi bật PRO (cột Premium), học viên cần đăng xuất rồi đăng nhập lại để quyền PRO có hiệu lực.
+              Bấm “Gói” ở cột Premium để bật PRO theo thời hạn (15 ngày, 30 ngày, 3 tháng hoặc không thời hạn), gia hạn hoặc tắt PRO.
+              Hết hạn, tài khoản tự về gói miễn phí. Sau khi bật PRO, học viên cần đăng xuất rồi đăng nhập lại để quyền PRO có hiệu lực.
             </p>
+            <p className={`${SUCCESS_TEXT} mb-3 empty:hidden`} role="status">{planMessage}</p>
             <div className="surface overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="border-b border-night-700">
@@ -302,23 +436,27 @@ export default function AdminUsers() {
                     <td className="px-4 py-2 text-slate-400 whitespace-nowrap">{new Date(u.createdAt).toLocaleDateString('vi-VN')}</td>
                     <td className="px-4 py-2 text-center tabular-nums">{u.submissionCount}</td>
                     <td className="px-4 py-2">
-                      <label className="flex items-center gap-2 min-h-[44px] cursor-pointer">
-                        <input
-                          type="checkbox"
-                          className={CHECKBOX}
-                          checked={u.plan === 'PREMIUM'}
-                          onChange={() => togglePremium(u)}
-                        />
-                        <span className={u.plan === 'PREMIUM' ? 'text-gold font-semibold' : 'text-slate-500'}>
-                          {u.plan === 'PREMIUM' ? <ProLabel /> : 'Free'}
-                        </span>
-                      </label>
+                      <div className="flex items-center gap-2">
+                        <PlanCell user={u} />
+                        <button
+                          type="button"
+                          onClick={() => togglePlanRow(u.id)}
+                          aria-expanded={planFor === u.id}
+                          className={`${BTN_LINK} whitespace-nowrap`}
+                        >
+                          {planStatus(u).kind === 'active' ? 'Gia hạn' : 'Gói'}
+                          <span className="sr-only"> của {u.email}</span>
+                        </button>
+                      </div>
                     </td>
                     <td className="px-2 py-2 text-right">
                       <div className="flex justify-end gap-1">
                         <button
                           type="button"
-                          onClick={() => setResetFor(resetFor === u.id ? null : u.id)}
+                          onClick={() => {
+                            setResetFor(resetFor === u.id ? null : u.id);
+                            if (planFor === u.id) setPlanFor(null);
+                          }}
                           aria-expanded={resetFor === u.id}
                           className={`${BTN_LINK} whitespace-nowrap`}
                         >
@@ -330,6 +468,9 @@ export default function AdminUsers() {
                       </div>
                     </td>
                   </tr>
+                  {planFor === u.id && (
+                    <PlanRow user={u} onSaved={handlePlanSaved} onClose={() => setPlanFor(null)} />
+                  )}
                   {resetFor === u.id && <ResetPasswordRow user={u} onClose={() => setResetFor(null)} />}
                   </Fragment>
                 ))}

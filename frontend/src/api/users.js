@@ -4,8 +4,9 @@ export const listUsers = () => axiosClient.get('/admin/users').then((r) => r.dat
 
 export const createUser = (payload) => axiosClient.post('/admin/users', payload).then((r) => r.data);
 
-export const updateUserPlan = (id, plan) =>
-  axiosClient.patch(`/admin/users/${id}/plan`, { plan }).then((r) => r.data);
+// days: length of the PRO period (15 / 30 / 90); omit for no end date.
+export const updateUserPlan = (id, plan, days) =>
+  axiosClient.patch(`/admin/users/${id}/plan`, { plan, days }).then((r) => r.data);
 
 export const resetUserPassword = (id, password) =>
   axiosClient.patch(`/admin/users/${id}/password`, { password }).then((r) => r.data);

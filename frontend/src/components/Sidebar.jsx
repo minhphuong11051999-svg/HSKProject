@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import BrandLogo from './BrandLogo';
 import { Highlight, HighlightItem } from '@animate-ui/react/primitives/effects/highlight';
-import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree, Crown, CreditCard } from '@phosphor-icons/react';
+import { House, BookOpen, NotePencil, Target, ClockCounterClockwise, Books, UsersThree, Crown, CreditCard, TreeStructure, ChatCircleText } from '@phosphor-icons/react';
 
 // Hồ sơ + Đăng xuất now live in the account menu (top-right avatar).
 const NAV_ITEMS = [
@@ -16,10 +16,12 @@ const NAV_ITEMS = [
 
 const ADMIN_ITEMS = [
   { to: '/admin', icon: Books, label: 'Quản trị bài học' },
+  { to: '/admin/lesson-map', icon: TreeStructure, label: 'Phân loại bài học' },
   { to: '/admin/sample-papers', icon: NotePencil, label: 'Quản trị đề mẫu' },
   { to: '/admin/exam-sittings', icon: Target, label: 'Quản trị đề thi thật' },
   { to: '/admin/users', icon: UsersThree, label: 'Người dùng' },
   { to: '/admin/pricing', icon: CreditCard, label: 'Gói PRO & thanh toán' },
+  { to: '/admin/feedback', icon: ChatCircleText, label: 'Góp ý' },
 ];
 
 // Desktop (lg+): sticky full-height column. Below lg: off-canvas drawer that

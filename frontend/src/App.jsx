@@ -21,6 +21,8 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const Pro = lazy(() => import('./pages/Pro'));
 const Profile = lazy(() => import('./pages/Profile'));
 const AdminPricing = lazy(() => import('./pages/AdminPricing'));
+const AdminLessonMap = lazy(() => import('./pages/AdminLessonMap'));
+const AdminFeedback = lazy(() => import('./pages/AdminFeedback'));
 
 function PageFallback() {
   return <div className="p-10 text-center text-slate-500">Đang tải...</div>;
@@ -40,6 +42,22 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/lesson-map"
+            element={
+              <ProtectedRoute role="ADMIN">
+                <AdminLessonMap />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/feedback"
+            element={
+              <ProtectedRoute role="ADMIN">
+                <AdminFeedback />
               </ProtectedRoute>
             }
           />

@@ -58,8 +58,9 @@ const SYSTEM = [
 ].join('\n');
 
 async function gradeWriting({ user, samplePaperId, examSittingId, text }) {
-  if (!user || (user.plan !== 'PREMIUM' && user.role !== 'ADMIN')) {
-    throw httpError(403, 'Tính năng AI chấm bài chỉ dành cho tài khoản PRO.');
+  // AI grading belongs to the upcoming VIP plan; until it launches only the admin can use it.
+  if (!user || user.role !== 'ADMIN') {
+    throw httpError(403, 'Tính năng AI chấm bài dành cho gói VIP, sắp ra mắt.');
   }
   if (!text || !text.trim()) {
     throw httpError(400, 'Bạn hãy viết bài ở tab "Bài làm" trước khi chấm.');

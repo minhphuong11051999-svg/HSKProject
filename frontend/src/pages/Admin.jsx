@@ -8,10 +8,15 @@ import ClozeExercisesEditor from '../components/admin/ClozeExercisesEditor';
 import MatchItemsEditor from '../components/admin/MatchItemsEditor';
 import FlashcardsEditor from '../components/admin/FlashcardsEditor';
 import PageHeader from '../components/PageHeader';
+import { getSettings } from '../api/settings';
+import { DEFAULT_LESSON_MAP, readLessonMap } from './Lessons';
 import {
   PANEL,
   PANEL_TITLE,
   HINT,
+  LABEL,
+  LABEL_TEXT,
+  INPUT,
   BTN_PRIMARY,
   BTN_SECONDARY,
   BTN_LINK,
@@ -100,6 +105,8 @@ const EMPTY_FORM = {
   examMonth: null,
   examYear: null,
   orderIndex: 0,
+  category: '',
+  isPublished: true,
   isPremium: false,
   premiumParts: DEFAULT_PREMIUM_PARTS,
   hiddenParts: [],
@@ -126,12 +133,21 @@ export default function Admin() {
   const [saving, setSaving] = useState(false);
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [savedMessage, setSavedMessage] = useState('');
+  const [lessonMap, setLessonMap] = useState(DEFAULT_LESSON_MAP);
 
   function refresh() {
     listLessons().then(setLessons);
   }
 
   useEffect(refresh, []);
+  useEffect(() => {
+    getSettings()
+      .then((st) => setLessonMap(readLessonMap(st.lessonMap)))
+      .catch(() => {});
+  }, []);
+
+  // Sub-group id → label, for the lesson list and the "Phân loại" select.
+  const categoryLabels = new Map(lessonMap.groups.flatMap((g) => g.subs.map((s) => [s.id, s.label])));
 
   async function edit(lesson) {
     setError('');
@@ -502,6 +518,8 @@ export default function Admin() {
         examMonth: form.type === 'EXAM' ? form.examMonth : null,
         examYear: form.type === 'EXAM' ? form.examYear : null,
         orderIndex: form.orderIndex || 0,
+        category: form.category || null,
+        isPublished: form.isPublished !== false,
         isPremium: !!form.isPremium,
         premiumParts: form.premiumParts || [],
         hiddenParts: (form.hiddenParts || []).filter((k) => form.selectedParts.includes(k)),
@@ -562,6 +580,16 @@ export default function Admin() {
                 <div className="min-w-0">
                   <p className="zh text-slate-100 truncate">{lesson.titleZh}</p>
                   <p className="text-xs text-slate-400 truncate">{lesson.slug} · {lesson.type}</p>
+                  {lesson.type === 'PRACTICE' && (
+                    <p className="text-xs text-slate-400 truncate">
+                      {lesson.category
+                        ? categoryLabels.get(lesson.category) || `Phân loại không còn: ${lesson.category}`
+                        : 'Chưa phân loại'}
+                    </p>
+                  )}
+                  {lesson.isPublished === false && (
+                    <p className="text-xs font-semibold text-[color:var(--c-hint-text)]">Đang ẩn với người học</p>
+                  )}
                 </div>
                 <div className="flex flex-shrink-0">
                   <button onClick={() => edit(lesson)} className={BTN_LINK}>Sửa</button>
@@ -597,6 +625,38 @@ export default function Admin() {
                   onChange={(v) => set('type', v)}
                   options={[['PRACTICE', 'Đề mẫu'], ['EXAM', 'Đề thi thật']]}
                 />
+                <div className={LABEL}>
+                  <label htmlFor="lesson-category" className={LABEL_TEXT}>
+                    Phân loại
+                  </label>
+                  <select
+                    id="lesson-category"
+                    value={form.category || ''}
+                    onChange={(e) => set('category', e.target.value)}
+                    className={INPUT}
+                    aria-describedby="lesson-category-hint"
+                  >
+                    <option value="">— Chưa phân loại —</option>
+                    {lessonMap.groups.map((g) => (
+                      <optgroup key={g.id} label={g.title}>
+                        {g.subs.map((s) => (
+                          <option key={s.id} value={s.id}>
+                            {s.label}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
+                    {form.category && !categoryLabels.has(form.category) && (
+                      <option value={form.category}>Không còn trong danh sách: {form.category}</option>
+                    )}
+                  </select>
+                  <p id="lesson-category-hint" className={`${HINT} mt-1`}>
+                    Nhóm hiển thị trên trang Bài học.{' '}
+                    <Link to="/admin/lesson-map" className="font-semibold text-coral-400 underline underline-offset-2">
+                      Sửa danh sách phân loại
+                    </Link>
+                  </p>
+                </div>
                 {form.type === 'EXAM' && (
                   <>
                     <NumberField label="Tháng" value={form.examMonth} onChange={(v) => set('examMonth', v)} />
@@ -606,6 +666,11 @@ export default function Admin() {
                 <NumberField label="Thứ tự hiển thị" value={form.orderIndex} onChange={(v) => set('orderIndex', v)} />
               </div>
               <TextAreaField label="Mô tả ngắn" value={form.description} onChange={(v) => set('description', v)} />
+              <CheckboxField
+                label="Hiện bài này cho người học"
+                checked={form.isPublished !== false}
+                onChange={(v) => set('isPublished', v)}
+              />
               <CheckboxField
                 label="Khoá toàn bộ bài học, chỉ user Premium mới xem được"
                 checked={form.isPremium}

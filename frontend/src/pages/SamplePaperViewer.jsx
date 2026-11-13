@@ -41,6 +41,7 @@ export default function SamplePaperViewer() {
         prompt={paper.prompt}
         outline={paper.outline}
         answer={paper.answer}
+        answerProLocked={!!paper.answerLocked}
         hasGradingCriteria={paper.hasGradingCriteria}
         targetKey={{ samplePaperId: paper.id }}
       />

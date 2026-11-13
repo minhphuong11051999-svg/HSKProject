@@ -4,7 +4,7 @@ import { Crown, Lock, X } from '@phosphor-icons/react';
 
 const DEFAULT_TITLE = 'Tính năng PRO';
 const DEFAULT_DESCRIPTION =
-  'Nội dung này dành cho tài khoản PRO. Nâng cấp để mở khoá AI chấm bài, các bài học và đề thi thật gắn nhãn PRO.';
+  'Nội dung này dành cho tài khoản PRO. Nâng cấp để mở đủ các bước của mọi bài học, đáp án mẫu, thêm đề mẫu và đề thi thật.';
 
 // Animate UI's animated Radix Dialog: zoom/fade in & out, focus trapped inside,
 // Escape and backdrop click close it, focus returns to the trigger afterwards.

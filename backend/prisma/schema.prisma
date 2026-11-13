@@ -29,49 +29,56 @@ enum QuizKind {
 }
 
 model User {
-  id           String       @id @default(cuid())
-  email        String       @unique
-  passwordHash String
-  name         String
-  role         Role         @default(USER)
-  plan         Plan         @default(FREE)
-  createdAt    DateTime     @default(now())
-  submissions  Submission[]
+  id            String       @id @default(cuid())
+  email         String       @unique
+  passwordHash  String
+  name          String
+  role          Role         @default(USER)
+  plan          Plan         @default(FREE)
+  // PRO bought for a set period (15 days, 30 days, 3 months); null = no end date.
+  planExpiresAt DateTime?
+  createdAt     DateTime     @default(now())
+  submissions   Submission[]
+  feedbacks     Feedback[]
 }
 
 model Lesson {
-  id          String     @id @default(cuid())
-  slug        String     @unique
-  titleZh     String
-  titleVi     String
-  description String?
-  themeKey    String     @default("indigo")
-  type        LessonType @default(PRACTICE)
-  examMonth   Int?
-  examYear    Int?
-  orderIndex  Int        @default(0)
-  isPremium   Boolean    @default(false)
-  premiumParts String[]  @default(["cloze", "error", "vocab", "writing"])
-  hiddenParts  String[]  @default([])
-  selectedParts String[] @default(["theory", "samples", "quiz", "cloze", "error", "vocab", "writing"])
+  id            String     @id @default(cuid())
+  slug          String     @unique
+  titleZh       String
+  titleVi       String
+  description   String?
+  themeKey      String     @default("indigo")
+  type          LessonType @default(PRACTICE)
+  examMonth     Int?
+  examYear      Int?
+  orderIndex    Int        @default(0)
+  isPremium     Boolean    @default(false)
+  // Shown to learners; unticked lessons stay visible only to the admin.
+  isPublished   Boolean    @default(true)
+  // Sub-group id from the "Phân loại bài học" tree (AppSetting "lessonMap").
+  category      String?
+  premiumParts  String[]   @default(["cloze", "error", "vocab", "writing"])
+  hiddenParts   String[]   @default([])
+  selectedParts String[]   @default(["theory", "samples", "quiz", "cloze", "error", "vocab", "writing"])
   // "Phân tích đề" part: { prompt?: string, items: [{ hint, answer }] x5 } — the 5 questions are fixed in the frontend.
-  analysisTask Json?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  analysisTask  Json?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 
-  sections             LessonSection[]
-  sampleDocuments       SampleDocument[]
-  vocabTerms            VocabTerm[]
-  fixedPhrases          FixedPhrase[]
-  quizQuestions         QuizQuestion[]
-  clozeExercises        ClozeExercise[]
-  matchItems            MatchItem[]
-  writingTasks          WritingTask[]
-  guidedWritingFields   GuidedWritingField[]
+  sections               LessonSection[]
+  sampleDocuments        SampleDocument[]
+  vocabTerms             VocabTerm[]
+  fixedPhrases           FixedPhrase[]
+  quizQuestions          QuizQuestion[]
+  clozeExercises         ClozeExercise[]
+  matchItems             MatchItem[]
+  writingTasks           WritingTask[]
+  guidedWritingFields    GuidedWritingField[]
   guidedWritingScenarios GuidedWritingScenario[]
-  exercises             LessonExercise[]
-  flashcards            Flashcard[]
-  submissions           Submission[]
+  exercises              LessonExercise[]
+  flashcards             Flashcard[]
+  submissions            Submission[]
 }
 
 model LessonSection {
@@ -85,22 +92,22 @@ model LessonSection {
 }
 
 model SampleDocument {
-  id         String @id @default(cuid())
+  id         String  @id @default(cuid())
   lessonId   String
-  lesson     Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lesson     Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   label      String
   title      String?
   audience   String?
   body       String
   signerOrg  String?
   date       String?
-  orderIndex Int    @default(0)
+  orderIndex Int     @default(0)
 }
 
 model VocabTerm {
-  id         String @id @default(cuid())
+  id         String  @id @default(cuid())
   lessonId   String
-  lesson     Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lesson     Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   literary   String
   colloquial String
   meaningVi  String
@@ -108,11 +115,11 @@ model VocabTerm {
 }
 
 model FixedPhrase {
-  id             String @id @default(cuid())
-  lessonId       String
-  lesson         Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  chinese        String
-  viExplanation  String
+  id            String @id @default(cuid())
+  lessonId      String
+  lesson        Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  chinese       String
+  viExplanation String
 }
 
 model QuizQuestion {
@@ -178,65 +185,65 @@ model ClozeExercise {
 }
 
 model MatchItem {
-  id            String @id @default(cuid())
-  lessonId      String
-  lesson        Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  leftLabelVi   String
-  rightLabelZh  String
-  correctKey    String
-  explanation   String?
-  orderIndex    Int    @default(0)
+  id           String  @id @default(cuid())
+  lessonId     String
+  lesson       Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  leftLabelVi  String
+  rightLabelZh String
+  correctKey   String
+  explanation  String?
+  orderIndex   Int     @default(0)
 }
 
 model WritingTask {
-  id               String @id @default(cuid())
+  id               String  @id @default(cuid())
   lessonId         String
-  lesson           Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lesson           Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   title            String
   facts            Json
   requiredKeywords Json
   hint             String?
   referenceAnswer  String
-  orderIndex       Int    @default(0)
+  orderIndex       Int     @default(0)
 }
 
 model GuidedWritingField {
-  id          String @id @default(cuid())
+  id          String  @id @default(cuid())
   lessonId    String
-  lesson      Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  group       String @default("writing")
+  lesson      Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  group       String  @default("writing")
   name        String
   label       String
   placeholder String?
-  inputType   String @default("text")
-  orderIndex  Int    @default(0)
+  inputType   String  @default("text")
+  orderIndex  Int     @default(0)
 }
 
 model GuidedWritingScenario {
-  id               String @id @default(cuid())
-  lessonId         String
-  lesson           Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  group            String @default("writing")
-  situationPrompt  String
-  modelAnswer      String
-  targetWordCount  Int?
+  id              String @id @default(cuid())
+  lessonId        String
+  lesson          Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  group           String @default("writing")
+  situationPrompt String
+  modelAnswer     String
+  targetWordCount Int?
 }
 
 model SamplePaper {
-  id           String   @id @default(cuid())
-  slug         String   @unique
-  titleZh      String
-  titleVi      String
-  prompt       String
-  requirements String?
-  outline      String?
-  outlineOpen  Boolean  @default(false)
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  titleZh         String
+  titleVi         String
+  prompt          String
+  requirements    String?
+  outline         String?
+  outlineOpen     Boolean  @default(false)
   gradingCriteria String?
-  answer       String
-  orderIndex   Int      @default(0)
-  isPremium    Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  answer          String
+  orderIndex      Int      @default(0)
+  isPremium       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   submissions Submission[]
 }
@@ -252,24 +259,24 @@ model ExamYear {
 }
 
 model ExamSitting {
-  id           String    @id @default(cuid())
-  examYearId   String
-  examYear     ExamYear  @relation(fields: [examYearId], references: [id], onDelete: Cascade)
-  slug         String    @unique
-  label        String
-  examDate     DateTime?
-  titleZh      String
-  titleVi      String
-  prompt       String
-  requirements String?
-  outline      String?
-  outlineOpen  Boolean   @default(false)
+  id              String    @id @default(cuid())
+  examYearId      String
+  examYear        ExamYear  @relation(fields: [examYearId], references: [id], onDelete: Cascade)
+  slug            String    @unique
+  label           String
+  examDate        DateTime?
+  titleZh         String
+  titleVi         String
+  prompt          String
+  requirements    String?
+  outline         String?
+  outlineOpen     Boolean   @default(false)
   gradingCriteria String?
-  answer       String
-  isPremium    Boolean   @default(false)
-  orderIndex   Int       @default(0)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  answer          String
+  isPremium       Boolean   @default(false)
+  orderIndex      Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
   submissions Submission[]
 }
@@ -290,6 +297,19 @@ model Submission {
   score         Int?
   maxScore      Int?
   submittedAt   DateTime     @default(now())
+}
+
+// "Góp ý" box: messages from learners (or guests) to the admin.
+model Feedback {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name      String?
+  email     String?
+  message   String
+  page      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
 
 // Site-wide switches the admin can flip (e.g. showing unfinished lessons to learners).

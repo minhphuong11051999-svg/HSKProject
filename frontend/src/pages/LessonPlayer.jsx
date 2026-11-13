@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { getLesson, submitExercise } from '../api/lessons';
+import { getSettings } from '../api/settings';
 import { useAuth } from '../context/AuthContext';
 import PremiumModal from '../components/PremiumModal';
 import BackLink from '../components/BackLink';
@@ -31,11 +32,27 @@ export default function LessonPlayer() {
   const [loading, setLoading] = useState(true);
   const [showTabPremium, setShowTabPremium] = useState(false);
   const sectionRef = useRef(null);
-  const isPremiumUser = user?.plan === 'PREMIUM';
   const isAdmin = user?.role === 'ADMIN';
+  const isPremiumUser = user?.plan === 'PREMIUM' || isAdmin;
+  // Free accounts open the first N learner-visible steps of every lesson (site setting).
+  const [freeStepCount, setFreeStepCount] = useState(0);
+
+  useEffect(() => {
+    getSettings()
+      .then((st) => setFreeStepCount(Number(st.freeStepCount) || 0))
+      .catch(() => {});
+  }, []);
+
+  const learnerKeys = useMemo(() => {
+    const hidden = lesson?.hiddenParts || [];
+    return (lesson?.selectedParts || []).filter((k) => !hidden.includes(k) && partHasContent(lesson, k));
+  }, [lesson]);
 
   function isPartPremium(key) {
-    return !!lesson?.premiumParts?.includes(key);
+    if (lesson?.premiumParts?.includes(key)) return true;
+    if (freeStepCount <= 0) return false;
+    const idx = learnerKeys.indexOf(key);
+    return idx >= freeStepCount;
   }
 
   useEffect(() => {
@@ -65,7 +82,7 @@ export default function LessonPlayer() {
   const requested = searchParams.get('buoc');
   const requestedPart = parts.find((p) => p.key === requested);
   const tab =
-    requestedPart && (!lesson?.premiumParts?.includes(requestedPart.key) || isPremiumUser)
+    requestedPart && (!isPartPremium(requestedPart.key) || isPremiumUser)
       ? requestedPart.key
       : parts[0]?.key || 'theory';
 
