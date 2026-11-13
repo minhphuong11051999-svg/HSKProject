@@ -3,6 +3,8 @@ import { Check, CheckCircle, Copy, Crown, BookOpen, Exam, ChatCircleText, Sparkl
 import { getSettings, checkDiscount } from '../api/settings';
 import { useAuth } from '../context/AuthContext';
 import PageHeader from '../components/PageHeader';
+import { FANPAGE_URL } from '../components/FanpageButton';
+import { PRESET_PLANS, PRESET_DISCOUNT_NOTE } from '../constants/pricingPreset';
 
 const EMAIL_PLACEHOLDER = '[email của bạn]';
 const DEFAULT_FREE_STEPS = 2;
@@ -265,17 +267,26 @@ export default function Pro() {
 
   const isPro = user?.plan === 'PREMIUM';
   const proUntil = isPro && user?.planExpiresAt ? formatDate(user.planExpiresAt) : '';
-  const plans = Array.isArray(pricing?.plans) ? pricing.plans : [];
+  // Until the admin saves a price list, show the launch prices (free plan
+  // wording follows the current free step setting).
+  const savedPlans = Array.isArray(pricing?.plans) ? pricing.plans : [];
+  const plans = savedPlans.length
+    ? savedPlans
+    : PRESET_PLANS.map((p) =>
+        p.price === '0đ' && freeSteps > 0
+          ? { ...p, features: p.features.map((f) => f.replace(/bước 1–\d+/, `bước 1–${freeSteps}`)) }
+          : p
+      );
   const bank = pricing?.bank || {};
   const contact = (pricing?.contact || '').trim();
   const note = (pricing?.note || '').trim();
-  const discountNote = (pricing?.discountNote || '').trim();
+  const discountNote = (pricing?.discountNote || '').trim() || PRESET_DISCOUNT_NOTE;
   // Admins get the raw settings (with the code) instead of the public hasDiscount flag.
   const hasDiscount = !!(pricing?.hasDiscount || (pricing?.discountCode || '').trim());
   const hasBank = !!(bank.accountNumber || '').trim();
   const baseNote = (bank.transferNote || '').split(EMAIL_PLACEHOLDER).join(user?.email || EMAIL_PLACEHOLDER);
   const transferNote = appliedCode && baseNote ? `${baseNote} ${appliedCode}` : baseNote;
-  const notConfigured = plans.length === 0 && !hasBank;
+  const notConfigured = !!loadError && savedPlans.length === 0 && !hasBank;
 
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -361,7 +372,9 @@ export default function Pro() {
             </h2>
             <ol className="grid gap-4 sm:grid-cols-3">
               {[
-                'Chuyển khoản theo thông tin bên dưới, ghi đúng nội dung chuyển khoản.',
+                hasBank
+                  ? 'Chuyển khoản theo thông tin bên dưới, ghi đúng nội dung chuyển khoản.'
+                  : 'Nhắn fanpage Belle Chinese Lab để nhận thông tin chuyển khoản.',
                 contact
                   ? 'Gửi ảnh chụp giao dịch qua kênh liên hệ bên dưới.'
                   : 'Gửi ảnh chụp giao dịch cho quản trị viên.',
@@ -413,6 +426,17 @@ export default function Pro() {
               </section>
             )}
 
+            {!hasBank && !contact && (
+              <aside className="surface p-5 sm:p-6 min-w-0">
+                <h2 className="text-lg font-extrabold tracking-tight text-slate-100">Liên hệ</h2>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                  Nhắn tin cho fanpage để nhận thông tin chuyển khoản và kích hoạt PRO:{' '}
+                  <a href={FANPAGE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-coral-400 underline underline-offset-2 hover:text-coral-300">
+                    Fanpage Belle Chinese Lab
+                  </a>
+                </p>
+              </aside>
+            )}
             {(contact || note) && (
               <aside className={`surface p-5 sm:p-6 min-w-0 ${hasBank ? 'lg:max-w-xs' : ''}`}>
                 {contact && (

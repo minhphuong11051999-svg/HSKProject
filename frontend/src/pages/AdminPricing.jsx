@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUp, ArrowDown, Trash, Plus, MagicWand } from '@phosphor-icons/react';
 import { getSettings, updateSettings } from '../api/settings';
 import PageHeader from '../components/PageHeader';
+import { PRESET_PLANS, PRESET_DISCOUNT_NOTE } from '../constants/pricingPreset';
 import { TextField, TextAreaField, CheckboxField } from '../components/admin/fields';
 import {
   PANEL,
@@ -25,21 +26,6 @@ const EMPTY_BANK = { bankName: '', accountNumber: '', accountName: '', transferN
 const EMPTY_PLAN = { name: '', price: '', salePrice: '', period: '', featuresText: '', highlight: false };
 const DEFAULT_FREE_STEPS = 2;
 
-// "Điền bảng giá mới": the November launch price list. Fills the form only;
-// the admin reviews it and presses "Lưu cấu hình".
-const PRO_FEATURES = [
-  '16 dạng văn bản ứng dụng (đủ bước 1–8)',
-  '20 đề thi mẫu (cập nhật thêm)',
-  'Tặng: 2 đề thi thật (cập nhật dần)',
-  'Đáp án mẫu',
-];
-const PRESET_PLANS = [
-  { name: 'Gói miễn phí', price: '0đ', features: ['16 dạng văn bản ứng dụng (bước 1–3)', '5 đề thi mẫu'] },
-  { name: 'PRO 15 ngày', price: '99.000đ', salePrice: '60.000đ', period: '15 ngày', features: PRO_FEATURES },
-  { name: 'PRO 30 ngày', price: '119.000đ', salePrice: '90.000đ', period: '30 ngày', features: PRO_FEATURES, highlight: true },
-  { name: 'PRO 3 tháng', price: '279.000đ', salePrice: '239.000đ', period: '3 tháng', features: PRO_FEATURES },
-];
-const PRESET_DISCOUNT_NOTE = 'Nhập mã giảm giá để được giá ưu đãi';
 
 let planKeySeq = 0;
 const nextKey = () => `plan-${++planKeySeq}`;
