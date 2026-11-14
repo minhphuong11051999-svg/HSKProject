@@ -4,7 +4,7 @@ import { getSettings, checkDiscount } from '../api/settings';
 import { useAuth } from '../context/AuthContext';
 import PageHeader from '../components/PageHeader';
 import { FANPAGE_URL } from '../components/FanpageButton';
-import { PRESET_PLANS, PRESET_DISCOUNT_NOTE } from '../constants/pricingPreset';
+import { PRESET_PLANS, PRESET_DISCOUNT_NOTE, PLAN_COMPARISON } from '../constants/pricingPreset';
 
 const EMAIL_PLACEHOLDER = '[email của bạn]';
 const DEFAULT_FREE_STEPS = 2;
@@ -19,16 +19,13 @@ function benefits(freeSteps) {
   return [
     {
       icon: BookOpen,
-      title: 'Đủ 8 bước mỗi bài học',
-      text:
-        freeSteps > 0
-          ? `Tài khoản miễn phí học được bước 1–${freeSteps} của mỗi bài; PRO mở toàn bộ các bước của 16 dạng văn bản ứng dụng.`
-          : 'Mở toàn bộ các bước của 16 dạng văn bản ứng dụng.',
+      title: 'Full bước mỗi bài học',
+      text: 'Tài khoản miễn phí học 4 bước của mỗi bài; PRO mở full bước của cả 16 dạng văn bản ứng dụng.',
     },
     {
       icon: Exam,
       title: 'Đề thi mẫu và đề thi thật',
-      text: 'Luyện với 20 đề thi mẫu (cập nhật thêm), tặng kèm đề thi thật gắn nhãn PRO.',
+      text: 'Luyện với 20 đề thi mẫu, tặng kèm toàn bộ kho đề thi thật để ôn nước rút cho kỳ thi 13/12.',
     },
     {
       icon: CheckCircle,
@@ -36,6 +33,64 @@ function benefits(freeSteps) {
       text: 'Xem đáp án mẫu của từng đề để so sánh và học cách triển khai bài viết.',
     },
   ];
+}
+
+function ComparisonCell({ value, pro = false }) {
+  if (value === true) {
+    return (
+      <span className="inline-flex items-center gap-1.5 font-semibold text-ok">
+        <Check size={16} weight="bold" aria-hidden="true" />
+        Có
+      </span>
+    );
+  }
+  if (value === false) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-slate-500">
+        <XCircle size={16} aria-hidden="true" />
+        Không
+      </span>
+    );
+  }
+  return <span className={pro ? 'font-bold text-slate-100' : 'text-slate-300'}>{value}</span>;
+}
+
+// Free vs PRO side by side, below the price cards.
+function PlanComparison() {
+  return (
+    <section aria-labelledby="pro-compare" className="mb-10">
+      <h2 id="pro-compare" className="mb-4 text-xl font-extrabold tracking-tight text-slate-100">
+        So sánh gói
+      </h2>
+      <div className="surface overflow-hidden">
+        <table className="w-full text-left text-sm sm:text-[0.9375rem]">
+          <thead>
+            <tr className="border-b border-night-700">
+              <th scope="col" className="p-3 sm:p-4 font-semibold text-slate-400">
+                <span className="sr-only">Tính năng</span>
+              </th>
+              <th scope="col" className="p-3 sm:p-4 font-bold text-slate-200">Miễn phí</th>
+              <th scope="col" className="p-3 sm:p-4 font-extrabold text-gold">
+                <span className="inline-flex items-center gap-1.5">
+                  <Crown size={16} weight="fill" aria-hidden="true" />
+                  PRO
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {PLAN_COMPARISON.map(([label, free, pro]) => (
+              <tr key={label} className="border-b border-night-700 last:border-0">
+                <th scope="row" className="p-3 sm:p-4 font-semibold text-slate-300">{label}</th>
+                <td className="p-3 sm:p-4"><ComparisonCell value={free} /></td>
+                <td className="p-3 sm:p-4 bg-gold/5"><ComparisonCell value={pro} pro /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
 }
 
 const URL_RE = /(https?:\/\/[^\s]+)/g;
@@ -365,6 +420,8 @@ export default function Pro() {
               </ul>
             </section>
           )}
+
+          <PlanComparison />
 
           <section aria-labelledby="pro-steps" className="mb-10">
             <h2 id="pro-steps" className="mb-4 text-xl font-extrabold tracking-tight text-slate-100">
