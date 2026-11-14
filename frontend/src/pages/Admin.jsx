@@ -331,6 +331,24 @@ export default function Admin() {
     );
   }
 
+  function vocabTermsEditor() {
+    return (
+      <SimpleListEditor
+        title="Từ vựng"
+        items={form.vocabTerms}
+        onChange={(v) => set('vocabTerms', v)}
+        addLabel="Thêm từ vựng"
+        itemLabel={(_, i) => `Từ ${i + 1}`}
+        fields={[
+          { key: 'literary', label: '书面语 (văn viết)' },
+          { key: 'colloquial', label: '口语 (khẩu ngữ)' },
+          { key: 'meaningVi', label: 'Nghĩa tiếng Việt' },
+          { key: 'example', label: 'Ví dụ (có thể để trống)' },
+        ]}
+      />
+    );
+  }
+
   function matchEditor() {
     return <MatchItemsEditor items={form.matchItems} onChange={(v) => set('matchItems', v)} />;
   }
@@ -413,7 +431,14 @@ export default function Admin() {
           </>
         );
       case 'matching':
-        return matchEditor();
+        // The learner's "Ghép nối" step also shows the vocabulary table, so edit it
+        // here too — unless the lesson has its own "Ghép từ vựng & viết câu" step.
+        return (
+          <>
+            {!form.selectedParts.includes('vocab') && vocabTermsEditor()}
+            {matchEditor()}
+          </>
+        );
       case 'cloze':
         return <ClozeExercisesEditor items={form.clozeExercises} onChange={(v) => set('clozeExercises', v)} />;
       case 'error':
@@ -462,19 +487,7 @@ export default function Admin() {
       case 'vocab':
         return (
           <>
-            <SimpleListEditor
-              title="Từ vựng"
-              items={form.vocabTerms}
-              onChange={(v) => set('vocabTerms', v)}
-              addLabel="Thêm từ vựng"
-              itemLabel={(_, i) => `Từ ${i + 1}`}
-              fields={[
-                { key: 'literary', label: '书面语 (văn viết)' },
-                { key: 'colloquial', label: '口语 (khẩu ngữ)' },
-                { key: 'meaningVi', label: 'Nghĩa tiếng Việt' },
-                { key: 'example', label: 'Ví dụ (có thể để trống)' },
-              ]}
-            />
+            {vocabTermsEditor()}
             {!form.selectedParts.includes('matching') && matchEditor()}
             {!form.selectedParts.includes('sentence_building') && sentenceTasksEditor()}
           </>
