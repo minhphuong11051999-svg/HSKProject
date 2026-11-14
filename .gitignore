@@ -12,3 +12,6 @@ dist/
 
 # Local Claude Code skill config, not part of the app
 /.claude/
+
+# Old static pages kept locally for reference
+/legacy-static/
