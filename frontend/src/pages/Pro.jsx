@@ -20,12 +20,12 @@ function benefits(freeSteps) {
     {
       icon: BookOpen,
       title: 'Full bước mỗi bài học',
-      text: 'Tài khoản miễn phí học 4 bước của mỗi bài; PRO mở full bước của cả 16 dạng văn bản ứng dụng.',
+      text: 'Tài khoản miễn phí học 8 dạng văn bản ứng dụng, 4 bước mỗi bài; PRO mở full bước của cả 16 dạng.',
     },
     {
       icon: Exam,
       title: 'Đề thi mẫu và đề thi thật',
-      text: 'Luyện với 20 đề thi mẫu, tặng kèm toàn bộ kho đề thi thật để ôn nước rút cho kỳ thi 13/12.',
+      text: 'Luyện với kho đề thi mẫu (cập nhật thêm), tặng kèm đề thi thật để ôn nước rút cho kỳ thi 13/12.',
     },
     {
       icon: CheckCircle,
